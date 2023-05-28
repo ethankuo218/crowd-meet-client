@@ -1,4 +1,13 @@
-import { Inject, PLATFORM_ID, Component, AfterViewInit, ViewChild, HostBinding, NgZone, OnInit } from '@angular/core';
+import {
+  Inject,
+  PLATFORM_ID,
+  Component,
+  AfterViewInit,
+  ViewChild,
+  HostBinding,
+  NgZone,
+  OnInit,
+} from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
 import { Preferences } from '@capacitor/preferences';
@@ -16,11 +25,11 @@ SwiperCore.use([Pagination, IonicSwiper]);
   styleUrls: [
     './styles/walkthrough.page.scss',
     './styles/walkthrough.shell.scss',
-    './styles/walkthrough.responsive.scss'
-  ]
+    './styles/walkthrough.responsive.scss',
+  ],
 })
 export class WalkthroughPage implements AfterViewInit, OnInit {
-  swiperRef: SwiperCore;
+  swiperRef: SwiperCore | undefined;
 
   @ViewChild(SwiperComponent, { static: false }) swiper?: SwiperComponent;
 
@@ -32,13 +41,13 @@ export class WalkthroughPage implements AfterViewInit, OnInit {
     @Inject(PLATFORM_ID) private platformId: object,
     public menu: MenuController,
     private ngZone: NgZone
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     // save key to mark the walkthrough as visited so the next time the user visits the app, he would be redirected to log in
     Preferences.set({
       key: 'visitedWalkthrough',
-      value: 'true'
+      value: 'true',
     });
   }
 
@@ -55,21 +64,25 @@ export class WalkthroughPage implements AfterViewInit, OnInit {
   ngAfterViewInit(): void {
     // Accessing slides in server platform throw errors
     if (isPlatformBrowser(this.platformId)) {
-      this.swiperRef = this.swiper.swiperRef;
+      this.swiperRef = this.swiper?.swiperRef;
 
-      this.swiperRef.on('slidesLengthChange', () => {
+      this.swiperRef?.on('slidesLengthChange', () => {
         // ? We need to use ngZone because the change happens outside Angular
         // (see: https://swiperjs.com/angular#swiper-component-events)
         this.ngZone.run(() => {
-          this.markSlides(this.swiperRef);
+          if (this.swiperRef) {
+            this.markSlides(this.swiperRef);
+          }
         });
       });
 
-      this.swiperRef.on('slideChange', () => {
+      this.swiperRef?.on('slideChange', () => {
         // ? We need to use ngZone because the change happens outside Angular
         // (see: https://swiperjs.com/angular#swiper-component-events)
         this.ngZone.run(() => {
-          this.markSlides(this.swiperRef);
+          if (this.swiperRef) {
+            this.markSlides(this.swiperRef);
+          }
         });
       });
     }
@@ -88,12 +101,12 @@ export class WalkthroughPage implements AfterViewInit, OnInit {
   }
 
   public markSlides(swiper: SwiperCore): void {
-    this.isFirstSlide = (swiper.isBeginning || swiper.activeIndex === 0);
+    this.isFirstSlide = swiper.isBeginning || swiper.activeIndex === 0;
     this.isLastSlide = swiper.isEnd;
   }
 
   public skipWalkthrough(): void {
     // Skip to the last slide
-    this.swiperRef.slideTo(this.swiperRef.slides.length - 1);
+    this.swiperRef?.slideTo(this.swiperRef.slides.length - 1);
   }
 }

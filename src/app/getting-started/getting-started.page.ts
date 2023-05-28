@@ -2,9 +2,9 @@ import { Component, HostBinding, NgZone } from '@angular/core';
 import { UntypedFormGroup, UntypedFormControl } from '@angular/forms';
 
 import { MenuController } from '@ionic/angular';
-import { IonicSwiper } from "@ionic/angular";
+import { IonicSwiper } from '@ionic/angular';
 
-import SwiperCore, { Pagination } from "swiper";
+import SwiperCore, { Pagination } from 'swiper';
 
 SwiperCore.use([Pagination, IonicSwiper]);
 
@@ -14,19 +14,16 @@ SwiperCore.use([Pagination, IonicSwiper]);
   styleUrls: [
     './styles/getting-started.page.scss',
     './styles/getting-started.shell.scss',
-    './styles/getting-started.responsive.scss'
-  ]
+    './styles/getting-started.responsive.scss',
+  ],
 })
 export class GettingStartedPage {
   @HostBinding('class.last-slide-active') isLastSlide = false;
 
-  swiperRef: SwiperCore;
+  swiperRef: SwiperCore | undefined;
   gettingStartedForm: UntypedFormGroup;
 
-  constructor(
-    public menu: MenuController,
-    private ngZone: NgZone
-  ) {
+  constructor(public menu: MenuController, private ngZone: NgZone) {
     this.gettingStartedForm = new UntypedFormGroup({
       browsingCategory: new UntypedFormControl('men'),
       followingInterests: new UntypedFormGroup({
@@ -35,8 +32,8 @@ export class GettingStartedPage {
         jeans: new UntypedFormControl(),
         jackets: new UntypedFormControl(true),
         shoes: new UntypedFormControl(),
-        glasses: new UntypedFormControl()
-      })
+        glasses: new UntypedFormControl(),
+      }),
     });
   }
 
@@ -58,7 +55,9 @@ export class GettingStartedPage {
     // ? We need to use ngZone because the change happens outside Angular
     // (see: https://swiperjs.com/angular#swiper-component-events)
     this.ngZone.run(() => {
-      this.isLastSlide = this.swiperRef.isEnd;
+      if (this.swiperRef) {
+        this.isLastSlide = this.swiperRef.isEnd;
+      }
     });
   }
 }

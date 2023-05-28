@@ -20,7 +20,11 @@ const routes: Routes = [
       import('./getting-started/getting-started.module').then(
         (m) => m.GettingStartedPageModule
       ),
-  }
+  },
+  {
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+  },
 ];
 @NgModule({
   imports: [
