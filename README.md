@@ -1,6 +1,6 @@
 # Crowd Meet Client
-This project was generated with:
-Angular CLI version 16.0.0 
+This project was generated with:  
+Angular CLI version 16.0.0  
 Ionic CLI version 5.0.4
 
 # Development
