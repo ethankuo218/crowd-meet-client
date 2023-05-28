@@ -13,6 +13,13 @@ const routes: Routes = [
       import('./walkthrough/walkthrough.module').then(
         (m) => m.WalkthroughPageModule
       ),
+  },
+  {
+    path: 'getting-started',
+    loadChildren: () =>
+      import('./getting-started/getting-started.module').then(
+        (m) => m.GettingStartedPageModule
+      ),
   }
 ];
 @NgModule({
