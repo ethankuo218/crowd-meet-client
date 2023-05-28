@@ -1,7 +1,5 @@
 # Crowd Meet Client
-This project was generated with:  
-Angular CLI version 16.0.0  
-Ionic CLI version 5.0.4
+This project was generated with: Angular CLI version 16.0.0, Ionic CLI version 5.0.4
 
 # Development
 Run `npm install`
@@ -13,11 +11,11 @@ Run `ionic build` to build the project.The build artifacts will be stored in the
 ## Android
 This project needs Java 17 and Android studio for build.
 
-Run `npx cap add android` to wrap the project with capacitor.
+Run `npx cap add android` to wrap the project with capacitor.  
 Run `npx cap open android` and run the project in Android Studio.
 
 ## IOS
 This project needs XCode for build.
 
-Run `npx cap add ios` to wrap the project with capacitor.
+Run `npx cap add ios` to wrap the project with capacitor.  
 Run `npx cap open ios` and run the project in XCode.
