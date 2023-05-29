@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingController, Platform } from '@ionic/angular';
 
 import { Observable, Subject, of } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import {
   AuthProvider,
@@ -44,6 +44,8 @@ import { DataStore } from '../shell/data-store';
 import { ProfileModel } from './profile/profile.model';
 import { SignInProvider } from './auth-definitions';
 import { AuthHelper } from './auth.helper';
+import { HttpHeaders } from '@angular/common/http';
+import { Preferences } from '@capacitor/preferences';
 
 @Injectable({
   providedIn: 'root',
@@ -129,8 +131,15 @@ export class AuthService implements OnDestroy {
                   );
 
                   this.dismissLoading();
+                  // call API to get token from server
+                  FirebaseAuthentication.getIdToken().then((result) => {
+                    Preferences.set({
+                      key: 'token',
+                      value: 'Bearer ' + result.token,
+                    });
 
-                  this.redirectResultSubject.next(signInResult);
+                    this.redirectResultSubject.next(signInResult);
+                  });
                 } else {
                   throw new Error('Could not get user from redirect result');
                 }
@@ -171,6 +180,10 @@ export class AuthService implements OnDestroy {
 
   ngOnDestroy(): void {
     this.dismissLoading();
+  }
+
+  public async getAndSetIdToken(signInResult?: SignInResult): Promise<void> {
+
   }
 
   private prepareForAuthWithProvidersRedirection(authProviderId: string): void {

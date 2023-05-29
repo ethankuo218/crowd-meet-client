@@ -1,6 +1,6 @@
 export class SeoDataModel {
-  title: string;
-  description: string;
-  keywords: string;
-  image: string;
+  title: string = '';
+  description: string = '';
+  keywords: string = '';
+  image: string = '';
 }

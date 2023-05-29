@@ -1,3 +1,4 @@
+import { HttpClientService } from './../../core/http-client.service';
 import { Component, NgZone } from '@angular/core';
 import {
   Validators,
@@ -14,6 +15,7 @@ import { Subscription } from 'rxjs';
 
 import { HistoryHelperService } from '../../utils/history-helper.service';
 import { AuthService } from '../auth.service';
+import { UserResponse } from './models/sign-in.model';
 
 @Component({
   selector: 'app-sign-in',
@@ -43,7 +45,8 @@ export class SignInPage {
     public router: Router,
     public authService: AuthService,
     private ngZone: NgZone,
-    public historyHelper: HistoryHelperService
+    public historyHelper: HistoryHelperService,
+    private httpClientService: HttpClientService
   ) {
     this.loginForm = new UntypedFormGroup({
       email: new UntypedFormControl(
@@ -63,11 +66,10 @@ export class SignInPage {
     // ? signInWithRedirect() is only used when client is in web but not desktop. For example a PWA
     this.authRedirectResult = this.authService.redirectResult$.subscribe(
       (result) => {
-        console.log(result);
         if (result.error) {
           this.manageAuthWithProvidersErrors(result.error);
         } else {
-          this.redirectLoggedUserToProfilePage();
+          this.redirectLoggedUserToHomePage();
         }
       }
     );
@@ -76,7 +78,7 @@ export class SignInPage {
       if (!stateChange.user) {
         this.manageAuthWithProvidersErrors('No user logged in');
       } else {
-        this.redirectLoggedUserToProfilePage();
+        this.redirectLoggedUserToHomePage();
       }
     });
   }
@@ -90,7 +92,7 @@ export class SignInPage {
         .then((result: SignInResult) => {
           // ? This gives you a Facebook Access Token. You can use it to access the Facebook API.
           // const token = result.credential.accessToken;
-          this.redirectLoggedUserToProfilePage();
+          this.redirectLoggedUserToHomePage();
         })
         .catch((error) => {
           this.manageAuthWithProvidersErrors(error.message);
@@ -109,26 +111,7 @@ export class SignInPage {
         .then((result) => {
           // ? This gives you a Google Access Token. You can use it to access the Google API.
           // const token = result.credential.accessToken;
-          this.redirectLoggedUserToProfilePage();
-        })
-        .catch((error) => {
-          this.manageAuthWithProvidersErrors(error.message);
-        });
-    } finally {
-      // ? Termination code goes here
-    }
-  }
-
-  public async doTwitterLogin(): Promise<void> {
-    this.resetSubmitError();
-
-    try {
-      await this.authService
-        .signInWithTwitter()
-        .then((result) => {
-          // ? This gives you a Twitter Access Token. You can use it to access the Twitter API.
-          // const token = result.credential.accessToken;
-          this.redirectLoggedUserToProfilePage();
+          this.redirectLoggedUserToHomePage();
         })
         .catch((error) => {
           this.manageAuthWithProvidersErrors(error.message);
@@ -145,7 +128,7 @@ export class SignInPage {
       await this.authService
         .signInWithApple()
         .then((result) => {
-          this.redirectLoggedUserToProfilePage();
+          this.redirectLoggedUserToHomePage();
         })
         .catch((error) => {
           this.manageAuthWithProvidersErrors(error.message);
@@ -165,7 +148,7 @@ export class SignInPage {
           this.loginForm.value['password']
         )
         .then((result) => {
-          this.redirectLoggedUserToProfilePage();
+          this.redirectLoggedUserToHomePage();
         })
         .catch((error) => {
           this.submitError = error.message;
@@ -175,19 +158,24 @@ export class SignInPage {
     }
   }
 
-  // ? Once the auth provider finished the authentication flow, and the auth redirect completes, hide the loader and redirect the user to the profile page
-  private redirectLoggedUserToProfilePage(): void {
-    // As we are calling the Angular router navigation inside a subscribe method, the navigation will be triggered outside Angular zone.
-    // That's why we need to wrap the router navigation call inside an ngZone wrapper
+  // ? Once the auth provider finished the authentication flow, and the auth redirect completes, hide the loader and redirect the user to the home page
+  private redirectLoggedUserToHomePage(): void {
     this.ngZone.run(() => {
       // Get previous URL from our custom History Helper
       // If there's no previous page, then redirect to profile
-      // const previousUrl = this.historyHelper.previousUrl || 'firebase/auth/profile';
-      const previousUrl = 'auth/profile';
+      // const previousUrl = this.historyHelper.previousUrl || 'app';
+      const previousUrl = 'app';
+      // check if isNewUser
+      this.httpClientService.post<UserResponse>('user',{}).subscribe(result => {
+        if (result.isNewUser) {
+          this.router.navigate(['walkthrough'], { replaceUrl: true });
+        }else {
+          this.router.navigate(['app'], { replaceUrl: true });
+        }
+      });
 
       // No need to store in the navigation history the sign-in page with redirect params (it's just a a mandatory mid-step)
       // Navigate to profile and replace current url with profile
-      this.router.navigate([previousUrl], { replaceUrl: true });
     });
   }
 

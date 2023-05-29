@@ -14,10 +14,10 @@ import { ComponentsModule } from '../../components/components.module';
 
 
 // ? Firebase guard to redirect logged in users to profile
-const redirectLoggedInToProfile: AuthPipeGenerator = (next) => map(user => {
+const redirectLoggedInToHome: AuthPipeGenerator = (next) => map(user => {
   // ? When queryParams['auth-redirect'] don't redirect because we want the component to handle the redirection
   if (user !== null && !next.queryParams['auth-redirect']) {
-    return ['auth/profile'];
+    return ['app/home'];
   } else {
     return true;
   }
@@ -27,7 +27,7 @@ const routes: Routes = [
   {
     path: '',
     component: SignInPage,
-    ...canActivate(redirectLoggedInToProfile)
+    ...canActivate(redirectLoggedInToHome)
   }
 ];
 

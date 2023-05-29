@@ -1,0 +1,53 @@
+import { Component, OnInit, HostBinding } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+
+import {
+  IResolvedRouteData,
+  ResolverHelper,
+} from '../../utils/resolver-helper';
+import { DetailsModel } from './details.model';
+import { switchMap } from 'rxjs/operators';
+
+@Component({
+  selector: 'app-details',
+  templateUrl: './details.page.html',
+  styleUrls: ['./styles/details.page.scss', './styles/details.shell.scss'],
+})
+export class DetailsPage implements OnInit {
+  // Gather all component subscription in one place. Can be one Subscription or multiple (chained using the Subscription.add() method)
+  subscriptions: Subscription | undefined;
+
+  details: DetailsModel = new DetailsModel();
+
+  @HostBinding('class.is-shell') get isShell() {
+    return this.details && this.details.isShell ? true : false;
+  }
+
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.subscriptions = this.route.data
+      .pipe(
+        // Extract data for this page
+        switchMap((resolvedRouteData) => {
+          return ResolverHelper.extractData<DetailsModel>(
+            resolvedRouteData['data']['dataStore'],
+            DetailsModel
+          );
+        })
+      )
+      .subscribe({
+        next: (state) => {
+          this.details = state;
+        },
+        error: (error) => console.log(error),
+      });
+  }
+
+  // NOTE: Ionic only calls ngOnDestroy if the page was popped (ex: when navigating back)
+  // Since ngOnDestroy might not fire when you navigate from the current page, use ionViewWillLeave to cleanup Subscriptions
+  ionViewWillLeave(): void {
+    this.subscriptions?.unsubscribe();
+  }
+}

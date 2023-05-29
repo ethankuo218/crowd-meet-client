@@ -6,7 +6,7 @@ import { filter } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class HistoryHelperService {
-  private previousUrl: string | undefined;
+  public previousUrl: string | undefined;
 
   constructor(private router: Router) {
     this.router.events
