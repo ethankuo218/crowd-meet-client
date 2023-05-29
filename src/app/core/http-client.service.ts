@@ -8,10 +8,7 @@ import { AuthService } from '../auth/auth.service';
 export class HttpClientService {
   private urlPrefix: string = '/api/v1/';
 
-  constructor(
-    private httpClient: HttpClient,
-    private authService: AuthService
-  ) {}
+  constructor(private httpClient: HttpClient) {}
 
   removeToken(): void {
     Preferences.remove({ key: 'token' }).then();
