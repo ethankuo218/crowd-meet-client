@@ -4,8 +4,20 @@ const config: CapacitorConfig = {
   appId: 'io.ionic.starter',
   appName: 'crowd-meet-client',
   webDir: 'www',
-  server: {
-    androidScheme: 'https'
+  bundledWebRuntime: false,
+  plugins: {
+    SplashScreen: {
+      launchAutoHide: false
+    },
+    FirebaseAuthentication: {
+      skipNativeAuth: false,
+      providers: [
+        "google.com",
+        "twitter.com",
+        "facebook.com",
+        "apple.com"
+      ]
+    }
   }
 };
 
