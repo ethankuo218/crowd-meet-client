@@ -26,7 +26,7 @@ const routes: Routes = [
       // ? /firebase/auth redirect
       {
         path: '',
-        redirectTo: 'sign-in',
+        redirectTo: '/sign-in',
         pathMatch: 'full',
       },
       {
