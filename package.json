@@ -7,6 +7,7 @@
     "ng": "ng",
     "start": "ng serve --port=8100 --proxy-config proxy.conf.json --open",
     "build": "ng build",
+    "build:dev": "ng build --configuration development",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint"
@@ -41,6 +42,7 @@
     "@ngx-translate/http-loader": "^8.0.0",
     "@videogular/ngx-videogular": "^8.0.0",
     "ionicons": "^7.0.0",
+    "jetifier": "^2.0.0",
     "rxjs": "~7.8.0",
     "swiper": "^8.4.6",
     "tslib": "^2.3.0",
