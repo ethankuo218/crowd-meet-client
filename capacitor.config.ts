@@ -12,10 +12,7 @@ const config: CapacitorConfig = {
     FirebaseAuthentication: {
       skipNativeAuth: false,
       providers: [
-        "google.com",
-        "twitter.com",
-        "facebook.com",
-        "apple.com"
+        "google.com"
       ]
     }
   }
