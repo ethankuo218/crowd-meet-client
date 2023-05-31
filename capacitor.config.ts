@@ -3,7 +3,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 const config: CapacitorConfig = {
   appId: 'io.ionic.starter',
   appName: 'crowd-meet-client',
-  webDir: 'www',
+  webDir: 'dist/app/browser',
   bundledWebRuntime: false,
   plugins: {
     SplashScreen: {
