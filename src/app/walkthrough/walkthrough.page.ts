@@ -44,11 +44,7 @@ export class WalkthroughPage implements AfterViewInit, OnInit {
   ) {}
 
   ngOnInit(): void {
-    // save key to mark the walkthrough as visited so the next time the user visits the app, he would be redirected to log in
-    Preferences.set({
-      key: 'visitedWalkthrough',
-      value: 'true',
-    });
+
   }
 
   // Disable side menu for this page

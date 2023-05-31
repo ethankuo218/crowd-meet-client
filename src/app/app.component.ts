@@ -85,13 +85,4 @@ export class AppComponent {
     //   this.textDir = (event.lang === 'ar' || event.lang === 'iw') ? 'rtl' : 'ltr';
     // });
   }
-
-  public openTutorial(): void {
-    // save key to mark the walkthrough as NOT visited because the user wants to check it out
-    Preferences.set({
-      key: 'visitedWalkthrough',
-      value: 'false',
-    });
-    this.router.navigateByUrl('walkthrough');
-  }
 }

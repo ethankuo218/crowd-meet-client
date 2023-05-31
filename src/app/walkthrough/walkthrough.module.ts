@@ -10,13 +10,11 @@ import { SwiperModule } from 'swiper/angular';
 import { ComponentsModule } from '../components/components.module';
 
 import { WalkthroughPage } from './walkthrough.page';
-import { WalkthroughGuard } from './walkthrough.guard';
 
 const routes: Routes = [
   {
     path: '',
-    component: WalkthroughPage,
-    canActivate: [WalkthroughGuard]
+    component: WalkthroughPage
   }
 ];
 
@@ -30,6 +28,6 @@ const routes: Routes = [
     SwiperModule
   ],
   declarations: [WalkthroughPage],
-  providers: [WalkthroughGuard]
+  providers: []
 })
 export class WalkthroughPageModule {}

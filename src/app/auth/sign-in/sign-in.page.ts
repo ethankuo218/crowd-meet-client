@@ -172,6 +172,7 @@ export class SignInPage {
         }else {
           this.router.navigate(['app'], { replaceUrl: true });
         }
+        // this.router.navigate(['walkthrough'], { replaceUrl: true });
       });
 
       // No need to store in the navigation history the sign-in page with redirect params (it's just a a mandatory mid-step)
