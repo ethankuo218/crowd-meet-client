@@ -34,10 +34,6 @@ log.txt
 npm-debug.log
 yarn-error.log
 
-# Capacitor
-/android
-/ios
-
 # IDEs and editors
 .idea/
 .project
