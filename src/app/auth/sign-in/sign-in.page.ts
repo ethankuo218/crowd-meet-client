@@ -1,11 +1,11 @@
 import { HttpClientService } from './../../core/http-client.service';
-import { Component, NgZone } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import {
   Validators,
   UntypedFormGroup,
   UntypedFormControl,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   AuthStateChange,
   SignInResult,
@@ -22,7 +22,7 @@ import { UserResponse } from './models/sign-in.model';
   templateUrl: './sign-in.page.html',
   styleUrls: ['./styles/sign-in.page.scss'],
 })
-export class SignInPage {
+export class SignInPage implements OnInit{
   loginForm: UntypedFormGroup;
   submitError: string | null = null;
   authRedirectResult: Subscription;
@@ -46,7 +46,8 @@ export class SignInPage {
     public authService: AuthService,
     private ngZone: NgZone,
     public historyHelper: HistoryHelperService,
-    private httpClientService: HttpClientService
+    private httpClientService: HttpClientService,
+    private route: ActivatedRoute
   ) {
     this.loginForm = new UntypedFormGroup({
       email: new UntypedFormControl(
@@ -79,6 +80,14 @@ export class SignInPage {
         this.manageAuthWithProvidersErrors('No user logged in');
       } else {
         this.redirectLoggedUserToHomePage();
+      }
+    });
+  }
+
+  ngOnInit(): void {
+    this.route.queryParams.subscribe((params) => {
+      if(params['logout']) {
+        this.authService.signOut().then();
       }
     });
   }
@@ -167,12 +176,12 @@ export class SignInPage {
       const previousUrl = 'app';
       // check if isNewUser
       this.httpClientService.post<UserResponse>('user',{}).subscribe(result => {
-        if (result.isNewUser) {
-          this.router.navigate(['walkthrough'], { replaceUrl: true });
-        }else {
-          this.router.navigate(['app'], { replaceUrl: true });
-        }
-        // this.router.navigate(['walkthrough'], { replaceUrl: true });
+        // if (result.isNewUser) {
+        //   this.router.navigate(['walkthrough'], { replaceUrl: true });
+        // }else {
+        //   this.router.navigate(['app'], { replaceUrl: true });
+        // }
+        this.router.navigate(['auth/walkthrough'], { replaceUrl: true });
       });
 
       // No need to store in the navigation history the sign-in page with redirect params (it's just a a mandatory mid-step)

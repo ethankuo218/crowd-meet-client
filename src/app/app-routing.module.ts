@@ -12,20 +12,6 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {
-    path: 'walkthrough',
-    loadChildren: () =>
-      import('./walkthrough/walkthrough.module').then(
-        (m) => m.WalkthroughPageModule
-      ),
-  },
-  {
-    path: 'getting-started',
-    loadChildren: () =>
-      import('./getting-started/getting-started.module').then(
-        (m) => m.GettingStartedPageModule
-      ),
-  },
-  {
     path: 'app',
     loadChildren: () =>
       import('./tabs/tabs.module').then((m) => m.TabsPageModule),

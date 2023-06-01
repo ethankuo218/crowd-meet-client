@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SwiperModule } from "swiper/angular";
+import { SwiperModule } from 'swiper/angular';
 
-import { ComponentsModule } from '../components/components.module';
+import { ComponentsModule } from '../../components/components.module';
 
-import { GettingStartedPage } from './getting-started.page';
+import { WalkthroughPage } from './walkthrough.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: GettingStartedPage
+    component: WalkthroughPage
   }
 ];
 
@@ -22,12 +22,12 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
     IonicModule,
     RouterModule.forChild(routes),
     ComponentsModule,
     SwiperModule
   ],
-  declarations: [GettingStartedPage]
+  declarations: [WalkthroughPage],
+  providers: []
 })
-export class GettingStartedPageModule {}
+export class WalkthroughPageModule {}

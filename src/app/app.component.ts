@@ -2,53 +2,38 @@ import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { HistoryHelperService } from './utils/history-helper.service';
 import { SplashScreen } from '@capacitor/splash-screen';
-import { Router } from '@angular/router';
-import { Preferences } from '@capacitor/preferences';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss'],
+  styleUrls: [
+    './app.component.scss',
+    './side-menu/styles/side-menu.scss',
+    './side-menu/styles/side-menu.shell.scss',
+    './side-menu/styles/side-menu.responsive.scss',
+  ],
 })
 export class AppComponent {
-  appPages = [
-    {
-      title: 'Categories',
-      url: '/app/categories',
-      ionicIcon: 'list-outline',
-    },
+  accountPages = [
     {
       title: 'Profile',
-      url: '/app/user',
+      url: '/auth/profile',
       ionicIcon: 'person-outline',
     },
     {
-      title: 'Contact Card',
-      url: '/contact-card',
-      customIcon: './assets/custom-icons/side-menu/contact-card.svg',
-    },
-    {
-      title: 'Notifications',
-      url: '/app/notifications',
-      ionicIcon: 'notifications-outline',
-    },
-  ];
-
-  accountPages = [
-    {
-      title: 'Log In',
-      url: '/auth/login',
-      ionicIcon: 'log-in-outline',
-    },
-    {
-      title: 'Sign Up',
-      url: '/auth/signup',
-      ionicIcon: 'person-add-outline',
+      title: 'Tutorial',
+      url: 'auth/walkthrough',
+      ionicIcon: 'school-outline',
     },
     {
       title: 'Getting Started',
-      url: '/getting-started',
+      url: '/auth/getting-started',
       ionicIcon: 'rocket-outline',
+    },
+    {
+      title: 'Sign out',
+      url: '/auth/sign-in/true',
+      ionicIcon: 'log-out-outline',
     }
   ];
 
@@ -57,8 +42,7 @@ export class AppComponent {
   // Inject HistoryHelperService in the app.components.ts so its available app-wide
   constructor(
     public translate: TranslateService,
-    public historyHelper: HistoryHelperService,
-    private router: Router
+    public historyHelper: HistoryHelperService
   ) {
     this.initializeApp();
     this.setLanguage();

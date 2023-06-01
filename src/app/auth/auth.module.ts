@@ -35,6 +35,20 @@ const routes: Routes = [
           import('./sign-in/sign-in.module').then((m) => m.SignInPageModule),
       },
       {
+        path: 'walkthrough',
+        loadChildren: () =>
+          import('./walkthrough/walkthrough.module').then(
+            (m) => m.WalkthroughPageModule
+          ),
+      },
+      {
+        path: 'getting-started',
+        loadChildren: () =>
+          import('./getting-started/getting-started.module').then(
+            (m) => m.GettingStartedPageModule
+          ),
+      },
+      {
         path: 'profile',
         loadChildren: () =>
           import('./profile/profile.module').then((m) => m.ProfilePageModule),
