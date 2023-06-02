@@ -1,4 +1,4 @@
-export interface ReferenceResponse {
+export interface Reference {
   categories: Category[];
 }
 

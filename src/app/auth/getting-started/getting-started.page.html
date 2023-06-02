@@ -4,7 +4,7 @@
       <ion-button
         class="skip-getting-started-button"
         fill="clear"
-        [routerLink]="['/app']"
+        (click)="skip()"
         >skip</ion-button
       >
     </ion-buttons>
@@ -31,7 +31,7 @@
           <ion-col class="question-options-col">
             <ion-row class="options-list-row" formArrayName="interests">
               <ion-col
-                *ngFor="let item of categoryList; let i = index; trackBy: itemById"
+                *ngFor="let item of (categoryList$ | async) as categoryList; let i = index; trackBy: itemById"
                 size="6"
               >
                 <app-checkbox-wrapper class="custom-checkbox">

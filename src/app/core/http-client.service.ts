@@ -7,7 +7,9 @@ import {
   GetIdTokenResult,
 } from '@capacitor-firebase/authentication';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class HttpClientService {
   private urlPrefix: string = '/api/v1/';
   private isFirstLogin: boolean = true;

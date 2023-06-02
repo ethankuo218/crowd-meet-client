@@ -18,6 +18,9 @@ import { environment } from '../../environments/environment';
 import { AuthService } from './auth.service';
 import { AuthHelper } from './auth.helper';
 import { HttpClientService } from '../core/http-client.service';
+import { UserService } from '../core/user.service';
+import { UserStateFacade } from '../core/states/user-state/user.state.facade';
+import { ReferenceStateFacade } from '../core/states/reference-state/reference.state.facade';
 
 const routes: Routes = [
   {
@@ -77,6 +80,13 @@ const routes: Routes = [
       }
     }),
   ],
-  providers: [AuthService, HttpClientService, AuthHelper],
+  providers: [
+    AuthService,
+    HttpClientService,
+    AuthHelper,
+    UserService,
+    UserStateFacade,
+    ReferenceStateFacade
+  ],
 })
 export class AuthModule {}

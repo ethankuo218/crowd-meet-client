@@ -14,7 +14,7 @@ import { SplashScreen } from '@capacitor/splash-screen';
   ],
 })
 export class AppComponent {
-  accountPages = [
+  readonly accountPages = [
     {
       title: 'Profile',
       url: '/auth/profile',
@@ -57,7 +57,6 @@ export class AppComponent {
   }
 
   public setLanguage(): void {
-    // this language will be used as a fallback when a translation isn't found in the current language
     this.translate.setDefaultLang('en');
 
     // the lang to use, if the lang isn't available, it will use the current loader to get them

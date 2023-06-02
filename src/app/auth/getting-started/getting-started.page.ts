@@ -1,19 +1,16 @@
-import { HttpClientService } from '../../core/http-client.service';
+import { UserStateFacade } from '../../core/states/user-state/user.state.facade';
+import { ReferenceStateFacade } from '../../core/states/reference-state/reference.state.facade';
 import { Component, HostBinding, NgZone, OnInit } from '@angular/core';
-import {
-  AbstractControl,
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-} from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 import { MenuController } from '@ionic/angular';
 import { IonicSwiper } from '@ionic/angular';
 
 import SwiperCore, { Pagination } from 'swiper';
-import { Category, ReferenceResponse } from './models/getting-started.model';
 import { Router } from '@angular/router';
+import { Category } from 'src/app/core/states/reference-state/reference.model';
+import { Observable } from 'rxjs';
+import { UserService } from 'src/app/core/user.service';
 
 SwiperCore.use([Pagination, IonicSwiper]);
 
@@ -30,15 +27,19 @@ export class GettingStartedPage implements OnInit {
   @HostBinding('class.last-slide-active') isLastSlide = false;
 
   private swiperRef!: SwiperCore;
-  categoryList: Category[] = [];
+
+  categoryList$: Observable<Category[]> =
+    this.referenceStateFacade.getCategories();
+
   interestForm!: FormGroup;
 
   constructor(
     public menu: MenuController,
     private ngZone: NgZone,
-    private httpClientService: HttpClientService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private referenceStateFacade: ReferenceStateFacade,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -46,35 +47,31 @@ export class GettingStartedPage implements OnInit {
       interests: this.formBuilder.array([]),
     });
 
-    this.getCatrgories();
-  }
-
-  private getCatrgories(): void {
-    this.httpClientService
-      .get<ReferenceResponse>('reference')
-      .subscribe((result) => {
-        this.categoryList = result.categories;
-        this.categoryList.forEach(() => {
+    this.categoryList$.subscribe({
+      next: (result) => {
+        result.forEach(() => {
           this.interests.push(new FormControl());
         });
-      });
+      },
+      error: (error) => console.error(error),
+    });
   }
 
   // Disable side menu for this page
-  public ionViewDidEnter(): void {
+  ionViewDidEnter(): void {
     this.menu.enable(false);
   }
 
   // Restore to default when leaving this page
-  public ionViewDidLeave(): void {
+  ionViewDidLeave(): void {
     this.menu.enable(true);
   }
 
-  public swiperInit(swiper: SwiperCore): void {
+  swiperInit(swiper: SwiperCore): void {
     this.swiperRef = swiper;
   }
 
-  public slideWillChange(): void {
+  slideWillChange(): void {
     // ? We need to use ngZone because the change happens outside Angular
     // (see: https://swiperjs.com/angular#swiper-component-events)
     this.ngZone.run(() => {
@@ -84,24 +81,35 @@ export class GettingStartedPage implements OnInit {
     });
   }
 
-  public itemById(index: number, item: Category) {
+  itemById(index: number, item: Category): number {
     return item.categoryId - 1;
   }
 
-  public goNext() {
-    const selection: string[] = [];
-    this.interests.value.forEach((value: boolean, index: string) => {
+  goNext(): void {
+    const selection: number[] = [];
+    this.interests.value.forEach((value: boolean, index: number) => {
       if (value) {
         selection.push(index + 1);
       }
     });
 
-    this.httpClientService
-      .patch('user', {
-        interests: selection,
+    this.updateUserInterests(selection);
+  }
+
+  skip(): void {
+    this.updateUserInterests();
+  }
+
+  private updateUserInterests(interestSelection?: number[]) {
+    this.userService
+      .updateUser({
+        interests: interestSelection ? interestSelection : [],
       })
-      .subscribe(() => {
-        this.router.navigate(['/app'], { replaceUrl: true });
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/app'], { replaceUrl: true });
+        },
+        error: (error) => console.error(error),
       });
   }
 

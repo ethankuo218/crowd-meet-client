@@ -19,11 +19,11 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () => import('../home/listing/listing.module').then(m => m.ListingPageModule)
+            loadChildren: () => import('../event/listing/listing.module').then(m => m.ListingPageModule)
           },
           {
             path: ':productId',
-            loadChildren: () => import('../home/details/details.module').then(m => m.DetailsPageModule)
+            loadChildren: () => import('../event/details/details.module').then(m => m.DetailsPageModule)
           }
         ]
       },

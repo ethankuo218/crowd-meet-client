@@ -20,6 +20,13 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ShellModule } from './shell/shell.module';
+import { StoreModule } from '@ngrx/store';
+import {
+  referenceFeatureKey,
+  referenceReducer,
+  userFeatureKey,
+  userReducer,
+} from './core/states/state.reducer';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -34,6 +41,10 @@ export function createTranslateLoader(http: HttpClient) {
     AppRoutingModule,
     HttpClientModule,
     ShellModule,
+    StoreModule.forRoot({
+      [userFeatureKey]: userReducer,
+      [referenceFeatureKey]: referenceReducer,
+    }),
     ServiceWorkerModule.register('/ngsw-worker.js', {
       enabled: environment.production,
     }),
