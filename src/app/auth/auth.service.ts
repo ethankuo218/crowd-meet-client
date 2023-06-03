@@ -44,6 +44,7 @@ import { DataStore } from '../shell/data-store';
 import { ProfileModel } from './profile/profile.model';
 import { SignInProvider } from './auth-definitions';
 import { AuthHelper } from './auth.helper';
+import { Preferences } from '@capacitor/preferences';
 
 @Injectable({
   providedIn: 'root',
@@ -227,6 +228,7 @@ export class AuthService implements OnDestroy {
           signOut(auth)
             .then((webResult) => {
               // ? Sign-out successful
+              Preferences.remove({ key: 'token' }).then();
               resolve('Successfully sign out from native and web');
             })
             .catch((webError) => {

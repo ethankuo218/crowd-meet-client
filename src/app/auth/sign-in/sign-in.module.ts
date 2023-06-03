@@ -17,7 +17,7 @@ import { ComponentsModule } from '../../components/components.module';
 const redirectLoggedInToHome: AuthPipeGenerator = (next) => map(user => {
   // ? When queryParams['auth-redirect'] don't redirect because we want the component to handle the redirection
   if (user !== null && !next.queryParams['auth-redirect'] && !next.params['logout']) {
-    return ['app/home'];
+    return ['app/event'];
   } else {
     return true;
   }

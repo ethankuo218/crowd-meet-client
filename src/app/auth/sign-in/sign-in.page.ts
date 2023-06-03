@@ -88,7 +88,7 @@ export class SignInPage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
+    this.route.params.subscribe((params) => {
       if (params['logout']) {
         this.authService.signOut().then();
       }

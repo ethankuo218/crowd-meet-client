@@ -16,10 +16,6 @@ export class HttpClientService {
 
   constructor(private httpClient: HttpClient) {}
 
-  removeToken(): void {
-    Preferences.remove({ key: 'token' }).then();
-  }
-
   post<T>(apiName: string, body: any): Observable<T> {
     if (this.isFirstLogin) {
       return from(FirebaseAuthentication.getIdToken()).pipe(

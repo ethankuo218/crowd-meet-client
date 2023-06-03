@@ -11,11 +11,11 @@ const routes: Routes = [
       // /app/ redirect
       {
         path: '',
-        redirectTo: 'home',
+        redirectTo: 'event',
         pathMatch: 'full'
       },
       {
-        path: 'home',
+        path: 'event',
         children: [
           {
             path: '',
