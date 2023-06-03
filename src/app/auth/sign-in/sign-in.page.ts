@@ -159,12 +159,11 @@ export class SignInPage implements OnInit {
       const previousUrl = 'app';
       this.userService.login().subscribe({
         next: (result) => {
-          // if (result.isNewUser) {
-          //   this.router.navigate(['walkthrough'], { replaceUrl: true });
-          // }else {
-          //   this.router.navigate(['app'], { replaceUrl: true });
-          // }
-          this.router.navigate(['auth/walkthrough'], { replaceUrl: true });
+          if (result.isNewUser) {
+            this.router.navigate(['walkthrough'], { replaceUrl: true });
+          }else {
+            this.router.navigate(['app'], { replaceUrl: true });
+          }
         },
       });
 
