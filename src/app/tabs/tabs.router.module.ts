@@ -41,7 +41,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'notifications',
+        path: 'messages',
         children: [
           {
             path: '',

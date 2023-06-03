@@ -41,7 +41,6 @@ import {
 } from '@capacitor-firebase/authentication';
 
 import { DataStore } from '../shell/data-store';
-import { ProfileModel } from './profile/profile.model';
 import { SignInProvider } from './auth-definitions';
 import { AuthHelper } from './auth.helper';
 import { Preferences } from '@capacitor/preferences';
@@ -52,7 +51,6 @@ import { Preferences } from '@capacitor/preferences';
 export class AuthService implements OnDestroy {
   currentUser: User | null = null;
   authLoader: HTMLIonLoadingElement | undefined;
-  profileDataStore: DataStore<ProfileModel> | undefined;
   redirectResultSubject: Subject<any> = new Subject<any>();
   authStateSubject: Subject<AuthStateChange> = new Subject<AuthStateChange>();
 
@@ -487,55 +485,6 @@ export class AuthService implements OnDestroy {
 
   public get authState$(): Observable<AuthStateChange> {
     return this.authStateSubject.asObservable();
-  }
-
-  public getProfileDataSource(): Observable<ProfileModel> {
-    const auth = getAuth();
-    if (auth.currentUser == null) {
-      return of();
-    }
-
-    return of(auth.currentUser).pipe(
-      map((user: FirebaseUser) => {
-        const userResult = this.authHelper.createUserResult(user);
-        return this.setUserModelForProfile(userResult);
-      })
-    );
-  }
-
-  private setUserModelForProfile(userResult?: User | null): ProfileModel {
-    const userModel = new ProfileModel();
-
-    if (userResult) {
-      userModel.image = this.getPhotoURL(
-        userResult.providerId,
-        userResult.photoUrl ? userResult.photoUrl : ''
-      );
-      userModel.name = userResult.displayName || "What's your name?";
-      userModel.role = 'How would you describe yourself?';
-      userModel.description =
-        'Anything else you would like to share with the world?';
-      userModel.phoneNumber =
-        userResult.phoneNumber || 'Is there a number where I can reach you?';
-      userModel.email = userResult.email || 'Where can I send you emails?';
-      userModel.provider =
-        userResult.providerId !== 'password'
-          ? userResult.providerId
-          : 'Credentials';
-    }
-
-    return userModel;
-  }
-
-  public getProfileStore(
-    dataSource: Observable<ProfileModel>
-  ): DataStore<ProfileModel> {
-    // ? Initialize the model specifying that it is a shell model
-    const shellModel: ProfileModel = new ProfileModel();
-    this.profileDataStore = new DataStore(shellModel);
-    // ? Trigger the loading mechanism (with shell) in the dataStore
-    this.profileDataStore.load(dataSource);
-    return this.profileDataStore;
   }
 
   private getPhotoURL(signInProviderId: string, photoURL: string): string {

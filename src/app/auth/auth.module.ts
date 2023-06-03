@@ -51,11 +51,6 @@ const routes: Routes = [
             (m) => m.GettingStartedPageModule
           ),
       },
-      {
-        path: 'profile',
-        loadChildren: () =>
-          import('./profile/profile.module').then((m) => m.ProfilePageModule),
-      },
     ],
   },
 ];
@@ -86,7 +81,7 @@ const routes: Routes = [
     AuthHelper,
     UserService,
     UserStateFacade,
-    ReferenceStateFacade
+    ReferenceStateFacade,
   ],
 })
 export class AuthModule {}
