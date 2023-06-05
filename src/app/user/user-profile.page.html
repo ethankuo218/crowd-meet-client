@@ -13,7 +13,7 @@
         <app-image-shell
           class="user-image"
           animation="spinner"
-          [src]="profile.userImage"
+          [src]="profile.profilePictureUrl"
         ></app-image-shell>
       </app-aspect-ratio>
     </ion-col>
@@ -24,23 +24,23 @@
             <app-text-shell [data]="profile.name"></app-text-shell>
           </h3>
           <h5 class="user-title">
-            <app-text-shell [data]="profile.job"></app-text-shell>
+            <app-text-shell [data]="'Test job'"></app-text-shell>
           </h5>
         </ion-col>
         <ion-col class="membership-col">
           <span class="user-membership">
-            <app-text-shell [data]="profile.membership"></app-text-shell>
+            <app-text-shell [data]="'membership'"></app-text-shell>
           </span>
         </ion-col>
       </ion-row>
       <ion-row class="actions-row">
         <ion-col class="main-actions">
-          <ion-button class="call-to-action-btn" size="small" color="primary"
+          <!-- <ion-button class="call-to-action-btn" size="small" color="primary"
             >{{ 'FOLLOW' | translate }}</ion-button
           >
           <ion-button class="call-to-action-btn" size="small" color="medium"
             >{{ 'MESSAGE' | translate }}</ion-button
-          >
+          > -->
         </ion-col>
         <ion-col class="secondary-actions">
           <ion-button
@@ -61,36 +61,50 @@
     </ion-col>
   </ion-row>
   <ion-row class="user-stats-section">
-    <ion-col class="user-stats-wrapper" size="4">
+    <ion-col class="user-stats-wrapper" size="6">
       <span class="stat-value">
-        <app-text-shell [data]="profile.likes"></app-text-shell>
+        <app-text-shell [data]="5"></app-text-shell>
       </span>
-      <span class="stat-name">{{ 'LIKES' | translate }}</span>
+      <span class="stat-name">{{ 'Participated' | translate }}</span>
     </ion-col>
-    <ion-col class="user-stats-wrapper" size="4">
+    <ion-col class="user-stats-wrapper" size="6">
       <span class="stat-value">
-        <app-text-shell [data]="profile.followers"></app-text-shell>
+        <app-text-shell [data]="4"></app-text-shell>
       </span>
-      <span class="stat-name">{{ 'FOLLOWERS' | translate }}</span>
-    </ion-col>
-    <ion-col class="user-stats-wrapper" size="4">
-      <span class="stat-value">
-        <app-text-shell [data]="profile.following"></app-text-shell>
-      </span>
-      <span class="stat-name">{{ 'FOLLOWING' | translate }}</span>
+      <span class="stat-name">{{ 'Hold' | translate }}</span>
     </ion-col>
   </ion-row>
   <div class="user-about-section">
-    <h3 class="details-section-title">{{ 'ABOUT' | translate }}</h3>
+    <h3 class="details-section-title">{{ 'Introduction' | translate }}</h3>
     <p class="user-description">
       <app-text-shell
         animation="bouncing"
         lines="4"
-        [data]="profile.about"
+        [data]="profile.bio"
       ></app-text-shell>
     </p>
   </div>
-  <div class="user-friends-section">
+  <div class="user-interest-section">
+    <h3 class="details-section-title">{{'Interests & Skills' | translate}}</h3>
+    <p class="user-description">
+      <app-text-shell
+        animation="bouncing"
+        lines="4"
+        [data]="profile.interests"
+      ></app-text-shell>
+    </p>
+  </div>
+  <div class="user-comment-section">
+    <h3 class="details-section-title">{{'Comments' | translate}}</h3>
+    <p class="user-description">
+      <app-text-shell
+        animation="bouncing"
+        lines="4"
+        [data]="profile.bio"
+      ></app-text-shell>
+    </p>
+  </div>
+  <!-- <div class="user-friends-section">
     <ion-row class="heading-row">
       <h3 class="details-section-title">{{ 'FRIENDS' | translate }}</h3>
       <a class="heading-call-to-action" [routerLink]="['/app/user/friends']"
@@ -110,9 +124,9 @@
         </span>
       </ion-col>
     </ion-row>
-  </div>
+  </div> -->
 
-  <div class="user-photos-section">
+  <!-- <div class="user-photos-section">
     <ion-row class="heading-row">
       <h3 class="details-section-title">{{ 'PHOTOS' | translate }}</h3>
       <a class="heading-call-to-action">{{ 'SEE_ALL' | translate }}</a>
@@ -131,5 +145,5 @@
         </app-image-shell>
       </ion-col>
     </ion-row>
-  </div>
+  </div> -->
 </ion-content>

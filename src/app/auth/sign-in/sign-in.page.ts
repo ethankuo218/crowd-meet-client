@@ -1,5 +1,4 @@
-import { ReferenceStateFacade } from '../../core/states/reference-state/reference.state.facade';
-import { UserStateFacade } from '../../core/states/user-state/user.state.facade';
+import { Location } from '@angular/common';
 import { UserService } from './../../core/user.service';
 import { Component, NgZone, OnInit } from '@angular/core';
 import {
@@ -16,7 +15,7 @@ import {
 import { Subscription } from 'rxjs';
 
 import { HistoryHelperService } from '../../utils/history-helper.service';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../core/auth.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -49,8 +48,8 @@ export class SignInPage implements OnInit {
     public historyHelper: HistoryHelperService,
     private userService: UserService,
     private route: ActivatedRoute,
-    private userStateFacade: UserStateFacade,
-    private referenceStateFacade: ReferenceStateFacade
+    private location: Location
+
   ) {
     this.loginForm = new UntypedFormGroup({
       email: new UntypedFormControl(
@@ -90,7 +89,9 @@ export class SignInPage implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       if (params['logout']) {
-        this.authService.signOut().then();
+        this.authService.signOut().then(() => {
+          this.location.replaceState('/auth/sign-in');
+        });
       }
     });
   }

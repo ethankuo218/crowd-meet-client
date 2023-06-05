@@ -148,6 +148,34 @@
   }
 }
 
+.user-interest-section {
+  margin: calc(var(--page-margin) * 2) var(--page-margin) var(--page-margin);
+  padding-bottom: var(--page-margin);
+  border-bottom: 1px solid var(--ion-color-light-shade);
+
+  .user-description {
+    color: var(--ion-color-dark-shade);
+    text-align: justify;
+    margin: var(--page-margin) 0px;
+    font-size: 14px;
+    line-height: 1.3;
+  }
+}
+
+.user-comment-section {
+  margin: calc(var(--page-margin) * 2) var(--page-margin) var(--page-margin);
+  padding-bottom: var(--page-margin);
+  border-bottom: 1px solid var(--ion-color-light-shade);
+
+  .user-description {
+    color: var(--ion-color-dark-shade);
+    text-align: justify;
+    margin: var(--page-margin) 0px;
+    font-size: 14px;
+    line-height: 1.3;
+  }
+}
+
 .user-friends-section {
   margin: calc(var(--page-margin) * 2) var(--page-margin) var(--page-margin);
   padding-bottom: var(--page-margin);

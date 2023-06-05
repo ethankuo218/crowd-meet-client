@@ -23,6 +23,7 @@ export class UserService {
       this.httpClientService.get<Reference>('Reference'),
     ]).pipe(
       map(([loginResult, referenceResult]): LoginResponse => {
+        this.userStateFacade.storeUser({ userId: loginResult.userId });
         this.referenceStateFacade.storeReference(referenceResult);
         return loginResult;
       })

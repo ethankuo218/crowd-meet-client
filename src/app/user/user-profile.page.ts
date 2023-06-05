@@ -1,18 +1,14 @@
+import { UserStateFacade } from '../core/states/user-state/user.state.facade';
 import { Component, OnInit, HostBinding } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, of, switchMap, tap } from 'rxjs';
 
-import {
-  IResolvedRouteData,
-  ResolverHelper,
-} from '../../utils/resolver-helper';
-import { UserProfileModel } from './user-profile.model';
 import { AlertController } from '@ionic/angular';
 
-import { LanguageService } from '../../language/language.service';
+import { LanguageService } from '../language/language.service';
 import { TranslateService } from '@ngx-translate/core';
-import { switchMap } from 'rxjs/operators';
 import { LanguageModel } from 'src/app/language/language.model';
+import { User } from 'src/app/core/states/user-state/user.model';
+import { UserService } from '../core/user.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -28,42 +24,43 @@ export class UserProfilePage implements OnInit {
   // Gather all component subscription in one place. Can be one Subscription or multiple (chained using the Subscription.add() method)
   subscriptions: Subscription | undefined;
 
-  profile: UserProfileModel = new UserProfileModel();
+  profile: User = {
+    userId: 0,
+    email: '',
+    name: '',
+    profilePictureUrl: '',
+    bio: '',
+    interests: [],
+  };
   available_languages: any[] = [];
   translations: any;
 
   @HostBinding('class.is-shell') get isShell() {
-    return this.profile && this.profile.isShell ? true : false;
+    return this.profile ? true : false;
   }
 
   constructor(
-    private route: ActivatedRoute,
     public translate: TranslateService,
     public languageService: LanguageService,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private userStateFacade: UserStateFacade,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
-    this.subscriptions = this.route.data
+    this.userStateFacade
+      .getUser()
       .pipe(
-        // Extract data for this page
-        switchMap((resolvedRouteData) => {
-          return ResolverHelper.extractData<UserProfileModel>(
-            resolvedRouteData['data'],
-            UserProfileModel
-          );
+        switchMap((result) => {
+          return result.name
+            ? of(result)
+            : this.userService.getUserById(result.userId);
         })
       )
-      .subscribe({
-        next: (state) => {
-          this.profile = state;
-
-          // get translations for this page to use in the Language Chooser Alert
-          this.getTranslations();
-        },
-        error: (error) => console.log(error),
+      .subscribe((result) => {
+        this.profile = result;
+        this.getTranslations();
       });
-
     this.translate.onLangChange.subscribe(() => this.getTranslations());
   }
 

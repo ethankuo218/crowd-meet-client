@@ -28,6 +28,17 @@ import {
   userReducer,
 } from './core/states/state.reducer';
 
+import { Capacitor } from '@capacitor/core';
+
+import { getApp, initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import {
+  provideAuth,
+  getAuth,
+  initializeAuth,
+  indexedDBLocalPersistence,
+} from '@angular/fire/auth';
+import { CoreModule } from './core/core.module';
+
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -41,6 +52,7 @@ export function createTranslateLoader(http: HttpClient) {
     AppRoutingModule,
     HttpClientModule,
     ShellModule,
+    CoreModule,
     StoreModule.forRoot({
       [userFeatureKey]: userReducer,
       [referenceFeatureKey]: referenceReducer,
@@ -54,6 +66,18 @@ export function createTranslateLoader(http: HttpClient) {
         useFactory: createTranslateLoader,
         deps: [HttpClient],
       },
+    }),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => {
+      if (Capacitor.isNativePlatform()) {
+        return initializeAuth(getApp(), {
+          persistence: indexedDBLocalPersistence,
+          // persistence: browserLocalPersistence
+          // popupRedirectResolver: browserPopupRedirectResolver
+        });
+      } else {
+        return getAuth();
+      }
     }),
   ],
   providers: [

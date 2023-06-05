@@ -25,6 +25,7 @@ export const userReducer = createReducer(
   initialState,
   on(UserStateActions.storeUser, (state, { userInfo }) => ({
     ...state,
+    userId: userInfo.userId,
     email: userInfo.email,
     name: userInfo.name,
     profilePictureUrl: userInfo.profilePictureUrl,

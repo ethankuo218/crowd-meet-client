@@ -12,52 +12,58 @@ const routes: Routes = [
       {
         path: '',
         redirectTo: 'event',
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'event',
         children: [
           {
             path: '',
-            loadChildren: () => import('../event/listing/listing.module').then(m => m.ListingPageModule)
+            loadChildren: () =>
+              import('../event/listing/listing.module').then(
+                (m) => m.ListingPageModule
+              ),
           },
           {
             path: ':productId',
-            loadChildren: () => import('../event/details/details.module').then(m => m.DetailsPageModule)
-          }
-        ]
+            loadChildren: () =>
+              import('../event/details/details.module').then(
+                (m) => m.DetailsPageModule
+              ),
+          },
+        ],
       },
       {
         path: 'user',
         children: [
           {
             path: '',
-            loadChildren: () => import('../user/profile/user-profile.module').then(m => m.UserProfilePageModule)
+            loadChildren: () =>
+              import('../user/user-profile.module').then(
+                (m) => m.UserProfilePageModule
+              ),
           },
-          {
-            path: 'friends',
-            loadChildren: () => import('../user/friends/user-friends.module').then(m => m.UserFriendsPageModule)
-          }
-        ]
+        ],
       },
       {
         path: 'messages',
         children: [
           {
             path: '',
-            loadChildren: () => import('../notifications/notifications.module').then(m => m.NotificationsPageModule)
-          }
-        ]
-      }
-    ]
-  }
+            loadChildren: () =>
+              import('../notifications/notifications.module').then(
+                (m) => m.NotificationsPageModule
+              ),
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forChild(routes)
-  ],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [ ]
+  providers: [],
 })
 export class TabsPageRoutingModule {}

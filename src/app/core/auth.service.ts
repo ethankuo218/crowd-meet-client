@@ -9,8 +9,7 @@ import { isPlatformBrowser, Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingController, Platform } from '@ionic/angular';
 
-import { Observable, Subject, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
 
 import {
   AuthProvider,
@@ -30,8 +29,6 @@ import {
   signOut,
 } from '@angular/fire/auth';
 
-import type { User as FirebaseUser } from '@angular/fire/auth';
-
 import {
   AuthStateChange,
   FirebaseAuthentication,
@@ -40,7 +37,6 @@ import {
   User,
 } from '@capacitor-firebase/authentication';
 
-import { DataStore } from '../shell/data-store';
 import { SignInProvider } from './auth-definitions';
 import { AuthHelper } from './auth.helper';
 import { Preferences } from '@capacitor/preferences';

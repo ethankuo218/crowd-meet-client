@@ -3,24 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
-import { Capacitor } from '@capacitor/core';
-
-import { getApp, initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import {
-  provideAuth,
-  getAuth,
-  initializeAuth,
-  indexedDBLocalPersistence,
-} from '@angular/fire/auth';
-
 import { ComponentsModule } from '../components/components.module';
-import { environment } from '../../environments/environment';
-import { AuthService } from './auth.service';
-import { AuthHelper } from './auth.helper';
-import { HttpClientService } from '../core/http-client.service';
-import { UserService } from '../core/user.service';
-import { UserStateFacade } from '../core/states/user-state/user.state.facade';
-import { ReferenceStateFacade } from '../core/states/reference-state/reference.state.facade';
 
 const routes: Routes = [
   {
@@ -62,26 +45,7 @@ const routes: Routes = [
     ComponentsModule,
     RouterModule.forChild(routes),
     // ? Correct way to initialize Firebase using the Capacitor Firebase plugin mixed with the Firebase JS SDK (@angular/fire)
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => {
-      if (Capacitor.isNativePlatform()) {
-        return initializeAuth(getApp(), {
-          persistence: indexedDBLocalPersistence,
-          // persistence: browserLocalPersistence
-          // popupRedirectResolver: browserPopupRedirectResolver
-        });
-      } else {
-        return getAuth();
-      }
-    }),
   ],
-  providers: [
-    AuthService,
-    HttpClientService,
-    AuthHelper,
-    UserService,
-    UserStateFacade,
-    ReferenceStateFacade,
-  ],
+  providers: [],
 })
 export class AuthModule {}

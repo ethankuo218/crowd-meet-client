@@ -1,7 +1,9 @@
+import { UserService } from 'src/app/core/user.service';
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { HistoryHelperService } from './utils/history-helper.service';
 import { SplashScreen } from '@capacitor/splash-screen';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -34,7 +36,7 @@ export class AppComponent {
       title: 'Sign out',
       url: '/auth/sign-in/true',
       ionicIcon: 'log-out-outline',
-    }
+    },
   ];
 
   textDir = 'ltr';
@@ -42,7 +44,8 @@ export class AppComponent {
   // Inject HistoryHelperService in the app.components.ts so its available app-wide
   constructor(
     public translate: TranslateService,
-    public historyHelper: HistoryHelperService
+    public historyHelper: HistoryHelperService,
+    private userService: UserService
   ) {
     this.initializeApp();
     this.setLanguage();
@@ -50,6 +53,7 @@ export class AppComponent {
 
   async initializeApp() {
     try {
+      await this.userService.login().pipe(take(1)).subscribe();
       await SplashScreen.hide();
     } catch (err) {
       console.log('This is normal in a browser', err);

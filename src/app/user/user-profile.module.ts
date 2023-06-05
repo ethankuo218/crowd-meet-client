@@ -5,20 +5,15 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { UserService } from '../user.service';
 import { UserProfilePage } from './user-profile.page';
-import { UserProfileResolver } from './user-profile.resolver';
-import { ComponentsModule } from '../../components/components.module';
-import { LanguageService } from '../../language/language.service';
+import { ComponentsModule } from '../components/components.module';
+import { LanguageService } from '../language/language.service';
 import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
     path: '',
     component: UserProfilePage,
-    resolve: {
-      data: UserProfileResolver,
-    },
   },
 ];
 
@@ -32,6 +27,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
   ],
   declarations: [UserProfilePage],
-  providers: [UserProfileResolver, UserService, LanguageService],
+  providers: [
+    LanguageService
+  ],
 })
 export class UserProfilePageModule {}
