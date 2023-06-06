@@ -10,6 +10,8 @@ import { HomeService } from '../home.service';
 import { ListingPage } from './listing.page';
 import { ListingResolver } from './listing.resolver';
 import { ListingPlainResolver } from './listing.plain.resolver';
+import { ListingCardComponent } from './listing-card/listing-card.component';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -25,9 +27,11 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
     ComponentsModule,
+    ListingCardComponent
   ],
   declarations: [ListingPage],
   providers: [ListingResolver, ListingPlainResolver, HomeService],

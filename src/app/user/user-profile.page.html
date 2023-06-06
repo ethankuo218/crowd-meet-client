@@ -85,13 +85,23 @@
     </p>
   </div>
   <div class="user-interest-section">
-    <h3 class="details-section-title">{{'Interests & Skills' | translate}}</h3>
+    <ion-row>
+      <ion-col size="5">
+        <h3 class="details-section-title">
+          {{'Interests & Skills' | translate}}
+        </h3>
+      </ion-col>
+      <ion-col size="1">
+        <ion-buttons class="more-btn" size="small" fill="clear" color="medium" [routerLink]="['/auth/getting-started']">
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+
     <p class="user-description">
-      <app-text-shell
-        animation="bouncing"
-        lines="4"
-        [data]="profile.interests"
-      ></app-text-shell>
+      <ng-container *ngFor="let item of profile.interests">
+        <app-text-shell [data]="'#' + item.name"></app-text-shell>
+      </ng-container>
     </p>
   </div>
   <div class="user-comment-section">
