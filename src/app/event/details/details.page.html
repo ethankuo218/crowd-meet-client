@@ -10,24 +10,17 @@
 <ion-content class="travel-details-content">
   <ion-row class="image-row">
     <ion-col size="12">
-      <app-image-shell [display]="'cover'" animation="spinner" class="add-overlay details-image" [src]="details.image">
-        <app-aspect-ratio [ratio]="{w:64, h:50}">
-          <div class="icon-wrapper">
-            <app-aspect-ratio [ratio]="{w: 47, h: 25}">
-              <app-image-shell [src]="details.icon" class="details-icon"></app-image-shell>
-            </app-aspect-ratio>
-          </div>
-        </app-aspect-ratio>
+      <app-image-shell [display]="'cover'" animation="spinner" class="add-overlay details-image" [src]="details.imageUrl">
       </app-image-shell>
     </ion-col>
   </ion-row>
   <ion-row class="description-row">
     <ion-col size="12">
       <h3 class="details-name">
-        <app-text-shell animation="bouncing" [data]="details.name.concat(' - ', details.category)"></app-text-shell>
+        <app-text-shell animation="bouncing" [data]="details.title"></app-text-shell>
       </h3>
       <p class="details-short-description">
-        <app-text-shell animation="bouncing" [data]="details.shortDescription"></app-text-shell>
+        <app-text-shell animation="bouncing" [data]="details.description"></app-text-shell>
       </p>
     </ion-col>
     <ion-col size="12">
@@ -48,7 +41,7 @@
     </ion-col>
     <ion-col size="12">
       <ion-row class="details-tags">
-        <ion-col class="tag-wrapper" *ngFor="let tag of details?.tags">
+        <ion-col class="tag-wrapper" *ngFor="let tag of details.categories">
           <span class="item-tag">
             <app-text-shell [data]="tag"></app-text-shell>
           </span>
@@ -57,16 +50,16 @@
     </ion-col>
     <ion-col size="12">
       <p class="details-description">
-        <app-text-shell animation="bouncing" lines="6" [data]="details.fullDescription"></app-text-shell>
+        <app-text-shell animation="bouncing" lines="6" [data]="details.description"></app-text-shell>
       </p>
     </ion-col>
   </ion-row>
   <div class="open-hours-wrapper">
     <h3 class="detail-title">When?</h3>
     <ul class="schedules-list">
-      <li class="open-hour-item" *ngFor="let schedule of details?.openHours">
+      <li class="open-hour-item" *ngFor="let schedule of details.startTime">
         <div class="schedule-outer">
-          <span class="schedule-day">
+          <!-- <span class="schedule-day">
             <app-text-shell [data]="schedule.day"></app-text-shell>
           </span>
           <div class="schedule-hours">
@@ -82,7 +75,7 @@
             <ng-container *ngIf="!schedule.open">
               <ion-badge class="schedule-closed" color="medium">closed</ion-badge>
             </ng-container>
-          </div>
+          </div> -->
         </div>
       </li>
     </ul>
@@ -91,60 +84,18 @@
     <div class="location-header">
       <h3 class="detail-title">Where?</h3>
       <span class="location-address">
-        <app-text-shell [data]="details.location.address"></app-text-shell>
+        <app-text-shell [data]="details.locationName"></app-text-shell>
       </span>
     </div>
     <!-- <app-aspect-ratio [ratio]="{w: 64, h: 30}">
       <app-image-shell [src]="'https://maps.googleapis.com/maps/api/staticmap?center=' + details.location?.latlng + '&zoom=15&size=640x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xd9453a%7C' + details.location?.latlng + '&key=YOUR_KEY_HERE'">
       </app-image-shell>
     </app-aspect-ratio> -->
-    <app-aspect-ratio [ratio]="{w: 64, h: 30}">
+    <!-- <app-aspect-ratio [ratio]="{w: 64, h: 30}">
       <app-image-shell class="location-image" animation="spinner" [src]="details.location.mapImage"></app-image-shell>
-    </app-aspect-ratio>
+    </app-aspect-ratio> -->
   </div>
-  <div class="suggested-places-wrapper" *ngIf="details?.whereToStay && details.whereToStay.length > 0">
-    <h3 class="detail-alt-title">Need a place to stay?</h3>
-    <ion-row class="suggested-places-row">
-      <ion-col size="4" class="suggested-place" *ngFor="let placeToStay of details?.whereToStay">
-        <app-aspect-ratio [ratio]="{w: 18, h: 23}">
-          <app-image-shell class="place-picture" animation="spinner" [src]="placeToStay.picture"></app-image-shell>
-        </app-aspect-ratio>
-        <div class="place-details">
-          <h5 class="place-name">
-            <app-text-shell [data]="placeToStay.name"></app-text-shell>
-          </h5>
-          <div class="place-rating">
-            <ion-icon class="rating-icon" name="star-outline"></ion-icon>
-            <div class="rating-value">
-              <app-text-shell [data]="placeToStay.rating"></app-text-shell>
-            </div>
-          </div>
-        </div>
-      </ion-col>
-    </ion-row>
-  </div>
-  <div class="suggested-places-wrapper" *ngIf="details?.whereToEat && details.whereToEat.length > 0">
-    <h3 class="detail-alt-title">Grab a bite?</h3>
-    <ion-row class="suggested-places-row">
-      <ion-col size="4" class="suggested-place" *ngFor="let placeToEat of details?.whereToEat">
-        <app-aspect-ratio [ratio]="{w: 18, h: 23}">
-          <app-image-shell class="place-picture" animation="spinner" [src]="placeToEat.picture"></app-image-shell>
-        </app-aspect-ratio>
-        <div class="place-details">
-          <h5 class="place-name">
-            <app-text-shell [data]="placeToEat.name"></app-text-shell>
-          </h5>
-          <div class="place-rating">
-            <ion-icon class="rating-icon" name="star-outline"></ion-icon>
-            <div class="rating-value">
-              <app-text-shell [data]="placeToEat.rating"></app-text-shell>
-            </div>
-          </div>
-        </div>
-      </ion-col>
-    </ion-row>
-  </div>
-  <div class="related-activities-wrapper" *ngIf="details?.relatedActivities && details.relatedActivities.length > 0">
+  <!-- <div class="related-activities-wrapper" *ngIf="details?.relatedActivities && details.relatedActivities.length > 0">
     <h3 class="detail-alt-title">More activities?</h3>
     <ion-row class="related-activity" *ngFor="let relatedActivity of details?.relatedActivities">
       <ion-col size="12">
@@ -168,5 +119,5 @@
         </div>
       </ion-col>
     </ion-row>
-  </div>
+  </div> -->
 </ion-content>

@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { ComponentsModule } from '../../../components/components.module';
-import { ItemModel } from '../listing.model';
+import { Event } from '../../models/event.model';
 
 @Component({
   selector: 'app-listing-card',
@@ -20,7 +20,29 @@ import { ItemModel } from '../listing.model';
   ],
 })
 export class ListingCardComponent {
-  @Input() cardInfo = new ItemModel();
+  @Input() cardInfo: Event = {
+    imageUrl: '',
+    videoUrl: '',
+    title: '',
+    description: '',
+    startTime: '',
+    endTime: '',
+    maxParticipants: 0,
+    locationName: '',
+    price: 0,
+    categories: [],
+    creator: {
+      userId: 0,
+      email: '',
+      name: '',
+      profilePictureUrl: '',
+      bio: '',
+      interests: [],
+    },
+    eventId: 0,
+    rating: 0,
+    reviewsCount: 0,
+  };
 
   constructor() {}
 }

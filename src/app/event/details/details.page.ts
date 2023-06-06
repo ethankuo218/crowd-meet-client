@@ -1,13 +1,12 @@
+import { EventService } from './../event.service';
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import {
-  IResolvedRouteData,
-  ResolverHelper,
-} from '../../utils/resolver-helper';
+import { ResolverHelper } from '../../utils/resolver-helper';
 import { DetailsModel } from './details.model';
 import { switchMap } from 'rxjs/operators';
+import { Event } from '../models/event.model';
 
 @Component({
   selector: 'app-details',
@@ -18,23 +17,41 @@ export class DetailsPage implements OnInit {
   // Gather all component subscription in one place. Can be one Subscription or multiple (chained using the Subscription.add() method)
   subscriptions: Subscription | undefined;
 
-  details: DetailsModel = new DetailsModel();
+  details: Event = {
+    imageUrl: '',
+    videoUrl: '',
+    title: '',
+    description: '',
+    startTime: '',
+    endTime: '',
+    maxParticipants: 0,
+    locationName: '',
+    price: 0,
+    categories: [],
+    creator: {
+      userId: 0,
+      email: '',
+      name: '',
+      profilePictureUrl: '',
+      bio: '',
+      interests: [],
+    },
+    eventId: 0,
+    rating: 0,
+    reviewsCount: 0,
+  };
 
-  @HostBinding('class.is-shell') get isShell() {
-    return this.details && this.details.isShell ? true : false;
-  }
-
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private eventService: EventService
+  ) {}
 
   ngOnInit(): void {
-    this.subscriptions = this.route.data
+    this.subscriptions = this.route.params
       .pipe(
         // Extract data for this page
-        switchMap((resolvedRouteData) => {
-          return ResolverHelper.extractData<DetailsModel>(
-            resolvedRouteData['data']['dataStore'],
-            DetailsModel
-          );
+        switchMap(() => {
+          return this.eventService.getEventDetail(0);
         })
       )
       .subscribe({

@@ -23,14 +23,10 @@
 <ion-row class="header-row">
   <ion-col class="title-col" size="10">
     <div class="item-name">
-      <a class="name-anchor" [routerLink]="['/app/event/', cardInfo.slug]">
+      <a class="name-anchor" [routerLink]="['/app/event/', cardInfo.eventId]">
         <app-text-shell
           animation="bouncing"
-          [data]="
-            cardInfo.name && cardInfo.category
-              ? cardInfo.name + ' - ' + cardInfo.category
-              : cardInfo.name
-          "
+          [data]="cardInfo.title"
         ></app-text-shell>
       </a>
     </div>
@@ -41,7 +37,7 @@
     </ion-button>
   </ion-col>
 </ion-row>
-<ion-row class="info-row" [routerLink]="['/app/event/', cardInfo.slug]">
+<ion-row class="info-row" [routerLink]="['/app/event/', cardInfo.eventId]">
   <ion-col class="main-info-col" size="9">
     <p class="item-description">
       <app-text-shell
@@ -76,7 +72,7 @@
     <app-image-shell
       [display]="'cover'"
       class="add-overlay item-image"
-      [src]="cardInfo.image"
+      [src]="cardInfo.imageUrl"
     >
       <app-aspect-ratio [ratio]="{ w: 1, h: 1 }"> </app-aspect-ratio>
     </app-image-shell>

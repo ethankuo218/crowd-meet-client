@@ -25,4 +25,8 @@ export interface Event {
   categories: Category[];
   creator: User;
   eventId: number;
+
+  //TODO: check correct property name
+  rating: number;
+  reviewsCount: number;
 }

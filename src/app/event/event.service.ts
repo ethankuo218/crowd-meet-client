@@ -1,7 +1,7 @@
 import { HttpClientService } from '../core/http-client.service';
 import { Injectable } from '@angular/core';
-import { EventSetting } from './models/event.model';
-import { Observable } from 'rxjs';
+import { Event, EventSetting } from './models/event.model';
+import { Observable, of } from 'rxjs';
 import { FileResponse } from '../core/models/core.model';
 
 @Injectable()
@@ -26,7 +26,9 @@ export class EventService {
     return this.httpClientService.get<Event>(`Event/${id}`);
   }
 
-  getEventList() {}
+  getEventList(): Observable<Event[]> {
+    return of() as Observable<Event[]>;
+  }
 
   deleteEvent() {}
 }

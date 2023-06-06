@@ -1,10 +1,9 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { EventService } from './../event.service';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-
-import { ResolverHelper } from '../../utils/resolver-helper';
-import { ListingModel } from './listing.model';
 import { switchMap } from 'rxjs/operators';
+import { Event } from '../models/event.model';
 
 @Component({
   selector: 'app-listing',
@@ -15,28 +14,23 @@ export class ListingPage implements OnInit {
   // Gather all component subscription in one place. Can be one Subscription or multiple (chained using the Subscription.add() method)
   subscriptions: Subscription | undefined;
 
-  listing: ListingModel = new ListingModel();
+  listing: Event[] = [];
 
-  @HostBinding('class.is-shell') get isShell() {
-    return this.listing && this.listing.isShell ? true : false;
-  }
-
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private eventService: EventService) {}
 
   ngOnInit(): void {
     this.subscriptions = this.route.data
       .pipe(
         // Extract data for this page
-        switchMap((resolvedRouteData) => {
-          return ResolverHelper.extractData<ListingModel>(
-            resolvedRouteData['data']['dataStore'],
-            ListingModel
-          );
+        switchMap(() => {
+          return this.eventService.getEventList();
         })
       )
       .subscribe({
-        next: (state) => {
-          this.listing = state;
+        next: (result) => {
+          this.listing = result;
         },
         error: (error) => console.log(error),
       });
