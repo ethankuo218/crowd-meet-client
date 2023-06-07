@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { Event } from '../models/event.model';
+import { EventListData } from '../models/event.model';
 
 @Component({
   selector: 'app-listing',
@@ -14,11 +14,12 @@ export class ListingPage implements OnInit {
   // Gather all component subscription in one place. Can be one Subscription or multiple (chained using the Subscription.add() method)
   subscriptions: Subscription | undefined;
 
-  listing: Event[] = [];
+  listing: EventListData[] = [];
 
   constructor(
     private route: ActivatedRoute,
-    private eventService: EventService) {}
+    private eventService: EventService
+  ) {}
 
   ngOnInit(): void {
     this.subscriptions = this.route.data
@@ -30,7 +31,7 @@ export class ListingPage implements OnInit {
       )
       .subscribe({
         next: (result) => {
-          this.listing = result;
+          this.listing = result.data;
         },
         error: (error) => console.log(error),
       });

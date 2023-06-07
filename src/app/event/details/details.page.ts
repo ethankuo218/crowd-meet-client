@@ -37,8 +37,6 @@ export class DetailsPage implements OnInit {
       interests: [],
     },
     eventId: 0,
-    rating: 0,
-    reviewsCount: 0,
   };
 
   constructor(
