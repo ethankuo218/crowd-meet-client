@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { TabsPageRoutingModule } from './tabs.router.module';
 
 import { TabsPage } from './tabs.page';
+import { EventService } from '../event/event.service';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { TabsPage } from './tabs.page';
     FormsModule,
     TabsPageRoutingModule
   ],
-  declarations: [ TabsPage ]
+  declarations: [ TabsPage ],
+  providers:[EventService]
 })
 export class TabsPageModule {}
