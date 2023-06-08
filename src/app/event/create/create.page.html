@@ -61,11 +61,10 @@
         </ng-container>
       </div>
 
-      <!-- When this bug (https://github.com/ionic-team/ionic-framework/issues/22117) gets fixed, remove .item-label-floating class -->
-      <ion-item class="input-item item-label-floating">
-        <ion-label position="floating">Start Time</ion-label>
+      <ion-item class="input-item">
+        <ion-label position="fixed">Start Time</ion-label>
         <ion-input
-          type="text"
+          type="date"
           formControlName="startTime"
           clearInput
         ></ion-input>
@@ -82,10 +81,9 @@
         </ng-container>
       </div>
 
-      <!-- When this bug (https://github.com/ionic-team/ionic-framework/issues/22117) gets fixed, remove .item-label-floating class -->
-      <ion-item class="input-item item-label-floating">
-        <ion-label position="floating">End Time</ion-label>
-        <ion-input type="text" formControlName="endTime" clearInput></ion-input>
+      <ion-item class="input-item">
+        <ion-label position="fixed">End Time</ion-label>
+        <ion-input type="date" formControlName="endTime" clearInput></ion-input>
       </ion-item>
       <div class="error-container">
         <ng-container *ngFor="let validation of validations.endTime">
@@ -172,7 +170,7 @@
       <!-- When this bug (https://github.com/ionic-team/ionic-framework/issues/22117) gets fixed, remove .item-label-floating class -->
       <ion-item class="input-item item-label-floating">
         <ion-label position="floating">Price</ion-label>
-        <ion-input type="text" formControlName="price" clearInput></ion-input>
+        <ion-input type="number" formControlName="price" clearInput></ion-input>
       </ion-item>
       <div class="error-container">
         <ng-container *ngFor="let validation of validations.price">

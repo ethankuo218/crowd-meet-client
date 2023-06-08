@@ -31,15 +31,16 @@ ion-content {
     .inputs-list {
       --ion-item-background: var(--page-background);
 
-      padding: var(--page-margin) var(--page-margin) calc(var(--page-margin) * 2);
+      padding: var(--page-margin) var(--page-margin)
+        calc(var(--page-margin) * 2);
 
       ion-list-header {
         padding-inline-start: 0px;
 
         .header-title {
           text-transform: uppercase;
-      		font-size: 16px;
-      		color: var(--ion-color-secondary);
+          font-size: 16px;
+          color: var(--ion-color-secondary);
         }
       }
 
@@ -67,7 +68,7 @@ ion-content {
             flex-shrink: 0;
           }
         }
-    	}
+      }
 
       .counter-item {
         app-counter-input {
@@ -101,4 +102,11 @@ ion-content {
   .alert-message {
     display: none;
   }
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color: black;
+  opacity: 1;
+
+  font-size: large;
 }
