@@ -10,7 +10,7 @@ export class PhoneValidator {
   static invalidCountryPhone = (countryControl: AbstractControl): ValidatorFn => {
     let subscribe = false;
 
-    return (phoneControl: AbstractControl): {[key: string]: boolean} => {
+    return (phoneControl: AbstractControl) => {
       if (!subscribe) {
         subscribe = true;
         countryControl.valueChanges.subscribe(() => {

@@ -1,8 +1,8 @@
-import { UntypedFormControl } from '@angular/forms';
+import { AbstractControl, FormControl } from '@angular/forms';
 
 export class UsernameValidator {
 
-  static usernameNotAvailable(fc: UntypedFormControl) {
+  static usernameNotAvailable(fc: AbstractControl) {
 
     // this is a dummy validator to check if the username is valid or not.
     // In a real app you should check against your DB if the username is already in use.

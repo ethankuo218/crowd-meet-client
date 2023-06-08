@@ -18,6 +18,13 @@ const routes: Routes = [
         path: 'event',
         children: [
           {
+            path: 'create',
+            loadChildren: () =>
+              import('../event/create/create.module').then(
+                (m) => m.CreatePageModule
+              ),
+          },
+          {
             path: '',
             loadChildren: () =>
               import('../event/listing/listing.module').then(

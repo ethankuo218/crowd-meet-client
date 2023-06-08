@@ -1,0 +1,199 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Create Event</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="forms-validations-content">
+  <form
+    class="validations-form"
+    [formGroup]="eventForm"
+    (ngSubmit)="onSubmit(eventForm.value)"
+  >
+    <ion-list class="inputs-list" lines="full">
+      <ion-list-header>
+        <ion-label class="header-title">Basic Info</ion-label>
+      </ion-list-header>
+
+      <!-- When this bug (https://github.com/ionic-team/ionic-framework/issues/22117) gets fixed, remove .item-label-floating class -->
+      <ion-item class="input-item item-label-floating">
+        <ion-label position="floating">Event Title</ion-label>
+        <ion-input
+          type="text"
+          formControlName="title"
+          clearInput
+          required
+        ></ion-input>
+      </ion-item>
+      <div class="error-container">
+        <ng-container *ngFor="let validation of validations.title">
+          <div
+            class="error-message"
+            *ngIf="eventForm.get('title')?.hasError(validation.type) && (eventForm.get('title')?.dirty || eventForm.get('title')?.touched)"
+          >
+            <ion-icon name="information-circle-outline"></ion-icon>
+            <span>{{ validation.message }}</span>
+          </div>
+        </ng-container>
+      </div>
+
+      <!-- When this bug (https://github.com/ionic-team/ionic-framework/issues/22117) gets fixed, remove .item-label-floating class -->
+      <ion-item class="input-item item-label-floating">
+        <ion-label position="floating">Description</ion-label>
+        <ion-input
+          type="text"
+          formControlName="description"
+          clearInput
+        ></ion-input>
+      </ion-item>
+      <div class="error-container">
+        <ng-container *ngFor="let validation of validations.description">
+          <div
+            class="error-message"
+            *ngIf="eventForm.get('description')?.hasError(validation.type) && (eventForm.get('description')?.dirty || eventForm.get('description')?.touched)"
+          >
+            <ion-icon name="information-circle-outline"></ion-icon>
+            <span>{{ validation.message }}</span>
+          </div>
+        </ng-container>
+      </div>
+
+      <!-- When this bug (https://github.com/ionic-team/ionic-framework/issues/22117) gets fixed, remove .item-label-floating class -->
+      <ion-item class="input-item item-label-floating">
+        <ion-label position="floating">Start Time</ion-label>
+        <ion-input
+          type="text"
+          formControlName="startTime"
+          clearInput
+        ></ion-input>
+      </ion-item>
+      <div class="error-container">
+        <ng-container *ngFor="let validation of validations.startTime">
+          <div
+            class="error-message"
+            *ngIf="eventForm.get('startTime')?.hasError(validation.type) && (eventForm.get('startTime')?.dirty || eventForm.get('startTime')?.touched)"
+          >
+            <ion-icon name="information-circle-outline"></ion-icon>
+            <span>{{ validation.message }}</span>
+          </div>
+        </ng-container>
+      </div>
+
+      <!-- When this bug (https://github.com/ionic-team/ionic-framework/issues/22117) gets fixed, remove .item-label-floating class -->
+      <ion-item class="input-item item-label-floating">
+        <ion-label position="floating">End Time</ion-label>
+        <ion-input type="text" formControlName="endTime" clearInput></ion-input>
+      </ion-item>
+      <div class="error-container">
+        <ng-container *ngFor="let validation of validations.endTime">
+          <div
+            class="error-message"
+            *ngIf="eventForm.get('endTime')?.hasError(validation.type) && (eventForm.get('endTime')?.dirty || eventForm.get('endTime')?.touched)"
+          >
+            <ion-icon name="information-circle-outline"></ion-icon>
+            <span>{{ validation.message }}</span>
+          </div>
+        </ng-container>
+      </div>
+
+      <!-- When this bug (https://github.com/ionic-team/ionic-framework/issues/22117) gets fixed, remove .item-label-floating class -->
+      <ion-item class="input-item item-label-floating">
+        <ion-label position="floating">Location Name</ion-label>
+        <ion-input
+          type="text"
+          formControlName="locationName"
+          clearInput
+        ></ion-input>
+      </ion-item>
+      <div class="error-container">
+        <ng-container *ngFor="let validation of validations.locationName">
+          <div
+            class="error-message"
+            *ngIf="eventForm.get('locationName')?.hasError(validation.type) && (eventForm.get('locationName')?.dirty || eventForm.get('locationName')?.touched)"
+          >
+            <ion-icon name="information-circle-outline"></ion-icon>
+            <span>{{ validation.message }}</span>
+          </div>
+        </ng-container>
+      </div>
+
+      <!-- When this bug (https://github.com/ionic-team/ionic-framework/issues/22117) gets fixed, remove .item-label-floating class -->
+      <ion-item class="input-item item-label-floating">
+        <ion-label position="floating">Categories</ion-label>
+        <ion-input
+          type="text"
+          formControlName="categories"
+          clearInput
+        ></ion-input>
+      </ion-item>
+      <div class="error-container">
+        <ng-container *ngFor="let validation of validations.categories">
+          <div
+            class="error-message"
+            *ngIf="eventForm.get('categories')?.hasError(validation.type) && (eventForm.get('categories')?.dirty || eventForm.get('categories')?.touched)"
+          >
+            <ion-icon name="information-circle-outline"></ion-icon>
+            <span>{{ validation.message }}</span>
+          </div>
+        </ng-container>
+      </div>
+    </ion-list>
+
+    <ion-list class="inputs-list" lines="full">
+      <ion-list-header>
+        <ion-label class="header-title">Limit</ion-label>
+      </ion-list-header>
+      <ion-item class="counter-item input-item">
+        <ion-label>Max Participants</ion-label>
+        <app-counter-input
+          formControlName="maxParticipants"
+        ></app-counter-input>
+      </ion-item>
+      <div class="error-container">
+        <ng-container *ngFor="let validation of validations.maxParticipants">
+          <div
+            class="error-message"
+            *ngIf="eventForm.get('maxParticipants')?.hasError(validation.type) && (eventForm.get('maxParticipants')?.dirty || eventForm.get('maxParticipants')?.touched)"
+          >
+            <ion-icon name="information-circle-outline"></ion-icon>
+            <span
+              >{{ validation.message }} {{
+              eventForm.get('maxParticipants')?.getError(validation.type).min }}
+              and {{
+              eventForm.get('maxParticipants')?.getError(validation.type).max
+              }}</span
+            >
+          </div>
+        </ng-container>
+      </div>
+      <!-- When this bug (https://github.com/ionic-team/ionic-framework/issues/22117) gets fixed, remove .item-label-floating class -->
+      <ion-item class="input-item item-label-floating">
+        <ion-label position="floating">Price</ion-label>
+        <ion-input type="text" formControlName="price" clearInput></ion-input>
+      </ion-item>
+      <div class="error-container">
+        <ng-container *ngFor="let validation of validations.price">
+          <div
+            class="error-message"
+            *ngIf="eventForm.get('price')?.hasError(validation.type) && (eventForm.get('price')?.dirty || eventForm.get('price')?.touched)"
+          >
+            <ion-icon name="information-circle-outline"></ion-icon>
+            <span>{{ validation.message }}</span>
+          </div>
+        </ng-container>
+      </div>
+    </ion-list>
+
+    <ion-button
+      class="submit-btn"
+      type="submit"
+      expand="block"
+      fill="outline"
+      [disabled]="!eventForm.valid"
+      >Create</ion-button
+    >
+  </form>
+</ion-content>

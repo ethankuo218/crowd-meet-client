@@ -23,6 +23,11 @@ export class AppComponent {
       ionicIcon: 'person-outline',
     },
     {
+      title: 'Create Event',
+      url: '/app/event/create',
+      ionicIcon: 'add-circle-outline',
+    },
+    {
       title: 'Tutorial',
       url: 'auth/walkthrough',
       ionicIcon: 'school-outline',
