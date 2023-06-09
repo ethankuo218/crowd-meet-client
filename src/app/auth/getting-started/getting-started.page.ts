@@ -9,7 +9,7 @@ import { IonicSwiper } from '@ionic/angular';
 import SwiperCore, { Pagination } from 'swiper';
 import { Router } from '@angular/router';
 import { Category } from 'src/app/core/states/reference-state/reference.model';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { UserService } from 'src/app/core/user.service';
 
 SwiperCore.use([Pagination, IonicSwiper]);
@@ -33,6 +33,10 @@ export class GettingStartedPage implements OnInit {
 
   interestForm!: FormGroup;
 
+  get interests(): FormArray {
+    return <FormArray>this.interestForm.get('interests');
+  }
+
   constructor(
     public menu: MenuController,
     private ngZone: NgZone,
@@ -47,7 +51,7 @@ export class GettingStartedPage implements OnInit {
       interests: this.formBuilder.array([]),
     });
 
-    this.categoryList$.subscribe({
+    this.categoryList$.pipe(take(1)).subscribe({
       next: (result) => {
         result.forEach(() => {
           this.interests.push(new FormControl());
@@ -111,9 +115,5 @@ export class GettingStartedPage implements OnInit {
         },
         error: (error) => console.error(error),
       });
-  }
-
-  get interests(): FormArray {
-    return <FormArray>this.interestForm.get('interests');
   }
 }

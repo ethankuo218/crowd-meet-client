@@ -1,3 +1,5 @@
+import { EventService } from './../event.service';
+import { ReferenceStateFacade } from './../../core/states/reference-state/reference.state.facade';
 import { Component, OnInit } from '@angular/core';
 import {
   Validators,
@@ -8,6 +10,9 @@ import {
 } from '@angular/forms';
 
 import { counterRangeValidator } from '../../components/counter-input/counter-input.component';
+import { Observable, take } from 'rxjs';
+import { Router } from '@angular/router';
+import { Category } from 'src/app/core/states/reference-state/reference.model';
 
 @Component({
   selector: 'app-create-page',
@@ -30,7 +35,18 @@ export class CreatePage implements OnInit {
     locationName: [{ type: 'required', message: 'Location name is required' }],
   };
 
-  constructor() {}
+  categoryList$: Observable<Category[]> =
+    this.referenceStateFacade.getCategories();
+
+  get categories(): FormArray {
+    return <FormArray>this.eventForm.get('categories');
+  }
+
+  constructor(
+    private referenceStateFacade: ReferenceStateFacade,
+    private eventService: EventService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.eventForm = new FormGroup({
@@ -41,11 +57,46 @@ export class CreatePage implements OnInit {
       maxParticipants: new FormControl(1, counterRangeValidator(1, 15)),
       locationName: new FormControl('', [Validators.required]),
       price: new FormControl(0, [Validators.required]),
-      categories: new FormControl('', [Validators.required]),
+      categories: new FormArray([], [Validators.required]),
+    });
+
+    this.categoryList$.pipe(take(1
+      )).subscribe({
+      next: (result) => {
+        result.forEach(() => {
+          this.categories.push(new FormControl());
+        });
+      },
     });
   }
 
   onSubmit(values: any) {
-    console.log(values);
+    const selection: number[] = [];
+    this.categories.value.forEach((value: boolean, index: number) => {
+      if (value) {
+        selection.push(index + 1);
+      }
+    });
+
+    this.eventService
+      .createEvent({
+      ...values,
+      startTime: this.formatDateToIsoString(values.startTime),
+      endTime: this.formatDateToIsoString(values.endTime),
+      categories: selection
+    })
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/app/event']);
+        },
+      });
+  }
+
+  private formatDateToIsoString(date: string): string {
+    return new Date(date).toISOString();
+  }
+
+  itemById(index: number, item: Category): number {
+    return item.categoryId - 1;
   }
 }
