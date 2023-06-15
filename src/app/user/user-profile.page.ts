@@ -1,5 +1,6 @@
+import { ImgUploadService } from 'src/app/core/img-upload.service';
 import { UserStateFacade } from '../core/states/user-state/user.state.facade';
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit, HostBinding, OnDestroy } from '@angular/core';
 import { Subscription, of, switchMap, tap } from 'rxjs';
 
 import { AlertController } from '@ionic/angular';
@@ -22,8 +23,6 @@ import { UserService } from '../core/user.service';
 })
 export class UserProfilePage implements OnInit {
   // Gather all component subscription in one place. Can be one Subscription or multiple (chained using the Subscription.add() method)
-  subscriptions: Subscription | undefined;
-
   profile: User = {
     userId: 0,
     email: '',
@@ -31,6 +30,7 @@ export class UserProfilePage implements OnInit {
     profilePictureUrl: '',
     bio: '',
     interests: [],
+    images: [],
   };
   available_languages: any[] = [];
   translations: any;
@@ -44,7 +44,8 @@ export class UserProfilePage implements OnInit {
     public languageService: LanguageService,
     public alertController: AlertController,
     private userStateFacade: UserStateFacade,
-    private userService: UserService
+    private userService: UserService,
+    private imgUploadService: ImgUploadService
   ) {}
 
   ngOnInit(): void {
@@ -66,9 +67,7 @@ export class UserProfilePage implements OnInit {
 
   // NOTE: Ionic only calls ngOnDestroy if the page was popped (ex: when navigating back)
   // Since ngOnDestroy might not fire when you navigate from the current page, use ionViewWillLeave to cleanup Subscriptions
-  ionViewWillLeave(): void {
-    this.subscriptions?.unsubscribe();
-  }
+  ionViewWillLeave(): void {}
 
   getTranslations() {
     // get translations for this page to use in the Language Chooser Alert
@@ -110,5 +109,23 @@ export class UserProfilePage implements OnInit {
       ],
     });
     await alert.present();
+  }
+
+  selectImage() {
+    this.imgUploadService.selectImage().then(() => {
+      this.uploadImg();
+    });
+  }
+
+  private async uploadImg() {
+    const formData = new FormData();
+    const files = await this.imgUploadService.getUploadedImg();
+
+    if (files.length > 0) {
+      formData.append('file', files[0]);
+      await this.userService.updateUserProfilePicture(formData);
+    } else {
+      console.error('No image found, please try again!');
+    }
   }
 }

@@ -1,13 +1,8 @@
+import { ImgUploadService } from './../../core/img-upload.service';
 import { EventService } from './../event.service';
 import { ReferenceStateFacade } from './../../core/states/reference-state/reference.state.facade';
 import { Component, OnInit } from '@angular/core';
-import {
-  Validators,
-  FormControl,
-  FormGroup,
-  AbstractControl,
-  FormArray,
-} from '@angular/forms';
+import { Validators, FormControl, FormGroup, FormArray } from '@angular/forms';
 
 import { counterRangeValidator } from '../../components/counter-input/counter-input.component';
 import { Observable, take } from 'rxjs';
@@ -30,9 +25,11 @@ export class CreatePage implements OnInit {
     categories: [{ type: 'required', message: 'Categories is required.' }],
     maxParticipants: [
       { type: 'required', message: 'Max participants is required.' },
+      { type: 'rangeError', message: 'Input participants is out of range.' },
     ],
     price: [{ type: 'required', message: 'Price is required.' }],
     locationName: [{ type: 'required', message: 'Location name is required' }],
+    image: [{ type: 'required', message: 'Image is required' }],
   };
 
   categoryList$: Observable<Category[]> =
@@ -45,7 +42,8 @@ export class CreatePage implements OnInit {
   constructor(
     private referenceStateFacade: ReferenceStateFacade,
     private eventService: EventService,
-    private router: Router
+    private router: Router,
+    private imgUploadService: ImgUploadService
   ) {}
 
   ngOnInit(): void {
@@ -60,8 +58,7 @@ export class CreatePage implements OnInit {
       categories: new FormArray([], [Validators.required]),
     });
 
-    this.categoryList$.pipe(take(1
-      )).subscribe({
+    this.categoryList$.pipe(take(1)).subscribe({
       next: (result) => {
         result.forEach(() => {
           this.categories.push(new FormControl());
@@ -80,16 +77,36 @@ export class CreatePage implements OnInit {
 
     this.eventService
       .createEvent({
-      ...values,
-      startTime: this.formatDateToIsoString(values.startTime),
-      endTime: this.formatDateToIsoString(values.endTime),
-      categories: selection
-    })
+        ...values,
+        startTime: this.formatDateToIsoString(values.startTime),
+        endTime: this.formatDateToIsoString(values.endTime),
+        categories: selection,
+      })
       .subscribe({
-        next: () => {
-          this.router.navigate(['/app/event']);
+        next: (result) => {
+          if (this.imgUploadService.uploadedImagesCount !== 0) {
+            this.uploadEventImg(result.eventId);
+          } else {
+            this.router.navigate(['/app/event']);
+          }
         },
       });
+  }
+
+  selectImage(): void {
+    this.imgUploadService.selectImage();
+  }
+
+  private async uploadEventImg(id: number) {
+    const formData = new FormData();
+    const files = await this.imgUploadService.getUploadedImg();
+
+    formData.append('file', files[0]);
+    this.eventService.updateEventImage(id, formData).subscribe({
+      next: () => {
+        this.router.navigate(['/app/event']);
+      },
+    });
   }
 
   private formatDateToIsoString(date: string): string {

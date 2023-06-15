@@ -147,6 +147,14 @@
           </div>
         </ng-container>
       </div>
+
+      <ion-item class="input-item">
+        <ion-label position="fixed">Images</ion-label>
+       <ion-button fill="clear" expand="full" (click)="selectImage()">
+        <ion-icon name="camera"></ion-icon>
+        {{'Select Image'}}
+       </ion-button>
+      </ion-item>
     </ion-list>
 
     <ion-list class="inputs-list" lines="full">
@@ -154,7 +162,7 @@
         <ion-label class="header-title">Limit</ion-label>
       </ion-list-header>
       <ion-item class="counter-item input-item">
-        <ion-label>Max Participants</ion-label>
+        <ion-label>Max Participants (Max: 15)</ion-label>
         <app-counter-input
           formControlName="maxParticipants"
         ></app-counter-input>
@@ -166,13 +174,7 @@
             *ngIf="eventForm.get('maxParticipants')?.hasError(validation.type) && (eventForm.get('maxParticipants')?.dirty || eventForm.get('maxParticipants')?.touched)"
           >
             <ion-icon name="information-circle-outline"></ion-icon>
-            <span
-              >{{ validation.message }} {{
-              eventForm.get('maxParticipants')?.getError(validation.type).min }}
-              and {{
-              eventForm.get('maxParticipants')?.getError(validation.type).max
-              }}</span
-            >
+            <span>{{ validation.message }}</span>
           </div>
         </ng-container>
       </div>

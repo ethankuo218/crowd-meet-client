@@ -7,5 +7,5 @@ export interface User {
   profilePictureUrl: string;
   bio: string;
   interests: Category[];
+  images: string[];
 }
-

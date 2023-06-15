@@ -32,7 +32,7 @@ const routes: Routes = [
               ),
           },
           {
-            path: ':productId',
+            path: ':id',
             loadChildren: () =>
               import('../event/details/details.module').then(
                 (m) => m.DetailsPageModule

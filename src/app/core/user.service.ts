@@ -1,6 +1,6 @@
 import { ReferenceStateFacade } from './states/reference-state/reference.state.facade';
 import { UserStateFacade } from './states/user-state/user.state.facade';
-import { Observable, forkJoin, map, tap } from 'rxjs';
+import { Observable, firstValueFrom, forkJoin, map, take, tap } from 'rxjs';
 import { HttpClientService } from './http-client.service';
 import { Injectable } from '@angular/core';
 import { FileResponse, LoginResponse } from './models/core.model';
@@ -42,9 +42,17 @@ export class UserService {
     );
   }
 
-  updateUserImage(file: string): Observable<FileResponse> {
-    return this.httpClientService.post<FileResponse>('user/image', {
-      file: file,
+  updateUserImage(file: FormData): Observable<FileResponse> {
+    return this.httpClientService.post<FileResponse>('user/image', file);
+  }
+
+  async updateUserProfilePicture(file: FormData): Promise<void> {
+    const fileName = (await firstValueFrom(this.updateUserImage(file)))
+      .fileName;
+    this.updateUser({ profilePicture: fileName }).subscribe({
+      next: (result) => {
+        this.userStateFacade.storeUser(result);
+      },
     });
   }
 }

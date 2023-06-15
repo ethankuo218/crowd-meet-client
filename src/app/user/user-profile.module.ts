@@ -9,6 +9,7 @@ import { UserProfilePage } from './user-profile.page';
 import { ComponentsModule } from '../components/components.module';
 import { LanguageService } from '../language/language.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { ImgUploadService } from '../core/img-upload.service';
 
 const routes: Routes = [
   {
@@ -28,7 +29,8 @@ const routes: Routes = [
   ],
   declarations: [UserProfilePage],
   providers: [
-    LanguageService
+    LanguageService,
+    ImgUploadService
   ],
 })
 export class UserProfilePageModule {}

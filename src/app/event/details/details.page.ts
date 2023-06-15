@@ -35,6 +35,7 @@ export class DetailsPage implements OnInit {
       profilePictureUrl: '',
       bio: '',
       interests: [],
+      images: [],
     },
     eventId: 0,
   };
@@ -48,8 +49,8 @@ export class DetailsPage implements OnInit {
     this.subscriptions = this.route.params
       .pipe(
         // Extract data for this page
-        switchMap(() => {
-          return this.eventService.getEventDetail(0);
+        switchMap((params) => {
+          return this.eventService.getEventDetail(params['id']);
         })
       )
       .subscribe({

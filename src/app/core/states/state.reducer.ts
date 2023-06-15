@@ -15,6 +15,7 @@ export const initialState: State = {
     profilePictureUrl: '',
     bio: '',
     interests: [],
+    images: [],
   },
   reference: {
     categories: [],
@@ -31,6 +32,7 @@ export const userReducer = createReducer(
     profilePictureUrl: userInfo.profilePictureUrl,
     bio: userInfo.bio,
     interests: userInfo.interests,
+    images: userInfo.images,
   }))
 );
 

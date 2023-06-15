@@ -6,12 +6,13 @@ import { IonicModule } from '@ionic/angular';
 
 import { ComponentsModule } from '../../components/components.module';
 import { CreatePage } from './create.page';
+import { ImgUploadService } from 'src/app/core/img-upload.service';
 
 const routes: Routes = [
   {
     path: '',
-    component: CreatePage
-  }
+    component: CreatePage,
+  },
 ];
 
 @NgModule({
@@ -21,8 +22,9 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
-    ComponentsModule
+    ComponentsModule,
   ],
-  declarations: [CreatePage]
+  declarations: [CreatePage],
+  providers: [ImgUploadService],
 })
 export class CreatePageModule {}

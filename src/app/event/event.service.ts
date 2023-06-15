@@ -16,10 +16,8 @@ export class EventService {
     return this.httpClientService.patch<Event>('Event', body);
   }
 
-  updateEventImage(id: number, file: string): Observable<FileResponse> {
-    return this.httpClientService.post<FileResponse>(`event/${id}/image`, {
-      file: file,
-    });
+  updateEventImage(id: number, file: FormData): Observable<FileResponse> {
+    return this.httpClientService.post<FileResponse>(`event/${id}/image`, file);
   }
 
   getEventDetail(id: number): Observable<Event> {

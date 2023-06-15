@@ -8,7 +8,7 @@
 
 <ion-content class="user-profile-content">
   <ion-row class="user-details-section">
-    <ion-col class="user-image-wrapper">
+    <ion-col class="user-image-wrapper" (click)="selectImage()">
       <app-aspect-ratio [ratio]="{w: 1, h: 1}">
         <app-image-shell
           class="user-image"
@@ -92,7 +92,13 @@
         </h3>
       </ion-col>
       <ion-col size="1">
-        <ion-buttons class="more-btn" size="small" fill="clear" color="medium" [routerLink]="['/auth/getting-started']">
+        <ion-buttons
+          class="more-btn"
+          size="small"
+          fill="clear"
+          color="medium"
+          [routerLink]="['/auth/getting-started']"
+        >
           <ion-icon name="create-outline"></ion-icon>
         </ion-buttons>
       </ion-col>
