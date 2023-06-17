@@ -11,7 +11,8 @@ import {
   providedIn: 'root',
 })
 export class HttpClientService {
-  private urlPrefix: string = '/api/v1/';
+  // private urlPrefix: string = '/api/v1/';
+  private urlPrefix: string = 'https://crowd-meet-server-tpqol4vd2a-uc.a.run.app/api/v1/';
   private isFirstLogin: boolean = true;
 
   constructor(private httpClient: HttpClient) {}

@@ -9,7 +9,11 @@ PODS:
     - CapacitorCordova
   - CapacitorApp (5.0.2):
     - Capacitor
+  - CapacitorCamera (5.0.4):
+    - Capacitor
   - CapacitorCordova (5.0.4)
+  - CapacitorFilesystem (5.0.4):
+    - Capacitor
   - CapacitorFirebaseAuthentication (5.0.0):
     - Capacitor
     - CapacitorFirebaseAuthentication/Lite (= 5.0.0)
@@ -72,7 +76,9 @@ PODS:
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorApp (from `../../node_modules/@capacitor/app`)"
+  - "CapacitorCamera (from `../../node_modules/@capacitor/camera`)"
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
+  - "CapacitorFilesystem (from `../../node_modules/@capacitor/filesystem`)"
   - "CapacitorFirebaseAuthentication (from `../../node_modules/@capacitor-firebase/authentication`)"
   - "CapacitorFirebaseAuthentication/Google (from `../../node_modules/@capacitor-firebase/authentication`)"
   - "CapacitorHaptics (from `../../node_modules/@capacitor/haptics`)"
@@ -99,8 +105,12 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/ios"
   CapacitorApp:
     :path: "../../node_modules/@capacitor/app"
+  CapacitorCamera:
+    :path: "../../node_modules/@capacitor/camera"
   CapacitorCordova:
     :path: "../../node_modules/@capacitor/ios"
+  CapacitorFilesystem:
+    :path: "../../node_modules/@capacitor/filesystem"
   CapacitorFirebaseAuthentication:
     :path: "../../node_modules/@capacitor-firebase/authentication"
   CapacitorHaptics:
@@ -118,7 +128,9 @@ SPEC CHECKSUMS:
   AppAuth: 3bb1d1cd9340bd09f5ed189fb00b1cc28e1e8570
   Capacitor: d3d4463573438b9fa65326d1f3549da6f4c21634
   CapacitorApp: 28fef1fd75b2b3686e875216806fb8416d421097
+  CapacitorCamera: 9b5c8e809c1042f263994f97ba846aa37e974f12
   CapacitorCordova: b1fe6bf1f36974a8e4a9044b342d22d49c0996d6
+  CapacitorFilesystem: e1bdfab09b95b181c844c16abcfda45ec8e8ed6b
   CapacitorFirebaseAuthentication: f2e3c2a7488b87078025855588670840f93a721e
   CapacitorHaptics: 864585542a435bd41eaabf7f30d9ff5ec03024d3
   CapacitorKeyboard: e628d4e66d621c69e449945ebabded17c5b9c2e8
@@ -135,6 +147,6 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: e8647203b65cee28c5f73d0f473d096653945e72
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
 
-PODFILE CHECKSUM: a4cdf06491924dda87badd0bba5f4bde82b1e817
+PODFILE CHECKSUM: 2a5daac1255d9edba8413ccd0979f53f24015733
 
 COCOAPODS: 1.12.1

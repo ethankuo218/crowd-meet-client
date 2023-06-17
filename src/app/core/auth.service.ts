@@ -19,11 +19,9 @@ import {
   OAuthProvider,
   OAuthCredential,
   UserCredential,
-  createUserWithEmailAndPassword,
   getAuth,
   getRedirectResult,
   signInWithCredential,
-  signInWithEmailAndPassword,
   signInWithPopup,
   signInWithRedirect,
   signOut,
@@ -96,7 +94,6 @@ export class AuthService implements OnDestroy {
                 // ? result.credential.accessToken gives you the Provider Access Token. You can use it to access the Provider API.
                 // const credential = FacebookAuthProvider.credentialFromResult(result);
                 // const token = credential.accessToken;
-
                 let credential: any;
 
                 if (result && result !== null) {
@@ -251,11 +248,14 @@ export class AuthService implements OnDestroy {
     let authResult: SignInResult | null = null;
 
     if (this.platform.is('capacitor')) {
+      console.log('Enter native');
       authResult = await this.nativeAuth(provider, authOptions);
     } else {
+      console.log('Enter web');
       authResult = await this.webAuth(provider, authOptions);
     }
 
+    console.log('Get auth');
     this.dismissLoading();
 
     if (authResult !== null) {
@@ -356,6 +356,8 @@ export class AuthService implements OnDestroy {
         break;
     }
 
+    console.log('AuthResult: ', nativeAuthResult);
+
     // ? Once we have the user authenticated on the native layer, authenticate it in the web layer
     if (
       nativeAuthResult !== null &&
@@ -421,16 +423,6 @@ export class AuthService implements OnDestroy {
     return this.socialSignIn(provider, authOptions);
   }
 
-  public async signInWithTwitter(): Promise<SignInResult> {
-    const provider = new TwitterAuthProvider();
-    const authOptions: SignInWithOAuthOptions = {
-      scopes: ['email', 'name'],
-    };
-
-    // ? When we use the redirect authentication flow, the code below the socialSignIn() invocation does not get executed as we leave the current page
-    return this.socialSignIn(provider, authOptions);
-  }
-
   public async signInWithApple(): Promise<SignInResult> {
     const provider = new OAuthProvider('apple.com');
     const authOptions: SignInWithOAuthOptions = {
@@ -439,40 +431,6 @@ export class AuthService implements OnDestroy {
 
     // ? When we use the redirect authentication flow, the code below the socialSignIn() invocation does not get executed as we leave the current page
     return this.socialSignIn(provider, authOptions);
-  }
-
-  public async signInWithEmail(
-    email: string,
-    password: string
-  ): Promise<SignInResult> {
-    // ? Show a loader while we attempt to perform the login
-    this.presentLoading('email');
-
-    const auth = getAuth();
-    const credential = await signInWithEmailAndPassword(auth, email, password);
-
-    this.dismissLoading();
-
-    return this.authHelper.createSignInResult(credential, null);
-  }
-
-  public async signUpWithEmail(
-    email: string,
-    password: string
-  ): Promise<SignInResult> {
-    // ? Show a loader while we attempt to perform the signup
-    this.presentLoading('email');
-
-    const auth = getAuth();
-    const credential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-
-    this.dismissLoading();
-
-    return this.authHelper.createSignInResult(credential, null);
   }
 
   public get redirectResult$(): Observable<any> {
