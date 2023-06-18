@@ -7,7 +7,7 @@
     "ng": "ng",
     "start": "ng serve --port=8100 --proxy-config proxy.conf.json --open",
     "build": "ng build",
-    "build:dev": "ng build --configuration development",
+    "build:prod": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint"
