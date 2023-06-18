@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
+  appId: 'com.crowdmeet.app',
   appName: 'crowd-meet-client',
   webDir: 'dist/app/browser',
   bundledWebRuntime: false,
