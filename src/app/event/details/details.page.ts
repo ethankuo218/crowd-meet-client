@@ -1,4 +1,4 @@
-import { EventService } from './../event.service';
+import { EventService } from '../../core/event.service';
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';

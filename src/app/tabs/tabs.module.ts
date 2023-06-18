@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { TabsPageRoutingModule } from './tabs.router.module';
 
 import { TabsPage } from './tabs.page';
-import { EventService } from '../event/event.service';
+import { EventService } from '../core/event.service';
 
 @NgModule({
   imports: [

@@ -7,9 +7,7 @@
 </ion-header>
 
 <ion-content>
-  <ng-container *ngIf="listing">
-    <div class="listing-item" *ngFor="let item of listing">
-      <app-listing-card [cardInfo]="item"></app-listing-card>
-    </div>
-  </ng-container>
+  <div class="listing-item" *ngFor="let item of listing$ | async">
+    <app-listing-card [cardInfo]="item"></app-listing-card>
+  </div>
 </ion-content>

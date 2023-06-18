@@ -22,6 +22,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ShellModule } from './shell/shell.module';
 import { StoreModule } from '@ngrx/store';
 import {
+  eventListFeatureKey,
+  eventListReducer,
   referenceFeatureKey,
   referenceReducer,
   userFeatureKey,
@@ -56,6 +58,7 @@ export function createTranslateLoader(http: HttpClient) {
     StoreModule.forRoot({
       [userFeatureKey]: userReducer,
       [referenceFeatureKey]: referenceReducer,
+      [eventListFeatureKey]: eventListReducer
     }),
     ServiceWorkerModule.register('/ngsw-worker.js', {
       enabled: environment.production,

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, from, switchMap } from 'rxjs';
+import { Observable, from, of, switchMap } from 'rxjs';
 import { GetResult, Preferences } from '@capacitor/preferences';
 import {
   FirebaseAuthentication,
@@ -12,113 +12,74 @@ import {
 })
 export class HttpClientService {
   // private urlPrefix: string = '/api/v1/';
-  private urlPrefix: string = 'https://crowd-meet-server-tpqol4vd2a-uc.a.run.app/api/v1/';
-  private isFirstLogin: boolean = true;
+  private urlPrefix: string =
+    'https://crowd-meet-server-tpqol4vd2a-uc.a.run.app/api/v1/';
 
   constructor(private httpClient: HttpClient) {}
 
-  post<T>(apiName: string, body: any): Observable<T> {
-    if (this.isFirstLogin) {
-      return from(FirebaseAuthentication.getIdToken()).pipe(
-        switchMap((result: GetIdTokenResult): Observable<T> => {
-          const token = 'Bearer ' + result.token;
-          const headers = new HttpHeaders({
-            Authorization: token,
-          });
+  private getIdToken() {
+    return from(Preferences.get({ key: 'token' })).pipe(
+      switchMap(async (result: GetResult): Promise<HttpHeaders> => {
+        const token = result.value
+          ? result.value
+          : (await FirebaseAuthentication.getIdToken()).token;
 
-          Preferences.set({ key: 'token', value: token });
-          this.isFirstLogin = false;
+        const headers = new HttpHeaders({
+          Authorization: token,
+        });
 
-          return this.httpClient.post<T>(this.urlPrefix + apiName, body, {
-            headers: headers,
-          });
-        })
-      );
-    } else {
-      return from(Preferences.get({ key: 'token' })).pipe(
-        switchMap((result: GetResult): Observable<T> => {
-          const token = result.value;
-          const headers = new HttpHeaders({
-            Authorization: token as string,
-          });
+        Preferences.set({ key: 'token', value: token });
 
-          return this.httpClient.post<T>(this.urlPrefix + apiName, body, {
-            headers: headers,
-          });
-        })
-      );
-    }
+        return headers;
+      })
+    );
   }
 
-  get<T>(apiName: string, id?: string): Observable<T> {
-    if (this.isFirstLogin) {
-      return from(FirebaseAuthentication.getIdToken()).pipe(
-        switchMap((result: GetIdTokenResult): Observable<T> => {
-          const token = 'Bearer ' + result.token;
-          const headers = new HttpHeaders({
-            Authorization: token,
-          });
+  post<T>(apiName: string, body: any): Observable<T> {
+    return from(this.getIdToken()).pipe(
+      switchMap((headers: HttpHeaders): Observable<T> => {
+        return this.httpClient.post<T>(this.urlPrefix + apiName, body, {
+          headers: headers,
+        });
+      })
+    );
+  }
 
-          Preferences.set({ key: 'token', value: token });
-          this.isFirstLogin = false;
+  get<T>(apiName: string, parameter?: string | any): Observable<T> {
+    return from(this.getIdToken()).pipe(
+      switchMap((headers: HttpHeaders): Observable<T> => {
+        let queryString = '';
 
-          return this.httpClient.get<T>(
-            `${this.urlPrefix}${apiName}${id ? '/' + id : ''}`,
-            {
-              headers: headers,
-            }
-          );
-        })
-      );
-    } else {
-      return from(Preferences.get({ key: 'token' })).pipe(
-        switchMap((result: GetResult): Observable<T> => {
-          const token = result.value;
-          const headers = new HttpHeaders({
-            Authorization: token as string,
-          });
+        if (typeof parameter !== 'string' && parameter) {
+          for (const key in parameter) {
+            queryString += `?${key}=${parameter[key]}`;
+          }
+        }
 
-          return this.httpClient.get<T>(
-            `${this.urlPrefix}${apiName}${id ? '/' + id : ''}`,
-            {
-              headers: headers,
-            }
-          );
-        })
-      );
-    }
+        return typeof parameter === 'string'
+          ? this.httpClient.get<T>(
+              `${this.urlPrefix}${apiName}${parameter ? '/' + parameter : ''}`,
+              {
+                headers: headers,
+              }
+            )
+          : this.httpClient.get<T>(
+              `${this.urlPrefix}${apiName}${queryString}`,
+              {
+                headers: headers,
+              }
+            );
+      })
+    );
   }
 
   patch<T>(apiName: string, body: any): Observable<T> {
-    if (this.isFirstLogin) {
-      return from(FirebaseAuthentication.getIdToken()).pipe(
-        switchMap((result: GetIdTokenResult): Observable<T> => {
-          const token = 'Bearer ' + result.token;
-          const headers = new HttpHeaders({
-            Authorization: token,
-          });
-
-          Preferences.set({ key: 'token', value: token });
-          this.isFirstLogin = false;
-
-          return this.httpClient.patch<T>(this.urlPrefix + apiName, body, {
-            headers: headers,
-          });
-        })
-      );
-    } else {
-      return from(Preferences.get({ key: 'token' })).pipe(
-        switchMap((result: GetResult): Observable<T> => {
-          const token = result.value;
-          const headers = new HttpHeaders({
-            Authorization: token as string,
-          });
-
-          return this.httpClient.patch<T>(this.urlPrefix + apiName, body, {
-            headers: headers,
-          });
-        })
-      );
-    }
+    return from(this.getIdToken()).pipe(
+      switchMap((headers: HttpHeaders): Observable<T> => {
+        return this.httpClient.patch<T>(this.urlPrefix + apiName, body, {
+          headers: headers,
+        });
+      })
+    );
   }
 }

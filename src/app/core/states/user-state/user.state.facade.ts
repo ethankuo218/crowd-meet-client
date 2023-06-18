@@ -1,4 +1,4 @@
-import { storeUser } from './user.actions';
+import { storeUserState } from './user.actions';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { getUserState } from './user.selector';
@@ -10,7 +10,7 @@ export class UserStateFacade {
   constructor(private readonly store: Store<User>) {}
 
   storeUser(userInfo: any) {
-    this.store.dispatch(storeUser({ userInfo }));
+    this.store.dispatch(storeUserState({ userInfo }));
   }
 
   getUser(): Observable<User> {

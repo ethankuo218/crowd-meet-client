@@ -8,6 +8,7 @@ import { ComponentsModule } from '../../components/components.module';
 import { ListingPage } from './listing.page';
 import { ListingCardComponent } from './listing-card/listing-card.component';
 import { FormsModule } from '@angular/forms';
+import { EventService } from '../../core/event.service';
 
 const routes: Routes = [
   {
@@ -26,6 +27,6 @@ const routes: Routes = [
     ListingCardComponent,
   ],
   declarations: [ListingPage],
-  providers: [],
+  providers: [EventService],
 })
 export class ListingPageModule {}

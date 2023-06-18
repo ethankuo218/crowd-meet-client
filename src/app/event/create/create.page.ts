@@ -1,5 +1,5 @@
 import { ImgUploadService } from './../../core/img-upload.service';
-import { EventService } from './../event.service';
+import { EventService } from '../../core/event.service';
 import { ReferenceStateFacade } from './../../core/states/reference-state/reference.state.facade';
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormControl, FormGroup, FormArray } from '@angular/forms';
@@ -32,8 +32,7 @@ export class CreatePage implements OnInit {
     image: [{ type: 'required', message: 'Image is required' }],
   };
 
-  categoryList$: Observable<Category[]> =
-    this.referenceStateFacade.getCategories();
+  categoryList: Category[] = [];
 
   get categories(): FormArray {
     return <FormArray>this.eventForm.get('categories');
@@ -58,9 +57,10 @@ export class CreatePage implements OnInit {
       categories: new FormArray([], [Validators.required]),
     });
 
-    this.categoryList$.pipe(take(1)).subscribe({
+    this.referenceStateFacade.getCategories().pipe(take(1)).subscribe({
       next: (result) => {
-        result.forEach(() => {
+        this.categoryList = result;
+        this.categoryList.forEach(() => {
           this.categories.push(new FormControl());
         });
       },
@@ -71,7 +71,7 @@ export class CreatePage implements OnInit {
     const selection: number[] = [];
     this.categories.value.forEach((value: boolean, index: number) => {
       if (value) {
-        selection.push(index + 1);
+        selection.push(this.categoryList[index].categoryId);
       }
     });
 
@@ -113,7 +113,7 @@ export class CreatePage implements OnInit {
     return new Date(date).toISOString();
   }
 
-  itemById(index: number, item: Category): number {
-    return item.categoryId - 1;
+  trackByIndex(index: number, item: Category): number {
+    return index;
   }
 }

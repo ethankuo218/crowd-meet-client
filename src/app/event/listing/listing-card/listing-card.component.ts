@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { ComponentsModule } from '../../../components/components.module';
-import { EventListData } from '../../models/event.model';
+import { EventListData } from 'src/app/core/states/event-list-state/event-list.model';
 
 @Component({
   selector: 'app-listing-card',

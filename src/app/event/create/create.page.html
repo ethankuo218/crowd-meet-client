@@ -128,12 +128,10 @@
         <ion-item
           lines="none"
           class="checkbox-tag rounded-tag"
-          *ngFor="let item of (categoryList$ | async) as categoryList; let i = index; trackBy: itemById"
+          *ngFor="let item of categoryList; let i = index; trackBy: trackByIndex"
         >
           <ion-label class="tag-label">{{item.name}}</ion-label>
-          <ion-checkbox
-            [formControlName]="categoryList[i].categoryId - 1"
-          ></ion-checkbox>
+          <ion-checkbox [formControlName]="i"></ion-checkbox>
         </ion-item>
       </ion-row>
       <div class="error-container">
@@ -150,10 +148,10 @@
 
       <ion-item class="input-item">
         <ion-label position="fixed">Images</ion-label>
-       <ion-button fill="clear" expand="full" (click)="selectImage()">
-        <ion-icon name="camera"></ion-icon>
-        {{'Select Image'}}
-       </ion-button>
+        <ion-button fill="clear" expand="full" (click)="selectImage()">
+          <ion-icon name="camera"></ion-icon>
+          {{'Select Image'}}
+        </ion-button>
       </ion-item>
     </ion-list>
 
