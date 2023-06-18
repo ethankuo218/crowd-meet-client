@@ -22,7 +22,7 @@ export class HttpClientService {
       switchMap(async (result: GetResult): Promise<HttpHeaders> => {
         const token = result.value
           ? result.value
-          : (await FirebaseAuthentication.getIdToken()).token;
+          : `Bearer ${(await FirebaseAuthentication.getIdToken()).token}`;
 
         const headers = new HttpHeaders({
           Authorization: token,
