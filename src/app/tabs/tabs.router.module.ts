@@ -64,6 +64,18 @@ const routes: Routes = [
           },
         ],
       },
+      {
+        path: 'purchase',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../in-app-purchase/in-app-purchase.module').then(
+                (m) => m.InAppPurchaseModule
+              ),
+          },
+        ],
+      },
     ],
   },
 ];

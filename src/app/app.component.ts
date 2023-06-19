@@ -19,7 +19,7 @@ export class AppComponent {
   readonly accountPages = [
     {
       title: 'Profile',
-      url: '/auth/profile',
+      url: '/app/user',
       ionicIcon: 'person-outline',
     },
     {
@@ -36,6 +36,11 @@ export class AppComponent {
       title: 'Getting Started',
       url: '/auth/getting-started',
       ionicIcon: 'rocket-outline',
+    },
+    {
+      title: 'Purchase',
+      url: '/app/purchase',
+      ionicIcon: 'wallet-outline',
     },
     {
       title: 'Sign out',
