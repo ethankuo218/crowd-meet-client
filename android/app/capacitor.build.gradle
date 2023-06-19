@@ -18,9 +18,10 @@ dependencies {
     implementation project(':capacitor-preferences')
     implementation project(':capacitor-splash-screen')
     implementation project(':capacitor-status-bar')
-
+    implementation "com.revenuecat.purchases:purchases-hybrid-common:5.0.0"
+    implementation "androidx.annotation:annotation:[1.4.0]"
 }
-
+apply from: "../../node_modules/cordova-annotated-plugin-android/build.gradle"
 
 if (hasProperty('postBuildExtras')) {
   postBuildExtras()
