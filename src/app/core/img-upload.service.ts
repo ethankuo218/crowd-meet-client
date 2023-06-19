@@ -4,7 +4,7 @@ import {
   Camera,
   CameraResultType,
   CameraSource,
-  Photo,
+  Photo
 } from '@capacitor/camera';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 
@@ -14,25 +14,26 @@ const IMAGE_DIR = 'stored-images';
 export class ImgUploadService {
   private uploadedImageName: string[] = [];
 
-  constructor(private platform: Platform) {
-  }
+  constructor(private platform: Platform) {}
 
   async selectImage(): Promise<void> {
     const image = await Camera.getPhoto({
       quality: 90,
       allowEditing: false,
       resultType: CameraResultType.Uri,
-      source: CameraSource.Photos,
+      source: CameraSource.Photos
     });
 
     if (image) {
       const base64Data = await this.readAsBase64(image);
       const fileName = new Date().getTime() + '.jpeg';
 
+      console.log('SelectFile: ', `${IMAGE_DIR}/${fileName}`);
       await Filesystem.writeFile({
         directory: Directory.Data,
         path: `${IMAGE_DIR}/${fileName}`,
         data: base64Data,
+        recursive: true
       });
 
       this.uploadedImageName.push(fileName);
@@ -44,16 +45,17 @@ export class ImgUploadService {
 
     while (this.uploadedImageName.length !== 0) {
       const fileName = this.uploadedImageName.shift();
+      console.log('ReadFile: ', `${IMAGE_DIR}/${fileName}`);
       const filePath = `${IMAGE_DIR}/${fileName}`;
       const readFile = await Filesystem.readFile({
         directory: Directory.Data,
-        path: filePath,
+        path: filePath
       });
 
       // delete after upload
       await Filesystem.deleteFile({
         directory: Directory.Data,
-        path: filePath,
+        path: filePath
       });
 
       images.push(await this.convertBase64ToBlob(readFile.data));
@@ -67,7 +69,7 @@ export class ImgUploadService {
     if (this.platform.is('hybrid')) {
       // Read the file into base64 format
       const file = await Filesystem.readFile({
-        path: photo.path!,
+        path: photo.path!
       });
 
       return file.data;
