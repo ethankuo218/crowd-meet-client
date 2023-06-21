@@ -12,33 +12,51 @@ const routes: Routes = [
       {
         path: '',
         redirectTo: 'event',
-        pathMatch: 'full',
+        pathMatch: 'full'
       },
       {
         path: 'event',
         children: [
           {
-            path: 'create',
+            path: '',
             loadChildren: () =>
-              import('../event/create/create.module').then(
-                (m) => m.CreatePageModule
-              ),
-          },
+              import('../event/event.module').then((m) => m.EventModule)
+          }
+        ]
+      },
+      {
+        path: 'chat',
+        children: [
           {
             path: '',
             loadChildren: () =>
-              import('../event/listing/listing.module').then(
-                (m) => m.ListingPageModule
-              ),
-          },
+              import('../chat/chat.module').then((m) => m.ChatModule)
+          }
+        ]
+      },
+      {
+        path: 'event-create',
+        children: [
           {
-            path: ':id',
+            path: '',
             loadChildren: () =>
-              import('../event/details/details.module').then(
-                (m) => m.DetailsPageModule
-              ),
-          },
-        ],
+              import('../event/event-create/event-create.module').then(
+                (m) => m.EventCreateModule
+              )
+          }
+        ]
+      },
+      {
+        path: 'notifications',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../notifications/notifications.module').then(
+                (m) => m.NotificationsPageModule
+              )
+          }
+        ]
       },
       {
         path: 'user',
@@ -48,21 +66,9 @@ const routes: Routes = [
             loadChildren: () =>
               import('../user/user-profile.module').then(
                 (m) => m.UserProfilePageModule
-              ),
-          },
-        ],
-      },
-      {
-        path: 'messages',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('../notifications/notifications.module').then(
-                (m) => m.NotificationsPageModule
-              ),
-          },
-        ],
+              )
+          }
+        ]
       },
       {
         path: 'purchase',
@@ -72,17 +78,17 @@ const routes: Routes = [
             loadChildren: () =>
               import('../in-app-purchase/in-app-purchase.module').then(
                 (m) => m.InAppPurchaseModule
-              ),
-          },
-        ],
-      },
-    ],
-  },
+              )
+          }
+        ]
+      }
+    ]
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [],
+  providers: []
 })
 export class TabsPageRoutingModule {}

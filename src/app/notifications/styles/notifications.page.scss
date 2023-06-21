@@ -1,60 +1,281 @@
-// Custom variables
-// Note:  These ones were added by us and have nothing to do with Ionic CSS Custom Properties
-:host {
-  --page-margin: var(--app-narrow-margin);
+.arw_left {
+  color: #212121;
+  font-size: 22px;
+  vertical-align: middle;
 }
 
-// Note:  All the CSS variables defined below are overrides of Ionic elements CSS Custom Properties
-.notifications-content {
-  ion-item-divider {
-    --background: var(--ion-color-light);
-    --padding-start: var(--page-margin);
-  }
+.dot_opt {
+  color: #212121;
+  font-size: 22px;
+  vertical-align: middle;
+  margin-left: 10rem;
+}
 
-  .notification-item {
-    --padding-start: 0px;
-    --inner-padding-end: 0px;
+.event-detail-area .dot_opt a:nth-child(2) img {
+  width: 32px;
+  margin-right: 12px;
+}
 
-    padding: var(--page-margin);
-    color: var(--ion-color-medium);
-    box-shadow: inset 0 8px 2px -9px var(--ion-color-darkest);
+.fix .dot_opt {
+  position: absolute;
+  top: 42px;
+  right: 20px;
+}
 
-    .notification-item-wrapper {
-      --ion-grid-column-padding: 0px;
+.poin_ment {
+  display: flex;
+  gap: 15px;
+  position: relative;
+  margin: 30px 0 0;
+}
 
-      width: 100%;
-      align-items: center;
-    }
+.poin_ment div img {
+  width: 60px;
+  height: 60px;
+}
 
-    .details-wrapper {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      padding-left: var(--page-margin);
+.ment_text h2 {
+  font-size: 17px;
+  font-weight: 700;
+}
 
-      .details-name {
-        margin-top: 0px;
-        margin-bottom: 5px;
-        font-size: 16px;
-      	font-weight: 400;
-      	letter-spacing: 0.2px;
-      	color: var(--ion-color-secondary);
-      }
+.ment_text p {
+  font-size: 13px;
+  margin: 3px 0 0;
+}
 
-      .details-description {
-        font-size: 12px;
-        margin: 0px;
-      }
-    }
+.ment_text p span {
+  margin: 0 5px;
+}
 
-    .date-wrapper {
-      align-self: flex-start;
+.poin_ment button {
+  font-size: 11px;
+  background: #256cfe;
+  padding: 6px 12px;
+  border-radius: 10px;
+  position: absolute;
+  right: -25px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
 
-      .notification-date {
-        margin: 0px;
-        font-size: 12px;
-        text-align: end;
-      }
-    }
-  }
+.sample_text p {
+  font-size: 13px;
+  margin: 20px 0 0;
+}
+
+.image_content2 {
+  padding: 0 0 30px;
+}
+
+// header
+ion-toolbar {
+  --background: #fff;
+  --border: none;
+  height: 5rem;
+}
+
+ion-toolbar:last-of-type {
+  --border-width: 0;
+}
+
+.head_arw {
+  position: relative;
+  padding: 1.5rem;
+}
+
+.head_arw h3 {
+  display: inline-block;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 0 12px;
+  vertical-align: middle;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+//TODO: remove
+body {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+* {
+  font-family: 'Urbanist', sans-serif;
+  /*! font-family: 'Montserrat', sans-serif; */
+  /*! font-family: 'Poppins', sans-serif; */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+th,
+td,
+p {
+  margin: 0;
+}
+
+figure {
+  margin: 0;
+}
+
+img {
+  vertical-align: middle;
+}
+
+span,
+small {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+  transition: 0.3s all ease-in-out;
+}
+
+button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: none !important;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border: none;
+}
+
+::selection {
+  background: #3f8c32;
+  color: #ffffff;
+}
+
+::-webkit-selection {
+  background: #3f8c32;
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background: #3f8c32;
+  color: #ffffff;
+}
+
+/*main styles*/
+
+.container {
+  max-width: 100%;
+  padding: 0 25px;
+}
+
+.row,
+.d-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col-6 {
+  width: 50%;
+}
+
+.gray {
+  color: #a4634d;
+}
+
+.danger {
+  color: #f85555;
+}
+
+.dark1 {
+  color: #424242;
+}
+
+.dark {
+  color: #212121;
+}
+
+.dark_d {
+  color: #5c5b5e;
+}
+
+.dark_dd {
+  color: #b1b0b1;
+}
+
+.white {
+  color: #ffffff;
+}
+
+.primary {
+  color: #246bfd;
+}
+
+.primary_2 {
+  color: #9610ff;
+}
+
+.text-start {
+  text-align: start;
+}
+
+.text-end {
+  text-align: end;
+}
+
+.text-center {
+  justify-content: center;
+  padding: 0 0 12px;
+  text-align: center;
+}
+
+.p-0 {
+  padding: 0 !important;
+}
+
+.fix .row {
+  gap: 12px;
+  flex-wrap: nowrap;
+  margin: 15px 0 0;
+}
+
+.article-area .row {
+  flex-wrap: nowrap;
+}
+
+.btm-full {
+  max-width: 767px;
+  margin: 0 auto;
+}
+
+.msg_link {
+  display: block;
+}
+
+.wdt__2 > div.P-text {
+  width: 100%;
+}
+.prof .content a {
+  display: block;
 }

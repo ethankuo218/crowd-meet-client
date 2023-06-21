@@ -8,47 +8,9 @@ import { take } from 'rxjs';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  styleUrls: [
-    './app.component.scss',
-    './side-menu/styles/side-menu.scss',
-    './side-menu/styles/side-menu.shell.scss',
-    './side-menu/styles/side-menu.responsive.scss',
-  ],
+  styleUrls: []
 })
 export class AppComponent {
-  readonly accountPages = [
-    {
-      title: 'Profile',
-      url: '/app/user',
-      ionicIcon: 'person-outline',
-    },
-    {
-      title: 'Create Event',
-      url: '/app/event/create',
-      ionicIcon: 'add-circle-outline',
-    },
-    {
-      title: 'Tutorial',
-      url: 'auth/walkthrough',
-      ionicIcon: 'school-outline',
-    },
-    {
-      title: 'Getting Started',
-      url: '/auth/getting-started',
-      ionicIcon: 'rocket-outline',
-    },
-    {
-      title: 'Purchase',
-      url: '/app/purchase',
-      ionicIcon: 'wallet-outline',
-    },
-    {
-      title: 'Sign out',
-      url: '/auth/sign-in/true',
-      ionicIcon: 'log-out-outline',
-    },
-  ];
-
   textDir = 'ltr';
 
   // Inject HistoryHelperService in the app.components.ts so its available app-wide

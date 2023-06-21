@@ -2,7 +2,7 @@ import {
   APP_INITIALIZER,
   NgModule,
   Optional,
-  PLATFORM_ID,
+  PLATFORM_ID
 } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -27,7 +27,7 @@ import {
   referenceFeatureKey,
   referenceReducer,
   userFeatureKey,
-  userReducer,
+  userReducer
 } from './core/states/state.reducer';
 
 import { Capacitor } from '@capacitor/core';
@@ -37,9 +37,16 @@ import {
   provideAuth,
   getAuth,
   initializeAuth,
-  indexedDBLocalPersistence,
+  indexedDBLocalPersistence
 } from '@angular/fire/auth';
 import { CoreModule } from './core/core.module';
+import {
+  FontAwesomeModule,
+  FaIconLibrary
+} from '@fortawesome/angular-fontawesome';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { fab } from '@fortawesome/free-brands-svg-icons';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -53,6 +60,7 @@ export function createTranslateLoader(http: HttpClient) {
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
+    FontAwesomeModule,
     ShellModule,
     CoreModule,
     StoreModule.forRoot({
@@ -61,27 +69,27 @@ export function createTranslateLoader(http: HttpClient) {
       [eventListFeatureKey]: eventListReducer
     }),
     ServiceWorkerModule.register('/ngsw-worker.js', {
-      enabled: environment.production,
+      enabled: environment.production
     }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: createTranslateLoader,
-        deps: [HttpClient],
-      },
+        deps: [HttpClient]
+      }
     }),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => {
       if (Capacitor.isNativePlatform()) {
         return initializeAuth(getApp(), {
-          persistence: indexedDBLocalPersistence,
+          persistence: indexedDBLocalPersistence
           // persistence: browserLocalPersistence
           // popupRedirectResolver: browserPopupRedirectResolver
         });
       } else {
         return getAuth();
       }
-    }),
+    })
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
@@ -101,9 +109,13 @@ export function createTranslateLoader(http: HttpClient) {
         };
       },
       deps: [PLATFORM_ID, [new Optional(), RESPONSE]],
-      multi: true,
-    },
+      multi: true
+    }
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+  constructor(library: FaIconLibrary) {
+    library.addIconPacks(fas, fab, far);
+  }
+}

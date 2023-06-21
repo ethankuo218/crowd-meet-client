@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ComponentsModule } from '../components/components.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { NotificationsPage } from './notifications.page';
 import { NotificationsResolver } from '../notifications/notifications.resolver';
@@ -12,6 +13,7 @@ import { NotificationsService } from '../notifications/notifications.service';
 @NgModule({
   imports: [
     IonicModule,
+    FontAwesomeModule,
     CommonModule,
     ComponentsModule,
     RouterModule.forChild([
@@ -24,10 +26,7 @@ import { NotificationsService } from '../notifications/notifications.service';
       }
     ])
   ],
-  declarations: [ NotificationsPage ],
-  providers: [
-    NotificationsResolver,
-    NotificationsService
-  ]
+  declarations: [NotificationsPage],
+  providers: [NotificationsResolver, NotificationsService]
 })
 export class NotificationsPageModule {}

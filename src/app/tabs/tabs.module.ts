@@ -9,13 +9,8 @@ import { TabsPage } from './tabs.page';
 import { EventService } from '../core/event.service';
 
 @NgModule({
-  imports: [
-    IonicModule,
-    CommonModule,
-    FormsModule,
-    TabsPageRoutingModule
-  ],
-  declarations: [ TabsPage ],
-  providers:[EventService]
+  imports: [IonicModule, CommonModule, FormsModule, TabsPageRoutingModule],
+  declarations: [TabsPage],
+  providers: [EventService]
 })
 export class TabsPageModule {}
