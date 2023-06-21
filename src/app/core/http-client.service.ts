@@ -4,16 +4,16 @@ import { Observable, from, of, switchMap } from 'rxjs';
 import { GetResult, Preferences } from '@capacitor/preferences';
 import {
   FirebaseAuthentication,
-  GetIdTokenResult,
+  GetIdTokenResult
 } from '@capacitor-firebase/authentication';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class HttpClientService {
-  // private urlPrefix: string = '/api/v1/';
-  private urlPrefix: string =
-    'https://crowd-meet-server-tpqol4vd2a-uc.a.run.app/api/v1/';
+  private urlPrefix: string = 'http://127.0.0.1:3000/api/v1/';
+  // private urlPrefix: string =
+  //   'https://crowd-meet-server-tpqol4vd2a-uc.a.run.app/api/v1/';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -25,7 +25,7 @@ export class HttpClientService {
           : `Bearer ${(await FirebaseAuthentication.getIdToken()).token}`;
 
         const headers = new HttpHeaders({
-          Authorization: token,
+          Authorization: token
         });
 
         Preferences.set({ key: 'token', value: token });
@@ -39,7 +39,7 @@ export class HttpClientService {
     return from(this.getIdToken()).pipe(
       switchMap((headers: HttpHeaders): Observable<T> => {
         return this.httpClient.post<T>(this.urlPrefix + apiName, body, {
-          headers: headers,
+          headers: headers
         });
       })
     );
@@ -60,13 +60,13 @@ export class HttpClientService {
           ? this.httpClient.get<T>(
               `${this.urlPrefix}${apiName}${parameter ? '/' + parameter : ''}`,
               {
-                headers: headers,
+                headers: headers
               }
             )
           : this.httpClient.get<T>(
               `${this.urlPrefix}${apiName}${queryString}`,
               {
-                headers: headers,
+                headers: headers
               }
             );
       })
@@ -77,7 +77,7 @@ export class HttpClientService {
     return from(this.getIdToken()).pipe(
       switchMap((headers: HttpHeaders): Observable<T> => {
         return this.httpClient.patch<T>(this.urlPrefix + apiName, body, {
-          headers: headers,
+          headers: headers
         });
       })
     );
