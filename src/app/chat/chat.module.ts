@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { ChatRoomComponent } from './chat-room/chat-room.component';
 import { ChatListComponent } from './chat-list/chat-list.component';
+import { HeaderComponent } from '../header/header.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,11 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [ChatListComponent, ChatRoomComponent],
-  imports: [IonicModule, CommonModule, RouterModule.forChild(routes)]
+  imports: [
+    IonicModule,
+    CommonModule,
+    RouterModule.forChild(routes),
+    HeaderComponent
+  ]
 })
 export class ChatModule {}
