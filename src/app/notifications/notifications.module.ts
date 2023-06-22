@@ -9,6 +9,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NotificationsPage } from './notifications.page';
 import { NotificationsResolver } from '../notifications/notifications.resolver';
 import { NotificationsService } from '../notifications/notifications.service';
+import { HeaderComponent } from '../header/header.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { NotificationsService } from '../notifications/notifications.service';
           data: NotificationsResolver
         }
       }
-    ])
+    ]),
+    HeaderComponent
   ],
   declarations: [NotificationsPage],
   providers: [NotificationsResolver, NotificationsService]

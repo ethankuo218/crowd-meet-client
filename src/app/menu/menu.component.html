@@ -1,20 +1,14 @@
-<main class="prof profile-menu-area main-area">
-  <div class="container">
-    <div class="head_arw">
-      <img src="assets/images/flower.png" alt="image" />
-      <h3 class="dark">Profile</h3>
-      <div class="dot_opt">
-        <a href="#"><img src="assets/images/dpt_image1.png" alt="image" /></a>
-      </div>
-    </div>
-    <div class="main-profile">
+<app-header></app-header>
+<ion-content class="menu-content">
+  <main class="prof profile-menu-area main-area">
+    <div class="container">
       <div class="upload_profile text-center">
         <div class="inr_upload">
           <img src="assets/images/profile1.jpg" alt="image" />
-          <button><i class="white fa-solid fa-pen"></i></button>
+          <button><fa-icon class="white" icon="pen"></fa-icon></button>
         </div>
         <h3 class="dark">Andrew Ainsley</h3>
-        <a class="dark" href="callto:+1-111-467-378-399">+1 111 467 378 399</a>
+        <a class="dark" href="#">+1 111 467 378 399</a>
         <hr />
       </div>
       <div class="menu_content">
@@ -22,23 +16,23 @@
           <a href="#">
             <div class="acc__card">
               <div class="acc__title">
-                <i class="dark fa-thin fa-user"></i>
+                <fa-icon class="dark" [icon]="['far', 'user']"></fa-icon>
                 <span class="dark">Edit Profile</span>
               </div>
             </div>
           </a>
-          <a href="#">
+          <a href="#" routerLink="/app/notifications">
             <div class="acc__card">
               <div class="acc__title">
-                <i class="dark fa-light fa-bell"></i>
+                <fa-icon class="dark" [icon]="['far', 'bell']"></fa-icon>
                 <span class="dark">Notifications</span>
               </div>
             </div>
           </a>
-          <a href="#">
+          <a href="#" routerLink="/app/purchase">
             <div class="acc__card">
               <div class="acc__title">
-                <i class="dark fa-light fa-credit-card-front"></i>
+                <fa-icon class="dark" [icon]="['far', 'credit-card']"></fa-icon>
                 <span class="dark">Payment</span>
               </div>
             </div>
@@ -46,7 +40,7 @@
           <a href="#">
             <div class="acc__card">
               <div class="acc__title">
-                <i class="dark fa-light fa-shield-check"></i>
+                <fa-icon class="dark" [icon]="['fas', 'shield']"></fa-icon>
                 <span class="dark">Security</span>
               </div>
             </div>
@@ -54,7 +48,7 @@
 
           <div class="acc__card">
             <div class="acc__title">
-              <i class="dark fa-light fa-shield-check"></i>
+              <fa-icon class="dark" [icon]="['fas', 'earth']"></fa-icon>
               <span class="dark">Language</span>
               <select class="dark">
                 <option class="dark">English(US)</option>
@@ -69,14 +63,9 @@
 
           <div class="acc__card">
             <div class="acc__title">
-              <i class="dark fa-light fa-shield-check"></i>
+              <fa-icon [icon]="['fas', 'circle-half-stroke']"></fa-icon>
               <span class="dark">Dark Mode</span>
-
-              <button
-                class="light-mode-button"
-                aria-label="Toggle Light Mode"
-                onclick="toggle_light_mode()"
-              >
+              <button class="light-mode-button">
                 <span></span>
                 <span></span>
               </button>
@@ -86,7 +75,7 @@
           <a href="#">
             <div class="acc__card">
               <div class="acc__title">
-                <i class="dark fa-light fa-square-info"></i>
+                <fa-icon class="dark" [icon]="['fas', 'circle-info']"></fa-icon>
                 <span class="dark">Help Center</span>
               </div>
             </div>
@@ -94,15 +83,18 @@
           <a href="#">
             <div class="acc__card">
               <div class="acc__title">
-                <i class="dark fa-light fa-user-group"></i>
+                <fa-icon class="dark" [icon]="['fas', 'user-group']"></fa-icon>
                 <span class="dark">Invite Friends</span>
               </div>
             </div>
           </a>
-          <a href="#">
+          <a href="#" routerLink="/auth/sign-in/true">
             <div class="acc__card">
               <div class="acc__title log_out">
-                <i class="danger fa-regular fa-arrow-right-from-bracket"></i>
+                <fa-icon
+                  class="danger"
+                  icon="arrow-right-from-bracket"
+                ></fa-icon>
                 <span class="danger">Logout</span>
               </div>
             </div>
@@ -110,45 +102,5 @@
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="bottom-area">
-    <div class="row">
-      <div class="col">
-        <a class="ftr_links" href="#">
-          <i class="dark_dd fa-light fa-house"></i>
-          <br />
-          <span class="dark_dd">Home</span>
-        </a>
-      </div>
-      <div class="col">
-        <a class="ftr_links" href="#">
-          <i class="dark_dd fa-regular fa-calendar-days"></i>
-          <br />
-          <span class="dark_dd">Appointment</span>
-        </a>
-      </div>
-      <div class="col">
-        <a class="ftr_links" href="#">
-          <i class="dark_dd fa-thin fa-files"></i>
-          <br />
-          <span class="dark_dd">History</span>
-        </a>
-      </div>
-      <div class="col">
-        <a class="ftr_links" href="#">
-          <i class="dark_dd fa-light fa-file"></i>
-          <br />
-          <span class="dark_dd">Articles</span>
-        </a>
-      </div>
-      <div class="col">
-        <a class="ftr_links active_links" href="#">
-          <i class="dark_dd fa-regular fa-user"></i>
-          <br />
-          <span class="dark_dd">Profile</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</main>
+  </main>
+</ion-content>

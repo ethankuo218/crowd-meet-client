@@ -59,14 +59,12 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'user',
+        path: 'menu',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../user/user-profile.module').then(
-                (m) => m.UserProfilePageModule
-              )
+              import('../menu/menu.module').then((m) => m.MenuModule)
           }
         ]
       },

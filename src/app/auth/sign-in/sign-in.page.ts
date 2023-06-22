@@ -4,12 +4,12 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import {
   Validators,
   UntypedFormGroup,
-  UntypedFormControl,
+  UntypedFormControl
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   AuthStateChange,
-  SignInResult,
+  SignInResult
 } from '@capacitor-firebase/authentication';
 
 import { Subscription } from 'rxjs';
@@ -20,7 +20,7 @@ import { AuthService } from '../../core/auth.service';
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.page.html',
-  styleUrls: ['./styles/sign-in.page.scss'],
+  styleUrls: ['./styles/sign-in.page.scss']
 })
 export class SignInPage implements OnInit {
   loginForm: UntypedFormGroup;
@@ -35,20 +35,19 @@ export class SignInPage implements OnInit {
     private userService: UserService,
     private route: ActivatedRoute,
     private location: Location
-
   ) {
     this.loginForm = new UntypedFormGroup({
       email: new UntypedFormControl(
         '',
         Validators.compose([
           Validators.required,
-          Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'),
+          Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
         ])
       ),
       password: new UntypedFormControl(
         '',
         Validators.compose([Validators.minLength(6), Validators.required])
-      ),
+      )
     });
 
     // ? Get firebase authentication redirect result invoked when using signInWithRedirect()
@@ -148,10 +147,10 @@ export class SignInPage implements OnInit {
         next: (result) => {
           if (result.isNewUser) {
             this.router.navigate(['walkthrough'], { replaceUrl: true });
-          }else {
+          } else {
             this.router.navigate(['app'], { replaceUrl: true });
           }
-        },
+        }
       });
 
       // No need to store in the navigation history the sign-in page with redirect params (it's just a a mandatory mid-step)

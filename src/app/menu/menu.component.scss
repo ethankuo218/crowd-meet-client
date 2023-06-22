@@ -1,0 +1,331 @@
+.inr_upload {
+  width: 135px;
+  height: 135px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.inr_upload img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.upload_profile button {
+  position: absolute;
+  bottom: 13px;
+  right: -2px;
+}
+
+.upload_profile button fa-icon {
+  background: #246bfd;
+  padding: 6px;
+  border-radius: 5px;
+}
+
+.upload_profile h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 15px 0 5px;
+}
+
+.upload_profile a {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.upload_profile hr {
+  background: #eeeeef !important;
+  height: 1px;
+  color: #eeeeef !important;
+  margin: 20px 0;
+}
+
+.acc {
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+.acc__card {
+  position: relative;
+}
+
+.acc__title,
+.acc_cnt {
+  cursor: pointer;
+  display: block;
+  position: relative;
+  text-align: left;
+  padding: 10px 0;
+  margin: 0 0 5px;
+}
+
+.acc__title fa-icon,
+.acc_cnt fa-icon {
+  font-size: 18px;
+  margin: 0 15px 0 0;
+  vertical-align: middle;
+  width: 20px;
+}
+
+.acc__title span,
+.acc_cnt span {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.acc__title::after {
+  width: 9px;
+  height: 9px;
+  border-right: 2px solid #000;
+  border-bottom: 2px solid #000;
+  position: absolute;
+  right: 10px;
+  content: ' ';
+  top: 17px;
+  transform: rotate(-45deg);
+  transition: all 0.2s ease-in-out;
+}
+
+select {
+  appearance: none;
+  background: none;
+  border: none;
+  font-size: 17px;
+  font-weight: 600;
+  margin-left: 35%;
+  margin-top: 1px;
+  position: absolute;
+  right: 35px;
+}
+
+.log_out::after {
+  display: none;
+}
+
+.light-mode-button {
+  background: 0;
+  border: 0;
+  box-sizing: border-box;
+  cursor: pointer;
+  height: 40px;
+  width: 55px;
+  position: absolute;
+  border: 1px solid rgba(255, 255, 255, 0);
+  margin-top: 0px;
+  right: 0;
+  z-index: 1;
+}
+
+.light-mode-button:focus {
+  outline: none; /* Not ideal for accessibility */
+}
+
+.light-mode-button span:nth-child(1) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 23px;
+  border-radius: 20px;
+  background-color: #d6d7db;
+  box-shadow: inset 1px 1px 3px 0 rgb(0 0 0 / 40%);
+  transition: 0.3s;
+  z-index: -1;
+}
+
+.light-mode-button span:nth-child(2) {
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  width: 17px;
+  height: 17px;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 1px 1px 2px 0 rgb(0 0 0 / 40%);
+  transition: 0.3s;
+}
+
+// TODO: remove
+.container {
+  max-width: 100%;
+  padding: 0 25px;
+}
+
+.row,
+.d-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col-6 {
+  width: 50%;
+}
+
+.gray {
+  color: #a4634d;
+}
+
+.danger {
+  color: #f85555;
+}
+
+.dark1 {
+  color: #424242;
+}
+
+.dark {
+  color: #212121;
+}
+
+.dark_d {
+  color: #5c5b5e;
+}
+
+.dark_dd {
+  color: #b1b0b1;
+}
+
+.white {
+  color: #ffffff;
+}
+
+.primary {
+  color: #246bfd;
+}
+
+.primary_2 {
+  color: #9610ff;
+}
+
+.text-start {
+  text-align: start;
+}
+
+.text-end {
+  text-align: end;
+}
+
+.text-center {
+  justify-content: center;
+  padding: 0 0 12px;
+  text-align: center;
+}
+
+.p-0 {
+  padding: 0 !important;
+}
+
+.fix .row {
+  gap: 12px;
+  flex-wrap: nowrap;
+  margin: 15px 0 0;
+}
+
+.article-area .row {
+  flex-wrap: nowrap;
+}
+
+.btm-full {
+  max-width: 767px;
+  margin: 0 auto;
+}
+
+.msg_link {
+  display: block;
+}
+
+.wdt__2 > div.P-text {
+  width: 100%;
+}
+.prof .content a {
+  display: block;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+* {
+  font-family: 'Urbanist', sans-serif;
+  /*! font-family: 'Montserrat', sans-serif; */
+  /*! font-family: 'Poppins', sans-serif; */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+th,
+td,
+p {
+  margin: 0;
+}
+
+figure {
+  margin: 0;
+}
+
+img {
+  vertical-align: middle;
+}
+
+span,
+small {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+  transition: 0.3s all ease-in-out;
+}
+
+button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: none !important;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border: none;
+}
+
+::selection {
+  background: #3f8c32;
+  color: #ffffff;
+}
+
+::-webkit-selection {
+  background: #3f8c32;
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background: #3f8c32;
+  color: #ffffff;
+}

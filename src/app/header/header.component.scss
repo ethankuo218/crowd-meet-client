@@ -1,0 +1,30 @@
+ion-toolbar {
+  --background: #fff;
+  --border: none;
+  height: 5rem;
+}
+
+ion-toolbar:last-of-type {
+  --border-width: 0;
+}
+
+.head_arw {
+  position: relative;
+  padding: 1.5rem;
+}
+
+.head_arw h3 {
+  display: inline-block;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 0 12px;
+  vertical-align: middle;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.arw_left {
+  color: #212121;
+  font-size: 22px;
+  vertical-align: middle;
+}
