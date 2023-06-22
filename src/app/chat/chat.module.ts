@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { ChatRoomComponent } from './chat-room/chat-room.component';
 import { ChatListComponent } from './chat-list/chat-list.component';
 import { HeaderComponent } from '../header/header.component';
+import { ChatCardComponent } from './chat-list/chat-card/chat-card.component';
 
 const routes: Routes = [
   {
@@ -20,7 +21,7 @@ const routes: Routes = [
         component: ChatListComponent
       },
       {
-        path: 'list:id',
+        path: ':id',
         component: ChatRoomComponent
       }
     ]
@@ -33,7 +34,8 @@ const routes: Routes = [
     IonicModule,
     CommonModule,
     RouterModule.forChild(routes),
-    HeaderComponent
+    HeaderComponent,
+    ChatCardComponent
   ]
 })
 export class ChatModule {}
