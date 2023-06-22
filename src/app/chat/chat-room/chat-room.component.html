@@ -3,10 +3,36 @@
   <main class="chat-room-area main-area">
     <div class="container">
       <div class="chat-body">
-        <div class="my-chat">
-          <div class="text-center">
-            <span class="dark_dd spn_s">Session start</span>
-          </div>
+        <div class="text-center">
+          <span class="dark_dd spn_s">Session start</span>
+        </div>
+        <ng-container *ngFor="let message of messages$ | async">
+          <ng-container *ngIf="user$ | async as user">
+            <ng-container *ngIf="message.senderId === user.uid">
+              <div class="my-chat">
+                <div class="chat_content">
+                  <p class="white">{{ message.content }}</p>
+                  <small class="white"
+                    >{{ message.timestamp | date : 'hh:mm' }}
+                    <i class="fa-light fa-check-double"></i
+                  ></small>
+                </div>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="message.senderId !== user.uid">
+              <div class="opt-chat">
+                <div class="chat_content chat_content2">
+                  <p class="dark">{{ message.content }}</p>
+                  <small class="dark">{{
+                    message.timestamp | date : 'hh:mm'
+                  }}</small>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+
+        <!-- <div class="my-chat">
           <div class="chat_content">
             <p class="white">Hi, good afternoon Dr.<br />Drake...</p>
             <small class="white"
@@ -76,7 +102,7 @@
             </p>
             <small class="dark">16:01</small>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="btn-full">
         <div class="btm-chat">
@@ -87,6 +113,7 @@
                 type="text"
                 name="#"
                 placeholder="Type a message"
+                (keyup.enter)="sendMessage($event)"
               />
             </div>
             <div class="wdt2">

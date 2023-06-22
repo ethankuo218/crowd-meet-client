@@ -21,6 +21,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ShellModule } from './shell/shell.module';
 import { StoreModule } from '@ngrx/store';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import {
   eventListFeatureKey,
   eventListReducer,
@@ -79,6 +80,7 @@ export function createTranslateLoader(http: HttpClient) {
       }
     }),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore()),
     provideAuth(() => {
       if (Capacitor.isNativePlatform()) {
         return initializeAuth(getApp(), {
