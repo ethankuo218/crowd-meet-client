@@ -6,6 +6,8 @@ import { EventDetailComponent } from './event-detail/event-detail.component';
 import { ShellModule } from '../shell/shell.module';
 import { EventListComponent } from './event-list/event-list.component';
 import { ListingCardComponent } from './event-list/listing-card/listing-card.component';
+import { HeaderComponent } from '../header/header.component';
+import { SwiperModule } from 'swiper/angular';
 
 const routes: Routes = [
   {
@@ -35,7 +37,9 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     ShellModule,
-    ListingCardComponent
+    ListingCardComponent,
+    HeaderComponent,
+    SwiperModule
   ]
 })
 export class EventModule {}

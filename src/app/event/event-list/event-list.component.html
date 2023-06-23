@@ -1,13 +1,130 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<app-header></app-header>
 
 <ion-content>
-  <div class="listing-item" *ngFor="let item of listing$ | async">
-    <app-listing-card [cardInfo]="item"></app-listing-card>
-  </div>
+  <main class="article-area main-area">
+    <div class="image_slider">
+      <div class="pson_div">
+        <h3 class="dark">Trending <a class="primary" href="#">See All</a></h3>
+      </div>
+      <swiper
+        [slidesPerView]="1.8"
+        [spaceBetween]="20"
+        [centeredSlides]="true"
+        [centeredSlidesBounds]="true"
+      >
+        <ng-template swiperSlide>
+          <div class="item slide_item">
+            <img src="assets/images/spoon.png" alt="image" />
+            <p class="dark">
+              Lorem ipsum dolor sit amet, consectetur adipisicing el...
+            </p>
+          </div>
+        </ng-template>
+        <ng-template swiperSlide>
+          <div class="item slide_item">
+            <img src="assets/images/spoon.png" alt="image" />
+            <p class="dark">
+              Lorem ipsum dolor sit amet, consectetur adipisicing el...
+            </p>
+          </div>
+        </ng-template>
+        <ng-template swiperSlide>
+          <div class="item slide_item">
+            <img src="assets/images/spoon.png" alt="image" />
+            <p class="dark">
+              Lorem ipsum dolor sit amet, consectetur adipisicing el...
+            </p>
+          </div>
+        </ng-template>
+      </swiper>
+      <div class="pson_div">
+        <h3 class="dark">Articles <a class="primary" href="#">See All</a></h3>
+      </div>
+      <swiper [slidesPerView]="3.75" [spaceBetween]="20">
+        <ng-template swiperSlide>
+          <div class="item btn_item">
+            <button class="primary" [ngClass]="{ active_btn: true }">
+              Newest
+            </button>
+          </div>
+        </ng-template>
+        <ng-template swiperSlide>
+          <div class="item btn_item">
+            <button class="primary">Health</button>
+          </div>
+        </ng-template>
+        <ng-template swiperSlide>
+          <div class="item btn_item">
+            <button class="primary">Covid-19</button>
+          </div>
+        </ng-template>
+        <ng-template swiperSlide>
+          <div class="item btn_item">
+            <button class="primary">Lifestyle</button>
+          </div>
+        </ng-template>
+        <ng-template swiperSlide>
+          <div class="item btn_item">
+            <button class="primary">Newest</button>
+          </div>
+        </ng-template>
+        <ng-template swiperSlide>
+          <div class="item btn_item">
+            <button class="primary">Newest</button>
+          </div>
+        </ng-template>
+      </swiper>
+      <div class="cause_content">
+        <div class="row">
+          <div class="inr_cause_content">
+            <small class="dark_dd">Dec 22. 2022</small>
+            <p class="dark">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+              eiusmod.
+            </p>
+            <div>
+              <a class="primary" href="#">Covid-19</a>
+            </div>
+          </div>
+          <div class="cause_image">
+            <img src="assets/images/spoon.png" alt="image" />
+          </div>
+        </div>
+      </div>
+      <div class="cause_content">
+        <div class="row">
+          <div class="inr_cause_content">
+            <small class="dark_dd">Dec 22. 2022</small>
+            <p class="dark">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+              eiusmod.
+            </p>
+            <div>
+              <a class="primary" href="#">Covid-19</a>
+            </div>
+          </div>
+          <div class="cause_image">
+            <img src="assets/images/spoon.png" alt="image" />
+          </div>
+        </div>
+      </div>
+      <div class="cause_content">
+        <div class="row">
+          <div class="inr_cause_content">
+            <small class="dark_dd">Dec 22. 2022</small>
+            <p class="dark">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+              eiusmod.
+            </p>
+            <div>
+              <a class="primary" href="#">Covid-19</a>
+            </div>
+          </div>
+          <div class="cause_image">
+            <img src="assets/images/spoon.png" alt="image" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 </ion-content>

@@ -1,15 +1,340 @@
-// Custom variables
-// Note:  These ones were added by us and have nothing to do with Ionic CSS Custom Properties
-:host {
-  --page-margin: var(--app-fair-margin);
-  --page-background: var(--app-background);
-
-  --page-color: #00AFFF;
+.image_slider {
+  padding: 1rem 0 1rem 0;
 }
 
-// Note:  All the CSS variables defined below are overrides of Ionic elements CSS Custom Properties
-.listing-item {
-  padding: 0px 0px var(--page-margin);
-  background-color: var(--page-background);
-  border-bottom: calc(var(--page-margin) / 2) solid var(--page-color);
+.pson_div {
+  padding: 0px 25px 20px;
+}
+
+.pson_div h3 {
+  font-size: 18px;
+  font-weight: 700;
+  position: relative;
+}
+
+.pson_div h3 a {
+  position: absolute;
+  right: 0;
+  top: 2px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.slide_item img {
+  width: 100%;
+  height: 145px;
+  border-radius: 20px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.slide_item p {
+  text-align: left;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+  margin: 15px 0 0;
+  width: 100%;
+  height: 3rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.image_slider .owl-stage {
+  padding-left: 25px !important;
+  padding-bottom: 20px;
+}
+
+.item.btn_item {
+  width: 100%;
+}
+
+.btn_item button {
+  display: block;
+  width: 100%;
+  padding: 0.55rem 0;
+  border-radius: 20px;
+  border: 2px solid #246bfd;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.image_slider
+  ::ng-deep
+  .swiper-wrapper
+  .swiper-slide:first-child.swiper-slide-active {
+  margin-left: 1.5rem;
+}
+
+.active_btn {
+  background: #246bfd;
+  color: #fff !important;
+}
+
+.cause_content {
+  padding: 0 25px;
+  margin: 0 0 15px;
+}
+
+.cause_image {
+  width: 35%;
+  padding: 0 0 0 1rem;
+}
+
+.cause_image img {
+  border-radius: 17px;
+  width: 100%;
+  height: 7.5rem;
+  object-fit: cover;
+}
+
+.inr_cause_content {
+  width: 65%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.inr_cause_content small {
+  font-size: 11px;
+  font-weight: 600;
+  margin: 0 0 2px;
+}
+
+.inr_cause_content p {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+  height: 4rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.inr_cause_content a {
+  font-size: 11px;
+  padding: 6px 9px;
+  border-radius: 8px;
+  background: #eef4ff;
+  font-weight: 600;
+  margin: 8px 0 0;
+}
+
+.image_slider ::ng-deep .swiper-wrapper {
+  padding-bottom: 20px;
+}
+
+.image_slider
+  ::ng-deep
+  .swiper-wrapper
+  .swiper-slide:first-child.swiper-slide-active {
+  margin-left: 1.5rem;
+}
+
+.image_slider ::ng-deep .swiper-slide img {
+  height: 150px;
+  border-radius: 25px;
+  object-fit: cover;
+}
+
+.image_slider .item {
+  position: relative;
+}
+
+.slider-area .item button {
+  position: absolute;
+  right: 9px;
+  bottom: 8px;
+  color: #fff;
+  font-size: 14px;
+}
+
+//TODO: remove
+body {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+* {
+  font-family: 'Urbanist', sans-serif;
+  /*! font-family: 'Montserrat', sans-serif; */
+  /*! font-family: 'Poppins', sans-serif; */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+th,
+td,
+p {
+  margin: 0;
+}
+
+figure {
+  margin: 0;
+}
+
+img {
+  vertical-align: middle;
+}
+
+span,
+small {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+  transition: 0.3s all ease-in-out;
+}
+
+button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: none !important;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border: none;
+}
+
+::selection {
+  background: #3f8c32;
+  color: #ffffff;
+}
+
+::-webkit-selection {
+  background: #3f8c32;
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background: #3f8c32;
+  color: #ffffff;
+}
+
+/*main styles*/
+
+.container {
+  max-width: 100%;
+  padding: 0 25px;
+}
+
+.row,
+.d-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col-6 {
+  width: 50%;
+}
+
+.gray {
+  color: #a4634d;
+}
+
+.danger {
+  color: #f85555;
+}
+
+.dark1 {
+  color: #424242;
+}
+
+.dark {
+  color: #212121;
+}
+
+.dark_d {
+  color: #5c5b5e;
+}
+
+.dark_dd {
+  color: #b1b0b1;
+}
+
+.white {
+  color: #ffffff;
+}
+
+.primary {
+  color: #246bfd;
+}
+
+.primary_2 {
+  color: #9610ff;
+}
+
+.text-start {
+  text-align: start;
+}
+
+.text-end {
+  text-align: end;
+}
+
+.text-center {
+  justify-content: center;
+  padding: 0 0 12px;
+  text-align: center;
+}
+
+.p-0 {
+  padding: 0 !important;
+}
+
+.fix .row {
+  gap: 12px;
+  flex-wrap: nowrap;
+  margin: 15px 0 0;
+}
+
+.article-area .row {
+  flex-wrap: nowrap;
+}
+
+.btm-full {
+  max-width: 767px;
+  margin: 0 auto;
+}
+
+.msg_link {
+  display: block;
+}
+
+.wdt__2 > div.P-text {
+  width: 100%;
+}
+.prof .content a {
+  display: block;
 }
