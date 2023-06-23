@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { ComponentsModule } from '../../components/components.module';
 import { EventCreateComponent } from './event-create.component';
 import { ImgUploadService } from 'src/app/core/img-upload.service';
+import { HeaderComponent } from 'src/app/header/header.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const routes: Routes = [
   {
@@ -19,10 +21,12 @@ const routes: Routes = [
   imports: [
     CommonModule,
     IonicModule,
+    FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
-    ComponentsModule
+    ComponentsModule,
+    HeaderComponent
   ],
   declarations: [EventCreateComponent],
   providers: [ImgUploadService]

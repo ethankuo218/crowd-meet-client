@@ -1,149 +1,356 @@
-@import "theme/mixins/inputs/select-alert";
-@import "theme/mixins/inputs/checkbox-tag";
-
-// Custom variables
-// Note:  These ones were added by us and have nothing to do with Ionic CSS Custom Properties
-:host {
-  --page-margin: var(--app-fair-margin);
-  --page-background: var(--app-background-shade);
-}
-
-// Use a colored border-top to fix weird transitions between toolbars that have different background colors
-ion-header {
-  ion-toolbar {
-    --background: transparent;
+.head_arw {
+  position: relative;
+  .arw_left {
+    width: 7%;
+    color: #212121;
+    font-size: 22px;
+    vertical-align: middle;
   }
-}
-ion-content {
-  position: absolute;
-  top: 0;
-  border-top: calc(var(--app-header-height) + var(--ion-safe-area-top));
-  border-top-style: solid;
-  border-top-color: var(--ion-color-primary);
-}
 
-// Note:  All the CSS variables defined below are overrides of Ionic elements CSS Custom Properties
-.forms-validations-content {
-  --background: var(--page-background);
+  h3 {
+    width: 32%;
+    display: inline-block;
+    font-size: 22px;
+    font-weight: 700;
+    vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-right: 0.5rem;
+  }
 
-  .validations-form {
-    margin-bottom: calc(var(--page-margin) * 2);
+  .tp_link_1 {
+    width: 20%;
+    margin-right: 0.5rem;
+  }
 
-    .inputs-list {
-      --ion-item-background: var(--page-background);
-
-      padding: var(--page-margin) var(--page-margin)
-        calc(var(--page-margin) * 2);
-
-      ion-list-header {
-        padding-inline-start: 0px;
-
-        .header-title {
-          text-transform: uppercase;
-          font-size: 16px;
-          color: var(--ion-color-secondary);
-        }
-      }
-
-      .input-item {
-        --padding-start: 0px;
-        --padding-end: 0px;
-        --inner-padding-end: 0px;
-      }
-
-      .terms-item {
-        --border-width: 0px;
-        --inner-padding-end: 0px;
-      }
-
-      .error-container {
-        .error-message {
-          margin: calc(var(--page-margin) / 2) 0px;
-          display: flex;
-          align-items: center;
-          color: var(--ion-color-danger);
-          font-size: 14px;
-
-          ion-icon {
-            padding-inline-end: calc(var(--page-margin) / 2);
-            flex-shrink: 0;
-          }
-        }
-      }
-
-      .counter-item {
-        app-counter-input {
-          --counter-background: transparent;
-          --counter-color: var(--ion-color-primary);
-          --counter-border-color: var(--ion-color-primary);
-        }
-
-        .counter-value {
-          text-align: center;
-        }
-      }
-    }
-
-    .submit-btn {
-      margin: var(--page-margin);
-    }
+  .tp_link_2 {
+    width: 25%;
+    margin-right: 0.5rem;
   }
 }
 
-// Alerts and in general all overlays are attached to the body or ion-app directly
-// We need to use ::ng-deep to access it from here
-::ng-deep .select-alert {
-  @include select-alert();
-
-  // Variables should be in a deeper selector or after the mixin include to override default values
-  --select-alert-color: var(--ion-color-lightest);
-  --select-alert-background: var(--ion-color-primary);
-  --select-alert-margin: 16px;
-
-  .alert-message {
-    display: none;
-  }
+.tp_active {
+  background: #a4634d;
+  color: #fff !important;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
-  color: black;
-  opacity: 1;
-
-  font-size: large;
+.tp_link {
+  text-align: center;
+  font-weight: 700;
+  font-size: 15px;
+  border: 2px solid #a4634d;
+  border-radius: 20px;
+  line-height: 1;
+  padding: 0.5rem;
 }
 
-.checkbox-tags {
-  padding: calc(var(--page-margin) / 2)
-    calc(var(--page-margin) - var(--page-tags-gutter));
+.tp_link_1:hover {
+  color: #fff;
+}
 
-  @include checkbox-tag();
+.tp_link_2:hover {
+  color: #a4634d;
+}
 
-  .checkbox-tag {
-    padding: 0px var(--page-tags-gutter);
-    margin: var(--page-tags-gutter) 0px;
-  }
+#picture__input {
+  display: none;
+}
 
-  // Add a deeper selector to override default colors
-  &.square-checkbox-tags {
-    background-color: var(--page-background);
+.picture {
+  width: 100%;
+  /*! aspect-ratio: 16/9; */
+  background: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #aaa;
+  border: 1px solid #f3f3f3;
+  cursor: pointer;
+  font-family: sans-serif;
+  transition: color 300ms ease-in-out, background 300ms ease-in-out;
+  outline: none;
+  overflow: hidden;
+  border-radius: 20px;
+  flex-direction: column;
+  padding: 120px 0;
+  margin: 20px 0;
+}
 
-    .checkbox-tag {
-      --checkbox-tag-color: var(--ion-color-medium);
-      --checkbox-tag-background: var(--ion-color-lightest);
-      --checkbox-tag-active-color: var(--ion-color-lightest);
-      --checkbox-tag-active-background: var(--ion-color-secondary);
-    }
-  }
+.picture:focus {
+  outline: none;
+  background: #fafafa;
+}
 
-  // Add a deeper selector to override default colors
-  &.rounded-checkbox-tags {
-    // background-color: var(--ion-color-lightest);
+.picture:hover {
+  /*! color: #777; */
+  /*! background: #ccc; */
+}
 
-    .checkbox-tag {
-      --checkbox-tag-color: var(--ion-color-lightest);
-      --checkbox-tag-background: var(--ion-color-light-shade);
-      --checkbox-tag-active-color: var(--ion-color-lightest);
-      --checkbox-tag-active-background: var(--ion-color-secondary);
-    }
-  }
+.picture:active {
+  border-color: turquoise;
+  color: turquoise;
+  background: #eee;
+}
+
+.picture:focus {
+  color: #777;
+  background: #ccc;
+  /*! box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); */
+}
+
+.picture__img {
+  max-width: 100%;
+}
+
+.picture__image {
+  display: block;
+}
+
+.picture fa-icon {
+  font-size: 50px;
+}
+
+.picture p {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 20px 0 0;
+}
+
+.airticle_content label span,
+.h2_art {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 11px;
+}
+
+.airticle_content ion-textarea {
+  width: 100%;
+  border-radius: 11px;
+  background: #fafafa;
+  padding: 16px 18px;
+  border: none;
+  font-size: 14px;
+  margin: 0 0 25px;
+}
+
+
+.airticle_content input,
+.airticle_content select {
+  width: 100%;
+  border-radius: 11px;
+  background: #fafafa;
+  padding: 16px 18px;
+  border: none;
+  font-size: 14px;
+  margin: 0 0 25px;
+}
+
+.airticle_content select {
+  background-image: url('../../../../assets/images/down.png');
+  background-repeat: no-repeat;
+  background-position: 98% 50%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  position: initial !important;
+}
+
+.note-editor {
+  margin-bottom: 30px;
+}
+.note-editable {
+  height: 200px;
+}
+
+.write_spn {
+  border-radius: 11px;
+  /*! padding: 16px 18px; */
+  font-size: 14px;
+}
+
+//TODO: remove
+body {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+* {
+  font-family: 'Urbanist', sans-serif;
+  /*! font-family: 'Montserrat', sans-serif; */
+  /*! font-family: 'Poppins', sans-serif; */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+th,
+td,
+p {
+  margin: 0;
+}
+
+figure {
+  margin: 0;
+}
+
+img {
+  vertical-align: middle;
+}
+
+span,
+small {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+  transition: 0.3s all ease-in-out;
+}
+
+button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: none !important;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border: none;
+}
+
+::selection {
+  background: #3f8c32;
+  color: #ffffff;
+}
+
+::-webkit-selection {
+  background: #3f8c32;
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background: #3f8c32;
+  color: #ffffff;
+}
+
+/*main styles*/
+
+.container {
+  max-width: 100%;
+  padding: 0 25px;
+}
+
+.row,
+.d-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col-6 {
+  width: 50%;
+}
+
+.gray {
+  color: #a4634d;
+}
+
+.danger {
+  color: #f85555;
+}
+
+.dark1 {
+  color: #424242;
+}
+
+.dark {
+  color: #212121;
+}
+
+.dark_d {
+  color: #5c5b5e;
+}
+
+.dark_dd {
+  color: #b1b0b1;
+}
+
+.white {
+  color: #ffffff;
+}
+
+.primary {
+  color: #246bfd;
+}
+
+.primary_2 {
+  color: #9610ff;
+}
+
+.text-start {
+  text-align: start;
+}
+
+.text-end {
+  text-align: end;
+}
+
+.text-center {
+  justify-content: center;
+  padding: 0 0 12px;
+  text-align: center;
+}
+
+.p-0 {
+  padding: 0 !important;
+}
+
+.fix .row {
+  gap: 12px;
+  flex-wrap: nowrap;
+  margin: 15px 0 0;
+}
+
+.article-area .row {
+  flex-wrap: nowrap;
+}
+
+.btm-full {
+  max-width: 767px;
+  margin: 0 auto;
+}
+
+.msg_link {
+  display: block;
+}
+
+.wdt__2 > div.P-text {
+  width: 100%;
+}
+.prof .content a {
+  display: block;
 }
