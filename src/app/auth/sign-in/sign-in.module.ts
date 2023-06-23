@@ -11,17 +11,22 @@ import { canActivate, AuthPipeGenerator } from '@angular/fire/auth-guard';
 
 import { SignInPage } from './sign-in.page';
 import { ComponentsModule } from '../../components/components.module';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 // ? Firebase guard to redirect logged in users to profile
-const redirectLoggedInToHome: AuthPipeGenerator = (next) => map(user => {
-  // ? When queryParams['auth-redirect'] don't redirect because we want the component to handle the redirection
-  if (user !== null && !next.queryParams['auth-redirect'] && !next.params['logout']) {
-    return ['app/event'];
-  } else {
-    return true;
-  }
-});
+const redirectLoggedInToHome: AuthPipeGenerator = (next) =>
+  map((user) => {
+    // ? When queryParams['auth-redirect'] don't redirect because we want the component to handle the redirection
+    if (
+      user !== null &&
+      !next.queryParams['auth-redirect'] &&
+      !next.params['logout']
+    ) {
+      return ['app/event'];
+    } else {
+      return true;
+    }
+  });
 
 const routes: Routes = [
   {
@@ -42,6 +47,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
+    FontAwesomeModule,
     RouterModule.forChild(routes),
     ComponentsModule
   ],

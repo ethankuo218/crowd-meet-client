@@ -23,7 +23,6 @@ import { AuthService } from '../../core/auth.service';
   styleUrls: ['./styles/sign-in.page.scss']
 })
 export class SignInPage implements OnInit {
-  loginForm: UntypedFormGroup;
   submitError: string | null = null;
   authRedirectResult: Subscription;
 
@@ -36,20 +35,6 @@ export class SignInPage implements OnInit {
     private route: ActivatedRoute,
     private location: Location
   ) {
-    this.loginForm = new UntypedFormGroup({
-      email: new UntypedFormControl(
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-        ])
-      ),
-      password: new UntypedFormControl(
-        '',
-        Validators.compose([Validators.minLength(6), Validators.required])
-      )
-    });
-
     // ? Get firebase authentication redirect result invoked when using signInWithRedirect()
     // ? signInWithRedirect() is only used when client is in web but not desktop. For example a PWA
     this.authRedirectResult = this.authService.redirectResult$.subscribe(
@@ -164,13 +149,5 @@ export class SignInPage implements OnInit {
 
   private resetSubmitError(): void {
     this.submitError = null;
-  }
-
-  get email() {
-    return this.loginForm.get('email');
-  }
-
-  get password() {
-    return this.loginForm.get('password');
   }
 }

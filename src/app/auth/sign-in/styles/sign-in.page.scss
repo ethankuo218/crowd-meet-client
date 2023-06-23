@@ -1,86 +1,280 @@
-// Custom variables
-// Note:  These ones were added by us and have nothing to do with Ionic CSS Custom Properties
-:host {
-  --page-margin: var(--app-broad-margin);
-  --page-background: var(--app-background-shade);
+.main-area {
+  padding: 40px 0 0;
+  max-width: 575px;
+  margin: 0 auto;
+  position: relative;
 }
 
-ion-toolbar {
-  --background: var(--page-background);
+.center_img img {
+  width: 70%;
+  margin: 60px 0 0;
 }
 
-// Note:  All the CSS variables defined below are overrides of Ionic elements CSS Custom Properties
-.login-content {
-  --background: var(--page-background);
-  --padding-start: var(--page-margin);
-  --padding-end: var(--page-margin);
-  --padding-top: var(--page-margin);
-  --padding-bottom: var(--page-margin);
+.arw_left {
+  color: #212121;
+  font-size: 22px;
+  vertical-align: middle;
+}
 
-  .auth-title {
-    color: var(--ion-color-dark);
-    font-weight: bold;
-    margin-top: calc(var(--page-margin) / 2);
-    margin-bottom: calc(var(--page-margin) * (3/2));
-    letter-spacing: 0.6px;
-    text-align: center;
-  }
+.lets_content h2 {
+  font-size: 50px;
+  margin: 40px 0 0;
+  font-weight: 700;
+}
 
-  .inputs-list {
-    --ion-item-background: var(--page-background);
+.link_list {
+  margin: 30px 0 35px;
+}
 
-    .input-item {
-      --padding-start: 0px;
-      --padding-end: 0px;
-      --inner-padding-end: 0px;
-    }
-  }
+.link_list li a {
+  display: block;
+  width: 100%;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 15px 0;
+  border: 1px solid #eceded;
+  border-radius: 15px;
+  margin: 0 0 15px;
+  text-align: center;
+}
 
-  .error-container {
-    .error-message {
-      margin: calc(var(--page-margin) / 2) 0px;
-      display: flex;
-      align-items: center;
-      color: var(--ion-color-danger);
-      font-size: 14px;
+.facebook {
+  color: rgb(73, 150, 226);
+}
 
-      ion-icon {
-        padding-inline-end: calc(var(--page-margin) / 2);
-      }
-    }
-  }
+svg {
+  height: 25px;
+  width: 25px;
+  vertical-align: middle;
+}
 
-  .login-btn {
-    margin: calc(var(--page-margin) / 2) 0px;
-  }
+.link_list li a fa-icon {
+  font-size: 25px;
+  vertical-align: middle;
+}
 
-  .other-auth-options-row {
-    justify-content: flex-end;
-    align-items: center;
+.link_list li a span {
+  margin-left: 12px;
+  vertical-align: middle;
+}
 
-    .signup-btn {
-      --color: var(--ion-color-secondary);
-      margin: 0px;
+.or_p {
+  border-top: 1px solid #eceded;
+  position: relative;
+}
 
-      &:focus {
-        outline: none;
-      }
-    }
-  }
+.or_p span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 15px;
+  font-weight: 600;
+  background: #fff;
+  padding: 0 12px;
+}
 
-  .social-auth-options {
-    .options-divider {
-      color: var(--ion-color-medium);
-  		margin: var(--page-margin) 0px;
-  		text-align: center;
-    }
+.sign_a .password_a {
+  width: 100%;
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 20px 0;
+  border-radius: 35px;
+  background: #246bfd;
+  margin: 40px 0 0;
+}
 
-    .social-auth-btn {
-      margin: 0px;
+.sign_a p {
+  padding: 25px 0 35px;
+}
 
-      &:not(:first-child) {
-        margin-top: var(--page-margin);
-      }
-    }
-  }
+.sign_a p a {
+  font-weight: 700;
+}
+
+//TODO: remove
+body {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+* {
+  font-family: 'Urbanist', sans-serif;
+  /*! font-family: 'Montserrat', sans-serif; */
+  /*! font-family: 'Poppins', sans-serif; */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+th,
+td,
+p {
+  margin: 0;
+}
+
+figure {
+  margin: 0;
+}
+
+img {
+  vertical-align: middle;
+}
+
+span,
+small {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+  transition: 0.3s all ease-in-out;
+}
+
+button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: none !important;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border: none;
+}
+
+::selection {
+  background: #3f8c32;
+  color: #ffffff;
+}
+
+::-webkit-selection {
+  background: #3f8c32;
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background: #3f8c32;
+  color: #ffffff;
+}
+
+/*main styles*/
+
+.container {
+  max-width: 100%;
+  padding: 0 25px;
+}
+
+.row,
+.d-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col-6 {
+  width: 50%;
+}
+
+.gray {
+  color: #a4634d;
+}
+
+.danger {
+  color: #f85555;
+}
+
+.dark1 {
+  color: #424242;
+}
+
+.dark {
+  color: #212121;
+}
+
+.dark_d {
+  color: #5c5b5e;
+}
+
+.dark_dd {
+  color: #b1b0b1;
+}
+
+.white {
+  color: #ffffff;
+}
+
+.primary {
+  color: #246bfd;
+}
+
+.primary_2 {
+  color: #9610ff;
+}
+
+.text-start {
+  text-align: start;
+}
+
+.text-end {
+  text-align: end;
+}
+
+.text-center {
+  justify-content: center;
+  padding: 0 0 12px;
+  text-align: center;
+}
+
+.p-0 {
+  padding: 0 !important;
+}
+
+.fix .row {
+  gap: 12px;
+  flex-wrap: nowrap;
+  margin: 15px 0 0;
+}
+
+.article-area .row {
+  flex-wrap: nowrap;
+}
+
+.btm-full {
+  max-width: 767px;
+  margin: 0 auto;
+}
+
+.msg_link {
+  display: block;
+}
+
+.wdt__2 > div.P-text {
+  width: 100%;
+}
+.prof .content a {
+  display: block;
 }

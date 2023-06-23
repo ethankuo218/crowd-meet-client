@@ -13,29 +13,29 @@ const routes: Routes = [
       {
         path: '',
         redirectTo: '/sign-in',
-        pathMatch: 'full',
+        pathMatch: 'full'
       },
       {
         path: 'sign-in',
         loadChildren: () =>
-          import('./sign-in/sign-in.module').then((m) => m.SignInPageModule),
+          import('./sign-in/sign-in.module').then((m) => m.SignInPageModule)
       },
       {
         path: 'walkthrough',
         loadChildren: () =>
           import('./walkthrough/walkthrough.module').then(
             (m) => m.WalkthroughPageModule
-          ),
+          )
       },
       {
         path: 'getting-started',
         loadChildren: () =>
           import('./getting-started/getting-started.module').then(
             (m) => m.GettingStartedPageModule
-          ),
-      },
-    ],
-  },
+          )
+      }
+    ]
+  }
 ];
 
 @NgModule({
@@ -43,9 +43,9 @@ const routes: Routes = [
     CommonModule,
     IonicModule,
     ComponentsModule,
-    RouterModule.forChild(routes),
+    RouterModule.forChild(routes)
     // ? Correct way to initialize Firebase using the Capacitor Firebase plugin mixed with the Firebase JS SDK (@angular/fire)
   ],
-  providers: [],
+  providers: []
 })
 export class AuthModule {}
