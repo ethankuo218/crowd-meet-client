@@ -33,6 +33,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   private user: User | null = null;
   private readInfos: ReadInfo = {};
   messages$!: Observable<ChatMessage[]>;
+  private chatDoc = doc(this.firestore, 'chats', this.chatId);
 
   async ngOnInit() {
     this.messages$ = this.getChatMessages(this.chatId);
@@ -48,8 +49,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   }
 
   private async setReadInfo(): Promise<void> {
-    const chatDoc = doc(this.firestore, 'chats', this.chatId);
-    const chatData = (await getDoc(chatDoc)).data();
+    const chatData = (await getDoc(this.chatDoc)).data();
     if (chatData) {
       this.readInfos = chatData['readInfos'];
     }
@@ -68,30 +68,35 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   async sendMessage({ target }: Event) {
     const messageText = (target as HTMLInputElement).value;
     if (!messageText) return;
+    const sentTime = Date.now();
     const message: ChatMessage = {
       senderId: this.user!.uid,
       content: messageText,
-      timestamp: Date.now()
+      timestamp: sentTime
     };
 
-    const chatDoc = doc(this.firestore, 'chats', this.chatId);
     const messagesCollection = collection(
       this.firestore,
       'chats',
       this.chatId,
       'messages'
     );
+    // Update the read timestamp within the sendMessage transaction
+    this.readInfos[this.user!.uid].readTimestamp = sentTime;
 
     // Send the message and update the chat's readInfos in a batch
     await runTransaction(this.firestore, async (transaction) => {
       const newMessageRef = doc(messagesCollection);
-      transaction.set(chatDoc, { latestMessage: message }, { merge: true });
+      transaction.set(
+        this.chatDoc,
+        { latestMessage: message, readInfos: this.readInfos },
+        { merge: true }
+      );
       transaction.set(newMessageRef, message);
     });
 
     // Clear the input
     (target as HTMLInputElement).value = '';
-    await this.updateReadTimeStamp();
   }
 
   async updateReadTimeStamp() {
@@ -100,9 +105,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
     }
     this.readInfos[this.user.uid].readTimestamp = Date.now();
 
-    const chatDoc = doc(this.firestore, 'chats', this.chatId);
-
     // Update the chat's readInfos with the new readTimestamp and unreadCount
-    await updateDoc(chatDoc, { readInfos: this.readInfos });
+    await updateDoc(this.chatDoc, { readInfos: this.readInfos });
   }
 }
