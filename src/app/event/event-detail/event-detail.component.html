@@ -1,123 +1,154 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="app/categories/travel"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Travel Details</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header></app-header>
 
-<ion-content class="travel-details-content">
-  <ion-row class="image-row">
-    <ion-col size="12">
-      <app-image-shell [display]="'cover'" animation="spinner" class="add-overlay details-image" [src]="details.imageUrl">
-      </app-image-shell>
-    </ion-col>
-  </ion-row>
-  <ion-row class="description-row">
-    <ion-col size="12">
-      <h3 class="details-name">
-        <app-text-shell animation="bouncing" [data]="details.title"></app-text-shell>
-      </h3>
-      <p class="details-short-description">
-        <app-text-shell animation="bouncing" [data]="details.description"></app-text-shell>
-      </p>
-    </ion-col>
-    <ion-col size="12">
-      <div class="details-score">
-        <div class="score-item">
-          <ion-icon class="score-icon" src="./assets/custom-icons/travel/star.svg"></ion-icon>
-          <div class="score-value">
-            <app-text-shell [data]="5"></app-text-shell>
-          </div>
-        </div>
-        <div class="score-item">
-          <ion-icon class="score-icon" src="./assets/custom-icons/travel/comments.svg"></ion-icon>
-          <div class="score-value">
-            <app-text-shell [data]="5"></app-text-shell>
-          </div>
-        </div>
-      </div>
-    </ion-col>
-    <ion-col size="12">
-      <ion-row class="details-tags">
-        <ion-col class="tag-wrapper" *ngFor="let tag of details.categories">
-          <span class="item-tag">
-            <app-text-shell [data]="tag"></app-text-shell>
-          </span>
-        </ion-col>
-      </ion-row>
-    </ion-col>
-    <ion-col size="12">
-      <p class="details-description">
-        <app-text-shell animation="bouncing" lines="6" [data]="details.description"></app-text-shell>
-      </p>
-    </ion-col>
-  </ion-row>
-  <div class="open-hours-wrapper">
-    <h3 class="detail-title">When?</h3>
-    <ul class="schedules-list">
-      <li class="open-hour-item" *ngFor="let schedule of details.startTime">
-        <div class="schedule-outer">
-          <!-- <span class="schedule-day">
-            <app-text-shell [data]="schedule.day"></app-text-shell>
-          </span>
-          <div class="schedule-hours">
-            <ng-container *ngIf="schedule.open">
-              <span class="schedule-value">
-                <app-text-shell [data]="schedule.hourFrom"></app-text-shell>
-              </span>
-              <span class="schedule-separator">to</span>
-              <span class="schedule-value">
-                <app-text-shell [data]="schedule.hourTo"></app-text-shell>
-              </span>
-            </ng-container>
-            <ng-container *ngIf="!schedule.open">
-              <ion-badge class="schedule-closed" color="medium">closed</ion-badge>
-            </ng-container>
-          </div> -->
-        </div>
-      </li>
-    </ul>
-  </div>
-  <div class="location-wrapper">
-    <div class="location-header">
-      <h3 class="detail-title">Where?</h3>
-      <span class="location-address">
-        <app-text-shell [data]="details.locationName"></app-text-shell>
-      </span>
+<ion-content class="event-detail-content">
+  <main class="event-detail-area main-area">
+    <div class="bg-detail bg_head">
+
     </div>
-    <!-- <app-aspect-ratio [ratio]="{w: 64, h: 30}">
-      <app-image-shell [src]="'https://maps.googleapis.com/maps/api/staticmap?center=' + details.location?.latlng + '&zoom=15&size=640x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xd9453a%7C' + details.location?.latlng + '&key=YOUR_KEY_HERE'">
-      </app-image-shell>
-    </app-aspect-ratio> -->
-    <!-- <app-aspect-ratio [ratio]="{w: 64, h: 30}">
-      <app-image-shell class="location-image" animation="spinner" [src]="details.location.mapImage"></app-image-shell>
-    </app-aspect-ratio> -->
-  </div>
-  <!-- <div class="related-activities-wrapper" *ngIf="details?.relatedActivities && details.relatedActivities.length > 0">
-    <h3 class="detail-alt-title">More activities?</h3>
-    <ion-row class="related-activity" *ngFor="let relatedActivity of details?.relatedActivities">
-      <ion-col size="12">
-        <app-image-shell [display]="'cover'" animation="spinner" class="related-activity-picture" [src]="relatedActivity.picture">
-          <app-aspect-ratio [ratio]="{w:64, h:23}">
-          </app-aspect-ratio>
-        </app-image-shell>
-      </ion-col>
-      <ion-col size="12" class="activity-details">
-        <h5 class="activity-name">
-          <app-text-shell [data]="relatedActivity.name"></app-text-shell>
-        </h5>
-        <span class="activity-category">
-          <app-text-shell [data]="relatedActivity.category"></app-text-shell>
-        </span>
-        <div class="activity-rating">
-          <ion-icon class="rating-icon" name="star-outline"></ion-icon>
-          <div class="rating-value">
-            <app-text-shell [data]="relatedActivity.rating"></app-text-shell>
-          </div>
+    <div class="travel_area">
+        <div class="container">
+            <div class="travel_content">
+                <h2 class="dark">The Top 5 Travel Destinations for 2024!</h2>
+                <hr>
+                <div class="natasha_blog">
+                    <div class="row">
+                        <div>
+                            <img src="assets/images/natahsa_sm_im.png" alt="image">
+                        </div>
+                        <div class="name_content">
+                            <h3 class="dark">Natasha Winkles</h3>
+                            <a class="dark_d name_a">@natasha_winkles</a>
+                        </div>
+                    </div>
+                    <a class="white follow_a">Follow</a>
+                </div>
+                <hr>
+                <div class="country_content">
+                    <div class="country_link">
+                        <a class="gray">Travel</a>
+                        <small class="dark_d">3 days ago</small>
+                    </div>
+                    <p class="dark_d">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <div class="greese_text">
+                        <h3 class="dark1">1. Greese</h3>
+                        <p class="dark_d">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                    <div class="greese_text">
+                        <h3 class="dark1">2. Japan</h3>
+                        <p class="dark_d">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                    <div class="greese_text">
+                        <h3 class="dark1">3. Costa Rica</h3>
+                        <p class="dark_d">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                    <div class="greese_text">
+                        <h3 class="dark1">4. Italy</h3>
+                        <p class="dark_d">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                    <div class="greese_text">
+                        <h3 class="dark1">5. New Zealand</h3>
+                        <p class="dark_d">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <p class="greese_p dark_d">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                    <hr>
+                </div>
+                <div class="comments_div">
+                    <h2 class="dark">Comments (120) <a><fa-icon [icon]="['fas', 'arrow-right']" class="gray"></fa-icon></a></h2>
+                </div>
+                <div class="div_bella">
+                    <a class="vertical_dot"><i class="dark fa-regular fa-ellipsis-vertical"></i></a>
+                    <div class="inr_bella">
+                        <img src="assets/images/min_profile.png" alt="image">
+                        <h4 class="dark">Bella Wigington</h4>
+                    </div>
+                    <p class="dark_d">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et.</p>
+                    <button>
+                        <fa-icon [icon]="['fas', 'heart']" class="danger"></fa-icon>
+                        <span class="dark_d">356</span>
+                    </button>
+                    <small class="dark_d">1 month ago</small>
+                </div>
+                <div class="div_bella">
+                    <a class="vertical_dot"><i class="dark fa-regular fa-ellipsis-vertical"></i></a>
+                    <div class="inr_bella">
+                        <img src="assets/images/min_profile.png" alt="image">
+                        <h4 class="dark">Bella Wigington</h4>
+                    </div>
+                    <p class="dark_d">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et.</p>
+                    <button>
+                        <fa-icon [icon]="['fas', 'heart']" class="danger"></fa-icon>
+                        <span class="dark_d">356</span>
+                    </button>
+                    <small class="dark_d">1 month ago</small>
+                </div>
+                <div class="div_bella">
+                    <a class="vertical_dot"><i class="dark fa-regular fa-ellipsis-vertical"></i></a>
+                    <div class="inr_bella">
+                        <img src="assets/images/min_profile.png" alt="image">
+                        <h4 class="dark">Bella Wigington</h4>
+                    </div>
+                    <p class="dark_d">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et.</p>
+                    <button>
+                        <fa-icon [icon]="['fas', 'heart']" class="danger"></fa-icon>
+                        <span class="dark_d">356</span>
+                    </button>
+                    <small class="dark_d">1 month ago</small>
+                </div>
+                <div class="input_comment">
+                    <div class="row">
+                        <div class="mini__profile">
+                            <img src="assets/images/min_profile.png">
+                        </div>
+                        <div class="text__input">
+                            <form>
+                                <input class="dark_dd" type="text" name="#" placeholder="Add a comment" />
+                                <button type="submit">
+                                    <fa-icon [icon]="['fas', 'paper-plane']" class="gray"></fa-icon>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </ion-col>
-    </ion-row>
-  </div> -->
+    </div>
+</main>
 </ion-content>

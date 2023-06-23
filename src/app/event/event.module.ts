@@ -8,6 +8,7 @@ import { EventListComponent } from './event-list/event-list.component';
 import { ListingCardComponent } from './event-list/listing-card/listing-card.component';
 import { HeaderComponent } from '../header/header.component';
 import { SwiperModule } from 'swiper/angular';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const routes: Routes = [
   {
@@ -34,6 +35,7 @@ const routes: Routes = [
   declarations: [EventListComponent, EventDetailComponent],
   imports: [
     IonicModule,
+    FontAwesomeModule,
     CommonModule,
     RouterModule.forChild(routes),
     ShellModule,
