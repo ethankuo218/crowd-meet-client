@@ -1,10 +1,19 @@
 <ion-header>
-  <ion-toolbar>
-    <div class="head_arw">
-      <a class="arw_left" href="#">
-        <fa-icon icon="arrow-left"></fa-icon>
-      </a>
+  <ion-toolbar class="head_arw">
+    <ion-buttons slot="start" class="arw_left">
+      <ion-back-button
+        [icon]="'arrow-back'"
+        [text]="''"
+        defaultHref="app/categories/travel"
+      >
+        <fa-icon [icon]="['fas', 'arrow-left']"></fa-icon>
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>
       <h3 class="dark">Notifications</h3>
-    </div>
+    </ion-title>
+    <ion-buttons slot="end" class="arw_left">
+      <fa-icon [icon]="['fas', 'ellipsis']"></fa-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
