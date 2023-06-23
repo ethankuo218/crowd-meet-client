@@ -4,6 +4,11 @@
 // |    |--- chatId: "chat1"
 // |    |--- type: "private"
 // |    |--- members: ["user1FirebaseUid", "user2FirebaseUid"]
+// |    |--- memberNames: ["user1Name", "user2Name"] // if room type is private
+// |    |--- eventInfo: { // if room type is event
+// |           |--- eventTitle: "eventTitle"
+// |           |--- eventPicture: "eventPictureUrl"
+// |           }
 // |    |--- readInfos: {
 // |           |--- user1FirebaseUid: {
 // |               |--- readTimestamp: 1664430182024
@@ -37,3 +42,20 @@ interface UserReadInfo {
 }
 
 export type ReadInfo = { [userId: string]: UserReadInfo };
+
+export interface Chat {
+  members: string[];
+  memberNames?: string[];
+  latestMessage: {
+    timestamp: number;
+    senderId?: string;
+    content?: string;
+  };
+  type: string;
+  readInfos: {
+    [memberId: string]: {
+      readTimestamp: number;
+    };
+  };
+  chatId: string;
+}

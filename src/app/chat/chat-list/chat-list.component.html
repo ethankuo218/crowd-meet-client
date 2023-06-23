@@ -3,8 +3,12 @@
   <main class="message-area main-area">
     <div class="container">
       <div class="tabcontent" style="display: block">
-        <ng-container *ngFor="let item of items">
-          <app-chat-card></app-chat-card>
+        <ng-container *ngFor="let chat of chats$ | async">
+          <app-chat-card
+            *ngIf="user"
+            [chat]="chat"
+            [user]="user"
+          ></app-chat-card>
         </ng-container>
       </div>
     </div>

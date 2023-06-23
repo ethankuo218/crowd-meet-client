@@ -1,19 +1,19 @@
-<a class="msg_link" [routerLink]="['/app/chat/', '0']">
+<a class="msg_link" [routerLink]="['/app/chat/', chat.chatId]">
   <div class="row">
     <div class="wdt__1 d-flex">
       <div class="min_img">
         <img src="assets/images/min_profile.png" alt="image" />
       </div>
       <div class="text_div P-text">
-        <h3 class="dark">Dr. Drake Boeson</h3>
+        <h3 class="dark">{{ roomName }}</h3>
         <p class="dark_d">
-          My pleasure. All the best for...
+          {{ chat.latestMessage.content ?? '' }}
         </p>
       </div>
     </div>
     <div class="wdt__2">
       <div class="P-text text-end">
-        <p class="dark_d">Today<br />10:00 AM</p>
+        <p class="dark_d" [innerHTML]="displayTimeHtml"></p>
       </div>
     </div>
   </div>
