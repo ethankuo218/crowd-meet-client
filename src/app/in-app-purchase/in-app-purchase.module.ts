@@ -4,18 +4,24 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { InAppPurchaseComponent } from './in-app-purchase.component';
 import { IonicModule } from '@ionic/angular';
+import { HeaderComponent } from '../header/header.component';
 declare let window: any;
 
 const routes: Routes = [
   {
     path: '',
-    component: InAppPurchaseComponent,
-  },
+    component: InAppPurchaseComponent
+  }
 ];
 
 @NgModule({
   declarations: [InAppPurchaseComponent],
-  imports: [IonicModule, CommonModule, RouterModule.forChild(routes)],
+  imports: [
+    IonicModule,
+    CommonModule,
+    RouterModule.forChild(routes),
+    HeaderComponent
+  ]
 })
 export class InAppPurchaseModule {
   constructor(private purchases: Purchases) {
@@ -26,11 +32,11 @@ export class InAppPurchaseModule {
         if (window.cordova.platformId === 'ios') {
           console.log('Enter in ios app');
           this.purchases.configureWith({
-            apiKey: 'appl_pSXpxYdElyvkaGoluStFYFEeufZ',
+            apiKey: 'appl_pSXpxYdElyvkaGoluStFYFEeufZ'
           });
         } else if (window.cordova.platformId === 'android') {
           this.purchases.configureWith({
-            apiKey: 'goog_zdLdwSKOtRgrUYVKcgrEgrNzzBj',
+            apiKey: 'goog_zdLdwSKOtRgrUYVKcgrEgrNzzBj'
           });
         }
       },
