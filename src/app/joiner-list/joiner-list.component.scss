@@ -1,0 +1,146 @@
+.collum-4 {
+  width: 32%;
+}
+
+.collum-4 img {
+  width: 100%;
+}
+
+.collum-8 {
+  width: 68%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 13px;
+  position: relative;
+}
+
+.message_image {
+  position: absolute;
+
+  right: 0;
+}
+
+.collum-8 h3 {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.mes_p {
+  font-size: 12px;
+  padding: 13px 0;
+}
+
+.mes_p a:last-child {
+  border: 2px solid #246bfd;
+  border-radius: 8px;
+
+  padding: 2px 6px;
+}
+
+.td_p {
+  font-size: 13px;
+}
+
+.td_p span {
+  margin: 0 4px;
+}
+
+.cancel {
+  font-size: 14px;
+  border: 2px solid #246bfd;
+  padding: 5px 10px;
+  border-radius: 18px;
+  width: 100%;
+  text-align: center;
+  font-weight: 700;
+}
+
+.res_a {
+  width: 100%;
+  text-align: center;
+  background: #246bfd;
+  padding: 5px 10px;
+  border-radius: 18px;
+}
+
+.col {
+  width: 20%;
+  text-align: center;
+}
+
+.bottom-area {
+  padding: 15px 0 15px;
+  background: #fff;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  z-index: 9;
+}
+
+.ftr_links span {
+  font-size: 10px;
+  margin: -9px 0 0 0;
+  font-weight: 600;
+}
+
+.ftr_links i {
+  font-size: 23px;
+}
+
+.active_links span,
+.active_links i {
+  color: #246bfd !important;
+}
+
+/*====
+Tab
+====*/
+.fix .main_tab {
+  margin-top: 1rem;
+}
+
+.main_tab .tab {
+  overflow: hidden;
+  border-bottom: 2px solid #eeeeef;
+  /*! background-color: #f1f1f1; */
+  display: flex;
+  justify-content: center;
+  margin: 25px 0 20px;
+}
+
+.main_tab .tab button {
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: 600;
+  position: relative;
+  width: 33.33%;
+}
+
+.main_tab .tab button.active::after {
+  content: '';
+  width: 100%;
+  background: #246bfd;
+  height: 3px;
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  transition: 0.3s all ease-in-out;
+}
+
+.main_tab .tab button.active {
+  color: #246bfd;
+}
+
+.main_tab .tabcontent .drake_div {
+  padding: 15px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 1px 1px 40px #ddd;
+  margin: 0 0 20px;
+}

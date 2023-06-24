@@ -111,6 +111,18 @@ const routes: Routes = [
               import('../profile/profile.module').then((m) => m.ProfileModule)
           }
         ]
+      },
+      {
+        path: 'joiner-list',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../joiner-list/joiner-list.module').then(
+                (m) => m.JoinerListModule
+              )
+          }
+        ]
       }
     ]
   }
