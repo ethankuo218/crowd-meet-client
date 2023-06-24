@@ -79,6 +79,16 @@ const routes: Routes = [
               )
           }
         ]
+      },
+      {
+        path: 'reviews',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../reviews/reviews.module').then((m) => m.ReviewsModule)
+          }
+        ]
       }
     ]
   }
