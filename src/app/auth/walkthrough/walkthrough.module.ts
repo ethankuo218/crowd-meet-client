@@ -7,9 +7,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { SwiperModule } from 'swiper/angular';
 
-import { ComponentsModule } from '../../components/components.module';
-
 import { WalkthroughPage } from './walkthrough.page';
+import { ShellModule } from 'src/app/shell/shell.module';
 
 const routes: Routes = [
   {
@@ -23,8 +22,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    ShellModule,
     RouterModule.forChild(routes),
-    ComponentsModule,
     SwiperModule
   ],
   declarations: [WalkthroughPage],

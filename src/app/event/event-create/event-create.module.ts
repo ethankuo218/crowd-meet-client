@@ -4,7 +4,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
-import { ComponentsModule } from '../../components/components.module';
 import { EventCreateComponent } from './event-create.component';
 import { ImgUploadService } from 'src/app/core/img-upload.service';
 import { HeaderComponent } from 'src/app/header/header.component';
@@ -25,7 +24,6 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
-    ComponentsModule,
     HeaderComponent
   ],
   declarations: [EventCreateComponent],

@@ -6,11 +6,9 @@ import {
   ViewChild,
   HostBinding,
   NgZone,
-  OnInit,
+  OnInit
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-
-import { Preferences } from '@capacitor/preferences';
 
 import { MenuController, IonicSwiper } from '@ionic/angular';
 
@@ -25,8 +23,8 @@ SwiperCore.use([Pagination, IonicSwiper]);
   styleUrls: [
     './styles/walkthrough.page.scss',
     './styles/walkthrough.shell.scss',
-    './styles/walkthrough.responsive.scss',
-  ],
+    './styles/walkthrough.responsive.scss'
+  ]
 })
 export class WalkthroughPage implements AfterViewInit, OnInit {
   swiperRef: SwiperCore | undefined;
@@ -43,9 +41,7 @@ export class WalkthroughPage implements AfterViewInit, OnInit {
     private ngZone: NgZone
   ) {}
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   // Disable side menu for this page
   ionViewDidEnter(): void {

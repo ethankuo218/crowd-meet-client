@@ -1,13 +1,26 @@
-import { Component, forwardRef, Input, ViewEncapsulation, OnInit } from '@angular/core';
+import {
+  Component,
+  forwardRef,
+  Input,
+  ViewEncapsulation,
+  OnInit
+} from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-rating-input',
   templateUrl: './rating-input.component.html',
   styleUrls: ['./rating-input.component.scss'],
   providers: [
-    { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => RatingInputComponent), multi: true }
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => RatingInputComponent),
+      multi: true
+    }
   ],
+  standalone: true,
+  imports: [IonicModule],
   encapsulation: ViewEncapsulation.None
 })
 export class RatingInputComponent implements ControlValueAccessor, OnInit {

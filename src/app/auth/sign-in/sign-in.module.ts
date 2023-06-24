@@ -10,7 +10,6 @@ import { map } from 'rxjs/operators';
 import { canActivate, AuthPipeGenerator } from '@angular/fire/auth-guard';
 
 import { SignInPage } from './sign-in.page';
-import { ComponentsModule } from '../../components/components.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 // ? Firebase guard to redirect logged in users to profile
@@ -48,8 +47,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     IonicModule,
     FontAwesomeModule,
-    RouterModule.forChild(routes),
-    ComponentsModule
+    RouterModule.forChild(routes)
   ],
   declarations: [SignInPage]
 })

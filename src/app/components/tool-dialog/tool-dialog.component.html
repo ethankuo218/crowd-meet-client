@@ -1,0 +1,44 @@
+<div class="modal-content">
+  <div class="modal-header text-center">
+    <h2 class="dark text-center filter_h2">Filter</h2>
+  </div>
+  <div class="modal-body">
+    <form action="#" method="POST" class="cnt__form">
+      <h3 class="dark">Gender</h3>
+      <div class="row">
+        <p>
+          <input type="radio" id="test11" name="radio-group" checked />
+          <label for="test11"><span>Male</span></label>
+        </p>
+        <p>
+          <input type="radio" id="test22" name="radio-group" />
+          <label for="test22"><span>Female</span></label>
+        </p>
+        <p>
+          <input type="radio" id="test33" name="radio-group" />
+          <label for="test33"><span>Random</span></label>
+        </p>
+      </div>
+      <h3 class="dark mb-0">Age</h3>
+      <mat-slider min="10" max="80" step="1" value="10">
+        <input matSliderThumb>
+      </mat-slider>
+      <h3>Location</h3>
+      <div class="psion__div">
+        <input
+          class="dark location_input"
+          type="text"
+          name="#"
+          placeholder="Jakarta"
+        />
+        <i class="fa-solid fa-location-dot"></i>
+      </div>
+      <div class="row row__btn">
+        <button type="reset" class="primary_2">Reset</button>
+        <button type="submit" class="white" data-bs-dismiss="modal">
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

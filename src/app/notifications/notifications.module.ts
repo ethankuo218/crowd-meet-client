@@ -2,8 +2,6 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { ComponentsModule } from '../components/components.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { NotificationsPage } from './notifications.page';
@@ -16,7 +14,6 @@ import { HeaderComponent } from '../header/header.component';
     IonicModule,
     FontAwesomeModule,
     CommonModule,
-    ComponentsModule,
     RouterModule.forChild([
       {
         path: '',

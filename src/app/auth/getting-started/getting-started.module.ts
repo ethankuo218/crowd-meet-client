@@ -7,16 +7,16 @@ import { IonicModule } from '@ionic/angular';
 
 import { SwiperModule } from 'swiper/angular';
 
-import { ComponentsModule } from '../../components/components.module';
-
 import { GettingStartedPage } from './getting-started.page';
 import { HttpClientService } from '../../core/http-client.service';
+import { ShellModule } from 'src/app/shell/shell.module';
+import { CheckboxWrapperComponent } from 'src/app/components/checkbox-wrapper/checkbox-wrapper.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: GettingStartedPage,
-  },
+    component: GettingStartedPage
+  }
 ];
 
 @NgModule({
@@ -26,10 +26,11 @@ const routes: Routes = [
     ReactiveFormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    ComponentsModule,
     SwiperModule,
+    ShellModule,
+    CheckboxWrapperComponent
   ],
   declarations: [GettingStartedPage],
-  providers: [HttpClientService],
+  providers: [HttpClientService]
 })
 export class GettingStartedPageModule {}

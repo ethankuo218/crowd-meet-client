@@ -1,0 +1,62 @@
+.modal-body {
+  padding: 0;
+}
+
+.modal-footer {
+  border: none;
+  padding: 20px 0 0;
+}
+
+.mdl_div img {
+  width: 80%;
+}
+
+.mdl_div h2 {
+  font-size: 25px;
+  font-weight: 600;
+  margin: 15px 0;
+}
+
+.mdl_div p {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.modal-footer button {
+  width: 100%;
+  border-radius: 27px;
+  padding: 14px 0;
+  font-weight: 700;
+}
+
+.modal-footer button:nth-child(2) {
+  background: #e9f0ff;
+  margin: 10px 0 0;
+}
+
+.modal-body form p span {
+  position: absolute;
+  z-index: 50;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.modal-body .row {
+  flex-wrap: nowrap;
+  gap: 2.33%;
+  /*! margin: 0; */
+}
+
+.modal-body .row p {
+  width: 31.33%;
+  padding: 0;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}

@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
-import { ComponentsModule } from '../components/components.module';
-
 const routes: Routes = [
   {
     path: '',
@@ -42,7 +40,6 @@ const routes: Routes = [
   imports: [
     CommonModule,
     IonicModule,
-    ComponentsModule,
     RouterModule.forChild(routes)
     // ? Correct way to initialize Firebase using the Capacitor Firebase plugin mixed with the Firebase JS SDK (@angular/fire)
   ],

@@ -2,7 +2,7 @@ import {
   Component,
   AfterContentInit,
   ContentChild,
-  HostBinding,
+  HostBinding
 } from '@angular/core';
 
 // Reference to the @ionic/angular Components List:
@@ -13,6 +13,8 @@ import { IonCheckbox } from '@ionic/angular';
   selector: 'app-checkbox-wrapper',
   templateUrl: './checkbox-wrapper.component.html',
   styleUrls: ['./checkbox-wrapper.component.scss'],
+  standalone: true,
+  imports: []
 })
 export class CheckboxWrapperComponent implements AfterContentInit {
   @ContentChild(IonCheckbox) checkbox?: IonCheckbox;

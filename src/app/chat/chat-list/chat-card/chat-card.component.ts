@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { ComponentsModule } from '../../../components/components.module';
 import { Chat } from '../../models/chat.models';
 import { User } from '@angular/fire/auth';
 
@@ -12,13 +11,7 @@ import { User } from '@angular/fire/auth';
   templateUrl: './chat-card.component.html',
   styleUrls: ['./chat-card.component.scss'],
   standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RouterModule,
-    ComponentsModule
-  ]
+  imports: [CommonModule, FormsModule, IonicModule, RouterModule]
 })
 export class ChatCardComponent implements OnInit {
   constructor() {}

@@ -3,7 +3,9 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { EventListData } from 'src/app/core/states/event-list-state/event-list.model';
 import { EventService } from '../../core/event.service';
-import { ListingCardComponent } from './listing-card/listing-card.component';
+import { MatDialog } from '@angular/material/dialog';
+import { AlertDialogComponent } from 'src/app/components/alert-dialog/alert-dialog.component';
+import { ToolDialogComponent } from 'src/app/components/tool-dialog/tool-dialog.component';
 
 @Component({
   selector: 'app-listing',
@@ -18,10 +20,15 @@ export class EventListComponent {
     .getEventList()
     .pipe(map((result) => result?.data));
 
-  constructor(private eventService: EventService) {}
+  constructor(private eventService: EventService, private dialog: MatDialog) {}
+
+  openDialog() {
+    this.dialog.open(ToolDialogComponent, { panelClass: 'custom-container' });
+  }
 
   ionViewWillEnter(): void {
     this.eventService.reloadEventList();
+    this.openDialog();
   }
 
   // NOTE: Ionic only calls ngOnDestroy if the page was popped (ex: when navigating back)

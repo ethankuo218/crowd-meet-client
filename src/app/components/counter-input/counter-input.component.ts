@@ -3,15 +3,16 @@ import {
   forwardRef,
   Input,
   OnChanges,
-  ViewEncapsulation,
+  ViewEncapsulation
 } from '@angular/core';
 import {
   UntypedFormControl,
   ControlValueAccessor,
   NG_VALUE_ACCESSOR,
   NG_VALIDATORS,
-  AbstractControl,
+  AbstractControl
 } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
 
 export function counterRangeValidator(minValue: number, maxValue: number) {
   return (c: AbstractControl) => {
@@ -19,8 +20,8 @@ export function counterRangeValidator(minValue: number, maxValue: number) {
       rangeError: {
         given: c.value,
         min: minValue || 0,
-        max: maxValue || 10,
-      },
+        max: maxValue || 10
+      }
     };
 
     return c.value > +maxValue || c.value < +minValue ? err : null;
@@ -35,15 +36,17 @@ export function counterRangeValidator(minValue: number, maxValue: number) {
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => CounterInputComponent),
-      multi: true,
+      multi: true
     },
     {
       provide: NG_VALIDATORS,
       useExisting: forwardRef(() => CounterInputComponent),
-      multi: true,
-    },
+      multi: true
+    }
   ],
-  encapsulation: ViewEncapsulation.None,
+  standalone: true,
+  imports: [IonicModule],
+  encapsulation: ViewEncapsulation.None
 })
 export class CounterInputComponent implements ControlValueAccessor, OnChanges {
   @Input('counterValue') _counterValue = 0;
