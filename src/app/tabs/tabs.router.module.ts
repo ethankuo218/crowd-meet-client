@@ -89,6 +89,28 @@ const routes: Routes = [
               import('../reviews/reviews.module').then((m) => m.ReviewsModule)
           }
         ]
+      },
+      {
+        path: 'edit-profile',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../edit-profile/edit-profile.module').then(
+                (m) => m.EditProfileModule
+              )
+          }
+        ]
+      },
+      {
+        path: 'profile',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../profile/profile.module').then((m) => m.ProfileModule)
+          }
+        ]
       }
     ]
   }

@@ -1,0 +1,130 @@
+.fix .head_arw {
+  position: fixed;
+  padding: 40px 21px 10px;
+  z-index: 9;
+  background: #fff;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+.head_arw h3 {
+  display: inline-block;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 0 12px;
+  vertical-align: middle;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.create-event-area .head_arw h3 {
+  width: calc(100% - 235px);
+}
+.create-event-area .dot_opt {
+  width: 210px;
+}
+.slider-area {
+  overflow-x: hidden;
+  margin: 40px 0 0 0px;
+}
+
+.slider-area > h3 {
+  padding-left: 15px;
+}
+
+.fnt-same {
+  font-weight: 700;
+  font-size: 17px;
+  margin: 0 0 20px;
+}
+
+.story {
+  margin: 0 0 0 0px;
+}
+
+.slider-area ::ng-deep .swiper-slide .item img {
+  height: 150px;
+  border-radius: 25px;
+  object-fit: cover;
+}
+
+.slider-area ::ng-deep .swiper-slide .item {
+  position: relative;
+}
+
+.slider-area ::ng-deep .swiper-slide .item button {
+  position: absolute;
+  right: 9px;
+  bottom: 8px;
+  color: #fff;
+  font-size: 14px;
+}
+
+.interest_div h3 {
+  position: relative;
+}
+
+.interest_div h3 button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: #9610ff;
+}
+
+.interest_div ul li {
+  display: inline-block;
+}
+
+.interest_div ul li a {
+  padding: 9px 17px 12px;
+  border-radius: 26px;
+  background: #9610ff;
+  margin: 0 7px 10px 0;
+}
+
+.interest_div ul li a span {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 0 2px;
+  vertical-align: middle;
+}
+
+.interest_div ul li a img {
+  width: 18px;
+  vertical-align: middle;
+}
+
+.profile_your {
+  padding: 15px 0 30px;
+}
+
+.profile_your form input,
+.profile_your form textarea {
+  font-size: 15px;
+  border-radius: 12px;
+  border: none;
+  padding: 15px 20px;
+  width: 100%;
+  background: #fafafa;
+  color: #212121;
+  margin: 0 0 30px;
+}
+
+::placeholder {
+  opacity: 1;
+}
+
+.profile_your form [type='submit'] {
+  font-size: 14px;
+  background: #9610ff;
+  padding: 12px 45px;
+  border-radius: 25px;
+  font-weight: 600;
+}
+
+.slider-area
+  ::ng-deep
+  .swiper-wrapper
+  .swiper-slide:first-child.swiper-slide-active {
+  margin-left: 1.5rem;
+}

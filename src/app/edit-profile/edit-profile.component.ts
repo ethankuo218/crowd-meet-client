@@ -1,7 +1,7 @@
 import { ImgUploadService } from 'src/app/core/img-upload.service';
 import { UserStateFacade } from '../core/states/user-state/user.state.facade';
 import { Component, OnInit, HostBinding, OnDestroy } from '@angular/core';
-import { Subscription, of, switchMap, tap } from 'rxjs';
+import { of, switchMap } from 'rxjs';
 
 import { AlertController } from '@ionic/angular';
 
@@ -12,16 +12,16 @@ import { User } from 'src/app/core/states/user-state/user.model';
 import { UserService } from '../core/user.service';
 
 @Component({
-  selector: 'app-user-profile',
-  templateUrl: './user-profile.page.html',
+  selector: 'app-edit-profile',
+  templateUrl: './edit-profile.component.html',
   styleUrls: [
-    './styles/user-profile.page.scss',
-    './styles/user-profile.shell.scss',
-    './styles/user-profile.ios.scss',
-    './styles/user-profile.md.scss',
-  ],
+    './styles/edit-profile.component.scss',
+    './styles/edit-profile.shell.scss',
+    './styles/edit-profile.ios.scss',
+    './styles/edit-profile.md.scss'
+  ]
 })
-export class UserProfilePage implements OnInit {
+export class EditProfileComponent implements OnInit {
   // Gather all component subscription in one place. Can be one Subscription or multiple (chained using the Subscription.add() method)
   profile: User = {
     userId: 0,
@@ -30,7 +30,7 @@ export class UserProfilePage implements OnInit {
     profilePictureUrl: '',
     bio: '',
     interests: [],
-    images: [],
+    images: []
   };
   available_languages: any[] = [];
   translations: any;
@@ -84,7 +84,7 @@ export class UserProfilePage implements OnInit {
         type: 'radio',
         label: item.name,
         value: item.code,
-        checked: item.code === this.translate.currentLang,
+        checked: item.code === this.translate.currentLang
       }));
 
     const alert = await this.alertController.create({
@@ -96,7 +96,7 @@ export class UserProfilePage implements OnInit {
           text: this.translations.CANCEL,
           role: 'cancel',
           cssClass: 'secondary',
-          handler: () => {},
+          handler: () => {}
         },
         {
           text: this.translations.OK,
@@ -104,9 +104,9 @@ export class UserProfilePage implements OnInit {
             if (data) {
               this.translate.use(data);
             }
-          },
-        },
-      ],
+          }
+        }
+      ]
     });
     await alert.present();
   }
