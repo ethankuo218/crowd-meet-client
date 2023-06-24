@@ -20,15 +20,9 @@ export class EventListComponent {
     .getEventList()
     .pipe(map((result) => result?.data));
 
-  constructor(private eventService: EventService, private dialog: MatDialog) {}
-
-  openDialog() {
-    this.dialog.open(ToolDialogComponent, { panelClass: 'custom-container' });
-  }
-
+  constructor(private eventService: EventService) {}
   ionViewWillEnter(): void {
     this.eventService.reloadEventList();
-    this.openDialog();
   }
 
   // NOTE: Ionic only calls ngOnDestroy if the page was popped (ex: when navigating back)

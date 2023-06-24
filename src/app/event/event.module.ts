@@ -9,7 +9,6 @@ import { ListingCardComponent } from './event-list/listing-card/listing-card.com
 import { HeaderComponent } from '../header/header.component';
 import { SwiperModule } from 'swiper/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { MatDialogModule } from '@angular/material/dialog';
 
 const routes: Routes = [
   {
@@ -42,8 +41,7 @@ const routes: Routes = [
     ShellModule,
     ListingCardComponent,
     HeaderComponent,
-    SwiperModule,
-    MatDialogModule
+    SwiperModule
   ]
 })
 export class EventModule {}
