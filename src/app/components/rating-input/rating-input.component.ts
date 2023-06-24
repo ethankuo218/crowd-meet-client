@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   Component,
   forwardRef,
@@ -6,6 +7,7 @@ import {
   OnInit
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
@@ -20,7 +22,7 @@ import { IonicModule } from '@ionic/angular';
     }
   ],
   standalone: true,
-  imports: [IonicModule],
+  imports: [CommonModule, IonicModule, FontAwesomeModule],
   encapsulation: ViewEncapsulation.None
 })
 export class RatingInputComponent implements ControlValueAccessor, OnInit {
