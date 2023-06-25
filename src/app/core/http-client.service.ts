@@ -15,20 +15,34 @@ export class HttpClientService {
   // private urlPrefix: string =
   //   'https://crowd-meet-server-tpqol4vd2a-uc.a.run.app/api/v1/';
 
+  private timeStamp: number = 0;
+  private expiredTime = 50 * 60 * 1000; // millisecond
+
   constructor(private httpClient: HttpClient) {}
 
-  private getIdToken() {
+  private async storeToken(previousToken: string | null): Promise<string> {
+    const token = `Bearer ${(await FirebaseAuthentication.getIdToken()).token}`;
+    console.log('CHECK');
+    if (token !== previousToken) {
+      console.log('STORED');
+      Preferences.set({ key: 'token', value: token });
+      this.timeStamp = Date.now();
+    }
+
+    return token;
+  }
+
+  private getIdToken(): Observable<HttpHeaders> {
     return from(Preferences.get({ key: 'token' })).pipe(
       switchMap(async (result: GetResult): Promise<HttpHeaders> => {
-        const token = result.value
-          ? result.value
-          : `Bearer ${(await FirebaseAuthentication.getIdToken()).token}`;
-
+        const tokenExpired = Date.now() - this.timeStamp >= this.expiredTime;
+        const token =
+          result.value && !tokenExpired
+            ? result.value
+            : await this.storeToken(result.value);
         const headers = new HttpHeaders({
           Authorization: token
         });
-
-        Preferences.set({ key: 'token', value: token });
 
         return headers;
       })
