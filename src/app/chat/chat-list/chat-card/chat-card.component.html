@@ -2,11 +2,20 @@
   <div class="row">
     <div class="wdt__1 d-flex">
       <div class="min_img">
-        <img src="assets/images/min_profile.png" alt="image" />
+        <img
+          [src]="roomPictureUrl ?? 'assets/images/min_profile.png'"
+          alt="image"
+        />
       </div>
       <div class="text_div P-text">
         <h3 class="dark">{{ roomName }}</h3>
-        <p class="dark_d">
+        <p
+          class="dark_d"
+          [class.un_read]="
+            chat.readInfos[user.uid].readTimestamp <
+            chat.latestMessage.timestamp
+          "
+        >
           {{ chat.latestMessage.content ?? '' }}
         </p>
       </div>

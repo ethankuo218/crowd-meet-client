@@ -6,3 +6,8 @@ export interface LoginResponse {
 export interface FileResponse {
   fileName: string;
 }
+
+export interface ProfilePictureResponse {
+  userId: number;
+  profilePicture: string | null;
+}

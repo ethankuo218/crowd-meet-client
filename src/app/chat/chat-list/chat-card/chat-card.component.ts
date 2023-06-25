@@ -1,10 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Chat } from '../../models/chat.models';
 import { User } from '@angular/fire/auth';
+import { ProfilePictureResponse } from 'src/app/core/models/core.model';
 
 @Component({
   selector: 'app-chat-card',
@@ -13,20 +20,27 @@ import { User } from '@angular/fire/auth';
   standalone: true,
   imports: [CommonModule, FormsModule, IonicModule, RouterModule]
 })
-export class ChatCardComponent implements OnInit {
+export class ChatCardComponent implements OnInit, OnChanges {
   constructor() {}
 
   @Input() chat!: Chat;
   @Input() user!: User;
+  @Input() profilePictureUrls: ProfilePictureResponse[] = [];
   roomName!: string;
   displayTimeHtml!: string;
+  roomPictureUrl: string | null = null;
 
   ngOnInit() {
-    console.log(this.chat);
     this.roomName = this.getRoomName();
     this.displayTimeHtml = this.formatTimestamp(
       this.chat.latestMessage.timestamp
     );
+    this.roomPictureUrl = this.getRoomPictureUrl();
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['profilePictureUrls']) {
+      this.roomPictureUrl = this.getRoomPictureUrl();
+    }
   }
 
   private formatTimestamp(timestamp: number): string {
@@ -62,9 +76,27 @@ export class ChatCardComponent implements OnInit {
 
   private getRoomName(): string {
     if (this.chat.type === 'private') {
-      const myIndex = this.chat.members.indexOf(this.user.uid);
-      return this.chat.memberNames![1 - myIndex];
+      const otherMemberId = this.chat.members.find(
+        (memberId) => memberId !== this.user.uid
+      )!;
+      return this.chat.memberInfos[otherMemberId].name;
     }
     return 'not implemented';
+  }
+
+  private getRoomPictureUrl(): string | null {
+    if (this.chat.type === 'private') {
+      const otherMemberFirebaseId = this.chat.members.find(
+        (memberId) => memberId !== this.user.uid
+      )!;
+      const otherMemberServerUid =
+        this.chat.memberInfos[otherMemberFirebaseId].serverUid;
+      const url = this.profilePictureUrls.find(
+        (profilePictureResponse) =>
+          profilePictureResponse.userId === otherMemberServerUid
+      )?.profilePicture;
+      return url ?? null;
+    }
+    return null;
   }
 }

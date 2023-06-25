@@ -45,7 +45,8 @@ export type ReadInfo = { [userId: string]: UserReadInfo };
 
 export interface Chat {
   members: string[];
-  memberNames?: string[];
+  createdAt: number;
+  memberInfos: { [firebaseUid: string]: MemberInfo };
   latestMessage: {
     timestamp: number;
     senderId?: string;
@@ -58,4 +59,9 @@ export interface Chat {
     };
   };
   chatId: string;
+}
+
+export interface MemberInfo {
+  serverUid: number;
+  name: string;
 }
