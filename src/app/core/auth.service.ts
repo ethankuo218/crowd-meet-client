@@ -3,7 +3,7 @@ import {
   Injectable,
   NgZone,
   OnDestroy,
-  PLATFORM_ID,
+  PLATFORM_ID
 } from '@angular/core';
 import { isPlatformBrowser, Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -24,7 +24,7 @@ import {
   signInWithCredential,
   signInWithPopup,
   signInWithRedirect,
-  signOut,
+  signOut
 } from '@angular/fire/auth';
 
 import {
@@ -32,7 +32,7 @@ import {
   FirebaseAuthentication,
   SignInResult,
   SignInWithOAuthOptions,
-  User,
+  User
 } from '@capacitor-firebase/authentication';
 
 import { SignInProvider } from './auth-definitions';
@@ -40,7 +40,7 @@ import { AuthHelper } from './auth.helper';
 import { Preferences } from '@capacitor/preferences';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AuthService implements OnDestroy {
   currentUser: User | null = null;
@@ -150,7 +150,7 @@ export class AuthService implements OnDestroy {
 
               if (error && (error.code || error.message)) {
                 errorResult = {
-                  error: error.code ? error.code : error.message,
+                  error: error.code ? error.code : error.message
                 };
               }
 
@@ -195,7 +195,7 @@ export class AuthService implements OnDestroy {
     this.loadingController
       .create({
         message: message,
-        duration: 4000,
+        duration: 4000
       })
       .then((loader) => {
         this.authLoader = loader;
@@ -248,14 +248,11 @@ export class AuthService implements OnDestroy {
     let authResult: SignInResult | null = null;
 
     if (this.platform.is('capacitor')) {
-      console.log('Enter native');
       authResult = await this.nativeAuth(provider, authOptions);
     } else {
-      console.log('Enter web');
       authResult = await this.webAuth(provider, authOptions);
     }
 
-    console.log('Get auth');
     this.dismissLoading();
 
     if (authResult !== null) {
@@ -356,8 +353,6 @@ export class AuthService implements OnDestroy {
         break;
     }
 
-    console.log('AuthResult: ', nativeAuthResult);
-
     // ? Once we have the user authenticated on the native layer, authenticate it in the web layer
     if (
       nativeAuthResult !== null &&
@@ -372,7 +367,7 @@ export class AuthService implements OnDestroy {
           const provider = new OAuthProvider(SignInProvider.apple);
           nativeCredential = provider.credential({
             idToken: nativeAuthResult.credential.idToken,
-            rawNonce: nativeAuthResult.credential.nonce,
+            rawNonce: nativeAuthResult.credential.nonce
           });
           break;
         case SignInProvider.facebook:
@@ -406,7 +401,7 @@ export class AuthService implements OnDestroy {
   public async signInWithFacebook(): Promise<SignInResult> {
     const provider = new FacebookAuthProvider();
     const authOptions: SignInWithOAuthOptions = {
-      scopes: ['email', 'public_profile'],
+      scopes: ['email', 'public_profile']
     };
 
     // ? When we use the redirect authentication flow, the code below the socialSignIn() invocation does not get executed as we leave the current page
@@ -416,7 +411,7 @@ export class AuthService implements OnDestroy {
   public async signInWithGoogle(): Promise<SignInResult> {
     const provider = new GoogleAuthProvider();
     const authOptions: SignInWithOAuthOptions = {
-      scopes: ['email', 'profile'],
+      scopes: ['email', 'profile']
     };
 
     // ? When we use the redirect authentication flow, the code below the socialSignIn() invocation does not get executed as we leave the current page
@@ -426,7 +421,7 @@ export class AuthService implements OnDestroy {
   public async signInWithApple(): Promise<SignInResult> {
     const provider = new OAuthProvider('apple.com');
     const authOptions: SignInWithOAuthOptions = {
-      scopes: ['email', 'name'],
+      scopes: ['email', 'name']
     };
 
     // ? When we use the redirect authentication flow, the code below the socialSignIn() invocation does not get executed as we leave the current page

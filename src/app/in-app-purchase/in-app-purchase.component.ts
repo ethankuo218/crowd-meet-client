@@ -5,14 +5,12 @@ declare let window: any;
 @Component({
   selector: 'app-in-app-purchase',
   templateUrl: './in-app-purchase.component.html',
-  styleUrls: ['./in-app-purchase.component.scss'],
+  styleUrls: ['./in-app-purchase.component.scss']
 })
 export class InAppPurchaseComponent implements OnInit {
-
   offering: any | undefined;
 
-  constructor(private purchases: Purchases) {
-  }
+  constructor(private purchases: Purchases) {}
 
   ngOnInit() {
     this.purchases.getOfferings().then((offerings) => {
@@ -21,14 +19,11 @@ export class InAppPurchaseComponent implements OnInit {
         offerings.current.availablePackages.length !== 0
       ) {
         this.offering = offerings.current.availablePackages[0];
-        console.log(offerings);
       }
     });
   }
 
   purchase() {
-    this.purchases.purchasePackage(this.offering).then(() => {
-      console.log('[SUCCESS]');
-    });
+    this.purchases.purchasePackage(this.offering).then(() => {});
   }
 }

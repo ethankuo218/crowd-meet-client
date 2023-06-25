@@ -28,7 +28,6 @@ export class ImgUploadService {
       const base64Data = await this.readAsBase64(image);
       const fileName = new Date().getTime() + '.jpeg';
 
-      console.log('SelectFile: ', `${IMAGE_DIR}/${fileName}`);
       await Filesystem.writeFile({
         directory: Directory.Data,
         path: `${IMAGE_DIR}/${fileName}`,
@@ -45,7 +44,6 @@ export class ImgUploadService {
 
     while (this.uploadedImageName.length !== 0) {
       const fileName = this.uploadedImageName.shift();
-      console.log('ReadFile: ', `${IMAGE_DIR}/${fileName}`);
       const filePath = `${IMAGE_DIR}/${fileName}`;
       const readFile = await Filesystem.readFile({
         directory: Directory.Data,

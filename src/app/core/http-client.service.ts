@@ -22,9 +22,7 @@ export class HttpClientService {
 
   private async storeToken(previousToken: string | null): Promise<string> {
     const token = `Bearer ${(await FirebaseAuthentication.getIdToken()).token}`;
-    console.log('CHECK');
     if (token !== previousToken) {
-      console.log('STORED');
       Preferences.set({ key: 'token', value: token });
       this.timeStamp = Date.now();
     }
