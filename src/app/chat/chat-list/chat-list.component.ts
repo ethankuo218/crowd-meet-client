@@ -1,3 +1,4 @@
+import { ChatImageService } from './../chat-image.service';
 import { EventService } from './../../core/event.service';
 import { UserService } from 'src/app/core/user.service';
 import { Component, OnInit } from '@angular/core';
@@ -27,7 +28,8 @@ export class ChatListComponent implements OnInit {
     private readonly firestore: Firestore,
     private readonly auth: Auth,
     private readonly userService: UserService,
-    private readonly eventService: EventService
+    private readonly eventService: EventService,
+    private readonly chatImageService: ChatImageService
   ) {}
 
   chats$!: Observable<Chat[]>;
@@ -62,31 +64,10 @@ export class ChatListComponent implements OnInit {
   }
 
   private async getMembersProfilePictureUrl(chat$: Observable<Chat[]>) {
-    const chats = await firstValueFrom(chat$);
-    const userIds = new Set<number>();
-    for (const chat of chats) {
-      const otherMemberFirebaseUids = chat.members.filter(
-        (firebaseUid) => firebaseUid !== this.user!.uid
-      );
-      for (const otherMemberFirebaseUid of otherMemberFirebaseUids) {
-        userIds.add(chat.memberInfos[otherMemberFirebaseUid].serverUid);
-      }
-    }
-    if (!userIds.size) return [];
-    return this.userService.getProfilePictureUrls(Array.from(userIds));
+    return await this.chatImageService.getMemberPictures(chat$, this.user!.uid);
   }
 
   private async getEventImages(chat$: Observable<Chat[]>) {
-    const chats = await firstValueFrom(chat$);
-    const eventIds = new Set<number>();
-    for (const chat of chats) {
-      if (chat.eventInfo?.eventId) {
-        eventIds.add(chat.eventInfo?.eventId);
-      }
-    }
-    if (!eventIds.size) return [];
-    return firstValueFrom(
-      this.eventService.getEventImages(Array.from(eventIds))
-    );
+    return await this.chatImageService.getEventImages(chat$);
   }
 }
