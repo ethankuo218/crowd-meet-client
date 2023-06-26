@@ -25,7 +25,7 @@ export class AppComponent {
 
   async initializeApp() {
     try {
-      await this.userService.login().pipe(take(1)).subscribe();
+      this.userService.login();
       await SplashScreen.hide();
     } catch (err) {
       console.log('This is normal in a browser', err);

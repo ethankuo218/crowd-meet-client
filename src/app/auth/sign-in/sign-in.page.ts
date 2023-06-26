@@ -121,25 +121,9 @@ export class SignInPage implements OnInit {
     }
   }
 
-  // ? Once the auth provider finished the authentication flow, and the auth redirect completes, hide the loader and redirect the user to the home page
   private redirectLoggedUserToHomePage(): void {
     this.ngZone.run(() => {
-      // Get previous URL from our custom History Helper
-      // If there's no previous page, then redirect to profile
-      // const previousUrl = this.historyHelper.previousUrl || 'app';
       const previousUrl = 'app';
-      this.userService.login().subscribe({
-        next: (result) => {
-          if (result.isNewUser) {
-            this.router.navigate(['walkthrough'], { replaceUrl: true });
-          } else {
-            this.router.navigate(['app'], { replaceUrl: true });
-          }
-        }
-      });
-
-      // No need to store in the navigation history the sign-in page with redirect params (it's just a a mandatory mid-step)
-      // Navigate to profile and replace current url with profile
     });
   }
 
