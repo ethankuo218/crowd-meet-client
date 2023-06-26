@@ -1,6 +1,6 @@
 import { ReferenceStateFacade } from './states/reference-state/reference.state.facade';
 import { UserStateFacade } from './states/user-state/user.state.facade';
-import { Observable, firstValueFrom, forkJoin, map, take, tap } from 'rxjs';
+import { Observable, firstValueFrom, forkJoin, map, tap } from 'rxjs';
 import { HttpClientService } from './http-client.service';
 import { Injectable } from '@angular/core';
 import {
@@ -80,10 +80,8 @@ export class UserService {
   getProfilePictureUrls(ids: number[]) {
     // the api is like this /api/v1/user/profile-picture?userIds=1&userIds=2
     const params = ids.map((id) => `userIds=${id}`).join('&');
-    return firstValueFrom(
-      this.httpClientService.get<ProfilePictureResponse>(
-        `user/profile-picture?${params}`
-      )
-    );
+    return this.httpClientService
+      .get<ProfilePictureResponse>(`user/profile-picture?${params}`)
+      .pipe(map((resp) => resp.images));
   }
 }

@@ -11,10 +11,7 @@ import {
 } from '@angular/fire/firestore';
 import { Observable, firstValueFrom, take } from 'rxjs';
 import { Chat } from '../models/chat.models';
-import {
-  EventImageResponse,
-  ProfilePictureResponse
-} from 'src/app/core/models/core.model';
+import { EventImageResponse } from 'src/app/core/models/core.model';
 
 @Component({
   selector: 'app-chat-list',
@@ -30,7 +27,6 @@ export class ChatListComponent implements OnInit {
 
   chats$!: Observable<Chat[]>;
   user: User | null = null;
-  memberPictureUrls: ProfilePictureResponse | null = null;
   eventImages: EventImageResponse[] = [];
 
   async ngOnInit() {
@@ -39,9 +35,7 @@ export class ChatListComponent implements OnInit {
       throw new Error('User is not logged in');
     }
     this.chats$ = this.getUserChats(this.user.uid);
-    this.memberPictureUrls = await this.getMembersProfilePictureUrl(
-      this.chats$
-    );
+    this.chatService.getMemberPictures(this.chats$, this.user!.uid).subscribe();
     this.eventImages = await this.getEventImages(this.chats$);
   }
 
@@ -59,11 +53,11 @@ export class ChatListComponent implements OnInit {
     return collectionData(chatsQuery) as Observable<Chat[]>;
   }
 
-  private async getMembersProfilePictureUrl(chat$: Observable<Chat[]>) {
-    return await this.chatService.getMemberPictures(chat$, this.user!.uid);
-  }
-
   private async getEventImages(chat$: Observable<Chat[]>) {
     return await this.chatService.getEventImages(chat$);
+  }
+
+  get memberPictureUrls() {
+    return this.chatService.memberPictures;
   }
 }

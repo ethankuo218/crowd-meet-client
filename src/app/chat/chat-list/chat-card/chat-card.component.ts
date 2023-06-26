@@ -11,10 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Chat } from '../../models/chat.models';
 import { User } from '@angular/fire/auth';
-import {
-  EventImageResponse,
-  ProfilePictureResponse
-} from 'src/app/core/models/core.model';
+import { EventImageResponse } from 'src/app/core/models/core.model';
 import { ChatService } from '../../chat.service';
 
 @Component({
@@ -32,7 +29,12 @@ export class ChatCardComponent implements OnInit, OnChanges {
 
   @Input() chat!: Chat;
   @Input() user!: User;
-  @Input() memberPictureUrls: ProfilePictureResponse | null = null;
+  @Input() memberPictureUrls: {
+    [firebaseUid: string]: {
+      userId: number;
+      profilePicture: string | null;
+    };
+  } = {};
   @Input() eventImages: EventImageResponse[] = [];
   roomName!: string;
   displayTimeHtml!: string;
@@ -105,8 +107,7 @@ export class ChatCardComponent implements OnInit, OnChanges {
       (memberId) => memberId !== this.user.uid
     )!;
 
-    const url =
-      this.memberPictureUrls?.images[otherMemberFirebaseId].profilePicture;
+    const url = this.memberPictureUrls?.[otherMemberFirebaseId]?.profilePicture;
     return url ?? null;
   }
 

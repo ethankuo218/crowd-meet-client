@@ -23,7 +23,10 @@
               <div class="opt-chat">
                 <div class="min_img">
                   <img
-                    [src]="memberPictureUrls?.[message.senderId]?.profilePicture ?? 'assets/images/min_profile.png'"
+                    [src]="
+                      memberPictureUrls[message.senderId].profilePicture ??
+                      'assets/images/min_profile.png'
+                    "
                     alt="image"
                     referrerpolicy="no-referrer"
                   />
