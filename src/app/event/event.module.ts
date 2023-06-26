@@ -9,6 +9,7 @@ import { ListingCardComponent } from './event-list/listing-card/listing-card.com
 import { HeaderComponent } from '../header/header.component';
 import { SwiperModule } from 'swiper/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { EventService } from '../core/event.service';
 
 const routes: Routes = [
   {
@@ -42,6 +43,7 @@ const routes: Routes = [
     ListingCardComponent,
     HeaderComponent,
     SwiperModule
-  ]
+  ],
+  providers: [EventService]
 })
 export class EventModule {}

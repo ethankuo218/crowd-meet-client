@@ -1,3 +1,4 @@
+import { ChatImageService } from './chat-image.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
@@ -6,6 +7,7 @@ import { ChatRoomComponent } from './chat-room/chat-room.component';
 import { ChatListComponent } from './chat-list/chat-list.component';
 import { HeaderComponent } from '../header/header.component';
 import { ChatCardComponent } from './chat-list/chat-card/chat-card.component';
+import { EventService } from '../core/event.service';
 
 const routes: Routes = [
   {
@@ -36,6 +38,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     HeaderComponent,
     ChatCardComponent
-  ]
+  ],
+  providers: [EventService, ChatImageService]
 })
 export class ChatModule {}

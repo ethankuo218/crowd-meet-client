@@ -6,11 +6,10 @@ import { FormsModule } from '@angular/forms';
 import { TabsPageRoutingModule } from './tabs.router.module';
 
 import { TabsPage } from './tabs.page';
-import { EventService } from '../core/event.service';
 
 @NgModule({
   imports: [IonicModule, CommonModule, FormsModule, TabsPageRoutingModule],
   declarations: [TabsPage],
-  providers: [EventService]
+  providers: []
 })
 export class TabsPageModule {}

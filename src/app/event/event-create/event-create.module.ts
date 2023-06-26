@@ -8,6 +8,7 @@ import { EventCreateComponent } from './event-create.component';
 import { ImgUploadService } from 'src/app/core/img-upload.service';
 import { HeaderComponent } from 'src/app/header/header.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { EventService } from 'src/app/core/event.service';
 
 const routes: Routes = [
   {
@@ -27,6 +28,6 @@ const routes: Routes = [
     HeaderComponent
   ],
   declarations: [EventCreateComponent],
-  providers: [ImgUploadService]
+  providers: [ImgUploadService, EventService]
 })
 export class EventCreateModule {}
