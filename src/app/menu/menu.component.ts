@@ -19,20 +19,16 @@ export class MenuComponent implements OnInit {
   ngOnInit() {}
 
   selectPhoto() {
-    this.imgUploadService.selectImage().then(() => {
-      this.uploadImg();
+    this.imgUploadService.selectImage().then(async () => {
+      const formData = new FormData();
+      const files = await this.imgUploadService.getUploadedImg();
+
+      if (files.length > 0) {
+        formData.append('file', files[0]);
+        await this.userService.updateUserProfilePicture(formData);
+      } else {
+        console.error('No image found, please try again!');
+      }
     });
-  }
-
-  private async uploadImg() {
-    const formData = new FormData();
-    const files = await this.imgUploadService.getUploadedImg();
-
-    if (files.length > 0) {
-      formData.append('file', files[0]);
-      await this.userService.updateUserProfilePicture(formData);
-    } else {
-      console.error('No image found, please try again!');
-    }
   }
 }
