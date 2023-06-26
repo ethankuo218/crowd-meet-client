@@ -1,4 +1,4 @@
-import { ChatImageService } from './../chat-image.service';
+import { ChatService } from '../chat.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Auth, User, user } from '@angular/fire/auth';
 import {
@@ -27,7 +27,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
     private readonly firestore: Firestore,
     private readonly route: ActivatedRoute,
     private readonly auth: Auth,
-    private readonly chatImageService: ChatImageService
+    private readonly chatService: ChatService
   ) {}
 
   readonly chatId: string = this.route.snapshot.paramMap.get('id')!;
@@ -109,5 +109,13 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
 
     // Update the chat's readInfos with the new readTimestamp and unreadCount
     await updateDoc(this.chatDoc, { readInfos: this.readInfos });
+  }
+
+  get memberInfos() {
+    return this.chatService.memberInfos;
+  }
+
+  get memberPictureUrls() {
+    return this.chatService.memberPictures;
   }
 }

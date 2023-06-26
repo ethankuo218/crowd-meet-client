@@ -1,6 +1,4 @@
-import { ChatImageService } from './../chat-image.service';
-import { EventService } from './../../core/event.service';
-import { UserService } from 'src/app/core/user.service';
+import { ChatService } from '../chat.service';
 import { Component, OnInit } from '@angular/core';
 import { Auth, User, user } from '@angular/fire/auth';
 import {
@@ -27,15 +25,13 @@ export class ChatListComponent implements OnInit {
   constructor(
     private readonly firestore: Firestore,
     private readonly auth: Auth,
-    private readonly userService: UserService,
-    private readonly eventService: EventService,
-    private readonly chatImageService: ChatImageService
+    private readonly chatService: ChatService
   ) {}
 
   chats$!: Observable<Chat[]>;
   user: User | null = null;
-  memberPictureUrls: ProfilePictureResponse | null = null; // TODO: use a service and cache this
-  eventImages: EventImageResponse[] = []; // TODO: use a service and cache this
+  memberPictureUrls: ProfilePictureResponse | null = null;
+  eventImages: EventImageResponse[] = [];
 
   async ngOnInit() {
     this.user = await this.getUser();
@@ -64,10 +60,10 @@ export class ChatListComponent implements OnInit {
   }
 
   private async getMembersProfilePictureUrl(chat$: Observable<Chat[]>) {
-    return await this.chatImageService.getMemberPictures(chat$, this.user!.uid);
+    return await this.chatService.getMemberPictures(chat$, this.user!.uid);
   }
 
   private async getEventImages(chat$: Observable<Chat[]>) {
-    return await this.chatImageService.getEventImages(chat$);
+    return await this.chatService.getEventImages(chat$);
   }
 }

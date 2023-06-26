@@ -21,7 +21,17 @@
             </ng-container>
             <ng-container *ngIf="message.senderId !== user.uid">
               <div class="opt-chat">
+                <div class="min_img">
+                  <img
+                    [src]="memberPictureUrls?.[message.senderId]?.profilePicture ?? 'assets/images/min_profile.png'"
+                    alt="image"
+                    referrerpolicy="no-referrer"
+                  />
+                </div>
                 <div class="chat_content chat_content2">
+                  <p style="font-weight: lighter">
+                    {{ memberInfos[message.senderId].name }}
+                  </p>
                   <p class="dark">{{ message.content }}</p>
                   <small class="dark">{{
                     message.timestamp | date : 'hh:mm'

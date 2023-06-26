@@ -6,7 +6,7 @@ import {
   SimpleChanges
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Chat } from '../../models/chat.models';
@@ -15,6 +15,7 @@ import {
   EventImageResponse,
   ProfilePictureResponse
 } from 'src/app/core/models/core.model';
+import { ChatService } from '../../chat.service';
 
 @Component({
   selector: 'app-chat-card',
@@ -24,7 +25,10 @@ import {
   imports: [CommonModule, FormsModule, IonicModule, RouterModule]
 })
 export class ChatCardComponent implements OnInit, OnChanges {
-  constructor() {}
+  constructor(
+    private readonly router: Router,
+    private readonly chatService: ChatService
+  ) {}
 
   @Input() chat!: Chat;
   @Input() user!: User;
@@ -48,6 +52,11 @@ export class ChatCardComponent implements OnInit, OnChanges {
     if (changes['eventImages'] && this.chat.type === 'event') {
       this.roomPictureUrl = this.getRoomPictureFromEvent();
     }
+  }
+
+  navigateToChat() {
+    this.chatService.memberInfos = this.chat.memberInfos;
+    this.router.navigate(['/app/chat', this.chat.chatId]);
   }
 
   private formatTimestamp(timestamp: number): string {

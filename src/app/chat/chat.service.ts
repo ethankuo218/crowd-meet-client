@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
-import { Observable, firstValueFrom } from 'rxjs';
+import { Observable, filter, firstValueFrom } from 'rxjs';
 import { EventService } from '../core/event.service';
 import {
   ProfilePictureResponse,
   EventImageResponse
 } from '../core/models/core.model';
 import { UserService } from '../core/user.service';
-import { Chat } from './models/chat.models';
+import { Chat, MemberInfo } from './models/chat.models';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ChatImageService {
+export class ChatService {
   private memberPictureUrls: ProfilePictureResponse | null = null;
   private eventImages: EventImageResponse[] = [];
+  private _memberInfos: { [firebaseUid: string]: MemberInfo } = {};
 
   constructor(
     private readonly userService: UserService,
@@ -21,22 +22,21 @@ export class ChatImageService {
   ) {}
 
   async getMemberPictures(chat$: Observable<Chat[]>, userId: string) {
-    if (!this.memberPictureUrls) {
-      const chats = await firstValueFrom(chat$);
-      const userIds = new Set<number>();
-      for (const chat of chats) {
-        const otherMemberFirebaseUids = chat.members.filter(
-          (firebaseUid) => firebaseUid !== userId
-        );
-        for (const otherMemberFirebaseUid of otherMemberFirebaseUids) {
-          userIds.add(chat.memberInfos[otherMemberFirebaseUid].serverUid);
-        }
+    if (this.memberPictureUrls) return this.memberPictureUrls;
+    const chats = await firstValueFrom(chat$);
+    const serverUids = new Set<number>();
+    for (const chat of chats) {
+      const otherMemberFirebaseUids = chat.members.filter(
+        (firebaseUid) => firebaseUid !== userId
+      );
+      for (const otherMemberFirebaseUid of otherMemberFirebaseUids) {
+        serverUids.add(chat.memberInfos[otherMemberFirebaseUid].serverUid);
       }
-      if (userIds.size) {
-        this.memberPictureUrls = await this.userService.getProfilePictureUrls(
-          Array.from(userIds)
-        );
-      }
+    }
+    if (serverUids.size) {
+      this.memberPictureUrls = await this.userService.getProfilePictureUrls(
+        Array.from(serverUids)
+      );
     }
 
     return this.memberPictureUrls;
@@ -59,5 +59,17 @@ export class ChatImageService {
     }
 
     return this.eventImages;
+  }
+
+  set memberInfos(info: { [firebaseUid: string]: MemberInfo }) {
+    this._memberInfos = { ...this._memberInfos, ...info };
+  }
+
+  get memberInfos() {
+    return this._memberInfos;
+  }
+
+  get memberPictures() {
+    return this.memberPictureUrls?.images;
   }
 }

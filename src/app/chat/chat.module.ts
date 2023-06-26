@@ -1,4 +1,4 @@
-import { ChatImageService } from './chat-image.service';
+import { ChatService } from './chat.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
@@ -39,6 +39,6 @@ const routes: Routes = [
     HeaderComponent,
     ChatCardComponent
   ],
-  providers: [EventService, ChatImageService]
+  providers: [EventService, ChatService]
 })
 export class ChatModule {}
