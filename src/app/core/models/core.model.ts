@@ -8,8 +8,12 @@ export interface FileResponse {
 }
 
 export interface ProfilePictureResponse {
-  userId: number;
-  profilePicture: string | null;
+  images: {
+    [firebaseUid: string]: {
+      userId: number;
+      profilePicture: string | null;
+    };
+  };
 }
 
 export interface EventImageResponse {

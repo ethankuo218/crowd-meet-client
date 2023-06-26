@@ -34,7 +34,7 @@ export class ChatListComponent implements OnInit {
 
   chats$!: Observable<Chat[]>;
   user: User | null = null;
-  memberPictureUrls: ProfilePictureResponse[] = []; // TODO: use a service and cache this
+  memberPictureUrls: ProfilePictureResponse | null = null; // TODO: use a service and cache this
   eventImages: EventImageResponse[] = []; // TODO: use a service and cache this
 
   async ngOnInit() {

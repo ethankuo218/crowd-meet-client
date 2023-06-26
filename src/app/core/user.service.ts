@@ -64,7 +64,7 @@ export class UserService {
     // the api is like this /api/v1/user/profile-picture?userIds=1&userIds=2
     const params = ids.map((id) => `userIds=${id}`).join('&');
     return firstValueFrom(
-      this.httpClientService.get<ProfilePictureResponse[]>(
+      this.httpClientService.get<ProfilePictureResponse>(
         `user/profile-picture?${params}`
       )
     );

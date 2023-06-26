@@ -1,3 +1,4 @@
+import { ChatImageService } from './../chat-image.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Auth, User, user } from '@angular/fire/auth';
 import {
@@ -25,7 +26,8 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   constructor(
     private readonly firestore: Firestore,
     private readonly route: ActivatedRoute,
-    private readonly auth: Auth
+    private readonly auth: Auth,
+    private readonly chatImageService: ChatImageService
   ) {}
 
   readonly chatId: string = this.route.snapshot.paramMap.get('id')!;

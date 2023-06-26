@@ -28,7 +28,7 @@ export class ChatCardComponent implements OnInit, OnChanges {
 
   @Input() chat!: Chat;
   @Input() user!: User;
-  @Input() memberPictureUrls: ProfilePictureResponse[] = [];
+  @Input() memberPictureUrls: ProfilePictureResponse | null = null;
   @Input() eventImages: EventImageResponse[] = [];
   roomName!: string;
   displayTimeHtml!: string;
@@ -95,12 +95,9 @@ export class ChatCardComponent implements OnInit, OnChanges {
     const otherMemberFirebaseId = this.chat.members.find(
       (memberId) => memberId !== this.user.uid
     )!;
-    const otherMemberServerUid =
-      this.chat.memberInfos[otherMemberFirebaseId].serverUid;
-    const url = this.memberPictureUrls.find(
-      (profilePictureResponse) =>
-        profilePictureResponse.userId === otherMemberServerUid
-    )?.profilePicture;
+
+    const url =
+      this.memberPictureUrls?.images[otherMemberFirebaseId].profilePicture;
     return url ?? null;
   }
 

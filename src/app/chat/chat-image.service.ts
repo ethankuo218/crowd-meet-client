@@ -12,7 +12,7 @@ import { Chat } from './models/chat.models';
   providedIn: 'root'
 })
 export class ChatImageService {
-  private memberPictureUrls: ProfilePictureResponse[] = [];
+  private memberPictureUrls: ProfilePictureResponse | null = null;
   private eventImages: EventImageResponse[] = [];
 
   constructor(
@@ -21,7 +21,7 @@ export class ChatImageService {
   ) {}
 
   async getMemberPictures(chat$: Observable<Chat[]>, userId: string) {
-    if (this.memberPictureUrls.length === 0) {
+    if (!this.memberPictureUrls) {
       const chats = await firstValueFrom(chat$);
       const userIds = new Set<number>();
       for (const chat of chats) {
