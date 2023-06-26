@@ -10,6 +10,7 @@ import {
 } from './models/core.model';
 import { User } from './states/user-state/user.model';
 import { Reference } from './states/reference-state/reference.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -18,24 +19,40 @@ export class UserService {
   constructor(
     private httpClientService: HttpClientService,
     private userStateFacade: UserStateFacade,
-    private referenceStateFacade: ReferenceStateFacade
+    private referenceStateFacade: ReferenceStateFacade,
+    private router: Router
   ) {}
 
-  login(): Observable<LoginResponse> {
-    return forkJoin([
+  login(): void {
+    forkJoin([
       this.httpClientService.post<LoginResponse>('user', {}),
       this.httpClientService.get<Reference>('Reference')
-    ]).pipe(
-      map(([loginResult, referenceResult]): LoginResponse => {
-        this.userStateFacade.storeUser({ userId: loginResult.userId });
-        this.referenceStateFacade.storeReference(referenceResult);
-        return loginResult;
-      })
-    );
+    ]).subscribe(([loginResult, referenceResult]) => {
+      this.referenceStateFacade.storeReference(referenceResult);
+      this.getUserById(loginResult.userId).subscribe({
+        next: (result) => {
+          this.userStateFacade.storeUser(result);
+        }
+      });
+
+      if (loginResult.isNewUser) {
+        this.router.navigate(['walkthrough'], { replaceUrl: true });
+      } else {
+        this.router.navigate(['app'], { replaceUrl: true });
+      }
+    });
   }
 
   getUserById(id: number): Observable<User> {
     return this.httpClientService.get<User>(`user/${id}`);
+  }
+
+  async getCurrentUserProfile(): Promise<User> {
+    const userId = (await firstValueFrom(this.userStateFacade.getUser()))
+      .userId;
+    const userInfo = await firstValueFrom(this.getUserById(userId));
+
+    return userInfo;
   }
 
   updateUser(body: any): Observable<User> {

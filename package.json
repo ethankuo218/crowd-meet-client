@@ -78,13 +78,13 @@
     "@ionic/angular-toolkit": "^9.0.0",
     "@ionic/cli": "^7.1.1",
     "@ionic/pwa-elements": "^3.1.1",
+    "@types/angular-material": "^1.1.73",
     "@types/google-libphonenumber": "^7.4.23",
     "@types/jasmine": "~4.3.0",
     "@types/node": "^12.11.1",
     "@types/swiper": "^6.0.0",
     "@typescript-eslint/eslint-plugin": "5.3.0",
     "@typescript-eslint/parser": "5.3.0",
-    "@types/angular-material": "^1.1.73",
     "eslint": "^7.26.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsdoc": "30.7.6",
@@ -99,7 +99,8 @@
     "karma-jasmine-html-reporter": "~2.0.0",
     "prettier": "2.8.8",
     "ts-node": "^8.3.0",
-    "typescript": "~5.0.2"
+    "typescript": "~5.0.2",
+    "@ngrx/store-devtools": "^16.0.1"
   },
   "description": "An Ionic project"
 }

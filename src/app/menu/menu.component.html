@@ -3,12 +3,14 @@
   <main class="prof profile-menu-area main-area">
     <div class="container">
       <div class="upload_profile text-center">
-        <div class="inr_upload">
-          <img src="assets/images/profile1.jpg" alt="image" />
-          <button><fa-icon class="white" icon="pen"></fa-icon></button>
-        </div>
-        <h3 class="dark">Andrew Ainsley</h3>
-        <a class="dark">+1 111 467 378 399</a>
+        <ng-container *ngIf="user$ | async as user">
+          <div class="inr_upload">
+            <img [src]="user.profilePictureUrl" alt="image" />
+            <button (click)="selectPhoto()"><fa-icon class="white" icon="pen"></fa-icon></button>
+          </div>
+          <h3 class="dark">{{user.name}}</h3>
+          <a class="dark">{{user.email}}</a>
+        </ng-container>
         <hr />
       </div>
       <div class="menu_content">
