@@ -11,7 +11,10 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Chat } from '../../models/chat.models';
 import { User } from '@angular/fire/auth';
-import { ProfilePictureResponse } from 'src/app/core/models/core.model';
+import {
+  EventImageResponse,
+  ProfilePictureResponse
+} from 'src/app/core/models/core.model';
 
 @Component({
   selector: 'app-chat-card',
@@ -25,7 +28,8 @@ export class ChatCardComponent implements OnInit, OnChanges {
 
   @Input() chat!: Chat;
   @Input() user!: User;
-  @Input() profilePictureUrls: ProfilePictureResponse[] = [];
+  @Input() memberPictureUrls: ProfilePictureResponse[] = [];
+  @Input() eventImages: EventImageResponse[] = [];
   roomName!: string;
   displayTimeHtml!: string;
   roomPictureUrl: string | null = null;
@@ -35,11 +39,14 @@ export class ChatCardComponent implements OnInit, OnChanges {
     this.displayTimeHtml = this.formatTimestamp(
       this.chat.latestMessage.timestamp
     );
-    this.roomPictureUrl = this.getRoomPictureUrl();
+    // this.roomPictureUrl = this.getRoomPictureUrl();
   }
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['profilePictureUrls']) {
-      this.roomPictureUrl = this.getRoomPictureUrl();
+    if (changes['memberPictureUrls'] && this.chat.type === 'private') {
+      this.roomPictureUrl = this.getRoomPictureFromMember();
+    }
+    if (changes['eventImages'] && this.chat.type === 'event') {
+      this.roomPictureUrl = this.getRoomPictureFromEvent();
     }
   }
 
@@ -81,22 +88,26 @@ export class ChatCardComponent implements OnInit, OnChanges {
       )!;
       return this.chat.memberInfos[otherMemberId].name;
     }
-    return 'not implemented';
+    return this.chat.eventInfo!.eventTitle;
   }
 
-  private getRoomPictureUrl(): string | null {
-    if (this.chat.type === 'private') {
-      const otherMemberFirebaseId = this.chat.members.find(
-        (memberId) => memberId !== this.user.uid
-      )!;
-      const otherMemberServerUid =
-        this.chat.memberInfos[otherMemberFirebaseId].serverUid;
-      const url = this.profilePictureUrls.find(
-        (profilePictureResponse) =>
-          profilePictureResponse.userId === otherMemberServerUid
-      )?.profilePicture;
-      return url ?? null;
-    }
-    return null;
+  private getRoomPictureFromMember(): string | null {
+    const otherMemberFirebaseId = this.chat.members.find(
+      (memberId) => memberId !== this.user.uid
+    )!;
+    const otherMemberServerUid =
+      this.chat.memberInfos[otherMemberFirebaseId].serverUid;
+    const url = this.memberPictureUrls.find(
+      (profilePictureResponse) =>
+        profilePictureResponse.userId === otherMemberServerUid
+    )?.profilePicture;
+    return url ?? null;
+  }
+
+  private getRoomPictureFromEvent(): string | null {
+    const eventImage = this.eventImages.find(
+      (eventImage) => eventImage.eventId === this.chat.eventInfo?.eventId
+    );
+    return eventImage?.imageUrl ?? null;
   }
 }

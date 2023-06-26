@@ -11,3 +11,8 @@ export interface ProfilePictureResponse {
   userId: number;
   profilePicture: string | null;
 }
+
+export interface EventImageResponse {
+  eventId: number;
+  imageUrl: string;
+}

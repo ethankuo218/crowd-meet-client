@@ -52,6 +52,7 @@ export interface Chat {
     senderId?: string;
     content?: string;
   };
+  eventInfo?: { eventId: number; eventTitle: string };
   type: string;
   readInfos: {
     [memberId: string]: {

@@ -3,7 +3,7 @@ import { HttpClientService } from './http-client.service';
 import { Injectable } from '@angular/core';
 import { Event, EventSetting } from '../event/models/event.model';
 import { Observable, tap } from 'rxjs';
-import { FileResponse } from './models/core.model';
+import { EventImageResponse, FileResponse } from './models/core.model';
 import { EventList } from './states/event-list-state/event-list.model';
 
 @Injectable()
@@ -39,8 +39,14 @@ export class EventService {
       .subscribe({
         next: (result) => {
           this.eventListStateFacade.storeEventList(result);
-        },
+        }
       });
+  }
+
+  getEventImages(eventIds: number[]): Observable<EventImageResponse[]> {
+    return this.httpClientService.get<EventImageResponse[]>('event/images', {
+      eventIds: eventIds.join(',')
+    });
   }
 
   deleteEvent() {}
