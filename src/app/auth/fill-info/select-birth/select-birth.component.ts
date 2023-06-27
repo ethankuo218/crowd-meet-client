@@ -14,5 +14,6 @@ export class SelectBirthComponent implements OnInit {
 
   goNext() {
     console.log(this.birth);
+    this.fillInfoService.saveInfo();
   }
 }

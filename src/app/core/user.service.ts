@@ -11,6 +11,7 @@ import {
 import { User } from './states/user-state/user.model';
 import { Reference } from './states/reference-state/reference.model';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
   providedIn: 'root'
@@ -20,14 +21,18 @@ export class UserService {
     private httpClientService: HttpClientService,
     private userStateFacade: UserStateFacade,
     private referenceStateFacade: ReferenceStateFacade,
-    private router: Router
-  ) {}
+    private router: Router,
+    private storage: Storage
+  ) {
+    this.storage.create();
+  }
 
   login(): void {
     forkJoin([
       this.httpClientService.post<LoginResponse>('user', {}),
-      this.httpClientService.get<Reference>('Reference')
-    ]).subscribe(([loginResult, referenceResult]) => {
+      this.httpClientService.get<Reference>('Reference'),
+      this.storage.get('isNewUser')
+    ]).subscribe(([loginResult, referenceResult, isNewUser]) => {
       this.referenceStateFacade.storeReference(referenceResult);
       this.getUserById(loginResult.userId).subscribe({
         next: (result) => {
@@ -36,10 +41,12 @@ export class UserService {
       });
 
       if (loginResult.isNewUser) {
-        this.router.navigate(['walkthrough'], { replaceUrl: true });
-      } else {
-        this.router.navigate(['app'], { replaceUrl: true });
+        this.storage.set('isNewuser', true);
       }
+
+      this.router.navigate(isNewUser ? ['auth/walkthrough'] : ['app'], {
+        replaceUrl: true
+      });
     });
   }
 

@@ -1,3 +1,4 @@
+import { IonicStorageModule } from '@ionic/storage-angular';
 import {
   APP_INITIALIZER,
   NgModule,
@@ -98,7 +99,8 @@ export function createTranslateLoader(http: HttpClient) {
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production // Restrict extension to log-only mode
     }),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    IonicStorageModule.forRoot()
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

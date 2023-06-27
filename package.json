@@ -48,6 +48,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@ionic/angular": "^6.5.0",
     "@ionic/angular-server": "^6.5.0",
+    "@ionic/storage-angular": "^4.0.0",
     "@ngrx/store": "^16.0.1",
     "@nguniversal/express-engine": "^16.0.2",
     "@ngx-translate/core": "^15.0.0",
@@ -78,6 +79,7 @@
     "@ionic/angular-toolkit": "^9.0.0",
     "@ionic/cli": "^7.1.1",
     "@ionic/pwa-elements": "^3.1.1",
+    "@ngrx/store-devtools": "^16.0.1",
     "@types/angular-material": "^1.1.73",
     "@types/google-libphonenumber": "^7.4.23",
     "@types/jasmine": "~4.3.0",
@@ -99,8 +101,7 @@
     "karma-jasmine-html-reporter": "~2.0.0",
     "prettier": "2.8.8",
     "ts-node": "^8.3.0",
-    "typescript": "~5.0.2",
-    "@ngrx/store-devtools": "^16.0.1"
+    "typescript": "~5.0.2"
   },
   "description": "An Ionic project"
 }
