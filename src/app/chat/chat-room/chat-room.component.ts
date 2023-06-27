@@ -14,8 +14,9 @@ import {
   updateDoc
 } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, take } from 'rxjs';
+import { Observable, ReplaySubject, take, takeUntil } from 'rxjs';
 import { ChatMessage, ReadInfo } from '../models/chat.models';
+import { ProfilePictures } from 'src/app/core/models/core.model';
 
 @Component({
   selector: 'app-chat-room',
@@ -36,6 +37,8 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   private readInfos: ReadInfo = {};
   messages$!: Observable<ChatMessage[]>;
   private chatDoc = doc(this.firestore, 'chats', this.chatId);
+  memberPictureUrls: ProfilePictures = {};
+  private unsubscribe$ = new ReplaySubject<void>(1);
 
   async ngOnInit() {
     this.messages$ = this.getChatMessages(this.chatId);
@@ -44,10 +47,17 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
       await this.setReadInfo();
       await this.updateReadTimeStamp();
     });
+    this.chatService.memberPictures$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((memberPictures) => {
+        this.memberPictureUrls = memberPictures;
+      });
   }
 
   ngOnDestroy() {
     this.updateReadTimeStamp();
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   private async setReadInfo(): Promise<void> {
@@ -113,9 +123,5 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
 
   get memberInfos() {
     return this.chatService.memberInfos;
-  }
-
-  get memberPictureUrls() {
-    return this.chatService.memberPictures;
   }
 }

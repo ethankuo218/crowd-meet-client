@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, filter, firstValueFrom, map, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, Observable, filter, map, switchMap, tap } from 'rxjs';
 import { EventService } from '../core/event.service';
-import { EventImageResponse, ProfilePictures } from '../core/models/core.model';
+import { ProfilePictures } from '../core/models/core.model';
 import { UserService } from '../core/user.service';
 import { Chat, MemberInfo } from './models/chat.models';
 
@@ -10,10 +10,15 @@ import { Chat, MemberInfo } from './models/chat.models';
 })
 export class ChatService {
   private memberPictureUrls: ProfilePictures = {};
-  private eventImages: EventImageResponse[] = [];
   private _memberInfos: { [firebaseUid: string]: MemberInfo } = {};
+  private readonly recordedEventIds = new Set<number>();
+  private _eventImages: { [eventId: number]: string } = {};
   private readonly recordedChatIds = new Set<string>();
   private readonly recordedServerIds = new Set<number>();
+  private _memberPicturesSubject = new BehaviorSubject<ProfilePictures>({});
+  private _eventImagesSubject = new BehaviorSubject<{
+    [eventId: number]: string;
+  }>({});
 
   constructor(
     private readonly userService: UserService,
@@ -51,28 +56,36 @@ export class ChatService {
           ...this.memberPictureUrls,
           ...memberPictureUrls
         };
-        console.log(this.memberPictureUrls);
+        this._memberPicturesSubject.next(this.memberPictureUrls);
       })
     );
   }
 
-  async getEventImages(chat$: Observable<Chat[]>) {
-    if (this.eventImages.length === 0) {
-      const chats = await firstValueFrom(chat$);
-      const eventIds = new Set<number>();
-      for (const chat of chats) {
-        if (chat.eventInfo?.eventId) {
-          eventIds.add(chat.eventInfo?.eventId);
+  getEventImages(
+    chat$: Observable<Chat[]>
+  ): Observable<{ [eventId: number]: string }> {
+    return chat$.pipe(
+      map((chats) => {
+        const eventIds = new Set<number>();
+        for (const chat of chats) {
+          const eventId = chat.eventInfo?.eventId;
+          if (eventId && !this.recordedEventIds.has(eventId)) {
+            eventIds.add(eventId);
+            this.recordedEventIds.add(eventId);
+          }
         }
-      }
-      if (eventIds.size) {
-        this.eventImages = await firstValueFrom(
-          this.eventService.getEventImages(Array.from(eventIds))
-        );
-      }
-    }
-
-    return this.eventImages;
+        return Array.from(eventIds);
+      }),
+      filter((eventIds) => eventIds.length > 0),
+      switchMap((eventIds) => this.eventService.getEventImages(eventIds)),
+      tap((eventImageResponses) => {
+        eventImageResponses.forEach((res) => {
+          this._eventImages[res.eventId] = res.imageUrl;
+        });
+        this._eventImagesSubject.next(this._eventImages);
+      }),
+      map(() => this._eventImages)
+    );
   }
 
   set memberInfos(info: { [firebaseUid: string]: MemberInfo }) {
@@ -83,7 +96,11 @@ export class ChatService {
     return this._memberInfos;
   }
 
-  get memberPictures() {
-    return this.memberPictureUrls ?? {};
+  get memberPictures$() {
+    return this._memberPicturesSubject.asObservable();
+  }
+
+  get eventImages$() {
+    return this._eventImagesSubject.asObservable();
   }
 }

@@ -1,18 +1,13 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges
-} from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Chat } from '../../models/chat.models';
 import { User } from '@angular/fire/auth';
-import { EventImageResponse } from 'src/app/core/models/core.model';
+import { ProfilePictures } from 'src/app/core/models/core.model';
 import { ChatService } from '../../chat.service';
+import { Observable, ReplaySubject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-chat-card',
@@ -21,7 +16,7 @@ import { ChatService } from '../../chat.service';
   standalone: true,
   imports: [CommonModule, FormsModule, IonicModule, RouterModule]
 })
-export class ChatCardComponent implements OnInit, OnChanges {
+export class ChatCardComponent implements OnInit, OnDestroy {
   constructor(
     private readonly router: Router,
     private readonly chatService: ChatService
@@ -29,31 +24,41 @@ export class ChatCardComponent implements OnInit, OnChanges {
 
   @Input() chat!: Chat;
   @Input() user!: User;
-  @Input() memberPictureUrls: {
-    [firebaseUid: string]: {
-      userId: number;
-      profilePicture: string | null;
-    };
-  } = {};
-  @Input() eventImages: EventImageResponse[] = [];
+  @Input() memberPictureUrls$: Observable<ProfilePictures> | null = null;
+  @Input() eventImageUrls$: Observable<{ [eventId: number]: string }> | null =
+    null;
   roomName!: string;
   displayTimeHtml!: string;
   roomPictureUrl: string | null = null;
+  private readonly destroy$ = new ReplaySubject<void>(1);
 
   ngOnInit() {
     this.roomName = this.getRoomName();
     this.displayTimeHtml = this.formatTimestamp(
       this.chat.latestMessage.timestamp
     );
-    // this.roomPictureUrl = this.getRoomPictureUrl();
+
+    this.memberPictureUrls$
+      ?.pipe(takeUntil(this.destroy$))
+      .subscribe((memberPictureUrls) => {
+        if (this.chat.type === 'private') {
+          this.roomPictureUrl =
+            this.getRoomPictureFromMember(memberPictureUrls);
+        }
+      });
+
+    this.eventImageUrls$
+      ?.pipe(takeUntil(this.destroy$))
+      .subscribe((eventImageUrls) => {
+        if (this.chat.type === 'event') {
+          this.roomPictureUrl = eventImageUrls[this.chat.eventInfo!.eventId];
+        }
+      });
   }
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['memberPictureUrls'] && this.chat.type === 'private') {
-      this.roomPictureUrl = this.getRoomPictureFromMember();
-    }
-    if (changes['eventImages'] && this.chat.type === 'event') {
-      this.roomPictureUrl = this.getRoomPictureFromEvent();
-    }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   navigateToChat() {
@@ -102,19 +107,14 @@ export class ChatCardComponent implements OnInit, OnChanges {
     return this.chat.eventInfo!.eventTitle;
   }
 
-  private getRoomPictureFromMember(): string | null {
+  private getRoomPictureFromMember(
+    memberPictureUrls: ProfilePictures
+  ): string | null {
     const otherMemberFirebaseId = this.chat.members.find(
       (memberId) => memberId !== this.user.uid
     )!;
 
-    const url = this.memberPictureUrls?.[otherMemberFirebaseId]?.profilePicture;
+    const url = memberPictureUrls?.[otherMemberFirebaseId]?.profilePicture;
     return url ?? null;
-  }
-
-  private getRoomPictureFromEvent(): string | null {
-    const eventImage = this.eventImages.find(
-      (eventImage) => eventImage.eventId === this.chat.eventInfo?.eventId
-    );
-    return eventImage?.imageUrl ?? null;
   }
 }
