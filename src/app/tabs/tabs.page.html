@@ -1,24 +1,39 @@
- <ion-tabs (ionTabsDidChange)="ionTabsDidChange($event)">
+<ion-tabs (ionTabsDidChange)="ionTabsDidChange($event)">
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="event" [routerLinkActive]="['tab-selected']" [routerLink]="['/app/event']">
+    <ion-tab-button
+      tab="event"
+      [routerLinkActive]="['tab-selected']"
+      [routerLink]="['/app/event']"
+    >
       <ion-icon name="home-outline"></ion-icon>
-      <ion-label class="tab-title">Home</ion-label>
     </ion-tab-button>
-    <ion-tab-button tab="chat" [routerLinkActive]="['tab-selected']" [routerLink]="['/app/chat']">
+    <ion-tab-button
+      tab="chat"
+      [routerLinkActive]="['tab-selected']"
+      [routerLink]="['/app/chat']"
+    >
       <ion-icon name="chatbubbles-outline"></ion-icon>
-      <ion-label class="tab-title">Chats</ion-label>
     </ion-tab-button>
-    <ion-tab-button tab="event-create" [routerLinkActive]="['tab-selected']" [routerLink]="['/app/event-create']">
+    <ion-tab-button
+      tab="event-create"
+      [routerLinkActive]="['tab-selected']"
+      [routerLink]="['/app/event-create']"
+    >
       <ion-icon name="calendar-outline"></ion-icon>
-      <ion-label class="tab-title">Create Event</ion-label>
     </ion-tab-button>
-    <ion-tab-button tab="notifications" [routerLinkActive]="['tab-selected']" [routerLink]="['/app/notifications']">
+    <ion-tab-button
+      tab="notifications"
+      [routerLinkActive]="['tab-selected']"
+      [routerLink]="['/app/notifications']"
+    >
       <ion-icon name="notifications-outline"></ion-icon>
-      <ion-label class="tab-title">Notifications</ion-label>
     </ion-tab-button>
-    <ion-tab-button tab="menu" [routerLinkActive]="['tab-selected']" [routerLink]="['/app/menu']">
+    <ion-tab-button
+      tab="menu"
+      [routerLinkActive]="['tab-selected']"
+      [routerLink]="['/app/menu']"
+    >
       <ion-icon name="person-outline"></ion-icon>
-      <ion-label class="tab-title">Profile</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>
