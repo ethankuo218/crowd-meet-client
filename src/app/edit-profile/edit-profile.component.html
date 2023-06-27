@@ -1,110 +1,71 @@
 <app-header></app-header>
 <ion-content class="edit-profile-content">
   <main class="edit-profile main-area">
-    <div class="slider-area">
-      <h3 class="dark fnt-same">Your Best Photos</h3>
-      <swiper [slidesPerView]="3" [spaceBetween]="20">
-        <ng-template swiperSlide>
-          <div class="item">
-            <img src="assets/images/profile1.jpg" alt="image" />
-            <button><fa-icon [icon]="['fas', 'pen']"></fa-icon></button>
-          </div>
-        </ng-template>
-        <ng-template swiperSlide>
-          <div class="item">
-            <img src="assets/images/profile1.jpg" alt="image" />
-            <button><fa-icon [icon]="['fas', 'pen']"></fa-icon></button>
-          </div>
-        </ng-template>
-        <ng-template swiperSlide>
-          <div class="item">
-            <img src="assets/images/profile1.jpg" alt="image" />
-            <button><fa-icon [icon]="['fas', 'pen']"></fa-icon></button>
-          </div>
-        </ng-template>
-        <ng-template swiperSlide>
-          <div class="item">
-            <img src="assets/images/profile1.jpg" alt="image" />
-            <button><fa-icon [icon]="['fas', 'pen']"></fa-icon></button>
-          </div>
-        </ng-template>
-        <ng-template swiperSlide>
-          <div class="item">
-            <img src="assets/images/profile1.jpg" alt="image" />
-            <button><fa-icon [icon]="['fas', 'pen']"></fa-icon></button>
-          </div>
-        </ng-template>
-      </swiper>
-    </div>
-    <br />
-    <div class="container">
-      <div class="interest_div">
-        <h3 class="fnt-same dark">
-          Your Interest<button>
-            <fa-icon [icon]="['fas', 'pen']"></fa-icon>
-          </button>
-        </h3>
-        <ul>
-          <li>
-            <a href="#">
-              <img src="assets/images/burger1.png" alt="image" />
-              <span class="white">Fashion</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <img src="assets/images/burger1.png" alt="image" />
-              <span class="white">Movie</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <img src="assets/images/burger1.png" alt="image" />
-              <span class="white">Travel</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <img src="assets/images/burger1.png" alt="image" />
-              <span class="white">Fitness</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <img src="assets/images/burger1.png" alt="image" />
-              <span class="white">Food & Drink</span>
-            </a>
-          </li>
-        </ul>
+    <ng-container *ngIf="user$ | async as user">
+      <div class="slider-area">
+        <h3 class="dark fnt-same">Your Best Photos</h3>
+        <swiper [slidesPerView]="3" [spaceBetween]="20">
+          <ng-template *ngFor="let image of user.images" swiperSlide>
+            <div class="item">
+              <img [src]="image" alt="image" />
+              <button><fa-icon [icon]="['fas', 'pen']"></fa-icon></button>
+            </div>
+          </ng-template>
+        </swiper>
       </div>
-      <div class="profile_your">
-        <h3 class="fnt-same dark">Your Profile</h3>
-        <form action="#" method="POST">
-          <input
-            class="dark"
-            type="text"
-            name="#"
-            placeholder="Andrew Ainsley"
-            required=""
-          />
-          <input
-            class="dark"
-            type="text"
-            name="#"
-            placeholder="Andrew"
-            required=""
-          />
-          <input
-            class="dark"
-            type="text"
-            name="#"
-            placeholder="Designer"
-            required=""
-          />
-          <textarea rows="3" placeholder="Please Write Something"></textarea>
-          <button class="white" type="submit">Submit</button>
-        </form>
+      <br />
+      <div class="container">
+        <div class="interest_div">
+          <h3 class="fnt-same dark">
+            Your Interest<button>
+              <fa-icon [icon]="['fas', 'pen']"></fa-icon>
+            </button>
+          </h3>
+          <ul>
+            <li>
+              <a href="#">
+                <img src="assets/images/burger1.png" alt="image" />
+                <span class="white">Fashion</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="assets/images/burger1.png" alt="image" />
+                <span class="white">Movie</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="assets/images/burger1.png" alt="image" />
+                <span class="white">Travel</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="assets/images/burger1.png" alt="image" />
+                <span class="white">Fitness</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="assets/images/burger1.png" alt="image" />
+                <span class="white">Food & Drink</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="profile_your">
+          <h3 class="fnt-same dark">Your Profile</h3>
+          <form [formGroup]="userForm">
+              <textarea
+                rows="3"
+                placeholder="Please Write Something"
+                formControlName="bio"
+              ></textarea>
+            <button class="white" type="submit">Submit</button>
+          </form>
+        </div>
       </div>
-    </div>
+    </ng-container>
   </main>
 </ion-content>
