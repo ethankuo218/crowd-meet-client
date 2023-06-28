@@ -12,6 +12,8 @@ import { ShellModule } from '../shell/shell.module';
 import { HeaderComponent } from '../header/header.component';
 import { SwiperModule } from 'swiper/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CheckboxWrapperComponent } from '../components/checkbox-wrapper/checkbox-wrapper.component';
+import { ReferenceStateFacade } from '../core/states/reference-state/reference.state.facade';
 
 const routes: Routes = [
   {
@@ -31,9 +33,10 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ShellModule,
     HeaderComponent,
-    SwiperModule
+    SwiperModule,
+    CheckboxWrapperComponent
   ],
   declarations: [EditProfileComponent],
-  providers: [LanguageService, ImgUploadService]
+  providers: [LanguageService, ImgUploadService, ReferenceStateFacade]
 })
 export class EditProfileModule {}

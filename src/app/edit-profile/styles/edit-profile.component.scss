@@ -1,28 +1,5 @@
-.fix .head_arw {
-  position: fixed;
-  padding: 40px 21px 10px;
-  z-index: 9;
-  background: #fff;
-  width: 100%;
-  left: 0;
-  top: 0;
-}
-.head_arw h3 {
-  display: inline-block;
-  font-size: 22px;
-  font-weight: 700;
-  margin: 0 0 0 12px;
-  vertical-align: middle;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
+@import "theme/mixins/inputs/checkbox-tag";
 
-.create-event-area .head_arw h3 {
-  width: calc(100% - 235px);
-}
-.create-event-area .dot_opt {
-  width: 210px;
-}
 .slider-area {
   overflow-x: hidden;
   margin: 40px 0 0 0px;
@@ -52,6 +29,22 @@
   position: relative;
 }
 
+.slider-area ::ng-deep .swiper-slide .empty-item {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  height: 150px;
+  width: 100%;
+  border-radius: 25px;
+  border: dashed #b6b9c6 4px ;
+  align-items: center;
+}
+
+.slider-area ::ng-deep .swiper-slide .empty-item fa-icon {
+  font-size: 25px;
+  color: #b6b9c6;
+}
+
 .slider-area ::ng-deep .swiper-slide .item button {
   position: absolute;
   right: 9px;
@@ -60,46 +53,13 @@
   font-size: 14px;
 }
 
-.interest_div h3 {
-  position: relative;
-}
-
-.interest_div h3 button {
-  position: absolute;
-  right: 0;
-  top: 0;
-  color: #9610ff;
-}
-
-.interest_div ul li {
-  display: inline-block;
-}
-
-.interest_div ul li a {
-  padding: 9px 17px 12px;
-  border-radius: 26px;
-  background: #9610ff;
-  margin: 0 7px 10px 0;
-}
-
-.interest_div ul li a span {
-  font-size: 14px;
-  font-weight: 600;
-  margin: 0 0 0 2px;
-  vertical-align: middle;
-}
-
-.interest_div ul li a img {
-  width: 18px;
-  vertical-align: middle;
-}
-
 .profile_your {
-  padding: 15px 0 30px;
+  padding: 0px 0 30px;
+  text-align: center;
 }
 
-.profile_your form input,
-.profile_your form textarea {
+form .profile_your input,
+form .profile_your textarea {
   font-size: 15px;
   border-radius: 12px;
   border: none;
@@ -114,10 +74,11 @@
   opacity: 1;
 }
 
-.profile_your form [type='submit'] {
+form .profile_your [type='submit'] {
+  width: 80%;
   font-size: 14px;
-  background: #9610ff;
-  padding: 12px 45px;
+  background: #246bfd;
+  padding: 12px 0px;
   border-radius: 25px;
   font-weight: 600;
 }
@@ -127,4 +88,53 @@
   .swiper-wrapper
   .swiper-slide:first-child.swiper-slide-active {
   margin-left: 1.5rem;
+}
+
+.interest_div {
+  margin-bottom: 2rem;
+}
+
+.checkbox-tags {
+  padding: calc(var(--page-margin) / 2)
+    calc(var(--page-margin) - var(--page-tags-gutter));
+
+  @include checkbox-tag();
+
+  .checkbox-tag {
+    padding: 0px var(--page-tags-gutter);
+    margin-right: 0.5rem;
+    margin-bottom: 0.2rem;
+  }
+
+  // Add a deeper selector to override default colors
+  &.square-checkbox-tags {
+    background-color: var(--page-background);
+
+    .checkbox-tag {
+      --checkbox-tag-color: var(--ion-color-medium);
+      --checkbox-tag-background: var(--ion-color-lightest);
+      --checkbox-tag-active-color: #fff;
+      --checkbox-tag-active-background: #246bfd;
+    }
+  }
+
+  // Add a deeper selector to override default colors
+  &.rounded-checkbox-tags {
+
+    .checkbox-tag {
+      --checkbox-tag-color: var(--ion-color-lightest);
+      --checkbox-tag-background: var(--ion-color-light-shade);
+      --checkbox-tag-active-color: #fff;
+      --checkbox-tag-active-background: #246bfd;
+    }
+  }
+}
+
+.interest_div ::ng-deep .item-native {
+  border: solid 1px #246bfd
+}
+
+.profile_your button[disabled] {
+  background: rgb(234, 235, 240) !important;
+  color: rgb(132, 133, 148)
 }

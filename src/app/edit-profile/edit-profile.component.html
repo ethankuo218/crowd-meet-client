@@ -5,66 +5,62 @@
       <div class="slider-area">
         <h3 class="dark fnt-same">Your Best Photos</h3>
         <swiper [slidesPerView]="3" [spaceBetween]="20">
-          <ng-template *ngFor="let image of user.images" swiperSlide>
-            <div class="item">
+          <ng-template *ngFor="let image of images" swiperSlide>
+            <div *ngIf="image" class="item" (click)="selectPhoto()">
               <img [src]="image" alt="image" />
               <button><fa-icon [icon]="['fas', 'pen']"></fa-icon></button>
+            </div>
+            <div *ngIf="!image" class="empty-item" (click)="selectPhoto()">
+              <fa-icon [icon]="['fas', 'add']"></fa-icon>
             </div>
           </ng-template>
         </swiper>
       </div>
       <br />
       <div class="container">
-        <div class="interest_div">
-          <h3 class="fnt-same dark">
-            Your Interest<button>
-              <fa-icon [icon]="['fas', 'pen']"></fa-icon>
-            </button>
-          </h3>
-          <ul>
-            <li>
-              <a href="#">
-                <img src="assets/images/burger1.png" alt="image" />
-                <span class="white">Fashion</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <img src="assets/images/burger1.png" alt="image" />
-                <span class="white">Movie</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <img src="assets/images/burger1.png" alt="image" />
-                <span class="white">Travel</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <img src="assets/images/burger1.png" alt="image" />
-                <span class="white">Fitness</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <img src="assets/images/burger1.png" alt="image" />
-                <span class="white">Food & Drink</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="profile_your">
+        <form [formGroup]="userForm">
+          <div class="interest_div">
+            <h3 class="fnt-same dark">
+              Your Interest<button>
+                <fa-icon [icon]="['fas', 'pen']"></fa-icon>
+              </button>
+            </h3>
+            <ion-row
+              class="checkbox-tags rounded-checkbox-tags"
+              formArrayName="interests"
+            >
+              <ion-item
+                lines="none"
+                class="checkbox-tag rounded-tag"
+                *ngFor="
+                  let item of categoryList;
+                  let i = index;
+                  trackBy: trackByIndex
+                "
+              >
+                <ion-label class="tag-label">
+                  <fa-icon [icon]="['fas', 'star']"></fa-icon>
+                  {{ item.name }}
+                </ion-label>
+                <ion-checkbox [formControlName]="i"></ion-checkbox>
+              </ion-item>
+            </ion-row>
+          </div>
           <h3 class="fnt-same dark">Your Profile</h3>
-          <form [formGroup]="userForm">
-              <textarea
-                rows="3"
-                placeholder="Please Write Something"
-                formControlName="bio"
-              ></textarea>
-            <button class="white" type="submit">Submit</button>
-          </form>
-        </div>
+          <div class="profile_your">
+            <input
+              type="text"
+              placeholder="Please Enter Your Name"
+              formControlName="name"
+            />
+            <textarea
+              rows="3"
+              placeholder="Please Write Something"
+              formControlName="bio"
+            ></textarea>
+            <button class="white" type="submit" [disabled]="userForm.invalid" (click)="updateUserInfo()">Submit</button>
+          </div>
+        </form>
       </div>
     </ng-container>
   </main>
