@@ -1,7 +1,5 @@
-import { ImgUploadService } from 'src/app/core/img-upload.service';
 import { UserStateFacade } from './../core/states/user-state/user.state.facade';
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../core/user.service';
 
 @Component({
   selector: 'app-menu',
@@ -10,25 +8,7 @@ import { UserService } from '../core/user.service';
 })
 export class MenuComponent implements OnInit {
   user$ = this.userStateFacade.getUser();
-  constructor(
-    private userStateFacade: UserStateFacade,
-    private imgUploadService: ImgUploadService,
-    private userService: UserService
-  ) {}
+  constructor(private userStateFacade: UserStateFacade) {}
 
   ngOnInit() {}
-
-  selectPhoto() {
-    this.imgUploadService.selectImage().then(async () => {
-      const formData = new FormData();
-      const files = await this.imgUploadService.getUploadedImg();
-
-      if (files.length > 0) {
-        formData.append('file', files[0]);
-        await this.userService.updateUserProfilePicture(formData);
-      } else {
-        console.error('No image found, please try again!');
-      }
-    });
-  }
 }

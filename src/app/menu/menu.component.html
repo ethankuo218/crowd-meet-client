@@ -6,7 +6,6 @@
         <ng-container *ngIf="user$ | async as user">
           <div class="inr_upload">
             <img [src]="user.profilePictureUrl" alt="image" />
-            <button (click)="selectPhoto()"><fa-icon class="white" icon="pen"></fa-icon></button>
           </div>
           <h3 class="dark">{{user.name}}</h3>
           <a class="dark">{{user.email}}</a>
