@@ -5,6 +5,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HeaderComponent } from '../header/header.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ProfileComponent } from './profile.component';
+import { UserStateFacade } from '../core/states/user-state/user.state.facade';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
     FontAwesomeModule,
     HeaderComponent,
     RouterModule.forChild(routes)
-  ]
+  ],
+  providers: [UserStateFacade]
 })
 export class ProfileModule {}

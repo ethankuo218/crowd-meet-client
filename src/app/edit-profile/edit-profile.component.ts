@@ -65,7 +65,7 @@ export class EditProfileComponent implements OnInit {
     this.userStateFacade.getUser().subscribe({
       next: (result) => {
         result.images.forEach((item, index) => {
-          this.images[index] = item;
+          this.images[item.order] = item.imageUrl;
         });
       }
     });

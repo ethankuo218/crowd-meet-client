@@ -7,5 +7,10 @@ export interface User {
   profilePictureUrl: string;
   bio: string;
   interests: Category[];
-  images: string[];
+  images: Image[];
+}
+
+export interface Image {
+  imageUrl: string;
+  order: number;
 }
