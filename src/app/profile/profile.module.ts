@@ -6,6 +6,7 @@ import { HeaderComponent } from '../header/header.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ProfileComponent } from './profile.component';
 import { UserStateFacade } from '../core/states/user-state/user.state.facade';
+import { SwiperModule } from 'swiper/angular';
 
 const routes: Routes = [
   {
@@ -21,7 +22,8 @@ const routes: Routes = [
     IonicModule,
     FontAwesomeModule,
     HeaderComponent,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SwiperModule
   ],
   providers: [UserStateFacade]
 })

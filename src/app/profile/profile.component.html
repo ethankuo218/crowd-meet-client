@@ -2,89 +2,99 @@
 <ion-content>
   <main class="user-detail-area main-area">
     <div class="container">
-      <div class="dr-watson_box">
-        <div class="row">
-          <div class="collum-1">
-            <img src="assets/images/profile1.jpg" alt="image" />
-          </div>
-          <div class="collum-2">
-            <h3 class="dark">Dr. Jenny Watson</h3>
-            <hr />
-            <p class="dark_d">Immunologists</p>
-            <p class="dark_d">Chirst Hospital in London, Uk</p>
-          </div>
-        </div>
-      </div>
-      <div class="show_box">
-        <div class="row">
-          <div class="collum text-center">
-            <img src="assets/images/man.png" alt="image" />
-            <h3 class="primary">5,000+</h3>
-            <p class="dark_d">patients</p>
-          </div>
-          <div class="collum text-center">
-            <img src="assets/images/man.png" alt="image" />
-            <h3 class="primary">10+</h3>
-            <p class="dark_d">years expert</p>
-          </div>
-          <div class="collum text-center">
-            <img src="assets/images/man.png" alt="image" />
-            <h3 class="primary">4.8</h3>
-            <p class="dark_d">rating</p>
-          </div>
-          <div class="collum text-center">
-            <img src="assets/images/man.png" alt="image" />
-            <h3 class="primary">4.942</h3>
-            <p class="dark_d">reviews</p>
+      <ng-container *ngIf="user$ | async as user">
+        <div class="dr-watson_box">
+          <swiper
+            *ngIf="user.images.length !== 0"
+            [slidesPerView]="1"
+            [pagination]="true"
+          >
+            <ng-template swiperSlide *ngFor="let image of user.images">
+              <img [src]="image.imageUrl" />
+            </ng-template>
+          </swiper>
+          <div *ngIf="user.images.length === 0" class="row">
+            <div class="collum-1">
+              <img src="assets/images/profile1.jpg" alt="image" />
+            </div>
+            <div class="collum-2">
+              <h3 class="dark">{{ user.name }}</h3>
+              <hr />
+              <p class="dark_d">Immunologists</p>
+              <p class="dark_d">Chirst Hospital in London, Uk</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="about_content">
-        <h3 class="dark">About me</h3>
-        <p class="dark_d">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo.<a class="primary">view more</a>
-        </p>
-        <h3 class="dark">Working Time</h3>
-        <p class="dark_d">Monday - Friday 08.00 AM - 20.00 PM</p>
-      </div>
-      <div class="reviews-area">
-        <h3 class="dark">Reviews <a class="primary">See All</a></h3>
-        <div class="reviews_content">
+        <div class="show_box">
           <div class="row">
-            <div class="col-6">
-              <div class="img_text">
-                <img src="assets/images/min_profile2.png" alt="image" />
-                <h4 class="dark">Charolette Hanlin</h4>
-              </div>
+            <div class="collum text-center">
+              <img src="assets/images/man.png" alt="image" />
+              <h3 class="primary">5,000+</h3>
+              <p class="dark_d">patients</p>
             </div>
-            <div class="col-6">
-              <div class="aside">
-                <a class="star">
-                  <fa-icon [icon]="['fas', 'star']" class="primary"></fa-icon>
-                  <span class="primary">5</span>
-                </a>
-                <a>
-                  <img src="assets/images/sm_image.png" alt="image" />
-                </a>
-              </div>
+            <div class="collum text-center">
+              <img src="assets/images/man.png" alt="image" />
+              <h3 class="primary">10+</h3>
+              <p class="dark_d">years expert</p>
             </div>
-          </div>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut
-          </p>
-          <div class="react_div">
-            <button class="dark">
-              <fa-icon [icon]="['far', 'heart']" class="primary"></fa-icon> 938
-            </button>
-            <span class="dark_dd">6 days ago</span>
+            <div class="collum text-center">
+              <img src="assets/images/man.png" alt="image" />
+              <h3 class="primary">4.8</h3>
+              <p class="dark_d">rating</p>
+            </div>
+            <div class="collum text-center">
+              <img src="assets/images/man.png" alt="image" />
+              <h3 class="primary">4.942</h3>
+              <p class="dark_d">reviews</p>
+            </div>
           </div>
         </div>
-      </div>
-
+        <div class="about_content">
+          <h3 class="dark">About me</h3>
+          <p class="dark_d">
+            {{ user.bio }}
+          </p>
+          <h3 class="dark">Interest</h3>
+          <p class="dark_d" *ngFor="let item of user.interests">
+            {{ item.name }}
+          </p>
+        </div>
+        <div class="reviews-area">
+          <h3 class="dark">Reviews <a class="primary">See All</a></h3>
+          <div class="reviews_content">
+            <div class="row">
+              <div class="col-6">
+                <div class="img_text">
+                  <img src="assets/images/min_profile2.png" alt="image" />
+                  <h4 class="dark">Charolette Hanlin</h4>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="aside">
+                  <a class="star">
+                    <fa-icon [icon]="['fas', 'star']" class="primary"></fa-icon>
+                    <span class="primary">5</span>
+                  </a>
+                  <a>
+                    <img src="assets/images/sm_image.png" alt="image" />
+                  </a>
+                </div>
+              </div>
+            </div>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+              eiusmod tempor incididunt ut
+            </p>
+            <div class="react_div">
+              <button class="dark">
+                <fa-icon [icon]="['far', 'heart']" class="primary"></fa-icon>
+                938
+              </button>
+              <span class="dark_dd">6 days ago</span>
+            </div>
+          </div>
+        </div>
+      </ng-container>
       <div class="bool_apt">
         <a class="white">Book Appointment</a>
       </div>
