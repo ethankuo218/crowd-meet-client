@@ -5,16 +5,15 @@
       <div class="slider-area">
         <h3 class="dark fnt-same">Your Best Photos</h3>
         <ion-row>
-          <ion-col
-            [size]="4"
-            *ngFor="let image of images"
-            (click)="selectPhoto()"
-          >
+          <ion-col [size]="4" *ngFor="let image of images; let i = index">
             <div *ngIf="image; else empty" class="item">
-              <img src="assets/images/profile1.jpg" />
+              <img [src]="image.url" />
+              <button (click)="deletePhoto(image)">
+                <fa-icon [icon]="['fas', 'xmark']"></fa-icon>
+              </button>
             </div>
             <ng-template #empty>
-              <div class="empty-item">
+              <div class="empty-item" (click)="selectPhoto(i)">
                 <fa-icon [icon]="['fas', 'add']"></fa-icon>
               </div>
             </ng-template>

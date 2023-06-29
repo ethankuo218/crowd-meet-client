@@ -3,10 +3,6 @@ export interface LoginResponse {
   userId: number;
 }
 
-export interface FileResponse {
-  fileName: string;
-}
-
 export interface ProfilePictureResponse {
   images: ProfilePictures;
 }

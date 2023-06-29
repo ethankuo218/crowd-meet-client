@@ -31,6 +31,21 @@ ion-row {
   object-fit: cover;
 }
 
+.item button {
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  background-color: #fff;
+  border: solid 1px #b6b9c6;
+  border-radius: 50%;
+  padding: 2.5px 5.125px;
+
+  fa-icon {
+    color: #9a9daa;
+    font-size: 18px;
+  }
+}
+
 .empty-item {
   position: relative;
   display: flex;

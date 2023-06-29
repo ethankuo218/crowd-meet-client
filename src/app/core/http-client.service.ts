@@ -94,4 +94,14 @@ export class HttpClientService {
       })
     );
   }
+
+  delete<T>(apiName: string, id: number): Observable<T> {
+    return from(this.getIdToken()).pipe(
+      switchMap((headers: HttpHeaders): Observable<T> => {
+        return this.httpClient.delete<T>(`${this.urlPrefix}${apiName}/${id}`, {
+          headers: headers
+        });
+      })
+    );
+  }
 }

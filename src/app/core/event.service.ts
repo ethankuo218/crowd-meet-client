@@ -3,8 +3,9 @@ import { HttpClientService } from './http-client.service';
 import { Injectable } from '@angular/core';
 import { Event, EventSetting } from '../event/models/event.model';
 import { Observable, tap } from 'rxjs';
-import { EventImageResponse, FileResponse } from './models/core.model';
+import { EventImageResponse } from './models/core.model';
 import { EventList } from './states/event-list-state/event-list.model';
+import { Image } from './states/user-state/user.model';
 
 @Injectable()
 export class EventService {
@@ -21,8 +22,8 @@ export class EventService {
     return this.httpClientService.patch<Event>('event', body);
   }
 
-  updateEventImage(id: number, file: FormData): Observable<FileResponse> {
-    return this.httpClientService.post<FileResponse>(`event/${id}/image`, file);
+  updateEventImage(id: number, file: FormData): Observable<Image> {
+    return this.httpClientService.post<Image>(`event/${id}/image`, file);
   }
 
   getEventDetail(id: number): Observable<Event> {

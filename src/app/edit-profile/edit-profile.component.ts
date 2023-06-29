@@ -4,8 +4,9 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../core/user.service';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ReferenceStateFacade } from '../core/states/reference-state/reference.state.facade';
-import { Observable, take } from 'rxjs';
+import { take } from 'rxjs';
 import { Category } from '../core/states/reference-state/reference.model';
+import { Image } from '../core/states/user-state/user.model';
 
 @Component({
   selector: 'app-edit-profile',
@@ -24,7 +25,7 @@ export class EditProfileComponent implements OnInit {
 
   userForm!: FormGroup;
 
-  images: Array<string | undefined> = [
+  images: Array<Image | undefined> = [
     undefined,
     undefined,
     undefined,
@@ -32,6 +33,8 @@ export class EditProfileComponent implements OnInit {
     undefined,
     undefined
   ];
+
+  private imageOrder: number[] = [];
 
   get interests(): FormArray {
     return <FormArray>this.userForm.get('interests');
@@ -65,14 +68,32 @@ export class EditProfileComponent implements OnInit {
 
     this.userStateFacade.getUser().subscribe({
       next: (result) => {
-        result.images.forEach((item, index) => {
-          this.images[item.order] = item.imageUrl;
+        result.images.forEach((item) => {
+          this.images[item.order] = item;
+        });
+
+        this.images.forEach((item) => {
+          if (item) {
+            this.imageOrder.push(item.id);
+          }
         });
       }
     });
   }
 
-  ionViewWillLeave(): void {}
+  ionViewWillLeave(): void {
+    const currentImageOrder: number[] = [];
+
+    this.images.forEach((item) => {
+      if (item) {
+        currentImageOrder.push(item.id);
+      }
+    });
+
+    if (this.imageOrder === currentImageOrder) {
+      this.userService.patchUserImageOrder(currentImageOrder);
+    }
+  }
 
   trackByIndex(index: number, item: Category): number {
     return index;
@@ -86,17 +107,25 @@ export class EditProfileComponent implements OnInit {
     });
   }
 
-  selectPhoto() {
+  selectPhoto(index: number) {
     this.imgUploadService.selectImage().then(async () => {
       const formData = new FormData();
       const files = await this.imgUploadService.getUploadedImg();
 
       if (files.length > 0) {
         formData.append('file', files[0]);
-        await this.userService.updateUserProfilePicture(formData);
+        formData.append('order', index.toString());
+        this.userService.updateUserImage(formData).subscribe();
       } else {
         console.error('No image found, please try again!');
       }
+    });
+  }
+
+  deletePhoto(image: Image) {
+    alert('DELETE ?');
+    this.userService.deletePhoto(image.id).subscribe(() => {
+      this.images[image.order] = undefined;
     });
   }
 }

@@ -10,7 +10,8 @@
             [pagination]="true"
           >
             <ng-template swiperSlide *ngFor="let image of user.images">
-              <img [src]="image.imageUrl" />
+              <img [src]="image.url" />
+              <!-- <img src="assets/images/profile1.jpg" alt="image" /> -->
             </ng-template>
           </swiper>
           <div *ngIf="user.images.length === 0" class="row">

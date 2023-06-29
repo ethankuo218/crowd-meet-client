@@ -3,12 +3,8 @@ import { UserStateFacade } from './states/user-state/user.state.facade';
 import { Observable, firstValueFrom, forkJoin, map, tap } from 'rxjs';
 import { HttpClientService } from './http-client.service';
 import { Injectable } from '@angular/core';
-import {
-  FileResponse,
-  LoginResponse,
-  ProfilePictureResponse
-} from './models/core.model';
-import { User } from './states/user-state/user.model';
+import { LoginResponse, ProfilePictureResponse } from './models/core.model';
+import { Image, User } from './states/user-state/user.model';
 import { Reference } from './states/reference-state/reference.model';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
@@ -70,17 +66,21 @@ export class UserService {
     );
   }
 
-  updateUserImage(file: FormData): Observable<FileResponse> {
-    return this.httpClientService.post<FileResponse>('user/image', file);
+  updateUserImage(body: FormData): Observable<Image[]> {
+    return this.httpClientService.post<Image[]>('user/image', body).pipe(
+      tap((result: Image[]) => {
+        this.userStateFacade.storeUser({ images: result });
+      })
+    );
   }
 
-  async updateUserProfilePicture(file: FormData): Promise<void> {
-    const fileName = (await firstValueFrom(this.updateUserImage(file)))
-      .fileName;
-    this.updateUser({ profilePicture: fileName }).subscribe({
-      next: (result) => {
-        this.userStateFacade.storeUser(result);
-      }
+  deletePhoto(id: number) {
+    return this.httpClientService.delete('user/image', id);
+  }
+
+  patchUserImageOrder(order: number[]): Observable<Image[]> {
+    return this.httpClientService.patch('user/image/order', {
+      newOrder: order
     });
   }
 

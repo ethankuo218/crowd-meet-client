@@ -11,6 +11,7 @@ export interface User {
 }
 
 export interface Image {
-  imageUrl: string;
+  id: number;
   order: number;
+  url: string;
 }
