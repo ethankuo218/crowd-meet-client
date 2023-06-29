@@ -1,4 +1,4 @@
-@import "theme/mixins/inputs/checkbox-tag";
+@import 'theme/mixins/inputs/checkbox-tag';
 
 .slider-area {
   overflow-x: hidden;
@@ -19,25 +19,32 @@
   margin: 0 0 0 0px;
 }
 
-.slider-area ::ng-deep .swiper-slide .item img {
+ion-row {
+  padding: 0 16px;
+}
+
+.item img {
+  position: relative;
   height: 150px;
+  width: 100%;
   border-radius: 25px;
   object-fit: cover;
 }
 
-.slider-area ::ng-deep .swiper-slide .item {
-  position: relative;
-}
-
-.slider-area ::ng-deep .swiper-slide .empty-item {
+.empty-item {
   position: relative;
   display: flex;
   justify-content: center;
   height: 150px;
   width: 100%;
   border-radius: 25px;
-  border: dashed #b6b9c6 4px ;
+  border: dashed #b6b9c6 4px;
   align-items: center;
+
+  fa-icon {
+    font-size: 25px;
+    color: #b6b9c6;
+  }
 }
 
 .slider-area ::ng-deep .swiper-slide .empty-item fa-icon {
@@ -120,7 +127,6 @@ form .profile_your [type='submit'] {
 
   // Add a deeper selector to override default colors
   &.rounded-checkbox-tags {
-
     .checkbox-tag {
       --checkbox-tag-color: var(--ion-color-lightest);
       --checkbox-tag-background: var(--ion-color-light-shade);
@@ -131,10 +137,10 @@ form .profile_your [type='submit'] {
 }
 
 .interest_div ::ng-deep .item-native {
-  border: solid 1px #246bfd
+  border: solid 1px #246bfd;
 }
 
 .profile_your button[disabled] {
   background: rgb(234, 235, 240) !important;
-  color: rgb(132, 133, 148)
+  color: rgb(132, 133, 148);
 }

@@ -4,17 +4,22 @@
     <ng-container *ngIf="user$ | async as user">
       <div class="slider-area">
         <h3 class="dark fnt-same">Your Best Photos</h3>
-        <swiper [slidesPerView]="3" [spaceBetween]="20">
-          <ng-template *ngFor="let image of images" swiperSlide>
-            <div *ngIf="image" class="item" (click)="selectPhoto()">
-              <img [src]="image" alt="image" />
-              <button><fa-icon [icon]="['fas', 'pen']"></fa-icon></button>
+        <ion-row>
+          <ion-col
+            [size]="4"
+            *ngFor="let image of images"
+            (click)="selectPhoto()"
+          >
+            <div *ngIf="image; else empty" class="item">
+              <img src="assets/images/profile1.jpg" />
             </div>
-            <div *ngIf="!image" class="empty-item" (click)="selectPhoto()">
-              <fa-icon [icon]="['fas', 'add']"></fa-icon>
-            </div>
-          </ng-template>
-        </swiper>
+            <ng-template #empty>
+              <div class="empty-item">
+                <fa-icon [icon]="['fas', 'add']"></fa-icon>
+              </div>
+            </ng-template>
+          </ion-col>
+        </ion-row>
       </div>
       <br />
       <div class="container">
@@ -58,7 +63,6 @@
               placeholder="Please Write Something"
               formControlName="bio"
             ></textarea>
-            <button class="white" type="submit" [disabled]="userForm.invalid" (click)="updateUserInfo()">Submit</button>
           </div>
         </form>
       </div>

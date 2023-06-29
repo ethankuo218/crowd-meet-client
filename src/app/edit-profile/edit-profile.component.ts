@@ -29,6 +29,7 @@ export class EditProfileComponent implements OnInit {
     undefined,
     undefined,
     undefined,
+    undefined,
     undefined
   ];
 
