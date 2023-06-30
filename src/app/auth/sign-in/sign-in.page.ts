@@ -6,7 +6,7 @@ import {
   AuthStateChange,
   SignInResult
 } from '@capacitor-firebase/authentication';
-
+import { PushNotifications } from '@capacitor/push-notifications';
 import { Subscription } from 'rxjs';
 
 import { HistoryHelperService } from '../../utils/history-helper.service';
@@ -59,6 +59,49 @@ export class SignInPage implements OnInit {
         });
       }
     });
+  }
+
+  async test() {
+    PushNotifications.requestPermissions().then(async (result) => {
+      console.log(result);
+      if (result.receive === 'granted') {
+        // Register with Apple / Google to receive push via APNS/FCM
+        try {
+          await PushNotifications.register();
+          console.log('registered');
+        } catch (err) {
+          console.log(err);
+        }
+      } else {
+        // Show some error
+      }
+    });
+
+    // On success, we should be able to receive notifications
+    PushNotifications.addListener('registration', (token: any) => {
+      console.log('Push registration success, token: ' + token.value);
+    });
+
+    // Some issue with your setup and push will not work
+    PushNotifications.addListener('registrationError', (error: any) => {
+      console.log('Error on registration: ' + JSON.stringify(error));
+    });
+
+    // Show us the notification payload if the app is open on our device
+    PushNotifications.addListener(
+      'pushNotificationReceived',
+      (notification: any) => {
+        console.log('Push received: ' + JSON.stringify(notification));
+      }
+    );
+
+    // Method called when tapping on a notification
+    PushNotifications.addListener(
+      'pushNotificationActionPerformed',
+      (notification: any) => {
+        console.log('Push action performed: ' + JSON.stringify(notification));
+      }
+    );
   }
 
   public async doFacebookLogin(): Promise<void> {
