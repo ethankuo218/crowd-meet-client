@@ -23,6 +23,19 @@ ion-row {
   padding: 0 16px;
 }
 
+ion-reorder-group {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 16px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+ion-reorder {
+  width: 30%;
+  margin-bottom: 1rem;
+}
+
 .item img {
   position: relative;
   height: 150px;
@@ -60,19 +73,6 @@ ion-row {
     font-size: 25px;
     color: #b6b9c6;
   }
-}
-
-.slider-area ::ng-deep .swiper-slide .empty-item fa-icon {
-  font-size: 25px;
-  color: #b6b9c6;
-}
-
-.slider-area ::ng-deep .swiper-slide .item button {
-  position: absolute;
-  right: 9px;
-  bottom: 8px;
-  color: #fff;
-  font-size: 14px;
 }
 
 .profile_your {

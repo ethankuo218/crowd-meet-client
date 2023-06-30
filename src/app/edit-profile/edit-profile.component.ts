@@ -7,6 +7,7 @@ import { ReferenceStateFacade } from '../core/states/reference-state/reference.s
 import { take } from 'rxjs';
 import { Category } from '../core/states/reference-state/reference.model';
 import { Image } from '../core/states/user-state/user.model';
+import { ItemReorderEventDetail } from '@ionic/angular';
 
 @Component({
   selector: 'app-edit-profile',
@@ -68,6 +69,23 @@ export class EditProfileComponent implements OnInit {
 
     this.userStateFacade.getUser().subscribe({
       next: (result) => {
+        this.userForm.patchValue(result);
+
+        const patchInterestArr: boolean[] = [];
+        this.categoryList.forEach((element: Category, index: number) => {
+          if (
+            result.interests.find(
+              (interest) => interest.categoryId === element.categoryId
+            )
+          ) {
+            patchInterestArr.push(true);
+          } else {
+            patchInterestArr.push(false);
+          }
+        });
+
+        this.userForm.get('interests')?.patchValue(patchInterestArr);
+
         result.images.forEach((item) => {
           this.images[item.order] = item;
         });
@@ -83,6 +101,16 @@ export class EditProfileComponent implements OnInit {
     if (this.imageOrder === currentImageOrder) {
       console.log('REORDER');
       this.userService.patchUserImageOrder(currentImageOrder);
+    }
+
+    if (this.userForm.valid) {
+      this.userService
+        .updateUser({
+          name: this.userForm.get('name')?.value,
+          bio: this.userForm.get('bio')?.value,
+          interests: this.getInterests()
+        })
+        .subscribe();
     }
   }
 
@@ -145,5 +173,29 @@ export class EditProfileComponent implements OnInit {
     });
 
     return returnOrder;
+  }
+
+  private getInterests(): number[] {
+    const returnArr: number[] = [];
+
+    this.interests.value.forEach((element: boolean, index: number) => {
+      const interest = this.categoryList[index];
+      if (element && interest) {
+        returnArr.push(interest.categoryId);
+      }
+    });
+
+    return returnArr;
+  }
+
+  handleReorder(ev: CustomEvent<ItemReorderEventDetail>) {
+    // The `from` and `to` properties contain the index of the item
+    // when the drag started and ended, respectively
+    console.log('Dragged from index', ev.detail.from, 'to', ev.detail.to);
+
+    // Finish the reorder and position the item in the DOM based on
+    // where the gesture ended. This method can also be called directly
+    // by the reorder group
+    ev.detail.complete();
   }
 }
