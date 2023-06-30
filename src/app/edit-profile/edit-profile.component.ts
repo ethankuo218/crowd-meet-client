@@ -72,25 +72,16 @@ export class EditProfileComponent implements OnInit {
           this.images[item.order] = item;
         });
 
-        this.images.forEach((item) => {
-          if (item) {
-            this.imageOrder.push(item.id);
-          }
-        });
+        this.imageOrder = this.getCurrentOrder();
       }
     });
   }
 
   ionViewWillLeave(): void {
-    const currentImageOrder: number[] = [];
-
-    this.images.forEach((item) => {
-      if (item) {
-        currentImageOrder.push(item.id);
-      }
-    });
+    const currentImageOrder: number[] = this.getCurrentOrder();
 
     if (this.imageOrder === currentImageOrder) {
+      console.log('REORDER');
       this.userService.patchUserImageOrder(currentImageOrder);
     }
   }
@@ -125,7 +116,34 @@ export class EditProfileComponent implements OnInit {
   deletePhoto(image: Image) {
     alert('DELETE ?');
     this.userService.deletePhoto(image.id).subscribe(() => {
-      this.images[image.order] = undefined;
+      this.removePhoto(image.order);
     });
+  }
+
+  private removePhoto(index: number) {
+    const elementBeforeIndex: Array<Image | undefined> = this.images.slice(
+      0,
+      index
+    );
+    const elementAfterIndex: Array<Image | undefined> = this.images.slice(
+      index + 1
+    );
+    const newImagesOrder = elementBeforeIndex.concat(elementAfterIndex);
+
+    newImagesOrder.push(undefined);
+
+    this.images = newImagesOrder;
+  }
+
+  private getCurrentOrder() {
+    const returnOrder: number[] = [];
+
+    this.images.forEach((item) => {
+      if (item) {
+        returnOrder.push(item.id);
+      }
+    });
+
+    return returnOrder;
   }
 }
