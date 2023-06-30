@@ -7,6 +7,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProfileComponent } from './profile.component';
 import { UserStateFacade } from '../core/states/user-state/user.state.facade';
 import { SwiperModule } from 'swiper/angular';
+import SwiperCore, { Pagination } from 'swiper';
+
+SwiperCore.use([Pagination]);
 
 const routes: Routes = [
   {

@@ -5,6 +5,7 @@
       <ng-container *ngIf="user$ | async as user">
         <div class="dr-watson_box">
           <swiper
+            id="profile-swiper"
             *ngIf="user.images.length !== 0"
             [slidesPerView]="1"
             [pagination]="true"
@@ -14,6 +15,7 @@
               <!-- <img src="assets/images/profile1.jpg" alt="image" /> -->
             </ng-template>
           </swiper>
+          <h3 *ngIf="user.images.length !== 0">{{ user.name }}</h3>
           <div *ngIf="user.images.length === 0" class="row">
             <div class="collum-1">
               <img src="assets/images/profile1.jpg" alt="image" />
@@ -31,22 +33,17 @@
             <div class="collum text-center">
               <img src="assets/images/man.png" alt="image" />
               <h3 class="primary">5,000+</h3>
-              <p class="dark_d">patients</p>
+              <p class="dark_d">Joined</p>
             </div>
             <div class="collum text-center">
               <img src="assets/images/man.png" alt="image" />
               <h3 class="primary">10+</h3>
-              <p class="dark_d">years expert</p>
+              <p class="dark_d">Hold</p>
             </div>
             <div class="collum text-center">
               <img src="assets/images/man.png" alt="image" />
               <h3 class="primary">4.8</h3>
-              <p class="dark_d">rating</p>
-            </div>
-            <div class="collum text-center">
-              <img src="assets/images/man.png" alt="image" />
-              <h3 class="primary">4.942</h3>
-              <p class="dark_d">reviews</p>
+              <p class="dark_d">Rating</p>
             </div>
           </div>
         </div>
@@ -56,9 +53,11 @@
             {{ user.bio }}
           </p>
           <h3 class="dark">Interest</h3>
-          <p class="dark_d" *ngFor="let item of user.interests">
-            {{ item.name }}
-          </p>
+          <div class="interest_div">
+            <div class="item btn_item" *ngFor="let item of user.interests">
+              <button>{{ '# ' + item.name }}</button>
+            </div>
+          </div>
         </div>
         <div class="reviews-area">
           <h3 class="dark">Reviews <a class="primary">See All</a></h3>
@@ -96,9 +95,6 @@
           </div>
         </div>
       </ng-container>
-      <div class="bool_apt">
-        <a class="white">Book Appointment</a>
-      </div>
     </div>
   </main>
 </ion-content>
