@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { HistoryHelperService } from './utils/history-helper.service';
 import { SplashScreen } from '@capacitor/splash-screen';
-import { take } from 'rxjs';
 
 @Component({
   selector: 'app-root',

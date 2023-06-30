@@ -1,11 +1,6 @@
 import { Location } from '@angular/common';
 import { UserService } from './../../core/user.service';
 import { Component, NgZone, OnInit } from '@angular/core';
-import {
-  Validators,
-  UntypedFormGroup,
-  UntypedFormControl
-} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   AuthStateChange,
@@ -123,7 +118,7 @@ export class SignInPage implements OnInit {
 
   private redirectLoggedUserToHomePage(): void {
     this.ngZone.run(() => {
-      const previousUrl = 'app';
+      this.userService.login();
     });
   }
 

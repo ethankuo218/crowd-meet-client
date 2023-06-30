@@ -11,9 +11,9 @@ import {
   providedIn: 'root'
 })
 export class HttpClientService {
-  private urlPrefix: string = 'http://127.0.0.1:3000/api/v1/';
-  // private urlPrefix: string =
-  //   'https://crowd-meet-server-tpqol4vd2a-uc.a.run.app/api/v1/';
+  // private urlPrefix: string = 'https://127.0.0.1:3000/api/v1/';
+  private urlPrefix: string =
+    'https://crowd-meet-server-tpqol4vd2a-uc.a.run.app/api/v1/';
 
   private timeStamp: number = 0;
   private expiredTime = 50 * 60 * 1000; // millisecond
