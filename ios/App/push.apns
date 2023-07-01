@@ -1,0 +1,13 @@
+
+{
+    "Simulator Target Bundle": "com.crowdmeet.app",
+    "aps": {
+        "alert": {
+            "title": "test",
+            "subtitle" : "skrrrr",
+            "body" : "skr skr"
+        },
+        "sound": "default",
+        "badge": 99
+    }
+}
