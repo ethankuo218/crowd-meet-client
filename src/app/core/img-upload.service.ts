@@ -6,6 +6,7 @@ import {
   CameraSource,
   Photo
 } from '@capacitor/camera';
+import { Crop } from '@ionic-native/crop/ngx';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 
 const IMAGE_DIR = 'stored-images';
@@ -14,7 +15,7 @@ const IMAGE_DIR = 'stored-images';
 export class ImgUploadService {
   private uploadedImageName: string[] = [];
 
-  constructor(private platform: Platform) {}
+  constructor(private platform: Platform, private crop: Crop) {}
 
   async selectImage(): Promise<void> {
     const image = await Camera.getPhoto({
@@ -24,8 +25,12 @@ export class ImgUploadService {
       source: CameraSource.Photos
     });
 
+    const cropPath = await this.crop.crop(image.path!, {
+      quality: 55
+    });
+
     if (image) {
-      const base64Data = await this.readAsBase64(image);
+      const base64Data = await this.readAsBase64ByPath(cropPath);
       const fileName = new Date().getTime() + '.jpeg';
 
       await Filesystem.writeFile({
@@ -62,7 +67,7 @@ export class ImgUploadService {
     return images;
   }
 
-  private async readAsBase64(photo: Photo) {
+  private async readAsBase64(photo: Photo): Promise<string> {
     // "hybrid" will detect Cordova or Capacitor
     if (this.platform.is('hybrid')) {
       // Read the file into base64 format
@@ -78,6 +83,15 @@ export class ImgUploadService {
 
       return (await this.convertBlobToBase64(blob)) as string;
     }
+  }
+
+  private async readAsBase64ByPath(path: string): Promise<string> {
+    // Read the file into base64 format
+    const file = await Filesystem.readFile({
+      path: path
+    });
+
+    return file.data;
   }
 
   private convertBlobToBase64 = (blob: Blob) =>

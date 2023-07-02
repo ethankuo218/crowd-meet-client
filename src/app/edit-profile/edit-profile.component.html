@@ -1,70 +1,66 @@
 <app-header></app-header>
 <ion-content class="edit-profile-content">
   <main class="edit-profile main-area">
-    <ng-container *ngIf="user$ | async as user">
-      <div class="slider-area">
-        <h3 class="dark fnt-same">Your Best Photos</h3>
-        <ion-row>
-          <ion-col size="4" *ngFor="let image of images; let i = index">
-            <div *ngIf="image; else empty" class="item">
-              <img [src]="image.url" />
-              <button (click)="deletePhoto(image)">
-                <fa-icon [icon]="['fas', 'xmark']"></fa-icon>
-              </button>
+    <div class="slider-area">
+      <h3 class="dark fnt-same">Your Best Photos</h3>
+      <ion-row>
+        <ion-col size="4" *ngFor="let image of images; let i = index">
+          <div *ngIf="image; else empty" class="item">
+            <img [src]="image.url" />
+            <button (click)="deletePhoto(image)">
+              <fa-icon [icon]="['fas', 'xmark']"></fa-icon>
+            </button>
+          </div>
+          <ng-template #empty>
+            <div class="empty-item" (click)="selectPhoto(i)">
+              <fa-icon [icon]="['fas', 'add']"></fa-icon>
             </div>
-            <ng-template #empty>
-              <div class="empty-item" (click)="selectPhoto(i)">
-                <fa-icon [icon]="['fas', 'add']"></fa-icon>
-              </div>
-            </ng-template>
-          </ion-col>
-        </ion-row>
-      </div>
-      <br />
-      <div class="container">
-        <form [formGroup]="userForm">
-          <div class="interest_div">
-            <h3 class="fnt-same dark">
-              Your Interest<button>
-                <fa-icon [icon]="['fas', 'pen']"></fa-icon>
-              </button>
-            </h3>
-            <ion-row
-              class="checkbox-tags rounded-checkbox-tags"
-              formArrayName="interests"
+          </ng-template>
+        </ion-col>
+      </ion-row>
+    </div>
+    <br />
+    <div class="container">
+      <form [formGroup]="userForm">
+        <div class="interest_div">
+          <h3 class="fnt-same dark">
+            Your Interest
+          </h3>
+          <ion-row
+            class="checkbox-tags rounded-checkbox-tags"
+            formArrayName="interests"
+          >
+            <ion-item
+              lines="none"
+              class="checkbox-tag rounded-tag"
+              *ngFor="
+                let item of categoryList;
+                let i = index;
+                trackBy: trackByIndex
+              "
             >
-              <ion-item
-                lines="none"
-                class="checkbox-tag rounded-tag"
-                *ngFor="
-                  let item of categoryList;
-                  let i = index;
-                  trackBy: trackByIndex
-                "
-              >
-                <ion-label class="tag-label">
-                  <fa-icon [icon]="['fas', 'star']"></fa-icon>
-                  {{ item.name }}
-                </ion-label>
-                <ion-checkbox [formControlName]="i"></ion-checkbox>
-              </ion-item>
-            </ion-row>
-          </div>
-          <h3 class="fnt-same dark">Your Profile</h3>
-          <div class="profile_your">
-            <input
-              type="text"
-              placeholder="Please Enter Your Name"
-              formControlName="name"
-            />
-            <textarea
-              rows="3"
-              placeholder="Please Write Something"
-              formControlName="bio"
-            ></textarea>
-          </div>
-        </form>
-      </div>
-    </ng-container>
+              <ion-label class="tag-label">
+                <fa-icon [icon]="['fas', 'star']"></fa-icon>
+                {{ item.name }}
+              </ion-label>
+              <ion-checkbox [formControlName]="i"></ion-checkbox>
+            </ion-item>
+          </ion-row>
+        </div>
+        <h3 class="fnt-same dark">Your Profile</h3>
+        <div class="profile_your">
+          <input
+            type="text"
+            placeholder="Please Enter Your Name"
+            formControlName="name"
+          />
+          <textarea
+            rows="3"
+            placeholder="Please Write Something"
+            formControlName="bio"
+          ></textarea>
+        </div>
+      </form>
+    </div>
   </main>
 </ion-content>

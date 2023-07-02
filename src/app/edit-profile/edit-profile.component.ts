@@ -7,7 +7,6 @@ import { ReferenceStateFacade } from '../core/states/reference-state/reference.s
 import { take } from 'rxjs';
 import { Category } from '../core/states/reference-state/reference.model';
 import { Image } from '../core/states/user-state/user.model';
-import { ItemReorderEventDetail } from '@ionic/angular';
 
 @Component({
   selector: 'app-edit-profile',
@@ -20,8 +19,6 @@ import { ItemReorderEventDetail } from '@ionic/angular';
   ]
 })
 export class EditProfileComponent implements OnInit {
-  user$ = this.userStateFacade.getUser();
-
   categoryList: Category[] = [];
 
   userForm!: FormGroup;
@@ -72,6 +69,8 @@ export class EditProfileComponent implements OnInit {
         this.userForm.patchValue(result);
 
         const patchInterestArr: boolean[] = [];
+        console.log('Bio: ', result.bio);
+        console.log('Interests: ', result.interests);
         this.categoryList.forEach((element: Category, index: number) => {
           if (
             result.interests.find(
@@ -91,6 +90,9 @@ export class EditProfileComponent implements OnInit {
         });
 
         this.imageOrder = this.getCurrentOrder();
+      },
+      error: (error) => {
+        console.error(error);
       }
     });
   }
@@ -186,16 +188,5 @@ export class EditProfileComponent implements OnInit {
     });
 
     return returnArr;
-  }
-
-  handleReorder(ev: CustomEvent<ItemReorderEventDetail>) {
-    // The `from` and `to` properties contain the index of the item
-    // when the drag started and ended, respectively
-    console.log('Dragged from index', ev.detail.from, 'to', ev.detail.to);
-
-    // Finish the reorder and position the item in the DOM based on
-    // where the gesture ended. This method can also be called directly
-    // by the reorder group
-    ev.detail.complete();
   }
 }

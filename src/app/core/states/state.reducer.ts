@@ -18,32 +18,26 @@ export const initialState: State = {
     profilePictureUrl: '',
     bio: '',
     interests: [],
-    images: [],
+    images: []
   },
   reference: {
-    categories: [],
+    categories: []
   },
   eventList: {
     data: [],
     pagination: {
       page: 0,
       pageSize: 0,
-      total: 0,
-    },
-  },
+      total: 0
+    }
+  }
 };
 
 export const userReducer = createReducer(
   initialState,
   on(UserStateActions.storeUserState, (state, { userInfo }) => ({
     ...state,
-    userId: userInfo.userId,
-    email: userInfo.email,
-    name: userInfo.name,
-    profilePictureUrl: userInfo.profilePictureUrl,
-    bio: userInfo.bio,
-    interests: userInfo.interests,
-    images: userInfo.images,
+    ...userInfo
   }))
 );
 
@@ -51,7 +45,7 @@ export const referenceReducer = createReducer(
   initialState,
   on(ReferenceStateActions.storeReferenceState, (state, { reference }) => ({
     ...state,
-    categories: reference.categories,
+    ...reference
   }))
 );
 
@@ -59,8 +53,7 @@ export const eventListReducer = createReducer(
   initialState,
   on(EventListStateActions.storeEventListState, (state, { eventList }) => ({
     ...state,
-    data: eventList.data,
-    pagination: eventList.pagination
+    ...eventList
   }))
 );
 

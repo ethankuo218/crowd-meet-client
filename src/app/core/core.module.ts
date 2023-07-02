@@ -1,3 +1,4 @@
+import { Crop } from '@ionic-native/crop/ngx';
 import { NgModule } from '@angular/core';
 import { UserService } from './user.service';
 import { AuthService } from './auth.service';
@@ -13,7 +14,8 @@ import { EventListStateFacade } from './states/event-list-state/event-list.state
     AuthHelper,
     UserStateFacade,
     ReferenceStateFacade,
-    EventListStateFacade
-  ],
+    EventListStateFacade,
+    Crop
+  ]
 })
 export class CoreModule {}
