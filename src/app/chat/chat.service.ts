@@ -1,9 +1,19 @@
+import { HttpClientService } from './../core/http-client.service';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, filter, map, switchMap, tap } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  filter,
+  firstValueFrom,
+  map,
+  switchMap,
+  tap
+} from 'rxjs';
 import { EventService } from '../core/event.service';
 import { ProfilePictures } from '../core/models/core.model';
 import { UserService } from '../core/user.service';
-import { Chat, MemberInfo } from './models/chat.models';
+import { Chat, MemberInfo, SendMessageDto } from './models/chat.models';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +32,8 @@ export class ChatService {
 
   constructor(
     private readonly userService: UserService,
-    private readonly eventService: EventService
+    private readonly eventService: EventService,
+    private readonly http: HttpClientService
   ) {}
 
   getMemberPictures(
@@ -86,6 +97,10 @@ export class ChatService {
       }),
       map(() => this._eventImages)
     );
+  }
+
+  sendMessage(body: SendMessageDto) {
+    return firstValueFrom(this.http.post('chat/message', body));
   }
 
   set memberInfos(info: { [firebaseUid: string]: MemberInfo }) {

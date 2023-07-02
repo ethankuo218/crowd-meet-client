@@ -15,7 +15,7 @@ import {
 } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, ReplaySubject, take, takeUntil } from 'rxjs';
-import { ChatMessage, ReadInfo } from '../models/chat.models';
+import { ChatMessage, ReadInfo, SendMessageDto } from '../models/chat.models';
 import { ProfilePictures } from 'src/app/core/models/core.model';
 
 @Component({
@@ -81,31 +81,14 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
     const messageText = (target as HTMLInputElement).value;
     if (!messageText) return;
     const sentTime = Date.now();
-    const message: ChatMessage = {
+
+    const messageBody: SendMessageDto = {
       senderId: this.user!.uid,
       content: messageText,
-      timestamp: sentTime
+      sentTimeStamp: sentTime,
+      chatId: this.chatId
     };
-
-    const messagesCollection = collection(
-      this.firestore,
-      'chats',
-      this.chatId,
-      'messages'
-    );
-    // Update the read timestamp within the sendMessage transaction
-    this.readInfos[this.user!.uid].readTimestamp = sentTime;
-
-    // Send the message and update the chat's readInfos in a batch
-    await runTransaction(this.firestore, async (transaction) => {
-      const newMessageRef = doc(messagesCollection);
-      transaction.set(
-        this.chatDoc,
-        { latestMessage: message, readInfos: this.readInfos },
-        { merge: true }
-      );
-      transaction.set(newMessageRef, message);
-    });
+    this.chatService.sendMessage(messageBody);
 
     // Clear the input
     (target as HTMLInputElement).value = '';

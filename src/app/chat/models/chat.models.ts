@@ -66,3 +66,10 @@ export interface MemberInfo {
   serverUid: number;
   name: string;
 }
+
+export interface SendMessageDto {
+  chatId: string;
+  senderId: string;
+  content: string;
+  sentTimeStamp: number;
+}
