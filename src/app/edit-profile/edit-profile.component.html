@@ -3,8 +3,12 @@
   <main class="edit-profile main-area">
     <div class="slider-area">
       <h3 class="dark fnt-same">Your Best Photos</h3>
-      <ion-row>
-        <ion-col size="4" *ngFor="let image of images; let i = index">
+      <ion-row
+        cdkDropList
+        cdkDropListOrientation="horizontal"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <ion-col size="4" *ngFor="let image of images; let i = index; trackBy: trackByIndex" cdkDrag>
           <div *ngIf="image; else empty" class="item">
             <img [src]="image.url" />
             <button (click)="deletePhoto(image)">
@@ -23,9 +27,7 @@
     <div class="container">
       <form [formGroup]="userForm">
         <div class="interest_div">
-          <h3 class="fnt-same dark">
-            Your Interest
-          </h3>
+          <h3 class="fnt-same dark">Your Interest</h3>
           <ion-row
             class="checkbox-tags rounded-checkbox-tags"
             formArrayName="interests"

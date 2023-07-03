@@ -7,6 +7,7 @@ import { ReferenceStateFacade } from '../core/states/reference-state/reference.s
 import { take } from 'rxjs';
 import { Category } from '../core/states/reference-state/reference.model';
 import { Image } from '../core/states/user-state/user.model';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-edit-profile',
@@ -23,14 +24,7 @@ export class EditProfileComponent implements OnInit {
 
   userForm!: FormGroup;
 
-  images: Array<Image | undefined> = [
-    undefined,
-    undefined,
-    undefined,
-    undefined,
-    undefined,
-    undefined
-  ];
+  images: Array<Image | undefined> = [undefined, undefined, undefined];
 
   private imageOrder: number[] = [];
 
@@ -69,8 +63,6 @@ export class EditProfileComponent implements OnInit {
         this.userForm.patchValue(result);
 
         const patchInterestArr: boolean[] = [];
-        console.log('Bio: ', result.bio);
-        console.log('Interests: ', result.interests);
         this.categoryList.forEach((element: Category, index: number) => {
           if (
             result.interests.find(
@@ -100,9 +92,8 @@ export class EditProfileComponent implements OnInit {
   ionViewWillLeave(): void {
     const currentImageOrder: number[] = this.getCurrentOrder();
 
-    if (this.imageOrder === currentImageOrder) {
-      console.log('REORDER');
-      this.userService.patchUserImageOrder(currentImageOrder);
+    if (this.imageOrder !== currentImageOrder) {
+      this.userService.patchUserImageOrder(currentImageOrder).subscribe();
     }
 
     if (this.userForm.valid) {
@@ -116,16 +107,12 @@ export class EditProfileComponent implements OnInit {
     }
   }
 
-  trackByIndex(index: number, item: Category): number {
+  trackByIndex(index: number, item: any): number {
     return index;
   }
 
   updateUserInfo(): void {
-    this.userService.updateUser(this.userForm.value).subscribe({
-      next: (result) => {
-        this.userStateFacade.storeUser(result);
-      }
-    });
+    this.userService.updateUser(this.userForm.value).subscribe();
   }
 
   selectPhoto(index: number) {
@@ -135,7 +122,7 @@ export class EditProfileComponent implements OnInit {
 
       if (files.length > 0) {
         formData.append('file', files[0]);
-        formData.append('order', index.toString());
+        formData.append('order', this.getFirstUndefinedImageIndex(index));
         this.userService.updateUserImage(formData).subscribe();
       } else {
         console.error('No image found, please try again!');
@@ -146,11 +133,12 @@ export class EditProfileComponent implements OnInit {
   deletePhoto(image: Image) {
     alert('DELETE ?');
     this.userService.deletePhoto(image.id).subscribe(() => {
-      this.removePhoto(image.order);
+      this.removePhoto(image.id);
     });
   }
 
-  private removePhoto(index: number) {
+  private removePhoto(id: number) {
+    const index = this.images.findIndex((image) => image?.id === id);
     const elementBeforeIndex: Array<Image | undefined> = this.images.slice(
       0,
       index
@@ -163,6 +151,8 @@ export class EditProfileComponent implements OnInit {
     newImagesOrder.push(undefined);
 
     this.images = newImagesOrder;
+
+    this.userStateFacade.storeUser({ images: this.images });
   }
 
   private getCurrentOrder() {
@@ -188,5 +178,15 @@ export class EditProfileComponent implements OnInit {
     });
 
     return returnArr;
+  }
+
+  private getFirstUndefinedImageIndex(index: number): string {
+    const returnVal = this.images.findIndex((image) => image === undefined);
+
+    return returnVal ? returnVal.toString() : index.toString();
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.images, event.previousIndex, event.currentIndex);
   }
 }

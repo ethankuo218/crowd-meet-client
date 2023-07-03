@@ -14,6 +14,7 @@ import { SwiperModule } from 'swiper/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CheckboxWrapperComponent } from '../components/checkbox-wrapper/checkbox-wrapper.component';
 import { ReferenceStateFacade } from '../core/states/reference-state/reference.state.facade';
+import { CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
 
 const routes: Routes = [
   {
@@ -34,7 +35,9 @@ const routes: Routes = [
     ShellModule,
     HeaderComponent,
     SwiperModule,
-    CheckboxWrapperComponent
+    CheckboxWrapperComponent,
+    CdkDropList,
+    CdkDrag
   ],
   declarations: [EditProfileComponent],
   providers: [LanguageService, ImgUploadService, ReferenceStateFacade]

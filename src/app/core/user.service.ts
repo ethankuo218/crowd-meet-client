@@ -61,7 +61,14 @@ export class UserService {
   updateUser(body: any): Observable<User> {
     return this.httpClientService.patch<User>('user', body).pipe(
       tap((result: User) => {
-        this.userStateFacade.storeUser(result);
+        this.userStateFacade.storeUser({
+          userId: result.userId,
+          email: result.email,
+          name: result.name,
+          profilePictureUrl: result.profilePictureUrl,
+          bio: result.bio,
+          interests: result.interests
+        });
       })
     );
   }
@@ -75,13 +82,28 @@ export class UserService {
   }
 
   deletePhoto(id: number) {
-    return this.httpClientService.delete('user/image', id);
+    return this.httpClientService.delete<Image[]>('user/image', id);
+
+    // .pipe(
+    //   tap((result: Image[]) => {
+    //     this.userStateFacade.storeUser({ images: result });
+    //   })
+    // );
   }
 
   patchUserImageOrder(order: number[]): Observable<Image[]> {
-    return this.httpClientService.patch('user/image/order', {
-      newOrder: order
-    });
+    return this.httpClientService
+      .patch<Image[]>('user/image/order', {
+        newOrder: order
+      })
+      .pipe(
+        tap((result: Image[]) => {
+          this.userStateFacade.storeUser({
+            profilePictureUrl: result[0].url,
+            images: result
+          });
+        })
+      );
   }
 
   getProfilePictureUrls(ids: number[]) {
