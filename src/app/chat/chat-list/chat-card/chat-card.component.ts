@@ -115,6 +115,6 @@ export class ChatCardComponent implements OnInit, OnDestroy {
     )!;
 
     const url = memberPictureUrls?.[otherMemberFirebaseId]?.profilePicture;
-    return url ?? null;
+    return url || null;
   }
 }
