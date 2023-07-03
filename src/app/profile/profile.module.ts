@@ -8,6 +8,7 @@ import { ProfileComponent } from './profile.component';
 import { UserStateFacade } from '../core/states/user-state/user.state.facade';
 import { SwiperModule } from 'swiper/angular';
 import SwiperCore, { Pagination } from 'swiper';
+import { CoreModule } from '../core/core.module';
 
 SwiperCore.use([Pagination]);
 
@@ -26,7 +27,8 @@ const routes: Routes = [
     FontAwesomeModule,
     HeaderComponent,
     RouterModule.forChild(routes),
-    SwiperModule
+    SwiperModule,
+    CoreModule
   ],
   providers: [UserStateFacade]
 })

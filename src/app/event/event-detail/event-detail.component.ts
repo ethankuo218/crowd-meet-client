@@ -35,7 +35,9 @@ export class EventDetailComponent implements OnInit {
       profilePictureUrl: '',
       bio: '',
       interests: [],
-      images: []
+      images: [],
+      gender: '',
+      birthDate: ''
     },
     eventId: 0
   };

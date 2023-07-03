@@ -15,7 +15,11 @@
               <!-- <img src="assets/images/profile1.jpg" alt="image" /> -->
             </ng-template>
           </swiper>
-          <h3 *ngIf="user.images.length !== 0">{{ user.name }}</h3>
+          <ng-container *ngIf="user.images.length !== 0">
+            <h3 class="dark">{{ user.name }}</h3>
+            <p class="dark_d">{{ user.gender }}</p>
+            <p class="dark_d">{{ user.birthDate | age }}</p>
+          </ng-container>
           <div *ngIf="user.images.length === 0" class="row">
             <div class="collum-1">
               <img src="assets/images/profile1.jpg" alt="image" />
@@ -23,8 +27,8 @@
             <div class="collum-2">
               <h3 class="dark">{{ user.name }}</h3>
               <hr />
-              <p class="dark_d">Immunologists</p>
-              <p class="dark_d">Chirst Hospital in London, Uk</p>
+              <p class="dark_d">{{ user.gender }}</p>
+              <p class="dark_d">{{ user.birthDate | age }}</p>
             </div>
           </div>
         </div>

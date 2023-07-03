@@ -8,6 +8,8 @@ export interface User {
   bio: string;
   interests: Category[];
   images: Image[];
+  birthDate: string;
+  gender: string;
 }
 
 export interface Image {

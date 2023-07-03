@@ -18,7 +18,9 @@ export const initialState: State = {
     profilePictureUrl: '',
     bio: '',
     interests: [],
-    images: []
+    images: [],
+    gender: '',
+    birthDate: ''
   },
   reference: {
     categories: []
