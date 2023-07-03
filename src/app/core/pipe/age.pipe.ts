@@ -4,9 +4,11 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'age'
 })
 export class AgePipe implements PipeTransform {
-  transform(value: string): number {
+  transform(value: string): number | string {
     const birthDate = new Date(value);
     const currentDate = new Date();
-    return currentDate.getFullYear() - birthDate.getFullYear() + 1;
+    return value
+      ? currentDate.getFullYear() - birthDate.getFullYear() + 1
+      : '??';
   }
 }
