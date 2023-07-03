@@ -19,14 +19,14 @@ export class ImgUploadService {
 
   async selectImage(): Promise<void> {
     const image = await Camera.getPhoto({
-      quality: 90,
+      quality: 10,
       allowEditing: false,
       resultType: CameraResultType.Uri,
       source: CameraSource.Photos
     });
 
     const cropPath = await this.crop.crop(image.path!, {
-      quality: 55
+      quality: 10
     });
 
     if (image) {
