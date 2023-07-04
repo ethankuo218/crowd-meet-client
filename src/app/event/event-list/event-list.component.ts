@@ -56,6 +56,11 @@ export class EventListComponent {
         this.ngZone.run(() => {
           const place: google.maps.places.PlaceResult = autocomplete.getPlace();
           console.log(place);
+          // store the data below
+          console.log(place.place_id);
+          console.log(place.geometry?.location?.lat());
+          console.log(place.geometry?.location?.lng());
+          console.log(place.formatted_address);
           this.search = place.formatted_address || '';
         });
       });

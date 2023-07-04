@@ -15,8 +15,7 @@ export class GoogleMapsLoaderService {
     });
   }
 
-  public async load(): Promise<google.maps.places.AutocompleteService> {
-    await this.loader.load();
-    return new google.maps.places.AutocompleteService();
+  public async load(): Promise<google.maps.PlacesLibrary> {
+    return await this.loader.importLibrary('places');
   }
 }
