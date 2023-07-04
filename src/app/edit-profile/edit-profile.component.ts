@@ -24,7 +24,14 @@ export class EditProfileComponent implements OnInit {
 
   userForm!: FormGroup;
 
-  images: Array<Image | undefined> = [undefined, undefined, undefined];
+  images: Array<Image | undefined> = [
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined
+  ];
 
   private imageOrder: number[] = [];
 
