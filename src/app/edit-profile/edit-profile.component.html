@@ -3,25 +3,37 @@
   <main class="edit-profile main-area">
     <div class="slider-area">
       <h3 class="dark fnt-same">Your Best Photos</h3>
-      <ion-row
-        cdkDropList
-        cdkDropListOrientation="horizontal"
-        (cdkDropListDropped)="drop($event)"
+      <div
+        #contenedor
+        class="images"
+        cdkDropListGroup
       >
-        <ion-col size="4" *ngFor="let image of images; let i = index; trackBy: trackByIndex" cdkDrag>
-          <div *ngIf="image; else empty" class="item">
-            <img [src]="image.url" />
-            <button (click)="deletePhoto(image)">
-              <fa-icon [icon]="['fas', 'xmark']"></fa-icon>
-            </button>
-          </div>
-          <ng-template #empty>
-            <div class="empty-item" (click)="selectPhoto(i)">
-              <fa-icon [icon]="['fas', 'add']"></fa-icon>
+        <ng-container *ngFor="let image of images; let i = index">
+          <div
+            class="image-item"
+            cdkDropList
+            cdkDropListOrientation="horizontal"
+            [cdkDropListData]="{ item: image, index: i }"
+            (cdkDropListDropped)="drop($event)"
+          >
+            <div class="inner" cdkDrag>
+              <!-- <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+              {{ item?.id }} -->
+              <div *ngIf="image; else empty" class="item">
+                <img [src]="image.url" />
+                <button (click)="deletePhoto(image)">
+                  <fa-icon [icon]="['fas', 'xmark']"></fa-icon>
+                </button>
+              </div>
+              <ng-template #empty>
+                <div class="empty-item" (click)="selectPhoto(i)">
+                  <fa-icon [icon]="['fas', 'add']"></fa-icon>
+                </div>
+              </ng-template>
             </div>
-          </ng-template>
-        </ion-col>
-      </ion-row>
+          </div>
+        </ng-container>
+      </div>
     </div>
     <br />
     <div class="container">

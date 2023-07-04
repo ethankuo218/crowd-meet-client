@@ -186,7 +186,8 @@ export class EditProfileComponent implements OnInit {
     return returnVal ? returnVal.toString() : index.toString();
   }
 
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.images, event.previousIndex, event.currentIndex);
+  drop(event: CdkDragDrop<{ item: Image | undefined; index: number }>) {
+    this.images[event.previousContainer.data.index] = event.container.data.item;
+    this.images[event.container.data.index] = event.previousContainer.data.item;
   }
 }
