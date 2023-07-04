@@ -17,8 +17,6 @@
             (cdkDropListDropped)="drop($event)"
           >
             <div class="inner" cdkDrag>
-              <!-- <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
-              {{ item?.id }} -->
               <div *ngIf="image; else empty" class="item">
                 <img [src]="image.url" />
                 <button (click)="deletePhoto(image)">

@@ -4,26 +4,35 @@
   <main class="main-area create-event-area">
     <div class="container">
       <div class="head_arw">
-        <a class="arw_left" href="#">
-          <fa-icon [icon]="['fas', 'xmark']"></fa-icon>
-        </a>
-        <h3 class="dark">Create Event</h3>
-        <a class="gray tp_link tp_link_1 tp_active">Save</a>
-        <a class="gray tp_link tp_link_2">Publish</a>
+        <!-- <a class="gray tp_link tp_link_1 tp_active">Save</a> -->
+        <a class="gray tp_link tp_link_2" (click)="onSubmit()">Publish</a>
         <a class="gray tp_link tp_link_3">
           <fa-icon [icon]="['fas', 'ellipsis']"></fa-icon>
         </a>
       </div>
-      <form>
-        <label class="picture" for="picture__input" tabIndex="0">
-          <i class="fa-solid fa-image"></i><br />
-          <fa-icon [icon]="['fas', 'image']"></fa-icon>
-          <p>Add article cover image</p>
-        </label>
+      <form [formGroup]="eventForm">
+        <img
+          [src]="eventCoverPictureUrl"
+          class="event_image"
+          *ngIf="eventCoverPictureUrl; else empty"
+        />
 
-        <input type="file" name="picture__input" id="picture__input" />
+        <ng-template #empty>
+          <label
+            class="picture"
+            for="picture__input"
+            tabIndex="0"
+            (click)="selectImage()"
+          >
+            <i class="fa-solid fa-image"></i><br />
+            <fa-icon [icon]="['fas', 'image']"></fa-icon>
+            <p>Add event cover image</p>
+          </label>
+        </ng-template>
 
-        <div class="airticle_content">
+        <!-- <input type="file" name="picture__input" id="picture__input" /> -->
+
+        <div class="event_content">
           <label class="d-block" for="title"
             ><span class="dark">Title</span></label
           >
@@ -31,49 +40,109 @@
             class="dark_dd"
             id="title"
             type="text"
-            name="#"
-            placeholder="Article Title"
+            placeholder="Event Title"
+            formControlName="title"
           />
         </div>
 
-        <div class="airticle_content">
+        <div class="event_content">
           <label class="d-block" for="title">
-            <span class="dark">Article</span>
+            <span class="dark">Description</span>
           </label>
-          <ion-textarea class="dark_dd"> </ion-textarea>
+          <ion-textarea
+            class="dark_dd"
+            formControlName="description"
+          ></ion-textarea>
         </div>
 
-        <div class="airticle_content">
-          <label class="d-block" for="topics"
-            ><span class="dark">Select Topics</span></label
-          >
-          <select id="topics" class="dark_dd">
-            <option class="dark_dd">Select Topics</option>
-            <option class="dark_dd">Select Topics</option>
-            <option class="dark_dd">Select Topics</option>
-          </select>
-        </div>
-        <div class="airticle_content">
-          <label class="d-block" for="title2"
-            ><span class="dark">Set Publication Time</span></label
+        <div class="event_content">
+          <label class="d-block" for="location"
+            ><span class="dark">Location</span></label
           >
           <input
             class="dark_dd"
-            id="title2"
-            type="time"
-            name="#"
-            placeholder="Article Title"
-            value="11:04 am"
+            id="location"
+            type="text"
+            placeholder="Location"
+            formControlName="locationName"
           />
         </div>
-        <div class="airticle_content">
+
+        <div class="event_content">
           <label class="d-block" for="topics"
-            ><span class="dark">Allow comments from Community</span></label
+            ><span class="dark">Select Categories</span></label
           >
-          <select id="topics" class="dark_dd">
-            <option class="dark_dd">Yes</option>
-            <option class="dark_dd">No</option>
-          </select>
+          <ion-row
+            class="checkbox-tags rounded-checkbox-tags"
+            formArrayName="categories"
+          >
+            <ion-item
+              lines="none"
+              class="checkbox-tag rounded-tag"
+              *ngFor="
+                let item of categoryList;
+                let i = index;
+                trackBy: trackByIndex
+              "
+            >
+              <ion-label class="tag-label">
+                <fa-icon [icon]="['fas', 'star']"></fa-icon>
+                {{ item.name }}
+              </ion-label>
+              <ion-checkbox [formControlName]="i"></ion-checkbox>
+            </ion-item>
+          </ion-row>
+          <br>
+        </div>
+
+        <div class="event_content">
+          <label class="d-block" for="start-time"
+            ><span class="dark">Set Start Time</span></label
+          >
+          <input
+            class="dark_dd"
+            id="start-time"
+            type="datetime-local"
+            placeholder="Article Title"
+            formControlName="startTime"
+          />
+        </div>
+
+        <div class="event_content">
+          <label class="d-block" for="end-time"
+            ><span class="dark">Set End Time</span></label
+          >
+          <input
+            class="dark_dd"
+            id="end-time"
+            type="datetime-local"
+            placeholder="Article Title"
+            formControlName="endTime"
+          />
+        </div>
+
+        <div class="event_content">
+          <label class="d-block" for="topics"
+            ><span class="dark">Max Participants</span></label
+          >
+          <app-counter-input
+            formControlName="maxParticipants"
+            [max]="15"
+            [min]="1"
+          ></app-counter-input>
+          <br />
+        </div>
+
+        <div class="event_content">
+          <label class="d-block" for="title"
+            ><span class="dark">Price</span></label
+          >
+          <input
+            class="dark_dd"
+            id="price"
+            type="number"
+            formControlName="price"
+          />
         </div>
       </form>
     </div>

@@ -1,5 +1,8 @@
+@import 'theme/mixins/inputs/checkbox-tag';
+
 .head_arw {
   position: relative;
+  text-align: right;
   .arw_left {
     width: 7%;
     color: #212121;
@@ -57,6 +60,24 @@
   display: none;
 }
 
+.event_image {
+  width: 100%;
+  /*! aspect-ratio: 16/9; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #aaa;
+  border: 1px solid #f3f3f3;
+  cursor: pointer;
+  transition: color 300ms ease-in-out, background 300ms ease-in-out;
+  outline: none;
+  overflow: hidden;
+  border-radius: 20px;
+  flex-direction: column;
+  margin: 20px 0;
+  padding: -4px 0;
+}
+
 .picture {
   width: 100%;
   /*! aspect-ratio: 16/9; */
@@ -73,7 +94,7 @@
   overflow: hidden;
   border-radius: 20px;
   flex-direction: column;
-  padding: 120px 0;
+  padding: 124px 0;
   margin: 20px 0;
 }
 
@@ -117,14 +138,14 @@
   margin: 20px 0 0;
 }
 
-.airticle_content label span,
+.event_content label span,
 .h2_art {
   font-size: 18px;
   font-weight: 700;
   margin: 0 0 11px;
 }
 
-.airticle_content ion-textarea {
+.event_content ion-textarea {
   width: 100%;
   border-radius: 11px;
   background: #fafafa;
@@ -134,9 +155,8 @@
   margin: 0 0 25px;
 }
 
-
-.airticle_content input,
-.airticle_content select {
+.event_content input,
+.event_content select {
   width: 100%;
   border-radius: 11px;
   background: #fafafa;
@@ -146,7 +166,7 @@
   margin: 0 0 25px;
 }
 
-.airticle_content select {
+.event_content select {
   background-image: url('../../../../assets/images/down.png');
   background-repeat: no-repeat;
   background-position: 98% 50%;
@@ -167,4 +187,39 @@
   border-radius: 11px;
   /*! padding: 16px 18px; */
   font-size: 14px;
+}
+
+.checkbox-tags {
+  padding: calc(var(--page-margin) / 2)
+    calc(var(--page-margin) - var(--page-tags-gutter));
+
+  @include checkbox-tag();
+
+  .checkbox-tag {
+    padding: 0px var(--page-tags-gutter);
+    margin-right: 0.5rem;
+    margin-bottom: 0.2rem;
+  }
+
+  // Add a deeper selector to override default colors
+  &.square-checkbox-tags {
+    background-color: var(--page-background);
+
+    .checkbox-tag {
+      --checkbox-tag-color: var(--ion-color-medium);
+      --checkbox-tag-background: var(--ion-color-lightest);
+      --checkbox-tag-active-color: #fff;
+      --checkbox-tag-active-background: #246bfd;
+    }
+  }
+
+  // Add a deeper selector to override default colors
+  &.rounded-checkbox-tags {
+    .checkbox-tag {
+      --checkbox-tag-color: var(--ion-color-lightest);
+      --checkbox-tag-background: var(--ion-color-light-shade);
+      --checkbox-tag-active-color: #fff;
+      --checkbox-tag-active-background: #246bfd;
+    }
+  }
 }

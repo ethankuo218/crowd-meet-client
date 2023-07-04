@@ -15,7 +15,18 @@ import { Category } from 'src/app/core/states/reference-state/reference.model';
   styleUrls: ['./styles/event-create.component.scss']
 })
 export class EventCreateComponent implements OnInit {
-  eventForm!: FormGroup;
+  eventCoverPictureUrl: string | undefined;
+
+  eventForm: FormGroup = new FormGroup({
+    title: new FormControl('', [Validators.required]),
+    description: new FormControl('', [Validators.required]),
+    startTime: new FormControl('', [Validators.required]),
+    endTime: new FormControl('', [Validators.required]),
+    maxParticipants: new FormControl(1, counterRangeValidator(1, 15)),
+    locationName: new FormControl('', [Validators.required]),
+    price: new FormControl(0, [Validators.required]),
+    categories: new FormArray([], [Validators.required])
+  });
 
   validations = {
     title: [{ type: 'required', message: 'Title is required.' }],
@@ -46,17 +57,6 @@ export class EventCreateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.eventForm = new FormGroup({
-      title: new FormControl('', [Validators.required]),
-      description: new FormControl('', [Validators.required]),
-      startTime: new FormControl('', [Validators.required]),
-      endTime: new FormControl('', [Validators.required]),
-      maxParticipants: new FormControl(1, counterRangeValidator(1, 15)),
-      locationName: new FormControl('', [Validators.required]),
-      price: new FormControl(0, [Validators.required]),
-      categories: new FormArray([], [Validators.required])
-    });
-
     this.referenceStateFacade
       .getCategories()
       .pipe(take(1))
@@ -70,7 +70,7 @@ export class EventCreateComponent implements OnInit {
       });
   }
 
-  onSubmit(values: any) {
+  onSubmit() {
     const selection: number[] = [];
     this.categories.value.forEach((value: boolean, index: number) => {
       if (value) {
@@ -80,9 +80,9 @@ export class EventCreateComponent implements OnInit {
 
     this.eventService
       .createEvent({
-        ...values,
-        startTime: this.formatDateToIsoString(values.startTime),
-        endTime: this.formatDateToIsoString(values.endTime),
+        ...this.eventForm.value,
+        startTime: this.formatDateToIsoString(this.eventForm.value.startTime),
+        endTime: this.formatDateToIsoString(this.eventForm.value.endTime),
         categories: selection
       })
       .subscribe({
@@ -97,7 +97,7 @@ export class EventCreateComponent implements OnInit {
   }
 
   selectImage(): void {
-    this.imgUploadService.selectImage();
+    this.imgUploadService.selectImage().then();
   }
 
   private async uploadEventImg(id: number) {

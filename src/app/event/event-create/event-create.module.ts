@@ -9,6 +9,7 @@ import { ImgUploadService } from 'src/app/core/img-upload.service';
 import { HeaderComponent } from 'src/app/header/header.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EventService } from 'src/app/core/event.service';
+import { CounterInputComponent } from 'src/app/components/counter-input/counter-input.component';
 
 const routes: Routes = [
   {
@@ -25,7 +26,8 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
-    HeaderComponent
+    HeaderComponent,
+    CounterInputComponent
   ],
   declarations: [EventCreateComponent],
   providers: [ImgUploadService, EventService]
