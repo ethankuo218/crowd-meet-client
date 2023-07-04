@@ -1,14 +1,11 @@
-import { Component, ElementRef, NgZone, ViewChild } from '@angular/core';
+import { Component, NgZone, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { EventListData } from 'src/app/core/states/event-list-state/event-list.model';
 import { EventService } from '../../core/event.service';
-import { MatDialog } from '@angular/material/dialog';
-import { AlertDialogComponent } from 'src/app/components/alert-dialog/alert-dialog.component';
-import { ToolDialogComponent } from 'src/app/components/tool-dialog/tool-dialog.component';
 import { GoogleMapsLoaderService } from 'src/app/core/google-maps-loader.service';
 import { IonInput } from '@ionic/angular';
-
+import { Geolocation } from '@capacitor/geolocation';
 @Component({
   selector: 'app-listing',
   templateUrl: './event-list.component.html',
@@ -31,10 +28,30 @@ export class EventListComponent {
     private googleMapsLoaderService: GoogleMapsLoaderService,
     private ngZone: NgZone
   ) {}
-  ionViewWillEnter(): void {
+  async ionViewWillEnter(): Promise<void> {
     this.googleMapsLoaderService.load().then(async (placesService) => {
+      const coordinates = await Geolocation.getCurrentPosition();
+      const userLocation = {
+        lat: coordinates.coords.latitude,
+        lng: coordinates.coords.longitude
+      };
+      // Create a LatLngBounds object centered around the user's location.
+      const circle = new google.maps.Circle({
+        center: userLocation,
+        radius: 50000
+      }); // 50000 meters = 50 km
+      const bounds = circle.getBounds()!;
+
+      // Set the bounds of the Autocomplete object to the user's location.
+      const options: google.maps.places.AutocompleteOptions = {
+        bounds: bounds
+      };
+
       const inputElement = await this.searchElementRef.getInputElement();
-      const autocomplete = new google.maps.places.Autocomplete(inputElement);
+      const autocomplete = new google.maps.places.Autocomplete(
+        inputElement,
+        options
+      );
       autocomplete.addListener('place_changed', () => {
         this.ngZone.run(() => {
           const place: google.maps.places.PlaceResult = autocomplete.getPlace();
