@@ -10,7 +10,7 @@ import { HeaderComponent } from '../header/header.component';
 import { SwiperModule } from 'swiper/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EventService } from '../core/event.service';
-
+import { FormsModule } from '@angular/forms';
 const routes: Routes = [
   {
     path: '',
@@ -42,7 +42,8 @@ const routes: Routes = [
     ShellModule,
     ListingCardComponent,
     HeaderComponent,
-    SwiperModule
+    SwiperModule,
+    FormsModule
   ],
   providers: [EventService]
 })
