@@ -9,6 +9,8 @@ PODS:
     - CapacitorCordova
   - CapacitorApp (5.0.2):
     - Capacitor
+  - CapacitorBrowser (5.0.5):
+    - Capacitor
   - CapacitorCamera (5.0.4):
     - Capacitor
   - CapacitorCordova (5.0.4)
@@ -132,6 +134,7 @@ PODS:
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorApp (from `../../node_modules/@capacitor/app`)"
+  - "CapacitorBrowser (from `../../node_modules/@capacitor/browser`)"
   - "CapacitorCamera (from `../../node_modules/@capacitor/camera`)"
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorFilesystem (from `../../node_modules/@capacitor/filesystem`)"
@@ -179,6 +182,8 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/ios"
   CapacitorApp:
     :path: "../../node_modules/@capacitor/app"
+  CapacitorBrowser:
+    :path: "../../node_modules/@capacitor/browser"
   CapacitorCamera:
     :path: "../../node_modules/@capacitor/camera"
   CapacitorCordova:
@@ -212,6 +217,7 @@ SPEC CHECKSUMS:
   AppAuth: 3bb1d1cd9340bd09f5ed189fb00b1cc28e1e8570
   Capacitor: d3d4463573438b9fa65326d1f3549da6f4c21634
   CapacitorApp: 28fef1fd75b2b3686e875216806fb8416d421097
+  CapacitorBrowser: c08582e15086d4195f8e7808a6738b0499b6d52a
   CapacitorCamera: 9b5c8e809c1042f263994f97ba846aa37e974f12
   CapacitorCordova: b1fe6bf1f36974a8e4a9044b342d22d49c0996d6
   CapacitorFilesystem: e1bdfab09b95b181c844c16abcfda45ec8e8ed6b
@@ -247,6 +253,6 @@ SPEC CHECKSUMS:
   PurchasesHybridCommon: 88fc5fef1cb121457b95d286f1738f81cf3ac148
   RevenueCat: 465a9dc1fff60b09f29792082e5d5d5aeed01122
 
-PODFILE CHECKSUM: e707669a7780633508072609f86fe3b115146c01
+PODFILE CHECKSUM: 95f46cac6c94df297fedbeeccd140cc1ad255777
 
 COCOAPODS: 1.12.1
