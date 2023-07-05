@@ -242,7 +242,7 @@ textarea:focus {
   top: 0;
   width: 24px;
   height: 24px;
-  border: 3.5px solid #246bfd;
+  border: 3.5px solid black;
   border-radius: 100%;
   background: #fff;
 }
@@ -252,10 +252,10 @@ textarea:focus {
   content: '';
   width: 13px;
   height: 13px;
-  background: #246bfd;
+  background: black;
   position: absolute;
-  top: 0.32222222rem;
-  left: 0.32222222rem;
+  top: 0.34rem;
+  left: 0.355rem;
   border-radius: 100%;
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
