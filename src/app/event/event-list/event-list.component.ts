@@ -6,6 +6,8 @@ import { EventService } from '../../core/event.service';
 import { GoogleMapsLoaderService } from 'src/app/core/google-maps-loader.service';
 import { IonInput } from '@ionic/angular';
 import { Geolocation } from '@capacitor/geolocation';
+import { Browser } from '@capacitor/browser';
+
 @Component({
   selector: 'app-listing',
   templateUrl: './event-list.component.html',
@@ -67,6 +69,22 @@ export class EventListComponent {
     });
 
     this.eventService.reloadEventList();
+  }
+
+  async openMap(): Promise<void> {
+    // get the place details from server
+    const mockPlaceDetails = {
+      lat: 37.4220041,
+      lng: -122.0862462,
+      name: 'Googleplex',
+      address: '1600 Amphitheatre Parkway, Mountain View, CA, USA',
+      placeId: 'ChIJj61dQgK6j4AR4GeTYWZsKWw'
+    };
+
+    // The following URL should open Google Maps on all platforms
+    let url = `https://www.google.com/maps/search/?api=1&query=${mockPlaceDetails.lat},${mockPlaceDetails.lng}&query_place_id=${mockPlaceDetails.placeId}`;
+
+    await Browser.open({ url });
   }
 
   // NOTE: Ionic only calls ngOnDestroy if the page was popped (ex: when navigating back)
