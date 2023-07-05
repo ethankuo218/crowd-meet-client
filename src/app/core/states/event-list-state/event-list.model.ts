@@ -1,3 +1,5 @@
+import { Category } from '../reference-state/reference.model';
+
 export interface EventList {
   data: EventListData[];
   pagination: Pagination;
@@ -8,6 +10,8 @@ export interface EventListData {
   title: string;
   description: string;
   eventId: number;
+  startTime: string;
+  interests: Category[];
 }
 
 export interface Pagination {

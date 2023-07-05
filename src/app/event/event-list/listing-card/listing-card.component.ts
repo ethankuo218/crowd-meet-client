@@ -18,7 +18,9 @@ export class ListingCardComponent {
     imageUrl: '',
     title: '',
     description: '',
-    eventId: 0
+    eventId: 0,
+    startTime: '',
+    interests: []
   };
 
   constructor() {}

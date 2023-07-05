@@ -1,59 +1,20 @@
-
-<ion-row class="header-row">
-  <ion-col class="title-col" size="10">
-    <div class="item-name">
-      <a class="name-anchor" [routerLink]="['/app/event/', cardInfo.eventId]">
-        <app-text-shell
-          animation="bouncing"
-          [data]="cardInfo.title"
-        ></app-text-shell>
-      </a>
+<div class="cause_content" [routerLink]="['/app/event/', cardInfo.eventId]">
+  <div class="row">
+    <div class="inr_cause_content">
+      <small class="dark_dd">{{
+        cardInfo.startTime | date : 'MMM d. y'
+      }}</small>
+      <p class="dark">
+        {{ cardInfo.description }}
+      </p>
+      <div>
+        <ng-container *ngFor="let item of cardInfo.interests; let i = index">
+          <a *ngIf="i < 3" class="primary">{{ item.name }}</a>
+        </ng-container>
+      </div>
     </div>
-  </ion-col>
-  <ion-col class="secondary-actions">
-    <ion-button class="more-btn" size="small" fill="clear" color="medium">
-      <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
-    </ion-button>
-  </ion-col>
-</ion-row>
-<ion-row class="info-row" [routerLink]="['/app/event/', cardInfo.eventId]">
-  <ion-col class="main-info-col" size="9">
-    <p class="item-description">
-      <app-text-shell
-        animation="bouncing"
-        lines="3"
-        [data]="cardInfo.description"
-      ></app-text-shell>
-    </p>
-    <br />
-    <ion-row class="stats-row">
-      <ion-col size="2" class="item-rating">
-        <span class="rating-value">
-          <app-text-shell [data]="5"></app-text-shell>
-        </span>
-        <ion-icon
-          class="stats-icon"
-          src="./assets/custom-icons/travel/star.svg"
-        ></ion-icon>
-      </ion-col>
-      <ion-col size="2" class="item-reviews">
-        <span class="reviews-count">
-          <app-text-shell [data]="4"></app-text-shell>
-        </span>
-        <ion-icon
-          class="stats-icon"
-          src="./assets/custom-icons/travel/comments.svg"
-        ></ion-icon>
-      </ion-col>
-    </ion-row>
-  </ion-col>
-  <ion-col>
-    <app-image-shell
-      [display]="'cover'"
-      class="add-overlay item-image"
-      [src]="cardInfo.imageUrl"
-    >
-      <app-aspect-ratio [ratio]="{ w: 1, h: 1 }"> </app-aspect-ratio>
-    </app-image-shell>
-  </ion-col>
-</ion-row>
+    <div class="cause_image">
+      <img [src]="cardInfo.imageUrl" alt="image" />
+    </div>
+  </div>
+</div>

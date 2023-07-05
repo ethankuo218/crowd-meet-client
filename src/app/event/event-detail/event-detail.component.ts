@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Event } from '../models/event.model';
+import { Browser } from '@capacitor/browser';
 
 @Component({
   selector: 'app-details',
@@ -67,5 +68,21 @@ export class EventDetailComponent implements OnInit {
   // Since ngOnDestroy might not fire when you navigate from the current page, use ionViewWillLeave to cleanup Subscriptions
   ionViewWillLeave(): void {
     this.subscriptions?.unsubscribe();
+  }
+
+  async openMap(): Promise<void> {
+    // get the place details from server
+    const mockPlaceDetails = {
+      lat: 37.4220041,
+      lng: -122.0862462,
+      name: 'Googleplex',
+      address: '1600 Amphitheatre Parkway, Mountain View, CA, USA',
+      placeId: 'ChIJj61dQgK6j4AR4GeTYWZsKWw'
+    };
+
+    // The following URL should open Google Maps on all platforms
+    let url = `https://www.google.com/maps/search/?api=1&query=${mockPlaceDetails.lat},${mockPlaceDetails.lng}&query_place_id=${mockPlaceDetails.placeId}`;
+
+    await Browser.open({ url });
   }
 }

@@ -4,7 +4,7 @@
   <main class="article-area main-area">
     <div class="image_slider">
       <div class="pson_div">
-        <h3 class="dark">Trending <a class="primary">See All</a></h3>
+        <h3 class="dark">Suggested <a class="primary">See All</a></h3>
       </div>
       <swiper
         [slidesPerView]="1.8"
@@ -37,15 +37,9 @@
           </div>
         </ng-template>
       </swiper>
-      <ion-input
-        #searchInput
-        [(ngModel)]="search"
-        placeholder="Enter a location"
-      ></ion-input>
-      <ion-button (click)="openMap()">Open Google Maps</ion-button>
 
       <div class="pson_div">
-        <h3 class="dark">Articles <a class="primary" href="#">See All</a></h3>
+        <h3 class="dark">Events <a class="primary" href="#">See All</a></h3>
       </div>
       <swiper [slidesPerView]="3.75" [spaceBetween]="20">
         <ng-template swiperSlide>
@@ -81,6 +75,11 @@
           </div>
         </ng-template>
       </swiper>
+
+      <ng-container *ngFor="let item of listing$ | async">
+        <app-listing-card [cardInfo]="item"></app-listing-card>
+      </ng-container>
+
       <div class="cause_content" [routerLink]="['/app/event/', 0]">
         <div class="row">
           <div class="inr_cause_content">
@@ -90,6 +89,7 @@
               eiusmod.
             </p>
             <div>
+              <a class="primary" href="#">Covid-19</a>
               <a class="primary" href="#">Covid-19</a>
             </div>
           </div>
