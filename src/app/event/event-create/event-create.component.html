@@ -92,7 +92,7 @@
               <ion-checkbox [formControlName]="i"></ion-checkbox>
             </ion-item>
           </ion-row>
-          <br>
+          <br />
         </div>
 
         <div class="event_content">
@@ -144,6 +144,26 @@
             formControlName="price"
           />
         </div>
+
+        <div class="event_content">
+          <label class="d-block" for="isOnline"
+            ><span class="dark">Is Online Event</span></label
+          >
+          <select name="isOnline" id="isOnline">
+            <option value="Y">Yes</option>
+            <option value="N">No</option>
+          </select>
+        </div>
+        <!-- <div style="display: flex;">
+          <p style="margin-right: 2rem;">
+            <input type="radio" id="test1" name="radio-group" checked />
+            <label class="dark" for="test1">Yes</label>
+          </p>
+          <p>
+            <input type="radio" id="test2" name="radio-group" />
+            <label class="dark" for="test2">No</label>
+          </p>
+        </div> -->
       </form>
     </div>
   </main>
