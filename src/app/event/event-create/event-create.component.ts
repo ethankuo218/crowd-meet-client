@@ -1,4 +1,3 @@
-import { ImgUploadService } from '../../core/img-upload.service';
 import { EventService } from '../../core/event.service';
 import { ReferenceStateFacade } from '../../core/states/reference-state/reference.state.facade';
 import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
@@ -54,7 +53,6 @@ export class EventCreateComponent implements OnInit {
     private referenceStateFacade: ReferenceStateFacade,
     private eventService: EventService,
     private router: Router,
-    private imgUploadService: ImgUploadService,
     private googleMapsLoaderService: GoogleMapsLoaderService,
     private ngZone: NgZone
   ) {}
@@ -121,39 +119,19 @@ export class EventCreateComponent implements OnInit {
     this.eventService
       .createEvent({
         ...this.eventForm.value,
-        startTime: this.formatDateToIsoString(this.eventForm.value.startTime),
-        endTime: this.formatDateToIsoString(this.eventForm.value.endTime),
+        startTime: new Date(this.eventForm.value.startTime).toISOString(),
+        endTime: new Date(this.eventForm.value.endTime).toISOString(),
         categories: selection
       })
       .subscribe({
-        next: (result) => {
-          if (this.imgUploadService.uploadedImagesCount !== 0) {
-            this.uploadEventImg(result.eventId);
-          } else {
-            this.router.navigate(['/app/event']);
-          }
+        next: () => {
+          this.router.navigate(['/app/event']);
         }
       });
   }
 
   selectImage(): void {
-    this.imgUploadService.selectImage().then();
-  }
-
-  private async uploadEventImg(id: number) {
-    const formData = new FormData();
-    const files = await this.imgUploadService.getUploadedImg();
-
-    formData.append('file', files[0]);
-    this.eventService.updateEventImage(id, formData).subscribe({
-      next: () => {
-        this.router.navigate(['/app/event']);
-      }
-    });
-  }
-
-  private formatDateToIsoString(date: string): string {
-    return new Date(date).toISOString();
+    this.eventService.selectImage().then();
   }
 
   trackByIndex(index: number, item: Category): number {

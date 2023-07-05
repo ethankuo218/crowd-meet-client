@@ -30,6 +30,6 @@ const routes: Routes = [
     CounterInputComponent
   ],
   declarations: [EventCreateComponent],
-  providers: [ImgUploadService, EventService]
+  providers: [EventService]
 })
 export class EventCreateModule {}
