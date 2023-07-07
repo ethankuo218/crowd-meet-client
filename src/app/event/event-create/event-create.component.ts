@@ -124,6 +124,13 @@ export class EventCreateComponent implements OnInit {
     });
   }
 
+  ionViewWillEnter() {
+    this.eventForm.reset();
+    this.eventForm.get('maxParticipants')?.setValue(1);
+    delete this.eventCoverPictureUrl;
+    delete this.selectLocation;
+  }
+
   onSubmit() {
     const selection: number[] = [];
     this.categories.value.forEach((value: boolean, index: number) => {
