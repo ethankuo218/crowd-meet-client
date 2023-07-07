@@ -53,10 +53,10 @@
         </div>
         <div class="about_content">
           <h3 class="dark">About me</h3>
-          <p class="dark_d">
+          <p class="bio dark_d">
             {{ user.bio }}
           </p>
-          <h3 class="dark">Interest</h3>
+          <h3 class="dark">Interests</h3>
           <div class="interest_div">
             <div class="item btn_item" *ngFor="let item of user.interests">
               <button>{{ '# ' + item.name }}</button>
