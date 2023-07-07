@@ -10,6 +10,8 @@ import { Image } from './states/user-state/user.model';
 
 @Injectable()
 export class EventService {
+  private currentPage: number = 1;
+
   constructor(
     private httpClientService: HttpClientService,
     private eventListStateFacade: EventListStateFacade,
@@ -57,11 +59,22 @@ export class EventService {
   }
 
   reloadEventList(): void {
+    this.currentPage = 1;
     this.httpClientService
-      .get<EventList>('event', { pageSize: 999 })
+      .get<EventList>('event', { page: this.currentPage, pageSize: 10 })
       .subscribe({
         next: (result) => {
           this.eventListStateFacade.storeEventList(result);
+        }
+      });
+  }
+
+  loadNextPage(): void {
+    this.httpClientService
+      .get<EventList>('event', { page: ++this.currentPage, pageSize: 10 })
+      .subscribe({
+        next: (result) => {
+          this.eventListStateFacade.addEventList(result);
         }
       });
   }

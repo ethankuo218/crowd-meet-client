@@ -60,8 +60,13 @@ export class HttpClientService {
         let queryString = '';
 
         if (typeof parameter !== 'string' && parameter) {
+          let index = 0;
           for (const key in parameter) {
-            queryString += `?${key}=${parameter[key]}`;
+            index++;
+            queryString +=
+              index <= 1
+                ? `?${key}=${parameter[key]}`
+                : `&${key}=${parameter[key]}`;
           }
         }
 

@@ -56,6 +56,10 @@ export const eventListReducer = createReducer(
   on(EventListStateActions.storeEventListState, (state, { eventList }) => ({
     ...state,
     ...eventList
+  })),
+  on(EventListStateActions.addEventListState, (state, { eventList }) => ({
+    ...state,
+    data: [...state.data, ...eventList.data]
   }))
 );
 

@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { EventListData } from 'src/app/core/states/event-list-state/event-list.model';
 import { EventService } from '../../core/event.service';
+import { InfiniteScrollCustomEvent } from '@ionic/angular';
 
 @Component({
   selector: 'app-listing',
@@ -24,4 +25,11 @@ export class EventListComponent {
   }
 
   ionViewWillLeave(): void {}
+
+  onIonInfinite(ev: Event) {
+    this.eventService.loadNextPage();
+    setTimeout(() => {
+      (ev as InfiniteScrollCustomEvent).target.complete();
+    }, 500);
+  }
 }
