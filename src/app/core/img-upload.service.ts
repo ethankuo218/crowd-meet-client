@@ -17,7 +17,7 @@ export class ImgUploadService {
 
   constructor(private platform: Platform, private crop: Crop) {}
 
-  async selectImage(): Promise<void> {
+  async selectImage(): Promise<string> {
     const image = await Camera.getPhoto({
       quality: 10,
       allowEditing: false,
@@ -31,6 +31,7 @@ export class ImgUploadService {
 
     if (image) {
       const base64Data = await this.readAsBase64ByPath(cropPath);
+      console.log(base64Data);
       const fileName = new Date().getTime() + '.jpeg';
 
       await Filesystem.writeFile({
@@ -41,6 +42,10 @@ export class ImgUploadService {
       });
 
       this.uploadedImageName.push(fileName);
+
+      return `data:image/png;base64, ${base64Data}`;
+    } else {
+      return '';
     }
   }
 

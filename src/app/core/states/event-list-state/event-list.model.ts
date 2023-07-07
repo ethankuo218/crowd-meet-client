@@ -11,7 +11,7 @@ export interface EventListData {
   description: string;
   eventId: number;
   startTime: string;
-  interests: Category[];
+  categories: Category[];
 }
 
 export interface Pagination {

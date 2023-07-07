@@ -5,10 +5,13 @@
       <div class="upload_profile text-center">
         <ng-container *ngIf="user$ | async as user">
           <div class="inr_upload">
-            <img [src]="user.profilePictureUrl" alt="image" />
+            <img
+              [src]="user.profilePictureUrl || 'assets/images/profile1.jpg'"
+              alt="image"
+            />
           </div>
-          <h3 class="dark">{{user.name}}</h3>
-          <a class="dark">{{user.email}}</a>
+          <h3 class="dark">{{ user.name }}</h3>
+          <a class="dark">{{ user.email }}</a>
         </ng-container>
         <hr />
       </div>
@@ -41,7 +44,7 @@
           <a routerLink="/app/reviews">
             <div class="acc__card">
               <div class="acc__title">
-                <fa-icon class="dark" [icon]="['fas', 'star-half']"></fa-icon>
+                <fa-icon class="dark" [icon]="['fas', 'star']"></fa-icon>
                 <span class="dark">Reviews</span>
               </div>
             </div>

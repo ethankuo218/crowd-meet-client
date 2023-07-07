@@ -20,7 +20,7 @@ export class ListingCardComponent {
     description: '',
     eventId: 0,
     startTime: '',
-    interests: []
+    categories: []
   };
 
   constructor() {}

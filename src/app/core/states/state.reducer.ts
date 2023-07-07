@@ -36,7 +36,7 @@ export const initialState: State = {
 };
 
 export const userReducer = createReducer(
-  initialState,
+  initialState.user,
   on(UserStateActions.storeUserState, (state, { userInfo }) => ({
     ...state,
     ...userInfo
@@ -44,7 +44,7 @@ export const userReducer = createReducer(
 );
 
 export const referenceReducer = createReducer(
-  initialState,
+  initialState.reference,
   on(ReferenceStateActions.storeReferenceState, (state, { reference }) => ({
     ...state,
     ...reference
@@ -52,7 +52,7 @@ export const referenceReducer = createReducer(
 );
 
 export const eventListReducer = createReducer(
-  initialState,
+  initialState.eventList,
   on(EventListStateActions.storeEventListState, (state, { eventList }) => ({
     ...state,
     ...eventList

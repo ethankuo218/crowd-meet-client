@@ -36,10 +36,20 @@ export class EventCreateComponent implements OnInit {
     maxParticipants: new FormControl(1, counterRangeValidator(1, 15)),
     locationName: new FormControl('', [Validators.required]),
     price: new FormControl(0, [Validators.required]),
-    categories: new FormArray([], [Validators.required])
+    categories: new FormArray([], [Validators.required]),
+    isOnline: new FormControl('', [Validators.required])
   });
 
   categoryList: Category[] = [];
+
+  selectLocation:
+    | {
+        placeId: string;
+        lat: number;
+        lng: number;
+        formattedAddress: string;
+      }
+    | undefined;
 
   get categories(): FormArray {
     return <FormArray>this.eventForm.get('categories');
@@ -102,6 +112,12 @@ export class EventCreateComponent implements OnInit {
           console.log(place.geometry?.location?.lat());
           console.log(place.geometry?.location?.lng());
           console.log(place.formatted_address);
+          this.selectLocation = {
+            placeId: place.place_id!,
+            lat: place.geometry?.location?.lat()!,
+            lng: place.geometry?.location?.lng()!,
+            formattedAddress: place.formatted_address || ''
+          };
           this.location.setValue(place.formatted_address || '');
         });
       });
@@ -121,7 +137,8 @@ export class EventCreateComponent implements OnInit {
         ...this.eventForm.value,
         startTime: new Date(this.eventForm.value.startTime).toISOString(),
         endTime: new Date(this.eventForm.value.endTime).toISOString(),
-        categories: selection
+        categories: selection,
+        ...this.selectLocation
       })
       .subscribe({
         next: () => {
@@ -131,7 +148,9 @@ export class EventCreateComponent implements OnInit {
   }
 
   selectImage(): void {
-    this.eventService.selectImage().then();
+    this.eventService.selectImage().then((result) => {
+      this.eventCoverPictureUrl = result;
+    });
   }
 
   trackByIndex(index: number, item: Category): number {

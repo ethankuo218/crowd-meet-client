@@ -7,7 +7,7 @@ import { ReferenceStateFacade } from '../core/states/reference-state/reference.s
 import { take } from 'rxjs';
 import { Category } from '../core/states/reference-state/reference.model';
 import { Image } from '../core/states/user-state/user.model';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-edit-profile',
@@ -85,7 +85,9 @@ export class EditProfileComponent implements OnInit {
         this.userForm.get('interests')?.patchValue(patchInterestArr);
 
         result.images.forEach((item) => {
-          this.images[item.order] = item;
+          if (item) {
+            this.images[item.order] = item;
+          }
         });
 
         this.imageOrder = this.getCurrentOrder();
@@ -146,11 +148,11 @@ export class EditProfileComponent implements OnInit {
 
   private removePhoto(id: number) {
     const index = this.images.findIndex((image) => image?.id === id);
-    const elementBeforeIndex: Array<Image | undefined> = this.images.slice(
+    const elementBeforeIndex: Array<Image | undefined> = [...this.images].slice(
       0,
       index
     );
-    const elementAfterIndex: Array<Image | undefined> = this.images.slice(
+    const elementAfterIndex: Array<Image | undefined> = [...this.images].slice(
       index + 1
     );
     const newImagesOrder = elementBeforeIndex.concat(elementAfterIndex);

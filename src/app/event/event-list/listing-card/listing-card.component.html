@@ -5,16 +5,19 @@
         cardInfo.startTime | date : 'MMM d. y'
       }}</small>
       <p class="dark">
+        {{ cardInfo.title }}
+      </p>
+      <p class="content dark_dd">
         {{ cardInfo.description }}
       </p>
       <div>
-        <ng-container *ngFor="let item of cardInfo.interests; let i = index">
-          <a *ngIf="i < 3" class="primary">{{ item.name }}</a>
+        <ng-container *ngFor="let item of cardInfo.categories; let i = index">
+          <a *ngIf="i < 2" class="primary">{{ item.name }}</a>
         </ng-container>
       </div>
     </div>
     <div class="cause_image">
-      <img [src]="cardInfo.imageUrl" alt="image" />
+      <img [src]="cardInfo.imageUrl || 'assets/images/spoon.png'" alt="image" />
     </div>
   </div>
 </div>

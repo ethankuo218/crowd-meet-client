@@ -3,13 +3,6 @@
 <ion-content class="event-create-content">
   <main class="main-area create-event-area">
     <div class="container">
-      <div class="head_arw">
-        <!-- <a class="gray tp_link tp_link_1 tp_active">Save</a> -->
-        <a class="gray tp_link tp_link_2" (click)="onSubmit()">Publish</a>
-        <a class="gray tp_link tp_link_3">
-          <fa-icon [icon]="['fas', 'ellipsis']"></fa-icon>
-        </a>
-      </div>
       <form [formGroup]="eventForm">
         <img
           [src]="eventCoverPictureUrl"
@@ -150,14 +143,20 @@
           >
           <div class="radio_div">
             <p>
-              <input type="radio" id="test1" name="radio-group" />
+              <input type="radio" id="test1" formControlName="isOnline" [value]="true"/>
               <label class="dark" for="test1">Yes</label>
             </p>
             <p>
-              <input type="radio" id="test2" name="radio-group" />
+              <input type="radio" id="test2" formControlName="isOnline" [value]="false"/>
               <label class="dark" for="test2">No</label>
             </p>
           </div>
+          <br>
+          <br>
+        </div>
+
+        <div class="event_content">
+          <button class="submit-button" (click)="onSubmit()">Create</button>
         </div>
       </form>
     </div>

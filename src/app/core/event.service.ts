@@ -30,7 +30,7 @@ export class EventService {
     return this.httpClientService.patch<Event>('event', body);
   }
 
-  selectImage(): Promise<void> {
+  selectImage(): Promise<string> {
     return this.imgUploadService.selectImage();
   }
 
@@ -39,7 +39,7 @@ export class EventService {
       switchMap((images: Blob[]): Observable<Image> => {
         const formData = new FormData();
         formData.append('file', images[0]);
-
+        console.log(formData.get('file'));
         return this.httpClientService.post<Image>(
           `event/${id}/image`,
           formData
