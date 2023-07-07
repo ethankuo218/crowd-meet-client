@@ -3,7 +3,7 @@ import { EventListStateFacade } from './states/event-list-state/event-list.state
 import { HttpClientService } from './http-client.service';
 import { Injectable } from '@angular/core';
 import { Event, EventSetting } from '../event/models/event.model';
-import { Observable, from, switchMap, tap } from 'rxjs';
+import { Observable, firstValueFrom, from, switchMap, tap } from 'rxjs';
 import { EventImageResponse } from './models/core.model';
 import { EventList } from './states/event-list-state/event-list.model';
 import { Image } from './states/user-state/user.model';
@@ -58,25 +58,27 @@ export class EventService {
     return this.eventListStateFacade.getEventList();
   }
 
-  reloadEventList(): void {
+  async reloadEventList(): Promise<void> {
     this.currentPage = 1;
-    this.httpClientService
-      .get<EventList>('event', { page: this.currentPage, pageSize: 10 })
-      .subscribe({
-        next: (result) => {
-          this.eventListStateFacade.storeEventList(result);
-        }
-      });
+    const result = await firstValueFrom(
+      this.httpClientService.get<EventList>('event', {
+        page: this.currentPage,
+        pageSize: 10
+      })
+    );
+
+    this.eventListStateFacade.storeEventList(result);
   }
 
-  loadNextPage(): void {
-    this.httpClientService
-      .get<EventList>('event', { page: ++this.currentPage, pageSize: 10 })
-      .subscribe({
-        next: (result) => {
-          this.eventListStateFacade.addEventList(result);
-        }
-      });
+  async loadNextPage(): Promise<void> {
+    const result = await firstValueFrom(
+      this.httpClientService.get<EventList>('event', {
+        page: ++this.currentPage,
+        pageSize: 10
+      })
+    );
+
+    this.eventListStateFacade.addEventList(result);
   }
 
   getEventImages(eventIds: number[]): Observable<EventImageResponse[]> {

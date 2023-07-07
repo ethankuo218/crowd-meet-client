@@ -1,9 +1,13 @@
-import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { EventListData } from 'src/app/core/states/event-list-state/event-list.model';
 import { EventService } from '../../core/event.service';
-import { InfiniteScrollCustomEvent } from '@ionic/angular';
+import {
+  InfiniteScrollCustomEvent,
+  RefresherCustomEvent
+} from '@ionic/angular';
 
 @Component({
   selector: 'app-listing',
@@ -13,23 +17,41 @@ import { InfiniteScrollCustomEvent } from '@ionic/angular';
     './styles/event-list.shell.scss'
   ]
 })
-export class EventListComponent {
+export class EventListComponent implements OnInit {
   listing$: Observable<EventListData[]> = this.eventService
     .getEventList()
     .pipe(map((result) => result?.data));
 
-  constructor(private eventService: EventService) {}
+  constructor(
+    private eventService: EventService,
+    private route: ActivatedRoute
+  ) {}
 
-  ionViewWillEnter() {
+  ngOnInit(): void {
     this.eventService.reloadEventList();
   }
 
-  ionViewWillLeave(): void {}
+  ionViewWillEnter() {}
 
-  onIonInfinite(ev: Event) {
-    this.eventService.loadNextPage();
-    setTimeout(() => {
-      (ev as InfiniteScrollCustomEvent).target.complete();
-    }, 500);
+  ionViewWillLeave(): void {
+    this.route.paramMap.pipe(take(1)).subscribe({
+      next: (params) => {
+        if (params.get('refresh')) {
+          this.eventService.reloadEventList();
+        }
+      }
+    });
+  }
+
+  handleRefresh(event: Event) {
+    this.eventService.reloadEventList().then(() => {
+      (event as RefresherCustomEvent).target.complete();
+    });
+  }
+
+  onIonInfinite(event: Event) {
+    this.eventService.loadNextPage().then(() => {
+      (event as InfiniteScrollCustomEvent).target.complete();
+    });
   }
 }

@@ -1,6 +1,9 @@
 <app-header></app-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <main class="article-area main-area">
     <div class="image_slider">
       <div class="pson_div">

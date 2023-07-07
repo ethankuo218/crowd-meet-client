@@ -142,7 +142,7 @@ export class EventCreateComponent implements OnInit {
       })
       .subscribe({
         next: () => {
-          this.router.navigate(['/app/event']);
+          this.router.navigate(['/app/event', { refresh: true }]);
         }
       });
   }
