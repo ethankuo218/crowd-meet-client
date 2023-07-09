@@ -14,7 +14,7 @@ const config: CapacitorConfig = {
       providers: ['google.com', 'apple.com', 'facebook.com']
     },
     PushNotifications: {
-      presentationOptions: ['badge', 'sound', 'alert']
+      presentationOptions: []
     }
   }
 };

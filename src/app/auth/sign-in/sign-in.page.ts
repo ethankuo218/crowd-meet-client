@@ -6,7 +6,10 @@ import {
   AuthStateChange,
   SignInResult
 } from '@capacitor-firebase/authentication';
-import { PushNotifications } from '@capacitor/push-notifications';
+import {
+  PushNotificationSchema,
+  PushNotifications
+} from '@capacitor/push-notifications';
 import { Subscription } from 'rxjs';
 
 import { HistoryHelperService } from '../../utils/history-helper.service';
@@ -90,7 +93,7 @@ export class SignInPage implements OnInit {
     // Show us the notification payload if the app is open on our device
     PushNotifications.addListener(
       'pushNotificationReceived',
-      (notification: any) => {
+      (notification: PushNotificationSchema) => {
         console.log('Push received: ' + JSON.stringify(notification));
       }
     );
@@ -102,6 +105,15 @@ export class SignInPage implements OnInit {
         console.log('Push action performed: ' + JSON.stringify(notification));
       }
     );
+  }
+
+  async unregister() {
+    try {
+      await PushNotifications.unregister();
+      await PushNotifications.removeAllListeners();
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   public async doFacebookLogin(): Promise<void> {
