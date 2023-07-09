@@ -1,7 +1,8 @@
+import { UserStateFacade } from './../../core/states/user-state/user.state.facade';
 import { EventService } from '../../core/event.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Event } from '../models/event.model';
 import { Browser } from '@capacitor/browser';
@@ -16,59 +17,28 @@ import { Browser } from '@capacitor/browser';
 })
 export class EventDetailComponent implements OnInit {
   // Gather all component subscription in one place. Can be one Subscription or multiple (chained using the Subscription.add() method)
-  subscriptions: Subscription | undefined;
+  eventDetail$: Observable<Event> = this.route.params.pipe(
+    // Extract data for this page
+    switchMap((params) => {
+      return this.eventService.getEventDetail(params['id']);
+    })
+  );
 
-  details: Event = {
-    imageUrl: '',
-    videoUrl: '',
-    title: '',
-    description: '',
-    startTime: '',
-    endTime: '',
-    maxParticipants: 0,
-    locationName: '',
-    price: 0,
-    categories: [],
-    creator: {
-      userId: 0,
-      email: '',
-      name: '',
-      profilePictureUrl: '',
-      bio: '',
-      interests: [],
-      images: [],
-      gender: '',
-      birthDate: ''
-    },
-    eventId: 0
-  };
+  user$ = this.userStateFacade.getUser();
+
+  comment: string | undefined;
+
+  participants = [1, 2, 3, 4, 5, 6];
 
   constructor(
     private route: ActivatedRoute,
-    private eventService: EventService
+    private eventService: EventService,
+    private userStateFacade: UserStateFacade
   ) {}
 
-  ngOnInit(): void {
-    this.subscriptions = this.route.params
-      .pipe(
-        // Extract data for this page
-        switchMap((params) => {
-          return this.eventService.getEventDetail(params['id']);
-        })
-      )
-      .subscribe({
-        next: (state) => {
-          this.details = state;
-        },
-        error: (error) => console.log(error)
-      });
-  }
+  ngOnInit(): void {}
 
-  // NOTE: Ionic only calls ngOnDestroy if the page was popped (ex: when navigating back)
-  // Since ngOnDestroy might not fire when you navigate from the current page, use ionViewWillLeave to cleanup Subscriptions
-  ionViewWillLeave(): void {
-    this.subscriptions?.unsubscribe();
-  }
+  ionViewWillLeave(): void {}
 
   async openMap(): Promise<void> {
     // get the place details from server
@@ -84,5 +54,10 @@ export class EventDetailComponent implements OnInit {
     let url = `https://www.google.com/maps/search/?api=1&query=${mockPlaceDetails.lat},${mockPlaceDetails.lng}&query_place_id=${mockPlaceDetails.placeId}`;
 
     await Browser.open({ url });
+  }
+
+  addComment(): void {
+    console.log(this.comment);
+    delete this.comment;
   }
 }
