@@ -18,3 +18,11 @@ export interface EventImageResponse {
   eventId: number;
   imageUrl: string;
 }
+
+export interface EventActionResponse {
+  id: number;
+  eventId: number;
+  userId: number;
+  registeredAt: string;
+  status: string;
+}

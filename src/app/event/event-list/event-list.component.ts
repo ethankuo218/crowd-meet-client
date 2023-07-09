@@ -28,7 +28,7 @@ export class EventListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.eventService.reloadEventList();
+    this.eventService.reload();
   }
 
   ionViewWillEnter() {}
@@ -37,14 +37,14 @@ export class EventListComponent implements OnInit {
     this.route.paramMap.pipe(take(1)).subscribe({
       next: (params) => {
         if (params.get('refresh')) {
-          this.eventService.reloadEventList();
+          this.eventService.reload();
         }
       }
     });
   }
 
   handleRefresh(event: Event) {
-    this.eventService.reloadEventList().then(() => {
+    this.eventService.reload().then(() => {
       (event as RefresherCustomEvent).target.complete();
     });
   }

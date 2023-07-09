@@ -4,7 +4,7 @@ import { HttpClientService } from './http-client.service';
 import { Injectable } from '@angular/core';
 import { Event, EventSetting } from '../event/models/event.model';
 import { Observable, firstValueFrom, from, switchMap, tap } from 'rxjs';
-import { EventImageResponse } from './models/core.model';
+import { EventActionResponse, EventImageResponse } from './models/core.model';
 import { EventList } from './states/event-list-state/event-list.model';
 import { Image } from './states/user-state/user.model';
 
@@ -58,7 +58,7 @@ export class EventService {
     return this.eventListStateFacade.getEventList();
   }
 
-  async reloadEventList(): Promise<void> {
+  async reload(): Promise<void> {
     this.currentPage = 1;
     const result = await firstValueFrom(
       this.httpClientService.get<EventList>('event', {
@@ -87,5 +87,46 @@ export class EventService {
     });
   }
 
-  deleteEvent() {}
+  // event related actions
+  apply(id: number): Observable<EventActionResponse> {
+    return this.httpClientService.post<EventActionResponse>(
+      `event/${id}/apply`,
+      {}
+    );
+  }
+
+  leave(id: number): Observable<EventActionResponse> {
+    return this.httpClientService.patch<EventActionResponse>(
+      `event/${id}/leave`,
+      {}
+    );
+  }
+
+  accept(id: number, acceptUsers: number[]): Observable<EventActionResponse> {
+    return this.httpClientService.patch<EventActionResponse>(
+      `event/${id}/accept`,
+      {
+        userIds: acceptUsers
+      }
+    );
+  }
+
+  decline(
+    id: number,
+    declinedUsers: number[]
+  ): Observable<EventActionResponse> {
+    return this.httpClientService.patch<EventActionResponse>(
+      `event/${id}/decline`,
+      {
+        userIds: declinedUsers
+      }
+    );
+  }
+
+  kick(id: number, userId: number): Observable<EventActionResponse> {
+    return this.httpClientService.patch<EventActionResponse>(
+      `event/${id}/kick/${userId}`,
+      {}
+    );
+  }
 }
