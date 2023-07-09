@@ -47,6 +47,16 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'history',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../history/history.module').then((m) => m.HistoryModule)
+          }
+        ]
+      },
+      {
         path: 'notifications',
         children: [
           {

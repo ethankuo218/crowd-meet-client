@@ -1,0 +1,81 @@
+mat-tab-group {
+  --mat-tab-header-active-ripple-color: none;
+  --mdc-tab-indicator-active-indicator-color: #246bfd;
+  --mat-tab-header-active-label-text-color: #246bfd;
+  --mat-tab-header-inactive-ripple-color: #246bfd;
+  --mat-tab-header-active-focus-label-text-color: #246bfd;
+  --mat-tab-header-active-hover-label-text-color: #246bfd;
+  --mat-tab-header-active-focus-indicator-color: #246bfd;
+  --mat-tab-header-active-hover-indicator-color: #246bfd;
+}
+
+::ng-deep .mat-mdc-tab-header {
+  --mat-tab-header-label-text-weight: 600;
+}
+
+.cause_content {
+  display: flex;
+  padding: 0 25px;
+  margin: 0 0 15px;
+
+  .cause_image {
+    width: 25%;
+
+    img {
+      border-radius: 17px;
+      width: 5rem;
+      height: 5rem;
+      object-fit: cover;
+    }
+  }
+
+  .inr_cause_content {
+    width: 65%;
+    height: 100%;
+
+    small {
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    p {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.4;
+      height: 1.5rem;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+    }
+
+    p.content {
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.4;
+      height: 2.3rem;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+  }
+
+  .tool_btn {
+    width: 10%;
+
+    button {
+      width: 100%;
+      padding-top: 0.5rem;
+
+      fa-icon{
+        font-size: 18px;
+        color: #000000;
+      }
+    }
+  }
+}
+
+menu {
+  width: 5rem;
+}

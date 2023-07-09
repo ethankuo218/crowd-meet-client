@@ -1,0 +1,63 @@
+<app-header></app-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <main class="history-area main-area">
+    <mat-tab-group>
+      <mat-tab>
+        <ng-template mat-tab-label> Upcoming </ng-template>
+        <br />
+        <div class="cause_content">
+          <div class="cause_image">
+            <img
+              [src]="cardInfo.imageUrl || 'assets/images/spoon.png'"
+              alt="image"
+            />
+          </div>
+          <div class="inr_cause_content">
+            <small class="dark_dd">{{ 'Wed, Dec 3, 2023' }}</small>
+            <p class="dark">
+              {{ cardInfo.title }}
+            </p>
+            <p class="content dark_dd">
+              {{ cardInfo.description }}
+            </p>
+          </div>
+          <div class="tool_btn">
+            <button id="menu" (click)="openMenu()">
+              <fa-icon [icon]="['fas', 'ellipsis-vertical']"></fa-icon>
+            </button>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label> Joined </ng-template>
+        <br />
+        <div class="cause_content">
+          <div class="cause_image">
+            <img
+              [src]="cardInfo.imageUrl || 'assets/images/spoon.png'"
+              alt="image"
+            />
+          </div>
+          <div class="inr_cause_content">
+            <small class="dark_dd">{{ 'Wed, Dec 3, 2023' }}</small>
+            <p class="dark">
+              {{ cardInfo.title }}
+            </p>
+            <p class="content dark_dd">
+              {{ cardInfo.description }}
+            </p>
+          </div>
+          <div class="tool_btn">
+            <button class="dark">
+              <fa-icon [icon]="['fas', 'ellipsis-vertical']"></fa-icon>
+            </button>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </main>
+</ion-content>
