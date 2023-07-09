@@ -1,17 +1,18 @@
 .cause_content {
+  display: flex;
   padding: 0 25px;
   margin: 0 0 15px;
 }
 
 .cause_image {
   width: 35%;
-  padding: 0 0 0 1rem;
+  padding: 0 0.7rem;
 }
 
 .cause_image img {
   border-radius: 17px;
   width: 100%;
-  height: 7.5rem;
+  height: 6.4rem;
   object-fit: cover;
 }
 
@@ -52,10 +53,29 @@
 }
 
 .inr_cause_content a {
+  width: 100%;
   font-size: 11px;
-  padding: 6px 9px;
   border-radius: 8px;
   background: #eef4ff;
   font-weight: 600;
-  margin: 8px 0.2rem 0 0;
+  padding: 0.1rem 0.4rem;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cause_content
+  ::ng-deep
+  .swiper-wrapper
+  .swiper-slide:first-child.swiper-slide-active {
+  margin-left: 0;
+}
+
+.cause_content ::ng-deep .swiper-wrapper {
+  padding-bottom: 20px;
+}
+
+swiper {
+  margin: 0;
 }

@@ -33,14 +33,17 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [EventListComponent, EventDetailComponent],
+  declarations: [
+    EventListComponent,
+    EventDetailComponent,
+    ListingCardComponent
+  ],
   imports: [
     IonicModule,
     FontAwesomeModule,
     CommonModule,
     RouterModule.forChild(routes),
     ShellModule,
-    ListingCardComponent,
     HeaderComponent,
     SwiperModule,
     FormsModule

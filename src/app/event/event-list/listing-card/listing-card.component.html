@@ -1,23 +1,21 @@
 <div class="cause_content" [routerLink]="['/app/event/', cardInfo.eventId]">
-  <div class="row">
-    <div class="inr_cause_content">
-      <small class="dark_dd">{{
-        cardInfo.startTime | date : 'MMM d. y'
-      }}</small>
-      <p class="dark">
-        {{ cardInfo.title }}
-      </p>
-      <p class="content dark_dd">
-        {{ cardInfo.description }}
-      </p>
-      <div>
-        <ng-container *ngFor="let item of cardInfo.categories; let i = index">
+  <div class="inr_cause_content">
+    <small class="dark_dd">{{ cardInfo.startTime | date : 'MMM d. y' }}</small>
+    <p class="dark">
+      {{ cardInfo.title }}
+    </p>
+    <p class="content dark_dd">
+      {{ cardInfo.description }}
+    </p>
+    <swiper [slidesPerView]="3" [spaceBetween]="10">
+      <ng-container *ngFor="let item of cardInfo.categories; let i = index">
+        <ng-template swiperSlide>
           <a *ngIf="i < 2" class="primary">{{ item.name }}</a>
-        </ng-container>
-      </div>
-    </div>
-    <div class="cause_image">
-      <img [src]="cardInfo.imageUrl || 'assets/images/spoon.png'" alt="image" />
-    </div>
+        </ng-template>
+      </ng-container>
+    </swiper>
+  </div>
+  <div class="cause_image">
+    <img [src]="cardInfo.imageUrl || 'assets/images/spoon.png'" alt="image" />
   </div>
 </div>
