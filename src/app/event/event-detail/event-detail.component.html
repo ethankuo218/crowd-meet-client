@@ -75,7 +75,10 @@
                   <h3>Participants</h3>
                   <div class="joiner_list">
                     <ng-container
-                      *ngFor="let item of participants; let i = index"
+                      *ngFor="
+                        let participant of eventDetail.participants;
+                        let i = index
+                      "
                     >
                       <div *ngIf="i < 4" class="joiner">
                         <img [src]="'assets/images/profile1.jpg'" />
@@ -137,12 +140,18 @@
     </main>
   </ion-content>
 
-  <ion-footer class="ion-no-border">
-    <ion-toolbar>
-      <h3>Free</h3>
-      <ion-button slot="end" (click)="joinEvent(eventDetail.eventId)"
-        >Join</ion-button
-      >
-    </ion-toolbar>
-  </ion-footer>
+  <ng-container *ngIf="user$ | async as user">
+    <ion-footer class="ion-no-border">
+      <ion-toolbar>
+        <h3>Free</h3>
+        <ion-button
+          slot="end"
+          [disabled]="user.userId === eventDetail.creator.userId"
+          (click)="joinEvent(eventDetail.eventId)"
+        >
+          Join
+        </ion-button>
+      </ion-toolbar>
+    </ion-footer>
+  </ng-container>
 </ng-container>

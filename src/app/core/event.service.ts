@@ -90,7 +90,7 @@ export class EventService {
   // event related actions
   apply(id: number): Observable<EventActionResponse> {
     return this.httpClientService.post<EventActionResponse>(
-      `event/${id}/apply`,
+      `event/${id}/participants`,
       {}
     );
   }
