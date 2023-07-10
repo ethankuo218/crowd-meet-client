@@ -43,8 +43,39 @@
           </label>
           <ion-textarea
             class="dark_dd"
+            placeholder="Event Description"
             formControlName="description"
           ></ion-textarea>
+        </div>
+
+        <div class="event_content">
+          <label class="d-block" for="isOnline"
+            ><span class="dark">Is Online Event</span></label
+          >
+          <div class="radio_div">
+            <p>
+              <input
+                type="radio"
+                id="test1"
+                formControlName="isOnline"
+                [value]="true"
+                (ngModelChange)="onIsOnlineChange($event)"
+              />
+              <label class="dark" for="test1">Yes</label>
+            </p>
+            <p>
+              <input
+                type="radio"
+                id="test2"
+                formControlName="isOnline"
+                [value]="false"
+                (ngModelChange)="onIsOnlineChange($event)"
+              />
+              <label class="dark" for="test2">No</label>
+            </p>
+          </div>
+          <br />
+          <br />
         </div>
 
         <div class="event_content">
@@ -139,35 +170,9 @@
         </div>
 
         <div class="event_content">
-          <label class="d-block" for="isOnline"
-            ><span class="dark">Is Online Event</span></label
-          >
-          <div class="radio_div">
-            <p>
-              <input
-                type="radio"
-                id="test1"
-                formControlName="isOnline"
-                [value]="true"
-              />
-              <label class="dark" for="test1">Yes</label>
-            </p>
-            <p>
-              <input
-                type="radio"
-                id="test2"
-                formControlName="isOnline"
-                [value]="false"
-              />
-              <label class="dark" for="test2">No</label>
-            </p>
-          </div>
-          <br />
-          <br />
-        </div>
-
-        <div class="event_content">
-          <button class="submit-button" (click)="onSubmit()">Create</button>
+          <button class="submit-button" (click)="onSubmit()">
+            {{ mode === 'edit' ? 'Confirm' : 'Create' }}
+          </button>
         </div>
       </form>
     </div>

@@ -147,9 +147,10 @@
 
 .event_content ion-textarea {
   width: 100%;
+  height: 10rem;
   border-radius: 11px;
   background: #fafafa;
-  padding: 16px 18px;
+  padding: 0 1rem;
   border: none;
   font-size: 14px;
   margin: 0 0 25px;
@@ -160,7 +161,7 @@
   width: 100%;
   border-radius: 11px;
   background: #fafafa;
-  padding: 16px 18px;
+  padding: 0 1rem!important;
   border: none;
   font-size: 14px;
   margin: 0 0 25px;

@@ -25,4 +25,17 @@ export interface Event {
   categories: Category[];
   creator: User;
   eventId: number;
+  lat: number;
+  lng: number;
+  formattedAddress: string;
+  placeId: string;
+  participants: Participant[];
+  isOnline: boolean;
+}
+
+interface Participant {
+  userId: number;
+  registeredAt: string;
+  status: string;
+  leftAt: string;
 }

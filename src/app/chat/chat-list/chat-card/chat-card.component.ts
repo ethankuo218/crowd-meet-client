@@ -63,7 +63,7 @@ export class ChatCardComponent implements OnInit, OnDestroy {
 
   navigateToChat() {
     this.chatService.memberInfos = this.chat.memberInfos;
-    this.router.navigate(['/app/chat', this.chat.chatId]);
+    this.router.navigate(['/app/chat/list', this.chat.chatId]);
   }
 
   private formatTimestamp(timestamp: number): string {

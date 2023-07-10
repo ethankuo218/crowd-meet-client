@@ -1,8 +1,8 @@
-<app-header></app-header>
+<app-header (menuEvent)="onMenuClick($event)"></app-header>
 
-<ion-content class="event-detail-content">
-  <main class="event-detail-area main-area">
-    <ng-container *ngIf="eventDetail$ | async as eventDetail">
+<ng-container *ngIf="eventDetail$ | async as eventDetail">
+  <ion-content class="event-detail-content">
+    <main class="event-detail-area main-area">
       <div class="cover_photo">
         <img
           [src]="
@@ -134,6 +134,15 @@
           </div>
         </div>
       </div>
-    </ng-container>
-  </main>
-</ion-content>
+    </main>
+  </ion-content>
+
+  <ion-footer class="ion-no-border">
+    <ion-toolbar>
+      <h3>Free</h3>
+      <ion-button slot="end" (click)="joinEvent(eventDetail.eventId)"
+        >Join</ion-button
+      >
+    </ion-toolbar>
+  </ion-footer>
+</ng-container>

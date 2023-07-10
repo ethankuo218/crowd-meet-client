@@ -1,8 +1,8 @@
 import { UserStateFacade } from './../../core/states/user-state/user.state.facade';
 import { EventService } from '../../core/event.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, firstValueFrom } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Event } from '../models/event.model';
 import { Browser } from '@capacitor/browser';
@@ -32,6 +32,7 @@ export class EventDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private eventService: EventService,
     private userStateFacade: UserStateFacade
   ) {}
@@ -59,5 +60,21 @@ export class EventDetailComponent implements OnInit {
   addComment(): void {
     console.log(this.comment);
     delete this.comment;
+  }
+
+  async onMenuClick(action: string): Promise<void> {
+    switch (action) {
+      case 'edit':
+        const eventInfo = await firstValueFrom(this.eventDetail$);
+        this.router.navigate([
+          '/app/event-create',
+          { mode: 'edit', eventInfo: JSON.stringify(eventInfo) }
+        ]);
+        break;
+    }
+  }
+
+  joinEvent(id: number): void {
+    this.eventService.apply(id).subscribe();
   }
 }

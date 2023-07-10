@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IonicModule } from '@ionic/angular';
+import { ActionSheetController } from '@ionic/angular';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,32 @@ import { IonicModule } from '@ionic/angular';
   imports: [CommonModule, IonicModule, FontAwesomeModule]
 })
 export class HeaderComponent implements OnInit {
-  constructor() {}
+  @Output() menuEvent = new EventEmitter();
+
+  constructor(private actionSheetController: ActionSheetController) {}
 
   ngOnInit() {}
+
+  async openMenu() {
+    const actionSheet = await this.actionSheetController.create({
+      buttons: [
+        {
+          text: 'Edit',
+          role: 'edit',
+          // cssClass: 'leave_button',
+          handler: () => {
+            this.menuEvent.emit('edit');
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    await actionSheet.present();
+  }
 }

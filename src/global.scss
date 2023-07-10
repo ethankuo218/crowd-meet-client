@@ -307,3 +307,21 @@ textarea:focus {
 .leave_button{
   color: red!important;
 }
+
+
+ion-toolbar {
+  --background: #fff;
+
+  h3 {
+    font-size: 16px;
+    padding: 0 1rem;
+    font-weight: 600;
+  }
+
+  ion-button {
+    width: 40%;
+    height: 2.5rem;
+    --background: #246bfd;
+    font-weight: 600;
+  }
+}

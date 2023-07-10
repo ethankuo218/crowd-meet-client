@@ -23,7 +23,7 @@ const routes: Routes = [
         component: ChatListComponent
       },
       {
-        path: ':id',
+        path: 'list/:id',
         component: ChatRoomComponent
       }
     ]

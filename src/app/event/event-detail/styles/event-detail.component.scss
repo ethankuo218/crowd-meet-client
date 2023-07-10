@@ -4,8 +4,17 @@
 
 .cover_photo img {
   width: 100%;
-  height: 17rem;
+  height: 15rem;
   object-fit: cover;
+}
+
+.cover_photo button {
+  position: absolute;
+  width: 3rem;
+  height: 3rem;
+  fa-icon {
+    color: #fff;
+  }
 }
 
 .event_content h3 {

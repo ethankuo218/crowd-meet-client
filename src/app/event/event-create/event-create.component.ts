@@ -11,11 +11,12 @@ import {
 
 import { counterRangeValidator } from '../../components/counter-input/counter-input.component';
 import { take } from 'rxjs';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/core/states/reference-state/reference.model';
 import { GoogleMapsLoaderService } from 'src/app/core/google-maps-loader.service';
 import { Geolocation } from '@capacitor/geolocation';
 import { IonInput } from '@ionic/angular';
+import { Event } from '../models/event.model';
 
 @Component({
   selector: 'app-create-page',
@@ -23,6 +24,7 @@ import { IonInput } from '@ionic/angular';
   styleUrls: ['./styles/event-create.component.scss']
 })
 export class EventCreateComponent implements OnInit {
+  mode: string = 'create';
   eventCoverPictureUrl: string | undefined;
 
   @ViewChild('searchInput', { read: IonInput })
@@ -63,6 +65,7 @@ export class EventCreateComponent implements OnInit {
     private referenceStateFacade: ReferenceStateFacade,
     private eventService: EventService,
     private router: Router,
+    private route: ActivatedRoute,
     private googleMapsLoaderService: GoogleMapsLoaderService,
     private ngZone: NgZone
   ) {}
@@ -125,10 +128,20 @@ export class EventCreateComponent implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.eventForm.reset();
-    this.eventForm.get('maxParticipants')?.setValue(1);
-    delete this.eventCoverPictureUrl;
-    delete this.selectLocation;
+    this.route.paramMap.pipe(take(1)).subscribe((params) => {
+      this.mode = params.get('mode')!;
+      this.eventForm.reset();
+      this.eventForm.get('maxParticipants')?.setValue(1);
+      delete this.eventCoverPictureUrl;
+      delete this.selectLocation;
+
+      if (this.mode === 'edit') {
+        const eventInfo: Event = JSON.parse(params.get('eventInfo')!);
+        this.eventForm.patchValue(eventInfo);
+        this.eventCoverPictureUrl = eventInfo.imageUrl;
+        this.onIsOnlineChange(eventInfo.isOnline);
+      }
+    });
   }
 
   onSubmit() {
@@ -162,5 +175,18 @@ export class EventCreateComponent implements OnInit {
 
   trackByIndex(index: number, item: Category): number {
     return index;
+  }
+
+  onIsOnlineChange(value: boolean) {
+    if (value) {
+      this.location.reset();
+      this.location.clearValidators();
+      this.location.disable();
+      this.location.updateValueAndValidity();
+    } else {
+      this.location.setValidators([Validators.required]);
+      this.location.enable();
+      this.location.updateValueAndValidity();
+    }
   }
 }
