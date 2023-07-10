@@ -61,6 +61,8 @@ export class EventCreateComponent implements OnInit {
     return this.eventForm.get('locationName')!;
   }
 
+  minDate: string = '';
+
   constructor(
     private referenceStateFacade: ReferenceStateFacade,
     private eventService: EventService,
@@ -135,11 +137,23 @@ export class EventCreateComponent implements OnInit {
       delete this.eventCoverPictureUrl;
       delete this.selectLocation;
 
+      const today = new Date().toISOString().split('.')[0];
+      this.minDate = today;
+
       if (this.mode === 'edit') {
         const eventInfo: Event = JSON.parse(params.get('eventInfo')!);
         this.eventForm.patchValue(eventInfo);
+        this.eventForm
+          .get('startTime')
+          ?.patchValue(eventInfo.startTime.split('.')[0]);
+        this.eventForm
+          .get('endTime')
+          ?.patchValue(eventInfo.endTime.split('.')[0]);
         this.eventCoverPictureUrl = eventInfo.imageUrl;
         this.onIsOnlineChange(eventInfo.isOnline);
+      } else {
+        this.eventForm.get('startTime')?.patchValue(today.split('.')[0]);
+        this.eventForm.get('endTime')?.patchValue(today.split('.')[0]);
       }
     });
   }

@@ -128,6 +128,7 @@
             id="start-time"
             type="datetime-local"
             placeholder="Article Title"
+            [min]="minDate"
             formControlName="startTime"
           ></ion-input>
         </div>
@@ -141,6 +142,7 @@
             id="end-time"
             type="datetime-local"
             placeholder="Article Title"
+            [min]="minDate"
             formControlName="endTime"
           ></ion-input>
         </div>
