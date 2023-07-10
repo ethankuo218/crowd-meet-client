@@ -5,9 +5,10 @@
     <div class="container">
       <form [formGroup]="eventForm">
         <img
-          [src]="eventCoverPictureUrl"
-          class="event_image"
           *ngIf="eventCoverPictureUrl; else empty"
+          class="event_image"
+          [src]="eventCoverPictureUrl"
+          (click)="selectImage()"
         />
 
         <ng-template #empty>
@@ -143,16 +144,26 @@
           >
           <div class="radio_div">
             <p>
-              <input type="radio" id="test1" formControlName="isOnline" [value]="true"/>
+              <input
+                type="radio"
+                id="test1"
+                formControlName="isOnline"
+                [value]="true"
+              />
               <label class="dark" for="test1">Yes</label>
             </p>
             <p>
-              <input type="radio" id="test2" formControlName="isOnline" [value]="false"/>
+              <input
+                type="radio"
+                id="test2"
+                formControlName="isOnline"
+                [value]="false"
+              />
               <label class="dark" for="test2">No</label>
             </p>
           </div>
-          <br>
-          <br>
+          <br />
+          <br />
         </div>
 
         <div class="event_content">
