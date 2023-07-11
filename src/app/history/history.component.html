@@ -9,23 +9,28 @@
       <mat-tab>
         <ng-template mat-tab-label> Upcoming </ng-template>
         <br />
-        <div class="cause_content">
+        <div
+          class="cause_content"
+          *ngFor="let item of upcoming$ | async; trackBy: trackByIndex"
+          (click)="writeReview()"
+        >
           <div class="cause_image">
             <img
-              [src]="cardInfo.imageUrl || 'assets/images/spoon.png'"
+              [src]="item.imageUrl || 'assets/images/spoon.png'"
               alt="image"
             />
           </div>
           <div class="inr_cause_content">
             <div class="content-row">
-              <small class="dark_dd">{{ 'Wed, Dec 3, 2023' }}</small>
-              <div class="tag">Ongoing</div>
+              <small class="dark_dd">{{
+                item.startTime | date : 'EEE, MMM d, y'
+              }}</small>
             </div>
             <p class="dark">
-              {{ cardInfo.title }}
+              {{ item.title }}
             </p>
             <p class="content dark_dd">
-              {{ cardInfo.description }}
+              {{ item.description }}
             </p>
           </div>
           <div class="tool_btn">
@@ -38,27 +43,35 @@
       <mat-tab>
         <ng-template mat-tab-label> Joined </ng-template>
         <br />
-        <div class="cause_content">
+        <div
+          class="cause_content"
+          *ngFor="let item of joined$ | async; trackBy: trackByIndex"
+        >
           <div class="cause_image">
             <img
-              [src]="cardInfo.imageUrl || 'assets/images/spoon.png'"
+              [src]="item.imageUrl || 'assets/images/spoon.png'"
               alt="image"
             />
           </div>
           <div class="inr_cause_content">
-            <small class="dark_dd">{{ 'Wed, Dec 3, 2023' }}</small>
+            <div class="content-row">
+              <small class="dark_dd">{{
+                item.startTime | date : 'EEE, MMM d, y'
+              }}</small>
+              <div *ngIf="getIsOngoing(item.endTime)" class="tag">Ongoing</div>
+            </div>
             <p class="dark">
-              {{ cardInfo.title }}
+              {{ item.title }}
             </p>
             <p class="content dark_dd">
-              {{ cardInfo.description }}
+              {{ item.description }}
             </p>
           </div>
-          <div class="tool_btn">
+          <!-- <div class="tool_btn">
             <button class="dark">
               <fa-icon [icon]="['fas', 'ellipsis-vertical']"></fa-icon>
             </button>
-          </div>
+          </div> -->
         </div>
       </mat-tab>
     </mat-tab-group>

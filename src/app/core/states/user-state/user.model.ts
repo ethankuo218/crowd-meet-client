@@ -17,3 +17,12 @@ export interface Image {
   order: number;
   url: string;
 }
+
+export interface UserEvent {
+  eventId: number;
+  title: string;
+  description: string;
+  startTime: string;
+  endTime: string;
+  imageUrl: string;
+}

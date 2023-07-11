@@ -4,7 +4,7 @@ import { Observable, firstValueFrom, forkJoin, map, tap } from 'rxjs';
 import { HttpClientService } from './http-client.service';
 import { Injectable } from '@angular/core';
 import { LoginResponse, ProfilePictureResponse } from './models/core.model';
-import { Image, User } from './states/user-state/user.model';
+import { Image, User, UserEvent } from './states/user-state/user.model';
 import { Reference } from './states/reference-state/reference.model';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
@@ -112,5 +112,19 @@ export class UserService {
     return this.httpClientService
       .get<ProfilePictureResponse>(`user/profile-picture?${params}`)
       .pipe(map((resp) => resp.images));
+  }
+
+  getEvents(): Observable<UserEvent[]> {
+    return this.userStateFacade.getUserEvents();
+  }
+
+  async reloadUserEvents(): Promise<void> {
+    const userId = (await firstValueFrom(this.userStateFacade.getUser()))
+      .userId;
+    this.httpClientService.get<UserEvent[]>(`user/${userId}/events`).subscribe({
+      next: (result) => {
+        this.userStateFacade.storeUserEvents(result);
+      }
+    });
   }
 }

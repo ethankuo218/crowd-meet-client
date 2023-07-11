@@ -1,5 +1,5 @@
 import { Reference } from './reference-state/reference.model';
-import { User } from './user-state/user.model';
+import { User, UserEvent } from './user-state/user.model';
 import { createReducer, on } from '@ngrx/store';
 import * as UserStateActions from './user-state/user.actions';
 import * as ReferenceStateActions from './reference-state/reference.actions';
@@ -7,6 +7,7 @@ import * as EventListStateActions from './event-list-state/event-list.actions';
 import { EventList } from './event-list-state/event-list.model';
 
 export const userFeatureKey = 'user';
+export const userEventsFeatureKey = 'userEvents';
 export const referenceFeatureKey = 'reference';
 export const eventListFeatureKey = 'eventList';
 
@@ -22,6 +23,7 @@ export const initialState: State = {
     gender: '',
     birthDate: ''
   },
+  userEvents: [],
   reference: {
     categories: []
   },
@@ -41,6 +43,13 @@ export const userReducer = createReducer(
     ...state,
     ...userInfo
   }))
+);
+
+export const userEventsReducer = createReducer(
+  initialState.userEvents,
+  on(UserStateActions.storeUserEventsState, (state, { userEvents }) => [
+    ...userEvents
+  ])
 );
 
 export const referenceReducer = createReducer(
@@ -65,6 +74,7 @@ export const eventListReducer = createReducer(
 
 interface State {
   user: User;
+  userEvents: UserEvent[];
   reference: Reference;
   eventList: EventList;
 }

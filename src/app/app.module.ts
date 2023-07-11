@@ -28,7 +28,9 @@ import {
   eventListReducer,
   referenceFeatureKey,
   referenceReducer,
+  userEventsReducer,
   userFeatureKey,
+  userEventsFeatureKey,
   userReducer
 } from './core/states/state.reducer';
 
@@ -69,6 +71,7 @@ export function createTranslateLoader(http: HttpClient) {
     CoreModule,
     StoreModule.forRoot({
       [userFeatureKey]: userReducer,
+      [userEventsFeatureKey]: userEventsReducer,
       [referenceFeatureKey]: referenceReducer,
       [eventListFeatureKey]: eventListReducer
     }),
