@@ -14,6 +14,8 @@ import { Subscription } from 'rxjs';
 
 import { HistoryHelperService } from '../../utils/history-helper.service';
 import { AuthService } from '../../core/auth.service';
+import { AdMob } from '@capacitor-community/admob';
+import { BannerAdPosition, BannerAdSize } from '@capacitor-community/admob';
 
 @Component({
   selector: 'app-sign-in',
@@ -54,7 +56,8 @@ export class SignInPage implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    await this.showBanner();
     this.route.params.subscribe((params) => {
       if (params['logout']) {
         this.authService.signOut().then(() => {
@@ -105,6 +108,32 @@ export class SignInPage implements OnInit {
         console.log('Push action performed: ' + JSON.stringify(notification));
       }
     );
+  }
+
+  async showBanner() {
+    const { status } = await AdMob.trackingAuthorizationStatus();
+
+    if (status === 'notDetermined') {
+    }
+
+    await AdMob.initialize({
+      requestTrackingAuthorization: true,
+      testingDevices: ['testDeviceID'],
+      initializeForTesting: true
+    });
+    // To show a banner ad
+    AdMob.showBanner({
+      adId: 'test',
+      isTesting: true,
+      adSize: BannerAdSize.ADAPTIVE_BANNER,
+      position: BannerAdPosition.CENTER
+    })
+      .then(() => {
+        console.log('Banner Ad Shown');
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   }
 
   async unregister() {
