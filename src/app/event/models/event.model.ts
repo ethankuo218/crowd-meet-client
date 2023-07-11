@@ -39,3 +39,15 @@ interface Participant {
   status: string;
   leftAt: string;
 }
+
+export interface EventComment {
+  commentId: number;
+  content: string;
+  createdAt: string;
+  eventId: number;
+  user: {
+    userId: number;
+    name: string;
+    profilePictureUrl: string;
+  };
+}

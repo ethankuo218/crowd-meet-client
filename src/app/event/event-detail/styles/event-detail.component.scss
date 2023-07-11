@@ -233,7 +233,7 @@
           width: 17%;
           margin-right: 3%;
           img {
-            width: 3.5rem;
+            width: 3.3rem;
             border-radius: 50%;
           }
         }
@@ -255,6 +255,7 @@
       }
 
       p {
+        min-height: 3rem;
         font-size: 15px;
         font-weight: 500;
         line-height: 22px;
@@ -293,17 +294,21 @@
         width: 100%;
         border-radius: 11px;
         background: #fafafa;
-        padding: 16px 18px;
+        padding: 0.8rem 2.2rem 0.8rem 1rem;
         border: navajowhite;
         font-size: 14px;
         position: relative;
       }
 
-      button {
+      ion-button {
+        --background: transparent;
         font-size: 16px;
         position: absolute;
-        top: 1.5rem;
-        right: 1rem;
+        right: 0;
+
+        fa-icon {
+          color: black;
+        }
       }
     }
   }

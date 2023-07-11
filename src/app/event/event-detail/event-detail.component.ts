@@ -1,6 +1,6 @@
 import { UserStateFacade } from './../../core/states/user-state/user.state.facade';
 import { EventService } from '../../core/event.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, firstValueFrom } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -24,7 +24,9 @@ export class EventDetailComponent implements OnInit {
     })
   );
 
-  user$ = this.userStateFacade.getUser();
+  user$ = inject(UserStateFacade).getUser();
+
+  comments$ = this.eventService.getComment();
 
   comment: string | undefined;
 
@@ -33,8 +35,7 @@ export class EventDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private eventService: EventService,
-    private userStateFacade: UserStateFacade
+    private eventService: EventService
   ) {}
 
   ngOnInit(): void {}
@@ -57,8 +58,8 @@ export class EventDetailComponent implements OnInit {
     await Browser.open({ url });
   }
 
-  addComment(): void {
-    console.log(this.comment);
+  leaveComment(id: number): void {
+    this.eventService.leaveComment(id, this.comment!).subscribe();
     delete this.comment;
   }
 
