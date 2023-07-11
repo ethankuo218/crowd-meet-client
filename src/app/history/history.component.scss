@@ -79,3 +79,19 @@ mat-tab-group {
 menu {
   width: 5rem;
 }
+
+.content-row {
+  display: flex;
+  justify-content: space-between;
+  .tag {
+    font-size: 12px;
+    padding: 0.1rem 0.6rem;
+    // color: #fff;
+    color: #246bfd;
+    font-weight: 600;
+    text-align: center;
+    // background-color: #246bfd;
+    background-color: #eef4ff;
+    border-radius: 25px;
+  }
+}
