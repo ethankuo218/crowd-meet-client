@@ -166,19 +166,35 @@ export class EventCreateComponent implements OnInit {
       }
     });
 
-    this.eventService
-      .createEvent({
-        ...this.eventForm.value,
-        startTime: new Date(this.eventForm.value.startTime).toISOString(),
-        endTime: new Date(this.eventForm.value.endTime).toISOString(),
-        categories: selection,
-        ...this.selectLocation
-      })
-      .subscribe({
-        next: () => {
-          this.router.navigate(['/app/event', { refresh: true }]);
-        }
-      });
+    if (this.mode === 'edit') {
+      this.eventService
+        .updateEvent({
+          ...this.eventForm.value,
+          startTime: new Date(this.eventForm.value.startTime).toISOString(),
+          endTime: new Date(this.eventForm.value.endTime).toISOString(),
+          categories: selection,
+          ...this.selectLocation
+        })
+        .subscribe({
+          next: () => {
+            this.router.navigate(['/app/event', { refresh: true }]);
+          }
+        });
+    } else {
+      this.eventService
+        .createEvent({
+          ...this.eventForm.value,
+          startTime: new Date(this.eventForm.value.startTime).toISOString(),
+          endTime: new Date(this.eventForm.value.endTime).toISOString(),
+          categories: selection,
+          ...this.selectLocation
+        })
+        .subscribe({
+          next: () => {
+            this.router.navigate(['/app/event', { refresh: true }]);
+          }
+        });
+    }
   }
 
   selectImage(): void {

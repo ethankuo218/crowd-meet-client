@@ -106,4 +106,14 @@ export class HttpClientService {
       })
     );
   }
+
+  put<T>(apiName: string, body: any): Observable<T> {
+    return from(this.getIdToken()).pipe(
+      switchMap((headers: HttpHeaders): Observable<T> => {
+        return this.httpClient.put<T>(this.urlPrefix + apiName, body, {
+          headers: headers
+        });
+      })
+    );
+  }
 }
