@@ -8,6 +8,7 @@ import { UserService } from '../core/user.service';
 import { UserEvent } from '../core/states/user-state/user.model';
 import { map } from 'rxjs';
 import { RatingComponent } from '../reviews/rating/rating.component';
+import { ReviewsComponent } from '../reviews/reviews.component';
 
 @Component({
   selector: 'app-history',
@@ -82,7 +83,7 @@ export class HistoryComponent implements OnInit {
 
   async writeReview() {
     const modal = await this.modalCtrl.create({
-      component: RatingComponent
+      component: ReviewsComponent
     });
     modal.present();
 

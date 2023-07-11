@@ -12,7 +12,7 @@ import { RatingInputComponent } from '../components/rating-input/rating-input.co
 const routes: Routes = [
   {
     path: '',
-    component: RatingComponent
+    component: ReviewsComponent
   }
 ];
 

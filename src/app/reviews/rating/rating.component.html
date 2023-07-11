@@ -1,47 +1,27 @@
-<ion-content>
-  <main class="rating main-area">
-    <div class="container">
-      <div class="head_arw">
-        <a class="arw_left" href="#"
-          ><i class="fa-regular fa-arrow-left"></i
-        ></a>
-        <h3 class="dark">Write a Review</h3>
+<main class="rating main-area">
+  <div class="container">
+    <div class="head_arw">
+      <h3 class="dark">Write a Review</h3>
+    </div>
+    <div class="rating-area">
+      <div class="text-center">
+        <img [src]="'assets/images/profile1.jpg'" alt="image" />
+        <h3 class="dark">
+          How was your experience<br />
+          with Dr. Drake Boeson?
+        </h3>
+        <app-rating-input></app-rating-input>
+        <hr />
       </div>
-      <div class="rating-area">
-        <div class="text-center">
-          <img src="assets/images/doctors.png" alt="image" />
-          <h3 class="dark">
-            How was your experience<br />
-            with Dr. Drake Boeson?
-          </h3>
-          <app-rating-input></app-rating-input>
-          <hr>
-        </div>
-        <h3 class="dark">Write Your Rewiew</h3>
-        <p class="dark lm_text">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse.
-        </p>
-        <div class="radio_div">
-          <form action="#">
-            <div class="row">
-              <div class="col-6">
-                <button class="primary cancel_btn" type="submit" formaction="#">
-                  Cancel
-                </button>
-              </div>
-              <div class="col-6">
-                <button class="white submit_btn" type="submit" formaction="#">
-                  Submit
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
+      <h3 class="dark">Write Your Rewiew</h3>
+      <p class="dark lm_text">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+      <div class="button_row">
+        <button class="primary cancel_btn">Cancel</button>
+        <button class="white submit_btn">Submit</button>
       </div>
     </div>
-  </main>
-</ion-content>
+  </div>
+</main>
