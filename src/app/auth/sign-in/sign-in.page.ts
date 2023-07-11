@@ -131,7 +131,7 @@ export class SignInPage implements OnInit {
       .then(() => {
         console.log('Banner Ad Shown');
       })
-      .catch((err) => {
+      .catch((err: any) => {
         console.log(err.message);
       });
   }
