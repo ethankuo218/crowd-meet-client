@@ -7,7 +7,7 @@
   <main class="article-area main-area">
     <div class="image_slider">
       <div class="pson_div">
-        <h3 class="dark">Suggested <a class="primary">See All</a></h3>
+        <h3 class="dark">Suggested</h3>
       </div>
       <swiper
         [slidesPerView]="1.8"
@@ -42,7 +42,7 @@
       </swiper>
 
       <div class="pson_div">
-        <h3 class="dark">Events <a class="primary" href="#">See All</a></h3>
+        <h3 class="dark">Events</h3>
       </div>
       <ng-container *ngFor="let item of listing$ | async">
         <app-listing-card [cardInfo]="item"></app-listing-card>
