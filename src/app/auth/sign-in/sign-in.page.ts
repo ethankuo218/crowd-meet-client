@@ -57,7 +57,7 @@ export class SignInPage implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    await this.showBanner();
+    // await this.showBanner();
     this.route.params.subscribe((params) => {
       if (params['logout']) {
         this.authService.signOut().then(() => {
