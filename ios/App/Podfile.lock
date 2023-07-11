@@ -13,6 +13,9 @@ PODS:
     - Capacitor
   - CapacitorCamera (5.0.4):
     - Capacitor
+  - CapacitorCommunityAdmob (5.0.0):
+    - Capacitor
+    - Google-Mobile-Ads-SDK (= 10.1.0)
   - CapacitorCordova (5.0.4)
   - CapacitorFilesystem (5.0.4):
     - Capacitor
@@ -92,6 +95,29 @@ PODS:
     - GoogleUtilities/Reachability (~> 7.8)
     - GoogleUtilities/UserDefaults (~> 7.8)
     - nanopb (< 2.30910.0, >= 2.30908.0)
+  - Google-Mobile-Ads-SDK (10.1.0):
+    - GoogleAppMeasurement (< 11.0, >= 7.0)
+    - GoogleUserMessagingPlatform (>= 1.1)
+  - GoogleAppMeasurement (10.11.0):
+    - GoogleAppMeasurement/AdIdSupport (= 10.11.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
+    - GoogleUtilities/MethodSwizzler (~> 7.11)
+    - GoogleUtilities/Network (~> 7.11)
+    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - GoogleAppMeasurement/AdIdSupport (10.11.0):
+    - GoogleAppMeasurement/WithoutAdIdSupport (= 10.11.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
+    - GoogleUtilities/MethodSwizzler (~> 7.11)
+    - GoogleUtilities/Network (~> 7.11)
+    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - GoogleAppMeasurement/WithoutAdIdSupport (10.11.0):
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
+    - GoogleUtilities/MethodSwizzler (~> 7.11)
+    - GoogleUtilities/Network (~> 7.11)
+    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+    - nanopb (< 2.30910.0, >= 2.30908.0)
   - GoogleDataTransport (9.2.3):
     - GoogleUtilities/Environment (~> 7.7)
     - nanopb (< 2.30910.0, >= 2.30908.0)
@@ -100,6 +126,7 @@ PODS:
     - AppAuth (~> 1.5)
     - GTMAppAuth (< 3.0, >= 1.3)
     - GTMSessionFetcher/Core (< 4.0, >= 1.1)
+  - GoogleUserMessagingPlatform (2.0.1)
   - GoogleUtilities/AppDelegateSwizzler (7.11.1):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -108,6 +135,8 @@ PODS:
     - PromisesObjC (< 3.0, >= 1.2)
   - GoogleUtilities/Logger (7.11.1):
     - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (7.11.1):
+    - GoogleUtilities/Logger
   - GoogleUtilities/Network (7.11.1):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
@@ -136,6 +165,7 @@ DEPENDENCIES:
   - "CapacitorApp (from `../../node_modules/@capacitor/app`)"
   - "CapacitorBrowser (from `../../node_modules/@capacitor/browser`)"
   - "CapacitorCamera (from `../../node_modules/@capacitor/camera`)"
+  - "CapacitorCommunityAdmob (from `../../node_modules/@capacitor-community/admob`)"
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorFilesystem (from `../../node_modules/@capacitor/filesystem`)"
   - "CapacitorFirebaseAuthentication (from `../../node_modules/@capacitor-firebase/authentication`)"
@@ -167,8 +197,11 @@ SPEC REPOS:
     - FirebaseCoreInternal
     - FirebaseInstallations
     - FirebaseMessaging
+    - Google-Mobile-Ads-SDK
+    - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleSignIn
+    - GoogleUserMessagingPlatform
     - GoogleUtilities
     - GTMAppAuth
     - GTMSessionFetcher
@@ -186,6 +219,8 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/browser"
   CapacitorCamera:
     :path: "../../node_modules/@capacitor/camera"
+  CapacitorCommunityAdmob:
+    :path: "../../node_modules/@capacitor-community/admob"
   CapacitorCordova:
     :path: "../../node_modules/@capacitor/ios"
   CapacitorFilesystem:
@@ -219,6 +254,7 @@ SPEC CHECKSUMS:
   CapacitorApp: 28fef1fd75b2b3686e875216806fb8416d421097
   CapacitorBrowser: c08582e15086d4195f8e7808a6738b0499b6d52a
   CapacitorCamera: 9b5c8e809c1042f263994f97ba846aa37e974f12
+  CapacitorCommunityAdmob: dfa5cf8cdd1d78c27b685d87413c51a91c761c69
   CapacitorCordova: b1fe6bf1f36974a8e4a9044b342d22d49c0996d6
   CapacitorFilesystem: e1bdfab09b95b181c844c16abcfda45ec8e8ed6b
   CapacitorFirebaseAuthentication: f2e3c2a7488b87078025855588670840f93a721e
@@ -243,8 +279,11 @@ SPEC CHECKSUMS:
   FirebaseCoreInternal: 971029061d326000d65bfdc21f5502c75c8b0893
   FirebaseInstallations: 2a2c6859354cbec0a228a863d4daf6de7c74ced4
   FirebaseMessaging: 8a3b9a8b98ce72a42d22e69865cf662e38d2d6f5
+  Google-Mobile-Ads-SDK: 894be2e3e3e8281004bda14381f9af7ad73eeffd
+  GoogleAppMeasurement: d3dabccdb336fc0ae44b633c8abaa26559893cd9
   GoogleDataTransport: f0308f5905a745f94fb91fea9c6cbaf3831cb1bd
   GoogleSignIn: b232380cf495a429b8095d3178a8d5855b42e842
+  GoogleUserMessagingPlatform: 5f8b30daf181805317b6b985bb51c1ff3beca054
   GoogleUtilities: 9aa0ad5a7bc171f8bae016300bfcfa3fb8425749
   GTMAppAuth: 99fb010047ba3973b7026e45393f51f27ab965ae
   GTMSessionFetcher: e8647203b65cee28c5f73d0f473d096653945e72
@@ -253,6 +292,6 @@ SPEC CHECKSUMS:
   PurchasesHybridCommon: 88fc5fef1cb121457b95d286f1738f81cf3ac148
   RevenueCat: 465a9dc1fff60b09f29792082e5d5d5aeed01122
 
-PODFILE CHECKSUM: 95f46cac6c94df297fedbeeccd140cc1ad255777
+PODFILE CHECKSUM: 29b83be7aa2de260df8b7a3678807663b9d7a27a
 
 COCOAPODS: 1.12.1
