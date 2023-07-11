@@ -54,4 +54,8 @@ export class EventListComponent implements OnInit {
       (event as InfiniteScrollCustomEvent).target.complete();
     });
   }
+
+  get noMoreContent(): boolean {
+    return this.eventService.noMoreContent;
+  }
 }

@@ -48,6 +48,9 @@
         <app-listing-card [cardInfo]="item"></app-listing-card>
       </ng-container>
     </div>
+    <div *ngIf="noMoreContent" class="no-more-content">
+      No more content !
+    </div>
   </main>
   <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>

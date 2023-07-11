@@ -11,6 +11,7 @@ import { Image } from './states/user-state/user.model';
 @Injectable()
 export class EventService {
   private currentPage: number = 1;
+  noMoreContent: boolean = false;
 
   constructor(
     private httpClientService: HttpClientService,
@@ -77,6 +78,13 @@ export class EventService {
         pageSize: 10
       })
     );
+
+    if (result.data.length === 0) {
+      this.currentPage--;
+      this.noMoreContent = true;
+    } else {
+      this.noMoreContent = false;
+    }
 
     this.eventListStateFacade.addEventList(result);
   }
