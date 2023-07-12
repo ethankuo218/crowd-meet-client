@@ -1,4 +1,4 @@
-<app-header (menuEvent)="onMenuClick($event)"></app-header>
+<app-header></app-header>
 
 <ng-container *ngIf="eventDetail$ | async as eventDetail">
   <ion-content class="event-detail-content">
@@ -154,12 +154,17 @@
       <ion-toolbar>
         <h3>Free</h3>
         <ion-button
+          *ngIf="user.userId === eventDetail.creator.userId; else normalUser"
           slot="end"
-          [disabled]="user.userId === eventDetail.creator.userId"
-          (click)="joinEvent(eventDetail.eventId)"
+          (click)="editEvent(eventDetail)"
         >
-          Join
+          Edit
         </ion-button>
+        <ng-template #normalUser>
+          <ion-button slot="end" (click)="joinEvent(eventDetail.eventId)">
+            Join
+          </ion-button>
+        </ng-template>
       </ion-toolbar>
     </ion-footer>
   </ng-container>
