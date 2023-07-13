@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IonicModule } from '@ionic/angular';
 import { ActionSheetController } from '@ionic/angular';
@@ -12,6 +12,7 @@ import { ActionSheetController } from '@ionic/angular';
   imports: [CommonModule, IonicModule, FontAwesomeModule]
 })
 export class HeaderComponent implements OnInit {
+  @Input() disableBackButton: boolean = false;
   @Output() menuEvent = new EventEmitter();
 
   constructor(private actionSheetController: ActionSheetController) {}

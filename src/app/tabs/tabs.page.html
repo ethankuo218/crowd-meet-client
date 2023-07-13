@@ -1,4 +1,4 @@
-<ion-tabs  (ionTabsDidChange)="ionTabsDidChange($event)">
+<ion-tabs (ionTabsDidChange)="ionTabsDidChange($event)">
   <ion-tab-bar slot="bottom" *ngIf="showTabBar">
     <ion-tab-button
       tab="event"
@@ -27,6 +27,13 @@
       [routerLink]="['/app/history']"
     >
       <ion-icon name="time-outline"></ion-icon>
+    </ion-tab-button>
+    <ion-tab-button
+      tab="notifications"
+      [routerLinkActive]="['tab-selected']"
+      [routerLink]="['/app/notifications']"
+    >
+      <ion-icon name="notifications-outline"></ion-icon>
     </ion-tab-button>
     <ion-tab-button
       tab="menu"

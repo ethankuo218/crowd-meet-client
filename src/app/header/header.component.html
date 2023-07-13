@@ -2,11 +2,13 @@
   <ion-toolbar class="head_arw">
     <ion-buttons slot="start" class="arw_left">
       <ion-back-button
+        *ngIf="!disableBackButton"
         [icon]="'arrow-back'"
         [text]="''"
-        defaultHref="app/categories/travel"
+        defaultHref="app/event/list"
       >
       </ion-back-button>
+      <!-- <fa-icon [icon]="['fas', 'circle-exclamation']"></fa-icon> -->
     </ion-buttons>
     <ion-title>
       <h3 class="dark">Notifications</h3>
