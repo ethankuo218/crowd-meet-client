@@ -154,6 +154,10 @@
   border: none;
   font-size: 14px;
   margin: 0 0 25px;
+
+  ::ng-deep textarea {
+    height: 10rem;
+  }
 }
 
 .event_content ion-input,
@@ -161,7 +165,7 @@
   width: 100%;
   border-radius: 11px;
   background: #fafafa;
-  padding: 0 1rem!important;
+  padding: 0 1rem !important;
   border: none;
   font-size: 14px;
   margin: 0 0 25px;
