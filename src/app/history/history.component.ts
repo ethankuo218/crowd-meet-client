@@ -7,8 +7,6 @@ import {
 import { UserService } from '../core/user.service';
 import { UserEvent } from '../core/states/user-state/user.model';
 import { map } from 'rxjs';
-import { RatingComponent } from '../reviews/rating/rating.component';
-import { ReviewsComponent } from '../reviews/reviews.component';
 
 @Component({
   selector: 'app-history',
@@ -36,8 +34,7 @@ export class HistoryComponent implements OnInit {
 
   constructor(
     private actionSheetController: ActionSheetController,
-    private userService: UserService,
-    private modalCtrl: ModalController
+    private userService: UserService
   ) {}
 
   ngOnInit() {
@@ -79,14 +76,5 @@ export class HistoryComponent implements OnInit {
 
   getIsOngoing(endTime: string): boolean {
     return Date.now() - new Date(endTime).getTime() < 0;
-  }
-
-  async writeReview() {
-    const modal = await this.modalCtrl.create({
-      component: ReviewsComponent
-    });
-    modal.present();
-
-    const { data, role } = await modal.onWillDismiss();
   }
 }

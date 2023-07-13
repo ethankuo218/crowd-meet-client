@@ -3,25 +3,30 @@
     <div class="head_arw">
       <h3 class="dark">Write a Review</h3>
     </div>
-    <div class="rating-area">
-      <div class="text-center">
-        <img [src]="'assets/images/profile1.jpg'" alt="image" />
-        <h3 class="dark">
-          How was your experience<br />
-          with Dr. Drake Boeson?
-        </h3>
-        <app-rating-input></app-rating-input>
-        <hr />
+    <form [formGroup]="form">
+      <div class="rating-area">
+        <div class="text-center">
+          <img
+            [src]="userDetail.profilePictureUrl || 'assets/images/profile1.jpg'"
+            alt="image"
+          />
+          <h3 class="dark">
+            {{ 'How was your experience with ' + userDetail.name + '?' }}
+          </h3>
+          <app-rating-input formControlName="rating"></app-rating-input>
+          <hr />
+        </div>
+        <h3 class="dark">Write Your Rewiew</h3>
+        <ion-textarea
+          class="lm_text"
+          placeholder="Please write your comment here"
+          formControlName="comment"
+        ></ion-textarea>
+        <div class="button_row">
+          <button class="primary cancel_btn" (click)="cancel()">Cancel</button>
+          <button class="white submit_btn" (click)="submit()">Submit</button>
+        </div>
       </div>
-      <h3 class="dark">Write Your Rewiew</h3>
-      <p class="dark lm_text">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.
-      </p>
-      <div class="button_row">
-        <button class="primary cancel_btn">Cancel</button>
-        <button class="white submit_btn">Submit</button>
-      </div>
-    </div>
+    </form>
   </div>
 </main>

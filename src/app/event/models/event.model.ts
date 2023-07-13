@@ -33,11 +33,14 @@ export interface Event {
   isOnline: boolean;
 }
 
-interface Participant {
+export interface Participant {
+  id: number;
+  eventId: number;
   userId: number;
   registeredAt: string;
   status: string;
-  leftAt: string;
+  name: string;
+  profilePictureUrl: string;
 }
 
 export interface EventComment {

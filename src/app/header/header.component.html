@@ -1,20 +1,19 @@
 <ion-header class="ion-no-border">
   <ion-toolbar class="head_arw">
     <ion-buttons slot="start" class="arw_left">
-      <ion-back-button
+      <!-- <ion-back-button
         *ngIf="!disableBackButton"
         [icon]="'arrow-back'"
         [text]="''"
         defaultHref="app/event/list"
       >
-      </ion-back-button>
+      </ion-back-button> -->
       <!-- <fa-icon [icon]="['fas', 'circle-exclamation']"></fa-icon> -->
     </ion-buttons>
-    <ion-title>
-      <h3 class="dark">Notifications</h3>
-    </ion-title>
-    <ion-buttons slot="end" class="arw_left" (click)="openMenu()">
-      <fa-icon [icon]="['fas', 'ellipsis']"></fa-icon>
+
+    <ion-buttons slot="end" class="arw_left">
+      <!-- <fa-icon [icon]="['fas', 'ellipsis']"></fa-icon> -->
+      <fa-icon [icon]="['fas', 'bell']"></fa-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

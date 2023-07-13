@@ -2,7 +2,12 @@ import { ImgUploadService } from './img-upload.service';
 import { EventListStateFacade } from './states/event-list-state/event-list.state.facade';
 import { HttpClientService } from './http-client.service';
 import { Injectable } from '@angular/core';
-import { Event, EventComment, EventSetting } from '../event/models/event.model';
+import {
+  Event,
+  EventComment,
+  EventSetting,
+  Participant
+} from '../event/models/event.model';
 import {
   Observable,
   ReplaySubject,
@@ -109,13 +114,6 @@ export class EventService {
   }
 
   // event related actions
-  apply(id: number): Observable<EventActionResponse> {
-    return this.httpClientService.post<EventActionResponse>(
-      `event/${id}/participants`,
-      {}
-    );
-  }
-
   leave(id: number): Observable<EventActionResponse> {
     return this.httpClientService.patch<EventActionResponse>(
       `event/${id}/leave`,
@@ -174,5 +172,19 @@ export class EventService {
           this.reloadComment(id);
         })
       );
+  }
+
+  //event participants
+  getParticipants(id: number) {
+    return this.httpClientService.get<Participant[]>(
+      `event/${id}/participants`
+    );
+  }
+
+  apply(id: number): Observable<EventActionResponse> {
+    return this.httpClientService.post<EventActionResponse>(
+      `event/${id}/participant`,
+      {}
+    );
   }
 }

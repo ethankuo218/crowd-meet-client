@@ -8,11 +8,13 @@ import { HeaderComponent } from '../header/header.component';
 import { SwiperModule } from 'swiper/angular';
 import { RatingComponent } from './rating/rating.component';
 import { RatingInputComponent } from '../components/rating-input/rating-input.component';
-import { FilterComponent } from '../filter/filter.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ReviewsService } from './reviews.service';
+import { EventService } from '../core/event.service';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':id',
     component: ReviewsComponent
   }
 ];
@@ -27,7 +29,8 @@ const routes: Routes = [
     HeaderComponent,
     SwiperModule,
     RatingInputComponent,
-    FilterComponent
-  ]
+    ReactiveFormsModule
+  ],
+  providers: [ReviewsService, EventService]
 })
 export class ReviewsModule {}

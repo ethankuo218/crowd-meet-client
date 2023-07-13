@@ -1,5 +1,5 @@
 .head_arw {
-  height: 8vh;
+  height: 6vh;
   display: flex;
   align-items: center;
 }
@@ -8,6 +8,7 @@
   img {
     height: 10vh;
     border-radius: 50%;
+    margin-bottom: 1vh;
   }
 }
 
@@ -15,11 +16,13 @@
   font-weight: 700;
   line-height: 1.3;
   font-size: 16px;
+  margin-bottom: 1vh;
 }
 
 .lm_text {
   background: #fafafa;
   font-size: 14px;
+  color: #676767;
   padding: 1rem;
   border-radius: 10px;
   font-weight: 600;

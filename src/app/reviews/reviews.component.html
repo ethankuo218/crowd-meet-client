@@ -3,35 +3,29 @@
   <main class="fix notification-area main-area p-0">
     <div class="container">
       <div class="joiner_list">
-        <div class="joiner_info" (click)="writeReview()">
-          <div class="joiner_img">
-            <img src="assets/images/profile1.jpg" alt="image" />
+        <ng-container *ngIf="participants$ | async as participants">
+          <div
+            *ngFor="let participant of participants"
+            class="joiner_info"
+            (click)="writeReview(participant)"
+          >
+            <div class="joiner_img">
+              <img
+                [src]="
+                  participant.profilePictureUrl || 'assets/images/profile1.jpg'
+                "
+                alt="image"
+              />
+            </div>
+            <div class="joiner_content">
+              <h3 class="dark">{{ participant.name }}</h3>
+              <fa-icon [icon]="['fas', 'pen-to-square']"></fa-icon>
+            </div>
           </div>
-          <div class="joiner_content">
-            <h3 class="dark">Dr. Drake Boeson</h3>
-            <fa-icon [icon]="['fas', 'pen-to-square']"></fa-icon>
+          <div *ngIf="participants.length === 0" class="no-more-content">
+            No more content !
           </div>
-        </div>
-
-        <div class="joiner_info">
-          <div class="joiner_img">
-            <img src="assets/images/profile1.jpg" alt="image" />
-          </div>
-          <div class="joiner_content">
-            <h3 class="dark">Dr. Drake Boeson</h3>
-            <fa-icon [icon]="['fas', 'pen-to-square']"></fa-icon>
-          </div>
-        </div>
-
-        <div class="joiner_info">
-          <div class="joiner_img">
-            <img src="assets/images/profile1.jpg" alt="image" />
-          </div>
-          <div class="joiner_content">
-            <h3 class="dark">Dr. Drake Boeson</h3>
-            <fa-icon [icon]="['fas', 'pen-to-square']"></fa-icon>
-          </div>
-        </div>
+        </ng-container>
       </div>
     </div>
   </main>

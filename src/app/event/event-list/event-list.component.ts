@@ -6,8 +6,10 @@ import { EventListData } from 'src/app/core/states/event-list-state/event-list.m
 import { EventService } from '../../core/event.service';
 import {
   InfiniteScrollCustomEvent,
-  RefresherCustomEvent
+  RefresherCustomEvent,
+  ModalController
 } from '@ionic/angular';
+import { FilterComponent } from 'src/app/filter/filter.component';
 
 @Component({
   selector: 'app-listing',
@@ -24,7 +26,8 @@ export class EventListComponent implements OnInit {
 
   constructor(
     private eventService: EventService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private modalCtrl: ModalController
   ) {}
 
   ngOnInit(): void {
@@ -54,6 +57,45 @@ export class EventListComponent implements OnInit {
       (event as InfiniteScrollCustomEvent).target.complete();
     });
   }
+
+  async openFilter() {
+    const modal = await this.modalCtrl.create({
+      component: FilterComponent,
+      initialBreakpoint: 0.98,
+      breakpoints: [0, 0.98]
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    console.log(data);
+  }
+
+  // loadNativeAds() {
+  //   // To load native ads
+  //   AdmobAds.loadNativeAd({
+  //     adId: 'ca-app-pub-3940256099942544/2247696110',
+  //     isTesting: true,
+  //     adsCount: 3
+  //   })
+  //     .then((res) => {
+  //       this.ads = res.ads;
+  //       console.log(this.ads);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.message);
+  //     });
+  // }
+
+  // // To open a native ad
+  // viewAd(id: string) {
+  //   AdmobAds.triggerNativeAd({ id: id });
+  // }
+
+  // // To open AdChoices url
+  // openAdchoices(url: string) {
+  //   window.open(url);
+  // }
 
   get noMoreContent(): boolean {
     return this.eventService.noMoreContent;

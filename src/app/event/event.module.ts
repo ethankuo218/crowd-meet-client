@@ -11,6 +11,7 @@ import { SwiperModule } from 'swiper/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EventService } from '../core/event.service';
 import { FormsModule } from '@angular/forms';
+import { FilterComponent } from '../filter/filter.component';
 const routes: Routes = [
   {
     path: '',
@@ -46,7 +47,8 @@ const routes: Routes = [
     ShellModule,
     HeaderComponent,
     SwiperModule,
-    FormsModule
+    FormsModule,
+    FilterComponent
   ],
   providers: [EventService]
 })

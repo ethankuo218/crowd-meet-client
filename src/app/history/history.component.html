@@ -1,3 +1,4 @@
+<app-header></app-header>
 <ion-content>
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
@@ -10,7 +11,7 @@
         <div
           class="cause_content"
           *ngFor="let item of upcoming$ | async; trackBy: trackByIndex"
-          (click)="writeReview()"
+          [routerLink]="['/app/reviews', item.eventId]"
         >
           <div class="cause_image">
             <img
