@@ -53,26 +53,22 @@
             ><span class="dark">Is Online Event</span></label
           >
           <div class="radio_div">
-            <p>
-              <input
-                type="radio"
-                id="test1"
-                formControlName="isOnline"
-                [value]="true"
-                (ngModelChange)="onIsOnlineChange($event)"
-              />
-              <label class="dark" for="test1">Yes</label>
-            </p>
-            <p>
-              <input
-                type="radio"
-                id="test2"
-                formControlName="isOnline"
-                [value]="false"
-                (ngModelChange)="onIsOnlineChange($event)"
-              />
-              <label class="dark" for="test2">No</label>
-            </p>
+            <input
+              type="radio"
+              id="test1"
+              formControlName="isOnline"
+              [value]="true"
+              (ngModelChange)="onIsOnlineChange($event)"
+            />
+            <label class="dark" for="test1">Yes</label>
+            <input
+              type="radio"
+              id="test2"
+              formControlName="isOnline"
+              [value]="false"
+              (ngModelChange)="onIsOnlineChange($event)"
+            />
+            <label class="dark" for="test2">No</label>
           </div>
           <br />
           <br />

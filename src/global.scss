@@ -215,79 +215,46 @@ textarea:focus {
   border-radius: 40px;
 }
 
-.radio_div [type='radio']:checked,
-.radio_div [type='radio']:not(:checked) {
-  position: absolute;
-  left: -9999px;
-}
-
-.radio_div [type='radio']:checked + label,
-.radio_div [type='radio']:not(:checked) + label {
-  position: relative;
-  padding-left: 33px;
-  cursor: pointer;
-  line-height: 20px;
-  display: inline-block;
-  /*! color: #666; */
-  margin: 0 16px 0 0;
-  font-weight: 700;
-  font-size: 14px;
-}
-
-.radio_div [type='radio']:checked + label:before,
-.radio_div [type='radio']:not(:checked) + label:before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 24px;
-  height: 24px;
-  border: 3.5px solid black;
-  border-radius: 100%;
-  background: #fff;
-}
-
-.radio_div [type='radio']:checked + label:after,
-.radio_div [type='radio']:not(:checked) + label:after {
-  content: '';
-  width: 13px;
-  height: 13px;
-  background: black;
-  position: absolute;
-  top: 0.34rem;
-  left: 0.355rem;
-  border-radius: 100%;
-  -webkit-transition: all 0.2s ease;
-  transition: all 0.2s ease;
-}
-
-.radio_div [type='radio']:not(:checked) + label:after {
-  opacity: 0;
-  -webkit-transform: scale(0);
-  transform: scale(0);
-}
-
-.radio_div [type='radio']:checked + label:after {
-  opacity: 1;
-  -webkit-transform: scale(1);
-  transform: scale(1);
-}
-
 .radio_div {
+  font-size: 1.2rem;
+  font-weight: bold;
+  line-height: 1.1;
+  display: grid;
+  grid-template-columns: 0fr 0.2fr 0fr 0.2fr;
+  gap: 0.5em;
 
-}
+  input[type='radio'] {
+    /* Add if not using autoprefixer */
+    -webkit-appearance: none;
+    appearance: none;
+    /* For iOS < 15 to remove gradient background */
+    background-color: #fff;
+    /* Not removed via appearance */
+    margin: 0;
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid black;
+    border-radius: 50%;
+    transform: translateY(0.01em);
+    display: grid;
+    place-content: center;
+  }
 
-.radio_div p {
-  display: inline-block;
-}
+  input[type="radio"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em black;
+  }
 
-.radio_div button[type='submit'] {
-  width: 100%;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-  border-radius: 25px;
-  padding: 15px 0;
+  input[type="radio"]:checked::before {
+    transform: scale(1);
+  }
 }
 
 .cancel_btn {
@@ -298,16 +265,9 @@ textarea:focus {
   background: #246bfd;
 }
 
-.radio_div .row {
-  flex-wrap: nowrap;
-  gap: 15px;
-  padding: 40px 0 0;
+.leave_button {
+  color: red !important;
 }
-
-.leave_button{
-  color: red!important;
-}
-
 
 ion-toolbar {
   --background: #fff;
