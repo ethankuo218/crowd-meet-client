@@ -42,39 +42,6 @@
       <div class="pson_div">
         <h3 class="dark">Events</h3>
       </div>
-      <!-- <ion-card *ngFor="let ad of ads">
-        <ion-card-header mode="md">
-          <ion-item lines="none">
-            <ion-avatar slot="start">
-              <ion-img src="{{ ad.icon }}" crossorigin="Anonymous"> </ion-img>
-            </ion-avatar>
-            <ion-label>
-              <h2>{{ ad.headline }}</h2>
-              <p>
-                {{ ad.advertiser }}
-              </p>
-            </ion-label>
-            <ion-icon
-              slot="end"
-              src="{{ ad.icon }}"
-              (click)="openAdchoices(ad.adChoicesUrl)"
-            >
-            </ion-icon>
-          </ion-item>
-        </ion-card-header>
-
-        <ion-card-content mode="md">
-          <p class="ion-text-wrap">
-            {{ ad.body }}
-          </p>
-
-          <ion-img src="{{ ad.cover }}" crossorigin="anonymous"></ion-img>
-
-          <ion-chip (click)="viewAd(ad.id)" slot="end">
-            <ion-label> {{ ad.cta }} </ion-label>
-          </ion-chip>
-        </ion-card-content>
-      </ion-card> -->
       <ng-container *ngFor="let item of listing$ | async">
         <app-listing-card [cardInfo]="item"></app-listing-card>
       </ng-container>
