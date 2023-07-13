@@ -26,7 +26,9 @@ export class ImgUploadService {
     });
 
     const cropPath = await this.crop.crop(image.path!, {
-      quality: 10
+      quality: 10,
+      targetHeight: 200,
+      targetWidth: 200
     });
 
     if (image) {
