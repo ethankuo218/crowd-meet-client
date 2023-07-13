@@ -8,6 +8,7 @@ import { HeaderComponent } from '../header/header.component';
 import { SwiperModule } from 'swiper/angular';
 import { RatingComponent } from './rating/rating.component';
 import { RatingInputComponent } from '../components/rating-input/rating-input.component';
+import { FilterComponent } from '../filter/filter.component';
 
 const routes: Routes = [
   {
@@ -25,7 +26,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     HeaderComponent,
     SwiperModule,
-    RatingInputComponent
+    RatingInputComponent,
+    FilterComponent
   ]
 })
 export class ReviewsModule {}

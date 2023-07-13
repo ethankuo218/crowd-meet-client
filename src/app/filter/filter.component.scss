@@ -1,0 +1,50 @@
+ion-header {
+  ion-title {
+    margin-top: 0.8rem;
+    height: 1rem;
+    font-size: 18px;
+  }
+
+  ion-button {
+    --background: transparent;
+    --color: #246bfd;
+    font-weight: 400;
+    height: 1rem;
+    width: fit-content;
+  }
+}
+
+.filter_content{
+  height: 80vh;
+  overflow: scroll;
+}
+
+.filter_list {
+  padding: 1rem 1rem 0 1rem;
+}
+
+h3{
+  font-weight: 600;
+}
+
+ion-item {
+  --border-color: transparent;
+}
+
+ion-label{
+  font-weight: 400;
+}
+
+ion-checkbox {
+  --checkmark-color: black;
+  --background-checked: transparent;
+  --border-color: transparent;
+  --border-color-checked: transparent;
+  --size: 25px;
+}
+
+ion-footer{
+  ion-button{
+    width: 100%;
+  }
+}
