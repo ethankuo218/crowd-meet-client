@@ -52,6 +52,10 @@
 
 .acc__card {
   position: relative;
+  display: grid;
+  height: 3rem;
+  grid-template-columns: 1fr 0.05fr;
+  align-items: center;
 }
 
 .acc__title,
@@ -60,8 +64,6 @@
   display: block;
   position: relative;
   text-align: left;
-  padding: 10px 0;
-  margin: 0 0 5px;
 }
 
 .acc__title fa-icon,
@@ -78,74 +80,14 @@
   font-weight: 600;
 }
 
-.acc__title::after {
-  width: 9px;
-  height: 9px;
-  border-right: 2px solid #000;
-  border-bottom: 2px solid #000;
-  position: absolute;
-  right: 10px;
-  content: ' ';
-  top: 17px;
-  transform: rotate(-45deg);
-  transition: all 0.2s ease-in-out;
-}
-
 select {
   appearance: none;
   background: none;
   border: none;
   font-size: 17px;
   font-weight: 600;
-  margin-left: 35%;
-  margin-top: 1px;
-  position: absolute;
-  right: 35px;
 }
 
 .log_out::after {
   display: none;
-}
-
-.light-mode-button {
-  background: 0;
-  border: 0;
-  box-sizing: border-box;
-  cursor: pointer;
-  height: 40px;
-  width: 55px;
-  position: absolute;
-  border: 1px solid rgba(255, 255, 255, 0);
-  margin-top: 0px;
-  right: 0;
-  z-index: 1;
-}
-
-.light-mode-button:focus {
-  outline: none; /* Not ideal for accessibility */
-}
-
-.light-mode-button span:nth-child(1) {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50px;
-  height: 23px;
-  border-radius: 20px;
-  background-color: #d6d7db;
-  box-shadow: inset 1px 1px 3px 0 rgb(0 0 0 / 40%);
-  transition: 0.3s;
-  z-index: -1;
-}
-
-.light-mode-button span:nth-child(2) {
-  position: absolute;
-  top: 3px;
-  left: 4px;
-  width: 17px;
-  height: 17px;
-  background-color: #fff;
-  border-radius: 50%;
-  box-shadow: 1px 1px 2px 0 rgb(0 0 0 / 40%);
-  transition: 0.3s;
 }
