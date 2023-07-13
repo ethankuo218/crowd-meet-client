@@ -8,8 +8,6 @@ import {
   InfiniteScrollCustomEvent,
   RefresherCustomEvent
 } from '@ionic/angular';
-import { AdmobAds } from 'capacitor-admob-ads';
-import { AdResult } from 'capacitor-admob-ads/dist/esm/definitions';
 
 @Component({
   selector: 'app-listing',
@@ -24,8 +22,6 @@ export class EventListComponent implements OnInit {
     .getEventList()
     .pipe(map((result) => result?.data));
 
-  ads: AdResult[] = [];
-
   constructor(
     private eventService: EventService,
     private route: ActivatedRoute
@@ -33,7 +29,6 @@ export class EventListComponent implements OnInit {
 
   ngOnInit(): void {
     this.eventService.reload();
-    // this.loadNativeAds();
   }
 
   ionViewWillEnter() {}
@@ -59,32 +54,6 @@ export class EventListComponent implements OnInit {
       (event as InfiniteScrollCustomEvent).target.complete();
     });
   }
-
-  // loadNativeAds() {
-  //   // To load native ads
-  //   AdmobAds.loadNativeAd({
-  //     adId: 'ca-app-pub-3940256099942544/2247696110',
-  //     isTesting: true,
-  //     adsCount: 3
-  //   })
-  //     .then((res) => {
-  //       this.ads = res.ads;
-  //       console.log(this.ads);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.message);
-  //     });
-  // }
-
-  // // To open a native ad
-  // viewAd(id: string) {
-  //   AdmobAds.triggerNativeAd({ id: id });
-  // }
-
-  // // To open AdChoices url
-  // openAdchoices(url: string) {
-  //   window.open(url);
-  // }
 
   get noMoreContent(): boolean {
     return this.eventService.noMoreContent;
