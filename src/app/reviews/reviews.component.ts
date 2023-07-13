@@ -23,7 +23,7 @@ export class ReviewsComponent implements OnInit {
     private modalCtrl: ModalController,
     private route: ActivatedRoute,
     private eventService: EventService,
-    private reviewsService: ReviewsComponent
+    private reviewsService: ReviewsService
   ) {}
 
   ngOnInit() {
@@ -42,7 +42,7 @@ export class ReviewsComponent implements OnInit {
     const { data, role } = await modal.onWillDismiss();
 
     if (role === 'submit') {
-      this.reviewsService.writeReview({
+      this.reviewsService.review({
         revieweeId: userDetail.id,
         eventId: userDetail.eventId,
         ...data

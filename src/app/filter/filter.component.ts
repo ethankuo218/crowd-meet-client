@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-filter',
@@ -10,7 +10,15 @@ import { IonicModule } from '@ionic/angular';
   imports: [CommonModule, IonicModule]
 })
 export class FilterComponent implements OnInit {
-  constructor() {}
+  constructor(private modalControl: ModalController) {}
 
   ngOnInit() {}
+
+  cancel(): void {
+    this.modalControl.dismiss(null, 'cancel');
+  }
+
+  filter(): void {
+    this.modalControl.dismiss(null, 'filter');
+  }
 }

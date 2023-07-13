@@ -61,8 +61,8 @@ export class EventListComponent implements OnInit {
   async openFilter() {
     const modal = await this.modalCtrl.create({
       component: FilterComponent,
-      initialBreakpoint: 0.98,
-      breakpoints: [0, 0.98]
+      initialBreakpoint: 1,
+      breakpoints: [0, 1]
     });
     modal.present();
 

@@ -14,8 +14,8 @@ ion-header {
   }
 }
 
-.filter_content{
-  height: 80vh;
+.filter_content {
+  height: 75vh;
   overflow: scroll;
 }
 
@@ -23,7 +23,7 @@ ion-header {
   padding: 1rem 1rem 0 1rem;
 }
 
-h3{
+h3 {
   font-weight: 600;
 }
 
@@ -31,7 +31,7 @@ ion-item {
   --border-color: transparent;
 }
 
-ion-label{
+ion-label {
   font-weight: 400;
 }
 
@@ -43,8 +43,8 @@ ion-checkbox {
   --size: 25px;
 }
 
-ion-footer{
-  ion-button{
+ion-footer {
+  ion-button {
     width: 100%;
   }
 }
