@@ -22,7 +22,11 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
 export class EditProfileComponent implements OnInit {
   categoryList: Category[] = [];
 
-  userForm!: FormGroup;
+  userForm: FormGroup = new FormGroup({
+    name: new FormControl('', [Validators.required]),
+    bio: new FormControl('', [Validators.required]),
+    interests: new FormArray([], Validators.required)
+  });
 
   images: Array<Image | undefined> = [
     undefined,
@@ -47,12 +51,6 @@ export class EditProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userForm = new FormGroup({
-      name: new FormControl('', [Validators.required]),
-      bio: new FormControl('', [Validators.required]),
-      interests: new FormArray([], Validators.required)
-    });
-
     this.referenceStateFacade
       .getCategories()
       .pipe(take(1))

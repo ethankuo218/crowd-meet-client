@@ -1,3 +1,5 @@
+@import 'theme/mixins/inputs/checkbox-tag';
+
 ion-header {
   ion-title {
     margin-top: 0.8rem;
@@ -23,10 +25,6 @@ ion-header {
   padding: 1rem 1rem 0 1rem;
 }
 
-h3 {
-  font-weight: 600;
-}
-
 ion-item {
   --border-color: transparent;
 }
@@ -47,4 +45,83 @@ ion-footer {
   ion-button {
     width: 100%;
   }
+}
+
+.filter_div {
+  margin-bottom: 2rem;
+
+  h3 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+}
+
+.checkbox-tags {
+  padding: calc(var(--page-margin) / 2)
+    calc(var(--page-margin) - var(--page-tags-gutter));
+
+  @include checkbox-tag();
+
+  .checkbox-tag {
+    padding: 0px var(--page-tags-gutter);
+    margin-right: 0.5rem;
+    margin-bottom: 0.2rem;
+  }
+
+  // Add a deeper selector to override default colors
+  &.square-checkbox-tags {
+    background-color: var(--page-background);
+
+    .checkbox-tag {
+      --checkbox-tag-color: var(--ion-color-medium);
+      --checkbox-tag-background: var(--ion-color-lightest);
+      --checkbox-tag-active-color: #fff;
+      --checkbox-tag-active-background: #246bfd;
+    }
+  }
+
+  // Add a deeper selector to override default colors
+  &.rounded-checkbox-tags {
+    .checkbox-tag {
+      --checkbox-tag-color: var(--ion-color-lightest);
+      --checkbox-tag-background: var(--ion-color-light-shade);
+      --checkbox-tag-active-color: #fff;
+      --checkbox-tag-active-background: #246bfd;
+    }
+  }
+}
+
+.filter_div ::ng-deep .item-native {
+  border: solid 1px #246bfd;
+}
+
+ion-range::part(pin) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 16px;
+
+  border-radius: 50%;
+  transform: scale(1.01);
+
+  top: -20px;
+
+  min-width: 28px;
+  height: 28px;
+  transition: transform 120ms ease, background 120ms ease;
+}
+
+ion-range::part(pin)::before {
+  // content: none;
+}
+
+.filter_dev ion-input {
+  width: 100%;
+  border-radius: 11px;
+  background: #fafafa;
+  padding: 0 1rem !important;
+  border: none;
+  font-size: 14px;
+  margin: 0 0 25px;
 }

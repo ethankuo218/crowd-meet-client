@@ -3,95 +3,75 @@
     <ion-toolbar>
       <ion-button slot="start" (click)="cancel()"> Cancel </ion-button>
       <ion-title>Filters</ion-title>
-      <ion-button slot="end"> Reset </ion-button>
+      <ion-button slot="end" (click)="reset()"> Reset </ion-button>
     </ion-toolbar>
   </ion-header>
 
   <div class="filter_content">
-    <div class="filter_list">
-      <h3>Categories</h3>
-      <ion-item>
-        <ion-label>Label 1</ion-label>
-        <ion-checkbox></ion-checkbox>
-      </ion-item>
-      <ion-item>
-        <ion-label>Label 2</ion-label>
-        <ion-checkbox></ion-checkbox>
-      </ion-item>
-      <ion-item>
-        <ion-label>Label 3</ion-label>
-        <ion-checkbox></ion-checkbox>
-      </ion-item>
-      <ion-item>
-        <ion-label>Label 4</ion-label>
-        <ion-checkbox></ion-checkbox>
-      </ion-item>
-      <hr />
-    </div>
-    <div class="filter_list">
-      <h3>Distance</h3>
-      <ion-item>
-        <ion-label>Any distance</ion-label>
-        <ion-checkbox></ion-checkbox>
-      </ion-item>
-      <ion-item>
-        <ion-label>5 km</ion-label>
-        <ion-checkbox></ion-checkbox>
-      </ion-item>
-      <ion-item>
-        <ion-label>10 km</ion-label>
-        <ion-checkbox></ion-checkbox>
-      </ion-item>
-      <ion-item>
-        <ion-label>15 km</ion-label>
-        <ion-checkbox></ion-checkbox>
-      </ion-item>
-      <hr />
-    </div>
-    <div class="filter_list">
-      <h3>Distance</h3>
-      <ion-item>
-        <ion-label>Any distance</ion-label>
-        <ion-checkbox></ion-checkbox>
-      </ion-item>
-      <ion-item>
-        <ion-label>5 km</ion-label>
-        <ion-checkbox></ion-checkbox>
-      </ion-item>
-      <ion-item>
-        <ion-label>10 km</ion-label>
-        <ion-checkbox></ion-checkbox>
-      </ion-item>
-      <ion-item>
-        <ion-label>15 km</ion-label>
-        <ion-checkbox></ion-checkbox>
-      </ion-item>
-      <hr />
-    </div>
-    <div class="filter_list">
-      <h3>Distance</h3>
-      <ion-item>
-        <ion-label>Any distance</ion-label>
-        <ion-checkbox></ion-checkbox>
-      </ion-item>
-      <ion-item>
-        <ion-label>5 km</ion-label>
-        <ion-checkbox></ion-checkbox>
-      </ion-item>
-      <ion-item>
-        <ion-label>10 km</ion-label>
-        <ion-checkbox></ion-checkbox>
-      </ion-item>
-      <ion-item>
-        <ion-label>15 km</ion-label>
-        <ion-checkbox></ion-checkbox>
-      </ion-item>
-      <hr />
-    </div>
+    <form [formGroup]="filterForm">
+      <div class="filter_list">
+        <div class="filter_div">
+          <h3>Categories</h3>
+          <ion-row
+            class="checkbox-tags rounded-checkbox-tags"
+            formArrayName="categories"
+          >
+            <ion-item
+              lines="none"
+              class="checkbox-tag rounded-tag"
+              *ngFor="
+                let item of categoryList;
+                let i = index;
+                trackBy: trackByIndex
+              "
+            >
+              <ion-label class="tag-label">
+                <fa-icon [icon]="['fas', 'star']"></fa-icon>
+                {{ item.name }}
+              </ion-label>
+              <ion-checkbox [formControlName]="i"></ion-checkbox>
+            </ion-item>
+          </ion-row>
+        </div>
+
+        <div class="filter_div">
+          <h3>Distance</h3>
+          <ion-range
+            [pin]="true"
+            [pinFormatter]="pinFormatter"
+            [min]="5"
+            [max]="25"
+            (ionChange)="onDistanceChange($event)"
+          ></ion-range>
+        </div>
+
+        <div class="filter_div">
+          <h3>Start Time</h3>
+          <ion-input
+            class="dark_dd"
+            id="start-time"
+            type="datetime-local"
+            [min]="minDate"
+            formControlName="startTime"
+          ></ion-input>
+        </div>
+
+        <div class="filter_div">
+          <h3>End Time</h3>
+          <ion-input
+            class="dark_dd"
+            id="start-time"
+            type="datetime-local"
+            [min]="minDate"
+            formControlName="endTime"
+          ></ion-input>
+        </div>
+      </div>
+    </form>
   </div>
   <ion-footer>
     <ion-toolbar>
-      <ion-button>Apply</ion-button>
+      <ion-button (click)="applyFilter()">Apply</ion-button>
     </ion-toolbar>
   </ion-footer>
 </main>
