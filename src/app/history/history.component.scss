@@ -13,12 +13,12 @@ mat-tab-group {
   --mat-tab-header-label-text-weight: 600;
 }
 
-.cause_content {
+.joiner-list-content {
   display: flex;
   padding: 0 25px;
   margin: 0 0 15px;
 
-  .cause_image {
+  .joiner-list-image {
     width: 25%;
 
     img {
@@ -29,7 +29,7 @@ mat-tab-group {
     }
   }
 
-  .inr_cause_content {
+  .upcoming-content {
     width: 65%;
     height: 100%;
 
@@ -61,6 +61,50 @@ mat-tab-group {
     }
   }
 
+  .joined-content {
+    width: 75%;
+    height: 100%;
+
+    small {
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    p {
+      width: 75%;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.4;
+      height: 1.5rem;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+    }
+
+    hr {
+      background: #eeeeee;
+      height: 1px;
+      color: #eeeeee;
+      margin: 0 0 3px 0;
+    }
+
+    .button-area {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    ion-button {
+      --background: transparent;
+      width: 40%;
+      color: #246bfd;
+      border: #246bfd solid 2px;
+      border-radius: 25px;
+      height: 1.5rem;
+      font-size: 12px;
+    }
+  }
+
   .tool_btn {
     width: 10%;
 
@@ -68,7 +112,7 @@ mat-tab-group {
       width: 100%;
       padding-top: 0.5rem;
 
-      fa-icon{
+      fa-icon {
         font-size: 18px;
         color: #000000;
       }

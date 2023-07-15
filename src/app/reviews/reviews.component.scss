@@ -37,7 +37,21 @@
       align-items: center;
       width: 75%;
 
+      .joiner-info {
+        width: 75%;
+
+        p {
+          font-size: 13px;
+        }
+      }
+
       h3 {
+        font-size: 20px;
+      }
+
+      fa-icon {
+        width: 25%;
+        text-align: center;
         font-size: 20px;
       }
     }

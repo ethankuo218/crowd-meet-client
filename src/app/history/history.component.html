@@ -9,17 +9,17 @@
         <ng-template mat-tab-label> Upcoming </ng-template>
         <br />
         <div
-          class="cause_content"
+          class="joiner-list-content"
           *ngFor="let item of upcoming$ | async; trackBy: trackByIndex"
         >
-          <div class="cause_image">
+          <div class="joiner-list-image">
             <img
               [src]="item.imageUrl || 'assets/images/spoon.png'"
               alt="image"
             />
           </div>
           <div
-            class="inr_cause_content"
+            class="upcoming-content"
             [routerLink]="['/app/event/list', item.eventId]"
           >
             <div class="content-row">
@@ -45,16 +45,16 @@
         <ng-template mat-tab-label> Joined </ng-template>
         <br />
         <div
-          class="cause_content"
+          class="joiner-list-content"
           *ngFor="let item of joined$ | async; trackBy: trackByIndex"
         >
-          <div class="cause_image">
+          <div class="joiner-list-image">
             <img
               [src]="item.imageUrl || 'assets/images/spoon.png'"
               alt="image"
             />
           </div>
-          <div class="inr_cause_content">
+          <div class="joined-content">
             <div class="content-row">
               <small class="dark_dd">{{
                 item.startTime | date : 'EEE, MMM d, y'
@@ -64,15 +64,12 @@
             <p class="dark">
               {{ item.title }}
             </p>
-            <p class="content dark_dd">
-              {{ item.description }}
-            </p>
+            <hr>
+            <div class="button-area">
+              <ion-button [routerLink]="['/app/event/list', item.eventId]">View</ion-button>
+              <ion-button [routerLink]="['/app/reviews', item.eventId]">Rating</ion-button>
+            </div>
           </div>
-          <!-- <div class="tool_btn">
-            <button class="dark">
-              <fa-icon [icon]="['fas', 'ellipsis-vertical']"></fa-icon>
-            </button>
-          </div> -->
         </div>
       </mat-tab>
     </mat-tab-group>
