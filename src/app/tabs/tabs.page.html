@@ -29,6 +29,13 @@
       <ion-icon name="time-outline"></ion-icon>
     </ion-tab-button>
     <ion-tab-button
+    tab="notifications"
+    [routerLinkActive]="['tab-selected']"
+    [routerLink]="['/app/notifications']"
+  >
+    <ion-icon name="notifications-outline"></ion-icon>
+  </ion-tab-button>
+    <ion-tab-button
       tab="menu"
       [routerLinkActive]="['tab-selected']"
       [routerLink]="['/app/menu']"
