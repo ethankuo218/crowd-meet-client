@@ -29,3 +29,14 @@ ion-toolbar:last-of-type {
   padding: 0 1rem;
 }
 
+.filter_section {
+  display: grid;
+  grid-template-columns: 1fr 0.1fr;
+
+  button {
+    --background: transparent;
+    color: #000000;
+    padding: 0.5rem 1rem 0.5rem 0;
+    font-size: 20px;
+  }
+}

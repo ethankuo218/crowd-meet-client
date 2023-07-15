@@ -1,4 +1,4 @@
-.image_slider {
+.event-content {
   padding: 1rem 0 1rem 0;
 }
 
@@ -42,7 +42,7 @@
   -webkit-line-clamp: 2;
 }
 
-.image_slider .owl-stage {
+.event-content .owl-stage {
   padding-left: 25px !important;
   padding-bottom: 20px;
 }
@@ -61,7 +61,7 @@
   font-weight: 600;
 }
 
-.image_slider
+.event-content
   ::ng-deep
   .swiper-wrapper
   .swiper-slide:first-child.swiper-slide-active {
@@ -124,24 +124,24 @@
   margin: 8px 0.2rem 0 0;
 }
 
-.image_slider ::ng-deep .swiper-wrapper {
+.event-content ::ng-deep .swiper-wrapper {
   padding-bottom: 20px;
 }
 
-.image_slider
+.event-content
   ::ng-deep
   .swiper-wrapper
   .swiper-slide:first-child.swiper-slide-active {
   margin-left: 1.5rem;
 }
 
-.image_slider ::ng-deep .swiper-slide img {
+.event-content ::ng-deep .swiper-slide img {
   height: 150px;
   border-radius: 25px;
   object-fit: cover;
 }
 
-.image_slider .item {
+.event-content .item {
   position: relative;
 }
 

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IonicModule } from '@ionic/angular';
 import { ActionSheetController } from '@ionic/angular';
@@ -16,7 +16,18 @@ export class HeaderComponent implements OnInit {
   @Input() disableBackButton: boolean = false;
   @Output() menuEvent = new EventEmitter();
 
-  constructor(private actionSheetController: ActionSheetController) {}
+  tabPageUrls: string[] = [
+    '/app/event/list',
+    '/app/chat/list',
+    '/app/event-create',
+    '/app/history',
+    '/app/notifications'
+  ];
+
+  constructor(
+    private actionSheetController: ActionSheetController,
+    private router: Router
+  ) {}
 
   ngOnInit() {}
 
@@ -41,5 +52,11 @@ export class HeaderComponent implements OnInit {
       ]
     });
     await actionSheet.present();
+  }
+
+  openFilter() {}
+
+  get currentUrl(): string {
+    return this.router.url;
   }
 }
