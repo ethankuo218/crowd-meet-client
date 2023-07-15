@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IonicModule } from '@ionic/angular';
 import { ActionSheetController } from '@ionic/angular';
@@ -9,7 +10,7 @@ import { ActionSheetController } from '@ionic/angular';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule, FontAwesomeModule]
+  imports: [CommonModule, IonicModule, FontAwesomeModule, RouterModule]
 })
 export class HeaderComponent implements OnInit {
   @Input() disableBackButton: boolean = false;
