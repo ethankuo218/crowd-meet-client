@@ -1,3 +1,7 @@
+.tabcontent {
+  display: block;
+}
+
 .wdt__1 {
   width: 75%;
 }
@@ -37,4 +41,19 @@
 
 .msg_link {
   margin: 0 0 25px;
+}
+
+mat-tab-group {
+  --mat-tab-header-active-ripple-color: none;
+  --mdc-tab-indicator-active-indicator-color: #246bfd;
+  --mat-tab-header-active-label-text-color: #246bfd;
+  --mat-tab-header-inactive-ripple-color: #246bfd;
+  --mat-tab-header-active-focus-label-text-color: #246bfd;
+  --mat-tab-header-active-hover-label-text-color: #246bfd;
+  --mat-tab-header-active-focus-indicator-color: #246bfd;
+  --mat-tab-header-active-hover-indicator-color: #246bfd;
+}
+
+::ng-deep .mat-mdc-tab-header {
+  --mat-tab-header-label-text-weight: 600;
 }

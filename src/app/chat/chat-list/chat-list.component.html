@@ -1,18 +1,48 @@
 <app-header></app-header>
 <ion-content>
   <main class="message-area main-area">
-    <div class="container">
-      <div class="tabcontent" style="display: block">
-        <ng-container *ngFor="let chat of chats$ | async">
-          <app-chat-card
-            *ngIf="user"
-            [chat]="chat"
-            [user]="user"
-            [memberPictureUrls$]="memberPictureUrls$"
-            [eventImageUrls$]="eventImageUrls$"
-          ></app-chat-card>
-        </ng-container>
-      </div>
-    </div>
+    <mat-tab-group>
+      <mat-tab>
+        <ng-template mat-tab-label> Direct </ng-template>
+        <br />
+        <div *ngIf="chats$ | async as chats" class="container">
+          <ng-container *ngFor="let chat of chats">
+            <app-chat-card
+              *ngIf="user"
+              [chat]="chat"
+              [user]="user"
+              [memberPictureUrls$]="memberPictureUrls$"
+              [eventImageUrls$]="eventImageUrls$"
+            ></app-chat-card>
+          </ng-container>
+
+          <div *ngIf="chats.length === 0" class="no-more-content">
+            No more content !
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label> Group </ng-template>
+        <br />
+        <div *ngIf="chats$ | async as chats" class="container">
+          <ng-container *ngFor="let chat of chats">
+            <app-chat-card
+              *ngIf="user"
+              [chat]="chat"
+              [user]="user"
+              [memberPictureUrls$]="memberPictureUrls$"
+              [eventImageUrls$]="eventImageUrls$"
+            ></app-chat-card>
+          </ng-container>
+
+          <div *ngIf="chats.length === 0" class="no-more-content">
+            No more content !
+          </div>
+        </div>
+        <ng-template #noContent>
+          <div class="no-more-content">No more content !</div>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
   </main>
 </ion-content>

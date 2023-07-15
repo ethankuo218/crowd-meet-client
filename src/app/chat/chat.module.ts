@@ -9,6 +9,7 @@ import { HeaderComponent } from '../header/header.component';
 import { ChatCardComponent } from './chat-list/chat-card/chat-card.component';
 import { EventService } from '../core/event.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatTabsModule } from '@angular/material/tabs';
 
 const routes: Routes = [
   {
@@ -39,7 +40,8 @@ const routes: Routes = [
     FontAwesomeModule,
     RouterModule.forChild(routes),
     HeaderComponent,
-    ChatCardComponent
+    ChatCardComponent,
+    MatTabsModule
   ],
   providers: [EventService, ChatService]
 })
