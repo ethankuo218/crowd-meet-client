@@ -33,8 +33,12 @@ export class EventCreateComponent implements OnInit {
   eventForm: FormGroup = new FormGroup({
     title: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
-    startTime: new FormControl('', [Validators.required]),
-    endTime: new FormControl('', [Validators.required]),
+    startTime: new FormControl(new Date().toISOString().split('.')[0], [
+      Validators.required
+    ]),
+    endTime: new FormControl(new Date().toISOString().split('.')[0], [
+      Validators.required
+    ]),
     maxParticipants: new FormControl(1, counterRangeValidator(1, 15)),
     locationName: new FormControl('', [Validators.required]),
     price: new FormControl(0, [Validators.required]),
@@ -86,27 +90,27 @@ export class EventCreateComponent implements OnInit {
       });
 
     this.googleMapsLoaderService.load().then(async (placesService) => {
-      const coordinates = await Geolocation.getCurrentPosition();
-      const userLocation = {
-        lat: coordinates.coords.latitude,
-        lng: coordinates.coords.longitude
-      };
-      // Create a LatLngBounds object centered around the user's location.
-      const circle = new google.maps.Circle({
-        center: userLocation,
-        radius: 50000
-      }); // 50000 meters = 50 km
-      const bounds = circle.getBounds()!;
+      // const coordinates = await Geolocation.getCurrentPosition();
+      // const userLocation = {
+      //   lat: coordinates.coords.latitude,
+      //   lng: coordinates.coords.longitude
+      // };
+      // // Create a LatLngBounds object centered around the user's location.
+      // const circle = new google.maps.Circle({
+      //   center: userLocation,
+      //   radius: 50000
+      // }); // 50000 meters = 50 km
+      // const bounds = circle.getBounds()!;
 
-      // Set the bounds of the Autocomplete object to the user's location.
-      const options: google.maps.places.AutocompleteOptions = {
-        bounds: bounds
-      };
+      // // Set the bounds of the Autocomplete object to the user's location.
+      // const options: google.maps.places.AutocompleteOptions = {
+      //   bounds: bounds
+      // };
 
       const inputElement = await this.searchElementRef.getInputElement();
       const autocomplete = new google.maps.places.Autocomplete(
-        inputElement,
-        options
+        inputElement
+        // options
       );
       autocomplete.addListener('place_changed', () => {
         this.ngZone.run(() => {
@@ -133,7 +137,6 @@ export class EventCreateComponent implements OnInit {
     this.route.paramMap.pipe(take(1)).subscribe((params) => {
       this.mode = params.get('mode')!;
       this.eventForm.reset();
-      this.eventForm.get('maxParticipants')?.setValue(1);
       delete this.eventCoverPictureUrl;
       delete this.selectLocation;
 
@@ -152,8 +155,10 @@ export class EventCreateComponent implements OnInit {
         this.eventCoverPictureUrl = eventInfo.imageUrl;
         this.onIsOnlineChange(eventInfo.isOnline);
       } else {
+        this.eventForm.get('maxParticipants')?.setValue(1);
         this.eventForm.get('startTime')?.patchValue(today.split('.')[0]);
         this.eventForm.get('endTime')?.patchValue(today.split('.')[0]);
+        this.eventForm.get('price')?.patchValue(0);
       }
     });
   }

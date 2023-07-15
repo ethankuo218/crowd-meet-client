@@ -22,12 +22,7 @@ import { ReferenceStateFacade } from '../core/states/reference-state/reference.s
   providers: [ReferenceStateFacade]
 })
 export class FilterComponent implements OnInit {
-  categoryList: Category[] = [
-    { categoryId: 0, name: 'testestestest1' },
-    { categoryId: 1, name: 'test2' },
-    { categoryId: 2, name: 'testest3' },
-    { categoryId: 3, name: 'testet4' }
-  ];
+  categoryList: Category[] = [];
 
   minDate: string = '';
 
@@ -37,9 +32,15 @@ export class FilterComponent implements OnInit {
 
   filterForm: FormGroup = new FormGroup({
     categories: new FormArray([], Validators.required),
-    distance: new FormControl<number>(5, Validators.required),
-    startTime: new FormControl<string>('', Validators.required),
-    endTime: new FormControl<string>('', Validators.required)
+    radius: new FormControl<number>(5, Validators.required),
+    startDate: new FormControl<string>(
+      new Date().toISOString().split('.')[0],
+      Validators.required
+    ),
+    endDate: new FormControl<string>(
+      new Date().toISOString().split('.')[0],
+      Validators.required
+    )
   });
 
   constructor(
@@ -48,20 +49,19 @@ export class FilterComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.referenceStateFacade
-    //   .getCategories()
-    //   .pipe(take(1))
-    //   .subscribe({
-    //     next: (result) => {
-    //       this.categoryList = result;
-    this.categoryList.forEach(() => {
-      this.categories.push(new FormControl());
-    });
-    //     }
-    //   });
+    this.referenceStateFacade
+      .getCategories()
+      .pipe(take(1))
+      .subscribe({
+        next: (result) => {
+          this.categoryList = result;
+          this.categoryList.forEach(() => {
+            this.categories.push(new FormControl());
+          });
+        }
+      });
 
-    const today = new Date().toISOString().split('.')[0];
-    this.minDate = today;
+    this.minDate = new Date().toISOString().split('.')[0];
   }
 
   cancel(): void {
@@ -72,8 +72,16 @@ export class FilterComponent implements OnInit {
     this.filterForm.reset();
   }
 
-  filter(): void {
-    this.modalControl.dismiss(null, 'filter');
+  applyFilter(): void {
+    this.modalControl.dismiss(
+      {
+        ...this.filterForm.value,
+        startDate: new Date(this.filterForm.value.startDate).toISOString(),
+        endDate: new Date(this.filterForm.value.endDate).toISOString(),
+        categories: this.getCategories()
+      },
+      'filter'
+    );
   }
 
   trackByIndex(index: number, item: any): number {
@@ -86,11 +94,7 @@ export class FilterComponent implements OnInit {
 
   onDistanceChange(event: Event) {
     const value = (event as RangeCustomEvent).detail.value;
-    this.filterForm.get('distance')?.patchValue(value);
-  }
-
-  applyFilter(): void {
-    console.log(this.filterForm.value);
+    this.filterForm.get('radius')?.patchValue(value);
   }
 
   private getCategories(): number[] {

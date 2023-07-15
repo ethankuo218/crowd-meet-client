@@ -59,16 +59,16 @@ export class HttpClientService {
       switchMap((headers: HttpHeaders): Observable<T> => {
         let queryString = '';
 
-        if (typeof parameter !== 'string' && parameter) {
-          let index = 0;
-          for (const key in parameter) {
-            index++;
-            queryString +=
-              index <= 1
-                ? `?${key}=${parameter[key]}`
-                : `&${key}=${parameter[key]}`;
-          }
-        }
+        // if (typeof parameter !== 'string' && parameter) {
+        //   let index = 0;
+        //   for (const key in parameter) {
+        //     index++;
+        //     queryString +=
+        //       index <= 1
+        //         ? `?${key}=${parameter[key]}`
+        //         : `&${key}=${parameter[key]}`;
+        //   }
+        // }
 
         return typeof parameter === 'string'
           ? this.httpClient.get<T>(
@@ -80,6 +80,7 @@ export class HttpClientService {
           : this.httpClient.get<T>(
               `${this.urlPrefix}${apiName}${queryString}`,
               {
+                params: parameter,
                 headers: headers
               }
             );

@@ -24,6 +24,8 @@ export class EventListComponent implements OnInit {
     .getEventList()
     .pipe(map((result) => result?.data));
 
+  filter: any = {};
+
   constructor(
     private eventService: EventService,
     private route: ActivatedRoute,
@@ -31,7 +33,7 @@ export class EventListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.eventService.reload();
+    this.eventService.reload({});
   }
 
   ionViewWillEnter() {}
@@ -40,20 +42,20 @@ export class EventListComponent implements OnInit {
     this.route.paramMap.pipe(take(1)).subscribe({
       next: (params) => {
         if (params.get('refresh')) {
-          this.eventService.reload();
+          this.eventService.reload(this.filter);
         }
       }
     });
   }
 
   handleRefresh(event: Event) {
-    this.eventService.reload().then(() => {
+    this.eventService.reload(this.filter).then(() => {
       (event as RefresherCustomEvent).target.complete();
     });
   }
 
   onIonInfinite(event: Event) {
-    this.eventService.loadNextPage().then(() => {
+    this.eventService.loadNextPage(this.filter).then(() => {
       (event as InfiniteScrollCustomEvent).target.complete();
     });
   }
@@ -68,7 +70,11 @@ export class EventListComponent implements OnInit {
 
     const { data, role } = await modal.onWillDismiss();
 
-    console.log(data);
+    if (role === 'filter') {
+      this.filter = data;
+      console.log(this.filter);
+      this.eventService.reload(this.filter);
+    }
   }
 
   // loadNativeAds() {

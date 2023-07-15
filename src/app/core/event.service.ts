@@ -77,10 +77,16 @@ export class EventService {
     return this.eventListStateFacade.getEventList();
   }
 
-  async reload(): Promise<void> {
+  async reload(filter: any): Promise<void> {
     this.currentPage = 1;
+    console.log({
+      ...filter,
+      page: this.currentPage,
+      pageSize: 10
+    });
     const result = await firstValueFrom(
       this.httpClientService.get<EventList>('event', {
+        ...filter,
         page: this.currentPage,
         pageSize: 10
       })
@@ -89,9 +95,10 @@ export class EventService {
     this.eventListStateFacade.storeEventList(result);
   }
 
-  async loadNextPage(): Promise<void> {
+  async loadNextPage(filter: any): Promise<void> {
     const result = await firstValueFrom(
       this.httpClientService.get<EventList>('event', {
+        ...filter,
         page: ++this.currentPage,
         pageSize: 10
       })
