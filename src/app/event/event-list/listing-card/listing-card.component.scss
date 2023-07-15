@@ -76,6 +76,10 @@
   padding-bottom: 20px;
 }
 
+.cause_content ::ng-deep .swiper-slide {
+  width: fit-content;
+}
+
 swiper {
   margin: 0;
 }

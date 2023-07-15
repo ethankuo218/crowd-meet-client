@@ -7,10 +7,10 @@
     <p class="content dark_dd">
       {{ cardInfo.description }}
     </p>
-    <swiper [slidesPerView]="3" [spaceBetween]="10">
+    <swiper [slidesPerView]="'auto'" [spaceBetween]="10">
       <ng-container *ngFor="let item of cardInfo.categories; let i = index">
         <ng-template swiperSlide>
-          <a *ngIf="i < 2" class="primary">{{ item.name }}</a>
+          <a class="primary">{{ item.name }}</a>
         </ng-template>
       </ng-container>
     </swiper>
