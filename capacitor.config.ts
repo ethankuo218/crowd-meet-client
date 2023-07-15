@@ -2,7 +2,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.crowdmeet.app',
-  appName: 'crowd-meet-client',
+  appName: 'CrowdMeet',
   webDir: 'dist/app/browser',
   bundledWebRuntime: false,
   plugins: {
