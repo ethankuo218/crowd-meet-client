@@ -77,32 +77,6 @@ export class EventListComponent implements OnInit {
     }
   }
 
-  // loadNativeAds() {
-  //   // To load native ads
-  //   AdmobAds.loadNativeAd({
-  //     adId: 'ca-app-pub-3940256099942544/2247696110',
-  //     isTesting: true,
-  //     adsCount: 3
-  //   })
-  //     .then((res) => {
-  //       this.ads = res.ads;
-  //       console.log(this.ads);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.message);
-  //     });
-  // }
-
-  // // To open a native ad
-  // viewAd(id: string) {
-  //   AdmobAds.triggerNativeAd({ id: id });
-  // }
-
-  // // To open AdChoices url
-  // openAdchoices(url: string) {
-  //   window.open(url);
-  // }
-
   get noMoreContent(): boolean {
     return this.eventService.noMoreContent;
   }

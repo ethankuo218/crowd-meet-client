@@ -7,8 +7,7 @@ import {
   FormArray,
   FormControl,
   FormGroup,
-  ReactiveFormsModule,
-  Validators
+  ReactiveFormsModule
 } from '@angular/forms';
 import { take } from 'rxjs';
 import { ReferenceStateFacade } from '../core/states/reference-state/reference.state.facade';
@@ -31,16 +30,10 @@ export class FilterComponent implements OnInit {
   }
 
   filterForm: FormGroup = new FormGroup({
-    categories: new FormArray([], Validators.required),
-    radius: new FormControl<number>(5, Validators.required),
-    startDate: new FormControl<string>(
-      new Date().toISOString().split('.')[0],
-      Validators.required
-    ),
-    endDate: new FormControl<string>(
-      new Date().toISOString().split('.')[0],
-      Validators.required
-    )
+    categories: new FormArray([], []),
+    radius: new FormControl<number>(5, []),
+    startDate: new FormControl<string>('', []),
+    endDate: new FormControl<string>('', [])
   });
 
   constructor(
@@ -75,10 +68,14 @@ export class FilterComponent implements OnInit {
   applyFilter(): void {
     this.modalControl.dismiss(
       {
-        ...this.filterForm.value,
-        startDate: new Date(this.filterForm.value.startDate).toISOString(),
-        endDate: new Date(this.filterForm.value.endDate).toISOString(),
-        categories: this.getCategories()
+        categories: this.getCategories(),
+        radius: this.filterForm.value.radius,
+        ...(this.filterForm.value.startDate && {
+          startDate: new Date(this.filterForm.value.startDate).toISOString()
+        }),
+        ...(this.filterForm.value.endDate && {
+          endDate: new Date(this.filterForm.value.endDate).toISOString()
+        })
       },
       'filter'
     );
@@ -98,6 +95,10 @@ export class FilterComponent implements OnInit {
   }
 
   private getCategories(): number[] {
+    if (this.categories.value.length === 0) {
+      return [];
+    }
+
     const returnArr: number[] = [];
 
     this.categories.value.forEach((element: boolean, index: number) => {
