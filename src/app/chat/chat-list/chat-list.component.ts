@@ -49,7 +49,7 @@ export class ChatListComponent implements OnInit {
     return firstValueFrom(user(this.auth));
   }
 
-  private getUserChats(userId: string) {
+  private getUserChats(userId: string): Observable<Chat[]> {
     const chatsQuery = query(
       collection(this.firestore, 'chats'),
       where('members', 'array-contains', userId),

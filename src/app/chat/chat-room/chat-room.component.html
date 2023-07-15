@@ -6,7 +6,7 @@
         <div class="text-center">
           <span class="dark_dd spn_s">Session start</span>
         </div>
-        <ng-container *ngFor="let message of messages$ | async">
+        <!-- <ng-container *ngFor="let message of messages$ | async">
           <ng-container *ngIf="user$ | async as user">
             <ng-container *ngIf="message.senderId === user.uid">
               <div class="my-chat">
@@ -43,9 +43,9 @@
               </div>
             </ng-container>
           </ng-container>
-        </ng-container>
+        </ng-container> -->
 
-        <!-- <div class="my-chat">
+        <div class="my-chat">
           <div class="chat_content">
             <p class="white">Hi, good afternoon Dr.<br />Drake...</p>
             <small class="white"
@@ -115,26 +115,23 @@
             </p>
             <small class="dark">16:01</small>
           </div>
-        </div> -->
-      </div>
-      <div class="btn-full">
-        <div class="btm-chat">
-          <div class="chat-bottom">
-            <div class="wdt1">
-              <input
-                class="dark_dd"
-                type="text"
-                name="#"
-                placeholder="Type a message"
-                (keyup.enter)="sendMessage($event)"
-              />
-            </div>
-            <div class="wdt2">
-              <button><img src="assets/images/voice.png" alt="image" /></button>
-            </div>
-          </div>
         </div>
       </div>
     </div>
   </main>
 </ion-content>
+
+<ion-footer>
+  <div class="btm-chat">
+    <input
+      class="dark_dd"
+      type="text"
+      name="#"
+      placeholder="Type a message"
+      (keyup.enter)="sendMessage($event)"
+    />
+    <ion-button>
+      <fa-icon [icon]="['fas', 'paper-plane']"></fa-icon>
+    </ion-button>
+  </div>
+</ion-footer>

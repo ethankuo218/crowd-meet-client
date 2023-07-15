@@ -3,7 +3,7 @@
   <main class="message-area main-area">
     <div class="container">
       <div class="tabcontent" style="display: block">
-        <ng-container *ngFor="let chat of chats$ | async">
+        <!-- <ng-container *ngFor="let chat of chats$ | async">
           <app-chat-card
             *ngIf="user"
             [chat]="chat"
@@ -11,7 +11,10 @@
             [memberPictureUrls$]="memberPictureUrls$"
             [eventImageUrls$]="eventImageUrls$"
           ></app-chat-card>
-        </ng-container>
+        </ng-container> -->
+        <app-chat-card></app-chat-card>
+        <app-chat-card></app-chat-card>
+        <app-chat-card></app-chat-card>
       </div>
     </div>
   </main>

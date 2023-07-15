@@ -47,11 +47,17 @@
   margin: 30px 0 20px;
 }
 
-.chat-bottom {
-  display: flex;
+ion-footer {
+  padding: 1rem;
 }
 
-.chat-bottom .wdt1 input {
+.btm-chat {
+  display: grid;
+  grid-template-columns: 1fr 0.1fr;
+  grid-column-gap: 0.2rem;
+}
+
+.btm-chat input {
   font-size: 15px;
   border-radius: 12px;
   border: none;
@@ -61,50 +67,12 @@
   position: relative;
 }
 
-.chat-bottom .wdt1 {
-  position: relative;
-  width: 76%;
-}
+.btm-chat ion-button {
+  --background: transparent;
+  --color: black;
+  width: fit-content;
 
-.chat-bottom .wdt1 button {
-  position: absolute;
-}
-
-.chat-bottom .wdt1 button.emoji1 {
-  left: 13px;
-  top: 16px;
-}
-
-.chat-bottom .wdt1 button.emoji2 {
-  right: 40px;
-  top: 16px;
-}
-
-.chat-bottom .wdt1 button.emoji3 {
-  right: 13px;
-  top: 16px;
-}
-
-.chat-bottom .wdt1 button i {
-  font-size: 16px;
-}
-
-.wdt2 {
-  width: 15%;
-  text-align: end;
-}
-
-.wdt2 button img {
-  width: 48px;
-}
-
-.btm-chat {
-  position: fixed;
-  bottom: 0;
-  width: 97%;
-  left: 50%;
-  transform: translate(-46%, -0%);
-  text-align: center;
-  padding: 10px 0 30px;
-  background: #fff;
+  fa-icon {
+    font-size: 18px;
+  }
 }
