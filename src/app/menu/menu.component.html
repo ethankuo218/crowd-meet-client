@@ -1,4 +1,3 @@
-<app-header></app-header>
 <ion-content class="menu-content">
   <main class="prof profile-menu-area main-area">
     <div class="container">
@@ -11,7 +10,6 @@
             />
           </div>
           <h3 class="dark">{{ user.name }}</h3>
-          <a class="dark">{{ user.email }}</a>
         </ng-container>
         <hr />
       </div>
@@ -26,29 +24,12 @@
               <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
             </div>
           </a>
-          <a routerLink="/app/notifications">
-            <div class="acc__card">
-              <div class="acc__title">
-                <fa-icon class="dark" [icon]="['far', 'bell']"></fa-icon>
-                <span class="dark">Notifications</span>
-              </div>
-              <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
-            </div>
-          </a>
+
           <a routerLink="/app/purchase">
             <div class="acc__card">
               <div class="acc__title">
                 <fa-icon class="dark" [icon]="['far', 'credit-card']"></fa-icon>
-                <span class="dark">Payment</span>
-              </div>
-              <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
-            </div>
-          </a>
-          <a routerLink="/app/reviews">
-            <div class="acc__card">
-              <div class="acc__title">
-                <fa-icon class="dark" [icon]="['fas', 'star']"></fa-icon>
-                <span class="dark">Reviews</span>
+                <span class="dark">Membership</span>
               </div>
               <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
             </div>

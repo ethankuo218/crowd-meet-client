@@ -15,10 +15,13 @@
   border-radius: 50%;
 }
 
-.upload_profile button {
-  position: absolute;
-  bottom: 13px;
-  right: -2px;
+.upload_profile {
+  margin-top: 5rem;
+  button {
+    position: absolute;
+    bottom: 13px;
+    right: -2px;
+  }
 }
 
 .upload_profile button fa-icon {
