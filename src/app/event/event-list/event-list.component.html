@@ -5,20 +5,14 @@
   </ion-refresher>
   <main class="article-area main-area">
     <div class="event-content">
-      <div class="pson_div">
-        <h3 class="dark">Suggested</h3>
-      </div>
-      <swiper
-        [slidesPerView]="1.8"
-        [spaceBetween]="20"
-        [centeredSlides]="true"
-        [centeredSlidesBounds]="true"
-      >
+      <h3 class="dark">Suggested</h3>
+      <swiper [slidesPerView]="2">
         <ng-template swiperSlide>
           <div class="item slide_item">
             <img src="assets/images/spoon.png" alt="image" />
             <p class="dark">
-              Lorem ipsum dolor sit amet, consectetur adipisicing el...
+              Lorem ipsum dolor sit amet, consectetur adipisicing elel qweqwe
+              erwer...
             </p>
           </div>
         </ng-template>
@@ -40,9 +34,7 @@
         </ng-template>
       </swiper>
 
-      <div class="pson_div">
-        <h3 class="dark">Events</h3>
-      </div>
+      <h3 class="dark">Events</h3>
       <ng-container *ngFor="let item of listing$ | async">
         <app-listing-card [cardInfo]="item"></app-listing-card>
       </ng-container>

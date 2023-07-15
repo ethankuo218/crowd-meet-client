@@ -2,22 +2,11 @@
   padding: 1rem 0 1rem 0;
 }
 
-.pson_div {
-  padding: 0px 25px 20px;
-}
-
-.pson_div h3 {
+h3 {
+  margin-left: 1rem;
   font-size: 18px;
   font-weight: 700;
   position: relative;
-}
-
-.pson_div h3 a {
-  position: absolute;
-  right: 0;
-  top: 2px;
-  font-size: 16px;
-  font-weight: 700;
 }
 
 .slide_item img {
@@ -59,13 +48,6 @@
   border: 2px solid #246bfd;
   font-size: 16px;
   font-weight: 600;
-}
-
-.event-content
-  ::ng-deep
-  .swiper-wrapper
-  .swiper-slide:first-child.swiper-slide-active {
-  margin-left: 1.5rem;
 }
 
 .active_btn {
@@ -124,46 +106,17 @@
   margin: 8px 0.2rem 0 0;
 }
 
-.event-content ::ng-deep .swiper-wrapper {
-  padding-bottom: 20px;
-}
-
-.event-content
-  ::ng-deep
-  .swiper-wrapper
-  .swiper-slide:first-child.swiper-slide-active {
-  margin-left: 1.5rem;
+.event-content swiper {
+  margin-bottom: 1rem;
 }
 
 .event-content ::ng-deep .swiper-slide img {
-  height: 150px;
-  border-radius: 25px;
+  height: 10rem;
   object-fit: cover;
 }
 
 .event-content .item {
   position: relative;
-}
-
-.slider-area .item button {
-  position: absolute;
-  right: 9px;
-  bottom: 8px;
-  color: #fff;
-  font-size: 14px;
-}
-
-.filter_section {
-  display: flex;
-
-  ion-searchbar {
-    width: 90%;
-  }
-
-  button {
-    padding: 0.5rem 1rem 0.5rem 0;
-    width: 10%;
-    --background: transparent;
-    font-size: 20px;
-  }
+  border-radius: 25px;
+  padding: 1rem;
 }
