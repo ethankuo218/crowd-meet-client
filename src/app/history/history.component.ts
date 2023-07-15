@@ -1,12 +1,11 @@
+import { UserStateFacade } from './../core/states/user-state/user.state.facade';
 import { Component, OnInit } from '@angular/core';
-import {
-  ActionSheetController,
-  ModalController,
-  RefresherCustomEvent
-} from '@ionic/angular';
+import { ActionSheetController, RefresherCustomEvent } from '@ionic/angular';
 import { UserService } from '../core/user.service';
 import { UserEvent } from '../core/states/user-state/user.model';
-import { map } from 'rxjs';
+import { firstValueFrom, map } from 'rxjs';
+import { Router } from '@angular/router';
+import { EventService } from '../core/event.service';
 
 @Component({
   selector: 'app-history',
@@ -34,7 +33,10 @@ export class HistoryComponent implements OnInit {
 
   constructor(
     private actionSheetController: ActionSheetController,
-    private userService: UserService
+    private userService: UserService,
+    private userStateFacade: UserStateFacade,
+    private router: Router,
+    private eventService: EventService
   ) {}
 
   ngOnInit() {
@@ -47,15 +49,15 @@ export class HistoryComponent implements OnInit {
     });
   }
 
-  async openMenu() {
-    const actionSheet = await this.actionSheetController.create({
+  async openMenu(eventId: number, creatorId: number) {
+    let buttonOptions = {
       buttons: [
         {
           text: 'Leave',
           role: 'leave',
           cssClass: 'leave_button',
           handler: () => {
-            console.log('Leave clicked');
+            this.eventService.leave(eventId);
           }
         },
         {
@@ -66,7 +68,26 @@ export class HistoryComponent implements OnInit {
           }
         }
       ]
-    });
+    };
+
+    const userId = (await firstValueFrom(this.userStateFacade.getUser()))
+      .userId;
+    if (userId === creatorId) {
+      buttonOptions.buttons = [
+        ...[
+          {
+            text: 'Manage Participants',
+            role: 'manage',
+            handler: () => {
+              this.router.navigate(['/app/history/joiner-list', eventId]);
+            }
+          }
+        ],
+        ...buttonOptions.buttons
+      ];
+    }
+
+    const actionSheet = await this.actionSheetController.create(buttonOptions);
     await actionSheet.present();
   }
 

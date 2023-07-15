@@ -1,0 +1,30 @@
+<app-header></app-header>
+<ion-content>
+  <main class="fix notification-area main-area p-0">
+    <div class="container">
+      <div class="joiner_list">
+        <ng-container *ngIf="joiners$ | async as joiners">
+          <div *ngFor="let joiner of joiners" class="joiner_info">
+            <div class="joiner_img">
+              <img
+                [src]="joiner.profilePictureUrl || 'assets/images/men.png'"
+                alt="image"
+              />
+            </div>
+            <div class="joiner_content">
+              <h3 class="dark">{{ joiner.name }}</h3>
+              <p class="dark_d td_p">
+                {{ joiner.registeredAt | date : 'MMMM d, y | h:m a' }}
+              </p>
+              <hr />
+              <div class="button_area">
+                <ion-button (click)="accept(joiner.id)">Accept</ion-button>
+                <ion-button (click)="decline(joiner.id)">Decline</ion-button>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </main>
+</ion-content>

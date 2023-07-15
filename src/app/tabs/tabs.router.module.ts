@@ -123,18 +123,6 @@ const routes: Routes = [
               )
           }
         ]
-      },
-      {
-        path: 'joiner-list',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('../joiner-list/joiner-list.module').then(
-                (m) => m.JoinerListModule
-              )
-          }
-        ]
       }
     ]
   }

@@ -6,16 +6,22 @@ import { HeaderComponent } from '../header/header.component';
 import { IonicModule } from '@ionic/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatTabsModule } from '@angular/material/tabs';
+import { JoinerListComponent } from './joiner-list/joiner-list.component';
+import { EventService } from '../core/event.service';
 
 const routes: Routes = [
   {
     path: '',
     component: HistoryComponent
+  },
+  {
+    path: 'joiner-list/:id',
+    component: JoinerListComponent
   }
 ];
 
 @NgModule({
-  declarations: [HistoryComponent],
+  declarations: [HistoryComponent, JoinerListComponent],
   imports: [
     IonicModule,
     FontAwesomeModule,
@@ -23,6 +29,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     HeaderComponent,
     MatTabsModule
-  ]
+  ],
+  providers: [EventService]
 })
 export class HistoryModule {}

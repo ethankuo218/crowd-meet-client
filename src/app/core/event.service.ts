@@ -16,7 +16,11 @@ import {
   switchMap,
   tap
 } from 'rxjs';
-import { EventActionResponse, EventImageResponse } from './models/core.model';
+import {
+  EventAction,
+  EventActionResponse,
+  EventImageResponse
+} from './models/core.model';
 import { EventList } from './states/event-list-state/event-list.model';
 import { Image } from './states/user-state/user.model';
 
@@ -120,42 +124,6 @@ export class EventService {
     });
   }
 
-  // event related actions
-  leave(id: number): Observable<EventActionResponse> {
-    return this.httpClientService.patch<EventActionResponse>(
-      `event/${id}/leave`,
-      {}
-    );
-  }
-
-  accept(id: number, acceptUsers: number[]): Observable<EventActionResponse> {
-    return this.httpClientService.patch<EventActionResponse>(
-      `event/${id}/accept`,
-      {
-        userIds: acceptUsers
-      }
-    );
-  }
-
-  decline(
-    id: number,
-    declinedUsers: number[]
-  ): Observable<EventActionResponse> {
-    return this.httpClientService.patch<EventActionResponse>(
-      `event/${id}/decline`,
-      {
-        userIds: declinedUsers
-      }
-    );
-  }
-
-  kick(id: number, userId: number): Observable<EventActionResponse> {
-    return this.httpClientService.patch<EventActionResponse>(
-      `event/${id}/kick/${userId}`,
-      {}
-    );
-  }
-
   // event comment
   private reloadComment(id: number): void {
     this.httpClientService
@@ -192,6 +160,46 @@ export class EventService {
     return this.httpClientService.post<EventActionResponse>(
       `event/${id}/participant`,
       {}
+    );
+  }
+
+  leave(id: number): Observable<EventActionResponse> {
+    return this.httpClientService.patch<EventActionResponse>(
+      `event/${id}/participant/me`,
+      {}
+    );
+  }
+
+  accept(id: number, acceptUsers: number[]): Observable<EventActionResponse> {
+    return this.httpClientService.patch<EventActionResponse>(
+      `event/${id}/participant`,
+      {
+        status: EventAction.ACCEPT,
+        participantIds: acceptUsers
+      }
+    );
+  }
+
+  decline(
+    id: number,
+    declinedUsers: number[]
+  ): Observable<EventActionResponse> {
+    return this.httpClientService.patch<EventActionResponse>(
+      `event/${id}/participant`,
+      {
+        status: EventAction.DECLINE,
+        participantIds: declinedUsers
+      }
+    );
+  }
+
+  kick(id: number, userId: number): Observable<EventActionResponse> {
+    return this.httpClientService.patch<EventActionResponse>(
+      `event/${id}/participant`,
+      {
+        status: EventAction.KICK,
+        participantId: userId
+      }
     );
   }
 }

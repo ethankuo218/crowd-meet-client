@@ -50,12 +50,13 @@
         display: flex;
         justify-content: space-around;
 
-        button {
+        ion-button {
+          --background: transparent;
           width: 45%;
           color: #246bfd;
           border: #246bfd solid 2px;
           border-radius: 25px;
-          padding: 0.3rem 0;
+          height: 1.7rem;
         }
       }
     }

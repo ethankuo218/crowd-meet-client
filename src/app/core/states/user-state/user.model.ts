@@ -25,4 +25,5 @@ export interface UserEvent {
   startTime: string;
   endTime: string;
   imageUrl: string;
+  creatorId: number;
 }

@@ -26,3 +26,11 @@ export interface EventActionResponse {
   registeredAt: string;
   status: string;
 }
+
+export enum EventAction {
+  APPLY = 'apply',
+  LEAVE = 'leave',
+  ACCEPT = 'accept',
+  DECLINE = 'decline',
+  KICK = 'kick'
+}
