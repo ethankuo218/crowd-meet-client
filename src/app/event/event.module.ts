@@ -12,6 +12,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EventService } from '../core/event.service';
 import { FormsModule } from '@angular/forms';
 import { FilterComponent } from '../filter/filter.component';
+import { ProfileComponent } from '../profile/profile.component';
+import { ParticipantsComponent } from './participants/participants.component';
 const routes: Routes = [
   {
     path: '',
@@ -28,6 +30,14 @@ const routes: Routes = [
       {
         path: 'list/:id',
         component: EventDetailComponent
+      },
+      {
+        path: 'profile/:id',
+        component: ProfileComponent
+      },
+      {
+        path: 'participants/:participants',
+        component: ParticipantsComponent
       }
     ]
   }
@@ -37,7 +47,8 @@ const routes: Routes = [
   declarations: [
     EventListComponent,
     EventDetailComponent,
-    ListingCardComponent
+    ListingCardComponent,
+    ParticipantsComponent
   ],
   imports: [
     IonicModule,
@@ -48,7 +59,8 @@ const routes: Routes = [
     HeaderComponent,
     SwiperModule,
     FormsModule,
-    FilterComponent
+    FilterComponent,
+    ProfileComponent
   ],
   providers: [EventService]
 })

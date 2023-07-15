@@ -35,9 +35,11 @@
       </swiper>
 
       <h3 class="dark">Events</h3>
-      <ng-container *ngFor="let item of listing$ | async">
-        <app-listing-card [cardInfo]="item"></app-listing-card>
-      </ng-container>
+      <div class="event-list">
+        <ng-container *ngFor="let item of listing$ | async">
+          <app-listing-card [cardInfo]="item"></app-listing-card>
+        </ng-container>
+      </div>
     </div>
     <div *ngIf="noMoreContent" class="no-more-content">No more content !</div>
   </main>

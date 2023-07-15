@@ -59,7 +59,13 @@
               <div class="host_joiner_info">
                 <div class="creator">
                   <h3>Host</h3>
-                  <div class="host_info">
+                  <div
+                    class="host_info"
+                    [routerLink]="[
+                      '/app/event/profile',
+                      eventDetail.creator.userId
+                    ]"
+                  >
                     <div class="profile_img">
                       <img
                         [src]="eventDetail.creator.profilePictureUrl"
@@ -71,25 +77,30 @@
                     </div>
                   </div>
                 </div>
-                <div class="participants" style="width: 50%">
+                <div class="participants">
                   <h3>Participants</h3>
-                  <div class="joiner_list">
-                    <ng-container
-                      *ngFor="
-                        let participant of eventDetail.participants;
-                        let i = index
-                      "
+                  <ng-container *ngIf="participants$ | async as participants">
+                    <div
+                      class="joiner_list"
+                      [routerLink]="[
+                        '/app/event/participants',
+                        getJsonString(participants)
+                      ]"
                     >
-                      <div *ngIf="i < 4" class="joiner">
-                        <img [src]="'assets/images/profile1.jpg'" />
-                      </div>
-                      <div *ngIf="i === 4" class="joiner">
-                        <div class="more">
-                          {{ '+6' }}
+                      <ng-container
+                        *ngFor="let participant of participants; let i = index"
+                      >
+                        <div *ngIf="i < 4" class="joiner">
+                          <img [src]="'assets/images/profile1.jpg'" />
                         </div>
-                      </div>
-                    </ng-container>
-                  </div>
+                        <div *ngIf="i === 4" class="joiner">
+                          <div class="more">
+                            {{ '+6' }}
+                          </div>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </ng-container>
                 </div>
               </div>
             </div>
@@ -152,7 +163,11 @@
   <ng-container *ngIf="user$ | async as user">
     <ion-footer class="ion-no-border">
       <ion-toolbar>
-        <h3>Free</h3>
+        <h3>
+          {{
+            eventDetail.price === 0 ? 'free' : (eventDetail.price | currency)
+          }}
+        </h3>
         <ion-button
           *ngIf="user.userId === eventDetail.creator.userId; else normalUser"
           slot="end"

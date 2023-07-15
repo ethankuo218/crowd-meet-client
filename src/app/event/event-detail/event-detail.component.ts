@@ -1,4 +1,4 @@
-import { Event } from './../models/event.model';
+import { Event, Participant } from './../models/event.model';
 import { UserStateFacade } from './../../core/states/user-state/user.state.facade';
 import { EventService } from '../../core/event.service';
 import { Component, OnInit, inject } from '@angular/core';
@@ -16,11 +16,15 @@ import { Browser } from '@capacitor/browser';
   ]
 })
 export class EventDetailComponent implements OnInit {
-  // Gather all component subscription in one place. Can be one Subscription or multiple (chained using the Subscription.add() method)
   eventDetail$: Observable<Event> = this.route.params.pipe(
-    // Extract data for this page
     switchMap((params) => {
       return this.eventService.getEventDetail(params['id']);
+    })
+  );
+
+  participants$: Observable<Participant[]> = this.route.params.pipe(
+    switchMap((params) => {
+      return this.eventService.getParticipants(params['id']);
     })
   );
 
@@ -29,8 +33,6 @@ export class EventDetailComponent implements OnInit {
   comments$ = this.eventService.getComment();
 
   comment: string | undefined;
-
-  participants = [1, 2, 3, 4, 5, 6];
 
   constructor(
     private route: ActivatedRoute,
@@ -72,5 +74,9 @@ export class EventDetailComponent implements OnInit {
 
   joinEvent(id: number): void {
     this.eventService.apply(id).subscribe();
+  }
+
+  getJsonString(input: any) {
+    return JSON.stringify(input);
   }
 }

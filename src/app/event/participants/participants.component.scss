@@ -1,0 +1,58 @@
+.cancel {
+  font-size: 14px;
+  border: 2px solid #246bfd;
+  padding: 5px 10px;
+  border-radius: 18px;
+  width: 100%;
+  text-align: center;
+  font-weight: 700;
+}
+
+.joiner_list {
+  margin-top: 1rem;
+
+  .joiner_info {
+    padding: 0.5rem 1rem;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 1px 1px 40px #ddd;
+    margin: 0 0 20px;
+
+    display: flex;
+
+    .joiner_img {
+      width: 25%;
+      margin-right: 5%;
+
+      img {
+        width: 4rem;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+
+    .joiner_content {
+      width: 75%;
+      transform: translateY(15%);
+
+      h3 {
+        font-size: 20px;
+      }
+
+      p {
+        font-size: 13px;
+      }
+    }
+  }
+}
+
+hr {
+  background: #eeeeee;
+  height: 1px;
+  color: #eeeeee;
+  margin: 3px 0 7px 0;
+}
+
+ion-modal {
+  --height: 10rem;
+}

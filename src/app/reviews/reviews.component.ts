@@ -13,7 +13,6 @@ import { EventService } from '../core/event.service';
 })
 export class ReviewsComponent implements OnInit {
   participants$: Observable<Participant[]> = this.route.params.pipe(
-    // Extract data for this page
     switchMap((params) => {
       return this.eventService.getParticipants(params['id']);
     })

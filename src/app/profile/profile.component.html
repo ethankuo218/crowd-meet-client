@@ -12,7 +12,6 @@
           >
             <ng-template swiperSlide *ngFor="let image of user.images">
               <img [src]="image.url" />
-              <!-- <img src="assets/images/profile1.jpg" alt="image" /> -->
             </ng-template>
           </swiper>
           <ng-container *ngIf="user.images.length !== 0">

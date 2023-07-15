@@ -113,12 +113,14 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'profile',
+        path: 'profile/:id',
         children: [
           {
             path: '',
-            loadChildren: () =>
-              import('../profile/profile.module').then((m) => m.ProfileModule)
+            loadComponent: () =>
+              import('../profile/profile.component').then(
+                (m) => m.ProfileComponent
+              )
           }
         ]
       },

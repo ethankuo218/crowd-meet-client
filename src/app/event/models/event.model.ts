@@ -29,7 +29,6 @@ export interface Event {
   lng: number;
   formattedAddress: string;
   placeId: string;
-  participants: Participant[];
   isOnline: boolean;
 }
 
