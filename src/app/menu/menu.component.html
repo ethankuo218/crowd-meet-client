@@ -55,7 +55,10 @@
               <fa-icon [icon]="['fas', 'circle-half-stroke']"></fa-icon>
               <span class="dark">Dark Mode</span>
             </div>
-            <ion-toggle></ion-toggle>
+            <ion-toggle
+              (ionChange)="changeMode()"
+              [checked]="isDarkMode"
+            ></ion-toggle>
           </div>
 
           <a routerLink="/app/joiner-list">
