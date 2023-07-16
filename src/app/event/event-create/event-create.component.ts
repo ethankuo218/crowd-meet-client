@@ -1,6 +1,6 @@
 import { EventService } from '../../core/event.service';
 import { ReferenceStateFacade } from '../../core/states/reference-state/reference.state.facade';
-import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   Validators,
   FormControl,
@@ -13,9 +13,6 @@ import { counterRangeValidator } from '../../components/counter-input/counter-in
 import { take } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/core/states/reference-state/reference.model';
-import { GoogleMapsLoaderService } from 'src/app/core/google-maps-loader.service';
-import { Geolocation } from '@capacitor/geolocation';
-import { IonInput } from '@ionic/angular';
 import { Event } from '../models/event.model';
 
 @Component({
@@ -26,9 +23,6 @@ import { Event } from '../models/event.model';
 export class EventCreateComponent implements OnInit {
   mode: string = 'create';
   eventCoverPictureUrl: string | undefined;
-
-  @ViewChild('searchInput', { read: IonInput })
-  public searchElementRef!: IonInput;
 
   eventForm: FormGroup = new FormGroup({
     title: new FormControl('', [Validators.required]),
@@ -71,9 +65,7 @@ export class EventCreateComponent implements OnInit {
     private referenceStateFacade: ReferenceStateFacade,
     private eventService: EventService,
     private router: Router,
-    private route: ActivatedRoute,
-    private googleMapsLoaderService: GoogleMapsLoaderService,
-    private ngZone: NgZone
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -88,49 +80,6 @@ export class EventCreateComponent implements OnInit {
           });
         }
       });
-
-    this.googleMapsLoaderService.load().then(async (placesService) => {
-      // const coordinates = await Geolocation.getCurrentPosition();
-      // const userLocation = {
-      //   lat: coordinates.coords.latitude,
-      //   lng: coordinates.coords.longitude
-      // };
-      // // Create a LatLngBounds object centered around the user's location.
-      // const circle = new google.maps.Circle({
-      //   center: userLocation,
-      //   radius: 50000
-      // }); // 50000 meters = 50 km
-      // const bounds = circle.getBounds()!;
-
-      // // Set the bounds of the Autocomplete object to the user's location.
-      // const options: google.maps.places.AutocompleteOptions = {
-      //   bounds: bounds
-      // };
-
-      const inputElement = await this.searchElementRef.getInputElement();
-      const autocomplete = new google.maps.places.Autocomplete(
-        inputElement
-        // options
-      );
-      autocomplete.addListener('place_changed', () => {
-        this.ngZone.run(() => {
-          const place: google.maps.places.PlaceResult = autocomplete.getPlace();
-          console.log(place);
-          // store the data below
-          console.log(place.place_id);
-          console.log(place.geometry?.location?.lat());
-          console.log(place.geometry?.location?.lng());
-          console.log(place.formatted_address);
-          this.selectLocation = {
-            placeId: place.place_id!,
-            lat: place.geometry?.location?.lat()!,
-            lng: place.geometry?.location?.lng()!,
-            formattedAddress: place.formatted_address || ''
-          };
-          this.location.setValue(place.formatted_address || '');
-        });
-      });
-    });
   }
 
   ionViewWillEnter() {

@@ -15,7 +15,16 @@ export class GoogleMapsLoaderService {
     });
   }
 
-  public async load(): Promise<google.maps.PlacesLibrary> {
-    return await this.loader.importLibrary('places');
+  public async loadPredictions(
+    input: string
+  ): Promise<google.maps.places.AutocompletePrediction[]> {
+    await this.loader.importLibrary('places');
+    const autoComplete = new google.maps.places.AutocompleteService();
+    const request: google.maps.places.AutocompletionRequest = {
+      input: input,
+      language: 'en'
+    };
+
+    return (await autoComplete.getPlacePredictions(request)).predictions;
   }
 }

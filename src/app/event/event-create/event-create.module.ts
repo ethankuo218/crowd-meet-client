@@ -9,6 +9,7 @@ import { HeaderComponent } from 'src/app/header/header.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EventService } from 'src/app/core/event.service';
 import { CounterInputComponent } from 'src/app/components/counter-input/counter-input.component';
+import { LocationInputComponent } from 'src/app/components/location-input/location-input.component';
 
 const routes: Routes = [
   {
@@ -26,7 +27,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(routes),
     HeaderComponent,
-    CounterInputComponent
+    CounterInputComponent,
+    LocationInputComponent
   ],
   declarations: [EventCreateComponent],
   providers: [EventService]
