@@ -48,14 +48,6 @@
   padding: 0.5rem;
 }
 
-.tp_link_1:hover {
-  color: #fff;
-}
-
-.tp_link_2:hover {
-  color: #a4634d;
-}
-
 #picture__input {
   display: none;
 }
@@ -189,10 +181,12 @@
   font-size: 16px;
   font-weight: 700;
   width: 100%;
-  color: black;
+  color: #ffffff;
   padding: 0.5rem 0;
-  border: black solid 3px;
+  border: #0c8cf0 solid 3px;
   border-radius: 25px;
+  background-color: #0c8cf0;
+  margin-bottom: 2rem;
 }
 
 .note-editor {
@@ -228,7 +222,7 @@
       --checkbox-tag-color: var(--ion-color-medium);
       --checkbox-tag-background: var(--ion-color-lightest);
       --checkbox-tag-active-color: #fff;
-      --checkbox-tag-active-background: #246bfd;
+      --checkbox-tag-active-background: #0c8cf0;
     }
   }
 
@@ -238,7 +232,7 @@
       --checkbox-tag-color: var(--ion-color-lightest);
       --checkbox-tag-background: var(--ion-color-light-shade);
       --checkbox-tag-active-color: #fff;
-      --checkbox-tag-active-background: #246bfd;
+      --checkbox-tag-active-background: #0c8cf0;
     }
   }
 }

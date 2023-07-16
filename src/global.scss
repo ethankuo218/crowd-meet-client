@@ -99,17 +99,17 @@ textarea:focus {
 }
 
 ::selection {
-  background: #3f8c32;
+  background: #0c8cf0;
   color: #ffffff;
 }
 
 ::-webkit-selection {
-  background: #3f8c32;
+  background: #0c8cf0;
   color: #ffffff;
 }
 
 ::-moz-selection {
-  background: #3f8c32;
+  background: #0c8cf0;
   color: #ffffff;
 }
 
@@ -128,10 +128,6 @@ textarea:focus {
 
 .col-6 {
   width: 50%;
-}
-
-.gray {
-  color: #a4634d;
 }
 
 .danger {
@@ -159,11 +155,7 @@ textarea:focus {
 }
 
 .primary {
-  color: #246bfd;
-}
-
-.primary_2 {
-  color: #9610ff;
+  color: #0c8cf0;
 }
 
 .text-start {
@@ -235,7 +227,7 @@ textarea:focus {
     color: currentColor;
     width: 1.15em;
     height: 1.15em;
-    border: 0.15em solid black;
+    border: 0.15em solid #0c8cf0;
     border-radius: 50%;
     transform: translateY(0.01em);
     display: grid;
@@ -249,7 +241,7 @@ textarea:focus {
     border-radius: 50%;
     transform: scale(0);
     transition: 120ms transform ease-in-out;
-    box-shadow: inset 1em 1em black;
+    box-shadow: inset 1em 1em #0c8cf0;
   }
 
   input[type="radio"]:checked::before {
@@ -262,7 +254,7 @@ textarea:focus {
 }
 
 .submit_btn {
-  background: #246bfd;
+  background: #0c8cf0;
 }
 
 .leave_button {
@@ -281,7 +273,7 @@ ion-toolbar {
   ion-button {
     width: 40%;
     height: 2.5rem;
-    --background: #246bfd;
+    --background: #0c8cf0;
     font-weight: 600;
   }
 }
@@ -294,7 +286,7 @@ hr {
 }
 
 .no-more-content {
-  color: #246bfd;
+  color: #0c8cf0;
   font-weight: 600;
   text-align: center;
 }

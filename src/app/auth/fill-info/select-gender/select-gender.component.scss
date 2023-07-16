@@ -31,7 +31,7 @@
 
 .button-row [type='submit'] {
   font-size: 20px;
-  background: #246bfd;
+  background: #0c8cf0;
   // padding: 12px 45px;
   width: 100%;
   padding: 0.6rem 0;
@@ -48,7 +48,7 @@
   width: 100%;
   padding: 0.7rem 0;
   border-radius: 20px;
-  border: 2px solid #246bfd;
+  border: 2px solid #0c8cf0;
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 1.5rem;
@@ -60,6 +60,6 @@ button[disabled] {
 }
 
 .active_btn {
-  background: #246bfd;
+  background: #0c8cf0;
   color: #fff !important;
 }

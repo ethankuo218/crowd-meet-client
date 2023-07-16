@@ -82,7 +82,7 @@ form .profile_your textarea {
 form .profile_your [type='submit'] {
   width: 80%;
   font-size: 14px;
-  background: #246bfd;
+  background: #0c8cf0;
   padding: 12px 0px;
   border-radius: 25px;
   font-weight: 600;
@@ -119,7 +119,7 @@ form .profile_your [type='submit'] {
       --checkbox-tag-color: var(--ion-color-medium);
       --checkbox-tag-background: var(--ion-color-lightest);
       --checkbox-tag-active-color: #fff;
-      --checkbox-tag-active-background: #246bfd;
+      --checkbox-tag-active-background: #0c8cf0;
     }
   }
 
@@ -129,13 +129,13 @@ form .profile_your [type='submit'] {
       --checkbox-tag-color: var(--ion-color-lightest);
       --checkbox-tag-background: var(--ion-color-light-shade);
       --checkbox-tag-active-color: #fff;
-      --checkbox-tag-active-background: #246bfd;
+      --checkbox-tag-active-background: #0c8cf0;
     }
   }
 }
 
 .interest_div ::ng-deep .item-native {
-  border: solid 1px #246bfd;
+  border: solid 1px #0c8cf0;
 }
 
 .profile_your button[disabled] {

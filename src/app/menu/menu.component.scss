@@ -25,7 +25,7 @@
 }
 
 .upload_profile button fa-icon {
-  background: #246bfd;
+  background: #0c8cf0;
   padding: 6px;
   border-radius: 5px;
 }
@@ -59,6 +59,10 @@
   height: 3rem;
   grid-template-columns: 1fr 0.05fr;
   align-items: center;
+
+  fa-icon {
+    color: #000000;
+  }
 }
 
 .acc__title,

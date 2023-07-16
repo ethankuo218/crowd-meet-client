@@ -6,10 +6,10 @@ ion-toolbar {
     margin-left: 1rem;
     width: 12rem;
   }
-}
 
-ion-toolbar:last-of-type {
-  // --border-width: 0;
+  ion-buttons {
+    color: #0c8cf0;
+  }
 }
 
 .head_arw h3 {
