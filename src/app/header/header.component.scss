@@ -1,5 +1,5 @@
 ion-toolbar {
-  --background: #fff;
+  --background: var(--ion-background-color);
   // --border: none;
   // height: 5rem;
   img {

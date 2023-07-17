@@ -1,3 +1,5 @@
+@import '../../theme/variables.scss';
+
 .profile-menu-area {
   margin-top: 2rem;
 }
@@ -61,7 +63,7 @@
   align-items: center;
 
   fa-icon {
-    color: #000000;
+    color: var(--ion-text-color);
   }
 }
 

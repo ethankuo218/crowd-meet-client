@@ -5,5 +5,5 @@ ion-tab-button {
 
 ion-tab-bar {
   --border: none;
-  --background: #fff;
+  --background: var(--ion-background-color);
 }
