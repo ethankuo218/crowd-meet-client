@@ -4,7 +4,6 @@ import { Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { ActionSheetController } from '@ionic/angular';
-import { RatingComponent } from '../reviews/rating/rating.component';
 
 @Component({
   selector: 'app-header',
@@ -56,29 +55,7 @@ export class HeaderComponent implements OnInit {
     await actionSheet.present();
   }
 
-  openFilter() {
-    this.writeReview();
-  }
-
-  async writeReview() {
-    const modal = await this.modalCtrl.create({
-      component: RatingComponent,
-      componentProps: { userDetail: {} },
-      initialBreakpoint: 0.65,
-      breakpoints: [0, 0.65]
-    });
-    modal.present();
-
-    const { data, role } = await modal.onWillDismiss();
-
-    if (role === 'submit') {
-      // this.reviewsService.review({
-      //   revieweeId: userDetail.id,
-      //   eventId: userDetail.eventId,
-      //   ...data
-      // });
-    }
-  }
+  openFilter() {}
 
   get currentUrl(): string {
     return this.router.url;
