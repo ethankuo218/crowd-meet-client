@@ -1,4 +1,10 @@
 export interface LanguageModel {
   name: string;
-  code: string;
+  code: Language;
+}
+
+export enum Language {
+  ENGLISH = 'en',
+  SPANISH = 'es',
+  FRANCH = 'fr'
 }

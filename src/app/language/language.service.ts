@@ -1,19 +1,28 @@
 import { Injectable } from '@angular/core';
-import { LanguageModel } from './language.model';
+import { Language, LanguageModel } from './language.model';
 
 @Injectable()
 export class LanguageService {
-  languages: Array<LanguageModel> = [];
+  private languages: Array<LanguageModel> = [];
+  private _currentLanguage: Language = Language.ENGLISH;
 
   constructor() {
     this.languages.push(
-      { name: 'English', code: 'en' },
-      { name: 'Spanish', code: 'es' },
-      { name: 'French', code: 'fr' }
+      { name: 'English', code: Language.ENGLISH },
+      { name: 'Spanish', code: Language.SPANISH },
+      { name: 'French', code: Language.FRANCH }
     );
   }
 
-  getLanguages() {
+  getLanguages(): LanguageModel[] {
     return this.languages;
+  }
+
+  get currentLanguage(): Language {
+    return this._currentLanguage;
+  }
+
+  set currentLanguage(language: Language) {
+    this._currentLanguage = language;
   }
 }
