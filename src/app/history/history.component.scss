@@ -1,12 +1,12 @@
 mat-tab-group {
   --mat-tab-header-active-ripple-color: none;
-  --mdc-tab-indicator-active-indicator-color: #0c8cf0;
-  --mat-tab-header-active-label-text-color: #0c8cf0;
-  --mat-tab-header-inactive-ripple-color: #0c8cf0;
-  --mat-tab-header-active-focus-label-text-color: #0c8cf0;
-  --mat-tab-header-active-hover-label-text-color: #0c8cf0;
-  --mat-tab-header-active-focus-indicator-color: #0c8cf0;
-  --mat-tab-header-active-hover-indicator-color: #0c8cf0;
+  --mdc-tab-indicator-active-indicator-color: var(--ion-color-primary);
+  --mat-tab-header-active-label-text-color: var(--ion-color-primary);
+  --mat-tab-header-inactive-ripple-color: var(--ion-color-primary);
+  --mat-tab-header-active-focus-label-text-color: var(--ion-color-primary);
+  --mat-tab-header-active-hover-label-text-color: var(--ion-color-primary);
+  --mat-tab-header-active-focus-indicator-color: var(--ion-color-primary);
+  --mat-tab-header-active-hover-indicator-color: var(--ion-color-primary);
 }
 
 ::ng-deep .mat-mdc-tab-header {
@@ -97,8 +97,8 @@ mat-tab-group {
     ion-button {
       --background: transparent;
       width: 40%;
-      color: #0c8cf0;
-      border: #0c8cf0 solid 2px;
+      color: var(--ion-color-primary);
+      border: var(--ion-color-primary) solid 2px;
       border-radius: 25px;
       height: 1.5rem;
       font-size: 12px;
@@ -131,10 +131,10 @@ menu {
     font-size: 12px;
     padding: 0.1rem 0.6rem;
     // color: #fff;
-    color: #0c8cf0;
+    color: var(--ion-color-primary);
     font-weight: 600;
     text-align: center;
-    // background-color: #0c8cf0;
+    // background-color: var(--ion-color-primary);
     background-color: #eef4ff;
     border-radius: 25px;
   }

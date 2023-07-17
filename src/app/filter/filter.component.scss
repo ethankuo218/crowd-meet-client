@@ -9,7 +9,7 @@ ion-header {
 
   ion-button {
     --background: transparent;
-    --color: #0c8cf0;
+    --color: var(--ion-color-primary);
     font-weight: 400;
     height: 1rem;
     width: fit-content;
@@ -76,7 +76,7 @@ ion-footer {
       --checkbox-tag-color: var(--ion-color-medium);
       --checkbox-tag-background: var(--ion-color-lightest);
       --checkbox-tag-active-color: #fff;
-      --checkbox-tag-active-background: #0c8cf0;
+      --checkbox-tag-active-background: var(--ion-color-primary);
     }
   }
 
@@ -86,13 +86,13 @@ ion-footer {
       --checkbox-tag-color: var(--ion-color-lightest);
       --checkbox-tag-background: var(--ion-color-light-shade);
       --checkbox-tag-active-color: #fff;
-      --checkbox-tag-active-background: #0c8cf0;
+      --checkbox-tag-active-background: var(--ion-color-primary);
     }
   }
 }
 
 .filter_div ::ng-deep .item-native {
-  border: solid 1px #0c8cf0;
+  border: solid 1px var(--ion-color-primary);
 }
 
 ion-range::part(pin) {

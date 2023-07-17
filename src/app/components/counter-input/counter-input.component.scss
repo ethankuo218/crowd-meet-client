@@ -1,8 +1,8 @@
 app-counter-input {
   --counter-background: transparent;
-  --counter-color: #0c8cf0;
+  --counter-color: var(--ion-color-primary);
   --counter-color-activated: #fff;
-  --counter-border-color: #0c8cf0;
+  --counter-border-color: var(--ion-color-primary);
   --counter-border-radius-outer: 25%;
   --counter-border-radius-inner: 25%;
   --counter-size: 30px;

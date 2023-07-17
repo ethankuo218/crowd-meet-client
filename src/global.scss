@@ -99,17 +99,17 @@ textarea:focus {
 }
 
 ::selection {
-  background: #0c8cf0;
+  background: var(--ion-color-primary);
   color: #ffffff;
 }
 
 ::-webkit-selection {
-  background: #0c8cf0;
+  background: var(--ion-color-primary);
   color: #ffffff;
 }
 
 ::-moz-selection {
-  background: #0c8cf0;
+  background: var(--ion-color-primary);
   color: #ffffff;
 }
 
@@ -155,7 +155,7 @@ textarea:focus {
 }
 
 .primary {
-  color: #0c8cf0;
+  color: var(--ion-color-primary);
 }
 
 .text-start {
@@ -227,7 +227,7 @@ textarea:focus {
     color: currentColor;
     width: 1.15em;
     height: 1.15em;
-    border: 0.15em solid #0c8cf0;
+    border: 0.15em solid var(--ion-color-primary);
     border-radius: 50%;
     transform: translateY(0.01em);
     display: grid;
@@ -241,7 +241,7 @@ textarea:focus {
     border-radius: 50%;
     transform: scale(0);
     transition: 120ms transform ease-in-out;
-    box-shadow: inset 1em 1em #0c8cf0;
+    box-shadow: inset 1em 1em var(--ion-color-primary);
   }
 
   input[type="radio"]:checked::before {
@@ -254,7 +254,7 @@ ion-button.cancel_btn {
 }
 
 ion-button.submit_btn {
-  --background: #0c8cf0;
+  --background: var(--ion-color-primary);
 }
 
 .leave_button {
@@ -273,7 +273,7 @@ ion-toolbar {
   ion-button {
     width: 40%;
     height: 2.5rem;
-    --background: #0c8cf0;
+    --background: var(--ion-color-primary);
     font-weight: 600;
   }
 }
@@ -286,7 +286,7 @@ hr {
 }
 
 .no-more-content {
-  color: #0c8cf0;
+  color: var(--ion-color-primary);
   font-weight: 600;
   text-align: center;
 }

@@ -1,6 +1,6 @@
 app-rating-input {
   --rating-background: transparent;
-  --rating-color: #0c8cf0;
+  --rating-color: var(--ion-color-primary);
   --rating-size: 32px;
 
   display: flex;

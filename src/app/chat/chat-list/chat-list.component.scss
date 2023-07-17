@@ -45,13 +45,13 @@
 
 mat-tab-group {
   --mat-tab-header-active-ripple-color: none;
-  --mdc-tab-indicator-active-indicator-color: #0c8cf0;
-  --mat-tab-header-active-label-text-color: #0c8cf0;
-  --mat-tab-header-inactive-ripple-color: #0c8cf0;
-  --mat-tab-header-active-focus-label-text-color: #0c8cf0;
-  --mat-tab-header-active-hover-label-text-color: #0c8cf0;
-  --mat-tab-header-active-focus-indicator-color: #0c8cf0;
-  --mat-tab-header-active-hover-indicator-color: #0c8cf0;
+  --mdc-tab-indicator-active-indicator-color: var(--ion-color-primary);
+  --mat-tab-header-active-label-text-color: var(--ion-color-primary);
+  --mat-tab-header-inactive-ripple-color: var(--ion-color-primary);
+  --mat-tab-header-active-focus-label-text-color: var(--ion-color-primary);
+  --mat-tab-header-active-hover-label-text-color: var(--ion-color-primary);
+  --mat-tab-header-active-focus-indicator-color: var(--ion-color-primary);
+  --mat-tab-header-active-hover-indicator-color: var(--ion-color-primary);
 }
 
 ::ng-deep .mat-mdc-tab-header {
