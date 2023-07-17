@@ -43,7 +43,6 @@ import {
   initializeAuth,
   indexedDBLocalPersistence
 } from '@angular/fire/auth';
-import { CoreModule } from './core/core.module';
 import {
   FontAwesomeModule,
   FaIconLibrary
@@ -53,6 +52,7 @@ import { far } from '@fortawesome/free-regular-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { Crop } from '@ionic-native/crop/ngx';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -68,7 +68,6 @@ export function createTranslateLoader(http: HttpClient) {
     HttpClientModule,
     FontAwesomeModule,
     ShellModule,
-    CoreModule,
     StoreModule.forRoot({
       [userFeatureKey]: userReducer,
       [userEventsFeatureKey]: userEventsReducer,
@@ -124,7 +123,8 @@ export function createTranslateLoader(http: HttpClient) {
       },
       deps: [PLATFORM_ID, [new Optional(), RESPONSE]],
       multi: true
-    }
+    },
+    Crop
   ],
   bootstrap: [AppComponent]
 })

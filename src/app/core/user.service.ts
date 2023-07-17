@@ -9,9 +9,7 @@ import { Reference } from './states/reference-state/reference.model';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class UserService {
   constructor(
     private httpClientService: HttpClientService,

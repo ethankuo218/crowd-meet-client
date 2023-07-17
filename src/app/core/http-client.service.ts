@@ -1,13 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable, from, switchMap } from 'rxjs';
 import { GetResult, Preferences } from '@capacitor/preferences';
 import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class HttpClientService {
+  private httpClient = inject(HttpClient);
   private urlPrefix: string = 'http://127.0.0.1:3000/api/v1/';
   // private urlPrefix: string =
   //   'https://crowd-meet-server-tpqol4vd2a-uc.a.run.app/api/v1/';
@@ -15,7 +14,7 @@ export class HttpClientService {
   private timeStamp: number = 0;
   private expiredTime = 50 * 60 * 1000; // millisecond
 
-  constructor(private httpClient: HttpClient) {}
+  constructor() {}
 
   private async storeToken(previousToken: string | null): Promise<string> {
     const token = `Bearer ${(await FirebaseAuthentication.getIdToken()).token}`;

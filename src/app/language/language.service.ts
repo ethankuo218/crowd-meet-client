@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Language, LanguageModel } from './language.model';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class LanguageService {
   private languages: Array<LanguageModel> = [];
   private _currentLanguage: Language = Language.ENGLISH;

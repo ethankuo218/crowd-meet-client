@@ -1,3 +1,4 @@
+import { GoogleMapsLoaderService } from 'src/app/core/google-maps-loader.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
@@ -7,7 +8,6 @@ import { IonicModule } from '@ionic/angular';
 import { EventCreateComponent } from './event-create.component';
 import { HeaderComponent } from 'src/app/header/header.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { EventService } from 'src/app/core/event.service';
 import { CounterInputComponent } from 'src/app/components/counter-input/counter-input.component';
 import { LocationInputComponent } from 'src/app/components/location-input/location-input.component';
 
@@ -30,7 +30,6 @@ const routes: Routes = [
     CounterInputComponent,
     LocationInputComponent
   ],
-  declarations: [EventCreateComponent],
-  providers: [EventService]
+  declarations: [EventCreateComponent]
 })
 export class EventCreateModule {}

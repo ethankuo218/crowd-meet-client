@@ -5,7 +5,7 @@ import { getUserEventsState, getUserState } from './user.selector';
 import { User, UserEvent } from './user.model';
 import { Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class UserStateFacade {
   constructor(private readonly store: Store<User>) {}
 

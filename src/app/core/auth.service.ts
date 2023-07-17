@@ -39,9 +39,7 @@ import { SignInProvider } from './auth-definitions';
 import { AuthHelper } from './auth.helper';
 import { Preferences } from '@capacitor/preferences';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class AuthService implements OnDestroy {
   currentUser: User | null = null;
   authLoader: HTMLIonLoadingElement | undefined;

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { EventList } from './event-list.model';
 import { getEventListState } from './event-list.selector';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class EventListStateFacade {
   constructor(private readonly store: Store<EventList>) {}
 

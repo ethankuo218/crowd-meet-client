@@ -24,7 +24,7 @@ import {
 import { EventList } from './states/event-list-state/event-list.model';
 import { Image } from './states/user-state/user.model';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class EventService {
   noMoreContent: boolean = false;
   private currentPage: number = 1;

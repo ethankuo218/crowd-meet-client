@@ -5,7 +5,7 @@ import { storeReferenceState } from './reference.actions';
 import { Category, Reference } from './reference.model';
 import { Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ReferenceStateFacade {
   constructor(private readonly store: Store<Reference>) {}
 

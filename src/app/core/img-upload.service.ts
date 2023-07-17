@@ -1,5 +1,5 @@
 import { Platform } from '@ionic/angular';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {
   Camera,
   CameraResultType,
@@ -11,11 +11,11 @@ import { Filesystem, Directory } from '@capacitor/filesystem';
 
 const IMAGE_DIR = 'stored-images';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ImgUploadService {
+  private platform = inject(Platform);
+  private crop = inject(Crop);
   private uploadedImageName: string[] = [];
-
-  constructor(private platform: Platform, private crop: Crop) {}
 
   async selectImage(): Promise<string> {
     const image = await Camera.getPhoto({

@@ -6,9 +6,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HeaderComponent } from '../header/header.component';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { SwiperModule } from 'swiper/angular';
-import { CoreModule } from '../core/core.module';
 import { from, switchMap, Observable } from 'rxjs';
 import { User } from '../core/states/user-state/user.model';
+import { AgePipe } from '../core/pipe/age.pipe';
 
 @Component({
   selector: 'app-profile',
@@ -22,7 +22,7 @@ import { User } from '../core/states/user-state/user.model';
     HeaderComponent,
     RouterModule,
     SwiperModule,
-    CoreModule
+    AgePipe
   ],
   providers: [UserService]
 })
