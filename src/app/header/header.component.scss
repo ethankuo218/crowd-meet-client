@@ -33,7 +33,7 @@ ion-toolbar {
   display: grid;
   grid-template-columns: 1fr 0.1fr;
 
-  button {
+  ion-buttons {
     --background: transparent;
     color: #000000;
     padding: 0.5rem 1rem 0.5rem 0;
