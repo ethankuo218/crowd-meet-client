@@ -38,7 +38,7 @@ export class GoogleMapsLoaderService {
     const request: google.maps.places.AutocompletionRequest = {
       input: input,
       language: this.language,
-      locationBias: locationBias
+      ...(locationBias && { locationBias: locationBias })
     };
 
     return (await autoComplete.getPlacePredictions(request)).predictions;
