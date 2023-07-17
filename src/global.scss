@@ -249,12 +249,12 @@ textarea:focus {
   }
 }
 
-.cancel_btn {
-  background: #e9f0ff;
+ion-button.cancel_btn {
+  --background: #e9f0ff;
 }
 
-.submit_btn {
-  background: #0c8cf0;
+ion-button.submit_btn {
+  --background: #0c8cf0;
 }
 
 .leave_button {
