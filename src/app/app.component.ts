@@ -1,25 +1,48 @@
 import { UserService } from 'src/app/core/user.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { HistoryHelperService } from './utils/history-helper.service';
 import { SplashScreen } from '@capacitor/splash-screen';
+import { Platform } from '@ionic/angular';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: []
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   textDir = 'ltr';
 
   // Inject HistoryHelperService in the app.components.ts so its available app-wide
   constructor(
     public translate: TranslateService,
     public historyHelper: HistoryHelperService,
-    private userService: UserService
+    private userService: UserService,
+    private platform: Platform,
+    private storage: Storage
   ) {
     this.initializeApp();
     this.setLanguage();
+  }
+
+  ngOnInit(): void {
+    this.platform.ready().then(async () => {
+      const isDarkMode = await this.storage.get('isDarkMode');
+      if (isDarkMode === null) {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+        this.toggleDarkTheme(prefersDark.matches);
+
+        prefersDark.addEventListener('change', (mediaQuery) =>
+          this.toggleDarkTheme(mediaQuery.matches)
+        );
+      }
+    });
+  }
+
+  toggleDarkTheme(shouldAdd: boolean) {
+    document.body.classList.toggle('dark', shouldAdd);
   }
 
   async initializeApp() {
@@ -33,14 +56,6 @@ export class AppComponent {
 
   public setLanguage(): void {
     this.translate.setDefaultLang('en');
-
-    // the lang to use, if the lang isn't available, it will use the current loader to get them
     this.translate.use('en');
-
-    // this is to determine the text direction depending on the selected language
-    // for the purpose of this example we determine that only arabic and hebrew are RTL.
-    // this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-    //   this.textDir = (event.lang === 'ar' || event.lang === 'iw') ? 'rtl' : 'ltr';
-    // });
   }
 }
