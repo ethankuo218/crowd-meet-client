@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 
-import { FacebookAuthProvider, getAdditionalUserInfo, GoogleAuthProvider, OAuthProvider, TwitterAuthProvider } from '@angular/fire/auth';
+import {
+  FacebookAuthProvider,
+  getAdditionalUserInfo,
+  GoogleAuthProvider,
+  OAuthProvider,
+  TwitterAuthProvider
+} from '@angular/fire/auth';
 import {
   AuthCredential as FirebaseAuthCredential,
   AuthProvider as FirebaseAuthProvider,
@@ -10,17 +16,29 @@ import {
   UserCredential as FirebaseUserCredential
 } from '@angular/fire/auth';
 
-import { AuthCredential, SignInResult, User, AdditionalUserInfo, SignInOptions, SignInWithOAuthOptions } from '@capacitor-firebase/authentication';
-
+import {
+  AuthCredential,
+  SignInResult,
+  User,
+  AdditionalUserInfo,
+  SignInOptions,
+  SignInWithOAuthOptions
+} from '@capacitor-firebase/authentication';
 
 // * Aux methods inspired on the @capacitor-firebase/authentication library
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthHelper {
-
-  public applySignInOptions(options: SignInWithOAuthOptions, provider: OAuthProvider | GoogleAuthProvider | FacebookAuthProvider | TwitterAuthProvider) {
+  public applySignInOptions(
+    options: SignInWithOAuthOptions,
+    provider:
+      | OAuthProvider
+      | GoogleAuthProvider
+      | FacebookAuthProvider
+      | TwitterAuthProvider
+  ) {
     if (options.customParameters) {
       const customParameters: FirebaseCustomParameters = {};
-      options.customParameters.map(parameter => {
+      options.customParameters.map((parameter) => {
         customParameters[parameter.key] = parameter.value;
       });
       provider.setCustomParameters(customParameters);
@@ -33,10 +51,14 @@ export class AuthHelper {
   }
 
   // ? (see: https://github.com/capawesome-team/capacitor-firebase/blob/9024eef856dbd25b2b6459e4b6bcee104ca89755/packages/authentication/src/web.ts#L594)
-  public createSignInResult(userCredential: FirebaseUserCredential | null, authCredential: FirebaseAuthCredential | null): SignInResult {
+  public createSignInResult(
+    userCredential: FirebaseUserCredential | null,
+    authCredential: FirebaseAuthCredential | null
+  ): SignInResult {
     const userResult = this.createUserResult(userCredential?.user || null);
     const credentialResult = this.createCredentialResult(authCredential);
-    const additionalUserInfoResult = this.createAdditionalUserInfoResult(userCredential);
+    const additionalUserInfoResult =
+      this.createAdditionalUserInfoResult(userCredential);
     const result: SignInResult = {
       user: userResult,
       credential: credentialResult,
@@ -65,7 +87,9 @@ export class AuthHelper {
   }
 
   // ? (see: https://github.com/capawesome-team/capacitor-firebase/blob/9024eef856dbd25b2b6459e4b6bcee104ca89755/packages/authentication/src/web.ts#L610)
-  private createCredentialResult(credential: FirebaseAuthCredential | null): AuthCredential | null {
+  private createCredentialResult(
+    credential: FirebaseAuthCredential | null
+  ): AuthCredential | null {
     if (!credential) {
       return null;
     }
@@ -81,7 +105,9 @@ export class AuthHelper {
   }
 
   // ? (see: https://github.com/capawesome-team/capacitor-firebase/blob/9024eef856dbd25b2b6459e4b6bcee104ca89755/packages/authentication/src/web.ts#L645)
-  private createAdditionalUserInfoResult(credential: FirebaseUserCredential | null): AdditionalUserInfo | null {
+  private createAdditionalUserInfoResult(
+    credential: FirebaseUserCredential | null
+  ): AdditionalUserInfo | null {
     if (!credential) {
       return null;
     }

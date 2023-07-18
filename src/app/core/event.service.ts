@@ -84,15 +84,17 @@ export class EventService {
   async reload(filter: any): Promise<void> {
     this.currentPage = 1;
     console.log({
-      ...filter,
       page: this.currentPage,
-      pageSize: 10
+      pageSize: 10,
+      startDate: new Date().toISOString(),
+      ...filter
     });
     const result = await firstValueFrom(
       this.httpClientService.get<EventList>('event', {
-        ...filter,
         page: this.currentPage,
-        pageSize: 10
+        pageSize: 10,
+        startDate: new Date().toISOString(),
+        ...filter
       })
     );
 
