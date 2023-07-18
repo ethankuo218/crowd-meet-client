@@ -92,6 +92,7 @@
   /** basic color **/
   --ion-text-color: #212121;
   --ion-background-color: #ffffff;
+  --ion-toolbar-border-color: transparent;
 }
 
 /*
@@ -162,6 +163,8 @@ body.dark {
   --ion-color-light-contrast-rgb: 255, 255, 255;
   --ion-color-light-shade: #1e2023;
   --ion-color-light-tint: #383a3e;
+
+  --ion-toolbar-border-color: var(--ion-color-step-250);
 }
 
 /*

@@ -1,14 +1,16 @@
 ion-toolbar {
   --background: var(--ion-background-color);
-  // --border: none;
-  // height: 5rem;
   img {
     margin-left: 1rem;
     width: 12rem;
   }
 
-  ion-buttons {
+  ion-buttons.upgrade_btn {
     color: var(--ion-color-primary);
+    svg {
+      height: 1.3rem;
+      width: 1.3rem;
+    }
   }
 }
 
@@ -22,21 +24,28 @@ ion-toolbar {
   overflow: hidden;
 }
 
-.arw_left {
+.upgrade_btn {
   color: #212121;
   font-size: 22px;
   vertical-align: middle;
-  padding: 0 1rem;
+  padding: 0 0.5rem;
 }
 
 .filter_section {
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 0.1fr;
 
   ion-buttons {
     --background: transparent;
-    color: #000000;
-    padding: 0.5rem 1rem 0.5rem 0;
     font-size: 20px;
+    padding-bottom: 15px;
+    text-align: center;
+
+    svg {
+      fill: var(--ion-text-color);
+      margin-left: 0.1rem;
+      margin-right: 0.5rem;
+    }
   }
 }
