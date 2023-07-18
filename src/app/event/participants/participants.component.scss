@@ -13,9 +13,9 @@
 
   .joiner_info {
     padding: 0.5rem 1rem;
-    background: #fff;
+    background: var(--ion-card-background);
     border-radius: 20px;
-    box-shadow: 1px 1px 40px #ddd;
+    box-shadow: 1px 1px 40px var(--ion-box-shadow);
     margin: 0 0 20px;
 
     display: flex;
