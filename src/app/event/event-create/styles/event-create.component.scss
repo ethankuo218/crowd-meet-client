@@ -73,7 +73,7 @@
 .picture {
   width: 100%;
   /*! aspect-ratio: 16/9; */
-  background: #fafafa;
+  background: var(--ion-input-background-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -92,7 +92,7 @@
 
 .picture:focus {
   outline: none;
-  background: #fafafa;
+  background: var(--ion-input-background-color);
 }
 
 .picture:hover {
@@ -141,7 +141,7 @@
   width: 100%;
   height: 10rem;
   border-radius: 11px;
-  background: #fafafa;
+  background: var(--ion-input-background-color);
   padding: 0 1rem;
   border: none;
   font-size: 14px;
@@ -156,7 +156,7 @@
 .event_content ion-select {
   width: 100%;
   border-radius: 11px;
-  background: #fafafa;
+  background: var(--ion-input-background-color);
   padding: 0 1rem !important;
   border: none;
   font-size: 14px;

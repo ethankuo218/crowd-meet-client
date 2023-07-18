@@ -9,7 +9,7 @@ app-counter-input {
 
   display: flex;
   align-items: center;
-  background: #fafafa;
+  background: var(--ion-input-background-color);
   padding: 0.7rem 0.5rem;
   border-radius: 11px;
   // justify-content: flex-end;
@@ -37,7 +37,7 @@ app-counter-input {
   }
 
   .counter-value {
-    color: black;
+    color: var(--iont-text-color);
     margin: 0px 10px;
     width: calc(100% - 60px);
     text-align: center;

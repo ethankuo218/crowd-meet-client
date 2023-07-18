@@ -295,7 +295,7 @@
       input {
         width: 100%;
         border-radius: 11px;
-        background: #fafafa;
+        background: var(--ion-input-background-color);
         padding: 0.8rem 2.2rem 0.8rem 1rem;
         border: navajowhite;
         font-size: 14px;

@@ -147,7 +147,7 @@ textarea:focus {
 }
 
 .dark_dd {
-  color: #b1b0b1;
+  color: var(--ion-input-text-color);
 }
 
 .white {
@@ -220,7 +220,7 @@ textarea:focus {
     -webkit-appearance: none;
     appearance: none;
     /* For iOS < 15 to remove gradient background */
-    background-color: #fff;
+    background-color: var(--ion-input-background-color);
     /* Not removed via appearance */
     margin: 0;
     font: inherit;

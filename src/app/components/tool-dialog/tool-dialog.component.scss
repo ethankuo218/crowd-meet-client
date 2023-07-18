@@ -154,7 +154,7 @@ modal-body [type='radio']:checked + label span {
 .location_input {
   width: 100%;
   border-radius: 11px;
-  background: #fafafa;
+  background: var(--ion-input-background-color);
   padding: 12px 18px;
   border: none;
   font-size: 14px;

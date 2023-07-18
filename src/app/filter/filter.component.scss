@@ -119,7 +119,7 @@ ion-range::part(pin)::before {
 .filter_div ion-input {
   width: 100%;
   border-radius: 11px;
-  background: #fafafa;
+  background: var(--ion-input-background-color);
   padding: 0 1rem !important;
   border: none;
   font-size: 14px;

@@ -91,8 +91,11 @@
 
   /** basic color **/
   --ion-text-color: #212121;
+  --ion-inactive-text-color: rgba(0, 0, 0, 0.6);
   --ion-background-color: #ffffff;
   --ion-toolbar-border-color: transparent;
+  --ion-input-background-color: #fafafa;
+  --ion-input-text-color: #b1b0b1;
 }
 
 /*
@@ -101,7 +104,7 @@
  */
 
 body.dark {
-  --ion-color-primary: #428cff;
+  --ion-color-primary: #0c8cf0;
   --ion-color-primary-rgb: 66, 140, 255;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
@@ -165,6 +168,9 @@ body.dark {
   --ion-color-light-tint: #383a3e;
 
   --ion-toolbar-border-color: var(--ion-color-step-250);
+  --ion-input-background-color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.07);
+  --ion-inactive-text-color: #86888f;
+  --ion-input-text-color: #cccccc;
 }
 
 /*
