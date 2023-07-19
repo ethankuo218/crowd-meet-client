@@ -28,21 +28,13 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.platform.ready().then(async () => {
+      this.storage.clear();
       const isDarkMode = await this.storage.get('isDarkMode');
       if (isDarkMode === null) {
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-
-        this.toggleDarkTheme(prefersDark.matches);
-
-        prefersDark.addEventListener('change', (mediaQuery) =>
-          this.toggleDarkTheme(mediaQuery.matches)
-        );
+        document.body.classList.toggle('dark', prefersDark.matches);
       }
     });
-  }
-
-  toggleDarkTheme(shouldAdd: boolean) {
-    document.body.classList.toggle('dark', shouldAdd);
   }
 
   async initializeApp() {
