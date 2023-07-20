@@ -1,0 +1,117 @@
+{
+  "identifier" : "F6F6E555",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+
+  ],
+  "settings" : {
+    "_applicationInternalID" : "6450379280",
+    "_developerTeamID" : "XA23XC6V5K",
+    "_lastSynchronizedDate" : 711352725.73883605
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "21352854",
+      "localizations" : [
+
+      ],
+      "name" : "subscribtions",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "6.99",
+          "familyShareable" : false,
+          "groupNumber" : 2,
+          "internalID" : "6451340661",
+          "introductoryOffer" : null,
+          "localizations" : [
+
+          ],
+          "productID" : "crowdMeet_Influencer_1m",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Influencer Bundle Monthly Subscription",
+          "subscriptionGroupID" : "21352854",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "10.99",
+          "familyShareable" : false,
+          "groupNumber" : 4,
+          "internalID" : "6451383707",
+          "introductoryOffer" : null,
+          "localizations" : [
+
+          ],
+          "productID" : "crowdMeet_Lifestyle_1m",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Lifestyle Bundle Monthly Subscription",
+          "subscriptionGroupID" : "21352854",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "3.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "6450380937",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "One event promotion per month ",
+              "displayName" : "Crowd meet premium ",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "crowdmeet_test_9.99_month_just_test",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Premium ($4.99 per month)",
+          "subscriptionGroupID" : "21352854",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "4.99",
+          "familyShareable" : false,
+          "groupNumber" : 3,
+          "internalID" : "6451344753",
+          "introductoryOffer" : null,
+          "localizations" : [
+
+          ],
+          "productID" : "crowdMeet_social_spark_1m",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Social Spark Bundle Monthly Subscription",
+          "subscriptionGroupID" : "21352854",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 2,
+    "minor" : 0
+  }
+}

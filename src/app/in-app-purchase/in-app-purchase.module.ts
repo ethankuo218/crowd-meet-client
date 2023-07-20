@@ -5,6 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { InAppPurchaseComponent } from './in-app-purchase.component';
 import { IonicModule } from '@ionic/angular';
 import { HeaderComponent } from '../header/header.component';
+import { Auth, user } from '@angular/fire/auth';
+import { firstValueFrom } from 'rxjs';
 declare let window: any;
 
 const routes: Routes = [
@@ -24,10 +26,10 @@ const routes: Routes = [
   ]
 })
 export class InAppPurchaseModule {
-  constructor(private purchases: Purchases) {
+  constructor(private purchases: Purchases, private readonly auth: Auth) {
     document.addEventListener(
       'deviceready',
-      () => {
+      async () => {
         this.purchases.setDebugLogsEnabled(true);
         if (window.cordova.platformId === 'ios') {
           console.log('Enter in ios app');
@@ -39,8 +41,18 @@ export class InAppPurchaseModule {
             apiKey: 'goog_zdLdwSKOtRgrUYVKcgrEgrNzzBj'
           });
         }
+        this.purchases.logIn(await this.getUserId());
+        this.purchases.setAttributes({ serverUid: '1' }); //TODO: use actual server uid
       },
       false
     );
+  }
+
+  private async getUserId() {
+    const firebaseUser = await firstValueFrom(user(this.auth));
+    if (!firebaseUser) {
+      throw new Error('User is not logged in');
+    }
+    return firebaseUser.uid;
   }
 }

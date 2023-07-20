@@ -14,6 +14,10 @@ export class InAppPurchaseComponent implements OnInit {
 
   ngOnInit() {
     this.purchases.getOfferings().then((offerings) => {
+      console.log('************');
+      console.log(offerings);
+      console.log('************');
+
       if (
         offerings.current !== null &&
         offerings.current.availablePackages.length !== 0
