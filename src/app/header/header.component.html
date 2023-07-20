@@ -7,10 +7,9 @@
     <ng-template #backbutton>
       <ion-buttons slot="start" class="arw_left">
         <ion-back-button
-          *ngIf="!disableBackButton"
           [icon]="'arrow-back'"
           [text]="''"
-          defaultHref="app/event/list"
+          [defaultHref]="defaultHref"
         >
         </ion-back-button>
       </ion-buttons>

@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header [defaultHref]="'app/history'"></app-header>
 
 <ng-container *ngIf="eventDetail$ | async as eventDetail">
   <ion-content class="event-detail-content">

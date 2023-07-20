@@ -22,7 +22,7 @@ import { EventService } from '../core/event.service';
   imports: [CommonModule, IonicModule, FontAwesomeModule, RouterModule]
 })
 export class HeaderComponent implements OnInit {
-  @Input() disableBackButton: boolean = false;
+  @Input() defaultHref: string = 'app/event/list';
   @Output() menuEvent = new EventEmitter();
 
   private router = inject(Router);
