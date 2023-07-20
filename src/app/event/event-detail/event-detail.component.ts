@@ -44,14 +44,16 @@ export class EventDetailComponent implements OnInit {
 
   ionViewWillLeave(): void {}
 
-  async openMap(): Promise<void> {
+  async openMap(eventDetail: Event): Promise<void> {
     // get the place details from server
     const mockPlaceDetails = {
-      lat: 37.4220041,
-      lng: -122.0862462,
-      name: 'Googleplex',
-      address: '1600 Amphitheatre Parkway, Mountain View, CA, USA',
-      placeId: 'ChIJj61dQgK6j4AR4GeTYWZsKWw'
+      lat: eventDetail.lat || 37.4220041,
+      lng: eventDetail.lng || -122.0862462,
+      name: eventDetail.locationName || 'Googleplex',
+      address:
+        eventDetail.formattedAddress ||
+        '1600 Amphitheatre Parkway, Mountain View, CA, USA',
+      placeId: eventDetail.placeId || 'ChIJj61dQgK6j4AR4GeTYWZsKWw'
     };
 
     // The following URL should open Google Maps on all platforms
