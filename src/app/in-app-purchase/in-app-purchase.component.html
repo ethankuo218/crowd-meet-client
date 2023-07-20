@@ -3,67 +3,155 @@
 <ion-content>
   <main class="subscriptions-area main-area">
     <div class="container">
-      <ion-button class="btn btn-primary" expand="block" (click)="purchase()">
-        Purchase
-      </ion-button>
-      <div class="main_hume">
-        <div class="hume_content text-center">
-          <h2 class="primary_2">Hume VIP</h2>
-          <p class="dark_d">
-            Enjoy unlimited swiping & like,<br />
-            without restrictions, & without ads
-          </p>
-        </div>
-        <div class="hume_box">
-          <div class="text-center">
-            <img src="assets/images/image.png" alt="image" />
-            <h2 class="dark">$9.99 <span class="dark_d">/month</span></h2>
+      <div class="container-title">Free</div>
+      <div class="free-container">
+        <div class="free-card">
+          <div class="card-title">Create Event</div>
+          <div class="card-box">
+            <fa-icon [icon]="['far', 'calendar']"></fa-icon>
+            <div class="count">1/3 Daily</div>
           </div>
-          <hr />
-          <ul>
-            <li>
-              <img src="assets/images/right.png" alt="image" />
-              <span class="dark_d">Unlimited Swiping & Likes</span>
-            </li>
-            <li>
-              <img src="assets/images/right.png" alt="image" />
-              <span class="dark_d">5 Super Likes a Day</span>
-            </li>
-            <li>
-              <img src="assets/images/right.png" alt="image" />
-              <span class="dark_d">Unlimited Rewinds</span>
-            </li>
-            <li>
-              <img src="assets/images/right.png" alt="image" />
-              <span class="dark_d">Remove Restrictions & Ads</span>
-            </li>
-          </ul>
-        </div>
-        <div class="hume_box">
-          <div class="text-center">
-            <img src="assets/images/image.png" alt="image" />
-            <h2 class="dark">$49.99 <span class="dark_d">/6 months</span></h2>
+          <div class="card-footer">
+            <div class="video-play-box">
+              <fa-icon [icon]="['fas', 'play']"></fa-icon>
+            </div>
+            <div class="footer-title">AD</div>
           </div>
-          <hr />
-          <ul>
-            <li>
-              <img src="assets/images/right.png" alt="image" />
-              <span class="dark_d">Unlimited Swiping & Likes</span>
-            </li>
-            <li>
-              <img src="assets/images/right.png" alt="image" />
-              <span class="dark_d">5 Super Likes a Day</span>
-            </li>
-            <li>
-              <img src="assets/images/right.png" alt="image" />
-              <span class="dark_d">Unlimited Rewinds</span>
-            </li>
-            <li>
-              <img src="assets/images/right.png" alt="image" />
-              <span class="dark_d">Remove Restrictions & Ads</span>
-            </li>
-          </ul>
         </div>
+        <div class="free-card">
+          <div class="card-title">Check<br />Participant</div>
+          <div class="card-box">
+            <fa-icon [icon]="['fas', 'magnifying-glass']"></fa-icon>
+            <div class="count">1/3 Daily</div>
+          </div>
+          <div class="card-footer">
+            <div class="video-play-box">
+              <fa-icon [icon]="['fas', 'play']"></fa-icon>
+            </div>
+            <div class="footer-title">AD</div>
+          </div>
+        </div>
+        <div class="free-card">
+          <div class="card-title">Kick</div>
+          <div class="card-box">
+            <fa-icon [icon]="['far', 'calendar']"></fa-icon>
+            <div class="count">1/1 Daily</div>
+          </div>
+          <div class="card-footer">
+            <div class="video-play-box">
+              <fa-icon [icon]="['fas', 'play']"></fa-icon>
+            </div>
+            <div class="footer-title">AD</div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="container-title">Bundle</div>
+      <div class="bundle-container">
+        <swiper [slidesPerView]="1" [pagination]="true">
+          <ng-template swiperSlide>
+            <div class="bundle-card">
+              <div class="bundle-header">
+                <div class="bundle-header-title">
+                  Influencer Bundle
+                  <br />
+                  <small
+                    >Designed for users who frequently create and host
+                    events</small
+                  >
+                  <div class="price-title">Starting at</div>
+                  <div class="price">$120.00 <small> / month</small></div>
+                </div>
+                <img src="assets/upgrade.svg" />
+              </div>
+              <hr />
+              <div class="bundle-description">
+                <div class="bundle-description-content">
+                  <ion-item>
+                    <fa-icon [icon]="['fas', 'check']"></fa-icon>
+                    Enhanced event visibility
+                  </ion-item>
+                  <ion-item>
+                    <fa-icon [icon]="['fas', 'check']"></fa-icon>Push event
+                    notifications
+                  </ion-item>
+                  <ion-item>
+                    <fa-icon [icon]="['fas', 'check']"></fa-icon>Allow Kick 3
+                    person / event
+                  </ion-item>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template swiperSlide>
+            <div class="bundle-card">
+              <div class="bundle-header">
+                <div class="bundle-header-title">
+                  Influencer Bundle
+                  <br />
+                  <small
+                    >Designed for users who frequently create and host
+                    events</small
+                  >
+                  <div class="price-title">Starting at</div>
+                  <div class="price">$120.00 <small> / month</small></div>
+                </div>
+                <img src="assets/upgrade.svg" />
+              </div>
+              <hr />
+              <div class="bundle-description">
+                <div class="bundle-description-content">
+                  <ion-item>
+                    <fa-icon [icon]="['fas', 'check']"></fa-icon>
+                    Enhanced event visibility
+                  </ion-item>
+                  <ion-item>
+                    <fa-icon [icon]="['fas', 'check']"></fa-icon>Push event
+                    notifications
+                  </ion-item>
+                  <ion-item>
+                    <fa-icon [icon]="['fas', 'check']"></fa-icon>Allow Kick 3
+                    person / event
+                  </ion-item>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template swiperSlide>
+            <div class="bundle-card">
+              <div class="bundle-header">
+                <div class="bundle-header-title">
+                  Influencer Bundle
+                  <br />
+                  <small
+                    >Designed for users who frequently create and host
+                    events</small
+                  >
+                  <div class="price-title">Starting at</div>
+                  <div class="price">$120.00 <small> / month</small></div>
+                </div>
+                <img src="assets/upgrade.svg" />
+              </div>
+              <hr />
+              <div class="bundle-description">
+                <div class="bundle-description-content">
+                  <ion-item>
+                    <fa-icon [icon]="['fas', 'check']"></fa-icon>
+                    Enhanced event visibility
+                  </ion-item>
+                  <ion-item>
+                    <fa-icon [icon]="['fas', 'check']"></fa-icon>Push event
+                    notifications
+                  </ion-item>
+                  <ion-item>
+                    <fa-icon [icon]="['fas', 'check']"></fa-icon>Allow Kick 3
+                    person / event
+                  </ion-item>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </swiper>
       </div>
     </div>
   </main>

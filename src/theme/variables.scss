@@ -98,6 +98,8 @@
   --ion-input-text-color: #b1b0b1;
   --ion-tag-background-color: #eef4ff;
   --ion-box-shadow: #ddd;
+  --ion-card-footer-background-color: var(--ion-color-primary);
+  --ion-card-border-color: var(--ion-color-primary);
 }
 
 /*
@@ -175,6 +177,8 @@ body.dark {
   --ion-input-text-color: #cccccc;
   --ion-tag-background-color: #212121;
   --ion-box-shadow: transparent;
+  --ion-card-footer-background-color: #383838;
+  --ion-card-border-color: transparent;
 }
 
 /*

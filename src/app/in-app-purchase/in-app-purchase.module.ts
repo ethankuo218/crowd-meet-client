@@ -5,6 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { InAppPurchaseComponent } from './in-app-purchase.component';
 import { IonicModule } from '@ionic/angular';
 import { HeaderComponent } from '../header/header.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SwiperModule } from 'swiper/angular';
 import { Auth, user } from '@angular/fire/auth';
 import { firstValueFrom } from 'rxjs';
 declare let window: any;
@@ -22,7 +24,9 @@ const routes: Routes = [
     IonicModule,
     CommonModule,
     RouterModule.forChild(routes),
-    HeaderComponent
+    HeaderComponent,
+    FontAwesomeModule,
+    SwiperModule
   ]
 })
 export class InAppPurchaseModule {

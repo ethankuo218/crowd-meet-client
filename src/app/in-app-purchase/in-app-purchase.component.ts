@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Purchases } from '@awesome-cordova-plugins/purchases/ngx';
+import SwiperCore, { Pagination } from 'swiper';
+
+SwiperCore.use([Pagination]);
 declare let window: any;
 
 @Component({
