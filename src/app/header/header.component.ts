@@ -1,9 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  Input,
+  inject
+} from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { ActionSheetController } from '@ionic/angular';
+import { FilterComponent } from '../filter/filter.component';
+import { EventService } from '../core/event.service';
 
 @Component({
   selector: 'app-header',
@@ -16,6 +25,11 @@ export class HeaderComponent implements OnInit {
   @Input() disableBackButton: boolean = false;
   @Output() menuEvent = new EventEmitter();
 
+  private router = inject(Router);
+  private modalCtrl = inject(ModalController);
+  private eventService = inject(EventService);
+  private filter: any;
+
   tabPageUrls: string[] = [
     '/app/event/list',
     '/app/chat/list',
@@ -24,38 +38,24 @@ export class HeaderComponent implements OnInit {
     '/app/notifications'
   ];
 
-  constructor(
-    private actionSheetController: ActionSheetController,
-    private router: Router,
-    private modalCtrl: ModalController
-  ) {}
-
   ngOnInit() {}
 
-  async openMenu() {
-    const actionSheet = await this.actionSheetController.create({
-      buttons: [
-        {
-          text: 'Edit',
-          role: 'edit',
-          // cssClass: 'leave_button',
-          handler: () => {
-            this.menuEvent.emit('edit');
-          }
-        },
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }
-      ]
+  async openFilter() {
+    const modal = await this.modalCtrl.create({
+      component: FilterComponent,
+      initialBreakpoint: 1,
+      breakpoints: [0, 1],
+      componentProps: { filter: this.filter }
     });
-    await actionSheet.present();
-  }
+    modal.present();
 
-  openFilter() {}
+    const { data, role } = await modal.onWillDismiss();
+    console.log(data);
+    if (role === 'filter') {
+      this.filter = data;
+      this.eventService.reload(this.filter);
+    }
+  }
 
   get currentUrl(): string {
     return this.router.url;

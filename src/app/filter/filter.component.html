@@ -41,6 +41,7 @@
             [pinFormatter]="pinFormatter"
             [min]="5"
             [max]="25"
+            [value]="filterForm.get('radius')?.value"
             (ionChange)="onDistanceChange($event)"
           ></ion-range>
         </div>

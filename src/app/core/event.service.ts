@@ -102,6 +102,12 @@ export class EventService {
   }
 
   async loadNextPage(filter: any): Promise<void> {
+    console.log({
+      page: this.currentPage,
+      pageSize: 10,
+      startDate: new Date().toISOString(),
+      ...filter
+    });
     const result = await firstValueFrom(
       this.httpClientService.get<EventList>('event', {
         page: ++this.currentPage,

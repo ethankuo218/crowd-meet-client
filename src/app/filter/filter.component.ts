@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { IonicModule, ModalController, RangeCustomEvent } from '@ionic/angular';
 import { Category } from '../core/states/reference-state/reference.model';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -21,6 +21,8 @@ import { ReferenceStateFacade } from '../core/states/reference-state/reference.s
   providers: [ReferenceStateFacade]
 })
 export class FilterComponent implements OnInit {
+  @Input() filter: any;
+
   categoryList: Category[] = [];
 
   minDate: string = '';
@@ -54,7 +56,18 @@ export class FilterComponent implements OnInit {
         }
       });
 
-    this.minDate = new Date().toISOString().split('.')[0];
+    this.minDate = this.getFormatTimeString();
+
+    this.filterForm.patchValue({
+      startDate: this.minDate,
+      ...this.filter,
+      ...(this.filter?.startDate && {
+        startDate: this.getFormatTimeString(this.filter.startDate)
+      }),
+      ...(this.filter?.categories && {
+        categories: this.getPatchCategories()
+      })
+    });
   }
 
   cancel(): void {
@@ -109,5 +122,27 @@ export class FilterComponent implements OnInit {
     });
 
     return returnArr;
+  }
+
+  private getPatchCategories() {
+    this.filter?.categories.forEach((item: number) => {
+      const index = this.categoryList.findIndex(
+        (category) => category.categoryId === item
+      );
+      this.categories.get(index.toString())?.patchValue(true);
+    });
+  }
+
+  private getFormatTimeString(input?: string): string {
+    const date = input ? new Date(input) : new Date();
+    const isoDateString = date.toISOString().split('T')[0];
+    const isMorning = date.toLocaleTimeString().split(' ')[1] === 'AM';
+    const isoTimeString = date.toLocaleTimeString().split(' ')[0].split(':');
+
+    return `${isoDateString}T${
+      isMorning
+        ? isoTimeString[0].padStart(2, '0')
+        : Number(isoTimeString[0]) + 12
+    }:${isoTimeString[1]}`;
   }
 }
