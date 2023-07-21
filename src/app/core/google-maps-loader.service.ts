@@ -3,6 +3,7 @@ import { Loader } from '@googlemaps/js-api-loader';
 import { environment } from 'src/environments/environment';
 import { LanguageService } from '../language/language.service';
 import { Geolocation } from '@capacitor/geolocation';
+import { Subject, firstValueFrom } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class GoogleMapsLoaderService {
@@ -11,23 +12,29 @@ export class GoogleMapsLoaderService {
     version: 'weekly',
     libraries: ['places']
   });
-
   private language = inject(LanguageService).currentLanguage.toString();
+
+  private userLocation: { lat: number; lng: number } | undefined;
+
+  constructor() {
+    this.loader.importLibrary('places');
+    // Geolocation.requestPermissions({
+    //   permissions: ['location', 'coarseLocation']
+    // });
+    Geolocation.getCurrentPosition().then((coordinates) => {
+      this.userLocation = {
+        lat: coordinates.coords.latitude,
+        lng: coordinates.coords.longitude
+      };
+    });
+  }
 
   public async loadPredictions(
     input: string
   ): Promise<google.maps.places.AutocompletePrediction[]> {
-    await this.loader.importLibrary('places');
-
-    const coordinates = await Geolocation.getCurrentPosition();
-    const userLocation = {
-      lat: coordinates.coords.latitude,
-      lng: coordinates.coords.longitude
-    };
-
     // Create a LatLngBounds object centered around the user's location.
     const circle = new google.maps.Circle({
-      center: userLocation,
+      center: this.userLocation,
       radius: 50000
     }); // 50000 meters = 50 km
 
@@ -42,5 +49,27 @@ export class GoogleMapsLoaderService {
     };
 
     return (await autoComplete.getPlacePredictions(request)).predictions;
+  }
+
+  async getPlacesDetail(
+    placeId: string
+  ): Promise<google.maps.places.PlaceResult> {
+    const placeService = new google.maps.places.PlacesService(
+      new HTMLDivElement()
+    );
+    const placeDeatilSubject: Subject<google.maps.places.PlaceResult> =
+      new Subject();
+
+    placeService.getDetails(
+      {
+        placeId: placeId,
+        fields: [] // paid
+      },
+      (placeDetail) => {
+        placeDeatilSubject.next(placeDetail!);
+      }
+    );
+
+    return firstValueFrom(placeDeatilSubject);
   }
 }

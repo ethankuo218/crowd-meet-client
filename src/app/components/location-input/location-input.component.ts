@@ -6,7 +6,10 @@ import {
   ViewChild,
   forwardRef,
   AfterViewInit,
-  OnDestroy
+  OnDestroy,
+  EventEmitter,
+  Output,
+  inject
 } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IonInput, IonicModule } from '@ionic/angular';
@@ -31,7 +34,12 @@ import { fromEvent, map, debounceTime, Subscription } from 'rxjs';
 export class LocationInputComponent
   implements ControlValueAccessor, AfterViewInit, OnDestroy
 {
+  private googleMapsLoaderService = inject(GoogleMapsLoaderService);
+
   @ViewChild('inputbox') input!: IonInput;
+  @Output()
+  locaitionChangeEvent: EventEmitter<google.maps.places.AutocompletePrediction> =
+    new EventEmitter();
 
   predictions: google.maps.places.AutocompletePrediction[] = [];
 
@@ -54,8 +62,6 @@ export class LocationInputComponent
   }
 
   private subscription!: Subscription;
-
-  constructor(private googleMapsLoaderService: GoogleMapsLoaderService) {}
 
   async ngAfterViewInit(): Promise<void> {
     const inputElement = await this.input.getInputElement();
@@ -102,6 +108,7 @@ export class LocationInputComponent
   onMenuClick(item: google.maps.places.AutocompletePrediction): void {
     this.showDropddown = false;
 
+    this.locaitionChangeEvent.emit(item);
     this.input.value = item.structured_formatting.main_text;
     this._value = item.structured_formatting.main_text;
   }

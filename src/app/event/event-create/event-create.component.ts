@@ -162,6 +162,7 @@ export class EventCreateComponent implements OnInit {
   }
 
   onIsOnlineChange(value: boolean) {
+    //TODO: clear
     if (value) {
       this.location.reset();
       this.location.clearValidators();
@@ -172,5 +173,14 @@ export class EventCreateComponent implements OnInit {
       this.location.enable();
       this.location.updateValueAndValidity();
     }
+  }
+
+  onLocationChange(placeDetail: google.maps.places.PlaceResult): void {
+    this.selectLocation = {
+      placeId: placeDetail.place_id!,
+      lat: placeDetail.geometry?.location?.lat()!,
+      lng: placeDetail.geometry?.location?.lng()!,
+      formattedAddress: placeDetail.formatted_address!
+    };
   }
 }
