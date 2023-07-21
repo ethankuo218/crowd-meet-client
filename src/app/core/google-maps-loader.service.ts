@@ -63,7 +63,7 @@ export class GoogleMapsLoaderService {
     placeService.getDetails(
       {
         placeId: placeId,
-        fields: [] // paid
+        fields: ['geometry.location', 'formatted_address'] // paid
       },
       (placeDetail) => {
         placeDeatilSubject.next(placeDetail!);
