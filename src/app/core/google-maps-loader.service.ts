@@ -3,7 +3,7 @@ import { Loader } from '@googlemaps/js-api-loader';
 import { environment } from 'src/environments/environment';
 import { LanguageService } from '../language/language.service';
 import { Geolocation } from '@capacitor/geolocation';
-import { Subject, firstValueFrom } from 'rxjs';
+import { Subject, firstValueFrom, lastValueFrom } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class GoogleMapsLoaderService {
@@ -54,22 +54,22 @@ export class GoogleMapsLoaderService {
   async getPlacesDetail(
     placeId: string
   ): Promise<google.maps.places.PlaceResult> {
-    const placeService = new google.maps.places.PlacesService(
-      new HTMLDivElement()
-    );
-    const placeDeatilSubject: Subject<google.maps.places.PlaceResult> =
+    const googleMapHelper = document.createElement('div');
+    const placeService = new google.maps.places.PlacesService(googleMapHelper);
+    const placeDetailSubject: Subject<google.maps.places.PlaceResult> =
       new Subject();
 
     placeService.getDetails(
       {
         placeId: placeId,
-        fields: ['geometry.location', 'formatted_address'] // paid
+        fields: ['place_id', 'geometry.location', 'formatted_address'], // paid
+        language: this.language
       },
       (placeDetail) => {
-        placeDeatilSubject.next(placeDetail!);
+        placeDetailSubject.next(placeDetail!);
       }
     );
 
-    return firstValueFrom(placeDeatilSubject);
+    return firstValueFrom(placeDetailSubject.asObservable());
   }
 }

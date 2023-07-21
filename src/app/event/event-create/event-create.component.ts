@@ -176,11 +176,13 @@ export class EventCreateComponent implements OnInit {
   }
 
   onLocationChange(placeDetail: google.maps.places.PlaceResult): void {
+    console.log(placeDetail);
     this.selectLocation = {
       placeId: placeDetail.place_id!,
       lat: placeDetail.geometry?.location?.lat()!,
       lng: placeDetail.geometry?.location?.lng()!,
       formattedAddress: placeDetail.formatted_address!
     };
+    console.log(this.selectLocation);
   }
 }

@@ -38,7 +38,7 @@ export class LocationInputComponent
 
   @ViewChild('inputbox') input!: IonInput;
   @Output()
-  locaitionChangeEvent: EventEmitter<google.maps.places.AutocompletePrediction> =
+  locaitionChangeEvent: EventEmitter<google.maps.places.PlaceResult> =
     new EventEmitter();
 
   predictions: google.maps.places.AutocompletePrediction[] = [];
@@ -105,10 +105,14 @@ export class LocationInputComponent
     this.isDisabled = isDisabled;
   }
 
-  onMenuClick(item: google.maps.places.AutocompletePrediction): void {
+  async onMenuClick(
+    item: google.maps.places.AutocompletePrediction
+  ): Promise<void> {
     this.showDropddown = false;
-
-    this.locaitionChangeEvent.emit(item);
+    const selectLocation = await this.googleMapsLoaderService.getPlacesDetail(
+      item.place_id
+    );
+    this.locaitionChangeEvent.emit(selectLocation);
     this.input.value = item.structured_formatting.main_text;
     this._value = item.structured_formatting.main_text;
   }
