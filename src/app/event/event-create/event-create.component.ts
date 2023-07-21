@@ -131,7 +131,7 @@ export class EventCreateComponent implements OnInit {
         })
         .subscribe({
           next: () => {
-            this.router.navigate(['/app/event', { refresh: true }]);
+            this.router.navigate(['/app/event/list', { refresh: true }]);
           }
         });
     } else {

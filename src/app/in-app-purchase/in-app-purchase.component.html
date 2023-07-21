@@ -5,7 +5,7 @@
     <div class="container">
       <div class="container-title">Free</div>
       <div class="free-container">
-        <div class="free-card">
+        <div class="free-card" (click)="getReward('create_event')">
           <div class="card-title">Create Event</div>
           <div class="card-box">
             <fa-icon [icon]="['far', 'calendar']"></fa-icon>
@@ -18,7 +18,7 @@
             <div class="footer-title">AD</div>
           </div>
         </div>
-        <div class="free-card">
+        <div class="free-card" (click)="getReward('check_participant')">
           <div class="card-title">Check<br />Participant</div>
           <div class="card-box">
             <fa-icon [icon]="['fas', 'magnifying-glass']"></fa-icon>
@@ -31,7 +31,7 @@
             <div class="footer-title">AD</div>
           </div>
         </div>
-        <div class="free-card">
+        <div class="free-card" (click)="getReward('kick')">
           <div class="card-title">Kick</div>
           <div class="card-box">
             <fa-icon [icon]="['far', 'calendar']"></fa-icon>

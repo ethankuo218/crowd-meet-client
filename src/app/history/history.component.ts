@@ -1,5 +1,5 @@
 import { UserStateFacade } from './../core/states/user-state/user.state.facade';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActionSheetController, RefresherCustomEvent } from '@ionic/angular';
 import { UserService } from '../core/user.service';
 import { UserEvent } from '../core/states/user-state/user.model';
@@ -13,6 +13,12 @@ import { EventService } from '../core/event.service';
   styleUrls: ['./history.component.scss']
 })
 export class HistoryComponent implements OnInit {
+  private actionSheetController = inject(ActionSheetController);
+  private userService = inject(UserService);
+  private userStateFacade = inject(UserStateFacade);
+  private router = inject(Router);
+  private eventService = inject(EventService);
+
   upcoming$ = this.userService.getEvents().pipe(
     map((result: UserEvent[]): UserEvent[] => {
       return result.filter(
@@ -30,14 +36,6 @@ export class HistoryComponent implements OnInit {
       );
     })
   );
-
-  constructor(
-    private actionSheetController: ActionSheetController,
-    private userService: UserService,
-    private userStateFacade: UserStateFacade,
-    private router: Router,
-    private eventService: EventService
-  ) {}
 
   ngOnInit() {
     this.userService.reloadUserEvents();
@@ -57,7 +55,9 @@ export class HistoryComponent implements OnInit {
           role: 'leave',
           cssClass: 'leave_button',
           handler: () => {
-            this.eventService.leave(eventId);
+            this.eventService.leave(eventId).subscribe(() => {
+              this.userService.reloadUserEvents();
+            });
           }
         },
         {

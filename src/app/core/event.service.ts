@@ -1,7 +1,8 @@
+import { AdmobService } from './admob.service';
 import { ImgUploadService } from './img-upload.service';
 import { EventListStateFacade } from './states/event-list-state/event-list.state.facade';
 import { HttpClientService } from './http-client.service';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {
   Event,
   EventComment,
@@ -26,19 +27,23 @@ import { Image } from './states/user-state/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class EventService {
-  noMoreContent: boolean = false;
+  private httpClientService = inject(HttpClientService);
+  private eventListStateFacade = inject(EventListStateFacade);
+  private imgUploadService = inject(ImgUploadService);
+  private admobService = inject(AdmobService);
+
   private currentPage: number = 1;
   private commentSubject: ReplaySubject<EventComment[]> = new ReplaySubject(1);
+  private _noMoreContent: boolean = false;
 
-  constructor(
-    private httpClientService: HttpClientService,
-    private eventListStateFacade: EventListStateFacade,
-    private imgUploadService: ImgUploadService
-  ) {}
+  get noMoreContent(): boolean {
+    return this._noMoreContent;
+  }
 
   createEvent(eventSetting: EventSetting): Observable<Event> {
     return this.httpClientService.post<Event>('event', eventSetting).pipe(
       tap((result: Event) => {
+        this.admobService.showInterstitial();
         if (this.imgUploadService.uploadedImagesCount !== 0) {
           this.updateEventImage(result.eventId, 'post').subscribe();
         }
@@ -49,6 +54,7 @@ export class EventService {
   updateEvent(body: any): Observable<Event> {
     return this.httpClientService.patch<Event>('event', body).pipe(
       tap((result: Event) => {
+        this.admobService.showInterstitial();
         if (this.imgUploadService.uploadedImagesCount !== 0) {
           this.updateEventImage(result.eventId, 'put').subscribe();
         }
@@ -119,9 +125,9 @@ export class EventService {
 
     if (result.data.length === 0) {
       this.currentPage--;
-      this.noMoreContent = true;
+      this._noMoreContent = true;
     } else {
-      this.noMoreContent = false;
+      this._noMoreContent = false;
     }
 
     this.eventListStateFacade.addEventList(result);
@@ -166,16 +172,26 @@ export class EventService {
   }
 
   apply(id: number): Observable<EventActionResponse> {
-    return this.httpClientService.post<EventActionResponse>(
-      `event/${id}/participant`,
-      {}
+    return from(this.admobService.showReward()).pipe(
+      switchMap((result): Observable<EventActionResponse> => {
+        console.log(result);
+        return this.httpClientService.post<EventActionResponse>(
+          `event/${id}/participant`,
+          {}
+        );
+      })
     );
   }
 
   leave(id: number): Observable<EventActionResponse> {
-    return this.httpClientService.patch<EventActionResponse>(
-      `event/${id}/participant/me`,
-      {}
+    return from(this.admobService.showReward()).pipe(
+      switchMap((result): Observable<EventActionResponse> => {
+        console.log(result);
+        return this.httpClientService.patch<EventActionResponse>(
+          `event/${id}/participant/me`,
+          {}
+        );
+      })
     );
   }
 
@@ -203,12 +219,16 @@ export class EventService {
   }
 
   kick(id: number, userId: number): Observable<EventActionResponse> {
-    return this.httpClientService.patch<EventActionResponse>(
-      `event/${id}/participant`,
-      {
-        status: EventAction.KICK,
-        participantId: userId
-      }
+    return from(this.admobService.showReward()).pipe(
+      switchMap((result): Observable<EventActionResponse> => {
+        return this.httpClientService.patch<EventActionResponse>(
+          `event/${id}/participant`,
+          {
+            status: EventAction.KICK,
+            participantId: userId
+          }
+        );
+      })
     );
   }
 }

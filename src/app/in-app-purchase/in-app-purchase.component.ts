@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Purchases } from '@awesome-cordova-plugins/purchases/ngx';
 import SwiperCore, { Pagination } from 'swiper';
+import { AdmobService } from '../core/admob.service';
 
 SwiperCore.use([Pagination]);
 declare let window: any;
@@ -11,9 +12,10 @@ declare let window: any;
   styleUrls: ['./in-app-purchase.component.scss']
 })
 export class InAppPurchaseComponent implements OnInit {
-  offering: any | undefined;
+  private purchases = inject(Purchases);
+  private admobService = inject(AdmobService);
 
-  constructor(private purchases: Purchases) {}
+  offering: any | undefined;
 
   ngOnInit() {
     this.purchases.getOfferings().then((offerings) => {
@@ -27,6 +29,14 @@ export class InAppPurchaseComponent implements OnInit {
       ) {
         this.offering = offerings.current.availablePackages[0];
       }
+    });
+  }
+
+  getReward(type: string): void {
+    // this.admobService.showInterstitial();
+    this.admobService.showReward().then((result) => {
+      // this will call after reward get
+      console.log(result.type);
     });
   }
 

@@ -1,5 +1,6 @@
+import { AdmobService } from './core/admob.service';
 import { UserService } from 'src/app/core/user.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { HistoryHelperService } from './utils/history-helper.service';
 import { SplashScreen } from '@capacitor/splash-screen';
@@ -12,16 +13,16 @@ import { Storage } from '@ionic/storage-angular';
   styleUrls: []
 })
 export class AppComponent implements OnInit {
+  private translate = inject(TranslateService);
+  private historyHelper = inject(HistoryHelperService);
+  private userService = inject(UserService);
+  private platform = inject(Platform);
+  private storage = inject(Storage);
+  private admobService = inject(AdmobService);
   textDir = 'ltr';
 
   // Inject HistoryHelperService in the app.components.ts so its available app-wide
-  constructor(
-    public translate: TranslateService,
-    public historyHelper: HistoryHelperService,
-    private userService: UserService,
-    private platform: Platform,
-    private storage: Storage
-  ) {
+  constructor() {
     this.initializeApp();
     this.setLanguage();
   }
@@ -39,6 +40,7 @@ export class AppComponent implements OnInit {
 
   async initializeApp() {
     try {
+      await this.admobService.initializeAdmob();
       this.userService.login();
       await SplashScreen.hide();
     } catch (err) {
