@@ -1,8 +1,9 @@
+import { InAppPurchaseService } from './in-app-purchase.service';
 import { ReferenceStateFacade } from './+states/reference-state/reference.state.facade';
 import { UserStateFacade } from './+states/user-state/user.state.facade';
 import { Observable, firstValueFrom, forkJoin, map, tap } from 'rxjs';
 import { HttpClientService } from './http-client.service';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { LoginResponse, ProfilePictureResponse } from './models/core.model';
 import { Image, User, UserEvent } from './+states/user-state/user.model';
 import { Reference } from './+states/reference-state/reference.model';
@@ -11,13 +12,14 @@ import { Storage } from '@ionic/storage-angular';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-  constructor(
-    private httpClientService: HttpClientService,
-    private userStateFacade: UserStateFacade,
-    private referenceStateFacade: ReferenceStateFacade,
-    private router: Router,
-    private storage: Storage
-  ) {
+  private httpClientService = inject(HttpClientService);
+  private userStateFacade = inject(UserStateFacade);
+  private referenceStateFacade = inject(ReferenceStateFacade);
+  private router = inject(Router);
+  private storage = inject(Storage);
+  private inAppPurchaseService = inject(InAppPurchaseService);
+
+  constructor() {
     this.storage.create();
   }
 
@@ -28,6 +30,7 @@ export class UserService {
       this.storage.get('isNewUser')
     ]).subscribe(([loginResult, referenceResult, isNewUser]) => {
       this.referenceStateFacade.storeReference(referenceResult);
+      this.inAppPurchaseService.initialInAppPurchase(loginResult.userId);
       this.getUserById(loginResult.userId).subscribe({
         next: (result) => {
           this.userStateFacade.storeUser(result);

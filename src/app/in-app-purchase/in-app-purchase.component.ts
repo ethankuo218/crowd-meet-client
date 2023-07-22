@@ -1,10 +1,10 @@
+import { InAppPurchaseService } from './../core/in-app-purchase.service';
 import { Component, OnInit, inject } from '@angular/core';
-import { Purchases } from '@awesome-cordova-plugins/purchases/ngx';
 import SwiperCore, { Pagination } from 'swiper';
 import { AdmobService } from '../core/admob.service';
+import { PurchasesStoreProduct } from '@awesome-cordova-plugins/purchases/ngx';
 
 SwiperCore.use([Pagination]);
-declare let window: any;
 
 @Component({
   selector: 'app-in-app-purchase',
@@ -12,24 +12,14 @@ declare let window: any;
   styleUrls: ['./in-app-purchase.component.scss']
 })
 export class InAppPurchaseComponent implements OnInit {
-  private purchases = inject(Purchases);
   private admobService = inject(AdmobService);
+  private inAppPurchaseService = inject(InAppPurchaseService);
+  productList!: PurchasesStoreProduct[];
 
-  offering: any | undefined;
+  async ngOnInit() {
+    this.productList = await this.inAppPurchaseService.getProducts();
 
-  ngOnInit() {
-    this.purchases.getOfferings().then((offerings) => {
-      console.log('************');
-      console.log(offerings);
-      console.log('************');
-
-      if (
-        offerings.current !== null &&
-        offerings.current.availablePackages.length !== 0
-      ) {
-        this.offering = offerings.current.availablePackages[0];
-      }
-    });
+    console.log(this.productList);
   }
 
   getReward(type: string): void {
@@ -40,7 +30,7 @@ export class InAppPurchaseComponent implements OnInit {
     });
   }
 
-  purchase() {
-    this.purchases.purchasePackage(this.offering).then(() => {});
+  purchase(productIdentifier: string): void {
+    this.inAppPurchaseService.purchase(productIdentifier);
   }
 }

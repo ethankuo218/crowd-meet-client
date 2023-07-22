@@ -45,112 +45,45 @@
           </div>
         </div>
       </div>
-      <br>
+      <br />
       <div class="container-title">Bundle</div>
       <div class="bundle-container">
         <swiper [slidesPerView]="1" [pagination]="true">
-          <ng-template swiperSlide>
-            <div class="bundle-card">
-              <div class="bundle-header">
-                <div class="bundle-header-title">
-                  Influencer Bundle
-                  <br />
-                  <small
-                    >Designed for users who frequently create and host
-                    events</small
-                  >
-                  <div class="price-title">Starting at</div>
-                  <div class="price">$120.00 <small> / month</small></div>
+          <ng-container *ngFor="let product of productList">
+            <ng-template swiperSlide>
+              <div class="bundle-card" (click)="purchase(product.identifier)">
+                <div class="bundle-header">
+                  <div class="bundle-header-title">
+                    {{ product.identifier }}
+                    <br />
+                    <small>{{ product.description }}</small>
+                    <div class="price-title">Starting at</div>
+                    <div class="price">
+                      {{ product.priceString }} <small> / month</small>
+                    </div>
+                  </div>
+                  <img src="assets/upgrade.svg" />
                 </div>
-                <img src="assets/upgrade.svg" />
-              </div>
-              <hr />
-              <div class="bundle-description">
-                <div class="bundle-description-content">
-                  <ion-item>
-                    <fa-icon [icon]="['fas', 'check']"></fa-icon>
-                    Enhanced event visibility
-                  </ion-item>
-                  <ion-item>
-                    <fa-icon [icon]="['fas', 'check']"></fa-icon>Push event
-                    notifications
-                  </ion-item>
-                  <ion-item>
-                    <fa-icon [icon]="['fas', 'check']"></fa-icon>Allow Kick 3
-                    person / event
-                  </ion-item>
-                </div>
-              </div>
-            </div>
-          </ng-template>
-          <ng-template swiperSlide>
-            <div class="bundle-card">
-              <div class="bundle-header">
-                <div class="bundle-header-title">
-                  Influencer Bundle
-                  <br />
-                  <small
-                    >Designed for users who frequently create and host
-                    events</small
-                  >
-                  <div class="price-title">Starting at</div>
-                  <div class="price">$120.00 <small> / month</small></div>
-                </div>
-                <img src="assets/upgrade.svg" />
-              </div>
-              <hr />
-              <div class="bundle-description">
-                <div class="bundle-description-content">
-                  <ion-item>
-                    <fa-icon [icon]="['fas', 'check']"></fa-icon>
-                    Enhanced event visibility
-                  </ion-item>
-                  <ion-item>
-                    <fa-icon [icon]="['fas', 'check']"></fa-icon>Push event
-                    notifications
-                  </ion-item>
-                  <ion-item>
-                    <fa-icon [icon]="['fas', 'check']"></fa-icon>Allow Kick 3
-                    person / event
-                  </ion-item>
+                <hr />
+                <div class="bundle-description">
+                  <div class="bundle-description-content">
+                    <ion-item>
+                      <fa-icon [icon]="['fas', 'check']"></fa-icon>
+                      Enhanced event visibility
+                    </ion-item>
+                    <ion-item>
+                      <fa-icon [icon]="['fas', 'check']"></fa-icon>Push event
+                      notifications
+                    </ion-item>
+                    <ion-item>
+                      <fa-icon [icon]="['fas', 'check']"></fa-icon>Allow Kick 3
+                      person / event
+                    </ion-item>
+                  </div>
                 </div>
               </div>
-            </div>
-          </ng-template>
-          <ng-template swiperSlide>
-            <div class="bundle-card">
-              <div class="bundle-header">
-                <div class="bundle-header-title">
-                  Influencer Bundle
-                  <br />
-                  <small
-                    >Designed for users who frequently create and host
-                    events</small
-                  >
-                  <div class="price-title">Starting at</div>
-                  <div class="price">$120.00 <small> / month</small></div>
-                </div>
-                <img src="assets/upgrade.svg" />
-              </div>
-              <hr />
-              <div class="bundle-description">
-                <div class="bundle-description-content">
-                  <ion-item>
-                    <fa-icon [icon]="['fas', 'check']"></fa-icon>
-                    Enhanced event visibility
-                  </ion-item>
-                  <ion-item>
-                    <fa-icon [icon]="['fas', 'check']"></fa-icon>Push event
-                    notifications
-                  </ion-item>
-                  <ion-item>
-                    <fa-icon [icon]="['fas', 'check']"></fa-icon>Allow Kick 3
-                    person / event
-                  </ion-item>
-                </div>
-              </div>
-            </div>
-          </ng-template>
+            </ng-template>
+          </ng-container>
         </swiper>
       </div>
     </div>
