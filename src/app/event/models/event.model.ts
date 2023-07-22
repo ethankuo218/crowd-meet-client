@@ -20,7 +20,6 @@ export interface Event {
   startTime: string; // 2023-06-02T14:46:08.312Z
   endTime: string; // 2023-06-02T14:46:08.313Z
   maxParticipants: number;
-  locationName: string;
   price: number;
   categories: Category[];
   creator: User;
