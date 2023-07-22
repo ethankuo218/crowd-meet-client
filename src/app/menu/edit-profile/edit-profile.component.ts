@@ -1,12 +1,12 @@
-import { UserStateFacade } from '../core/+states/user-state/user.state.facade';
+import { UserStateFacade } from '../../core/+states/user-state/user.state.facade';
 import { ImgUploadService } from 'src/app/core/img-upload.service';
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../core/user.service';
+import { UserService } from '../../core/user.service';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ReferenceStateFacade } from '../core/+states/reference-state/reference.state.facade';
+import { ReferenceStateFacade } from '../../core/+states/reference-state/reference.state.facade';
 import { take } from 'rxjs';
-import { Category } from '../core/+states/reference-state/reference.model';
-import { Image } from '../core/+states/user-state/user.model';
+import { Category } from '../../core/+states/reference-state/reference.model';
+import { Image } from '../../core/+states/user-state/user.model';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 @Component({

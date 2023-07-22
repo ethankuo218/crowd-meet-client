@@ -17,6 +17,11 @@ const routes: Routes = [
   {
     path: 'joiner-list/:id',
     component: JoinerListComponent
+  },
+  {
+    path: 'reviews',
+    loadChildren: () =>
+      import('./reviews/reviews.module').then((m) => m.ReviewsModule)
   }
 ];
 

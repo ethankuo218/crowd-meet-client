@@ -8,7 +8,6 @@ const routes: Routes = [
     path: '',
     component: TabsPage,
     children: [
-      // /app/ redirect
       {
         path: '',
         redirectTo: 'event',
@@ -40,7 +39,7 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../event/event-create/event-create.module').then(
+              import('../event-create/event-create.module').then(
                 (m) => m.EventCreateModule
               )
           }
@@ -86,40 +85,6 @@ const routes: Routes = [
             loadChildren: () =>
               import('../in-app-purchase/in-app-purchase.module').then(
                 (m) => m.InAppPurchaseModule
-              )
-          }
-        ]
-      },
-      {
-        path: 'reviews',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('../reviews/reviews.module').then((m) => m.ReviewsModule)
-          }
-        ]
-      },
-      {
-        path: 'edit-profile',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('../edit-profile/edit-profile.module').then(
-                (m) => m.EditProfileModule
-              )
-          }
-        ]
-      },
-      {
-        path: 'profile/:id',
-        children: [
-          {
-            path: '',
-            loadComponent: () =>
-              import('../profile/profile.component').then(
-                (m) => m.ProfileComponent
               )
           }
         ]

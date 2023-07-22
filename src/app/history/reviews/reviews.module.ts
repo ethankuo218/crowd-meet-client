@@ -4,13 +4,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule, Routes } from '@angular/router';
 import { ReviewsComponent } from './reviews.component';
-import { HeaderComponent } from '../header/header.component';
+import { HeaderComponent } from '../../header/header.component';
 import { SwiperModule } from 'swiper/angular';
 import { RatingComponent } from './rating/rating.component';
-import { RatingInputComponent } from '../components/rating-input/rating-input.component';
+import { RatingInputComponent } from '../../components/rating-input/rating-input.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ReviewsService } from './reviews.service';
-import { EventService } from '../core/event.service';
+import { EventService } from '../../core/event.service';
 
 const routes: Routes = [
   {

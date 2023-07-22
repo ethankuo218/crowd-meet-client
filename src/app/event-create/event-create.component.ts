@@ -1,5 +1,5 @@
-import { EventService } from '../../core/event.service';
-import { ReferenceStateFacade } from '../../core/+states/reference-state/reference.state.facade';
+import { EventService } from '../core/event.service';
+import { ReferenceStateFacade } from '../core/+states/reference-state/reference.state.facade';
 import { Component, OnInit } from '@angular/core';
 import {
   Validators,
@@ -9,11 +9,11 @@ import {
   AbstractControl
 } from '@angular/forms';
 
-import { counterRangeValidator } from '../../components/counter-input/counter-input.component';
+import { counterRangeValidator } from '../components/counter-input/counter-input.component';
 import { take } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/core/+states/reference-state/reference.model';
-import { Event } from '../models/event.model';
+import { Event } from '../event/models/event.model';
 
 @Component({
   selector: 'app-create-page',

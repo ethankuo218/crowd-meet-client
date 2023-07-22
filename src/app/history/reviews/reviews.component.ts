@@ -3,9 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { RatingComponent } from './rating/rating.component';
-import { Participant } from '../event/models/event.model';
+import { Participant } from '../../event/models/event.model';
 import { Observable, switchMap } from 'rxjs';
-import { EventService } from '../core/event.service';
+import { EventService } from '../../core/event.service';
 @Component({
   selector: 'app-reviews',
   templateUrl: './reviews.component.html',

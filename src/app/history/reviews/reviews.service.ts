@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { HttpClientService } from './../core/http-client.service';
+import { HttpClientService } from '../../core/http-client.service';
 import { Injectable } from '@angular/core';
 import { Review } from './models/reviews.model';
 
