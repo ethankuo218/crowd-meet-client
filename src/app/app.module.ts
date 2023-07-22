@@ -32,7 +32,7 @@ import {
   userFeatureKey,
   userEventsFeatureKey,
   userReducer
-} from './core/states/state.reducer';
+} from './core/+states/state.reducer';
 
 import { Capacitor } from '@capacitor/core';
 

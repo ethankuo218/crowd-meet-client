@@ -1,6 +1,6 @@
 import { AdmobService } from './admob.service';
 import { ImgUploadService } from './img-upload.service';
-import { EventListStateFacade } from './states/event-list-state/event-list.state.facade';
+import { EventListStateFacade } from './+states/event-list-state/event-list.state.facade';
 import { HttpClientService } from './http-client.service';
 import { Injectable, inject } from '@angular/core';
 import {
@@ -22,8 +22,8 @@ import {
   EventActionResponse,
   EventImageResponse
 } from './models/core.model';
-import { EventList } from './states/event-list-state/event-list.model';
-import { Image } from './states/user-state/user.model';
+import { EventList } from './+states/event-list-state/event-list.model';
+import { Image } from './+states/user-state/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class EventService {

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { IonicModule, ModalController, RangeCustomEvent } from '@ionic/angular';
-import { Category } from '../core/states/reference-state/reference.model';
+import { Category } from '../core/+states/reference-state/reference.model';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   FormArray,
@@ -10,7 +10,7 @@ import {
   ReactiveFormsModule
 } from '@angular/forms';
 import { take } from 'rxjs';
-import { ReferenceStateFacade } from '../core/states/reference-state/reference.state.facade';
+import { ReferenceStateFacade } from '../core/+states/reference-state/reference.state.facade';
 
 @Component({
   selector: 'app-filter',

@@ -1,5 +1,5 @@
 import { Event, Participant } from './../models/event.model';
-import { UserStateFacade } from './../../core/states/user-state/user.state.facade';
+import { UserStateFacade } from '../../core/+states/user-state/user.state.facade';
 import { EventService } from '../../core/event.service';
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';

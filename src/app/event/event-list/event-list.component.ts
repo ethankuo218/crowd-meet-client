@@ -2,7 +2,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { EventListData } from 'src/app/core/states/event-list-state/event-list.model';
+import { EventListData } from 'src/app/core/+states/event-list-state/event-list.model';
 import { EventService } from '../../core/event.service';
 import {
   InfiniteScrollCustomEvent,

@@ -1,5 +1,5 @@
-import { UserStateFacade } from '../../core/states/user-state/user.state.facade';
-import { ReferenceStateFacade } from '../../core/states/reference-state/reference.state.facade';
+import { UserStateFacade } from '../../core/+states/user-state/user.state.facade';
+import { ReferenceStateFacade } from '../../core/+states/reference-state/reference.state.facade';
 import { Component, HostBinding, NgZone, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
@@ -8,7 +8,7 @@ import { IonicSwiper } from '@ionic/angular';
 
 import SwiperCore, { Pagination } from 'swiper';
 import { Router } from '@angular/router';
-import { Category } from 'src/app/core/states/reference-state/reference.model';
+import { Category } from 'src/app/core/+states/reference-state/reference.model';
 import { Observable, take } from 'rxjs';
 import { UserService } from 'src/app/core/user.service';
 
@@ -20,8 +20,8 @@ SwiperCore.use([Pagination, IonicSwiper]);
   styleUrls: [
     './styles/getting-started.page.scss',
     './styles/getting-started.shell.scss',
-    './styles/getting-started.responsive.scss',
-  ],
+    './styles/getting-started.responsive.scss'
+  ]
 })
 export class GettingStartedPage implements OnInit {
   @HostBinding('class.last-slide-active') isLastSlide = false;
@@ -48,7 +48,7 @@ export class GettingStartedPage implements OnInit {
 
   ngOnInit(): void {
     this.interestForm = this.formBuilder.group({
-      interests: this.formBuilder.array([]),
+      interests: this.formBuilder.array([])
     });
 
     this.categoryList$.pipe(take(1)).subscribe({
@@ -57,7 +57,7 @@ export class GettingStartedPage implements OnInit {
           this.interests.push(new FormControl());
         });
       },
-      error: (error) => console.error(error),
+      error: (error) => console.error(error)
     });
   }
 
@@ -107,13 +107,13 @@ export class GettingStartedPage implements OnInit {
   private updateUserInterests(interestSelection?: number[]) {
     this.userService
       .updateUser({
-        interests: interestSelection ? interestSelection : [],
+        interests: interestSelection ? interestSelection : []
       })
       .subscribe({
         next: () => {
           this.router.navigate(['/app'], { replaceUrl: true });
         },
-        error: (error) => console.error(error),
+        error: (error) => console.error(error)
       });
   }
 }

@@ -1,5 +1,5 @@
-import { Category } from 'src/app/core/states/reference-state/reference.model';
-import { User } from 'src/app/core/states/user-state/user.model';
+import { Category } from 'src/app/core/+states/reference-state/reference.model';
+import { User } from 'src/app/core/+states/user-state/user.model';
 
 export interface EventSetting {
   title: string;

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { EventListData } from 'src/app/core/states/event-list-state/event-list.model';
+import { EventListData } from 'src/app/core/+states/event-list-state/event-list.model';
 
 @Component({
   selector: 'app-listing-card',

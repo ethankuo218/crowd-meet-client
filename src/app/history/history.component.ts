@@ -1,8 +1,8 @@
-import { UserStateFacade } from './../core/states/user-state/user.state.facade';
+import { UserStateFacade } from '../core/+states/user-state/user.state.facade';
 import { Component, OnInit, inject } from '@angular/core';
 import { ActionSheetController, RefresherCustomEvent } from '@ionic/angular';
 import { UserService } from '../core/user.service';
-import { UserEvent } from '../core/states/user-state/user.model';
+import { UserEvent } from '../core/+states/user-state/user.model';
 import { firstValueFrom, map } from 'rxjs';
 import { Router } from '@angular/router';
 import { EventService } from '../core/event.service';

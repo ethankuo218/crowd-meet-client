@@ -35,7 +35,7 @@ import {
   User
 } from '@capacitor-firebase/authentication';
 
-import { SignInProvider } from './auth-definitions';
+import { SignInProvider } from './models/auth.model';
 import { AuthHelper } from './auth.helper';
 import { Preferences } from '@capacitor/preferences';
 

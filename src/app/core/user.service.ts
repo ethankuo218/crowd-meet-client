@@ -1,11 +1,11 @@
-import { ReferenceStateFacade } from './states/reference-state/reference.state.facade';
-import { UserStateFacade } from './states/user-state/user.state.facade';
+import { ReferenceStateFacade } from './+states/reference-state/reference.state.facade';
+import { UserStateFacade } from './+states/user-state/user.state.facade';
 import { Observable, firstValueFrom, forkJoin, map, tap } from 'rxjs';
 import { HttpClientService } from './http-client.service';
 import { Injectable } from '@angular/core';
 import { LoginResponse, ProfilePictureResponse } from './models/core.model';
-import { Image, User, UserEvent } from './states/user-state/user.model';
-import { Reference } from './states/reference-state/reference.model';
+import { Image, User, UserEvent } from './+states/user-state/user.model';
+import { Reference } from './+states/reference-state/reference.model';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 

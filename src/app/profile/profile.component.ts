@@ -7,7 +7,7 @@ import { HeaderComponent } from '../header/header.component';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { SwiperModule } from 'swiper/angular';
 import { from, switchMap, Observable } from 'rxjs';
-import { User } from '../core/states/user-state/user.model';
+import { User } from '../core/+states/user-state/user.model';
 import { AgePipe } from '../core/pipe/age.pipe';
 
 @Component({

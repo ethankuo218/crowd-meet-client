@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { User } from 'src/app/core/states/user-state/user.model';
+import { User } from 'src/app/core/+states/user-state/user.model';
 import { ModalController } from '@ionic/angular';
 
 @Component({

@@ -21,7 +21,6 @@ import {
   SignInResult,
   User,
   AdditionalUserInfo,
-  SignInOptions,
   SignInWithOAuthOptions
 } from '@capacitor-firebase/authentication';
 

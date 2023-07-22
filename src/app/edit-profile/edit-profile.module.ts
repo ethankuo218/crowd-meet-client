@@ -13,7 +13,7 @@ import { HeaderComponent } from '../header/header.component';
 import { SwiperModule } from 'swiper/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CheckboxWrapperComponent } from '../components/checkbox-wrapper/checkbox-wrapper.component';
-import { ReferenceStateFacade } from '../core/states/reference-state/reference.state.facade';
+import { ReferenceStateFacade } from '../core/+states/reference-state/reference.state.facade';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 const routes: Routes = [
