@@ -14,6 +14,7 @@ import { take } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/core/+states/reference-state/reference.model';
 import { Event } from '../event/models/event.model';
+import { InputValidators } from '../validators/input-validators';
 
 @Component({
   selector: 'app-create-page',
@@ -22,25 +23,23 @@ import { Event } from '../event/models/event.model';
 })
 export class EventCreateComponent implements OnInit {
   mode: string = 'create';
+  minDate: string = '';
   eventCoverPictureUrl: string | undefined;
-
-  eventForm: FormGroup = new FormGroup({
-    title: new FormControl('', [Validators.required]),
-    description: new FormControl('', [Validators.required]),
-    startTime: new FormControl(new Date().toISOString().split('.')[0], [
-      Validators.required
-    ]),
-    endTime: new FormControl(new Date().toISOString().split('.')[0], [
-      Validators.required
-    ]),
-    maxParticipants: new FormControl(1, counterRangeValidator(1, 15)),
-    locationName: new FormControl('', [Validators.required]),
-    price: new FormControl(0, [Validators.required]),
-    categories: new FormArray([], [Validators.required]),
-    isOnline: new FormControl('', [Validators.required])
-  });
-
   categoryList: Category[] = [];
+  eventForm: FormGroup = new FormGroup(
+    {
+      title: new FormControl('', [Validators.required]),
+      description: new FormControl('', [Validators.required]),
+      startTime: new FormControl('', [Validators.required]),
+      endTime: new FormControl('', [Validators.required]),
+      maxParticipants: new FormControl(1, counterRangeValidator(1, 15)),
+      locationName: new FormControl('', [Validators.required]),
+      price: new FormControl(0, [Validators.required]),
+      categories: new FormArray([], [Validators.required]),
+      isOnline: new FormControl('', [Validators.required])
+    },
+    [InputValidators.endTimeValidate, InputValidators.categoriesValidate]
+  );
 
   selectLocation:
     | {
@@ -58,8 +57,6 @@ export class EventCreateComponent implements OnInit {
   get location(): AbstractControl {
     return this.eventForm.get('locationName')!;
   }
-
-  minDate: string = '';
 
   constructor(
     private referenceStateFacade: ReferenceStateFacade,
@@ -89,7 +86,9 @@ export class EventCreateComponent implements OnInit {
       delete this.eventCoverPictureUrl;
       delete this.selectLocation;
 
-      const today = new Date().toISOString().split('.')[0];
+      const today = new Date(new Date().getTime() + 10 * 60 * 1000)
+        .toISOString()
+        .split('.')[0];
       this.minDate = today;
 
       if (this.mode === 'edit') {
@@ -162,9 +161,8 @@ export class EventCreateComponent implements OnInit {
   }
 
   onIsOnlineChange(value: boolean) {
-    //TODO: clear
     if (value) {
-      this.location.reset();
+      this.location.setValue('');
       this.location.clearValidators();
       this.location.disable();
       this.location.updateValueAndValidity();
@@ -176,13 +174,11 @@ export class EventCreateComponent implements OnInit {
   }
 
   onLocationChange(placeDetail: google.maps.places.PlaceResult): void {
-    console.log(placeDetail);
     this.selectLocation = {
       placeId: placeDetail.place_id!,
       lat: placeDetail.geometry?.location?.lat()!,
       lng: placeDetail.geometry?.location?.lng()!,
       formattedAddress: placeDetail.formatted_address!
     };
-    console.log(this.selectLocation);
   }
 }

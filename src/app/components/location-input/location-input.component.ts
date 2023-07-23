@@ -103,6 +103,10 @@ export class LocationInputComponent
 
   setDisabledState?(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
+    if (isDisabled) {
+      this._value = '';
+      this.input.value = '';
+    }
   }
 
   async onMenuClick(
@@ -114,6 +118,6 @@ export class LocationInputComponent
     );
     this.locaitionChangeEvent.emit(selectLocation);
     this.input.value = item.structured_formatting.main_text;
-    this._value = item.structured_formatting.main_text;
+    this.value = item.structured_formatting.main_text;
   }
 }

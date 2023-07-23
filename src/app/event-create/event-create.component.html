@@ -108,6 +108,9 @@
               <ion-checkbox [formControlName]="i"></ion-checkbox>
             </ion-item>
           </ion-row>
+          <div *ngIf="eventForm.hasError('categoryShouldBeChoose')" class="error-msg">
+            <fa-icon [icon]="['fas', 'exclamation-circle']"></fa-icon> Should choose at least one category
+          </div>
           <br />
         </div>
 
@@ -137,6 +140,9 @@
             [min]="minDate"
             formControlName="endTime"
           ></ion-input>
+          <div *ngIf="eventForm.hasError('endTimeNeedsToAfterStartTime')" class="error-msg">
+            <fa-icon [icon]="['fas', 'exclamation-circle']"></fa-icon> End time should after start time
+          </div>
         </div>
 
         <div class="event_content">
@@ -164,9 +170,9 @@
         </div>
 
         <div class="event_content">
-          <button class="submit-button" (click)="onSubmit()">
+          <ion-button class="submit-button" (click)="onSubmit()" [disabled]="eventForm.invalid">
             {{ mode === 'edit' ? 'Confirm' : 'Create' }}
-          </button>
+          </ion-button>
         </div>
       </form>
     </div>
