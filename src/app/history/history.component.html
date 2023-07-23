@@ -8,69 +8,131 @@
       <mat-tab>
         <ng-template mat-tab-label> Upcoming </ng-template>
         <br />
-        <div
-          class="joiner-list-content"
-          *ngFor="let item of upcoming$ | async; trackBy: trackByIndex"
-        >
-          <div class="joiner-list-image">
-            <img
-              [src]="item.imageUrl || 'assets/images/spoon.png'"
-              alt="image"
-            />
-          </div>
+        <ng-container *ngIf="!isLoading">
           <div
-            class="upcoming-content"
-            [routerLink]="['/app/event/list', item.eventId]"
+            class="joiner-list-content"
+            *ngFor="let item of upcoming$ | async; trackBy: trackByIndex"
           >
-            <div class="content-row">
-              <small class="dark_dd">{{
-                item.startTime | date : 'EEE, MMM d, y'
-              }}</small>
+            <div class="joiner-list-image">
+              <img
+                [src]="item.imageUrl || 'assets/images/spoon.png'"
+                alt="image"
+              />
             </div>
-            <p class="dark">
-              {{ item.title }}
-            </p>
-            <p class="content dark_dd">
-              {{ item.description }}
-            </p>
+            <div
+              class="upcoming-content"
+              [routerLink]="['/app/event/list', item.eventId]"
+            >
+              <div class="content-row">
+                <small class="dark_dd">{{
+                  item.startTime | date : 'EEE, MMM d, y'
+                }}</small>
+              </div>
+              <p class="dark">
+                {{ item.title }}
+              </p>
+              <p class="content dark_dd">
+                {{ item.description }}
+              </p>
+            </div>
+            <div class="tool_btn">
+              <button
+                id="menu"
+                (click)="openMenu(item.eventId, item.creatorId)"
+              >
+                <fa-icon [icon]="['fas', 'ellipsis-vertical']"></fa-icon>
+              </button>
+            </div>
           </div>
-          <div class="tool_btn">
-            <button id="menu" (click)="openMenu(item.eventId, item.creatorId)">
-              <fa-icon [icon]="['fas', 'ellipsis-vertical']"></fa-icon>
-            </button>
+        </ng-container>
+        <ng-container *ngIf="isLoading">
+          <div
+            *ngFor="let item of [0, 1, 2, 3, 4, 5, 6, 7]"
+            class="joiner-list-content"
+          >
+            <div class="joiner-list-image">
+              <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+            </div>
+            <div class="upcoming-content">
+              <ion-skeleton-text
+                [animated]="true"
+                style="width: 40%; margin-bottom: 0.5rem"
+              ></ion-skeleton-text>
+              <ion-skeleton-text
+                [animated]="true"
+                style="width: 80%; margin-bottom: 0.5rem; height: 1rem"
+              ></ion-skeleton-text>
+              <ion-skeleton-text
+                [animated]="true"
+                style="width: 60%"
+              ></ion-skeleton-text>
+            </div>
           </div>
-        </div>
+        </ng-container>
       </mat-tab>
       <mat-tab>
         <ng-template mat-tab-label> Joined </ng-template>
         <br />
-        <div
-          class="joiner-list-content"
-          *ngFor="let item of joined$ | async; trackBy: trackByIndex"
-        >
-          <div class="joiner-list-image">
-            <img
-              [src]="item.imageUrl || 'assets/images/spoon.png'"
-              alt="image"
-            />
-          </div>
-          <div class="joined-content">
-            <div class="content-row">
-              <small class="dark_dd">{{
-                item.startTime | date : 'EEE, MMM d, y'
-              }}</small>
-              <div *ngIf="getIsOngoing(item.endTime)" class="tag">Ongoing</div>
+        <ng-container *ngIf="!isLoading">
+          <div
+            class="joiner-list-content"
+            *ngFor="let item of joined$ | async; trackBy: trackByIndex"
+          >
+            <div class="joiner-list-image">
+              <img
+                [src]="item.imageUrl || 'assets/images/spoon.png'"
+                alt="image"
+              />
             </div>
-            <p class="dark">
-              {{ item.title }}
-            </p>
-            <hr>
-            <div class="button-area">
-              <ion-button [routerLink]="['/app/event/list', item.eventId]">View</ion-button>
-              <ion-button [routerLink]="['/app/history/reviews', item.eventId]">Rating</ion-button>
+            <div class="joined-content">
+              <div class="content-row">
+                <small class="dark_dd">{{
+                  item.startTime | date : 'EEE, MMM d, y'
+                }}</small>
+                <div *ngIf="getIsOngoing(item.endTime)" class="tag">
+                  Ongoing
+                </div>
+              </div>
+              <p class="dark">
+                {{ item.title }}
+              </p>
+              <hr />
+              <div class="button-area">
+                <ion-button [routerLink]="['/app/event/list', item.eventId]"
+                  >View</ion-button
+                >
+                <ion-button
+                  [routerLink]="['/app/history/reviews', item.eventId]"
+                  >Rating</ion-button
+                >
+              </div>
             </div>
           </div>
-        </div>
+        </ng-container>
+        <ng-container *ngIf="isLoading">
+          <div
+            *ngFor="let item of [0, 1, 2, 3, 4, 5, 6, 7]"
+            class="joiner-list-content"
+          >
+            <div class="joiner-list-image">
+              <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+            </div>
+            <div class="upcoming-content">
+              <ion-skeleton-text
+                [animated]="true"
+                style="width: 40%; margin-bottom: 0.5rem"
+              ></ion-skeleton-text>
+              <ion-skeleton-text
+                [animated]="true"
+                style="width: 80%; margin-bottom: 0.5rem; height: 1rem"
+              ></ion-skeleton-text>
+              <ion-skeleton-text
+                [animated]="true"
+                style="width: 60%"
+              ></ion-skeleton-text>
+            </div>
+          </div>
+        </ng-container>
       </mat-tab>
     </mat-tab-group>
   </main>

@@ -28,6 +28,13 @@ mat-tab-group {
       height: 5rem;
       object-fit: cover;
     }
+
+    ion-skeleton-text{
+      padding-right: 0.5rem;
+      border-radius: 17px;
+      width: 5rem;
+      height: 5rem;
+    }
   }
 
   .upcoming-content {

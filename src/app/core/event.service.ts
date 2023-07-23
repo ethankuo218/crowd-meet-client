@@ -35,9 +35,14 @@ export class EventService {
   private currentPage: number = 1;
   private commentSubject: ReplaySubject<EventComment[]> = new ReplaySubject(1);
   private _noMoreContent: boolean = false;
+  private _isLoading: boolean = false;
 
   get noMoreContent(): boolean {
     return this._noMoreContent;
+  }
+
+  get isLoading(): boolean {
+    return this._isLoading;
   }
 
   createEvent(eventSetting: EventSetting): Observable<Event> {
@@ -88,13 +93,8 @@ export class EventService {
   }
 
   async reload(filter: any): Promise<void> {
+    this._isLoading = true;
     this.currentPage = 1;
-    console.log({
-      page: this.currentPage,
-      pageSize: 10,
-      startDate: new Date().toISOString(),
-      ...filter
-    });
     const result = await firstValueFrom(
       this.httpClientService.get<EventList>('event', {
         page: this.currentPage,
@@ -104,6 +104,7 @@ export class EventService {
       })
     );
 
+    this._isLoading = false;
     this.eventListStateFacade.storeEventList(result);
   }
 

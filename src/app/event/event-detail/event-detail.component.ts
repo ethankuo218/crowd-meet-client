@@ -4,7 +4,7 @@ import { EventService } from '../../core/event.service';
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 import { Browser } from '@capacitor/browser';
 
 @Component({
@@ -16,9 +16,15 @@ import { Browser } from '@capacitor/browser';
   ]
 })
 export class EventDetailComponent implements OnInit {
+  isLoading = true;
+
   eventDetail$: Observable<Event> = this.route.params.pipe(
     switchMap((params) => {
-      return this.eventService.getEventDetail(params['id']);
+      return this.eventService.getEventDetail(params['id']).pipe(
+        tap(() => {
+          this.isLoading = false;
+        })
+      );
     })
   );
 

@@ -1,5 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { EventListData } from 'src/app/core/+states/event-list-state/event-list.model';
@@ -20,17 +20,19 @@ import { FilterComponent } from 'src/app/filter/filter.component';
   ]
 })
 export class EventListComponent implements OnInit {
+  private eventService = inject(EventService);
+  private route = inject(ActivatedRoute);
+  private modalCtrl = inject(ModalController);
+
   listing$: Observable<EventListData[]> = this.eventService
     .getEventList()
     .pipe(map((result) => result?.data));
 
   filter: any = {};
 
-  constructor(
-    private eventService: EventService,
-    private route: ActivatedRoute,
-    private modalCtrl: ModalController
-  ) {}
+  get isLoading(): boolean {
+    return this.eventService.isLoading;
+  }
 
   ngOnInit(): void {
     this.eventService.reload({});

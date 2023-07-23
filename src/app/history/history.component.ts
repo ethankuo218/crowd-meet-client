@@ -40,6 +40,10 @@ export class HistoryComponent implements OnInit {
     })
   );
 
+  get isLoading(): boolean {
+    return this.userService.isLoading;
+  }
+
   ngOnInit() {
     this.userService.reloadUserEvents();
   }

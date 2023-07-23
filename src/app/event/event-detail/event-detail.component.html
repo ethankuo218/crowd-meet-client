@@ -39,7 +39,7 @@
                 </div>
                 <div class="place">
                   <small class="title"
-                    >{{ eventDetail.formattedAddress || 'Test Location' }}
+                    >{{ eventDetail.formattedAddress || 'Online event' }}
                   </small>
                 </div>
                 <fa-icon
@@ -177,6 +177,138 @@
           <ion-button slot="end" (click)="joinEvent(eventDetail.eventId)">
             Join
           </ion-button>
+        </ng-template>
+      </ion-toolbar>
+    </ion-footer>
+  </ng-container>
+</ng-container>
+
+<ng-container *ngIf="isLoading">
+  <ion-content class="event-detail-content">
+    <main class="event-detail-area main-area">
+      <div class="cover_photo">
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+      </div>
+      <div class="content_area">
+        <div class="container">
+          <div class="event_content">
+            <h3>
+              <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+            </h3>
+            <div class="main_content">
+              <div class="calendar_link">
+                <div class="calendar-icon">
+                  <fa-icon [icon]="['far', 'calendar']"></fa-icon>
+                </div>
+                <div class="time">
+                  <small class="title">
+                    <ion-skeleton-text
+                      [animated]="true"
+                      style="width: 60%"
+                    ></ion-skeleton-text>
+                  </small>
+                  <br />
+                  <small class="dark_d">
+                    <ion-skeleton-text
+                      [animated]="true"
+                      style="width: 40%"
+                    ></ion-skeleton-text>
+                  </small>
+                </div>
+                <div class="chevron-right">
+                  <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+                </div>
+              </div>
+              <hr />
+              <div class="location_link">
+                <div class="location-icon">
+                  <fa-icon [icon]="['fas', 'location-dot']"></fa-icon>
+                </div>
+                <div class="place">
+                  <small class="title">
+                    <ion-skeleton-text
+                      [animated]="true"
+                      style="width: 80%"
+                    ></ion-skeleton-text>
+                  </small>
+                </div>
+                <fa-icon
+                  class="chevron-right"
+                  [icon]="['fas', 'chevron-right']"
+                ></fa-icon>
+              </div>
+              <hr />
+              <div class="description">
+                <h3>Description</h3>
+                <p>
+                  <ion-skeleton-text
+                    [animated]="true"
+                    style="width: 80%"
+                  ></ion-skeleton-text>
+                  <ion-skeleton-text
+                    [animated]="true"
+                    style="width: 50%"
+                  ></ion-skeleton-text>
+                  <ion-skeleton-text
+                    [animated]="true"
+                    style="width: 40%"
+                  ></ion-skeleton-text>
+                  <ion-skeleton-text
+                    [animated]="true"
+                    style="width: 60%"
+                  ></ion-skeleton-text>
+                  <ion-skeleton-text
+                    [animated]="true"
+                    style="width: 70%"
+                  ></ion-skeleton-text>
+                  <ion-skeleton-text
+                    [animated]="true"
+                    style="width: 90%"
+                  ></ion-skeleton-text>
+                </p>
+              </div>
+              <hr />
+              <div class="host_joiner_info">
+                <div class="creator">
+                  <h3>Host</h3>
+                  <div class="host_info">
+                    <div class="profile_img">
+                      <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                    </div>
+                    <div class="name_content">
+                      <h3>
+                        <ion-skeleton-text
+                          [animated]="true"
+                          style="width: 5rem"
+                        ></ion-skeleton-text>
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+                <div class="participants">
+                  <h3>Participants</h3>
+                  <ng-container>
+                    <div class="joiner_list">
+                      <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            <hr />
+          </div>
+        </div>
+      </div>
+    </main>
+  </ion-content>
+
+  <ng-container *ngIf="user$ | async as user">
+    <ion-footer>
+      <ion-toolbar>
+        <h3>free</h3>
+        <ion-button slot="end" disabled> Edit </ion-button>
+        <ng-template #normalUser>
+          <ion-button slot="end"> Join </ion-button>
         </ng-template>
       </ion-toolbar>
     </ion-footer>

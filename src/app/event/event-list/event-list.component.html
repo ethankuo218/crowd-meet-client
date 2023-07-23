@@ -6,7 +6,7 @@
   <main class="article-area main-area">
     <div class="event-content">
       <h3 class="dark">Suggested</h3>
-      <swiper [slidesPerView]="2">
+      <swiper *ngIf="!isLoading" [slidesPerView]="2">
         <ng-template swiperSlide>
           <div class="item slide_item">
             <img src="assets/images/spoon.png" alt="image" />
@@ -34,11 +34,148 @@
         </ng-template>
       </swiper>
 
+      <div *ngIf="isLoading" class="loading-suggest-area">
+        <div class="item slide_item">
+          <ion-skeleton-text class="img" [animated]="true"> </ion-skeleton-text>
+          <p>
+            <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+            <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+          </p>
+        </div>
+        <div class="item slide_item">
+          <ion-skeleton-text class="img" [animated]="true"> </ion-skeleton-text>
+          <p>
+            <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+            <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+          </p>
+        </div>
+      </div>
+
       <h3 class="dark">Events</h3>
-      <div class="event-list">
+      <div class="event-list" *ngIf="!isLoading">
         <ng-container *ngFor="let item of listing$ | async">
           <app-listing-card [cardInfo]="item"></app-listing-card>
         </ng-container>
+      </div>
+
+      <div class="event-list" *ngIf="isLoading">
+        <ion-item>
+          <ion-label>
+            <p>
+              <ion-skeleton-text
+                [animated]="true"
+                style="width: 30%"
+              ></ion-skeleton-text>
+            </p>
+            <p>
+              <ion-skeleton-text
+                [animated]="true"
+                style="width: 80%"
+              ></ion-skeleton-text>
+            </p>
+            <p>
+              <ion-skeleton-text
+                [animated]="true"
+                style="width: 60%; margin-bottom: 0.7rem"
+              ></ion-skeleton-text>
+            </p>
+            <p class="tag-skelton">
+              <ion-skeleton-text
+                [animated]="true"
+                style="width: 70%; border-radius: 10px"
+              ></ion-skeleton-text>
+              <ion-skeleton-text
+                [animated]="true"
+                style="width: 70%; border-radius: 10px"
+              ></ion-skeleton-text>
+              <ion-skeleton-text
+                [animated]="true"
+                style="width: 70%; border-radius: 10px"
+              ></ion-skeleton-text>
+            </p>
+          </ion-label>
+          <ion-thumbnail slot="end">
+            <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+          </ion-thumbnail>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <p>
+              <ion-skeleton-text
+                [animated]="true"
+                style="width: 30%"
+              ></ion-skeleton-text>
+            </p>
+            <p>
+              <ion-skeleton-text
+                [animated]="true"
+                style="width: 80%"
+              ></ion-skeleton-text>
+            </p>
+            <p>
+              <ion-skeleton-text
+                [animated]="true"
+                style="width: 60%; margin-bottom: 0.7rem"
+              ></ion-skeleton-text>
+            </p>
+            <p class="tag-skelton">
+              <ion-skeleton-text
+                [animated]="true"
+                style="width: 70%; border-radius: 10px"
+              ></ion-skeleton-text>
+              <ion-skeleton-text
+                [animated]="true"
+                style="width: 70%; border-radius: 10px"
+              ></ion-skeleton-text>
+              <ion-skeleton-text
+                [animated]="true"
+                style="width: 70%; border-radius: 10px"
+              ></ion-skeleton-text>
+            </p>
+          </ion-label>
+          <ion-thumbnail slot="end">
+            <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+          </ion-thumbnail>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <p>
+              <ion-skeleton-text
+                [animated]="true"
+                style="width: 30%"
+              ></ion-skeleton-text>
+            </p>
+            <p>
+              <ion-skeleton-text
+                [animated]="true"
+                style="width: 80%"
+              ></ion-skeleton-text>
+            </p>
+            <p>
+              <ion-skeleton-text
+                [animated]="true"
+                style="width: 60%; margin-bottom: 0.7rem"
+              ></ion-skeleton-text>
+            </p>
+            <p class="tag-skelton">
+              <ion-skeleton-text
+                [animated]="true"
+                style="width: 70%; border-radius: 10px"
+              ></ion-skeleton-text>
+              <ion-skeleton-text
+                [animated]="true"
+                style="width: 70%; border-radius: 10px"
+              ></ion-skeleton-text>
+              <ion-skeleton-text
+                [animated]="true"
+                style="width: 70%; border-radius: 10px"
+              ></ion-skeleton-text>
+            </p>
+          </ion-label>
+          <ion-thumbnail slot="end">
+            <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+          </ion-thumbnail>
+        </ion-item>
       </div>
     </div>
     <div *ngIf="noMoreContent" class="no-more-content">No more content !</div>

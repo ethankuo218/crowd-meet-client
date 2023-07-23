@@ -18,6 +18,11 @@ export class UserService {
   private router = inject(Router);
   private storage = inject(Storage);
   private inAppPurchaseService = inject(InAppPurchaseService);
+  private _isLoading: boolean = false;
+
+  get isLoading(): boolean {
+    return this._isLoading;
+  }
 
   constructor() {
     this.storage.create();
@@ -114,10 +119,12 @@ export class UserService {
   }
 
   async reloadUserEvents(): Promise<void> {
+    this._isLoading = true;
     const userId = (await firstValueFrom(this.userStateFacade.getUser()))
       .userId;
     this.httpClientService.get<UserEvent[]>(`user/${userId}/events`).subscribe({
       next: (result) => {
+        this._isLoading = false;
         this.userStateFacade.storeUserEvents(result);
       }
     });
