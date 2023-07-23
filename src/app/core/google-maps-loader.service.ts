@@ -3,7 +3,7 @@ import { Loader } from '@googlemaps/js-api-loader';
 import { environment } from 'src/environments/environment';
 import { LanguageService } from '../language/language.service';
 import { Geolocation } from '@capacitor/geolocation';
-import { Subject, firstValueFrom, lastValueFrom } from 'rxjs';
+import { Subject, firstValueFrom } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class GoogleMapsLoaderService {
@@ -18,9 +18,6 @@ export class GoogleMapsLoaderService {
 
   constructor() {
     this.loader.importLibrary('places');
-    // Geolocation.requestPermissions({
-    //   permissions: ['location', 'coarseLocation']
-    // });
     Geolocation.getCurrentPosition().then((coordinates) => {
       this.userLocation = {
         lat: coordinates.coords.latitude,

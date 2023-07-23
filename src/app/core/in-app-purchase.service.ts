@@ -6,6 +6,7 @@ import {
 } from '@awesome-cordova-plugins/purchases/ngx';
 import { Platform } from '@ionic/angular';
 import { Auth, user } from '@angular/fire/auth';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +20,11 @@ export class InAppPurchaseService {
     this.purchases.setDebugLogsEnabled(true);
     if (this.platform.is('ios')) {
       this.purchases.configureWith({
-        apiKey: 'appl_pSXpxYdElyvkaGoluStFYFEeufZ'
+        apiKey: environment.iosInAppPurchaseApiKey
       });
     } else if (this.platform.is('android')) {
       this.purchases.configureWith({
-        apiKey: 'goog_zdLdwSKOtRgrUYVKcgrEgrNzzBj'
+        apiKey: environment.androidInAppPurchaseApiKey
       });
     }
 
