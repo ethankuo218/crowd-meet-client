@@ -6,6 +6,7 @@ import { HistoryHelperService } from './utils/history-helper.service';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
+import { Geolocation } from '@capacitor/geolocation';
 
 @Component({
   selector: 'app-root',
@@ -40,6 +41,9 @@ export class AppComponent implements OnInit {
 
   async initializeApp() {
     try {
+      Geolocation.requestPermissions({
+        permissions: ['location', 'coarseLocation']
+      });
       await this.admobService.initializeAdmob();
       this.userService.login();
       await SplashScreen.hide();
