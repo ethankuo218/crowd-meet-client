@@ -168,6 +168,7 @@
         <ion-button
           *ngIf="user.userId === eventDetail.creator.userId; else normalUser"
           slot="end"
+          [disabled]="isEventStarted(eventDetail.startTime)"
           (click)="editEvent(eventDetail)"
         >
           Edit

@@ -70,4 +70,8 @@ export class EventDetailComponent implements OnInit {
   getJsonString(input: any) {
     return JSON.stringify(input);
   }
+
+  isEventStarted(startTime: string) {
+    return new Date(startTime).getTime() < new Date().getTime();
+  }
 }
