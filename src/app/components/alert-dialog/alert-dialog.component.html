@@ -2,18 +2,29 @@
   <div class="modal-body">
     <div class="text-center mdl_div">
       <img src="assets/images/deliver_image.png" alt="image" />
-      <h2 class="primary">Rescheduling Success!</h2>
+      <h2 class="primary">{{ data.title }}</h2>
       <p class="dark">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore.
+        {{ data.content }}
       </p>
     </div>
   </div>
   <div class="modal-footer">
-    <button mat-button type="button" class="btn btn-primary">
-      View Appiontment
+    <button
+      mat-button
+      type="button"
+      class="btn btn-primary"
+      [mat-dialog-close]="'confirm'"
+      cdkFocusInitial
+    >
+      Confirm
     </button>
-    <button mat-button type="button" class="primary btn" [mat-dialog-close]="" cdkFocusInitial>
+    <button
+      *ngIf="data.enableCancelButton"
+      mat-button
+      type="button"
+      class="primary btn"
+      [mat-dialog-close]="'cancel'"
+    >
       Cancel
     </button>
   </div>

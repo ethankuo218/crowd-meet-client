@@ -1,6 +1,8 @@
 import { Storage } from '@ionic/storage-angular';
 import { UserStateFacade } from '../core/+states/user-state/user.state.facade';
 import { Component, inject } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { AlertDialogComponent } from '../components/alert-dialog/alert-dialog.component';
 
 @Component({
   selector: 'app-menu',
@@ -16,5 +18,19 @@ export class MenuComponent {
     this.isDarkMode = !this.isDarkMode;
     this.storage.set('isDarkMode', this.isDarkMode);
     document.body.classList.toggle('dark', this.isDarkMode);
+  }
+
+  private dialog = inject(MatDialog);
+  testDialog() {
+    const dialogRef = this.dialog.open(AlertDialogComponent, {
+      data: {
+        title: 'Test Title',
+        content: 'This use for test'
+      },
+      panelClass: 'custom-dialog'
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }

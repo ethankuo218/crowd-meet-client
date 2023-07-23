@@ -1,6 +1,6 @@
 import { EventService } from '../core/event.service';
 import { ReferenceStateFacade } from '../core/+states/reference-state/reference.state.facade';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   Validators,
   FormControl,
@@ -15,6 +15,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/core/+states/reference-state/reference.model';
 import { Event } from '../event/models/event.model';
 import { InputValidators } from '../validators/input-validators';
+import { MatDialog } from '@angular/material/dialog';
+import { AlertDialogComponent } from '../components/alert-dialog/alert-dialog.component';
 
 @Component({
   selector: 'app-create-page',
@@ -22,6 +24,12 @@ import { InputValidators } from '../validators/input-validators';
   styleUrls: ['./styles/event-create.component.scss']
 })
 export class EventCreateComponent implements OnInit {
+  private referenceStateFacade = inject(ReferenceStateFacade);
+  private eventService = inject(EventService);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  private dialog = inject(MatDialog);
+
   mode: string = 'create';
   minDate: string = '';
   eventCoverPictureUrl: string | undefined;
@@ -57,13 +65,6 @@ export class EventCreateComponent implements OnInit {
   get location(): AbstractControl {
     return this.eventForm.get('locationName')!;
   }
-
-  constructor(
-    private referenceStateFacade: ReferenceStateFacade,
-    private eventService: EventService,
-    private router: Router,
-    private route: ActivatedRoute
-  ) {}
 
   ngOnInit(): void {
     this.referenceStateFacade
@@ -112,6 +113,22 @@ export class EventCreateComponent implements OnInit {
   }
 
   onSubmit() {
+    const dialogRef = this.dialog.open(AlertDialogComponent, {
+      data: {
+        title: this.mode === 'edit' ? 'Edit Event' : 'Create Event',
+        content: `Confirm to ${this.mode === 'edit' ? 'edit' : 'create'} event`,
+        enableCancelButton: true
+      },
+      panelClass: 'custom-dialog'
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'confirm') {
+        this.createEvent();
+      }
+    });
+  }
+
+  private createEvent() {
     const selection: number[] = [];
     this.categories.value.forEach((value: boolean, index: number) => {
       if (value) {

@@ -8,6 +8,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatTabsModule } from '@angular/material/tabs';
 import { JoinerListComponent } from './joiner-list/joiner-list.component';
 import { EventService } from '../core/event.service';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const routes: Routes = [
   {
@@ -33,7 +34,8 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     HeaderComponent,
-    MatTabsModule
+    MatTabsModule,
+    MatDialogModule
   ],
   providers: [EventService]
 })

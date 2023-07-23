@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { FilterComponent } from '../filter/filter.component';
 import { ProfileComponent } from '../profile/profile.component';
 import { ParticipantsComponent } from './participants/participants.component';
+import { MatDialogModule } from '@angular/material/dialog';
 const routes: Routes = [
   {
     path: '',
@@ -60,7 +61,8 @@ const routes: Routes = [
     SwiperModule,
     FormsModule,
     FilterComponent,
-    ProfileComponent
+    ProfileComponent,
+    MatDialogModule
   ],
   providers: [EventService]
 })

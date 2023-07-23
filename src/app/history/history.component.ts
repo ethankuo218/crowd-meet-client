@@ -6,6 +6,8 @@ import { UserEvent } from '../core/+states/user-state/user.model';
 import { firstValueFrom, map } from 'rxjs';
 import { Router } from '@angular/router';
 import { EventService } from '../core/event.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AlertDialogComponent } from '../components/alert-dialog/alert-dialog.component';
 
 @Component({
   selector: 'app-history',
@@ -18,6 +20,7 @@ export class HistoryComponent implements OnInit {
   private userStateFacade = inject(UserStateFacade);
   private router = inject(Router);
   private eventService = inject(EventService);
+  private dialog = inject(MatDialog);
 
   upcoming$ = this.userService.getEvents().pipe(
     map((result: UserEvent[]): UserEvent[] => {
@@ -55,8 +58,20 @@ export class HistoryComponent implements OnInit {
           role: 'leave',
           cssClass: 'leave_button',
           handler: () => {
-            this.eventService.leave(eventId).subscribe(() => {
-              this.userService.reloadUserEvents();
+            const dialogRef = this.dialog.open(AlertDialogComponent, {
+              data: {
+                title: 'Do you want to leave this event ?',
+                content: '',
+                enableCancelButton: true
+              },
+              panelClass: 'custom-dialog'
+            });
+            dialogRef.afterClosed().subscribe((result) => {
+              if (result === 'confirm') {
+                this.eventService.leave(eventId).subscribe(() => {
+                  this.userService.reloadUserEvents();
+                });
+              }
             });
           }
         },

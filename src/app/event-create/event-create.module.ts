@@ -10,6 +10,7 @@ import { HeaderComponent } from 'src/app/header/header.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CounterInputComponent } from 'src/app/components/counter-input/counter-input.component';
 import { LocationInputComponent } from 'src/app/components/location-input/location-input.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const routes: Routes = [
   {
@@ -28,7 +29,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     HeaderComponent,
     CounterInputComponent,
-    LocationInputComponent
+    LocationInputComponent,
+    MatDialogModule
   ],
   declarations: [EventCreateComponent]
 })

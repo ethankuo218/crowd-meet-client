@@ -8,6 +8,7 @@ import { HeaderComponent } from '../header/header.component';
 import { UserStateFacade } from '../core/+states/user-state/user.state.facade';
 import { UserService } from '../core/user.service';
 import { ImgUploadService } from '../core/img-upload.service';
+import { MatDialogModule } from '@angular/material/dialog';
 const routes: Routes = [
   {
     path: '',
@@ -29,7 +30,8 @@ const routes: Routes = [
     FontAwesomeModule,
     CommonModule,
     RouterModule.forChild(routes),
-    HeaderComponent
+    HeaderComponent,
+    MatDialogModule
   ],
   providers: [UserStateFacade, UserService, ImgUploadService]
 })
