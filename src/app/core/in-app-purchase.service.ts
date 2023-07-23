@@ -5,6 +5,7 @@ import {
   PurchasesStoreProduct
 } from '@awesome-cordova-plugins/purchases/ngx';
 import { Platform } from '@ionic/angular';
+import { Auth, user } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,9 @@ import { Platform } from '@ionic/angular';
 export class InAppPurchaseService {
   private purchases = inject(Purchases);
   private platform = inject(Platform);
+  private auth = inject(Auth);
 
-  initialInAppPurchase(userId: number): void {
+  async initialInAppPurchase(userId: number): Promise<void> {
     this.purchases.setDebugLogsEnabled(true);
     if (this.platform.is('ios')) {
       this.purchases.configureWith({
@@ -24,7 +26,11 @@ export class InAppPurchaseService {
         apiKey: 'goog_zdLdwSKOtRgrUYVKcgrEgrNzzBj'
       });
     }
-    this.purchases.logIn(userId.toString());
+
+    const firebaseUid = (await firstValueFrom(user(this.auth)))?.uid;
+
+    this.purchases.logIn(firebaseUid!);
+    this.purchases.setAttributes({ serverUid: userId.toString() });
   }
 
   getProducts(): Promise<PurchasesStoreProduct[]> {
