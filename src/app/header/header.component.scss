@@ -5,6 +5,10 @@ ion-toolbar {
     width: 12rem;
   }
 
+  .back-button {
+    margin-left: 0.5rem;
+  }
+
   ion-buttons.upgrade_btn {
     color: var(--ion-color-primary);
     svg {
