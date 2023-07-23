@@ -84,12 +84,6 @@ export class UserService {
 
   deletePhoto(id: number) {
     return this.httpClientService.delete<Image[]>('user/image', id);
-
-    // .pipe(
-    //   tap((result: Image[]) => {
-    //     this.userStateFacade.storeUser({ images: result });
-    //   })
-    // );
   }
 
   patchUserImageOrder(order: number[]): Observable<Image[]> {

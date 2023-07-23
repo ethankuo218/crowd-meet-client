@@ -83,9 +83,7 @@ export class EditProfileComponent implements OnInit {
         this.userForm.get('interests')?.patchValue(patchInterestArr);
 
         result.images.forEach((item) => {
-          if (item) {
-            this.images[item.order] = item;
-          }
+          this.images[item.order] = item;
         });
 
         this.imageOrder = this.getCurrentOrder();
@@ -98,9 +96,12 @@ export class EditProfileComponent implements OnInit {
 
   ionViewWillLeave(): void {
     const currentImageOrder: number[] = this.getCurrentOrder();
-
-    if (this.imageOrder !== currentImageOrder) {
+    if (this.imageOrder !== currentImageOrder && currentImageOrder.length > 0) {
       this.userService.patchUserImageOrder(currentImageOrder).subscribe();
+    }
+
+    if (currentImageOrder.length === 0) {
+      this.userStateFacade.storeUser({ images: [] });
     }
 
     if (this.userForm.valid) {
@@ -139,6 +140,7 @@ export class EditProfileComponent implements OnInit {
 
   deletePhoto(image: Image) {
     alert('DELETE ?');
+    console.log('Delete image');
     this.userService.deletePhoto(image.id).subscribe(() => {
       this.removePhoto(image.id);
     });
@@ -156,10 +158,7 @@ export class EditProfileComponent implements OnInit {
     const newImagesOrder = elementBeforeIndex.concat(elementAfterIndex);
 
     newImagesOrder.push(undefined);
-
     this.images = newImagesOrder;
-
-    this.userStateFacade.storeUser({ images: this.images });
   }
 
   private getCurrentOrder() {
@@ -194,7 +193,9 @@ export class EditProfileComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<{ item: Image | undefined; index: number }>) {
-    this.images[event.previousContainer.data.index] = event.container.data.item;
-    this.images[event.container.data.index] = event.previousContainer.data.item;
+    this.images[event.previousContainer.data.index] = event.container.data
+      .item && { ...event.container.data.item };
+    this.images[event.container.data.index] = event.previousContainer.data
+      .item && { ...event.previousContainer.data.item };
   }
 }

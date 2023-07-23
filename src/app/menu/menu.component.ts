@@ -1,6 +1,6 @@
 import { Storage } from '@ionic/storage-angular';
 import { UserStateFacade } from '../core/+states/user-state/user.state.facade';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 @Component({
   selector: 'app-menu',
