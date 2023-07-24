@@ -57,18 +57,6 @@ export class HttpClientService {
     return from(this.getIdToken()).pipe(
       switchMap((headers: HttpHeaders): Observable<T> => {
         let queryString = '';
-
-        // if (typeof parameter !== 'string' && parameter) {
-        //   let index = 0;
-        //   for (const key in parameter) {
-        //     index++;
-        //     queryString +=
-        //       index <= 1
-        //         ? `?${key}=${parameter[key]}`
-        //         : `&${key}=${parameter[key]}`;
-        //   }
-        // }
-
         return typeof parameter === 'string'
           ? this.httpClient.get<T>(
               `${this.urlPrefix}${apiName}${parameter ? '/' + parameter : ''}`,

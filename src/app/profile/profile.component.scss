@@ -1,18 +1,41 @@
 .dr-watson_box {
   padding: 12px;
-  box-shadow: 1px 1px 12px #efefef;
+  box-shadow: 1px 1px 12px var(--ion-box-shadow);
+  background-color: var(--ion-card-background-color);
   border-radius: 10px;
   margin: 30px 0 20px;
 }
 
-.dr-watson_box h3{
-    font-weight: 600;
-    margin-top: 1rem;
-    margin-left: 1rem;
+.dr-watson_box h3 {
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-left: 1rem;
 }
 
-.dr-watson_box p{
+.dr-watson_box p {
   margin-left: 1rem;
+}
+
+.loading-row {
+  height: fit-content;
+  display: grid;
+  grid-template-columns: 30% 70%;
+  padding: 1rem;
+  border-radius: 15px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  background-color: var(--ion-card-background-color);
+  box-shadow: 1px 1px 40px var(--ion-box-shadow);
+
+  .collum-1 {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 15px;
+  }
+
+  .collum-2 {
+    margin-top: 0.5rem;
+  }
 }
 
 .collum-1 {
@@ -21,7 +44,7 @@
 
 swiper ::ng-deep .swiper-slide img {
   width: 100%;
-  height:20rem;
+  height: 20rem;
   border-radius: 15px;
 }
 
@@ -52,15 +75,6 @@ swiper ::ng-deep .swiper-slide img {
   line-height: 27px;
 }
 
-.collum {
-  width: 33%;
-}
-
-.collum img {
-  /*! width: 100%; */
-  margin: 0 auto;
-}
-
 .collum h3 {
   font-size: 18px;
   font-weight: 700;
@@ -79,10 +93,22 @@ swiper ::ng-deep .swiper-slide img {
   margin: 0 0 5px;
 }
 
-.about_content p,
-.reviews_content p {
-  font-size: 13px;
+.about_content p {
+  color: var(--ion-text-color);
+  font-size: 15px;
+  padding: 0 1rem;
   margin: 0 0 12px;
+}
+
+.reviews_content p {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.4;
+  height: 3.5rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 
 .about_content p.bio {
@@ -109,24 +135,31 @@ swiper ::ng-deep .swiper-slide img {
   margin: 17px 0 13px;
 }
 
+.img_text {
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+  vertical-align: middle;
+  margin: 1rem 0;
+}
+
 .img_text h4 {
   font-weight: 700;
   font-size: 14px;
-  display: inline-block;
-  margin: 0 0 0 2px;
+  display: flex;
+  align-items: center;
 }
 
 .aside {
   text-align: end;
+  display: flex;
+  align-items: center;
 }
 
 .star {
   display: inline-block;
-  border: 3px solid var(--ion-color-primary);
+  border: 2px solid var(--ion-color-primary);
   border-radius: 19px;
-  padding: 7px 16px 9px;
-  line-height: 1;
-  margin: 0 5px 0 0;
+  padding: 0.2rem 1rem;
 }
 
 .star fa-icon {
@@ -139,14 +172,8 @@ swiper ::ng-deep .swiper-slide img {
   margin: 0 0 0 5px;
 }
 
-.react_div button {
-  font-size: 13px;
-  font-weight: 700;
-}
-
 .react_div span {
   font-size: 13px;
-  margin: 0 0 0 15px;
 }
 
 .bool_apt {
@@ -189,4 +216,35 @@ swiper ::ng-deep .swiper-slide img {
   font-size: 12px;
   font-weight: 550;
   color: #b1b0b1;
+}
+
+.info-row {
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  grid-gap: 5%;
+}
+
+.info-icon {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background-color: var(--ion-card-footer-background-color);
+  box-shadow: 1px 1px 12px var(--ion-box-shadow);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+
+  fa-icon {
+    color: #fff;
+    font-size: 30px;
+  }
+}
+
+.profile-pic img {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  object-fit: cover;
 }
