@@ -28,7 +28,6 @@ export class HeaderComponent implements OnInit {
   private router = inject(Router);
   private modalCtrl = inject(ModalController);
   private eventService = inject(EventService);
-  private filter: any;
 
   tabPageUrls: string[] = [
     '/app/event/list',
@@ -37,6 +36,14 @@ export class HeaderComponent implements OnInit {
     '/app/history',
     '/app/notifications'
   ];
+
+  get filter() {
+    return this.eventService.filter;
+  }
+
+  set filter(val: any) {
+    this.eventService.filter = val;
+  }
 
   ngOnInit() {}
 
@@ -52,7 +59,7 @@ export class HeaderComponent implements OnInit {
     const { data, role } = await modal.onWillDismiss();
     if (role === 'filter') {
       this.filter = data;
-      this.eventService.reload(this.filter);
+      this.eventService.reload();
     }
   }
 

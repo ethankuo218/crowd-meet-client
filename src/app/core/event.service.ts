@@ -37,6 +37,7 @@ export class EventService {
   private commentSubject: ReplaySubject<EventComment[]> = new ReplaySubject(1);
   private _noMoreContent: boolean = false;
   private _isLoading: boolean = false;
+  private _filter: any;
 
   get noMoreContent(): boolean {
     return this._noMoreContent;
@@ -44,6 +45,14 @@ export class EventService {
 
   get isLoading(): boolean {
     return this._isLoading;
+  }
+
+  get filter() {
+    return this._filter;
+  }
+
+  set filter(val: any) {
+    this._filter = val;
   }
 
   createEvent(eventSetting: EventSetting): Observable<Image> {
@@ -94,7 +103,7 @@ export class EventService {
     return this.eventListStateFacade.getEventList();
   }
 
-  async reload(filter: any): Promise<void> {
+  async reload(): Promise<void> {
     this._isLoading = true;
     this.currentPage = 1;
     const result = await firstValueFrom(
@@ -102,7 +111,7 @@ export class EventService {
         page: this.currentPage,
         pageSize: 10,
         startDate: new Date().toISOString(),
-        ...filter
+        ...this._filter
       })
     );
 
@@ -110,19 +119,19 @@ export class EventService {
     this.eventListStateFacade.storeEventList(result);
   }
 
-  async loadNextPage(filter: any): Promise<void> {
+  async loadNextPage(): Promise<void> {
     console.log({
       page: this.currentPage,
       pageSize: 10,
       startDate: new Date().toISOString(),
-      ...filter
+      ...this._filter
     });
     const result = await firstValueFrom(
       this.httpClientService.get<EventList>('event', {
         page: ++this.currentPage,
         pageSize: 10,
         startDate: new Date().toISOString(),
-        ...filter
+        ...this._filter
       })
     );
 

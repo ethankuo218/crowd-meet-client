@@ -152,7 +152,8 @@ export class EventCreateComponent implements OnInit {
         })
         .subscribe({
           next: () => {
-            this.router.navigate(['/app/history', { refresh: true }]);
+            this.eventService.reload();
+            this.router.navigate(['/app/history']);
           }
         });
     } else {
@@ -166,7 +167,8 @@ export class EventCreateComponent implements OnInit {
         })
         .subscribe({
           next: () => {
-            this.router.navigate(['/app/history', { refresh: true }]);
+            this.eventService.reload();
+            this.router.navigate(['/app/history']);
           }
         });
     }
@@ -184,7 +186,6 @@ export class EventCreateComponent implements OnInit {
 
   onIsOnlineChange(value: boolean) {
     if (value) {
-      this.location.setValue('');
       this.location.clearValidators();
       this.location.disable();
       this.location.updateValueAndValidity();
