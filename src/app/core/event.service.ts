@@ -177,7 +177,6 @@ export class EventService {
   apply(id: number): Observable<EventActionResponse> {
     return from(this.admobService.showReward()).pipe(
       switchMap((result): Observable<EventActionResponse> => {
-        console.log(result);
         return this.httpClientService.post<EventActionResponse>(
           `event/${id}/participant`,
           {}
@@ -189,7 +188,6 @@ export class EventService {
   leave(id: number): Observable<EventActionResponse> {
     return from(this.admobService.showReward()).pipe(
       switchMap((result): Observable<EventActionResponse> => {
-        console.log(result);
         return this.httpClientService.patch<EventActionResponse>(
           `event/${id}/participant/me`,
           {}

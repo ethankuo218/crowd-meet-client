@@ -140,7 +140,6 @@ export class EditProfileComponent implements OnInit {
 
   deletePhoto(image: Image) {
     alert('DELETE ?');
-    console.log('Delete image');
     this.userService.deletePhoto(image.id).subscribe(() => {
       this.removePhoto(image.id);
     });

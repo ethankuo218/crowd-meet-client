@@ -19,9 +19,7 @@ export class TabsPage {
     this.menu.enable(true);
   }
 
-  ionTabsDidChange(event: any) {
-    // console.log('ionTabsDidChange', event);
-  }
+  ionTabsDidChange(event: any) {}
 
   get currentUrl() {
     return this.router.url;

@@ -2,7 +2,6 @@ import { GoogleMapsLoaderService } from 'src/app/core/google-maps-loader.service
 import { CommonModule } from '@angular/common';
 import {
   Component,
-  ElementRef,
   ViewChild,
   forwardRef,
   AfterViewInit,
@@ -13,7 +12,11 @@ import {
 } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IonInput, IonicModule } from '@ionic/angular';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import {
+  NG_VALUE_ACCESSOR,
+  ControlValueAccessor,
+  FormsModule
+} from '@angular/forms';
 import { fromEvent, map, debounceTime, Subscription } from 'rxjs';
 
 @Component({
@@ -29,7 +32,7 @@ import { fromEvent, map, debounceTime, Subscription } from 'rxjs';
     GoogleMapsLoaderService
   ],
   standalone: true,
-  imports: [CommonModule, IonicModule, FontAwesomeModule]
+  imports: [CommonModule, IonicModule, FontAwesomeModule, FormsModule]
 })
 export class LocationInputComponent
   implements ControlValueAccessor, AfterViewInit, OnDestroy
@@ -105,7 +108,6 @@ export class LocationInputComponent
     this.isDisabled = isDisabled;
     if (isDisabled) {
       this._value = '';
-      this.input.value = '';
     }
   }
 
@@ -117,7 +119,6 @@ export class LocationInputComponent
       item.place_id
     );
     this.locaitionChangeEvent.emit(selectLocation);
-    this.input.value = item.structured_formatting.main_text;
-    this.value = item.structured_formatting.main_text;
+    this._value = item.structured_formatting.main_text;
   }
 }

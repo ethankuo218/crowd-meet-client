@@ -82,9 +82,7 @@ export class HistoryComponent implements OnInit {
         {
           text: 'Cancel',
           role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
+          handler: () => {}
         }
       ]
     };

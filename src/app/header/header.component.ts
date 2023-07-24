@@ -50,7 +50,6 @@ export class HeaderComponent implements OnInit {
     modal.present();
 
     const { data, role } = await modal.onWillDismiss();
-    console.log(data);
     if (role === 'filter') {
       this.filter = data;
       this.eventService.reload(this.filter);

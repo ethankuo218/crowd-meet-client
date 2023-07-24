@@ -72,9 +72,8 @@ export class SignInPage implements OnInit {
         // Register with Apple / Google to receive push via APNS/FCM
         try {
           await PushNotifications.register();
-          console.log('registered');
         } catch (err) {
-          console.log(err);
+          console.error(err);
         }
       } else {
         // Show some error

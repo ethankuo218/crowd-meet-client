@@ -33,7 +33,6 @@ export class ImgUploadService {
 
     if (image) {
       const base64Data = await this.readAsBase64ByPath(cropPath);
-      console.log(base64Data);
       const fileName = new Date().getTime() + '.jpeg';
 
       await Filesystem.writeFile({

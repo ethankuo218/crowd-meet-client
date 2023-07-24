@@ -3,7 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class HistoryHelperService {
   public previousUrl: string | undefined;
@@ -16,9 +16,7 @@ export class HistoryHelperService {
         )
       )
       .subscribe(({ urlAfterRedirects }: NavigationEnd) => {
-        // console.log('previous URL', this.previousUrl);
         this.previousUrl = urlAfterRedirects;
-        // console.log('NEW previous URL', this.previousUrl);
       });
   }
 }

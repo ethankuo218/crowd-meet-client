@@ -24,8 +24,6 @@ export class AdmobService {
       testingDevices: ['testDeviceID'],
       initializeForTesting: true
     });
-
-    console.log('Admob initialized');
   }
 
   showBanner() {
@@ -39,7 +37,7 @@ export class AdmobService {
         console.log('Banner Ad Shown');
       })
       .catch((err: any) => {
-        console.log(err.message);
+        console.error(err.message);
       });
   }
 
@@ -56,7 +54,7 @@ export class AdmobService {
         console.log('Interstitial Ad Shown');
       })
       .catch((err: any) => {
-        console.log(err.message);
+        console.error(err.message);
       });
   }
 
