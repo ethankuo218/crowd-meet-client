@@ -14,6 +14,7 @@ import {
   ReplaySubject,
   firstValueFrom,
   from,
+  of,
   switchMap,
   tap
 } from 'rxjs';
@@ -45,13 +46,14 @@ export class EventService {
     return this._isLoading;
   }
 
-  createEvent(eventSetting: EventSetting): Observable<Event> {
+  createEvent(eventSetting: EventSetting): Observable<Image> {
     return this.httpClientService.post<Event>('event', eventSetting).pipe(
-      tap((result: Event) => {
+      switchMap((result: Event) => {
         this.admobService.showInterstitial();
-        if (this.imgUploadService.uploadedImagesCount !== 0) {
-          this.updateEventImage(result.eventId, 'post').subscribe();
-        }
+
+        return this.imgUploadService.uploadedImagesCount !== 0
+          ? this.updateEventImage(result.eventId, 'post')
+          : of();
       })
     );
   }
