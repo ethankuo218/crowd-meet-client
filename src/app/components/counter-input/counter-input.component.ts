@@ -10,7 +10,8 @@ import {
   ControlValueAccessor,
   NG_VALUE_ACCESSOR,
   NG_VALIDATORS,
-  AbstractControl
+  AbstractControl,
+  FormsModule
 } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
@@ -45,11 +46,11 @@ export function counterRangeValidator(minValue: number, maxValue: number) {
     }
   ],
   standalone: true,
-  imports: [IonicModule],
+  imports: [IonicModule, FormsModule],
   encapsulation: ViewEncapsulation.None
 })
 export class CounterInputComponent implements ControlValueAccessor, OnChanges {
-  @Input('counterValue') _counterValue = 0;
+  private _counterValue = 0;
   @Input('max') counterRangeMax: number = 0;
   @Input('min') counterRangeMin: number = 0;
 

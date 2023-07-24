@@ -5,7 +5,8 @@
     </ion-button>
   </div>
 </div>
-<span class="counter-value">{{ _counterValue }}</span>
+<!-- <span class="counter-value">{{ _counterValue }}</span> -->
+<input type="number" class="counter-value" [(ngModel)]="counterValue">
 <div class="button-outer">
   <div class="button-wrapper">
     <ion-button class="counter-icon" (click)="increase()">
