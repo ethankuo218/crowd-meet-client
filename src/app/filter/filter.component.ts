@@ -75,6 +75,9 @@ export class FilterComponent implements OnInit {
 
   reset(): void {
     this.filterForm.reset();
+    this.filterForm
+      .get('startDate')
+      ?.patchValue(Formatter.getFormatTimeString());
   }
 
   applyFilter(): void {
