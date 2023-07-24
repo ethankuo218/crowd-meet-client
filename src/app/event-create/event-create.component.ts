@@ -17,6 +17,7 @@ import { Event } from '../event/models/event.model';
 import { InputValidators } from '../validators/input-validators';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertDialogComponent } from '../components/alert-dialog/alert-dialog.component';
+import * as Formatter from '../core/formatter';
 
 @Component({
   selector: 'app-create-page',
@@ -87,9 +88,9 @@ export class EventCreateComponent implements OnInit {
       delete this.eventCoverPictureUrl;
       delete this.selectLocation;
 
-      const today = new Date(new Date().getTime() + 10 * 60 * 1000)
-        .toISOString()
-        .split('.')[0];
+      const today = new Date(
+        new Date().getTime() + 10 * 60 * 1000
+      ).toISOString();
       this.minDate = today;
 
       if (this.mode === 'edit') {
@@ -97,16 +98,20 @@ export class EventCreateComponent implements OnInit {
         this.eventForm.patchValue(eventInfo);
         this.eventForm
           .get('startTime')
-          ?.patchValue(eventInfo.startTime.split('.')[0]);
+          ?.patchValue(Formatter.getFormatTimeString(eventInfo.startTime));
         this.eventForm
           .get('endTime')
-          ?.patchValue(eventInfo.endTime.split('.')[0]);
+          ?.patchValue(Formatter.getFormatTimeString(eventInfo.endTime));
         this.eventCoverPictureUrl = eventInfo.imageUrl;
         this.onIsOnlineChange(eventInfo.isOnline);
       } else {
         this.eventForm.get('maxParticipants')?.setValue(1);
-        this.eventForm.get('startTime')?.patchValue(today.split('.')[0]);
-        this.eventForm.get('endTime')?.patchValue(today.split('.')[0]);
+        this.eventForm
+          .get('startTime')
+          ?.patchValue(Formatter.getFormatTimeString(today));
+        this.eventForm
+          .get('endTime')
+          ?.patchValue(Formatter.getFormatTimeString(today));
         this.eventForm.get('price')?.patchValue(0);
       }
     });
