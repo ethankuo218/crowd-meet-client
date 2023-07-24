@@ -4,7 +4,7 @@
     type="text"
     [disabled]="isDisabled"
     [(ngModel)]="value"
-    (focusout)="showDropddown = false"
+    (ionBlur)="showDropddown = false"
   ></ion-input>
   <div *ngIf="showDropddown" class="dropdown-content">
     <a *ngFor="let item of predictions" (click)="onMenuClick(item)">{{

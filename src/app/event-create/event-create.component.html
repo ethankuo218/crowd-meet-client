@@ -181,6 +181,7 @@
             id="price"
             type="number"
             formControlName="price"
+            (ionFocus)="eventForm.get('price')?.setValue(null)"
           ></ion-input>
         </div>
 
