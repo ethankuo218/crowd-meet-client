@@ -1,15 +1,15 @@
 import { Component, Input, HostBinding } from '@angular/core';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../environments/environment.dev';
 
 import {
   ImageShellState,
-  TransferStateHelper,
+  TransferStateHelper
 } from '../../utils/transfer-state-helper';
 
 @Component({
   selector: 'app-image-shell',
   templateUrl: './image-shell.component.html',
-  styleUrls: ['./image-shell.component.scss'],
+  styleUrls: ['./image-shell.component.scss']
 })
 export class ImageShellComponent {
   // To debug shell styles, change configuration in the environment file

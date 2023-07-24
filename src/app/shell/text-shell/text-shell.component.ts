@@ -1,10 +1,10 @@
 import { Component, Input, HostBinding } from '@angular/core';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../environments/environment.dev';
 
 @Component({
   selector: 'app-text-shell',
   templateUrl: './text-shell.component.html',
-  styleUrls: ['./text-shell.component.scss'],
+  styleUrls: ['./text-shell.component.scss']
 })
 export class TextShellComponent {
   // To debug shell styles, change configuration in the environment file

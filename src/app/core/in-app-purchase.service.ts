@@ -6,7 +6,7 @@ import {
 } from '@awesome-cordova-plugins/purchases/ngx';
 import { Platform } from '@ionic/angular';
 import { Auth, user } from '@angular/fire/auth';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.dev';
 
 @Injectable({
   providedIn: 'root'

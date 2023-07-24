@@ -8,7 +8,6 @@ import { EditProfileComponent } from './edit-profile.component';
 import { LanguageService } from '../../language/language.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { ImgUploadService } from '../../core/img-upload.service';
-import { ShellModule } from '../../shell/shell.module';
 import { HeaderComponent } from '../../header/header.component';
 import { SwiperModule } from 'swiper/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -32,7 +31,6 @@ const routes: Routes = [
     ReactiveFormsModule,
     TranslateModule,
     RouterModule.forChild(routes),
-    ShellModule,
     HeaderComponent,
     SwiperModule,
     CheckboxWrapperComponent,
