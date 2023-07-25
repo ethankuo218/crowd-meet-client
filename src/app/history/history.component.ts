@@ -14,7 +14,7 @@ import { AlertDialogComponent } from '../components/alert-dialog/alert-dialog.co
   templateUrl: './history.component.html',
   styleUrls: ['./history.component.scss']
 })
-export class HistoryComponent implements OnInit {
+export class HistoryComponent {
   private actionSheetController = inject(ActionSheetController);
   private userService = inject(UserService);
   private userStateFacade = inject(UserStateFacade);
@@ -44,7 +44,7 @@ export class HistoryComponent implements OnInit {
     return this.userService.isLoading;
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.userService.reloadUserEvents();
   }
 
