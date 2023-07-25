@@ -203,6 +203,7 @@ textarea:focus {
 }
 
 .custom-dialog .mat-mdc-dialog-surface.mdc-dialog__surface {
+  background-color: var(--ion-dialog-background-color);
   padding: 40px 30px;
   border-radius: 40px;
 }

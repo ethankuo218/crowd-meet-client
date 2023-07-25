@@ -20,7 +20,6 @@ export class AppComponent implements OnInit {
   private platform = inject(Platform);
   private storage = inject(Storage);
   private admobService = inject(AdmobService);
-  textDir = 'ltr';
 
   // Inject HistoryHelperService in the app.components.ts so its available app-wide
   constructor() {

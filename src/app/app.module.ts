@@ -53,6 +53,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { Crop } from '@ionic-native/crop/ngx';
+import { MatDialogModule } from '@angular/material/dialog';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -68,6 +69,7 @@ export function createTranslateLoader(http: HttpClient) {
     HttpClientModule,
     FontAwesomeModule,
     ShellModule,
+    MatDialogModule,
     StoreModule.forRoot({
       [userFeatureKey]: userReducer,
       [userEventsFeatureKey]: userEventsReducer,
