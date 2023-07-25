@@ -174,7 +174,7 @@
           Edit
         </ion-button>
         <ng-template #normalUser>
-          <ion-button slot="end" (click)="joinEvent(eventDetail.eventId)">
+          <ion-button #joinBtn slot="end" (click)="joinEvent(eventDetail.eventId)">
             Join
           </ion-button>
         </ng-template>

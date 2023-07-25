@@ -1,11 +1,13 @@
+import { LoadingService } from 'src/app/core/loading.service';
 import { Event, Participant } from './../models/event.model';
 import { UserStateFacade } from '../../core/+states/user-state/user.state.facade';
 import { EventService } from '../../core/event.service';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 import { Browser } from '@capacitor/browser';
+import { IonButton } from '@ionic/angular';
 
 @Component({
   selector: 'app-details',
@@ -16,6 +18,13 @@ import { Browser } from '@capacitor/browser';
   ]
 })
 export class EventDetailComponent implements OnInit {
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private eventService = inject(EventService);
+  private loadingService = inject(LoadingService);
+
+  @ViewChild('joinBtn') joinBtn!: IonButton;
+
   isLoading = true;
 
   eventDetail$: Observable<Event> = this.route.params.pipe(
@@ -40,12 +49,6 @@ export class EventDetailComponent implements OnInit {
 
   comment: string | undefined;
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private eventService: EventService
-  ) {}
-
   ngOnInit(): void {}
 
   ionViewWillLeave(): void {}
@@ -69,8 +72,12 @@ export class EventDetailComponent implements OnInit {
     ]);
   }
 
-  joinEvent(id: number): void {
-    this.eventService.apply(id).subscribe();
+  async joinEvent(id: number): Promise<void> {
+    this.joinBtn.disabled = true;
+    await this.loadingService.present();
+    this.eventService.apply(id).subscribe(() => {
+      this.loadingService.dismiss();
+    });
   }
 
   getJsonString(input: any) {
