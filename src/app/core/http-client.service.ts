@@ -52,8 +52,6 @@ export class HttpClientService {
           })
           .pipe(
             catchError((err) => {
-              console.log(err.error);
-              console.log(err.error.message);
               this.showErrorDialog(err.error.message);
               return of(err);
             })
@@ -66,20 +64,22 @@ export class HttpClientService {
     return from(this.getIdToken()).pipe(
       switchMap((headers: HttpHeaders): Observable<T> => {
         let queryString = '';
-        return typeof parameter === 'string'
-          ? this.httpClient.get<T>(
-              `${this.urlPrefix}${apiName}${parameter ? '/' + parameter : ''}`,
-              {
-                headers: headers
-              }
-            )
-          : this.httpClient.get<T>(
-              `${this.urlPrefix}${apiName}${queryString}`,
-              {
-                params: parameter,
-                headers: headers
-              }
-            );
+        const requestUrl =
+          typeof parameter === 'string'
+            ? `${this.urlPrefix}${apiName}${parameter ? '/' + parameter : ''}`
+            : `${this.urlPrefix}${apiName}${queryString}`;
+
+        return this.httpClient
+          .get<T>(requestUrl, {
+            headers: headers,
+            params: typeof parameter === 'string' ? undefined : parameter
+          })
+          .pipe(
+            catchError((err) => {
+              this.showErrorDialog(err.error.message);
+              return of(err);
+            })
+          );
       })
     );
   }
@@ -87,9 +87,16 @@ export class HttpClientService {
   patch<T>(apiName: string, body: any): Observable<T> {
     return from(this.getIdToken()).pipe(
       switchMap((headers: HttpHeaders): Observable<T> => {
-        return this.httpClient.patch<T>(this.urlPrefix + apiName, body, {
-          headers: headers
-        });
+        return this.httpClient
+          .patch<T>(this.urlPrefix + apiName, body, {
+            headers: headers
+          })
+          .pipe(
+            catchError((err) => {
+              this.showErrorDialog(err.error.message);
+              return of(err);
+            })
+          );
       })
     );
   }
@@ -97,9 +104,16 @@ export class HttpClientService {
   delete<T>(apiName: string, id: number): Observable<T> {
     return from(this.getIdToken()).pipe(
       switchMap((headers: HttpHeaders): Observable<T> => {
-        return this.httpClient.delete<T>(`${this.urlPrefix}${apiName}/${id}`, {
-          headers: headers
-        });
+        return this.httpClient
+          .delete<T>(`${this.urlPrefix}${apiName}/${id}`, {
+            headers: headers
+          })
+          .pipe(
+            catchError((err) => {
+              this.showErrorDialog(err.error.message);
+              return of(err);
+            })
+          );
       })
     );
   }
@@ -107,9 +121,16 @@ export class HttpClientService {
   put<T>(apiName: string, body: any): Observable<T> {
     return from(this.getIdToken()).pipe(
       switchMap((headers: HttpHeaders): Observable<T> => {
-        return this.httpClient.put<T>(this.urlPrefix + apiName, body, {
-          headers: headers
-        });
+        return this.httpClient
+          .put<T>(this.urlPrefix + apiName, body, {
+            headers: headers
+          })
+          .pipe(
+            catchError((err) => {
+              this.showErrorDialog(err.error.message);
+              return of(err);
+            })
+          );
       })
     );
   }
