@@ -25,6 +25,7 @@ import {
 } from './models/core.model';
 import { EventList } from './+states/event-list-state/event-list.model';
 import { Image } from './+states/user-state/user.model';
+import { Geolocation } from '@capacitor/geolocation';
 
 @Injectable({ providedIn: 'root' })
 export class EventService {
@@ -104,12 +105,16 @@ export class EventService {
   }
 
   async reload(): Promise<void> {
+    const { latitude, longitude } = (await Geolocation.getCurrentPosition())
+      .coords;
     this._isLoading = true;
     this.currentPage = 1;
     const result = await firstValueFrom(
       this.httpClientService.get<EventList>('event', {
         page: this.currentPage,
         pageSize: 10,
+        lat: latitude,
+        lng: longitude,
         startDate: new Date().toISOString(),
         ...this._filter
       })
@@ -120,16 +125,14 @@ export class EventService {
   }
 
   async loadNextPage(): Promise<void> {
-    console.log({
-      page: this.currentPage,
-      pageSize: 10,
-      startDate: new Date().toISOString(),
-      ...this._filter
-    });
+    const { latitude, longitude } = (await Geolocation.getCurrentPosition())
+      .coords;
     const result = await firstValueFrom(
       this.httpClientService.get<EventList>('event', {
         page: ++this.currentPage,
         pageSize: 10,
+        lat: latitude,
+        lng: longitude,
         startDate: new Date().toISOString(),
         ...this._filter
       })
