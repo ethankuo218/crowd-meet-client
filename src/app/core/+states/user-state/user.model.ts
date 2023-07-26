@@ -26,4 +26,13 @@ export interface UserEvent {
   endTime: string;
   imageUrl: string;
   creatorId: number;
+  status: EventStatus;
+}
+
+export enum EventStatus {
+  applied = 'applied',
+  accepted = 'accepted',
+  declined = 'declined',
+  kicked = 'kicked',
+  left = 'left'
 }

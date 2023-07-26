@@ -26,10 +26,10 @@ export class JoinerListComponent implements OnInit {
   ngOnInit() {}
 
   accept(id: number): void {
-    this.eventServive.accept(this.eventId, [id]);
+    this.eventServive.accept(this.eventId, [id]).subscribe();
   }
 
   decline(id: number): void {
-    this.eventServive.decline(this.eventId, [id]);
+    this.eventServive.decline(this.eventId, [id]).subscribe();
   }
 }

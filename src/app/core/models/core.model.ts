@@ -28,9 +28,9 @@ export interface EventActionResponse {
 }
 
 export enum EventAction {
-  APPLY = 'apply',
-  LEAVE = 'leave',
-  ACCEPT = 'accept',
-  DECLINE = 'decline',
-  KICK = 'kick'
+  APPLY = 'applied',
+  LEAVE = 'left',
+  ACCEPT = 'accepted',
+  DECLINE = 'declined',
+  KICK = 'kicked'
 }
