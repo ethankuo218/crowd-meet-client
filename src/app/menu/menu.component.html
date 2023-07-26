@@ -61,7 +61,7 @@
             ></ion-toggle>
           </div>
 
-          <a (click)="testDialog()">
+          <a>
             <div class="acc__card">
               <div class="acc__title">
                 <fa-icon class="dark" [icon]="['fas', 'circle-info']"></fa-icon>
@@ -79,7 +79,7 @@
               <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
             </div>
           </a>
-          <a routerLink="/auth/sign-in/true">
+          <a (click)="logout()">
             <div class="acc__card">
               <div class="acc__title log_out">
                 <fa-icon

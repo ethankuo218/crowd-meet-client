@@ -1,8 +1,8 @@
 import { Storage } from '@ionic/storage-angular';
 import { UserStateFacade } from '../core/+states/user-state/user.state.facade';
 import { Component, inject } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { AlertDialogComponent } from '../components/alert-dialog/alert-dialog.component';
+import { AuthService } from '../core/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -11,6 +11,9 @@ import { AlertDialogComponent } from '../components/alert-dialog/alert-dialog.co
 })
 export class MenuComponent {
   private storage = inject(Storage);
+  private authService = inject(AuthService);
+  private router = inject(Router);
+
   user$ = inject(UserStateFacade).getUser();
   isDarkMode: boolean = document.body.classList.contains('dark');
 
@@ -20,17 +23,9 @@ export class MenuComponent {
     document.body.classList.toggle('dark', this.isDarkMode);
   }
 
-  private dialog = inject(MatDialog);
-  testDialog() {
-    const dialogRef = this.dialog.open(AlertDialogComponent, {
-      data: {
-        title: 'Test Title',
-        content: 'This use for test'
-      },
-      panelClass: 'custom-dialog'
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
+  logout(): void {
+    this.authService.signOut().then(() => {
+      this.router.navigate(['auth/sign-in']);
     });
   }
 }
