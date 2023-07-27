@@ -33,6 +33,7 @@ import {
   User
 } from '@capacitor-firebase/authentication';
 
+import { PushNotifications } from '@capacitor/push-notifications';
 import { SignInProvider } from './models/auth.model';
 import { AuthHelper } from './auth.helper';
 import { Preferences } from '@capacitor/preferences';
@@ -200,6 +201,12 @@ export class AuthService implements OnDestroy {
           signOut(auth)
             .then((webResult) => {
               // ? Sign-out successful
+              try {
+                PushNotifications.unregister();
+                PushNotifications.removeAllListeners();
+              } catch (err) {
+                console.log(err);
+              }
               Preferences.remove({ key: 'token' }).then();
               resolve('Successfully sign out from native and web');
             })

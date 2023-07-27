@@ -11,15 +11,8 @@ import { BannerAdPosition, BannerAdSize } from '@capacitor-community/admob';
   providedIn: 'root'
 })
 export class AdmobService {
-  async initializeAdmob(): Promise<void> {
-    const { status } = await AdMob.trackingAuthorizationStatus();
-    let needRequestTrackingAuth = true;
-    if (status === 'notDetermined') {
-      // show track modal
-      needRequestTrackingAuth = false;
-    }
-
-    await AdMob.initialize({
+  initializeAdmob(): Promise<void> {
+    return AdMob.initialize({
       requestTrackingAuthorization: true,
       testingDevices: ['testDeviceID'],
       initializeForTesting: true

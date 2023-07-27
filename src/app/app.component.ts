@@ -2,11 +2,11 @@ import { AdmobService } from './core/admob.service';
 import { UserService } from 'src/app/core/user.service';
 import { Component, OnInit, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { HistoryHelperService } from './utils/history-helper.service';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 import { Geolocation } from '@capacitor/geolocation';
+import { PushNotifications } from '@capacitor/push-notifications';
 
 @Component({
   selector: 'app-root',
@@ -39,7 +39,20 @@ export class AppComponent implements OnInit {
 
   async initializeApp() {
     try {
-      Geolocation.requestPermissions({
+      await PushNotifications.requestPermissions().then(async (result) => {
+        console.log(result);
+        if (result.receive === 'granted') {
+          // Register with Apple / Google to receive push via APNS/FCM
+          try {
+            await PushNotifications.register();
+          } catch (err) {
+            console.error(err);
+          }
+        } else {
+          // Show some error
+        }
+      });
+      await Geolocation.requestPermissions({
         permissions: ['location', 'coarseLocation']
       });
       await this.admobService.initializeAdmob();
