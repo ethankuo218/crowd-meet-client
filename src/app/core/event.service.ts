@@ -39,6 +39,7 @@ export class EventService {
   private _noMoreContent: boolean = false;
   private _isLoading: boolean = false;
   private _filter: any;
+  private userLocation: { lat: number; lng: number } | undefined;
 
   get noMoreContent(): boolean {
     return this._noMoreContent;
@@ -55,6 +56,8 @@ export class EventService {
   set filter(val: any) {
     this._filter = val;
   }
+
+  constructor() {}
 
   createEvent(eventSetting: EventSetting): Observable<Image> {
     return this.httpClientService.post<Event>('event', eventSetting).pipe(
@@ -104,18 +107,24 @@ export class EventService {
     return this.eventListStateFacade.getEventList();
   }
 
+  getUserLocation(): void {
+    Geolocation.getCurrentPosition().then((result) => {
+      this.userLocation = {
+        lat: result.coords.latitude,
+        lng: result.coords.longitude
+      };
+    });
+  }
+
   async reload(): Promise<void> {
-    const { latitude, longitude } = (await Geolocation.getCurrentPosition())
-      .coords;
     this._isLoading = true;
     this.currentPage = 1;
     const result = await firstValueFrom(
       this.httpClientService.get<EventList>('event', {
         page: this.currentPage,
         pageSize: 10,
-        lat: latitude,
-        lng: longitude,
         startDate: new Date().toISOString(),
+        ...this.userLocation,
         ...this._filter
       })
     );
@@ -150,7 +159,7 @@ export class EventService {
 
   getEventImages(eventIds: number[]): Observable<EventImageResponse[]> {
     return this.httpClientService.get<EventImageResponse[]>('event/images', {
-      eventIds: eventIds.join(',')
+      eventIds: eventIds
     });
   }
 

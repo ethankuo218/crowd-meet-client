@@ -1,5 +1,4 @@
 import { AdmobService } from './core/admob.service';
-import { UserService } from 'src/app/core/user.service';
 import { Component, OnInit, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { SplashScreen } from '@capacitor/splash-screen';
@@ -7,6 +6,7 @@ import { Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 import { Geolocation } from '@capacitor/geolocation';
 import { PushNotifications } from '@capacitor/push-notifications';
+import { EventService } from './core/event.service';
 
 @Component({
   selector: 'app-root',
@@ -15,10 +15,10 @@ import { PushNotifications } from '@capacitor/push-notifications';
 })
 export class AppComponent implements OnInit {
   private translate = inject(TranslateService);
-  private userService = inject(UserService);
   private platform = inject(Platform);
   private storage = inject(Storage);
   private admobService = inject(AdmobService);
+  private eventService = inject(EventService);
 
   // Inject HistoryHelperService in the app.components.ts so its available app-wide
   constructor() {
@@ -39,9 +39,11 @@ export class AppComponent implements OnInit {
 
   async initializeApp() {
     try {
-      await PushNotifications.requestPermissions().then(async (result) => {
-        console.log(result);
-        if (result.receive === 'granted') {
+      const { receive } = await PushNotifications.checkPermissions();
+      if (receive !== 'granted') {
+        const { receive: receive2 } =
+          await PushNotifications.requestPermissions();
+        if (receive2 === 'granted') {
           // Register with Apple / Google to receive push via APNS/FCM
           try {
             await PushNotifications.register();
@@ -49,12 +51,15 @@ export class AppComponent implements OnInit {
             console.error(err);
           }
         } else {
+          console.log('object');
           // Show some error
         }
-      });
+      }
+
       await Geolocation.requestPermissions({
         permissions: ['location', 'coarseLocation']
       });
+      this.eventService.getUserLocation();
       await this.admobService.initializeAdmob();
       await SplashScreen.hide();
     } catch (err) {
