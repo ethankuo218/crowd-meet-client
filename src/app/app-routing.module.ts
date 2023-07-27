@@ -1,10 +1,24 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { NgModule, inject } from '@angular/core';
+import {
+  ActivatedRouteSnapshot,
+  CanActivateFn,
+  RouterModule,
+  RouterStateSnapshot,
+  Routes
+} from '@angular/router';
+import { AuthService } from './core/auth.service';
+
+const redirectUnAuthorizedToLogin: CanActivateFn = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot
+) => {
+  return inject(AuthService).canActivate();
+};
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/auth/sign-in',
+    redirectTo: 'app',
     pathMatch: 'full'
   },
   {
@@ -14,7 +28,8 @@ const routes: Routes = [
   {
     path: 'app',
     loadChildren: () =>
-      import('./tabs/tabs.module').then((m) => m.TabsPageModule)
+      import('./tabs/tabs.module').then((m) => m.TabsPageModule),
+    canActivate: [redirectUnAuthorizedToLogin]
   }
 ];
 @NgModule({

@@ -15,7 +15,6 @@ import { Geolocation } from '@capacitor/geolocation';
 })
 export class AppComponent implements OnInit {
   private translate = inject(TranslateService);
-  private historyHelper = inject(HistoryHelperService);
   private userService = inject(UserService);
   private platform = inject(Platform);
   private storage = inject(Storage);
@@ -44,7 +43,6 @@ export class AppComponent implements OnInit {
         permissions: ['location', 'coarseLocation']
       });
       await this.admobService.initializeAdmob();
-      this.userService.login();
       await SplashScreen.hide();
     } catch (err) {
       console.log('This is normal in a browser', err);

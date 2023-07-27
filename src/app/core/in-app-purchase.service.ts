@@ -17,7 +17,7 @@ export class InAppPurchaseService {
   private auth = inject(Auth);
 
   async initialInAppPurchase(userId: number): Promise<void> {
-    this.purchases.setDebugLogsEnabled(true);
+    this.purchases.setDebugLogsEnabled(false);
     if (this.platform.is('ios')) {
       this.purchases.configureWith({
         apiKey: environment.iosInAppPurchaseApiKey

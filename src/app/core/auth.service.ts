@@ -3,19 +3,17 @@ import {
   Injectable,
   NgZone,
   OnDestroy,
-  PLATFORM_ID
+  PLATFORM_ID,
+  inject
 } from '@angular/core';
 import { isPlatformBrowser, Location } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, UrlTree } from '@angular/router';
 import { LoadingController, Platform } from '@ionic/angular';
-
-import { Observable, Subject } from 'rxjs';
 
 import {
   AuthProvider,
   FacebookAuthProvider,
   GoogleAuthProvider,
-  TwitterAuthProvider,
   OAuthProvider,
   OAuthCredential,
   UserCredential,
@@ -38,31 +36,32 @@ import {
 import { SignInProvider } from './models/auth.model';
 import { AuthHelper } from './auth.helper';
 import { Preferences } from '@capacitor/preferences';
+import { UserService } from './user.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService implements OnDestroy {
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  private platform = inject(Platform);
+  private ngZone = inject(NgZone);
+  private authHelper = inject(AuthHelper);
+  private loadingController = inject(LoadingController);
+  private location = inject(Location);
+  private userSerive = inject(UserService);
+
   currentUser: User | null = null;
   authLoader: HTMLIonLoadingElement | undefined;
-  redirectResultSubject: Subject<any> = new Subject<any>();
-  authStateSubject: Subject<AuthStateChange> = new Subject<AuthStateChange>();
 
-  constructor(
-    public router: Router,
-    public route: ActivatedRoute,
-    public platform: Platform,
-    private ngZone: NgZone,
-    private authHelper: AuthHelper,
-    public loadingController: LoadingController,
-    public location: Location,
-    @Inject(PLATFORM_ID) private platformId: object
-  ) {
+  constructor(@Inject(PLATFORM_ID) private platformId: object) {
     if (isPlatformBrowser(this.platformId)) {
       FirebaseAuthentication.removeAllListeners().then(() => {
         FirebaseAuthentication.addListener(
           'authStateChange',
           (change: AuthStateChange) => {
             this.ngZone.run(() => {
-              this.authStateSubject.next(change);
+              if (change.user) {
+                this.userSerive.login();
+              }
             });
 
             if (change?.user) {
@@ -89,9 +88,6 @@ export class AuthService implements OnDestroy {
           getRedirectResult(auth)
             .then(
               (result) => {
-                // ? result.credential.accessToken gives you the Provider Access Token. You can use it to access the Provider API.
-                // const credential = FacebookAuthProvider.credentialFromResult(result);
-                // const token = credential.accessToken;
                 let credential: any;
 
                 if (result && result !== null) {
@@ -107,20 +103,16 @@ export class AuthService implements OnDestroy {
                       credential =
                         GoogleAuthProvider.credentialFromResult(result);
                       break;
-                    case SignInProvider.twitter:
-                      credential =
-                        TwitterAuthProvider.credentialFromResult(result);
-                      break;
                   }
 
-                  const signInResult = authHelper.createSignInResult(
+                  const signInResult = this.authHelper.createSignInResult(
                     result,
                     credential
                   );
 
                   this.dismissLoading();
 
-                  this.redirectResultSubject.next(signInResult);
+                  this.userSerive.login();
                 } else {
                   throw new Error('Could not get user from redirect result');
                 }
@@ -135,15 +127,6 @@ export class AuthService implements OnDestroy {
             .catch((error) => {
               // ? Clear redirection loading
               this.clearAuthWithProvidersRedirection();
-
-              // ? Handle Errors here
-              // const errorCode = error.code;
-              // const errorMessage = error.message;
-              // ? The email of the user's account used.
-              // const email = error.email;
-              // ?AuthCredential type that was used.
-              // const credential = FacebookAuthProvider.credentialFromError(error);
-
               let errorResult = { error: 'undefined' };
 
               if (error && (error.code || error.message)) {
@@ -152,7 +135,7 @@ export class AuthService implements OnDestroy {
                 };
               }
 
-              this.redirectResultSubject.next(errorResult);
+              this.router.navigate(['auth']);
             });
         }
       });
@@ -234,11 +217,7 @@ export class AuthService implements OnDestroy {
   }
 
   private async socialSignIn(
-    provider:
-      | OAuthProvider
-      | GoogleAuthProvider
-      | FacebookAuthProvider
-      | TwitterAuthProvider,
+    provider: OAuthProvider | GoogleAuthProvider | FacebookAuthProvider,
     authOptions?: SignInWithOAuthOptions
   ): Promise<SignInResult> {
     this.presentLoading(provider.providerId);
@@ -263,11 +242,7 @@ export class AuthService implements OnDestroy {
   }
 
   private async webAuth(
-    provider:
-      | OAuthProvider
-      | GoogleAuthProvider
-      | FacebookAuthProvider
-      | TwitterAuthProvider,
+    provider: OAuthProvider | GoogleAuthProvider | FacebookAuthProvider,
     authOptions?: SignInWithOAuthOptions
   ): Promise<SignInResult> {
     const auth = getAuth();
@@ -305,11 +280,6 @@ export class AuthService implements OnDestroy {
             webAuthUserCredential
           );
           break;
-        case SignInProvider.twitter:
-          webCredential = TwitterAuthProvider.credentialFromResult(
-            webAuthUserCredential
-          );
-          break;
       }
 
       return this.authHelper.createSignInResult(
@@ -341,11 +311,6 @@ export class AuthService implements OnDestroy {
         break;
       case SignInProvider.google:
         nativeAuthResult = await FirebaseAuthentication.signInWithGoogle(
-          authOptions
-        );
-        break;
-      case SignInProvider.twitter:
-        nativeAuthResult = await FirebaseAuthentication.signInWithTwitter(
           authOptions
         );
         break;
@@ -426,21 +391,11 @@ export class AuthService implements OnDestroy {
     return this.socialSignIn(provider, authOptions);
   }
 
-  public get redirectResult$(): Observable<any> {
-    return this.redirectResultSubject.asObservable();
-  }
-
-  public get authState$(): Observable<AuthStateChange> {
-    return this.authStateSubject.asObservable();
-  }
-
   private getPhotoURL(signInProviderId: string, photoURL: string): string {
     // ? Default imgs are too small and our app needs a bigger image
     switch (signInProviderId) {
       case SignInProvider.facebook:
         return photoURL + '?height=400';
-      case SignInProvider.twitter:
-        return photoURL.replace('_normal', '_400x400');
       case SignInProvider.google:
         return photoURL.split('=')[0];
       case 'password':
@@ -448,5 +403,11 @@ export class AuthService implements OnDestroy {
       default:
         return photoURL;
     }
+  }
+
+  canActivate(): Promise<boolean | UrlTree> {
+    return FirebaseAuthentication.getCurrentUser().then((result) => {
+      return result.user ? true : this.router.parseUrl('auth');
+    });
   }
 }

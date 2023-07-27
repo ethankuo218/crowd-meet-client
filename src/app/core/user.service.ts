@@ -39,15 +39,14 @@ export class UserService {
       this.getUserById(loginResult.userId).subscribe({
         next: (result) => {
           this.userStateFacade.storeUser(result);
+          if (loginResult.isNewUser) {
+            this.storage.set('isNewuser', true);
+          }
+
+          this.router.navigate(isNewUser ? ['auth/walkthrough'] : ['app'], {
+            replaceUrl: true
+          });
         }
-      });
-
-      if (loginResult.isNewUser) {
-        this.storage.set('isNewuser', true);
-      }
-
-      this.router.navigate(isNewUser ? ['auth/walkthrough'] : ['app'], {
-        replaceUrl: true
       });
     });
   }
