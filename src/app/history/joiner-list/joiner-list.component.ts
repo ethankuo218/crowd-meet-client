@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Observable, from, switchMap } from 'rxjs';
+import { EventStatus } from 'src/app/core/+states/user-state/user.model';
 import { EventService } from 'src/app/core/event.service';
 import { Participant } from 'src/app/event/models/event.model';
 
@@ -33,5 +34,9 @@ export class JoinerListComponent implements OnInit {
 
   decline(id: number): void {
     this.eventService.decline(this.eventId, [id]).subscribe();
+  }
+
+  get eventStatus(): typeof EventStatus {
+    return EventStatus;
   }
 }

@@ -91,6 +91,7 @@
 
   /** basic color **/
   --ion-text-color: #212121;
+  --ion-tag-text-color: #fff;
   --ion-inactive-text-color: rgba(0, 0, 0, 0.6);
   --ion-background-color: #ffffff;
   --ion-toolbar-border-color: transparent;
@@ -183,6 +184,7 @@ body.dark {
   --ion-card-border-color: transparent;
   --ion-card-background-color: #383838;
   --ion-dialog-background-color: #383838;
+  --ion-tag-text-color: #212121;
 }
 
 /*

@@ -22,7 +22,9 @@ export class FcmTokenService {
       if (!hasSameToken) {
         this.httpClientService
           .post<FcmToken>('fcm-token', { token: token.value })
-          .subscribe();
+          .subscribe((result) => {
+            this.fcmTokenId = result.id;
+          });
       }
     });
   }

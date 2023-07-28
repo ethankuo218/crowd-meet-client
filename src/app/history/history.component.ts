@@ -1,8 +1,8 @@
 import { UserStateFacade } from '../core/+states/user-state/user.state.facade';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActionSheetController, RefresherCustomEvent } from '@ionic/angular';
 import { UserService } from '../core/user.service';
-import { UserEvent } from '../core/+states/user-state/user.model';
+import { EventStatus, UserEvent } from '../core/+states/user-state/user.model';
 import { firstValueFrom, map } from 'rxjs';
 import { Router } from '@angular/router';
 import { EventService } from '../core/event.service';
@@ -33,10 +33,14 @@ export class HistoryComponent {
 
   joined$ = this.userService.getEvents().pipe(
     map((result: UserEvent[]): UserEvent[] => {
-      return result.filter(
-        (event: UserEvent) =>
-          Date.now() - new Date(event.startTime).getTime() > 0
-      );
+      return result
+        .filter(
+          (event: UserEvent) =>
+            Date.now() - new Date(event.startTime).getTime() > 0
+        )
+        .filter((event: UserEvent) => {
+          event.status === EventStatus.accepted;
+        });
     })
   );
 
@@ -114,5 +118,9 @@ export class HistoryComponent {
 
   getIsOngoing(endTime: string): boolean {
     return Date.now() - new Date(endTime).getTime() < 0;
+  }
+
+  get eventStatus(): typeof EventStatus {
+    return EventStatus;
   }
 }

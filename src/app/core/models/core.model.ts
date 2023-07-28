@@ -27,14 +27,6 @@ export interface EventActionResponse {
   status: string;
 }
 
-export enum EventAction {
-  APPLY = 'applied',
-  LEAVE = 'left',
-  ACCEPT = 'accepted',
-  DECLINE = 'declined',
-  KICK = 'kicked'
-}
-
 export interface FcmToken {
   id: number;
   token: string;

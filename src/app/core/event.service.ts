@@ -18,13 +18,9 @@ import {
   switchMap,
   tap
 } from 'rxjs';
-import {
-  EventAction,
-  EventActionResponse,
-  EventImageResponse
-} from './models/core.model';
+import { EventActionResponse, EventImageResponse } from './models/core.model';
 import { EventList } from './+states/event-list-state/event-list.model';
-import { Image } from './+states/user-state/user.model';
+import { EventStatus, Image } from './+states/user-state/user.model';
 import { Geolocation } from '@capacitor/geolocation';
 
 @Injectable({ providedIn: 'root' })
@@ -221,7 +217,7 @@ export class EventService {
     return this.httpClientService.patch<EventActionResponse>(
       `event/${id}/participant`,
       {
-        status: EventAction.ACCEPT,
+        status: EventStatus.accepted,
         participantIds: acceptUsers
       }
     );
@@ -234,7 +230,7 @@ export class EventService {
     return this.httpClientService.patch<EventActionResponse>(
       `event/${id}/participant`,
       {
-        status: EventAction.DECLINE,
+        status: EventStatus.declined,
         participantIds: declinedUsers
       }
     );
@@ -246,7 +242,7 @@ export class EventService {
         return this.httpClientService.patch<EventActionResponse>(
           `event/${id}/participant`,
           {
-            status: EventAction.KICK,
+            status: EventStatus.kicked,
             participantId: userId
           }
         );

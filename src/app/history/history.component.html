@@ -27,6 +27,20 @@
                 <small class="dark_dd">{{
                   item.startTime | date : 'EEE, MMM d, y'
                 }}</small>
+
+                <div
+                  *ngIf="item.status"
+                  class="status-tag orange"
+                  [ngClass]="{
+                    orange: item.status === eventStatus.left,
+                    green: item.status === eventStatus.accepted,
+                    red:
+                      item.status === eventStatus.declined ||
+                      item.status === eventStatus.kicked
+                  }"
+                >
+                  {{ item.status }}
+                </div>
               </div>
               <p class="dark">
                 {{ item.title }}
@@ -89,7 +103,7 @@
                 <small class="dark_dd">{{
                   item.startTime | date : 'EEE, MMM d, y'
                 }}</small>
-                <div *ngIf="getIsOngoing(item.endTime)" class="tag">
+                <div *ngIf="getIsOngoing(item.endTime)" class="status-tag">
                   Ongoing
                 </div>
               </div>

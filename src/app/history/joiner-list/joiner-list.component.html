@@ -12,7 +12,20 @@
               />
             </div>
             <div class="joiner_content">
-              <h3 class="dark">{{ joiner.name }}</h3>
+              <div class="content-row">
+                <h3 class="dark">{{ joiner.name }}</h3>
+                <div class="status-tag green">
+                <!-- [ngClass]="{
+                  orange: joiner.status === eventStatus.left,
+                  green: joiner.status === eventStatus.accepted,
+                  red:
+                    joiner.status === eventStatus.declined ||
+                    joiner.status === eventStatus.kicked
+                }"
+                > -->
+                  {{ joiner.status }}
+                </div>
+              </div>
               <p class="dark_d td_p">
                 {{ joiner.registeredAt | date : 'MMMM d, y | h:m a' }}
               </p>
