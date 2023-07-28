@@ -24,11 +24,8 @@ export class UserService {
     return this._isLoading;
   }
 
-  constructor() {
-    this.storage.create();
-  }
-
   login(): void {
+    console.log('Get stored item');
     forkJoin([
       this.httpClientService.post<LoginResponse>('user', {}),
       this.httpClientService.get<Reference>('Reference'),

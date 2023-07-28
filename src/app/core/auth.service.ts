@@ -38,6 +38,7 @@ import { SignInProvider } from './models/auth.model';
 import { AuthHelper } from './auth.helper';
 import { Preferences } from '@capacitor/preferences';
 import { UserService } from './user.service';
+import { FcmTokenService } from './fcm-token.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService implements OnDestroy {
@@ -49,6 +50,7 @@ export class AuthService implements OnDestroy {
   private loadingController = inject(LoadingController);
   private location = inject(Location);
   private userSerive = inject(UserService);
+  private fcmTokenService = inject(FcmTokenService);
 
   currentUser: User | null = null;
   authLoader: HTMLIonLoadingElement | undefined;
@@ -201,12 +203,7 @@ export class AuthService implements OnDestroy {
           signOut(auth)
             .then((webResult) => {
               // ? Sign-out successful
-              try {
-                PushNotifications.unregister();
-                PushNotifications.removeAllListeners();
-              } catch (err) {
-                console.log(err);
-              }
+              this.fcmTokenService.unRegister();
               Preferences.remove({ key: 'token' }).then();
               resolve('Successfully sign out from native and web');
             })

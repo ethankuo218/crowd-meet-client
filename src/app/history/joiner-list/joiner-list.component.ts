@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, inject } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, from, switchMap } from 'rxjs';
 import { EventService } from 'src/app/core/event.service';
 import { Participant } from 'src/app/event/models/event.model';
@@ -10,26 +10,28 @@ import { Participant } from 'src/app/event/models/event.model';
   styleUrls: ['./joiner-list.component.scss']
 })
 export class JoinerListComponent implements OnInit {
+  private route = inject(ActivatedRoute);
+  private eventService = inject(EventService);
+
   private eventId!: number;
   joiners$ = from(this.route.params).pipe(
     switchMap((params): Observable<Participant[]> => {
       this.eventId = params['id'];
-      return this.eventServive.getParticipants(params['id']);
+      return this.eventService.getParticipants(params['id']);
     })
   );
 
-  constructor(
-    private route: ActivatedRoute,
-    private eventServive: EventService
-  ) {}
-
-  ngOnInit() {}
+  ngOnInit() {
+    this.route.params.subscribe((params) => {
+      this.eventId = params['id'];
+    });
+  }
 
   accept(id: number): void {
-    this.eventServive.accept(this.eventId, [id]).subscribe();
+    this.eventService.accept(this.eventId, [id]).subscribe(() => {});
   }
 
   decline(id: number): void {
-    this.eventServive.decline(this.eventId, [id]).subscribe();
+    this.eventService.decline(this.eventId, [id]).subscribe();
   }
 }

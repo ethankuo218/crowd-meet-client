@@ -46,13 +46,15 @@ export class HttpClientService {
   post<T>(apiName: string, body: any): Observable<T> {
     return from(this.getIdToken()).pipe(
       switchMap((headers: HttpHeaders): Observable<T> => {
+        const requestUrl = this.urlPrefix + apiName;
         return this.httpClient
-          .post<T>(this.urlPrefix + apiName, body, {
+          .post<T>(requestUrl, body, {
             headers: headers
           })
           .pipe(
             catchError((err) => {
               this.showErrorDialog(err.error.message);
+              console.error(`${requestUrl}: ${err.error.message}`);
               return of(err);
             })
           );
@@ -77,6 +79,7 @@ export class HttpClientService {
           .pipe(
             catchError((err) => {
               this.showErrorDialog(err.error.message);
+              console.error(`${requestUrl}: ${err.error.message}`);
               return of(err);
             })
           );
@@ -87,13 +90,15 @@ export class HttpClientService {
   patch<T>(apiName: string, body: any): Observable<T> {
     return from(this.getIdToken()).pipe(
       switchMap((headers: HttpHeaders): Observable<T> => {
+        const requestUrl = this.urlPrefix + apiName;
         return this.httpClient
-          .patch<T>(this.urlPrefix + apiName, body, {
+          .patch<T>(requestUrl, body, {
             headers: headers
           })
           .pipe(
             catchError((err) => {
               this.showErrorDialog(err.error.message);
+              console.error(`${requestUrl}: ${err.error.message}`);
               return of(err);
             })
           );
@@ -104,13 +109,15 @@ export class HttpClientService {
   delete<T>(apiName: string, id: number): Observable<T> {
     return from(this.getIdToken()).pipe(
       switchMap((headers: HttpHeaders): Observable<T> => {
+        const requestUrl = `${this.urlPrefix}${apiName}/${id}`;
         return this.httpClient
-          .delete<T>(`${this.urlPrefix}${apiName}/${id}`, {
+          .delete<T>(requestUrl, {
             headers: headers
           })
           .pipe(
             catchError((err) => {
               this.showErrorDialog(err.error.message);
+              console.error(`${requestUrl}: ${err.error.message}`);
               return of(err);
             })
           );
@@ -121,13 +128,15 @@ export class HttpClientService {
   put<T>(apiName: string, body: any): Observable<T> {
     return from(this.getIdToken()).pipe(
       switchMap((headers: HttpHeaders): Observable<T> => {
+        const requestUrl = this.urlPrefix + apiName;
         return this.httpClient
-          .put<T>(this.urlPrefix + apiName, body, {
+          .put<T>(requestUrl, body, {
             headers: headers
           })
           .pipe(
             catchError((err) => {
               this.showErrorDialog(err.error.message);
+              console.error(`${requestUrl}: ${err.error.message}`);
               return of(err);
             })
           );

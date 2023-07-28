@@ -34,3 +34,9 @@ export enum EventAction {
   DECLINE = 'declined',
   KICK = 'kicked'
 }
+
+export interface FcmToken {
+  id: number;
+  token: string;
+  userId: number;
+}
