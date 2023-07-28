@@ -1,85 +1,85 @@
 <app-header [defaultHref]="'app/history'"></app-header>
 
 <ng-container *ngIf="eventDetail$ | async as eventDetail">
-  <ion-content class="event-detail-content">
-    <main class="event-detail-area main-area">
-      <div class="cover_photo">
-        <img
-          [src]="
-            eventDetail.imageUrl || '../../../../assets/images/background.png'
-          "
-        />
-      </div>
-      <div class="content_area">
-        <div class="container">
-          <div class="event_content">
-            <h3 class="dark">{{ eventDetail.title }}</h3>
-            <div class="main_content">
-              <div class="calendar_link">
-                <div class="calendar-icon">
-                  <fa-icon [icon]="['far', 'calendar']"></fa-icon>
-                </div>
-                <div class="time">
-                  <small class="title">
-                    {{ eventDetail.startTime | date : 'EEEE, MMMM dd, yyyy' }}
-                  </small>
-                  <br />
-                  <small class="dark_d">
-                    {{ eventDetail.startTime | date : 'h:mm a z' }}
-                  </small>
-                </div>
-                <div class="chevron-right">
-                  <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
-                </div>
-              </div>
-              <hr />
-              <div class="location_link" (click)="openMap(eventDetail)">
-                <div class="location-icon">
-                  <fa-icon [icon]="['fas', 'location-dot']"></fa-icon>
-                </div>
-                <div class="place">
-                  <small class="title"
-                    >{{ eventDetail.formattedAddress || 'Online event' }}
-                  </small>
-                </div>
-                <fa-icon
-                  class="chevron-right"
-                  [icon]="['fas', 'chevron-right']"
-                ></fa-icon>
-              </div>
-              <hr />
-              <div class="description">
-                <h3>Description</h3>
-
-                <p class="dark_d">
-                  {{ eventDetail.description }}
-                </p>
-              </div>
-              <hr />
-              <div class="host_joiner_info">
-                <div class="creator">
-                  <h3>Host</h3>
-                  <div
-                    class="host_info"
-                    [routerLink]="[
-                      '/app/event/profile',
-                      eventDetail.creator.userId
-                    ]"
-                  >
-                    <div class="profile_img">
-                      <img
-                        [src]="eventDetail.creator.profilePictureUrl"
-                        alt="image"
-                      />
-                    </div>
-                    <div class="name_content">
-                      <h3>{{ eventDetail.creator.name }}</h3>
-                    </div>
+  <ng-container *ngIf="participants$ | async as participants">
+    <ion-content class="event-detail-content">
+      <main class="event-detail-area main-area">
+        <div class="cover_photo">
+          <img
+            [src]="
+              eventDetail.imageUrl || '../../../../assets/images/background.png'
+            "
+          />
+        </div>
+        <div class="content_area">
+          <div class="container">
+            <div class="event_content">
+              <h3 class="dark">{{ eventDetail.title }}</h3>
+              <div class="main_content">
+                <div class="calendar_link">
+                  <div class="calendar-icon">
+                    <fa-icon [icon]="['far', 'calendar']"></fa-icon>
+                  </div>
+                  <div class="time">
+                    <small class="title">
+                      {{ eventDetail.startTime | date : 'EEEE, MMMM dd, yyyy' }}
+                    </small>
+                    <br />
+                    <small class="dark_d">
+                      {{ eventDetail.startTime | date : 'h:mm a z' }}
+                    </small>
+                  </div>
+                  <div class="chevron-right">
+                    <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
                   </div>
                 </div>
-                <div class="participants">
-                  <h3>Participants</h3>
-                  <ng-container *ngIf="participants$ | async as participants">
+                <hr />
+                <div class="location_link" (click)="openMap(eventDetail)">
+                  <div class="location-icon">
+                    <fa-icon [icon]="['fas', 'location-dot']"></fa-icon>
+                  </div>
+                  <div class="place">
+                    <small class="title"
+                      >{{ eventDetail.formattedAddress || 'Online event' }}
+                    </small>
+                  </div>
+                  <fa-icon
+                    class="chevron-right"
+                    [icon]="['fas', 'chevron-right']"
+                  ></fa-icon>
+                </div>
+                <hr />
+                <div class="description">
+                  <h3>Description</h3>
+
+                  <p class="dark_d">
+                    {{ eventDetail.description }}
+                  </p>
+                </div>
+                <hr />
+                <div class="host_joiner_info">
+                  <div class="creator">
+                    <h3>Host</h3>
+                    <div
+                      class="host_info"
+                      [routerLink]="[
+                        '/app/event/profile',
+                        eventDetail.creator.userId
+                      ]"
+                    >
+                      <div class="profile_img">
+                        <img
+                          [src]="eventDetail.creator.profilePictureUrl"
+                          alt="image"
+                        />
+                      </div>
+                      <div class="name_content">
+                        <h3>{{ eventDetail.creator.name }}</h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="participants">
+                    <h3>Participants</h3>
                     <div
                       class="joiner_list"
                       [routerLink]="[
@@ -100,86 +100,91 @@
                         </div>
                       </ng-container>
                     </div>
-                  </ng-container>
-                </div>
-              </div>
-            </div>
-            <hr />
-            <div class="comments" *ngIf="comments$ | async as comments">
-              <h2 class="dark">{{ 'Comments (' + comments.length + ')' }}</h2>
-              <div class="comment_list">
-                <div class="comment" *ngFor="let comment of comments">
-                  <div class="user">
-                    <div class="user_img">
-                      <img
-                        [src]="
-                          comment.user.profilePictureUrl ||
-                          'assets/images/profile1.jpg'
-                        "
-                      />
-                    </div>
-                    <div class="user_name">
-                      <h4 class="dark">{{ comment.user.name }}</h4>
-                    </div>
                   </div>
-
-                  <p class="dark_d">
-                    {{ comment.content }}
-                  </p>
-                  <small class="dark_d">{{
-                    comment.createdAt | date : 'MMM d. y | HH:mm a'
-                  }}</small>
                 </div>
               </div>
-              <div class="input_comment" *ngIf="user$ | async as user">
-                <div class="mini_profile">
-                  <img [src]="user.profilePictureUrl" />
+              <hr />
+              <div class="comments" *ngIf="comments$ | async as comments">
+                <h2 class="dark">{{ 'Comments (' + comments.length + ')' }}</h2>
+                <div class="comment_list">
+                  <div class="comment" *ngFor="let comment of comments">
+                    <div class="user">
+                      <div class="user_img">
+                        <img
+                          [src]="
+                            comment.user.profilePictureUrl ||
+                            'assets/images/profile1.jpg'
+                          "
+                        />
+                      </div>
+                      <div class="user_name">
+                        <h4 class="dark">{{ comment.user.name }}</h4>
+                      </div>
+                    </div>
+
+                    <p class="dark_d">
+                      {{ comment.content }}
+                    </p>
+                    <small class="dark_d">{{
+                      comment.createdAt | date : 'MMM d. y | HH:mm a'
+                    }}</small>
+                  </div>
                 </div>
-                <div class="comment_input">
-                  <input
-                    class="dark_dd"
-                    type="text"
-                    [(ngModel)]="comment"
-                    placeholder="Add a comment"
-                  />
-                  <ion-button
-                    (click)="leaveComment(eventDetail.eventId)"
-                    [disabled]="!comment"
-                  >
-                    <fa-icon [icon]="['fas', 'paper-plane']"></fa-icon>
-                  </ion-button>
+                <div class="input_comment" *ngIf="user$ | async as user">
+                  <div class="mini_profile">
+                    <img [src]="user.profilePictureUrl" />
+                  </div>
+                  <div class="comment_input">
+                    <input
+                      class="dark_dd"
+                      type="text"
+                      [(ngModel)]="comment"
+                      placeholder="Add a comment"
+                    />
+                    <ion-button
+                      (click)="leaveComment(eventDetail.eventId)"
+                      [disabled]="!comment"
+                    >
+                      <fa-icon [icon]="['fas', 'paper-plane']"></fa-icon>
+                    </ion-button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </main>
-  </ion-content>
+      </main>
+    </ion-content>
 
-  <ng-container *ngIf="user$ | async as user">
-    <ion-footer>
-      <ion-toolbar>
-        <h3>
-          {{
-            eventDetail.price === 0 ? 'free' : (eventDetail.price | currency)
-          }}
-        </h3>
-        <ion-button
-          *ngIf="user.userId === eventDetail.creator.userId; else normalUser"
-          slot="end"
-          [disabled]="isEventStarted(eventDetail.startTime)"
-          (click)="editEvent(eventDetail)"
-        >
-          Edit
-        </ion-button>
-        <ng-template #normalUser>
-          <ion-button #joinBtn slot="end" (click)="joinEvent(eventDetail.eventId)">
-            Join
+    <ng-container *ngIf="user$ | async as user">
+      <ion-footer>
+        <ion-toolbar>
+          <h3>
+            {{
+              eventDetail.price === 0 ? 'free' : (eventDetail.price | currency)
+            }}
+          </h3>
+          <ion-button
+            *ngIf="user.userId === eventDetail.creator.userId; else normalUser"
+            slot="end"
+            [disabled]="isEventStarted(eventDetail.startTime)"
+            (click)="editEvent(eventDetail)"
+          >
+            Edit
           </ion-button>
-        </ng-template>
-      </ion-toolbar>
-    </ion-footer>
+          <ng-template #normalUser>
+            <ion-button
+              #joinBtn
+              slot="end"
+              (click)="joinEvent(eventDetail.eventId)"
+              [disabled]="isAllowJoin(participants, user.userId)"
+            >
+              Join
+            </ion-button>
+          </ng-template>
+        </ion-toolbar>
+      </ion-footer>
+    </ng-container>
   </ng-container>
 </ng-container>
 

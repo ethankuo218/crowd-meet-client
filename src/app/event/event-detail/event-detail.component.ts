@@ -87,4 +87,10 @@ export class EventDetailComponent implements OnInit {
   isEventStarted(startTime: string) {
     return new Date(startTime).getTime() < new Date().getTime();
   }
+
+  isAllowJoin(participants: Participant[], userId: number): boolean {
+    return participants.find((participant) => participant.userId === userId)
+      ? false
+      : true;
+  }
 }
