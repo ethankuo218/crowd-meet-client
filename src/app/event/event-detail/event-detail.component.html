@@ -177,7 +177,7 @@
               #joinBtn
               slot="end"
               (click)="joinEvent(eventDetail.eventId)"
-              [disabled]="isAllowJoin(participants, user.userId)"
+              [disabled]="!isAllowJoin(participants, user.userId)"
             >
               Join
             </ion-button>
