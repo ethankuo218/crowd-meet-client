@@ -14,15 +14,16 @@
             <div class="joiner_content">
               <div class="content-row">
                 <h3 class="dark">{{ joiner.name }}</h3>
-                <div class="status-tag green">
-                <!-- [ngClass]="{
-                  orange: joiner.status === eventStatus.left,
-                  green: joiner.status === eventStatus.accepted,
-                  red:
-                    joiner.status === eventStatus.declined ||
-                    joiner.status === eventStatus.kicked
-                }"
-                > -->
+                <div
+                  class="status-tag green"
+                  [ngClass]="{
+                    orange: joiner.status === eventStatus.left,
+                    green: joiner.status === eventStatus.accepted,
+                    red:
+                      joiner.status === eventStatus.declined ||
+                      joiner.status === eventStatus.kicked
+                  }"
+                >
                   {{ joiner.status }}
                 </div>
               </div>
@@ -31,8 +32,16 @@
               </p>
               <hr />
               <div class="button_area">
-                <ion-button (click)="accept(joiner.id)">Accept</ion-button>
-                <ion-button (click)="decline(joiner.id)">Decline</ion-button>
+                <ion-button
+                  (click)="accept(joiner.id)"
+                  [disabled]="joiner.status !== eventStatus.applied"
+                  >Accept</ion-button
+                >
+                <ion-button
+                  (click)="decline(joiner.id)"
+                  [disabled]="joiner.status !== eventStatus.applied"
+                  >Decline</ion-button
+                >
               </div>
             </div>
           </div>
