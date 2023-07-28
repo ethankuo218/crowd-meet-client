@@ -58,6 +58,6 @@ export class FcmTokenService {
 
   private async hasSameToken(token: string): Promise<boolean> {
     const userToken = await firstValueFrom(this.getFcmToken());
-    return userToken.filter((item) => item.token === token) ? true : false;
+    return userToken.find((item) => item.token === token) ? true : false;
   }
 }
