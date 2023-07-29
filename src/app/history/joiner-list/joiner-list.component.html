@@ -1,5 +1,8 @@
 <app-header></app-header>
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="reload($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <main class="fix notification-area main-area p-0">
     <div class="container">
       <div class="joiner_list">
