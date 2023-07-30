@@ -26,13 +26,6 @@ const routes: Routes = [
           )
       },
       {
-        path: 'getting-started',
-        loadChildren: () =>
-          import('./getting-started/getting-started.module').then(
-            (m) => m.GettingStartedPageModule
-          )
-      },
-      {
         path: 'fill-info',
         loadChildren: () =>
           import('./fill-info/fill-info.module').then((m) => m.FillInfoModule)

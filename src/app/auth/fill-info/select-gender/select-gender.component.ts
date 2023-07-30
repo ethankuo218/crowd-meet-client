@@ -1,5 +1,5 @@
 import { FillInfoService } from './../fill-info.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 
 @Component({
   selector: 'app-select-gender',
@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./select-gender.component.scss']
 })
 export class SelectGenderComponent implements OnInit {
-  constructor(private fillInfoService: FillInfoService) {}
+  private fillInfoService = inject(FillInfoService);
 
   ngOnInit() {}
 

@@ -52,7 +52,7 @@ export class AuthService implements OnDestroy {
   private authHelper = inject(AuthHelper);
   private loadingController = inject(LoadingController);
   private location = inject(Location);
-  private userSerive = inject(UserService);
+  private userService = inject(UserService);
   private fcmTokenService = inject(FcmTokenService);
 
   private auth = inject(Auth);
@@ -65,7 +65,7 @@ export class AuthService implements OnDestroy {
       this.auth.onAuthStateChanged((userState) => {
         this.ngZone.run(() => {
           if (userState) {
-            this.userSerive.login();
+            this.userService.login();
           }
         });
 
@@ -115,7 +115,7 @@ export class AuthService implements OnDestroy {
 
                   this.dismissLoading();
 
-                  this.userSerive.login();
+                  this.userService.login();
                 } else {
                   throw new Error('Could not get user from redirect result');
                 }

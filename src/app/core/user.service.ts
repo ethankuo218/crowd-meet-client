@@ -37,13 +37,17 @@ export class UserService {
       this.getUserById(loginResult.userId).subscribe({
         next: (result) => {
           this.userStateFacade.storeUser(result);
-          if (loginResult.isNewUser) {
+          if (!isNewUser) {
             this.storage.set('isNewuser', true);
+            this.router.navigate(['auth/walkthrough'], {
+              replaceUrl: true
+            });
+          } else {
+            this.router.navigate(isNewUser ? ['auth/walkthrough'] : ['app'], {
+              replaceUrl: true
+            });
           }
           this.fcmTokenService.register();
-          this.router.navigate(isNewUser ? ['auth/walkthrough'] : ['app'], {
-            replaceUrl: true
-          });
         }
       });
     });

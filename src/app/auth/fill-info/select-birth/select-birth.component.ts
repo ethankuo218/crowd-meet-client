@@ -1,5 +1,5 @@
 import { FillInfoService } from './../fill-info.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 
 @Component({
   selector: 'app-select-birth',
@@ -7,13 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./select-birth.component.scss']
 })
 export class SelectBirthComponent implements OnInit {
+  private fillInfoService = inject(FillInfoService);
+
   birth: string | undefined;
-  constructor(private fillInfoService: FillInfoService) {}
 
   ngOnInit() {}
 
   goNext() {
-    console.log(this.birth);
-    this.fillInfoService.saveInfo();
+    this.fillInfoService.birth = this.birth;
   }
 }

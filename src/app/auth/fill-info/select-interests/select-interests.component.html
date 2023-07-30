@@ -1,14 +1,5 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="end">
-      <ion-button
-        class="skip-getting-started-button"
-        fill="clear"
-        (click)="skip()"
-        >skip</ion-button
-      >
-    </ion-buttons>
-  </ion-toolbar>
+  <ion-toolbar> </ion-toolbar>
 </ion-header>
 
 <ion-content>
@@ -31,7 +22,7 @@
           <ion-col class="question-options-col">
             <ion-row class="options-list-row" formArrayName="interests">
               <ion-col
-                *ngFor="let item of (categoryList$ | async) as categoryList; let i = index; trackBy: itemById"
+                *ngFor="let item of categoryList; let i = index; trackBy: trackByIndex"
                 size="6"
               >
                 <app-checkbox-wrapper class="custom-checkbox">

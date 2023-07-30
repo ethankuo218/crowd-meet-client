@@ -1,29 +1,35 @@
 import { Storage } from '@ionic/storage-angular';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { UserService } from 'src/app/core/user.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FillInfoService {
+  private userService = inject(UserService);
+  private storage = inject(Storage);
+  private router = inject(Router);
+
   gender: string | undefined;
   birth: string | undefined;
-  constructor(private userService: UserService, private storage: Storage) {}
+  interests: number[] | undefined;
 
   saveInfo() {
-    // this.userService
-    //   .updateUser({
-    //     gender: this.gender,
-    //     birth: this.birth
-    //   })
-    //   .subscribe({
-    //     next: () => {
-    //       this.gender = undefined;
-    //       this.birth = undefined;
-    //       this.storage.set('isNewuser', false);
-    //     }
-    //   });
-    console.log('SET FALSE');
-    this.storage.set('isNewUser', false);
+    this.userService
+      .updateUser({
+        gender: this.gender,
+        birthDate: this.birth,
+        interests: this.interests
+      })
+      .subscribe({
+        next: () => {
+          this.gender = undefined;
+          this.birth = undefined;
+          this.interests = undefined;
+          this.storage.set('isNewuser', false);
+          this.router.navigate(['app']);
+        }
+      });
   }
 }
