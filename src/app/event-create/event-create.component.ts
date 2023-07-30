@@ -42,7 +42,7 @@ export class EventCreateComponent implements OnInit {
       startTime: new FormControl('', [Validators.required]),
       endTime: new FormControl('', [Validators.required]),
       maxParticipants: new FormControl(1, counterRangeValidator(1, 15)),
-      locationName: new FormControl('', [Validators.required]),
+      formattedAddress: new FormControl('', [Validators.required]),
       price: new FormControl(0, [Validators.required]),
       categories: new FormArray([], [Validators.required]),
       isOnline: new FormControl('', [Validators.required])
@@ -64,7 +64,7 @@ export class EventCreateComponent implements OnInit {
   }
 
   get location(): AbstractControl {
-    return this.eventForm.get('locationName')!;
+    return this.eventForm.get('formattedAddress')!;
   }
 
   ngOnInit(): void {
@@ -82,6 +82,11 @@ export class EventCreateComponent implements OnInit {
   }
 
   ionViewWillEnter() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
     this.route.paramMap.pipe(take(1)).subscribe((params) => {
       this.mode = params.get('mode')!;
       this.eventForm.reset();
