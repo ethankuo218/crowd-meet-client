@@ -1,3 +1,4 @@
+import { FcmTokenService } from './fcm-token.service';
 import { InAppPurchaseService } from './in-app-purchase.service';
 import { ReferenceStateFacade } from './+states/reference-state/reference.state.facade';
 import { UserStateFacade } from './+states/user-state/user.state.facade';
@@ -18,6 +19,7 @@ export class UserService {
   private router = inject(Router);
   private storage = inject(Storage);
   private inAppPurchaseService = inject(InAppPurchaseService);
+  private fcmTokenService = inject(FcmTokenService);
   private _isLoading: boolean = false;
 
   get isLoading(): boolean {
@@ -38,7 +40,7 @@ export class UserService {
           if (loginResult.isNewUser) {
             this.storage.set('isNewuser', true);
           }
-
+          this.fcmTokenService.register();
           this.router.navigate(isNewUser ? ['auth/walkthrough'] : ['app'], {
             replaceUrl: true
           });
