@@ -22,15 +22,17 @@ import {
   signInWithCredential,
   signInWithPopup,
   signInWithRedirect,
-  signOut
+  signOut,
+  Auth,
+  user,
+  User
 } from '@angular/fire/auth';
 
 import {
   AuthStateChange,
   FirebaseAuthentication,
   SignInResult,
-  SignInWithOAuthOptions,
-  User
+  SignInWithOAuthOptions
 } from '@capacitor-firebase/authentication';
 
 import { PushNotifications } from '@capacitor/push-notifications';
@@ -39,6 +41,7 @@ import { AuthHelper } from './auth.helper';
 import { Preferences } from '@capacitor/preferences';
 import { UserService } from './user.service';
 import { FcmTokenService } from './fcm-token.service';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService implements OnDestroy {
@@ -52,30 +55,27 @@ export class AuthService implements OnDestroy {
   private userSerive = inject(UserService);
   private fcmTokenService = inject(FcmTokenService);
 
+  private auth = inject(Auth);
+
   currentUser: User | null = null;
   authLoader: HTMLIonLoadingElement | undefined;
 
   constructor(@Inject(PLATFORM_ID) private platformId: object) {
     if (isPlatformBrowser(this.platformId)) {
-      FirebaseAuthentication.removeAllListeners().then(() => {
-        FirebaseAuthentication.addListener(
-          'authStateChange',
-          (change: AuthStateChange) => {
-            this.ngZone.run(() => {
-              if (change.user) {
-                this.userSerive.login();
-              }
-            });
-
-            if (change?.user) {
-              // ? User is signed in.
-              this.currentUser = change.user;
-            } else {
-              // ? No user is signed in.
-              this.currentUser = null;
-            }
+      this.auth.onAuthStateChanged((userState) => {
+        this.ngZone.run(() => {
+          if (userState) {
+            this.userSerive.login();
           }
-        );
+        });
+
+        if (userState) {
+          // ? User is signed in.
+          this.currentUser = userState;
+        } else {
+          // ? No user is signed in.
+          this.currentUser = null;
+        }
       });
 
       // ? We should only listen for firebase auth redirect results when we have the flag 'auth-redirect' in the query params
@@ -321,11 +321,7 @@ export class AuthService implements OnDestroy {
     }
 
     // ? Once we have the user authenticated on the native layer, authenticate it in the web layer
-    if (
-      nativeAuthResult !== null &&
-      nativeAuthResult.credential &&
-      nativeAuthResult.credential.accessToken
-    ) {
+    if (nativeAuthResult !== null && nativeAuthResult.credential) {
       const auth = getAuth();
       let nativeCredential: OAuthCredential | null = null;
 
@@ -336,10 +332,11 @@ export class AuthService implements OnDestroy {
             idToken: nativeAuthResult.credential.idToken,
             rawNonce: nativeAuthResult.credential.nonce
           });
+
           break;
         case SignInProvider.facebook:
           nativeCredential = FacebookAuthProvider.credential(
-            nativeAuthResult.credential.accessToken
+            nativeAuthResult.credential.accessToken!
           );
           break;
         case SignInProvider.google:
@@ -391,6 +388,10 @@ export class AuthService implements OnDestroy {
       scopes: ['email', 'name']
     };
 
+    provider.addScope('email');
+    provider.addScope('name');
+    // provider.setCustomParameters({locale: 'en'});
+
     // ? When we use the redirect authentication flow, the code below the socialSignIn() invocation does not get executed as we leave the current page
     return this.socialSignIn(provider, authOptions);
   }
@@ -410,8 +411,8 @@ export class AuthService implements OnDestroy {
   }
 
   canActivate(): Promise<boolean | UrlTree> {
-    return FirebaseAuthentication.getCurrentUser().then((result) => {
-      return result.user ? true : this.router.parseUrl('auth');
+    return firstValueFrom(user(this.auth)).then((result) => {
+      return result ? true : this.router.parseUrl('auth');
     });
   }
 }

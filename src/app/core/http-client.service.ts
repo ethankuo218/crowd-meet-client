@@ -6,18 +6,22 @@ import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
 import { environment } from 'src/environments/environment.dev';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from '../components/error-dialog/error-dialog.component';
+import { Auth } from '@angular/fire/auth';
 
 @Injectable({ providedIn: 'root' })
 export class HttpClientService {
   private httpClient = inject(HttpClient);
   private dialog = inject(MatDialog);
+  private auth = inject(Auth);
 
   private urlPrefix: string = environment.serverUrl;
   private timeStamp: number = 0;
   private expiredTime = 50 * 60 * 1000; // millisecond
 
   private async storeToken(previousToken: string | null): Promise<string> {
-    const token = `Bearer ${(await FirebaseAuthentication.getIdToken()).token}`;
+    const token = `Bearer ${await this.auth.currentUser?.getIdToken()}`;
+    // const token = `Bearer ${(await FirebaseAuthentication.getIdToken()).token}`;
+    console.log('token', token);
     if (token !== previousToken) {
       Preferences.set({ key: 'token', value: token });
       this.timeStamp = Date.now();

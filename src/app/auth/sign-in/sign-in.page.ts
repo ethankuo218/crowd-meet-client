@@ -33,7 +33,9 @@ export class SignInPage {
 
   doAppleLogin(): void {
     try {
-      this.authService.signInWithApple();
+      this.authService.signInWithApple().then((result) => {
+        console.log(result);
+      });
     } catch (error) {
       console.error(error);
     }
