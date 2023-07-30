@@ -27,7 +27,7 @@ export class FillInfoService {
           this.gender = undefined;
           this.birth = undefined;
           this.interests = undefined;
-          this.storage.set('isNewuser', false);
+          this.storage.set('isNewUser', false);
           this.router.navigate(['app']);
         }
       });

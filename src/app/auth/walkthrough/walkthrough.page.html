@@ -1,11 +1,3 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="end">
-      <ion-button class="skip-walkthrough-button" fill="clear" (click)="skipWalkthrough()">skip</ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
   <swiper [pagination]="true" class="walkthrough-slides" (swiper)="setSwiperInstance($event)" (init)="swiperInit()" (slideChangeTransitionStart)="slideWillChange()">
     <ng-template swiperSlide>

@@ -29,16 +29,17 @@ export class UserService {
   login(): void {
     forkJoin([
       this.httpClientService.post<LoginResponse>('user', {}),
-      this.httpClientService.get<Reference>('Reference'),
-      this.storage.get('isNewUser')
-    ]).subscribe(([loginResult, referenceResult, isNewUser]) => {
+      this.httpClientService.get<Reference>('Reference')
+    ]).subscribe(([loginResult, referenceResult]) => {
       this.referenceStateFacade.storeReference(referenceResult);
       this.inAppPurchaseService.initialInAppPurchase(loginResult.userId);
       this.getUserById(loginResult.userId).subscribe({
-        next: (result) => {
+        next: async (result) => {
+          const isNewUser = await this.storage.get('isNewUser');
           this.userStateFacade.storeUser(result);
-          if (!isNewUser) {
-            this.storage.set('isNewuser', true);
+          console.log('isNewUser', isNewUser);
+          if (isNewUser === null) {
+            this.storage.set('isNewUser', true);
             this.router.navigate(['auth/walkthrough'], {
               replaceUrl: true
             });

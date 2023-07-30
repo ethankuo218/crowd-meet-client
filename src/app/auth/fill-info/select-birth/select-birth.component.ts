@@ -13,7 +13,7 @@ export class SelectBirthComponent implements OnInit {
 
   ngOnInit() {}
 
-  goNext() {
+  selectBirth() {
     this.fillInfoService.birth = this.birth;
   }
 }

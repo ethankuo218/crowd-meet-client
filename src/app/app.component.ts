@@ -30,7 +30,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.platform.ready().then(async () => {
-      this.storage.clear(); //TODO: remove clear
       const isDarkMode = await this.storage.get('isDarkMode');
       if (isDarkMode === null) {
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');

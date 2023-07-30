@@ -11,7 +11,7 @@
           <p>Your profile shows your age , not your birth date.</p>
         </div>
         <div class="button-row">
-          <button class="white" type="submit" [disabled]="!birth" [routerLink]="['../interests']">Next</button>
+          <button class="white" type="submit" [disabled]="!birth" [routerLink]="['../interests']" (click)="selectBirth()">Next</button>
         </div>
       </div>
     </ng-container>
