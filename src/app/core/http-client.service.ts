@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, catchError, from, of, switchMap } from 'rxjs';
 import { GetResult, Preferences } from '@capacitor/preferences';
-import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
 import { environment } from 'src/environments/environment.dev';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from '../components/error-dialog/error-dialog.component';
@@ -19,11 +18,10 @@ export class HttpClientService {
   private expiredTime = 50 * 60 * 1000; // millisecond
 
   private async storeToken(previousToken: string | null): Promise<string> {
-    const token = `Bearer ${await this.auth.currentUser?.getIdToken()}`;
-    // const token = `Bearer ${(await FirebaseAuthentication.getIdToken()).token}`;
-    console.log('token', token);
-    if (token !== previousToken) {
-      Preferences.set({ key: 'token', value: token });
+    const idToken = await this.auth.currentUser?.getIdToken();
+    const token = `Bearer ${idToken}`;
+    if (idToken && token !== previousToken) {
+      await Preferences.set({ key: 'token', value: token });
       this.timeStamp = Date.now();
     }
 

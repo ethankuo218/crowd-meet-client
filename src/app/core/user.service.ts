@@ -25,7 +25,6 @@ export class UserService {
   }
 
   login(): void {
-    console.log('Get stored item');
     forkJoin([
       this.httpClientService.post<LoginResponse>('user', {}),
       this.httpClientService.get<Reference>('Reference'),

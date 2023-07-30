@@ -204,7 +204,7 @@ export class AuthService implements OnDestroy {
             .then((webResult) => {
               // ? Sign-out successful
               this.fcmTokenService.unRegister();
-              Preferences.remove({ key: 'token' }).then();
+              Preferences.remove({ key: 'token' });
               resolve('Successfully sign out from native and web');
             })
             .catch((webError) => {

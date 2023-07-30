@@ -18,8 +18,6 @@ export class InAppPurchaseComponent implements OnInit {
 
   async ngOnInit() {
     this.productList = await this.inAppPurchaseService.getProducts();
-
-    console.log(this.productList);
   }
 
   getReward(type: string): void {

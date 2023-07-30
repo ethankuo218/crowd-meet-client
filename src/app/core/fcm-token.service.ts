@@ -3,13 +3,16 @@ import { PushNotifications } from '@capacitor/push-notifications';
 import { HttpClientService } from './http-client.service';
 import { Observable, firstValueFrom } from 'rxjs';
 import { FcmToken } from './models/core.model';
+import { Auth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FcmTokenService {
   private httpClientService = inject(HttpClientService);
+  private auth = inject(Auth);
 
+  private fcmToken: string | undefined;
   private fcmTokenId: number | undefined;
 
   constructor() {
@@ -18,14 +21,7 @@ export class FcmTokenService {
 
   async addListener(): Promise<void> {
     await PushNotifications.addListener('registration', async (token) => {
-      const hasSameToken = await this.hasSameToken(token.value);
-      if (!hasSameToken) {
-        this.httpClientService
-          .post<FcmToken>('fcm-token', { token: token.value })
-          .subscribe((result) => {
-            this.fcmTokenId = result.id;
-          });
-      }
+      this.fcmToken = token.value;
     });
   }
 
@@ -42,11 +38,27 @@ export class FcmTokenService {
     await PushNotifications.register();
   }
 
+  async register(): Promise<void> {
+    const hasSameToken = await this.hasSameToken(this.fcmToken!);
+
+    if (!hasSameToken) {
+      this.httpClientService
+        .post<FcmToken>('fcm-token', { token: this.fcmToken })
+        .subscribe((result) => {
+          this.fcmTokenId = result.id;
+        });
+    }
+  }
+
   async unRegister(): Promise<void> {
     try {
       PushNotifications.unregister();
       PushNotifications.removeAllListeners();
-      this.httpClientService.delete('fcm-token', this.fcmTokenId!).subscribe();
+      if (this.fcmTokenId) {
+        this.httpClientService
+          .delete('fcm-token', this.fcmTokenId!)
+          .subscribe();
+      }
     } catch (err) {
       console.log(err);
     }
