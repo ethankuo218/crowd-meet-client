@@ -37,7 +37,6 @@ export class UserService {
         next: async (result) => {
           const isNewUser = await this.storage.get('isNewUser');
           this.userStateFacade.storeUser(result);
-          console.log('isNewUser', isNewUser);
           if (isNewUser === null) {
             this.storage.set('isNewUser', true);
             this.router.navigate(['auth/walkthrough'], {

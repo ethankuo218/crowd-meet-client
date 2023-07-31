@@ -3,14 +3,13 @@ import { PushNotifications } from '@capacitor/push-notifications';
 import { HttpClientService } from './http-client.service';
 import { Observable, firstValueFrom } from 'rxjs';
 import { FcmToken } from './models/core.model';
-import { Auth } from '@angular/fire/auth';
+import { Capacitor } from '@capacitor/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FcmTokenService {
   private httpClientService = inject(HttpClientService);
-  private auth = inject(Auth);
 
   private fcmToken: string | undefined;
   private fcmTokenId: number | undefined;
@@ -69,6 +68,10 @@ export class FcmTokenService {
   }
 
   private async hasSameToken(token: string): Promise<boolean> {
+    if (!Capacitor.isNativePlatform()) {
+      return true;
+    }
+
     const userToken = await firstValueFrom(this.getFcmToken());
     return userToken.find((item) => item.token === token) ? true : false;
   }

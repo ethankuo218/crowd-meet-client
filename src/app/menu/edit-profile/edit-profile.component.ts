@@ -1,6 +1,6 @@
 import { UserStateFacade } from '../../core/+states/user-state/user.state.facade';
 import { ImgUploadService } from 'src/app/core/img-upload.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { UserService } from '../../core/user.service';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ReferenceStateFacade } from '../../core/+states/reference-state/reference.state.facade';
@@ -20,12 +20,17 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
   ]
 })
 export class EditProfileComponent implements OnInit {
+  private userService = inject(UserService);
+  private imgUploadService = inject(ImgUploadService);
+  private userStateFacade = inject(UserStateFacade);
+  private referenceStateFacade = inject(ReferenceStateFacade);
+
   categoryList: Category[] = [];
 
   userForm: FormGroup = new FormGroup({
-    name: new FormControl('', [Validators.required]),
-    bio: new FormControl('', [Validators.required]),
-    interests: new FormArray([], Validators.required)
+    name: new FormControl(''),
+    bio: new FormControl(''),
+    interests: new FormArray([])
   });
 
   images: Array<Image | undefined> = [
@@ -43,13 +48,6 @@ export class EditProfileComponent implements OnInit {
     return <FormArray>this.userForm.get('interests');
   }
 
-  constructor(
-    private userService: UserService,
-    private imgUploadService: ImgUploadService,
-    private userStateFacade: UserStateFacade,
-    private referenceStateFacade: ReferenceStateFacade
-  ) {}
-
   ngOnInit(): void {
     this.referenceStateFacade
       .getCategories()
@@ -62,36 +60,43 @@ export class EditProfileComponent implements OnInit {
           });
         }
       });
+  }
 
-    this.userStateFacade.getUser().subscribe({
-      next: (result) => {
-        this.userForm.patchValue(result);
+  ionViewWillEnter(): void {
+    this.userStateFacade
+      .getUser()
+      .pipe(take(1))
+      .subscribe({
+        next: (result) => {
+          const patchInterestArr: boolean[] = [];
+          this.categoryList.forEach((element: Category, index: number) => {
+            if (
+              result.interests.find(
+                (interest) => interest.categoryId === element.categoryId
+              )
+            ) {
+              patchInterestArr.push(true);
+            } else {
+              patchInterestArr.push(false);
+            }
+          });
 
-        const patchInterestArr: boolean[] = [];
-        this.categoryList.forEach((element: Category, index: number) => {
-          if (
-            result.interests.find(
-              (interest) => interest.categoryId === element.categoryId
-            )
-          ) {
-            patchInterestArr.push(true);
-          } else {
-            patchInterestArr.push(false);
-          }
-        });
+          this.userForm.patchValue({
+            name: result.name,
+            bio: result.bio,
+            interests: [...patchInterestArr]
+          });
 
-        this.userForm.get('interests')?.patchValue(patchInterestArr);
+          result.images.forEach((item) => {
+            this.images[item.order] = item;
+          });
 
-        result.images.forEach((item) => {
-          this.images[item.order] = item;
-        });
-
-        this.imageOrder = this.getCurrentOrder();
-      },
-      error: (error) => {
-        console.error(error);
-      }
-    });
+          this.imageOrder = this.getCurrentOrder();
+        },
+        error: (error) => {
+          console.error(error);
+        }
+      });
   }
 
   ionViewWillLeave(): void {
@@ -104,7 +109,7 @@ export class EditProfileComponent implements OnInit {
       this.userStateFacade.storeUser({ images: [] });
     }
 
-    if (this.userForm.valid) {
+    if (this.userForm.dirty) {
       this.userService
         .updateUser({
           name: this.userForm.get('name')?.value,
@@ -174,7 +179,6 @@ export class EditProfileComponent implements OnInit {
 
   private getInterests(): number[] {
     const returnArr: number[] = [];
-
     this.interests.value.forEach((element: boolean, index: number) => {
       const interest = this.categoryList[index];
       if (element && interest) {

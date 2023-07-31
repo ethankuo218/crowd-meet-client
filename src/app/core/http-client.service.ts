@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable, catchError, from, of, switchMap } from 'rxjs';
+import { Observable, catchError, from, of, switchMap, throwError } from 'rxjs';
 import { GetResult, Preferences } from '@capacitor/preferences';
 import { environment } from 'src/environments/environment.dev';
 import { MatDialog } from '@angular/material/dialog';
@@ -57,7 +57,7 @@ export class HttpClientService {
             catchError((err) => {
               this.showErrorDialog(err.error.message);
               console.error(`${requestUrl}: ${err.error.message}`);
-              return of(err);
+              return throwError(() => err);
             })
           );
       })
@@ -82,7 +82,7 @@ export class HttpClientService {
             catchError((err) => {
               this.showErrorDialog(err.error.message);
               console.error(`${requestUrl}: ${err.error.message}`);
-              return of(err);
+              return throwError(() => err);
             })
           );
       })
@@ -101,7 +101,7 @@ export class HttpClientService {
             catchError((err) => {
               this.showErrorDialog(err.error.message);
               console.error(`${requestUrl}: ${err.error.message}`);
-              return of(err);
+              return throwError(() => err);
             })
           );
       })
@@ -120,7 +120,7 @@ export class HttpClientService {
             catchError((err) => {
               this.showErrorDialog(err.error.message);
               console.error(`${requestUrl}: ${err.error.message}`);
-              return of(err);
+              return throwError(() => err);
             })
           );
       })
@@ -139,7 +139,7 @@ export class HttpClientService {
             catchError((err) => {
               this.showErrorDialog(err.error.message);
               console.error(`${requestUrl}: ${err.error.message}`);
-              return of(err);
+              return throwError(() => err);
             })
           );
       })
