@@ -7,6 +7,7 @@
           <div
             *ngFor="let participant of participants"
             class="joiner_info"
+            [ngClass]="{'disabled': false}"
             (click)="writeReview(participant)"
           >
             <div class="joiner_img">

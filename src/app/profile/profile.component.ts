@@ -9,6 +9,8 @@ import { SwiperModule } from 'swiper/angular';
 import { switchMap, Observable, tap } from 'rxjs';
 import { AgePipe } from '../core/pipe/age.pipe';
 import { User } from '../core/+states/user-state/user.model';
+import { Review } from '../history/reviews/models/reviews.model';
+import { ReviewsService } from '../history/reviews/reviews.service';
 
 @Component({
   selector: 'app-profile',
@@ -26,9 +28,11 @@ import { User } from '../core/+states/user-state/user.model';
   ],
   providers: [UserService]
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent {
   private route = inject(ActivatedRoute);
   private userService = inject(UserService);
+  private reviewService = inject(ReviewsService);
+
   isLoading = true;
 
   user$: Observable<User> = this.route.params.pipe(
@@ -41,5 +45,13 @@ export class ProfileComponent implements OnInit {
     })
   );
 
-  ngOnInit() {}
+  review$: Observable<Review[]> = this.route.params.pipe(
+    switchMap((params) => {
+      return this.reviewService.getReviewee(params['id']).pipe(
+        tap(() => {
+          this.isLoading = false;
+        })
+      );
+    })
+  );
 }

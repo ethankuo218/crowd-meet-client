@@ -41,11 +41,13 @@ export class ReviewsComponent implements OnInit {
     const { data, role } = await modal.onWillDismiss();
 
     if (role === 'submit') {
-      this.reviewsService.review({
-        revieweeId: userDetail.id,
-        eventId: userDetail.eventId,
-        ...data
-      });
+      this.reviewsService
+        .review({
+          revieweeId: userDetail.id,
+          eventId: userDetail.eventId,
+          ...data
+        })
+        .subscribe({ next: () => {} });
     }
   }
 }

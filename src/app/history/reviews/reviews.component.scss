@@ -13,9 +13,9 @@
 
   .joiner_info {
     padding: 0.75rem 1rem;
-    background: #fff;
+    background: var(--ion-card-background-color);
     border-radius: 20px;
-    box-shadow: 1px 1px 40px #ddd;
+    box-shadow: 1px 1px 40px var(--ion-box-shadow);
     margin: 0 0 20px;
 
     display: flex;
@@ -55,6 +55,10 @@
         font-size: 20px;
       }
     }
+  }
+
+  .joiner_info.disabled {
+    pointer-events: none;
   }
 }
 

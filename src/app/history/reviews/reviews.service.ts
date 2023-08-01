@@ -17,4 +17,8 @@ export class ReviewsService {
   }) {
     return this.httpClientService.post(`review`, body);
   }
+
+  getReviewee(id: number): Observable<Review[]> {
+    return this.httpClientService.get<Review[]>(`review/reviewee/${id}`);
+  }
 }

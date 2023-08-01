@@ -68,28 +68,55 @@
             </div>
           </div>
         </div>
-        <div class="reviews-area">
-          <h3 class="dark">Reviews(1)</h3>
+        <div class="reviews-area" *ngIf="review$ | async as reviews">
+          <h3 class="dark">{{ 'Reviews(' + reviews.length + ')' }}</h3>
+          <div class="reviews_content" *ngFor="let review of reviews">
+            <div class="img_text">
+              <div class="profile-pic">
+                <img
+                  [src]="
+                    review.reviewer.profilePicture ||
+                    'assets/images/profile1.jpg'
+                  "
+                />
+              </div>
+              <h4 class="dark">{{ review.reviewer.name }}</h4>
+
+              <div class="aside">
+                <a class="star">
+                  <fa-icon [icon]="['fas', 'star']" class="primary"></fa-icon>
+                  <span class="primary">{{ review.rating }}</span>
+                </a>
+              </div>
+            </div>
+            <p>
+              {{ review.comment }}
+            </p>
+            <div class="react_div">
+              <span class="dark_dd">{{
+                review.reviewDate | date : 'mmd d. yyyy'
+              }}</span>
+            </div>
+          </div>
           <div class="reviews_content">
             <div class="img_text">
               <div class="profile-pic">
                 <img [src]="'assets/images/profile1.jpg'" />
               </div>
-              <h4 class="dark">Charolette Hanlin</h4>
+              <h4 class="dark">{{ 'review.reviewer.name' }}</h4>
 
               <div class="aside">
                 <a class="star">
                   <fa-icon [icon]="['fas', 'star']" class="primary"></fa-icon>
-                  <span class="primary">5</span>
+                  <span class="primary">{{ 5 }}</span>
                 </a>
               </div>
             </div>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-              eiusmod tempor incididunt ut
+              {{ 'review.comment' }}
             </p>
             <div class="react_div">
-              <span class="dark_dd">6 days ago</span>
+              <span class="dark_dd">{{ '' | date : 'mmd d. yyyy' }}</span>
             </div>
           </div>
         </div>
@@ -256,17 +283,32 @@
             </h4>
 
             <div class="aside">
-              <ion-skeleton-text [animated]="true" style="width: 80%; height: 2rem; border-radius: 15px;"></ion-skeleton-text>
+              <ion-skeleton-text
+                [animated]="true"
+                style="width: 80%; height: 2rem; border-radius: 15px"
+              ></ion-skeleton-text>
             </div>
           </div>
           <p>
-            <ion-skeleton-text [animated]="true" style="width: 100%; height: 0.6rem;"></ion-skeleton-text>
-            <ion-skeleton-text [animated]="true" style="width: 80%; height: 0.6rem;"></ion-skeleton-text>
-            <ion-skeleton-text [animated]="true" style="width: 60%; height: 0.6rem;"></ion-skeleton-text>
+            <ion-skeleton-text
+              [animated]="true"
+              style="width: 100%; height: 0.6rem"
+            ></ion-skeleton-text>
+            <ion-skeleton-text
+              [animated]="true"
+              style="width: 80%; height: 0.6rem"
+            ></ion-skeleton-text>
+            <ion-skeleton-text
+              [animated]="true"
+              style="width: 60%; height: 0.6rem"
+            ></ion-skeleton-text>
           </p>
           <div class="react_div">
             <span class="dark_dd">
-            <ion-skeleton-text [animated]="true" style="width: 5rem;"></ion-skeleton-text>
+              <ion-skeleton-text
+                [animated]="true"
+                style="width: 5rem"
+              ></ion-skeleton-text>
             </span>
           </div>
         </div>
