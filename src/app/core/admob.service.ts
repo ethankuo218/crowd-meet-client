@@ -66,7 +66,7 @@ export class AdmobService {
 
     const options: RewardAdOptions = {
       adId: 'ca-app-pub-5981152485884247/1152996343',
-      // isTesting: true,
+      isTesting: true,
       // npa: true,
       ssv: {
         userId: 'A user ID to send to your SSV',
