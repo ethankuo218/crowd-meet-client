@@ -9,55 +9,54 @@
         <ng-template mat-tab-label> Upcoming </ng-template>
         <br />
         <ng-container *ngIf="!isLoading">
-          <div
-            class="joiner-list-content"
+          <ng-container
             *ngFor="let item of upcoming$ | async; trackBy: trackByIndex"
           >
-            <div class="joiner-list-image">
-              <img
-                [src]="item.imageUrl || 'assets/images/spoon.png'"
-                alt="image"
-              />
-            </div>
-            <div
-              class="upcoming-content"
-              [routerLink]="['/app/event/list', item.eventId]"
-            >
-              <div class="content-row">
-                <small class="dark_dd">{{
-                  item.startTime | date : 'EEE, MMM d, y'
-                }}</small>
-
-                <div
-                  *ngIf="item.status"
-                  class="status-tag orange"
-                  [ngClass]="{
-                    orange: item.status === eventStatus.left,
-                    green: item.status === eventStatus.accepted,
-                    red:
-                      item.status === eventStatus.declined ||
-                      item.status === eventStatus.kicked
-                  }"
-                >
-                  {{ item.status }}
+            <ion-item-sliding class="joiner-list-content" #slidingItem>
+              <ion-item>
+                <div class="joiner-list-image">
+                  <img
+                    [src]="item.imageUrl || 'assets/images/spoon.png'"
+                    alt="image"
+                  />
                 </div>
-              </div>
-              <p class="dark">
-                {{ item.title }}
-              </p>
-              <p class="content dark_dd">
-                {{ item.description }}
-              </p>
-            </div>
-            <div class="tool_btn">
-              <button
-                id="menu"
-                (click)="openMenu(item.eventId, item.creatorId)"
-              >
-                <fa-icon [icon]="['fas', 'ellipsis-vertical']"></fa-icon>
-              </button>
-            </div>
-          </div>
+                <div
+                  class="upcoming-content"
+                  [routerLink]="['/app/event/list', item.eventId]"
+                >
+                  <div class="content-row">
+                    <small class="dark_dd">{{
+                      item.startTime | date : 'EEE, MMM d, y'
+                    }}</small>
+
+                    <div
+                      *ngIf="item.status"
+                      class="status-tag orange"
+                      [ngClass]="{
+                        orange: item.status === eventStatus.left,
+                        green: item.status === eventStatus.accepted,
+                        red:
+                          item.status === eventStatus.declined ||
+                          item.status === eventStatus.kicked
+                      }"
+                    >
+                      {{ item.status }}
+                    </div>
+                  </div>
+                  <p class="dark">
+                    {{ item.title }}
+                  </p>
+                  <p class="content dark_dd">
+                    {{ item.description }}
+                  </p>
+                </div>
+              </ion-item>
+
+              <ion-item-options side="end">
+                <ion-item-option color="danger" (click)="leave(slidingItem, item.eventId)">Leave</ion-item-option>
+              </ion-item-options>
+            </ion-item-sliding>
+          </ng-container>
         </ng-container>
         <ng-container *ngIf="isLoading">
           <div
@@ -88,40 +87,47 @@
         <ng-template mat-tab-label> Joined </ng-template>
         <br />
         <ng-container *ngIf="!isLoading">
-          <div
-            class="joiner-list-content"
+          <ng-container
             *ngFor="let item of joined$ | async; trackBy: trackByIndex"
           >
-            <div class="joiner-list-image">
-              <img
-                [src]="item.imageUrl || 'assets/images/spoon.png'"
-                alt="image"
-              />
-            </div>
-            <div class="joined-content">
-              <div class="content-row">
-                <small class="dark_dd">{{
-                  item.startTime | date : 'EEE, MMM d, y'
-                }}</small>
-                <div *ngIf="getIsOngoing(item.endTime)" class="status-tag">
-                  Ongoing
+            <ion-item-sliding class="joiner-list-content" #slidingItem>
+              <ion-item>
+                <div class="joiner-list-image">
+                  <img
+                    [src]="item.imageUrl || 'assets/images/spoon.png'"
+                    alt="image"
+                  />
                 </div>
-              </div>
-              <p class="dark">
-                {{ item.title }}
-              </p>
-              <hr />
-              <div class="button-area">
-                <ion-button [routerLink]="['/app/event/list', item.eventId]"
-                  >View</ion-button
-                >
-                <ion-button
-                  [routerLink]="['/app/history/reviews', item.eventId]"
-                  >Rating</ion-button
-                >
-              </div>
-            </div>
-          </div>
+                <div class="joined-content">
+                  <div class="content-row">
+                    <small class="dark_dd">{{
+                      item.startTime | date : 'EEE, MMM d, y'
+                    }}</small>
+                    <div *ngIf="getIsOngoing(item.endTime)" class="status-tag">
+                      Ongoing
+                    </div>
+                  </div>
+                  <p class="dark">
+                    {{ item.title }}
+                  </p>
+                  <hr />
+                  <div class="button-area">
+                    <ion-button [routerLink]="['/app/event/list', item.eventId]"
+                      >View</ion-button
+                    >
+                    <ion-button
+                      [routerLink]="['/app/history/reviews', item.eventId]"
+                      >Rating</ion-button
+                    >
+                  </div>
+                </div>
+              </ion-item>
+
+              <ion-item-options side="end">
+                <ion-item-option color="danger" (click)="leave(slidingItem, item.eventId)">Leave</ion-item-option>
+              </ion-item-options>
+            </ion-item-sliding>
+          </ng-container>
         </ng-container>
         <ng-container *ngIf="isLoading">
           <div

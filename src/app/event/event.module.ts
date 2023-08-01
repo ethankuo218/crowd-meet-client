@@ -14,6 +14,7 @@ import { FilterComponent } from '../filter/filter.component';
 import { ProfileComponent } from '../profile/profile.component';
 import { ParticipantsComponent } from './participants/participants.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { JoinerListComponent } from './joiner-list/joiner-list.component';
 const routes: Routes = [
   {
     path: '',
@@ -38,6 +39,10 @@ const routes: Routes = [
       {
         path: 'participants/:participants',
         component: ParticipantsComponent
+      },
+      {
+        path: 'joiner-list/:id',
+        component: JoinerListComponent
       }
     ]
   }
@@ -48,7 +53,8 @@ const routes: Routes = [
     EventListComponent,
     EventDetailComponent,
     ListingCardComponent,
-    ParticipantsComponent
+    ParticipantsComponent,
+    JoinerListComponent
   ],
   imports: [
     IonicModule,

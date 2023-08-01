@@ -12,13 +12,13 @@
   margin-top: 1rem;
 
   .joiner_info {
-    padding: 15px;
+    // padding: 10px 0;
     background: var(--ion-card-background);
     border-radius: 20px;
     box-shadow: 1px 1px 40px var(--ion-box-shadow);
     margin: 0 0 20px;
 
-    display: flex;
+    // display: flex;
 
     .joiner_img {
       width: 25%;
@@ -31,7 +31,7 @@
     }
 
     .joiner_content {
-      width: 70%;
+      width: 75%;
 
       h3 {
         font-size: 20px;
@@ -61,6 +61,12 @@
       }
     }
   }
+}
+
+ion-item{
+  --border-color: transparent;
+  --inner-padding-top: 10px;
+  --inner-padding-bottom: 10px;
 }
 
 hr {

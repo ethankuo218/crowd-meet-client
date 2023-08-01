@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { RefresherCustomEvent } from '@ionic/angular';
+import { IonItemSliding, RefresherCustomEvent } from '@ionic/angular';
 import { Subject, firstValueFrom } from 'rxjs';
 import { EventStatus } from 'src/app/core/+states/user-state/user.model';
 import { EventService } from 'src/app/core/event.service';
@@ -45,6 +45,13 @@ export class JoinerListComponent implements OnInit {
   }
 
   decline(id: number): void {
+    this.eventService.decline(this.eventId, [id]).subscribe(() => {
+      this.reload();
+    });
+  }
+
+  kick(slidingItem: IonItemSliding, id: number): void {
+    slidingItem.close();
     this.eventService.decline(this.eventId, [id]).subscribe(() => {
       this.reload();
     });

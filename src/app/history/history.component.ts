@@ -1,10 +1,12 @@
-import { UserStateFacade } from '../core/+states/user-state/user.state.facade';
 import { Component, inject } from '@angular/core';
-import { ActionSheetController, RefresherCustomEvent } from '@ionic/angular';
+import {
+  ActionSheetController,
+  RefresherCustomEvent,
+  IonItemSliding
+} from '@ionic/angular';
 import { UserService } from '../core/user.service';
 import { EventStatus, UserEvent } from '../core/+states/user-state/user.model';
-import { firstValueFrom, map } from 'rxjs';
-import { Router } from '@angular/router';
+import { map } from 'rxjs';
 import { EventService } from '../core/event.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertDialogComponent } from '../components/alert-dialog/alert-dialog.component';
@@ -17,8 +19,6 @@ import { AlertDialogComponent } from '../components/alert-dialog/alert-dialog.co
 export class HistoryComponent {
   private actionSheetController = inject(ActionSheetController);
   private userService = inject(UserService);
-  private userStateFacade = inject(UserStateFacade);
-  private router = inject(Router);
   private eventService = inject(EventService);
   private dialog = inject(MatDialog);
 
@@ -59,58 +59,23 @@ export class HistoryComponent {
     });
   }
 
-  async openMenu(eventId: number, creatorId: number) {
-    let buttonOptions = {
-      buttons: [
-        {
-          text: 'Leave',
-          role: 'leave',
-          cssClass: 'leave_button',
-          handler: () => {
-            const dialogRef = this.dialog.open(AlertDialogComponent, {
-              data: {
-                title: 'Do you want to leave this event ?',
-                content: '',
-                enableCancelButton: true
-              },
-              panelClass: 'custom-dialog'
-            });
-            dialogRef.afterClosed().subscribe((result) => {
-              if (result === 'confirm') {
-                this.eventService.leave(eventId).subscribe(() => {
-                  this.userService.reloadUserEvents();
-                });
-              }
-            });
-          }
-        },
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {}
-        }
-      ]
-    };
-
-    const userId = (await firstValueFrom(this.userStateFacade.getUser()))
-      .userId;
-    if (userId === creatorId) {
-      buttonOptions.buttons = [
-        ...[
-          {
-            text: 'Manage Participants',
-            role: 'manage',
-            handler: () => {
-              this.router.navigate(['/app/history/joiner-list', eventId]);
-            }
-          }
-        ],
-        ...buttonOptions.buttons
-      ];
-    }
-
-    const actionSheet = await this.actionSheetController.create(buttonOptions);
-    await actionSheet.present();
+  leave(slidingItem: IonItemSliding, eventId: number) {
+    slidingItem.close();
+    const dialogRef = this.dialog.open(AlertDialogComponent, {
+      data: {
+        title: 'Do you want to leave this event ?',
+        content: '',
+        enableCancelButton: true
+      },
+      panelClass: 'custom-dialog'
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'confirm') {
+        this.eventService.leave(eventId).subscribe(() => {
+          this.userService.reloadUserEvents();
+        });
+      }
+    });
   }
 
   trackByIndex(index: number, item: UserEvent) {

@@ -80,6 +80,17 @@ export class EventDetailComponent implements OnInit {
     });
   }
 
+  checkParticipants(isHost: boolean, parameter: Participant[] | number): void {
+    if (isHost) {
+      this.router.navigate(['/app/event/joiner-list', parameter]);
+    } else {
+      this.router.navigate([
+        '/app/event/participants',
+        this.getJsonString(parameter)
+      ]);
+    }
+  }
+
   getJsonString(input: any) {
     return JSON.stringify(input);
   }

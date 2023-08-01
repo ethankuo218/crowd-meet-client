@@ -6,7 +6,6 @@ import { HeaderComponent } from '../header/header.component';
 import { IonicModule } from '@ionic/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatTabsModule } from '@angular/material/tabs';
-import { JoinerListComponent } from './joiner-list/joiner-list.component';
 import { EventService } from '../core/event.service';
 import { MatDialogModule } from '@angular/material/dialog';
 
@@ -16,10 +15,6 @@ const routes: Routes = [
     component: HistoryComponent
   },
   {
-    path: 'joiner-list/:id',
-    component: JoinerListComponent
-  },
-  {
     path: 'reviews',
     loadChildren: () =>
       import('./reviews/reviews.module').then((m) => m.ReviewsModule)
@@ -27,7 +22,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [HistoryComponent, JoinerListComponent],
+  declarations: [HistoryComponent],
   imports: [
     IonicModule,
     FontAwesomeModule,

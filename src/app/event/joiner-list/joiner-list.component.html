@@ -1,0 +1,65 @@
+<app-header></app-header>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="reload($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <main class="fix notification-area main-area p-0">
+    <div class="container">
+      <div class="joiner_list">
+        <ng-container *ngIf="joiners$ | async as joiners">
+          <div *ngFor="let joiner of joiners">
+            <ion-item-sliding class="joiner_info" #slidingItem>
+              <ion-item>
+                <div class="joiner_img">
+                  <img
+                    [src]="joiner.profilePictureUrl || 'assets/images/men.png'"
+                    alt="image"
+                  />
+                </div>
+                <div class="joiner_content">
+                  <div class="content-row">
+                    <h3 class="dark">{{ joiner.name }}</h3>
+                    <div
+                      class="status-tag green"
+                      [ngClass]="{
+                        orange: joiner.status === eventStatus.left,
+                        green: joiner.status === eventStatus.accepted,
+                        red:
+                          joiner.status === eventStatus.declined ||
+                          joiner.status === eventStatus.kicked
+                      }"
+                    >
+                      {{ joiner.status }}
+                    </div>
+                  </div>
+                  <p class="dark_d td_p">
+                    {{ joiner.registeredAt | date : 'MMMM d, y | h:m a' }}
+                  </p>
+                  <hr />
+                  <div class="button_area">
+                    <ion-button
+                      (click)="accept(joiner.id)"
+                      [disabled]="joiner.status !== eventStatus.applied"
+                      >Accept</ion-button
+                    >
+                    <ion-button
+                      (click)="decline(joiner.id)"
+                      [disabled]="joiner.status !== eventStatus.applied"
+                      >Decline</ion-button
+                    >
+                  </div>
+                </div>
+              </ion-item>
+              <ion-item-options>
+                <ion-item-option color="danger" (click)="kick(slidingItem, joiner.id)">Kick</ion-item-option>
+              </ion-item-options>
+            </ion-item-sliding>
+          </div>
+          <div *ngIf="joiners.length === 0" class="no-more-content">
+            No more content !
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </main>
+</ion-content>

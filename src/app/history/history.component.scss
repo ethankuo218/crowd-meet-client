@@ -15,12 +15,17 @@ mat-tab-group {
 }
 
 .joiner-list-content {
-  display: flex;
-  padding: 0 25px;
   margin: 0 0 15px;
+
+  ion-item {
+    --border-color: transparent;
+    // --inner-padding-start: 15px;
+    --inner-padding-end: 25px;
+  }
 
   .joiner-list-image {
     width: 25%;
+    margin-right: 3%;
 
     img {
       border-radius: 17px;
@@ -29,7 +34,7 @@ mat-tab-group {
       object-fit: cover;
     }
 
-    ion-skeleton-text{
+    ion-skeleton-text {
       padding-right: 0.5rem;
       border-radius: 17px;
       width: 5rem;
@@ -38,7 +43,7 @@ mat-tab-group {
   }
 
   .upcoming-content {
-    width: 65%;
+    width: 72%;
     height: 100%;
 
     small {
@@ -70,7 +75,7 @@ mat-tab-group {
   }
 
   .joined-content {
-    width: 75%;
+    width: 85%;
     height: 100%;
 
     small {
@@ -110,20 +115,6 @@ mat-tab-group {
       border-radius: 25px;
       height: 1.5rem;
       font-size: 12px;
-    }
-  }
-
-  .tool_btn {
-    width: 10%;
-
-    button {
-      width: 100%;
-      padding-top: 0.5rem;
-
-      fa-icon {
-        font-size: 18px;
-        color: var(--ion-text-color);
-      }
     }
   }
 }
