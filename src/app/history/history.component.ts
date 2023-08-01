@@ -38,9 +38,10 @@ export class HistoryComponent {
           (event: UserEvent) =>
             Date.now() - new Date(event.startTime).getTime() > 0
         )
-        .filter((event: UserEvent) => {
-          event.status === EventStatus.accepted;
-        });
+        .filter(
+          (event: UserEvent) =>
+            event.status === EventStatus.accepted || event.status === null
+        );
     })
   );
 
