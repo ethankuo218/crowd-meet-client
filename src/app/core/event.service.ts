@@ -67,8 +67,8 @@ export class EventService {
     );
   }
 
-  updateEvent(body: any): Observable<Event> {
-    return this.httpClientService.patch<Event>('event', body).pipe(
+  updateEvent(id: number, body: any): Observable<Event> {
+    return this.httpClientService.patch<Event>(`event/${id}`, body).pipe(
       tap((result: Event) => {
         this.admobService.showInterstitial();
         if (this.imgUploadService.uploadedImagesCount !== 0) {

@@ -31,6 +31,7 @@ export class EventCreateComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private dialog = inject(MatDialog);
 
+  private eventId: number | undefined;
   mode: string = 'create';
   minDate: string = '';
   eventCoverPictureUrl: string | undefined;
@@ -100,6 +101,7 @@ export class EventCreateComponent implements OnInit {
 
       if (this.mode === 'edit') {
         const eventInfo: Event = JSON.parse(params.get('eventInfo')!);
+        this.eventId = eventInfo.eventId;
         this.eventForm.patchValue(eventInfo);
         this.eventForm
           .get('startTime')
@@ -146,9 +148,9 @@ export class EventCreateComponent implements OnInit {
       }
     });
 
-    if (this.mode === 'edit') {
+    if (this.mode === 'edit' && this.eventId) {
       this.eventService
-        .updateEvent({
+        .updateEvent(this.eventId, {
           ...this.eventForm.value,
           startTime: new Date(this.eventForm.value.startTime).toISOString(),
           endTime: new Date(this.eventForm.value.endTime).toISOString(),
