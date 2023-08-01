@@ -2,7 +2,14 @@ import { FcmTokenService } from './fcm-token.service';
 import { InAppPurchaseService } from './in-app-purchase.service';
 import { ReferenceStateFacade } from './+states/reference-state/reference.state.facade';
 import { UserStateFacade } from './+states/user-state/user.state.facade';
-import { Observable, firstValueFrom, forkJoin, map, tap } from 'rxjs';
+import {
+  Observable,
+  firstValueFrom,
+  forkJoin,
+  map,
+  tap,
+  throwError
+} from 'rxjs';
 import { HttpClientService } from './http-client.service';
 import { Injectable, inject } from '@angular/core';
 import { LoginResponse, ProfilePictureResponse } from './models/core.model';
@@ -65,9 +72,9 @@ export class UserService {
     return userInfo;
   }
 
-  updateUser(body: any): Observable<User> {
-    return this.httpClientService.patch<User>('user', body).pipe(
-      tap((result: User) => {
+  updateUser(body: any): void {
+    this.httpClientService.patch<User>('user', body).subscribe({
+      next: (result: User) => {
         this.userStateFacade.storeUser({
           userId: result.userId,
           email: result.email,
@@ -76,16 +83,17 @@ export class UserService {
           bio: result.bio,
           interests: result.interests
         });
-      })
-    );
+      },
+      error: (err) => throwError(() => err)
+    });
   }
 
-  updateUserImage(body: FormData): Observable<Image[]> {
-    return this.httpClientService.post<Image[]>('user/image', body).pipe(
-      tap((result: Image[]) => {
+  updateUserImage(body: FormData): void {
+    this.httpClientService.post<Image[]>('user/image', body).subscribe({
+      next: (result) => {
         this.userStateFacade.storeUser({ images: result });
-      })
-    );
+      }
+    });
   }
 
   deletePhoto(id: number) {

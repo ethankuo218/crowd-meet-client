@@ -16,20 +16,21 @@ export class FillInfoService {
   interests: number[] | undefined;
 
   saveInfo() {
-    this.userService
-      .updateUser({
+    try {
+      this.userService.updateUser({
         gender: this.gender,
         birthDate: this.birth,
         interests: this.interests
-      })
-      .subscribe({
-        next: () => {
-          this.gender = undefined;
-          this.birth = undefined;
-          this.interests = undefined;
-          this.storage.set('isNewUser', false);
-          this.router.navigate(['app']);
-        }
       });
+    } catch (err) {
+      return;
+    }
+
+    this.gender = undefined;
+    this.birth = undefined;
+    this.interests = undefined;
+
+    this.storage.set('isNewUser', false);
+    this.router.navigate(['app']);
   }
 }

@@ -2,12 +2,13 @@ import { UserStateFacade } from '../../core/+states/user-state/user.state.facade
 import { ImgUploadService } from 'src/app/core/img-upload.service';
 import { Component, OnInit, inject } from '@angular/core';
 import { UserService } from '../../core/user.service';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { ReferenceStateFacade } from '../../core/+states/reference-state/reference.state.facade';
 import { take } from 'rxjs';
 import { Category } from '../../core/+states/reference-state/reference.model';
 import { Image } from '../../core/+states/user-state/user.model';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'app-edit-profile',
@@ -60,48 +61,47 @@ export class EditProfileComponent implements OnInit {
           });
         }
       });
-  }
 
-  ionViewWillEnter(): void {
-    this.userStateFacade
-      .getUser()
-      .pipe(take(1))
-      .subscribe({
-        next: (result) => {
-          const patchInterestArr: boolean[] = [];
-          this.categoryList.forEach((element: Category, index: number) => {
-            if (
-              result.interests.find(
-                (interest) => interest.categoryId === element.categoryId
-              )
-            ) {
-              patchInterestArr.push(true);
-            } else {
-              patchInterestArr.push(false);
-            }
-          });
+    this.userStateFacade.getUser().subscribe({
+      next: (result) => {
+        const patchInterestArr: boolean[] = [];
+        this.categoryList.forEach((element: Category, index: number) => {
+          if (
+            result.interests.find(
+              (interest) => interest.categoryId === element.categoryId
+            )
+          ) {
+            patchInterestArr.push(true);
+          } else {
+            patchInterestArr.push(false);
+          }
+        });
 
-          this.userForm.patchValue({
-            name: result.name,
-            bio: result.bio,
-            interests: [...patchInterestArr]
-          });
+        this.userForm.patchValue({
+          name: result.name,
+          bio: result.bio,
+          interests: [...patchInterestArr]
+        });
 
-          result.images.forEach((item) => {
-            this.images[item.order] = item;
-          });
+        result.images.forEach((item) => {
+          this.images[item.order] = item;
+        });
 
-          this.imageOrder = this.getCurrentOrder();
-        },
-        error: (error) => {
-          console.error(error);
-        }
-      });
+        this.imageOrder = this.getCurrentOrder();
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
   }
 
   ionViewWillLeave(): void {
     const currentImageOrder: number[] = this.getCurrentOrder();
-    if (this.imageOrder !== currentImageOrder && currentImageOrder.length > 0) {
+
+    if (
+      !_.isEqual(this.imageOrder, currentImageOrder) &&
+      currentImageOrder.length > 0
+    ) {
       this.userService.patchUserImageOrder(currentImageOrder).subscribe();
     }
 
@@ -110,13 +110,11 @@ export class EditProfileComponent implements OnInit {
     }
 
     if (this.userForm.dirty) {
-      this.userService
-        .updateUser({
-          name: this.userForm.get('name')?.value,
-          bio: this.userForm.get('bio')?.value,
-          interests: this.getInterests()
-        })
-        .subscribe();
+      this.userService.updateUser({
+        name: this.userForm.get('name')?.value,
+        bio: this.userForm.get('bio')?.value,
+        interests: this.getInterests()
+      });
     }
   }
 
@@ -125,7 +123,7 @@ export class EditProfileComponent implements OnInit {
   }
 
   updateUserInfo(): void {
-    this.userService.updateUser(this.userForm.value).subscribe();
+    this.userService.updateUser(this.userForm.value);
   }
 
   selectPhoto(index: number) {
@@ -136,7 +134,7 @@ export class EditProfileComponent implements OnInit {
       if (files.length > 0) {
         formData.append('file', files[0]);
         formData.append('order', this.getFirstUndefinedImageIndex(index));
-        this.userService.updateUserImage(formData).subscribe();
+        this.userService.updateUserImage(formData);
       } else {
         console.error('No image found, please try again!');
       }
