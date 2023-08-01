@@ -141,6 +141,18 @@ export class EventCreateComponent implements OnInit {
   }
 
   private createEvent() {
+    if (this.eventCoverPictureUrl === null) {
+      this.dialog.open(AlertDialogComponent, {
+        data: {
+          title: 'Oops!',
+          content: `Please upload event image`,
+          enableCancelButton: true
+        },
+        panelClass: 'custom-dialog'
+      });
+      return;
+    }
+
     const selection: number[] = [];
     this.categories.value.forEach((value: boolean, index: number) => {
       if (value) {
