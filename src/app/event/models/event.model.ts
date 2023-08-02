@@ -31,6 +31,11 @@ export interface Event {
   isOnline: boolean;
 }
 
+export interface GetParticipantsResponse {
+  canView: boolean;
+  participants: Participant[];
+}
+
 export interface Participant {
   id: number;
   eventId: number;

@@ -30,7 +30,7 @@
             </div>
           </div>
           <div *ngIf="participants.length === 0" class="no-more-content">
-            No more content !
+            {{canView? 'No participantas wating for review' : 'This event is still goning on'}}
           </div>
         </ng-container>
       </div>

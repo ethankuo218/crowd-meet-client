@@ -32,7 +32,7 @@ export class JoinerListComponent implements OnInit {
     const result = await firstValueFrom(
       this.eventService.getParticipants(this.eventId)
     );
-    this.joinerSubject.next(result);
+    this.joinerSubject.next(result.canView ? result.participants : []);
     if (event) {
       (event as RefresherCustomEvent).target.complete();
     }

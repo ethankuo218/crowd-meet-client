@@ -4,8 +4,7 @@ import { UserStateFacade } from '../../core/+states/user-state/user.state.facade
 import { EventService } from '../../core/event.service';
 import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { Observable, switchMap, tap, map } from 'rxjs';
 import { Browser } from '@capacitor/browser';
 import { IonButton } from '@ionic/angular';
 
@@ -39,7 +38,11 @@ export class EventDetailComponent implements OnInit {
 
   participants$: Observable<Participant[]> = this.route.params.pipe(
     switchMap((params) => {
-      return this.eventService.getParticipants(params['id']);
+      return this.eventService.getParticipants(params['id']).pipe(
+        map((result) => {
+          return result.canView ? result.participants : [];
+        })
+      );
     })
   );
 

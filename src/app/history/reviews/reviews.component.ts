@@ -1,33 +1,34 @@
 import { ReviewsService } from './reviews.service';
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { RatingComponent } from './rating/rating.component';
 import { Participant } from '../../event/models/event.model';
-import { Observable, switchMap } from 'rxjs';
+import { Observable, map, switchMap } from 'rxjs';
 import { EventService } from '../../core/event.service';
 @Component({
   selector: 'app-reviews',
   templateUrl: './reviews.component.html',
   styleUrls: ['./reviews.component.scss']
 })
-export class ReviewsComponent implements OnInit {
+export class ReviewsComponent {
+  private modalCtrl = inject(ModalController);
+  private route = inject(ActivatedRoute);
+  private eventService = inject(EventService);
+  private reviewsService = inject(ReviewsService);
+
+  canView: boolean = false;
+
   participants$: Observable<Participant[]> = this.route.params.pipe(
     switchMap((params) => {
-      return this.eventService.getParticipants(params['id']);
+      return this.eventService.getParticipants(params['id']).pipe(
+        map((result) => {
+          this.canView = result.canView;
+          return result.canView ? result.participants : [];
+        })
+      );
     })
   );
-
-  constructor(
-    private modalCtrl: ModalController,
-    private route: ActivatedRoute,
-    private eventService: EventService,
-    private reviewsService: ReviewsService
-  ) {}
-
-  ngOnInit() {
-    this.route.paramMap.subscribe(() => {});
-  }
 
   async writeReview(userDetail: Participant) {
     const modal = await this.modalCtrl.create({

@@ -7,6 +7,7 @@ import {
   Event,
   EventComment,
   EventSetting,
+  GetParticipantsResponse,
   Participant
 } from '../event/models/event.model';
 import {
@@ -186,7 +187,7 @@ export class EventService {
 
   //event participants
   getParticipants(id: number) {
-    return this.httpClientService.get<Participant[]>(
+    return this.httpClientService.get<GetParticipantsResponse>(
       `event/${id}/participants`
     );
   }

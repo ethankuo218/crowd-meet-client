@@ -95,18 +95,40 @@
                           )
                         "
                       >
+                        <div class="joiner">
+                          <img
+                            [src]="eventDetail.creator.profilePictureUrl"
+                            alt="image"
+                          />
+                        </div>
                         <ng-container
                           *ngFor="
                             let participant of participants;
                             let i = index
                           "
                         >
-                          <div *ngIf="i < 4" class="joiner">
+                          <div *ngIf="i < 3" class="joiner">
                             <img [src]="'assets/images/profile1.jpg'" />
                           </div>
-                          <div *ngIf="i === 4" class="joiner">
+                          <div *ngIf="i === 3" class="joiner">
                             <div class="more">
-                              {{ '+6' }}
+                              {{ '+' + (participants.length - 3) }}
+                            </div>
+                          </div>
+                        </ng-container>
+                        <ng-container *ngIf="participants.length === 0">
+                          <div class="joiner">
+                            <fa-icon [icon]="['fas', 'lock']"></fa-icon>
+                          </div>
+                          <div class="joiner">
+                            <fa-icon [icon]="['fas', 'lock']"></fa-icon>
+                          </div>
+                          <div class="joiner">
+                            <fa-icon [icon]="['fas', 'lock']"></fa-icon>
+                          </div>
+                          <div class="joiner">
+                            <div class="more">
+                              {{ '+?' }}
                             </div>
                           </div>
                         </ng-container>
