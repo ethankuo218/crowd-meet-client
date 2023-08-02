@@ -63,16 +63,14 @@ export class FcmTokenService {
     }
   }
 
-  getFcmToken(): Observable<FcmToken[]> {
-    return this.httpClientService.get<FcmToken[]>('fcm-token');
-  }
-
   private async hasSameToken(token: string): Promise<boolean> {
     if (!Capacitor.isNativePlatform()) {
       return true;
     }
 
-    const userToken = await firstValueFrom(this.getFcmToken());
+    const userToken = await firstValueFrom(
+      this.httpClientService.get<FcmToken[]>('fcm-token')
+    );
     return userToken.find((item) => item.token === token) ? true : false;
   }
 }

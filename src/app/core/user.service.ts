@@ -12,7 +12,12 @@ import {
 } from 'rxjs';
 import { HttpClientService } from './http-client.service';
 import { Injectable, inject } from '@angular/core';
-import { LoginResponse, ProfilePictureResponse } from './models/core.model';
+import {
+  AllowanceType,
+  LoginResponse,
+  ProfilePictureResponse,
+  UserAllowance
+} from './models/core.model';
 import { Image, User, UserEvent } from './+states/user-state/user.model';
 import { Reference } from './+states/reference-state/reference.model';
 import { Router } from '@angular/router';
@@ -125,6 +130,14 @@ export class UserService {
 
   getEvents(): Observable<UserEvent[]> {
     return this.userStateFacade.getUserEvents();
+  }
+
+  async checkAllowance(allowanceType: AllowanceType): Promise<number> {
+    return (
+      await firstValueFrom(
+        this.httpClientService.get<UserAllowance>('user/me/allowance')
+      )
+    )[allowanceType];
   }
 
   async reloadUserEvents(): Promise<void> {

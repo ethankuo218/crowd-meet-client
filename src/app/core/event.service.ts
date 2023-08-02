@@ -175,15 +175,19 @@ export class EventService {
 
   async apply(id: number): Promise<void> {
     await this.loadingService.present();
-    await this.admobService.showReward(AdOption.JOIN_EVENT);
-    await firstValueFrom(
-      this.httpClientService.post<EventActionResponse>(
-        `event/${id}/participant`,
-        {}
-      )
-    );
-    this.router.navigate(['/app/history']);
-    this.loadingService.dismiss();
+    try {
+      await this.admobService.showReward(AdOption.EVENT_JOIN);
+      console.log('Get Reward');
+      await firstValueFrom(
+        this.httpClientService.post<EventActionResponse>(
+          `event/${id}/participant`,
+          {}
+        )
+      );
+      this.router.navigate(['/app/history']);
+    } finally {
+      this.loadingService.dismiss();
+    }
   }
 
   async leave(id: number): Promise<void> {
