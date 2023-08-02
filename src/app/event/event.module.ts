@@ -37,7 +37,7 @@ const routes: Routes = [
         component: ProfileComponent
       },
       {
-        path: 'participants/:participants',
+        path: 'participants/:id',
         component: ParticipantsComponent
       },
       {

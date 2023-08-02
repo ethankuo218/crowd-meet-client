@@ -11,7 +11,7 @@ import {
 
 import { counterRangeValidator } from '../components/counter-input/counter-input.component';
 import { take } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Category } from 'src/app/core/+states/reference-state/reference.model';
 import { Event } from '../event/models/event.model';
 import { InputValidators } from '../validators/input-validators';
@@ -27,7 +27,6 @@ import * as Formatter from '../core/formatter';
 export class EventCreateComponent implements OnInit {
   private referenceStateFacade = inject(ReferenceStateFacade);
   private eventService = inject(EventService);
-  private router = inject(Router);
   private route = inject(ActivatedRoute);
   private dialog = inject(MatDialog);
 
@@ -161,35 +160,21 @@ export class EventCreateComponent implements OnInit {
     });
 
     if (this.mode === 'edit' && this.eventId) {
-      this.eventService
-        .updateEvent(this.eventId, {
-          ...this.eventForm.value,
-          startTime: new Date(this.eventForm.value.startTime).toISOString(),
-          endTime: new Date(this.eventForm.value.endTime).toISOString(),
-          categories: selection,
-          ...this.selectLocation
-        })
-        .subscribe({
-          next: () => {
-            this.eventService.reload();
-            this.router.navigate(['/app/history']);
-          }
-        });
+      this.eventService.updateEvent(this.eventId, {
+        ...this.eventForm.value,
+        startTime: new Date(this.eventForm.value.startTime).toISOString(),
+        endTime: new Date(this.eventForm.value.endTime).toISOString(),
+        categories: selection,
+        ...this.selectLocation
+      });
     } else {
-      this.eventService
-        .createEvent({
-          ...this.eventForm.value,
-          startTime: new Date(this.eventForm.value.startTime).toISOString(),
-          endTime: new Date(this.eventForm.value.endTime).toISOString(),
-          categories: selection,
-          ...this.selectLocation
-        })
-        .subscribe({
-          next: () => {
-            this.eventService.reload();
-            this.router.navigate(['/app/history']);
-          }
-        });
+      this.eventService.createEvent({
+        ...this.eventForm.value,
+        startTime: new Date(this.eventForm.value.startTime).toISOString(),
+        endTime: new Date(this.eventForm.value.endTime).toISOString(),
+        categories: selection,
+        ...this.selectLocation
+      });
     }
   }
 

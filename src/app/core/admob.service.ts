@@ -6,11 +6,14 @@ import {
   RewardAdOptions
 } from '@capacitor-community/admob';
 import { BannerAdPosition, BannerAdSize } from '@capacitor-community/admob';
+import { Capacitor } from '@capacitor/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdmobService {
+  private platform = Capacitor.getPlatform();
+
   initializeAdmob(): Promise<void> {
     return AdMob.initialize({
       requestTrackingAuthorization: true,
@@ -51,30 +54,38 @@ export class AdmobService {
       });
   }
 
-  async showReward(): Promise<AdMobRewardItem> {
-    // android:
-    // create-event: ca-app-pub-5981152485884247/8738744842
-    // join-event: ca-app-pub-5981152485884247/4263209563
-    // kick-participant: ca-app-pub-5981152485884247/8010882881
-    // view-participant: ca-app-pub-5981152485884247/8226505307
-
-    // ios:
-    // create-event: ca-app-pub-5981152485884247/5384719545
-    // join-event: ca-app-pub-5981152485884247/3103274788
-    // kick-participant: ca-app-pub-5981152485884247/6298399868
-    // view-participant: ca-app-pub-5981152485884247/4622302216
-
+  async showReward(option: AdOption): Promise<AdMobRewardItem> {
+    const adId = this.platform === 'ios' ? `${option}_IOS` : `${option}_MD`;
     const options: RewardAdOptions = {
-      adId: 'ca-app-pub-5981152485884247/1152996343',
+      adId: (AdId as any)[adId],
       isTesting: true,
       // npa: true,
       ssv: {
-        userId: 'A user ID to send to your SSV',
+        userId: '351', // user id (server)
         customData: JSON.stringify({ fake: 'data' })
       }
     };
+
     await AdMob.prepareRewardVideoAd(options);
 
     return AdMob.showRewardVideoAd();
   }
+}
+
+export enum AdOption {
+  CREATE_EVENT = 'CREATE_EVENT',
+  JOIN_EVENT = 'JOIN_EVENT',
+  KICK = 'KICK',
+  VIEW = 'VIEW'
+}
+
+enum AdId {
+  CREATE_EVENT_IOS = 'ca-app-pub-5981152485884247/5384719545',
+  JOIN_EVENT_IOS = 'ca-app-pub-5981152485884247/3103274788',
+  KICK_IOS = 'ca-app-pub-5981152485884247/6298399868',
+  VIEW_IOS = 'ca-app-pub-5981152485884247/4622302216',
+  CREATE_EVENT_MD = 'ca-app-pub-5981152485884247/8738744842',
+  JOIN_EVENT_MD = 'ca-app-pub-5981152485884247/4263209563',
+  KICK_MD = 'ca-app-pub-5981152485884247/8010882881',
+  VIEW_MD = 'ca-app-pub-5981152485884247/8226505307'
 }

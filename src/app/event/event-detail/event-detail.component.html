@@ -16,7 +16,10 @@
           <div class="content_area">
             <div class="container">
               <div class="event_content">
-                <h3 class="dark">{{ eventDetail.title }}</h3>
+                <div class="title-row">
+                  <h3 class="dark">{{ eventDetail.title }}</h3>
+                  <small>Estimate: {{eventDetail.maxParticipants}}</small>
+                </div>
                 <div class="main_content">
                   <div class="calendar_link">
                     <div class="calendar-icon">
@@ -89,9 +92,7 @@
                         (click)="
                           checkParticipants(
                             user.userId === eventDetail.creator.userId,
-                            user.userId === eventDetail.creator.userId
-                              ? eventDetail.eventId
-                              : participants
+                            eventDetail.eventId
                           )
                         "
                       >

@@ -1,4 +1,3 @@
-import { LoadingService } from 'src/app/core/loading.service';
 import { Event, Participant } from './../models/event.model';
 import { UserStateFacade } from '../../core/+states/user-state/user.state.facade';
 import { EventService } from '../../core/event.service';
@@ -20,7 +19,6 @@ export class EventDetailComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private eventService = inject(EventService);
-  private loadingService = inject(LoadingService);
 
   @ViewChild('joinBtn') joinBtn!: IonButton;
 
@@ -64,7 +62,7 @@ export class EventDetailComponent implements OnInit {
   }
 
   leaveComment(id: number): void {
-    this.eventService.leaveComment(id, this.comment!).subscribe();
+    this.eventService.leaveComment(id, this.comment!);
     delete this.comment;
   }
 
@@ -77,21 +75,14 @@ export class EventDetailComponent implements OnInit {
 
   async joinEvent(id: number): Promise<void> {
     this.joinBtn.disabled = true;
-    await this.loadingService.present();
-    this.eventService.apply(id).subscribe(() => {
-      this.loadingService.dismiss();
-    });
+    this.eventService.apply(id);
   }
 
-  checkParticipants(isHost: boolean, parameter: Participant[] | number): void {
-    if (isHost) {
-      this.router.navigate(['/app/event/joiner-list', parameter]);
-    } else {
-      this.router.navigate([
-        '/app/event/participants',
-        this.getJsonString(parameter)
-      ]);
-    }
+  checkParticipants(isHost: boolean, parameter: number): void {
+    this.router.navigate([
+      isHost ? '/app/event/joiner-list' : '/app/event/participants',
+      parameter
+    ]);
   }
 
   getJsonString(input: any) {

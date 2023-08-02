@@ -1,7 +1,10 @@
 <app-header></app-header>
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="reload($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <main class="fix notification-area main-area p-0">
-    <div class="container">
+    <div *ngIf="canView; else locked" class="container">
       <div class="joiner_list">
         <ng-container *ngIf="participants$ | async as participants">
           <div
@@ -25,10 +28,18 @@
             </div>
           </div>
           <div *ngIf="participants.length === 0" class="no-more-content">
-            No more content !
+            No more participants !
           </div>
         </ng-container>
       </div>
     </div>
+    <ng-template #locked>
+      <div class="locked-background">
+        <div class="icon-container" (click)="unlock()">
+          <fa-icon [icon]="['fas', 'lock']"></fa-icon>
+          <p>Unlock to see the participants</p>
+        </div>
+      </div>
+    </ng-template>
   </main>
 </ion-content>

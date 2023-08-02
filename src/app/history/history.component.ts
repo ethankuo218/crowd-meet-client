@@ -59,7 +59,7 @@ export class HistoryComponent {
     });
   }
 
-  leave(slidingItem: IonItemSliding, eventId: number) {
+  leave(slidingItem: IonItemSliding, eventId: number): void {
     slidingItem.close();
     const dialogRef = this.dialog.open(AlertDialogComponent, {
       data: {
@@ -69,11 +69,10 @@ export class HistoryComponent {
       },
       panelClass: 'custom-dialog'
     });
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(async (result) => {
       if (result === 'confirm') {
-        this.eventService.leave(eventId).subscribe(() => {
-          this.userService.reloadUserEvents();
-        });
+        await this.eventService.leave(eventId);
+        this.userService.reloadUserEvents();
       }
     });
   }

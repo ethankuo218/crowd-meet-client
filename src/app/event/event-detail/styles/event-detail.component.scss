@@ -18,6 +18,17 @@
   }
 }
 
+.title-row{
+  display: flex;
+  justify-content: space-between;
+
+  small{
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+  }
+}
+
 .event_content h3 {
   font-size: 24px;
   font-weight: 700;

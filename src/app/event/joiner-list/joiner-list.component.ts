@@ -32,29 +32,27 @@ export class JoinerListComponent implements OnInit {
     const result = await firstValueFrom(
       this.eventService.getParticipants(this.eventId)
     );
+
     this.joinerSubject.next(result.canView ? result.participants : []);
     if (event) {
       (event as RefresherCustomEvent).target.complete();
     }
   }
 
-  accept(id: number): void {
-    this.eventService.accept(this.eventId, [id]).subscribe(() => {
-      this.reload();
-    });
+  async accept(id: number): Promise<void> {
+    await this.eventService.accept(this.eventId, [id]);
+    this.reload();
   }
 
-  decline(id: number): void {
-    this.eventService.decline(this.eventId, [id]).subscribe(() => {
-      this.reload();
-    });
+  async decline(id: number): Promise<void> {
+    await this.eventService.decline(this.eventId, [id]);
+    this.reload();
   }
 
-  kick(slidingItem: IonItemSliding, id: number): void {
+  async kick(slidingItem: IonItemSliding, id: number): Promise<void> {
     slidingItem.close();
-    this.eventService.decline(this.eventId, [id]).subscribe(() => {
-      this.reload();
-    });
+    await this.eventService.kick(this.eventId, id);
+    this.reload();
   }
 
   get eventStatus(): typeof EventStatus {

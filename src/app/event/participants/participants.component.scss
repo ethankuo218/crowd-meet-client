@@ -46,6 +46,33 @@
   }
 }
 
+.locked-background {
+  height: 89vh;
+  background-color: var(--ion-background-color);
+  // opacity: 50%;
+
+  display: flex;
+  align-items: center;
+
+  .icon-container {
+    width: 100vw;
+    line-height: 40px;
+    text-align: center;
+
+    fa-icon {
+      font-size: 25vw;
+      color: var(--ion-text-color);
+      opacity: 50%;
+    }
+
+    p {
+      font-size: 23px;
+      color: var(--ion-color-primary);
+      font-weight: 800;
+    }
+  }
+}
+
 hr {
   background: #eeeeee;
   height: 1px;

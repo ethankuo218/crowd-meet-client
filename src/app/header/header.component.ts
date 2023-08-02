@@ -10,7 +10,6 @@ import {
 import { Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IonicModule, ModalController } from '@ionic/angular';
-import { ActionSheetController } from '@ionic/angular';
 import { FilterComponent } from '../filter/filter.component';
 import { EventService } from '../core/event.service';
 
