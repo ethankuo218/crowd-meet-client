@@ -8,6 +8,11 @@
 
 .min_img {
   width: 20%;
+
+  img {
+    border-radius: 50%;
+    object-fit: cover;
+  }
 }
 
 .text_div,

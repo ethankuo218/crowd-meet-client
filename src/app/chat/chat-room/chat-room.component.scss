@@ -13,7 +13,7 @@
   background: #f5f5f5;
   margin-right: auto;
   padding: 15px 20px;
-  border-radius: 20px 20px 20px 7px;
+  border-radius: 7px 20px 20px 20px;
   position: relative;
   margin-bottom: 20px;
   margin-left: 0;
@@ -74,5 +74,19 @@ ion-footer {
 
   fa-icon {
     font-size: 18px;
+  }
+}
+
+.opt-chat {
+  display: flex;
+
+  .min_img {
+    width: 2rem;
+    margin-right: 5px;
+
+    img {
+      border-radius: 50%;
+      object-fit: cover;
+    }
   }
 }
