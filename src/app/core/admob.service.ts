@@ -68,7 +68,7 @@ export class AdmobService {
         },
         panelClass: 'custom-dialog'
       });
-      return;
+      throw 'You are out of AD watching times';
     }
 
     const userId = (await firstValueFrom(this.userId$)).toString();
