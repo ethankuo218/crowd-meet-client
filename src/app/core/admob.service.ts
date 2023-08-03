@@ -1,12 +1,6 @@
 import { UserStateFacade } from './+states/user-state/user.state.facade';
 import { Injectable, inject } from '@angular/core';
-import {
-  AdMob,
-  AdMobRewardItem,
-  AdOptions,
-  RewardAdOptions,
-  RewardAdPluginEvents
-} from '@capacitor-community/admob';
+import { AdMob, AdOptions, RewardAdOptions } from '@capacitor-community/admob';
 import { BannerAdPosition, BannerAdSize } from '@capacitor-community/admob';
 import { Capacitor } from '@capacitor/core';
 import { firstValueFrom, map } from 'rxjs';
@@ -14,7 +8,6 @@ import { AllowanceType } from './models/core.model';
 import { UserService } from './user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertDialogComponent } from '../components/alert-dialog/alert-dialog.component';
-import { resolve } from 'dns';
 
 @Injectable({
   providedIn: 'root'
@@ -60,12 +53,18 @@ export class AdmobService {
   }
 
   async showReward(option: AdOption): Promise<void> {
-    if (!(await this.checkAdAllowance(option))) {
+    const checkAllowanceResult = await this.checkAdAllowance(option);
+
+    if (checkAllowanceResult === 'skipAd') {
+      return;
+    }
+
+    if (!checkAllowanceResult) {
       this.dialog.open(AlertDialogComponent, {
         data: {
           title: 'Oops',
           content: `You are out of AD watching times`,
-          enableCancelButton: true
+          enableCancelButton: false
         },
         panelClass: 'custom-dialog'
       });
@@ -90,33 +89,54 @@ export class AdmobService {
     let getReward: boolean = false;
     let checkCount: number = 0;
 
-    await new Promise((resolve) => {
-      const checkAllowanceInterval = setInterval(async () => {
+    await new Promise(async (resolve, reject) => {
+      while (checkCount < 3) {
         const checkResult = await this.checkCurrentAllowance(option);
-        console.log('check', checkResult);
-        if (checkResult || checkCount > 3) {
+        if (checkResult) {
           getReward = checkResult;
           resolve(getReward);
-          clearInterval(checkAllowanceInterval);
-        } else {
-          checkCount++;
+          break;
         }
-      }, 500);
+
+        checkCount++;
+        setTimeout(() => {}, 500);
+      }
+
+      this.dialog.open(AlertDialogComponent, {
+        data: {
+          title: 'Oops',
+          content: `Get reward failed. Please try again`,
+          enableCancelButton: false
+        },
+        panelClass: 'custom-dialog'
+      });
+      reject('Get reward failed!');
     });
   }
 
-  private async checkAdAllowance(option: AdOption): Promise<boolean> {
-    if (option === AdOption.EVENT_JOIN) {
-      return true;
-    }
+  private async checkAdAllowance(option: AdOption): Promise<string | boolean> {
+    return true;
+    const allowanceType = `${option}` as AllowanceType;
+    const adAllowanceType = `${option}_AD_WATCH` as AllowanceType;
+    const currentAllowance = await firstValueFrom(
+      this.userService.getAllowance()
+    );
 
-    const allowanceType = `${option}_AD_WATCH` as AllowanceType;
-    return (await this.userService.checkAllowance(allowanceType)) > 0;
+    if (currentAllowance[allowanceType] > 0) {
+      return 'skipAd';
+    } else {
+      return option === AdOption.EVENT_JOIN
+        ? true
+        : currentAllowance[adAllowanceType] > 0;
+    }
   }
 
   private async checkCurrentAllowance(option: AdOption): Promise<boolean> {
     const allowanceType = `${option}` as AllowanceType;
-    return (await this.userService.checkAllowance(allowanceType)) > 0;
+    const currentAllowance = (
+      await firstValueFrom(this.userService.getAllowance())
+    )[allowanceType];
+    return currentAllowance > 0;
   }
 }
 

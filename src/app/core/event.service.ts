@@ -177,7 +177,6 @@ export class EventService {
     await this.loadingService.present();
     try {
       await this.admobService.showReward(AdOption.EVENT_JOIN);
-      console.log('Get Reward');
       await firstValueFrom(
         this.httpClientService.post<EventActionResponse>(
           `event/${id}/participant`,
@@ -185,6 +184,8 @@ export class EventService {
         )
       );
       this.router.navigate(['/app/history']);
+    } catch (err) {
+      throw err;
     } finally {
       this.loadingService.dismiss();
     }

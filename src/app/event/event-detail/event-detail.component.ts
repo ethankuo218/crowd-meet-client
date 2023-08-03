@@ -75,7 +75,11 @@ export class EventDetailComponent implements OnInit {
 
   async joinEvent(id: number): Promise<void> {
     this.joinBtn.disabled = true;
-    this.eventService.apply(id);
+    try {
+      await this.eventService.apply(id);
+    } catch (err) {
+      this.joinBtn.disabled = false;
+    }
   }
 
   checkParticipants(isHost: boolean, parameter: number): void {

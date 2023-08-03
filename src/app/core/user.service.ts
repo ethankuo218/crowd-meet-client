@@ -132,12 +132,8 @@ export class UserService {
     return this.userStateFacade.getUserEvents();
   }
 
-  async checkAllowance(allowanceType: AllowanceType): Promise<number> {
-    return (
-      await firstValueFrom(
-        this.httpClientService.get<UserAllowance>('user/me/allowance')
-      )
-    )[allowanceType];
+  getAllowance(): Observable<UserAllowance> {
+    return this.httpClientService.get<UserAllowance>('user/me/allowance');
   }
 
   async reloadUserEvents(): Promise<void> {
