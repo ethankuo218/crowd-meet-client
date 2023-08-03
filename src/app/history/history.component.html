@@ -9,10 +9,12 @@
         <ng-template mat-tab-label> Upcoming </ng-template>
         <br />
         <ng-container *ngIf="!isLoading">
-          <ng-container
-            *ngFor="let item of upcoming$ | async; trackBy: trackByIndex"
-          >
-            <ion-item-sliding class="joiner-list-content" #slidingItem>
+          <ng-container *ngIf="upcoming$ | async as upcomings">
+            <ion-item-sliding
+              class="joiner-list-content"
+              *ngFor="let item of upcomings; trackBy: trackByIndex"
+              #slidingItem
+            >
               <ion-item>
                 <div class="joiner-list-image">
                   <img
@@ -53,9 +55,16 @@
               </ion-item>
 
               <ion-item-options side="end">
-                <ion-item-option color="danger" (click)="leave(slidingItem, item.eventId)">Leave</ion-item-option>
+                <ion-item-option
+                  color="danger"
+                  (click)="leave(slidingItem, item.eventId)"
+                  >Leave</ion-item-option
+                >
               </ion-item-options>
             </ion-item-sliding>
+            <div *ngIf="upcomings.length === 0" class="no-more-content">
+              You don't have upcoming event!
+            </div>
           </ng-container>
         </ng-container>
         <ng-container *ngIf="isLoading">
@@ -63,23 +72,32 @@
             *ngFor="let item of [0, 1, 2, 3, 4, 5, 6, 7]"
             class="joiner-list-content"
           >
-            <div class="joiner-list-image">
-              <ion-skeleton-text [animated]="true"></ion-skeleton-text>
-            </div>
-            <div class="upcoming-content">
-              <ion-skeleton-text
-                [animated]="true"
-                style="width: 40%; margin-bottom: 0.5rem"
-              ></ion-skeleton-text>
-              <ion-skeleton-text
-                [animated]="true"
-                style="width: 80%; margin-bottom: 0.5rem; height: 1rem"
-              ></ion-skeleton-text>
-              <ion-skeleton-text
-                [animated]="true"
-                style="width: 60%"
-              ></ion-skeleton-text>
-            </div>
+            <ion-item-sliding class="joiner-list-content" #slidingItem>
+              <ion-item>
+                <div class="joiner-list-image">
+                  <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                </div>
+                <div class="upcoming-content">
+                  <ion-skeleton-text
+                    [animated]="true"
+                    style="
+                      width: 40%;
+                      margin-top: 0.8rem;
+                      margin-bottom: 0.5rem;
+                      height: 0.8rem;
+                    "
+                  ></ion-skeleton-text>
+                  <ion-skeleton-text
+                    [animated]="true"
+                    style="width: 80%; margin-bottom: 0.5rem; height: 1rem"
+                  ></ion-skeleton-text>
+                  <ion-skeleton-text
+                    [animated]="true"
+                    style="width: 60%; height: 1rem"
+                  ></ion-skeleton-text>
+                </div>
+              </ion-item>
+            </ion-item-sliding>
           </div>
         </ng-container>
       </mat-tab>
@@ -87,10 +105,12 @@
         <ng-template mat-tab-label> Joined </ng-template>
         <br />
         <ng-container *ngIf="!isLoading">
-          <ng-container
-            *ngFor="let item of joined$ | async; trackBy: trackByIndex"
-          >
-            <ion-item-sliding class="joiner-list-content" #slidingItem>
+          <ng-container *ngIf="joined$ | async as joineds">
+            <ion-item-sliding
+              class="joiner-list-content"
+              *ngFor="let item of joineds; trackBy: trackByIndex"
+              #slidingItem
+            >
               <ion-item>
                 <div class="joiner-list-image">
                   <img
@@ -124,9 +144,16 @@
               </ion-item>
 
               <ion-item-options side="end">
-                <ion-item-option color="danger" (click)="leave(slidingItem, item.eventId)">Leave</ion-item-option>
+                <ion-item-option
+                  color="danger"
+                  (click)="leave(slidingItem, item.eventId)"
+                  >Leave</ion-item-option
+                >
               </ion-item-options>
             </ion-item-sliding>
+            <div *ngIf="joineds.length === 0" class="no-more-content">
+              You don't have joined event!
+            </div>
           </ng-container>
         </ng-container>
         <ng-container *ngIf="isLoading">
@@ -134,23 +161,32 @@
             *ngFor="let item of [0, 1, 2, 3, 4, 5, 6, 7]"
             class="joiner-list-content"
           >
-            <div class="joiner-list-image">
-              <ion-skeleton-text [animated]="true"></ion-skeleton-text>
-            </div>
-            <div class="upcoming-content">
-              <ion-skeleton-text
-                [animated]="true"
-                style="width: 40%; margin-bottom: 0.5rem"
-              ></ion-skeleton-text>
-              <ion-skeleton-text
-                [animated]="true"
-                style="width: 80%; margin-bottom: 0.5rem; height: 1rem"
-              ></ion-skeleton-text>
-              <ion-skeleton-text
-                [animated]="true"
-                style="width: 60%"
-              ></ion-skeleton-text>
-            </div>
+            <ion-item-sliding class="joiner-list-content" #slidingItem>
+              <ion-item>
+                <div class="joiner-list-image">
+                  <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                </div>
+                <div class="upcoming-content">
+                  <ion-skeleton-text
+                    [animated]="true"
+                    style="
+                      width: 40%;
+                      margin-top: 0.8rem;
+                      margin-bottom: 0.5rem;
+                      height: 0.8rem;
+                    "
+                  ></ion-skeleton-text>
+                  <ion-skeleton-text
+                    [animated]="true"
+                    style="width: 80%; margin-bottom: 0.5rem; height: 1rem"
+                  ></ion-skeleton-text>
+                  <ion-skeleton-text
+                    [animated]="true"
+                    style="width: 60%; height: 1rem"
+                  ></ion-skeleton-text>
+                </div>
+              </ion-item>
+            </ion-item-sliding>
           </div>
         </ng-container>
       </mat-tab>
