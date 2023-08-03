@@ -17,7 +17,6 @@ import { AlertDialogComponent } from '../components/alert-dialog/alert-dialog.co
   styleUrls: ['./history.component.scss']
 })
 export class HistoryComponent {
-  private actionSheetController = inject(ActionSheetController);
   private userService = inject(UserService);
   private eventService = inject(EventService);
   private dialog = inject(MatDialog);

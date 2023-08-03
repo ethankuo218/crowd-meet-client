@@ -142,7 +142,9 @@ export class UserService {
       .userId;
     this.httpClientService.get<UserEvent[]>(`user/${userId}/events`).subscribe({
       next: (result) => {
-        this._isLoading = false;
+        setTimeout(() => {
+          this._isLoading = false;
+        }, 300);
         this.userStateFacade.storeUserEvents(result);
       }
     });

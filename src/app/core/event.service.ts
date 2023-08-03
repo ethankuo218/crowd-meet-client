@@ -50,8 +50,9 @@ export class EventService {
         ...this._filter
       })
     );
-
-    this._isLoading = false;
+    setTimeout(() => {
+      this._isLoading = false;
+    }, 300);
     this.eventListStateFacade.storeEventList(result);
   }
 
@@ -86,31 +87,45 @@ export class EventService {
   }
 
   async createEvent(eventSetting: EventSetting): Promise<void> {
-    this.admobService.showInterstitial();
+    await this.loadingService.present();
+    try {
+      await this.admobService.showReward(AdOption.EVENT_CREATE);
+      const eventCreateResult = await firstValueFrom(
+        this.httpClientService.post<Event>('event', eventSetting)
+      );
 
-    const eventCreateResult = await firstValueFrom(
-      this.httpClientService.post<Event>('event', eventSetting)
-    );
+      if (this.imgUploadService.uploadedImagesCount !== 0) {
+        await this.updateEventImage(eventCreateResult.eventId, 'post');
+      }
+      this.reload();
 
-    if (this.imgUploadService.uploadedImagesCount !== 0) {
-      this.updateEventImage(eventCreateResult.eventId, 'post');
+      this.router.navigate(['app/history']);
+    } catch (error) {
+      throw error;
+    } finally {
+      this.loadingService.dismiss();
     }
-
-    this.reload();
   }
 
   async updateEvent(id: number, body: any): Promise<void> {
-    this.admobService.showInterstitial();
+    try {
+      this.loadingService.present();
+      const eventPatchResult = await firstValueFrom(
+        this.httpClientService.patch<Event>(`event/${id}`, body)
+      );
 
-    const eventPatchResult = await firstValueFrom(
-      this.httpClientService.patch<Event>(`event/${id}`, body)
-    );
+      if (this.imgUploadService.uploadedImagesCount !== 0) {
+        await this.updateEventImage(eventPatchResult.eventId, 'put');
+      }
 
-    if (this.imgUploadService.uploadedImagesCount !== 0) {
-      this.updateEventImage(eventPatchResult.eventId, 'put');
+      this.reload();
+
+      this.router.navigate(['app/history']);
+    } catch (error) {
+      throw error;
+    } finally {
+      this.loadingService.present();
     }
-
-    this.reload();
   }
 
   // event image
@@ -131,8 +146,6 @@ export class EventService {
         this.httpClientService.put<Image>(`event/${id}/image`, formData)
       );
     }
-
-    this.router.navigate(['app/history']);
   }
 
   getEventImages(eventIds: number[]): Observable<EventImageResponse[]> {
@@ -173,6 +186,20 @@ export class EventService {
     );
   }
 
+  async unlockedParticipants(id: number) {
+    await this.loadingService.present();
+    try {
+      await this.admobService.showReward(AdOption.CHECK_PARTICIPANT);
+      await firstValueFrom(
+        this.httpClientService.post(`/event/${id}/unlocked-participants`, {})
+      );
+    } catch (error) {
+      throw error;
+    } finally {
+      this.loadingService.dismiss();
+    }
+  }
+
   async apply(id: number): Promise<void> {
     await this.loadingService.present();
     try {
@@ -184,8 +211,8 @@ export class EventService {
         )
       );
       this.router.navigate(['/app/history']);
-    } catch (err) {
-      throw err;
+    } catch (error) {
+      throw error;
     } finally {
       this.loadingService.dismiss();
     }
@@ -226,17 +253,22 @@ export class EventService {
 
   async kick(id: number, userId: number): Promise<void> {
     await this.loadingService.present();
-    await this.admobService.showReward(AdOption.KICK);
-    await firstValueFrom(
-      this.httpClientService.patch<EventActionResponse>(
-        `event/${id}/participant`,
-        {
-          status: EventStatus.kicked,
-          participantId: userId
-        }
-      )
-    );
-    this.loadingService.dismiss();
+    try {
+      await this.admobService.showReward(AdOption.KICK);
+      await firstValueFrom(
+        this.httpClientService.patch<EventActionResponse>(
+          `event/${id}/participant`,
+          {
+            status: EventStatus.kicked,
+            participantId: userId
+          }
+        )
+      );
+    } catch (error) {
+      throw error;
+    } finally {
+      this.loadingService.dismiss();
+    }
   }
 
   // others
