@@ -208,6 +208,12 @@ textarea:focus {
   border-radius: 40px;
 }
 
+.mega-boost-dialog .mat-mdc-dialog-surface.mdc-dialog__surface {
+  background-color: var(--ion-dialog-background-color);
+  padding: 15px 20px;
+  border-radius: 40px;
+}
+
 .radio_div {
   font-size: 1.2rem;
   font-weight: bold;

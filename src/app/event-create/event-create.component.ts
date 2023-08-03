@@ -18,6 +18,7 @@ import { InputValidators } from '../validators/input-validators';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertDialogComponent } from '../components/alert-dialog/alert-dialog.component';
 import * as Formatter from '../core/formatter';
+import { MegaBoostComponent } from './mega-boost/mega-boost.component';
 
 @Component({
   selector: 'app-create-page',
@@ -168,12 +169,24 @@ export class EventCreateComponent implements OnInit {
         ...this.selectLocation
       });
     } else {
-      this.eventService.createEvent({
-        ...this.eventForm.value,
-        startTime: new Date(this.eventForm.value.startTime).toISOString(),
-        endTime: new Date(this.eventForm.value.endTime).toISOString(),
-        categories: selection,
-        ...this.selectLocation
+      const dialogRef = this.dialog.open(MegaBoostComponent, {
+        data: {
+          title: 'Mega boost',
+          content: `Confirm to boost your event`,
+          enableCancelButton: true
+        },
+        panelClass: 'mega-boost-dialog'
+      });
+      dialogRef.afterClosed().subscribe((result) => {
+        console.log(result);
+
+        this.eventService.createEvent({
+          ...this.eventForm.value,
+          startTime: new Date(this.eventForm.value.startTime).toISOString(),
+          endTime: new Date(this.eventForm.value.endTime).toISOString(),
+          categories: selection,
+          ...this.selectLocation
+        });
       });
     }
   }

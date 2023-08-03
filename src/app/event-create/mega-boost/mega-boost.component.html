@@ -1,0 +1,87 @@
+<div class="modal-content">
+  <div class="modal-body">
+    <div class="text-center mdl_div">
+      <h2 class="primary">{{ 'MEGA BOOST' }}</h2>
+      <ion-accordion-group #accordionGroup>
+        <ion-accordion value="selectPlan" [toggleIcon]="'none'">
+          <ion-item slot="header" color="light">
+            <div class="radio_div">
+              <input
+                type="radio"
+                id="yes"
+                name="boost"
+                [value]="'Y'"
+                [(ngModel)]="boost"
+                (ngModelChange)="onBoostChange()"
+              />
+              <label class="dark" for="yes">Choose your plan</label>
+            </div>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <div class="radio_div">
+              <input
+                type="radio"
+                #option1
+                id="option1"
+                name="plan"
+                [value]="1"
+                [(ngModel)]="plan"
+              />
+              <label class="dark" for="option1">1 day</label>
+            </div>
+          </div>
+          <div class="ion-padding" slot="content">
+            <div class="radio_div">
+              <input
+                type="radio"
+                #option2
+                id="option2"
+                name="plan"
+                [value]="3"
+                [(ngModel)]="plan"
+              />
+              <label class="dark" for="option2">3 days</label>
+            </div>
+          </div>
+          <div class="ion-padding" slot="content">
+            <div class="radio_div">
+              <input
+                type="radio"
+                #optioin3
+                id="option3"
+                name="plan"
+                [value]="7"
+                [(ngModel)]="plan"
+              />
+              <label class="dark" for="option3">7 days</label>
+            </div>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
+      <ion-item slot="header" color="light">
+        <div class="radio_div">
+          <input
+            type="radio"
+            id="no"
+            name="boost"
+            [value]="'N'"
+            [(ngModel)]="boost"
+            (ngModelChange)="onBoostChange()"
+          />
+          <label class="dark" for="no">Choose free plan</label>
+        </div>
+      </ion-item>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      mat-button
+      type="button"
+      class="btn btn-primary"
+      [mat-dialog-close]="boost"
+      cdkFocusInitial
+    >
+      Confirm
+    </button>
+  </div>
+</div>

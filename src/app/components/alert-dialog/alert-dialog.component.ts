@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
@@ -9,7 +9,7 @@ import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
   standalone: true,
   imports: [CommonModule, MatDialogModule]
 })
-export class AlertDialogComponent implements OnInit {
+export class AlertDialogComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: {
@@ -18,6 +18,4 @@ export class AlertDialogComponent implements OnInit {
       enableCancelButton: boolean;
     }
   ) {}
-
-  ngOnInit() {}
 }
