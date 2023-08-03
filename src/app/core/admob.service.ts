@@ -92,7 +92,7 @@ export class AdmobService {
 
     await new Promise((resolve) => {
       const checkAllowanceInterval = setInterval(async () => {
-        const checkResult = await this.checkAdAllowance(option);
+        const checkResult = await this.checkCurrentAllowance(option);
         console.log('check', checkResult);
         if (checkResult || checkCount > 3) {
           getReward = checkResult;
