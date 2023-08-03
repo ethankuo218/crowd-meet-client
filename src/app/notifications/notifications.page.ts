@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-notifications',
@@ -8,12 +8,8 @@ import { Component, OnInit } from '@angular/core';
     './styles/notifications.shell.scss'
   ]
 })
-export class NotificationsPage implements OnInit {
+export class NotificationsPage {
   notifications: any;
 
   constructor() {}
-
-  ngOnInit(): void {}
-
-  ionViewWillLeave(): void {}
 }

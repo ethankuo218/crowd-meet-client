@@ -3,98 +3,27 @@
 <ion-content class="notifications-content">
   <main class="notification-area main-area">
     <div class="container">
-      <div class="image_content">
-        <div class="poin_ment">
-          <div>
-            <img src="assets/images/round_image.png" alt="image" />
+      <ng-container *ngFor="let item of ['', '', '', '', '']">
+        <div class="image_content">
+          <div class="poin_ment">
+            <div>
+              <img src="assets/images/round_image.png" alt="image" />
+            </div>
+            <div class="ment_text">
+              <h2 class="dark">Appointment Cancelled!</h2>
+              <p class="dark_d">Today <span>|</span> 15:36 PM</p>
+            </div>
+            <button class="white">New</button>
           </div>
-          <div class="ment_text">
-            <h2 class="dark">Appointment Cancelled!</h2>
-            <p class="dark_d">Today <span>|</span> 15:36 PM</p>
-          </div>
-          <button class="white">New</button>
-        </div>
-        <div class="sample_text">
-          <p class="dark_d">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam,
-          </p>
-        </div>
-      </div>
-      <div class="image_content">
-        <div class="poin_ment">
-          <div>
-            <img src="assets/images/round_image.png" alt="image" />
-          </div>
-          <div class="ment_text">
-            <h2 class="dark">Schedule Changed</h2>
-            <p class="dark_d">Yesterday <span>|</span> 09:23 AM</p>
-          </div>
-          <button class="white">New</button>
-        </div>
-        <div class="sample_text">
-          <p class="dark_d">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam,
-          </p>
-        </div>
-      </div>
-      <div class="image_content">
-        <div class="poin_ment">
-          <div>
-            <img src="assets/images/round_image.png" alt="image" />
-          </div>
-          <div class="ment_text">
-            <h2 class="dark">Appointment Success!</h2>
-            <p class="dark_d">19Dec. 2022 <span>|</span> 18:35 PM</p>
+          <div class="sample_text">
+            <p class="dark_d">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+              ad minim veniam,
+            </p>
           </div>
         </div>
-        <div class="sample_text">
-          <p class="dark_d">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam,
-          </p>
-        </div>
-      </div>
-      <div class="image_content">
-        <div class="poin_ment">
-          <div>
-            <img src="assets/images/round_image.png" alt="image" />
-          </div>
-          <div class="ment_text">
-            <h2 class="dark">New Service Available!</h2>
-            <p class="dark_d">Today <span>|</span> 15:36 PM</p>
-          </div>
-        </div>
-        <div class="sample_text">
-          <p class="dark_d">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam,
-          </p>
-        </div>
-      </div>
-      <div class="image_content image_content2">
-        <div class="poin_ment">
-          <div>
-            <img src="assets/images/round_image.png" alt="image" />
-          </div>
-          <div class="ment_text">
-            <h2 class="dark">Credit Card Available!</h2>
-            <p class="dark_d">Today <span>|</span> 15:36 PM</p>
-          </div>
-        </div>
-        <div class="sample_text">
-          <p class="dark_d">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam,
-          </p>
-        </div>
-      </div>
+      </ng-container>
     </div>
   </main>
 </ion-content>
