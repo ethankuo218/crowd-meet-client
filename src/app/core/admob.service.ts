@@ -72,9 +72,8 @@ export class AdmobService {
     }
 
     const userId = (await firstValueFrom(this.userId$)).toString();
-    const adId = this.platform === 'ios' ? `${option}_IOS` : `${option}_MD`;
     const options: RewardAdOptions = {
-      adId: (AdId as any)[adId],
+      adId: AdId[`${option}${this.platform === 'ios' ? '_IOS' : '_MD'}`],
       isTesting: true,
       // npa: true,
       ssv: {
@@ -91,15 +90,16 @@ export class AdmobService {
 
     await new Promise(async (resolve, reject) => {
       while (checkCount < 3) {
-        const checkResult = await this.checkCurrentAllowance(option);
-        if (checkResult) {
-          getReward = checkResult;
-          resolve(getReward);
-          break;
-        }
+        setTimeout(async () => {
+          const checkResult = await this.checkCurrentAllowance(option);
+          if (checkResult) {
+            getReward = checkResult;
+            resolve(getReward);
+            checkCount = 3;
+          }
+        }, 500);
 
         checkCount++;
-        setTimeout(() => {}, 500);
       }
 
       this.dialog.open(AlertDialogComponent, {
@@ -115,9 +115,8 @@ export class AdmobService {
   }
 
   private async checkAdAllowance(option: AdOption): Promise<string | boolean> {
-    return true;
-    const allowanceType = `${option}` as AllowanceType;
-    const adAllowanceType = `${option}_AD_WATCH` as AllowanceType;
+    const allowanceType = AllowanceType[`${option}`];
+    const adAllowanceType = AllowanceType[`${option}_AD_WATCH`];
     const currentAllowance = await firstValueFrom(
       this.userService.getAllowance()
     );
@@ -132,10 +131,11 @@ export class AdmobService {
   }
 
   private async checkCurrentAllowance(option: AdOption): Promise<boolean> {
-    const allowanceType = `${option}` as AllowanceType;
+    const allowanceType = AllowanceType[`${option}`];
     const currentAllowance = (
       await firstValueFrom(this.userService.getAllowance())
     )[allowanceType];
+
     return currentAllowance > 0;
   }
 }

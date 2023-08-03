@@ -37,6 +37,7 @@ export interface UserAllowance {
   eventsCreationAllowance: number;
   adsWatchedForEventCreation: number;
   eventsJoiningAllowance: number;
+  adsWatchedForEventJoining: number; // event join not limit ad watching times
   kickAllowance: number;
   adsWatchedForKickIncrease: number;
   checkParticipantsAllowance: number;
@@ -47,6 +48,7 @@ export enum AllowanceType {
   EVENT_CREATE = 'eventsCreationAllowance',
   EVENT_CREATE_AD_WATCH = 'adsWatchedForEventCreation',
   EVENT_JOIN = 'eventsJoiningAllowance',
+  EVENT_JOIN_AD_WATCH = 'adsWatchedForEventJoining',
   KICK = 'kickAllowance',
   KICK_AD_WATCH = 'adsWatchedForKickIncrease',
   CHECK_PARTICIPANT = 'checkParticipantsAllowance',
