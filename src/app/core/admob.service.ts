@@ -3,7 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { AdMob, AdOptions, RewardAdOptions } from '@capacitor-community/admob';
 import { BannerAdPosition, BannerAdSize } from '@capacitor-community/admob';
 import { Capacitor } from '@capacitor/core';
-import { firstValueFrom, map } from 'rxjs';
+import { firstValueFrom, map, retry, timer } from 'rxjs';
 import { AllowanceType } from './models/core.model';
 import { UserService } from './user.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -74,7 +74,7 @@ export class AdmobService {
     const userId = (await firstValueFrom(this.userId$)).toString();
     const options: RewardAdOptions = {
       adId: AdId[`${option}${this.platform === 'ios' ? '_IOS' : '_MD'}`],
-      isTesting: true,
+      // isTesting: true,
       // npa: true,
       ssv: {
         userId: userId,
@@ -85,23 +85,9 @@ export class AdmobService {
     await AdMob.prepareRewardVideoAd(options);
     await AdMob.showRewardVideoAd();
 
-    let getReward: boolean = false;
-    let checkCount: number = 0;
-
-    await new Promise(async (resolve, reject) => {
-      while (checkCount < 3) {
-        setTimeout(async () => {
-          const checkResult = await this.checkCurrentAllowance(option);
-          if (checkResult) {
-            getReward = checkResult;
-            resolve(getReward);
-            checkCount = 3;
-          }
-        }, 500);
-
-        checkCount++;
-      }
-
+    try {
+      await this.checkCurrentAllowance(option);
+    } catch (error) {
       this.dialog.open(AlertDialogComponent, {
         data: {
           title: 'Oops',
@@ -110,8 +96,8 @@ export class AdmobService {
         },
         panelClass: 'custom-dialog'
       });
-      reject('Get reward failed!');
-    });
+      throw error;
+    }
   }
 
   private async checkAdAllowance(option: AdOption): Promise<string | boolean> {
@@ -126,17 +112,25 @@ export class AdmobService {
     } else {
       return option === AdOption.EVENT_JOIN
         ? true
-        : currentAllowance[adAllowanceType] > 0;
+        : currentAllowance[adAllowanceType] < AdWatchMaxCount[`${option}`];
     }
   }
 
-  private async checkCurrentAllowance(option: AdOption): Promise<boolean> {
+  private async checkCurrentAllowance(option: AdOption): Promise<void> {
     const allowanceType = AllowanceType[`${option}`];
-    const currentAllowance = (
-      await firstValueFrom(this.userService.getAllowance())
-    )[allowanceType];
-
-    return currentAllowance > 0;
+    await firstValueFrom(
+      this.userService.getAllowance().pipe(
+        map((result) => {
+          console.log('Check', result[allowanceType]);
+          if (result[allowanceType] > 0) {
+            return true;
+          } else {
+            throw 'Get reward failed';
+          }
+        }),
+        retry({ count: 2, delay: () => timer(500) })
+      )
+    );
   }
 }
 
@@ -156,4 +150,11 @@ enum AdId {
   EVENT_JOIN_MD = 'ca-app-pub-5981152485884247/4263209563',
   KICK_MD = 'ca-app-pub-5981152485884247/8010882881',
   CHECK_PARTICIPANT_MD = 'ca-app-pub-5981152485884247/8226505307'
+}
+
+enum AdWatchMaxCount {
+  EVENT_CREATE = 3,
+  EVENT_JOIN = 999,
+  KICK = 1,
+  CHECK_PARTICIPANT = 3
 }

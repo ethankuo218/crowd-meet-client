@@ -19,6 +19,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AlertDialogComponent } from '../components/alert-dialog/alert-dialog.component';
 import * as Formatter from '../core/formatter';
 import { MegaBoostComponent } from './mega-boost/mega-boost.component';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-create-page',
@@ -30,6 +31,7 @@ export class EventCreateComponent implements OnInit {
   private eventService = inject(EventService);
   private route = inject(ActivatedRoute);
   private dialog = inject(MatDialog);
+  private modalCtrl = inject(ModalController);
 
   private eventId: number | undefined;
   mode: string = 'create';
@@ -140,7 +142,7 @@ export class EventCreateComponent implements OnInit {
     });
   }
 
-  private createEvent() {
+  private async createEvent(): Promise<void> {
     if (this.eventCoverPictureUrl === null) {
       this.dialog.open(AlertDialogComponent, {
         data: {
@@ -169,17 +171,16 @@ export class EventCreateComponent implements OnInit {
         ...this.selectLocation
       });
     } else {
-      const dialogRef = this.dialog.open(MegaBoostComponent, {
-        data: {
-          title: 'Mega boost',
-          content: `Confirm to boost your event`,
-          enableCancelButton: true
-        },
-        panelClass: 'mega-boost-dialog'
+      const modal = await this.modalCtrl.create({
+        component: MegaBoostComponent,
+        initialBreakpoint: 1,
+        breakpoints: [0, 1],
+        componentProps: { eventId: this.eventId }
       });
-      dialogRef.afterClosed().subscribe((result) => {
-        console.log(result);
+      modal.present();
 
+      const { data, role } = await modal.onWillDismiss();
+      if (role === 'confirm') {
         this.eventService.createEvent({
           ...this.eventForm.value,
           startTime: new Date(this.eventForm.value.startTime).toISOString(),
@@ -187,7 +188,7 @@ export class EventCreateComponent implements OnInit {
           categories: selection,
           ...this.selectLocation
         });
-      });
+      }
     }
   }
 

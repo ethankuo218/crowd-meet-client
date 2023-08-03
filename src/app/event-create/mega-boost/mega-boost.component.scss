@@ -2,11 +2,6 @@
   padding: 0;
 }
 
-.modal-footer {
-  border: none;
-  padding: 20px 0 0;
-}
-
 .mdl_div img {
   width: 80%;
 }
@@ -22,16 +17,14 @@
   line-height: 20px;
 }
 
-.modal-footer button {
+.modal-footer ion-button {
   width: 100%;
-  border-radius: 27px;
-  padding: 14px 0;
+  height: 100%;
+  border-radius: 50%;
+  padding: 1rem;
+  --padding-top: 0.5rem;
+  --padding-bottom: 0.5rem;
   font-weight: 700;
-}
-
-.modal-footer button:nth-child(2) {
-  background: #e9f0ff;
-  margin: 10px 0 0;
 }
 
 .modal-body form p span {
@@ -55,15 +48,11 @@
   padding: 0;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #0d6efd;
-  border-color: #0d6efd;
-}
-
 ion-item {
   --ion-color-base: transparent !important;
   --border-color: transparent;
+  --border-style: none;
+  border: transparent;
 }
 
 .ion-padding {

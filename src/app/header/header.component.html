@@ -15,7 +15,12 @@
       </ion-buttons>
     </ng-template>
 
-    <ion-buttons slot="end" class="upgrade_btn" [routerLink]="['/app/purchase']">
+    <ion-buttons
+      *ngIf="!currentUrl.match('/app/event/list/')"
+      slot="end"
+      class="upgrade_btn"
+      [routerLink]="['/app/purchase']"
+    >
       <!-- <fa-icon [icon]="['fas', 'credit-card']"></fa-icon> -->
       <svg
         id="Layer_2"
@@ -47,6 +52,17 @@
           </g>
         </g>
       </svg>
+    </ion-buttons>
+    <ion-buttons
+      *ngIf="
+        (userId$ | async) === curretEventDetailCreatorId &&
+        currentUrl.match('/app/event/list/')
+      "
+      slot="end"
+      class="upgrade_btn"
+      (click)="openBoostPage()"
+    >
+      <fa-icon [icon]="['fas', 'rocket']"></fa-icon>
     </ion-buttons>
     <br />
   </ion-toolbar>

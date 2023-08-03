@@ -9,7 +9,7 @@ import {
   EventSetting,
   GetParticipantsResponse
 } from '../event/models/event.model';
-import { Observable, ReplaySubject, firstValueFrom } from 'rxjs';
+import { Observable, ReplaySubject, firstValueFrom, tap } from 'rxjs';
 import { EventActionResponse, EventImageResponse } from './models/core.model';
 import { EventList } from './+states/event-list-state/event-list.model';
 import { EventStatus, Image } from './+states/user-state/user.model';
@@ -32,6 +32,7 @@ export class EventService {
   private _isLoading: boolean = false;
   private _filter: any;
   private userLocation: { lat: number; lng: number } | undefined;
+  private _currentEventDetail: Event | undefined;
 
   // event list
   getEventList(): Observable<EventList> {
@@ -83,7 +84,11 @@ export class EventService {
   // event detail
   getEventDetail(id: number): Observable<Event> {
     this.reloadComment(id);
-    return this.httpClientService.get<Event>(`event/${id}`);
+    return this.httpClientService.get<Event>(`event/${id}`).pipe(
+      tap((result) => {
+        this._currentEventDetail = result;
+      })
+    );
   }
 
   async createEvent(eventSetting: EventSetting): Promise<void> {
@@ -287,6 +292,10 @@ export class EventService {
 
   get isLoading(): boolean {
     return this._isLoading;
+  }
+
+  get currentEventDetail() {
+    return this._currentEventDetail;
   }
 
   get filter() {

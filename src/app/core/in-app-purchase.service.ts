@@ -16,6 +16,8 @@ export class InAppPurchaseService {
   private platform = inject(Platform);
   private auth = inject(Auth);
 
+  private purchaseAttr: { serverUid: string } | undefined;
+
   async initialInAppPurchase(userId: number): Promise<void> {
     this.purchases.setDebugLogsEnabled(false);
     if (this.platform.is('ios')) {
@@ -31,7 +33,8 @@ export class InAppPurchaseService {
     const firebaseUid = (await firstValueFrom(user(this.auth)))?.uid;
 
     this.purchases.logIn(firebaseUid!);
-    this.purchases.setAttributes({ serverUid: userId.toString() });
+    this.purchaseAttr = { serverUid: userId.toString() };
+    this.purchases.setAttributes(this.purchaseAttr);
   }
 
   getProducts(): Promise<PurchasesStoreProduct[]> {
@@ -48,4 +51,22 @@ export class InAppPurchaseService {
   purchase(productIdentifier: string) {
     this.purchases.purchaseProduct(productIdentifier);
   }
+
+  purchaseBoost() {
+    this.resetAttributes();
+  }
+
+  setAttributes(parameter: any) {
+    this.purchases.setAttributes({
+      ...this.purchaseAttr,
+      ...parameter
+    });
+  }
+
+  resetAttributes() {
+    this.purchases.setAttributes(this.purchaseAttr!);
+  }
+  // set eventId in attributes if purchase boost
+  // { serverUid: userId.toString(), boostEventId: eventId.toString() }
+  // delete boostEventId when swipe down
 }

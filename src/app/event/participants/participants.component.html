@@ -6,36 +6,34 @@
   <main class="fix notification-area main-area p-0">
     <div *ngIf="canView; else locked" class="container">
       <div class="joiner_list">
-        <ng-container *ngIf="participants$ | async as participants">
-          <div
-            *ngFor="let participant of participants"
-            class="joiner_info"
-            [routerLink]="['/app/event/profile', participant.userId]"
-          >
-            <div class="joiner_img">
-              <img
-                [src]="
-                  participant.profilePictureUrl || 'assets/images/profile1.jpg'
-                "
-                alt="image"
-              />
-            </div>
-            <div class="joiner_content">
-              <h3 class="dark">{{ participant.name }}</h3>
-              <p class="dark_d td_p">
-                {{ participant.registeredAt | date : 'MMMM d, y | h:m a' }}
-              </p>
-            </div>
+        <div
+          *ngFor="let participant of participants"
+          class="joiner_info"
+          [routerLink]="['/app/event/profile', participant.userId]"
+        >
+          <div class="joiner_img">
+            <img
+              [src]="
+                participant.profilePictureUrl || 'assets/images/profile1.jpg'
+              "
+              alt="image"
+            />
           </div>
-          <div *ngIf="participants.length === 0" class="no-more-content">
-            No more participants !
+          <div class="joiner_content">
+            <h3 class="dark">{{ participant.name }}</h3>
+            <p class="dark_d td_p">
+              {{ participant.registeredAt | date : 'MMMM d, y | h:m a' }}
+            </p>
           </div>
-        </ng-container>
+        </div>
+        <div *ngIf="participants.length === 0" class="no-more-content">
+          No participants !
+        </div>
       </div>
     </div>
     <ng-template #locked>
       <div class="locked-background">
-        <div class="icon-container" (click)="unlock()">
+        <div class="icon-container">
           <fa-icon [icon]="['fas', 'lock']"></fa-icon>
           <p>You have no right to check it</p>
         </div>

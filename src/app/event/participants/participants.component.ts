@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Subject, firstValueFrom } from 'rxjs';
+import { Subject, firstValueFrom, Observable } from 'rxjs';
 import { Participant } from '../models/event.model';
 import { ActivatedRoute } from '@angular/router';
 import { EventService } from 'src/app/core/event.service';
@@ -18,9 +18,7 @@ export class ParticipantsComponent {
 
   private eventId!: number;
 
-  private participantsSubject: Subject<Participant[]> = new Subject();
-
-  participants$ = this.participantsSubject;
+  participants: Participant[] = [];
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
@@ -33,12 +31,10 @@ export class ParticipantsComponent {
     const result = await firstValueFrom(
       this.eventService.getParticipants(this.eventId)
     );
-
-    this.participantsSubject.next(result.canView ? result.participants : []);
+    this.canView = result.canView;
+    this.participants = result.canView ? result.participants : [];
     if (event) {
       (event as RefresherCustomEvent).target.complete();
     }
   }
-
-  unlock(): void {}
 }

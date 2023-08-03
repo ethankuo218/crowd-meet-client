@@ -1,3 +1,4 @@
+import { UserStateFacade } from './../core/+states/user-state/user.state.facade';
 import { CommonModule } from '@angular/common';
 import {
   Component,
@@ -12,6 +13,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { FilterComponent } from '../filter/filter.component';
 import { EventService } from '../core/event.service';
+import { MegaBoostComponent } from '../event-create/mega-boost/mega-boost.component';
+import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -27,6 +30,10 @@ export class HeaderComponent implements OnInit {
   private router = inject(Router);
   private modalCtrl = inject(ModalController);
   private eventService = inject(EventService);
+
+  userId$: Observable<number> = inject(UserStateFacade)
+    .getUser()
+    .pipe(map((user) => user.userId));
 
   tabPageUrls: string[] = [
     '/app/event/list',
@@ -62,7 +69,25 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  async openBoostPage() {
+    const modal = await this.modalCtrl.create({
+      component: MegaBoostComponent,
+      initialBreakpoint: 1,
+      breakpoints: [0, 1],
+      componentProps: { eventId: this.eventService.currentEventDetail?.eventId }
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+    if (role === 'confirm') {
+    }
+  }
+
   get currentUrl(): string {
     return this.router.url;
+  }
+
+  get curretEventDetailCreatorId() {
+    return this.eventService.currentEventDetail?.creator.userId;
   }
 }

@@ -95,6 +95,11 @@ export class EventDetailComponent implements OnInit {
       return;
     }
 
+    if (this.canView) {
+      this.router.navigate(['/app/event/participants', eventId]);
+      return;
+    }
+
     const dialogDef = this.dialog.open(AlertDialogComponent, {
       data: {
         title: 'Do you want to check the participants ?',
@@ -109,7 +114,7 @@ export class EventDetailComponent implements OnInit {
         if (result === 'confirm') {
           try {
             this.eventService.unlockedParticipants(eventId).then(() => {
-              this.router.navigate(['/app/event/participants']);
+              this.router.navigate(['/app/event/participants', eventId]);
             });
           } catch (error) {
             console.error(error);
