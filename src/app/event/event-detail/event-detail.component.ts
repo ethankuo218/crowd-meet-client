@@ -6,6 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, switchMap, tap, map } from 'rxjs';
 import { Browser } from '@capacitor/browser';
 import { IonButton } from '@ionic/angular';
+import { MatDialog } from '@angular/material/dialog';
+import { AlertDialogComponent } from 'src/app/components/alert-dialog/alert-dialog.component';
 
 @Component({
   selector: 'app-details',
@@ -19,6 +21,7 @@ export class EventDetailComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private eventService = inject(EventService);
+  private dialog = inject(MatDialog);
 
   @ViewChild('joinBtn') joinBtn!: IonButton;
 
@@ -28,7 +31,9 @@ export class EventDetailComponent implements OnInit {
     switchMap((params) => {
       return this.eventService.getEventDetail(params['id']).pipe(
         tap(() => {
-          this.isLoading = false;
+          setTimeout(() => {
+            this.isLoading = false;
+          }, 300);
         })
       );
     })
@@ -82,11 +87,34 @@ export class EventDetailComponent implements OnInit {
     }
   }
 
-  checkParticipants(isHost: boolean, parameter: number): void {
-    this.router.navigate([
-      isHost ? '/app/event/joiner-list' : '/app/event/participants',
-      parameter
-    ]);
+  checkParticipants(isHost: boolean, eventId: number): void {
+    if (isHost) {
+      this.router.navigate(['/app/event/joiner-list', eventId]);
+      return;
+    }
+
+    const dialogDef = this.dialog.open(AlertDialogComponent, {
+      data: {
+        title: 'Do you want to check the participants ?',
+        content: `Watch an ad to unlock`,
+        enableCancelButton: true
+      },
+      panelClass: 'custom-dialog'
+    });
+
+    dialogDef.afterClosed().subscribe({
+      next: (result) => {
+        if (result === 'confirm') {
+          try {
+            this.eventService.unlockedParticipants(eventId).then(() => {
+              this.router.navigate(['/app/event/participants']);
+            });
+          } catch (error) {
+            console.error(error);
+          }
+        }
+      }
+    });
   }
 
   getJsonString(input: any) {

@@ -3,7 +3,7 @@
 <ng-container *ngIf="eventDetail$ | async as eventDetail">
   <ng-container *ngIf="participants$ | async as participants">
     <ng-container *ngIf="user$ | async as user">
-      <ion-content class="event-detail-content">
+      <ion-content *ngIf="!isLoading" class="event-detail-content">
         <main class="event-detail-area main-area">
           <div class="cover_photo">
             <img
