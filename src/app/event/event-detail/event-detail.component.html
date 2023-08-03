@@ -117,7 +117,7 @@
                             </div>
                           </div>
                         </ng-container>
-                        <ng-container *ngIf="participants.length === 0">
+                        <ng-container *ngIf="participants.length === 0 && !canView">
                           <div class="joiner">
                             <fa-icon [icon]="['fas', 'lock']"></fa-icon>
                           </div>

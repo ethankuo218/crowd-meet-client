@@ -191,7 +191,7 @@ export class EventService {
     try {
       await this.admobService.showReward(AdOption.CHECK_PARTICIPANT);
       await firstValueFrom(
-        this.httpClientService.post(`/event/${id}/unlocked-participants`, {})
+        this.httpClientService.post(`event/${id}/unlocked-participants`, {})
       );
     } catch (error) {
       throw error;

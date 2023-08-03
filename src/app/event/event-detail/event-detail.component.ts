@@ -25,7 +25,8 @@ export class EventDetailComponent implements OnInit {
 
   @ViewChild('joinBtn') joinBtn!: IonButton;
 
-  isLoading = true;
+  isLoading: boolean = true;
+  canView: boolean = false;
 
   eventDetail$: Observable<Event> = this.route.params.pipe(
     switchMap((params) => {
@@ -43,6 +44,7 @@ export class EventDetailComponent implements OnInit {
     switchMap((params) => {
       return this.eventService.getParticipants(params['id']).pipe(
         map((result) => {
+          this.canView = result.canView;
           return result.canView ? result.participants : [];
         })
       );
