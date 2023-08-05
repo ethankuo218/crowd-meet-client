@@ -132,9 +132,16 @@ export class EventDetailComponent implements OnInit {
     return new Date(startTime).getTime() < new Date().getTime();
   }
 
-  isAllowJoin(participants: Participant[], userId: number): boolean {
-    return participants.find((participant) => participant.userId === userId)
-      ? false
-      : true;
+  isAllowJoin(
+    participants: Participant[],
+    maxParticipants: number,
+    userId: number
+  ): boolean {
+    const meetMaxParticipants = participants.length === maxParticipants - 1;
+    const joined = participants.find(
+      (participant) => participant.userId === userId
+    );
+
+    return joined || meetMaxParticipants ? false : true;
   }
 }

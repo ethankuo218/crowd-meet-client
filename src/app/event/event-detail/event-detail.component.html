@@ -18,7 +18,7 @@
               <div class="event_content">
                 <div class="title-row">
                   <h3 class="dark">{{ eventDetail.title }}</h3>
-                  <small>Estimate: {{eventDetail.maxParticipants}}</small>
+                  <small>Estimate: {{ eventDetail.maxParticipants }}</small>
                 </div>
                 <div class="main_content">
                   <div class="calendar_link">
@@ -117,7 +117,9 @@
                             </div>
                           </div>
                         </ng-container>
-                        <ng-container *ngIf="participants.length === 0 && !canView">
+                        <ng-container
+                          *ngIf="participants.length === 0 && !canView"
+                        >
                           <div class="joiner">
                             <fa-icon [icon]="['fas', 'lock']"></fa-icon>
                           </div>
@@ -212,7 +214,13 @@
               #joinBtn
               slot="end"
               (click)="joinEvent(eventDetail.eventId)"
-              [disabled]="!isAllowJoin(participants, user.userId)"
+              [disabled]="
+                !isAllowJoin(
+                  participants,
+                  eventDetail.maxParticipants,
+                  user.userId
+                )
+              "
             >
               Join
             </ion-button>
