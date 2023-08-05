@@ -1,6 +1,6 @@
 import { EventService } from '../core/event.service';
 import { ReferenceStateFacade } from '../core/+states/reference-state/reference.state.facade';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import {
   Validators,
   FormControl,
@@ -19,7 +19,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AlertDialogComponent } from '../components/alert-dialog/alert-dialog.component';
 import * as Formatter from '../core/formatter';
 import { MegaBoostComponent } from './mega-boost/mega-boost.component';
-import { ModalController } from '@ionic/angular';
+import { IonContent, ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-create-page',
@@ -32,6 +32,8 @@ export class EventCreateComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private dialog = inject(MatDialog);
   private modalCtrl = inject(ModalController);
+
+  @ViewChild('content') content!: IonContent;
 
   private eventId: number | undefined;
   mode: string = 'create';
@@ -85,11 +87,7 @@ export class EventCreateComponent implements OnInit {
   }
 
   ionViewWillEnter() {
-    window.scroll({
-      top: 0,
-      left: 0,
-      behavior: 'smooth'
-    });
+    this.content.scrollToTop(500);
     this.route.paramMap.pipe(take(1)).subscribe((params) => {
       this.mode = params.get('mode')!;
       this.eventForm.reset();
@@ -175,20 +173,18 @@ export class EventCreateComponent implements OnInit {
         component: MegaBoostComponent,
         initialBreakpoint: 1,
         breakpoints: [0, 1],
-        componentProps: { eventId: this.eventId }
+        componentProps: {
+          eventId: this.eventId,
+          eventInfo: {
+            ...this.eventForm.value,
+            startTime: new Date(this.eventForm.value.startTime).toISOString(),
+            endTime: new Date(this.eventForm.value.endTime).toISOString(),
+            categories: selection,
+            ...this.selectLocation
+          }
+        }
       });
       modal.present();
-
-      const { data, role } = await modal.onWillDismiss();
-      if (role === 'confirm') {
-        this.eventService.createEvent({
-          ...this.eventForm.value,
-          startTime: new Date(this.eventForm.value.startTime).toISOString(),
-          endTime: new Date(this.eventForm.value.endTime).toISOString(),
-          categories: selection,
-          ...this.selectLocation
-        });
-      }
     }
   }
 
