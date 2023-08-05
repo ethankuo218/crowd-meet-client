@@ -13,7 +13,6 @@ import {
 import { HttpClientService } from './http-client.service';
 import { Injectable, inject } from '@angular/core';
 import {
-  AllowanceType,
   LoginResponse,
   MegaBoost,
   ProfilePictureResponse,
@@ -48,10 +47,11 @@ export class UserService {
       this.inAppPurchaseService.initialInAppPurchase(loginResult.userId);
       this.getUserById(loginResult.userId).subscribe({
         next: async (result) => {
-          const isNewUser = await this.storage.get('isNewUser');
           this.userStateFacade.storeUser(result);
+
+          const isNewUser = await this.storage.get('isNewUser');
           if (isNewUser === null) {
-            this.storage.set('isNewUser', true);
+            this.storage.set('isNewUser', loginResult.isNewUser);
             this.router.navigate(['auth/walkthrough'], {
               replaceUrl: true
             });
