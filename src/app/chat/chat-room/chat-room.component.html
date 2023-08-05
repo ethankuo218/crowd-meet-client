@@ -1,5 +1,5 @@
 <app-header></app-header>
-<ion-content>
+<ion-content #content>
   <main class="chat-room-area main-area">
     <div class="container">
       <div class="chat-body">
@@ -124,13 +124,14 @@
 <ion-footer>
   <div class="btm-chat">
     <input
+      #inputMessage
       class="dark_dd"
       type="text"
       name="#"
       placeholder="Type a message"
-      (keyup.enter)="sendMessage($event)"
+      (focus)="scrollToBottom(800)"
     />
-    <ion-button>
+    <ion-button (click)="sendMessage()">
       <fa-icon [icon]="['fas', 'paper-plane']"></fa-icon>
     </ion-button>
   </div>

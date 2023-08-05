@@ -1,9 +1,15 @@
 import { ChatService } from '../chat.service';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  inject
+} from '@angular/core';
 import { Auth, User, user } from '@angular/fire/auth';
 import {
   Firestore,
-  runTransaction,
   collection,
   collectionData,
   limit,
@@ -14,9 +20,10 @@ import {
   updateDoc
 } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, ReplaySubject, take, takeUntil } from 'rxjs';
+import { Observable, ReplaySubject, take, takeUntil, tap } from 'rxjs';
 import { ChatMessage, ReadInfo, SendMessageDto } from '../models/chat.models';
 import { ProfilePictures } from 'src/app/core/models/core.model';
+import { IonContent } from '@ionic/angular';
 
 @Component({
   selector: 'app-chat-room',
@@ -24,12 +31,13 @@ import { ProfilePictures } from 'src/app/core/models/core.model';
   styleUrls: ['./chat-room.component.scss']
 })
 export class ChatRoomComponent implements OnInit, OnDestroy {
-  constructor(
-    private readonly firestore: Firestore,
-    private readonly route: ActivatedRoute,
-    private readonly auth: Auth,
-    private readonly chatService: ChatService
-  ) {}
+  private readonly firestore = inject(Firestore);
+  private readonly route = inject(ActivatedRoute);
+  private readonly auth = inject(Auth);
+  private readonly chatService = inject(ChatService);
+
+  @ViewChild('content') private content!: IonContent;
+  @ViewChild('inputMessage') private inputMessage!: ElementRef;
 
   readonly chatId: string = this.route.snapshot.paramMap.get('id')!;
   user$ = user(this.auth);
@@ -41,7 +49,11 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new ReplaySubject<void>(1);
 
   async ngOnInit() {
-    this.messages$ = this.getChatMessages(this.chatId);
+    this.messages$ = this.getChatMessages(this.chatId).pipe(
+      tap(() => {
+        this.scrollToBottom(500);
+      })
+    );
     this.user$.pipe(take(1)).subscribe(async (user) => {
       this.user = user;
       await this.setReadInfo();
@@ -77,8 +89,8 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
     return collectionData(messagesQuery) as Observable<ChatMessage[]>;
   }
 
-  async sendMessage({ target }: Event) {
-    const messageText = (target as HTMLInputElement).value;
+  async sendMessage(): Promise<void> {
+    const messageText = this.inputMessage.nativeElement.value;
     if (!messageText) return;
     const sentTime = Date.now();
 
@@ -88,10 +100,10 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
       sentTimeStamp: sentTime,
       chatId: this.chatId
     };
-    this.chatService.sendMessage(messageBody);
+    await this.chatService.sendMessage(messageBody);
 
     // Clear the input
-    (target as HTMLInputElement).value = '';
+    this.inputMessage.nativeElement.value = '';
   }
 
   async updateReadTimeStamp() {
@@ -102,6 +114,12 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
 
     // Update the chat's readInfos with the new readTimestamp and unreadCount
     await updateDoc(this.chatDoc, { readInfos: this.readInfos });
+  }
+
+  scrollToBottom(delay: number): void {
+    setTimeout(() => {
+      this.content.scrollToBottom(300);
+    }, delay);
   }
 
   get memberInfos() {
