@@ -1,4 +1,5 @@
 import { CapacitorConfig } from '@capacitor/cli';
+import { KeyboardResize, KeyboardStyle } from '@capacitor/keyboard';
 
 const config: CapacitorConfig = {
   appId: 'com.crowdmeet.app',
@@ -15,6 +16,11 @@ const config: CapacitorConfig = {
     },
     PushNotifications: {
       presentationOptions: []
+    },
+    Keyboard: {
+      resize: KeyboardResize.Native,
+      style: KeyboardStyle.Default,
+      resizeOnFullScreen: true
     }
   }
 };

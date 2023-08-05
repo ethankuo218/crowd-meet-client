@@ -92,7 +92,6 @@ export class EventService {
   }
 
   async createEvent(eventSetting: EventSetting): Promise<void> {
-    await this.loadingService.present();
     try {
       await this.admobService.showReward(AdOption.EVENT_CREATE);
       const eventCreateResult = await firstValueFrom(
@@ -107,8 +106,6 @@ export class EventService {
       this.router.navigate(['app/history']);
     } catch (error) {
       throw error;
-    } finally {
-      this.loadingService.dismiss();
     }
   }
 
@@ -129,7 +126,7 @@ export class EventService {
     } catch (error) {
       throw error;
     } finally {
-      this.loadingService.present();
+      this.loadingService.dismiss();
     }
   }
 

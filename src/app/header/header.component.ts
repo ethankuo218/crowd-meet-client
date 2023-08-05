@@ -77,10 +77,6 @@ export class HeaderComponent implements OnInit {
       componentProps: { eventId: this.eventService.currentEventDetail?.eventId }
     });
     modal.present();
-
-    const { data, role } = await modal.onWillDismiss();
-    if (role === 'confirm') {
-    }
   }
 
   get currentUrl(): string {

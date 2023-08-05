@@ -54,3 +54,9 @@ export enum AllowanceType {
   CHECK_PARTICIPANT = 'checkParticipantsAllowance',
   CHECK_PARTICIPANT_AD_WATCH = 'adsWatchedForCheckParticipants'
 }
+
+export interface MegaBoost {
+  duration: number;
+  boostId: number;
+  revenueCatId: string;
+}

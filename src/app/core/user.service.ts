@@ -15,6 +15,7 @@ import { Injectable, inject } from '@angular/core';
 import {
   AllowanceType,
   LoginResponse,
+  MegaBoost,
   ProfilePictureResponse,
   UserAllowance
 } from './models/core.model';
@@ -148,5 +149,9 @@ export class UserService {
         this.userStateFacade.storeUserEvents(result);
       }
     });
+  }
+
+  getMegaBoost(): Observable<MegaBoost[]> {
+    return this.httpClientService.get<MegaBoost[]>('user/me/mega-boost');
   }
 }
