@@ -21,7 +21,7 @@
                   <small>Estimate: {{ eventDetail.maxParticipants }}</small>
                 </div>
                 <div class="main_content">
-                  <div class="calendar_link">
+                  <div class="calendar_link" (click)="addToCalendar(eventDetail)">
                     <div class="calendar-icon">
                       <fa-icon [icon]="['far', 'calendar']"></fa-icon>
                     </div>

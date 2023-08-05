@@ -265,7 +265,7 @@ SPEC CHECKSUMS:
   CapacitorPushNotifications: 6ec1a5d0dff2e8b2456bce633996d15fc9de92ac
   CapacitorSplashScreen: bd2a056394ba0b8807e7bb3e746424f67c426e03
   CapacitorStatusBar: 48f2899f6846cc7d8431b251ebfc58e1c10e3d58
-  CordovaPlugins: 807fb7c3f149ca74a7c74826b8eb19d666d137d1
+  CordovaPlugins: 84ab04dde05749a089d945facca88b769c31a3cf
   CordovaPluginsResources: 1b3992e05cb6336d2850cd77dd5e3054f2f76f96
   CordovaPluginsStatic: 846a5b925780e5d60b15af6d9d4c28db3e34fcae
   FBAEMKit: daac7466b918752f020345be5c7d9787f98cfc07

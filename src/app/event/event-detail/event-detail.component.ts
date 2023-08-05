@@ -8,6 +8,7 @@ import { Browser } from '@capacitor/browser';
 import { IonButton } from '@ionic/angular';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertDialogComponent } from 'src/app/components/alert-dialog/alert-dialog.component';
+import { Calendar } from '@awesome-cordova-plugins/calendar/ngx';
 
 @Component({
   selector: 'app-details',
@@ -22,6 +23,7 @@ export class EventDetailComponent implements OnInit {
   private router = inject(Router);
   private eventService = inject(EventService);
   private dialog = inject(MatDialog);
+  private calendar = inject(Calendar);
 
   @ViewChild('joinBtn') joinBtn!: IonButton;
 
@@ -66,6 +68,30 @@ export class EventDetailComponent implements OnInit {
     let url = `https://www.google.com/maps/search/?api=1&query=${eventDetail.lat},${eventDetail.lng}&query_place_id=${eventDetail.placeId}`;
 
     await Browser.open({ url });
+  }
+
+  addToCalendar(event: Event): void {
+    console.log('Add calendar');
+    const dialogDef = this.dialog.open(AlertDialogComponent, {
+      data: {
+        title: 'Do you want to add this event to calendar ?',
+        content: '',
+        enableCancelButton: true
+      },
+      panelClass: 'custom-dialog'
+    });
+
+    dialogDef.afterClosed().subscribe((result) => {
+      if (result === 'confirm') {
+        this.calendar.createEvent(
+          event.title,
+          event.formattedAddress,
+          event.description,
+          new Date(event.startTime),
+          new Date(event.endTime)
+        );
+      }
+    });
   }
 
   leaveComment(id: number): void {
