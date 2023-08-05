@@ -48,10 +48,10 @@ export class AppComponent implements OnInit {
       this.eventService.getUserLocation();
 
       await this.admobService.initializeAdmob();
-
-      await SplashScreen.hide();
     } catch (err) {
       console.log('This is normal in a browser', err);
+    } finally {
+      await SplashScreen.hide();
     }
   }
 
