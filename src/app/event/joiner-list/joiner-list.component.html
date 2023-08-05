@@ -51,7 +51,12 @@
                 </div>
               </ion-item>
               <ion-item-options>
-                <ion-item-option color="danger" (click)="kick(slidingItem, joiner.id)">Kick</ion-item-option>
+                <ion-item-option
+                  *ngIf="joiner.status == eventStatus.accepted"
+                  color="danger"
+                  (click)="kick(slidingItem, joiner.id)"
+                  >Kick</ion-item-option
+                >
               </ion-item-options>
             </ion-item-sliding>
           </div>

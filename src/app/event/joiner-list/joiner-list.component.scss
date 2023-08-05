@@ -13,7 +13,6 @@
 
   .joiner_info {
     // padding: 10px 0;
-    background: var(--ion-card-background);
     border-radius: 20px;
     box-shadow: 1px 1px 40px var(--ion-box-shadow);
     margin: 0 0 20px;
@@ -67,6 +66,8 @@ ion-item{
   --border-color: transparent;
   --inner-padding-top: 10px;
   --inner-padding-bottom: 10px;
+  --background: var(--ion-card-background-color);
+
 }
 
 hr {
