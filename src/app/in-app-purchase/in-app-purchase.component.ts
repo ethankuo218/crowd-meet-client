@@ -15,7 +15,9 @@ export class InAppPurchaseComponent implements OnInit {
   productList!: PurchasesStoreProduct[];
 
   async ngOnInit() {
-    this.productList = await this.inAppPurchaseService.getProducts();
+    this.productList = (await this.inAppPurchaseService.getProducts()).filter(
+      (product) => !product.identifier.match('mega_boost')
+    );
   }
 
   purchase(productIdentifier: string): void {

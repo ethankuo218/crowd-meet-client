@@ -20,6 +20,7 @@ import { AlertDialogComponent } from '../components/alert-dialog/alert-dialog.co
 import * as Formatter from '../core/formatter';
 import { MegaBoostComponent } from './mega-boost/mega-boost.component';
 import { IonContent, ModalController } from '@ionic/angular';
+import { LoadingService } from '../core/loading.service';
 
 @Component({
   selector: 'app-create-page',
@@ -32,6 +33,7 @@ export class EventCreateComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private dialog = inject(MatDialog);
   private modalCtrl = inject(ModalController);
+  private loadingService = inject(LoadingService);
 
   @ViewChild('content') content!: IonContent;
 
@@ -161,13 +163,20 @@ export class EventCreateComponent implements OnInit {
     });
 
     if (this.mode === 'edit' && this.eventId) {
-      this.eventService.updateEvent(this.eventId, {
-        ...this.eventForm.value,
-        startTime: new Date(this.eventForm.value.startTime).toISOString(),
-        endTime: new Date(this.eventForm.value.endTime).toISOString(),
-        categories: selection,
-        ...this.selectLocation
-      });
+      this.loadingService.present();
+      try {
+        await this.eventService.updateEvent(this.eventId, {
+          ...this.eventForm.value,
+          startTime: new Date(this.eventForm.value.startTime).toISOString(),
+          endTime: new Date(this.eventForm.value.endTime).toISOString(),
+          categories: selection,
+          ...this.selectLocation
+        });
+      } catch (error) {
+        console.error(error);
+      } finally {
+        this.loadingService.dismiss;
+      }
     } else {
       const modal = await this.modalCtrl.create({
         component: MegaBoostComponent,

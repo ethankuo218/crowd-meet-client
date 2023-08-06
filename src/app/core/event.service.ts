@@ -111,7 +111,6 @@ export class EventService {
 
   async updateEvent(id: number, body: any): Promise<void> {
     try {
-      this.loadingService.present();
       const eventPatchResult = await firstValueFrom(
         this.httpClientService.patch<Event>(`event/${id}`, body)
       );
@@ -125,8 +124,6 @@ export class EventService {
       this.router.navigate(['app/history']);
     } catch (error) {
       throw error;
-    } finally {
-      this.loadingService.dismiss();
     }
   }
 

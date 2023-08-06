@@ -41,15 +41,15 @@ export class MegaBoostComponent implements OnInit {
 
     this.inAppPurchaseService.getProducts().then((productList) => {
       const oneDayBoostProduct = productList.find((product) =>
-        product.identifier.match('1d')
+        product.identifier.match('mega_boost_1d')
       );
       this.productList.push(oneDayBoostProduct!);
       const threeDayBoostProduct = productList.find((product) =>
-        product.identifier.match('3d')
+        product.identifier.match('mega_boost_3d')
       );
       this.productList.push(threeDayBoostProduct!);
       const sevenDayBoostProduct = productList.find((product) =>
-        product.identifier.match('7d')
+        product.identifier.match('mega_boost_7d')
       );
       this.productList.push(sevenDayBoostProduct!);
     });
@@ -173,15 +173,11 @@ export class MegaBoostComponent implements OnInit {
     }
   }
 
-  get oneDayBoostCount(): number {
-    return this.oneDayBoost.length;
-  }
-
-  get threeDayBoostCount(): number {
-    return this.threeDayBoost.length;
-  }
-
-  get sevenDayBoostCount(): number {
-    return this.sevenDayBoost.length;
+  get boostCount(): number[] {
+    return [
+      this.oneDayBoost.length,
+      this.threeDayBoost.length,
+      this.sevenDayBoost.length
+    ];
   }
 }

@@ -9,65 +9,34 @@
         minus ipsa tempore perspiciatis inventore culpa accusantium eaque!
         Quibusdam, ullam.
       </div>
-      <!-- <div class="product-list" *ngFor="let product of productList$ | async">
+      <div
+        class="product-list"
+        *ngFor="let product of productList; let i = index"
+      >
         <div
           class="product-card"
-          (click)="purchase(product.identifier, oneDayBoostCount !== 0, 1)"
+          (click)="purchase(product.identifier, boostCount[i] !== 0, 1)"
         >
-          <div class="title">1 DAY</div>
-          <div class="content">
-            {{ 'Left: 3' }}
-          </div>
-        </div>
-        <div
-          class="product-card"
-          (click)="purchase(product.identifier, threeDayBoostCount !== 0, 3)"
-        >
-          <div class="title">3 DAY</div>
-          <div class="content">
-            {{ 'Left: 3' }}
-          </div>
-        </div>
-        <div
-          class="product-card"
-          (click)="purchase(product.identifier, sevenDayBoostCount !== 0, 7)"
-        >
-          <div class="title">7 DAY</div>
-          <div class="content">
-            {{ 'Left: 3' }}
-          </div>
-        </div>
-      </div> -->
-
-      <div class="product-list">
-        <div
-          class="product-card"
-          (click)="purchase(productList[0].identifier, false, 1)"
-        >
-          <div class="title">1 DAY</div>
-          <div class="content">
-            {{ 100 | currency }}
-          </div>
-          <div class="content-small">
-            <s>{{ 110 | currency }}</s>
-          </div>
-          <div *ngIf="true" class="badge">10% off</div>
-        </div>
-        <div class="product-card" (click)="purchase('test', true, 3)">
-          <div class="title">3 DAY</div>
-          <div class="content">{{ 'Left: 3' }}</div>
-          <div class="content-small"></div>
-          <div *ngIf="true" class="badge">15% off</div>
-        </div>
-        <div class="product-card">
-          <div class="title">7 DAY</div>
-          <div class="content">
-            {{ 600 | currency }}
-          </div>
-          <div class="content-small">
-            <s>{{ 700 | currency }}</s>
-          </div>
-          <div *ngIf="true" class="badge">20% off</div>
+          <div *ngIf="i === 0" class="title">1 DAY</div>
+          <div *ngIf="i === 1" class="title">3 DAY</div>
+          <div *ngIf="i === 2" class="title">7 DAY</div>
+          <ng-container *ngIf="boostCount[i] === 0; else left">
+            <div class="content">
+              {{ product.price | currency }}
+            </div>
+            <div class="content-small">
+              <s>{{ 110 | currency }}</s>
+            </div>
+          </ng-container>
+          <ng-template #left>
+            <div class="content">
+              {{ 'Left: ' + boostCount[i] }}
+            </div>
+            <div class="content-small"></div>
+          </ng-template>
+          <div *ngIf="i === 0" class="badge">10% off</div>
+          <div *ngIf="i === 1" class="badge">15% off</div>
+          <div *ngIf="i === 2" class="badge">20% off</div>
         </div>
       </div>
     </div>
