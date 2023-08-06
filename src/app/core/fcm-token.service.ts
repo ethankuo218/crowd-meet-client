@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { PushNotifications } from '@capacitor/push-notifications';
 import { HttpClientService } from './http-client.service';
-import { Observable, firstValueFrom } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { FcmToken } from './models/core.model';
 import { Capacitor } from '@capacitor/core';
 
@@ -12,7 +12,7 @@ export class FcmTokenService {
   private httpClientService = inject(HttpClientService);
 
   private fcmToken: string | undefined;
-  private fcmTokenId: number | undefined;
+  private fcmTokenId!: number;
 
   constructor() {
     this.addListener();
@@ -39,27 +39,34 @@ export class FcmTokenService {
 
   async register(): Promise<void> {
     const hasSameToken = await this.hasSameToken(this.fcmToken!);
-
     if (!hasSameToken) {
       this.httpClientService
         .post<FcmToken>('fcm-token', { token: this.fcmToken })
-        .subscribe((result) => {
-          this.fcmTokenId = result.id;
+        .subscribe({
+          next: (result) => {
+            this.fcmTokenId = result.id;
+          }
         });
+    } else {
+      this.httpClientService.get<FcmToken[]>('fcm-token').subscribe({
+        next: (result) => {
+          this.fcmTokenId = result[0].id;
+        }
+      });
     }
   }
 
   async unRegister(): Promise<void> {
     try {
-      PushNotifications.unregister();
-      PushNotifications.removeAllListeners();
+      await PushNotifications.unregister();
+      await PushNotifications.removeAllListeners();
       if (this.fcmTokenId) {
         this.httpClientService
           .delete('fcm-token', this.fcmTokenId!)
           .subscribe();
       }
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.error(error);
     }
   }
 
@@ -71,6 +78,7 @@ export class FcmTokenService {
     const userToken = await firstValueFrom(
       this.httpClientService.get<FcmToken[]>('fcm-token')
     );
+
     return userToken.find((item) => item.token === token) ? true : false;
   }
 }

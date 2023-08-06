@@ -21,7 +21,10 @@
                   <small>Estimate: {{ eventDetail.maxParticipants }}</small>
                 </div>
                 <div class="main_content">
-                  <div class="calendar_link" (click)="addToCalendar(eventDetail)">
+                  <div
+                    class="calendar_link"
+                    (click)="addToCalendar(eventDetail)"
+                  >
                     <div class="calendar-icon">
                       <fa-icon [icon]="['far', 'calendar']"></fa-icon>
                     </div>
@@ -170,7 +173,11 @@
                   </div>
                   <div class="input_comment" *ngIf="user$ | async as user">
                     <div class="mini_profile">
-                      <img [src]="user.profilePictureUrl" />
+                      <img
+                        [src]="
+                          user.profilePictureUrl || 'assets/images/profile1.jpg'
+                        "
+                      />
                     </div>
                     <div class="comment_input">
                       <input

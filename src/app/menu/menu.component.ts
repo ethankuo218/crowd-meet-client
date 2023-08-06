@@ -24,8 +24,12 @@ export class MenuComponent {
   }
 
   logout(): void {
-    this.authService.signOut().then(() => {
-      this.router.navigate(['auth/sign-in']);
-    });
+    try {
+      this.authService.signOut().then(() => {
+        this.router.navigate(['auth/sign-in']);
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
 }

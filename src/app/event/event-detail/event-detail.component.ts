@@ -64,6 +64,10 @@ export class EventDetailComponent implements OnInit {
   ionViewWillLeave(): void {}
 
   async openMap(eventDetail: Event): Promise<void> {
+    if (!eventDetail.lat || !eventDetail.lng || !eventDetail.placeId) {
+      return;
+    }
+
     // The following URL should open Google Maps on all platforms
     let url = `https://www.google.com/maps/search/?api=1&query=${eventDetail.lat},${eventDetail.lng}&query_place_id=${eventDetail.placeId}`;
 
@@ -71,7 +75,6 @@ export class EventDetailComponent implements OnInit {
   }
 
   addToCalendar(event: Event): void {
-    console.log('Add calendar');
     const dialogDef = this.dialog.open(AlertDialogComponent, {
       data: {
         title: 'Do you want to add this event to calendar ?',
@@ -81,15 +84,28 @@ export class EventDetailComponent implements OnInit {
       panelClass: 'custom-dialog'
     });
 
-    dialogDef.afterClosed().subscribe((result) => {
+    dialogDef.afterClosed().subscribe(async (result) => {
       if (result === 'confirm') {
-        this.calendar.createEvent(
-          event.title,
-          event.formattedAddress,
-          event.description,
-          new Date(event.startTime),
-          new Date(event.endTime)
-        );
+        try {
+          await this.calendar.createEvent(
+            event.title,
+            event.formattedAddress,
+            event.description,
+            new Date(event.startTime),
+            new Date(event.endTime)
+          );
+
+          this.dialog.open(AlertDialogComponent, {
+            data: {
+              title: 'Add success !',
+              content: '',
+              enableCancelButton: false
+            },
+            panelClass: 'custom-dialog'
+          });
+        } catch (error) {
+          console.error(error);
+        }
       }
     });
   }
@@ -163,7 +179,7 @@ export class EventDetailComponent implements OnInit {
     maxParticipants: number,
     userId: number
   ): boolean {
-    const meetMaxParticipants = participants.length === maxParticipants - 1;
+    const meetMaxParticipants = participants.length === maxParticipants;
     const joined = participants.find(
       (participant) => participant.userId === userId
     );

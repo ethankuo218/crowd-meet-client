@@ -194,30 +194,34 @@ export class AuthService implements OnDestroy {
   }
 
   public async signOut(): Promise<string> {
-    const signOutPromise = new Promise<string>((resolve, reject) => {
-      // * 1. Sign out on the native layer
-      FirebaseAuthentication.signOut()
-        .then((nativeResult) => {
-          // * 2. Sign out on the web layer
-          const auth = getAuth();
-          signOut(auth)
-            .then((webResult) => {
-              // ? Sign-out successful
-              this.fcmTokenService.unRegister();
-              Preferences.remove({ key: 'token' });
-              resolve('Successfully sign out from native and web');
-            })
-            .catch((webError) => {
-              // ? An error happened
-              reject(`Web auth sign out error: ${webError}`);
-            });
-        })
-        .catch((nativeError) => {
-          reject(`Native auth sign out error: ${nativeError}`);
-        });
-    });
+    try {
+      await this.fcmTokenService.unRegister();
+      const signOutPromise = new Promise<string>((resolve, reject) => {
+        // * 1. Sign out on the native layer
+        FirebaseAuthentication.signOut()
+          .then((nativeResult) => {
+            // * 2. Sign out on the web layer
+            const auth = getAuth();
+            signOut(auth)
+              .then((webResult) => {
+                // ? Sign-out successful
+                Preferences.remove({ key: 'token' });
+                resolve('Successfully sign out from native and web');
+              })
+              .catch((webError) => {
+                // ? An error happened
+                reject(`Web auth sign out error: ${webError}`);
+              });
+          })
+          .catch((nativeError) => {
+            reject(`Native auth sign out error: ${nativeError}`);
+          });
+      });
 
-    return signOutPromise;
+      return signOutPromise;
+    } catch (error) {
+      throw error;
+    }
   }
 
   private async socialSignIn(

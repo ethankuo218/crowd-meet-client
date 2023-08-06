@@ -48,13 +48,15 @@ export class UserService {
       this.getUserById(loginResult.userId).subscribe({
         next: async (result) => {
           this.userStateFacade.storeUser(result);
-
           const isNewUser = await this.storage.get('isNewUser');
           if (isNewUser === null) {
             this.storage.set('isNewUser', loginResult.isNewUser);
-            this.router.navigate(['auth/walkthrough'], {
-              replaceUrl: true
-            });
+            this.router.navigate(
+              loginResult.isNewUser ? ['auth/walkthrough'] : ['app'],
+              {
+                replaceUrl: true
+              }
+            );
           } else {
             this.router.navigate(isNewUser ? ['auth/walkthrough'] : ['app'], {
               replaceUrl: true
