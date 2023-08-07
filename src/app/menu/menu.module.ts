@@ -9,6 +9,9 @@ import { UserStateFacade } from '../core/+states/user-state/user.state.facade';
 import { UserService } from '../core/user.service';
 import { ImgUploadService } from '../core/img-upload.service';
 import { MatDialogModule } from '@angular/material/dialog';
+import { HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { createTranslateLoader } from '../app.module';
 const routes: Routes = [
   {
     path: '',
@@ -31,7 +34,8 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     HeaderComponent,
-    MatDialogModule
+    MatDialogModule,
+    TranslateModule
   ],
   providers: [UserStateFacade, UserService, ImgUploadService]
 })

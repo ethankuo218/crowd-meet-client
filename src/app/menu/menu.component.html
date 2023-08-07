@@ -38,15 +38,16 @@
           <div class="acc__card">
             <div class="acc__title">
               <fa-icon class="dark" [icon]="['fas', 'earth']"></fa-icon>
-              <span class="dark">Language</span>
+              <span class="dark">{{'LANGUAGE' | translate}}</span>
             </div>
-            <select class="dark">
-              <option class="dark">English(US)</option>
-              <option class="dark">Bangla</option>
-              <option class="dark">china</option>
-              <option class="dark">Korean</option>
-              <option class="dark">Thailand</option>
-              <option class="dark">Hindi</option>
+            <select class="dark" (change)="changeLanguage($event)">
+              <option
+                *ngFor="let item of languages"
+                class="dark"
+                [value]="item.code"
+              >
+                {{ item.name }}
+              </option>
             </select>
           </div>
 
