@@ -1,6 +1,19 @@
 import { AbstractControl } from '@angular/forms';
 
 export class InputValidators {
+  static startTimeValidate(formcCtrl: AbstractControl) {
+    const currentTime = new Date();
+    const startTime = new Date(formcCtrl.get('startTime')?.value);
+
+    if (startTime.getTime() < currentTime.getTime() + 10 * 60 * 1000) {
+      return {
+        startTimeShouldTenMinutes: true
+      };
+    } else {
+      return null;
+    }
+  }
+
   static endTimeValidate(formcCtrl: AbstractControl) {
     const startTime = new Date(formcCtrl.get('startTime')?.value);
     const endTime = new Date(formcCtrl.get('endTime')?.value);

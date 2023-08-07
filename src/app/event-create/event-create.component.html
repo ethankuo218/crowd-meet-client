@@ -130,6 +130,13 @@
             [min]="minDate"
             formControlName="startTime"
           ></ion-input>
+          <div
+            *ngIf="eventForm.hasError('startTimeShouldTenMinutes')"
+            class="error-msg"
+          >
+            <fa-icon [icon]="['fas', 'exclamation-circle']"></fa-icon>
+            Start time should at least after 10 minutes
+          </div>
         </div>
 
         <div class="event_content">

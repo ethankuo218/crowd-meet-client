@@ -54,7 +54,11 @@ export class EventCreateComponent implements OnInit {
       categories: new FormArray([], [Validators.required]),
       isOnline: new FormControl('', [Validators.required])
     },
-    [InputValidators.endTimeValidate, InputValidators.categoriesValidate]
+    [
+      InputValidators.startTimeValidate,
+      InputValidators.endTimeValidate,
+      InputValidators.categoriesValidate
+    ]
   );
 
   selectLocation:
