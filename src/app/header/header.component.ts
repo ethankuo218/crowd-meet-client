@@ -74,7 +74,10 @@ export class HeaderComponent implements OnInit {
       component: MegaBoostComponent,
       initialBreakpoint: 1,
       breakpoints: [0, 1],
-      componentProps: { eventId: this.eventService.currentEventDetail?.eventId }
+      componentProps: {
+        eventId: this.eventService.currentEventDetail?.eventId,
+        endTime: this.eventService.currentEventDetail?.endTime
+      }
     });
     modal.present();
   }

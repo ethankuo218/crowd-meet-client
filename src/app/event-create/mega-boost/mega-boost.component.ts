@@ -28,6 +28,7 @@ export class MegaBoostComponent implements OnInit {
   private dialog = inject(MatDialog);
 
   @Input() eventId?: number;
+  @Input() endTime!: string;
   @Input() eventInfo?: any;
 
   productList: PurchasesStoreProduct[] = [];
@@ -171,6 +172,15 @@ export class MegaBoostComponent implements OnInit {
     } catch (error) {
       throw error;
     }
+  }
+
+  isAvailable(index: number): boolean {
+    const boostTypeMap = [1, 3, 7];
+    const current = new Date().getTime();
+    const endTime = new Date(this.endTime).getTime();
+    const duration = boostTypeMap[index] * 24 * 60 * 60 * 1000; // duration in millisecond
+
+    return current + duration < endTime;
   }
 
   get boostCount(): number[] {

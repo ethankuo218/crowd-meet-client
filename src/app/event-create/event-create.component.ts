@@ -184,6 +184,7 @@ export class EventCreateComponent implements OnInit {
         breakpoints: [0, 1],
         componentProps: {
           eventId: this.eventId,
+          endTime: new Date(this.eventForm.value.endTime).toISOString(),
           eventInfo: {
             ...this.eventForm.value,
             startTime: new Date(this.eventForm.value.startTime).toISOString(),
