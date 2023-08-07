@@ -113,7 +113,7 @@ export class MegaBoostComponent implements OnInit {
       try {
         revenueCatId = (
           await this.inAppPurchaseService.purchase(productIdentifier)
-        ).nonSubscriptionTransactions[0].transactionIdentifier;
+        ).nonSubscriptionTransactions.pop()?.transactionIdentifier!;
 
         await this.applyMegaBoost(revenueCatId);
 
