@@ -54,6 +54,14 @@
       </svg>
     </ion-buttons>
     <ion-buttons
+      *ngIf="currentUrl.match('/app/event/list/')"
+      slot="end"
+      class="upgrade_btn"
+      (click)="shareEvent()"
+    >
+      <fa-icon [icon]="['fas', 'arrow-up-from-bracket']"></fa-icon>
+    </ion-buttons>
+    <ion-buttons
       *ngIf="
         (userId$ | async) === curretEventDetailCreatorId &&
         currentUrl.match('/app/event/list/')

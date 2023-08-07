@@ -18,7 +18,7 @@ import { Calendar } from '@awesome-cordova-plugins/calendar/ngx';
     './styles/event-detail.shell.scss'
   ]
 })
-export class EventDetailComponent implements OnInit {
+export class EventDetailComponent {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private eventService = inject(EventService);
@@ -58,10 +58,6 @@ export class EventDetailComponent implements OnInit {
   comments$ = this.eventService.getComment();
 
   comment: string | undefined;
-
-  ngOnInit(): void {}
-
-  ionViewWillLeave(): void {}
 
   async openMap(eventDetail: Event): Promise<void> {
     if (!eventDetail.lat || !eventDetail.lng || !eventDetail.placeId) {

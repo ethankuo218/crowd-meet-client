@@ -15,6 +15,7 @@ import { FilterComponent } from '../filter/filter.component';
 import { EventService } from '../core/event.service';
 import { MegaBoostComponent } from '../event-create/mega-boost/mega-boost.component';
 import { Observable, map } from 'rxjs';
+import { Share } from '@capacitor/share';
 
 @Component({
   selector: 'app-header',
@@ -67,6 +68,16 @@ export class HeaderComponent implements OnInit {
       this.filter = data;
       this.eventService.reload();
     }
+  }
+
+  async shareEvent(): Promise<void> {
+    const eventDetail = this.eventService.currentEventDetail;
+    await Share.share({
+      title: 'Join this event !',
+      text: 'Join this event !',
+      url: 'http://ionicframework.com/',
+      dialogTitle: 'Share with buddies'
+    });
   }
 
   async openBoostPage() {
