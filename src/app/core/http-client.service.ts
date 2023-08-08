@@ -17,10 +17,14 @@ export class HttpClientService {
   private timeStamp: number = 0;
   private expiredTime = 50 * 60 * 1000; // millisecond
 
-  private async storeToken(previousToken: string | null): Promise<string> {
-    const idToken = await this.auth.currentUser?.getIdToken();
+  constructor() {
+    Preferences.remove({ key: 'token' });
+  }
+
+  private async storeToken(): Promise<string> {
+    const idToken = await this.auth.currentUser?.getIdToken(true);
     const token = `Bearer ${idToken}`;
-    if (idToken && token !== previousToken) {
+    if (idToken && token) {
       await Preferences.set({ key: 'token', value: token });
       this.timeStamp = Date.now();
     }
@@ -35,7 +39,7 @@ export class HttpClientService {
         const token =
           result.value && !tokenExpired
             ? result.value
-            : await this.storeToken(result.value);
+            : await this.storeToken();
         const headers = new HttpHeaders({
           Authorization: token
         });

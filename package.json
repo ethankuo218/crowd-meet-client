@@ -5,7 +5,7 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port=8100 --proxy-config proxy.conf.json --open",
+    "start": "ng serve --port=8100 --proxy-config proxy.conf.json",
     "build": "ng build && npx cap sync",
     "build:prod": "ng build --configuration production",
     "build:sit": "ng build --configuration test && npx cap sync",
