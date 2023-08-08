@@ -14,7 +14,7 @@ export class ParticipantsComponent {
   private route = inject(ActivatedRoute);
   private eventService = inject(EventService);
 
-  canView: boolean = false;
+  canView: boolean = true;
 
   private eventId!: number;
 
