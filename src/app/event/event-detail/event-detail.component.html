@@ -79,7 +79,7 @@
                       >
                         <div class="profile_img">
                           <img
-                            [src]="eventDetail.creator.profilePictureUrl"
+                            [src]="eventDetail.creator.profilePictureUrl || 'assets/images/profile1.jpg'"
                             alt="image"
                           />
                         </div>
@@ -101,7 +101,7 @@
                       >
                         <div class="joiner">
                           <img
-                            [src]="eventDetail.creator.profilePictureUrl"
+                            [src]="eventDetail.creator.profilePictureUrl || 'assets/images/profile1.jpg'"
                             alt="image"
                           />
                         </div>
