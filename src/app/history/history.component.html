@@ -16,7 +16,7 @@
               #slidingItem
             >
               <ion-item>
-                <div class="joiner-list-image">
+                <div class="joiner-list-image" [routerLink]="['/app/event/list', item.eventId]">
                   <img
                     [src]="item.imageUrl || 'assets/images/spoon.png'"
                     alt="image"
