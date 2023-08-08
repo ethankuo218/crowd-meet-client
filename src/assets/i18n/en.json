@@ -1,14 +1,137 @@
 {
-  "FOLLOW": "Follow",
-  "MESSAGE": "Message",
-  "LIKES" : "Likes",
-  "FOLLOWERS" : "Followers",
-  "FOLLOWING": "Following",
-  "ABOUT": "About",
-  "FRIENDS": "Friends",
-  "PHOTOS": "Photos",
-  "SEE_ALL": "See all",
-  "OK": "OK",
-  "CANCEL": "Cancel",
-  "LANGUAGE": "Language"
+  "EVENT_LIST": {
+    "SEARCH": "Search",
+    "SPOTLIGHT": "CrowdMeet Spotlight",
+    "NO_MORE_CONTENT": "no more content",
+    "FILTERS": "Filters",
+    "RESET": "Reset",
+    "CANCEL": "Cancel",
+    "APPLY": "Apply",
+    "CATEGORIES": "Categories",
+    "DISTANCE": "Distance",
+    "START_TIME": "Start Time",
+    "END_TIME": "End Time"
+  },
+  "CATEGORY": {
+    "OUTDOOR_ACTIVITY": "Outdoor Activity",
+    "NIGHT_LIFE": "Night Life",
+    "INDOOR_ACTIVITY": "Indoor Activity",
+    "EXERCISE": "Exercise",
+    "DINING": "Dining",
+    "ACADEMIC": "Academic",
+    "PHOTOGRAPHY": "Photography",
+    "TRAVEL": "Travel"
+  },
+  "EVENT_DETAIL": {
+    "EXPECTED_PALS": "Expected Pals",
+    "DESCRIPTION": "Description",
+    "HOST": "Host",
+    "PARTICIPANTS": "Participants",
+    "COMMENTS": "Comments",
+    "ADD_COMMENT": "Add a comment",
+    "EDIT": "Edit",
+    "JOIN": "Join"
+  },
+  "PROFILE": {
+    "GENDER": "Gender",
+    "AGE": "Age",
+    "JOINED": "Joined",
+    "HOLD": "Event Hold",
+    "RATING": "Rating",
+    "ABOUT_ME": "About me",
+    "INTERESTS": "Interests",
+    "REVIEWS": "Reviews"
+  },
+  "PARTICIPANTS": {
+    "NO_PARTICIPANTS": "It's too quiet... We're still gathering the crowd !"
+  },
+  "CHAT_LIST": {
+    "NO_MORE_CONTENT": "no more content",
+    "DIRECT": "Direct",
+    "GROUP": "Group",
+    "YESTERDAY": "Yesterday",
+    "TODAY": "Today"
+  },
+  "CREATE_EVENT": {
+    "ADD_EVENT_COVER_IMAGE": "Dress your event with a picure",
+    "TITLE": "Title",
+    "EVENT_TITLE": "Event Title",
+    "DESCRIPTION": "Description",
+    "EVENT_DESCRIPTION": "Tell us more about your event 🔥🤣",
+    "IS_ONLINE_EVENT": "Is online event",
+    "YES": "Yes",
+    "NO": "No",
+    "LOCATION": "Location",
+    "SELECT_CATEGORIES": "Select Categories",
+    "START_TIME": "start time",
+    "END_TIME": "end time",
+    "MAX_PARTICIPANTS": "Max Participants",
+    "PRICE": "Price",
+    "CREATE": "Create"
+  },
+  "ERROR_MSG": {
+    "CATEGORY": "One category minimum, crowdMeet style 😎",
+    "START_TIME": "Let's not rush! Make sure your event starts at least 10 minutes from now.",
+    "END_TIME": "Let's not time travel! End time should be after the start.",
+    "MAX_PARTICIPANTS": "Not too solo, not too crowded! Between 1 and 15 is the sweet spot."
+  },
+  "HISTORY": {
+    "UPCOMING": "Upcoming",
+    "JOINED": "Joined",
+    "VIEW": "View",
+    "RATE": "Rate",
+    "TAG": {
+      "ON_GOING": "Ongoing",
+      "ACCEPTED": "Accepted",
+      "APPLIED": "Applied",
+      "LEFT": "Left",
+      "DECLINED": "Declined",
+      "KICKED": "Kicked"
+    }
+  },
+  "MENU": {
+    "EDIT_PROFILE": "Edit Profile",
+    "MEMBERSHIP": "CrowdMeet's VIP Lounge",
+    "LANGUAGE": "Language",
+    "DARK_MODE": "Dark Mode",
+    "HELP_CENTER": "Help Center",
+    "INVITE_FRIENDS": "Invite Friends",
+    "LOGOUT": "Logout"
+  },
+  "EDIT_PROFILE": {
+    "PHOTOS": "Photos",
+    "INTERESTS": "Interest",
+    "PROFILE": "Profile",
+    "NAME": "Name",
+    "BIO": "Your CrowdMeet Chronicles!",
+    "NAME_PLACEHOLDER": "Name",
+    "BIO_PLACEHOLDER": "Share a fun fact, a quirky hobby, or your latest adventure! Let the crowdMeet community get to know the awesome you!"
+  },
+  "IN_APP_PURCHASE": {
+    "BUNDLE": {
+      "TITLE": "title",
+      "DESCRIPTION": "description"
+    },
+    "MEGA_BOOST": {
+      "DESCRIPTION": "Unlock the ultimate visibility for your event with crowdMeet Boost! Elevate your gathering to the top spot on our homepage and let us personally invite users who'll love what you've planned. It's not just a boost; it's your event's ticket to stardom!",
+      "BENFITS": "Benefits",
+      "BULLET_POINT_TITLE_1": "Prime Visibility",
+      "BULLET_POINT_TITLE_2": "Targeted Invites",
+      "BULLET_POINT_TITLE_3": "Increased Engagement",
+      "BULLET_POINT_TITLE_4": "Personalized Experience",
+      "BULLET_POINT_TITLE_5": "Maximized Reach",
+      "BULLET_POINT_CONTENT_1": "Your event takes the spotlight on our homepage.",
+      "BULLET_POINT_CONTENT_2": "We'll send notifications to users who match the vibe and interest of your event",
+      "BULLET_POINT_CONTENT_3": "Boosted events typically see higher engagement and RSVP rates",
+      "BULLET_POINT_CONTENT_4": "Tailored recommendations mean the right crowd for your event",
+      "BULLET_POINT_CONTENT_5": "Extend your event's reach beyond your immediate network for a diverse audience",
+      "DURATION": {
+        "1_DAY": "1 DAY",
+        "3_DAY": "3 DAYS",
+        "7_DAY": "7 DAYS"
+      },
+      "LEFT_PREFIX": "You have",
+      "UNIT": "boost ready to roll!"
+    }
+  }
 }

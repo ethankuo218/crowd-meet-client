@@ -1,0 +1,137 @@
+{
+  "EVENT_LIST": {
+    "SEARCH": "검색",
+    "SPOTLIGHT": "CrowdMeet 스포트라이트",
+    "NO_MORE_CONTENT": "더 이상 내용 없음",
+    "FILTERS": "필터",
+    "RESET": "재설정",
+    "CANCEL": "취소",
+    "APPLY": "적용",
+    "CATEGORIES": "카테고리",
+    "DISTANCE": "거리",
+    "START_TIME": "시작 시간",
+    "END_TIME": "종료 시간"
+  },
+  "CATEGORY": {
+    "OUTDOOR_ACTIVITY": "야외 활동",
+    "NIGHT_LIFE": "야간 생활",
+    "INDOOR_ACTIVITY": "실내 활동",
+    "EXERCISE": "운동",
+    "DINING": "식사",
+    "ACADEMIC": "학문",
+    "PHOTOGRAPHY": "사진술",
+    "TRAVEL": "여행"
+  },
+  "EVENT_DETAIL": {
+    "EXPECTED_PALS": "예상 친구들",
+    "DESCRIPTION": "설명",
+    "HOST": "주최자",
+    "PARTICIPANTS": "참가자",
+    "COMMENTS": "댓글",
+    "ADD_COMMENT": "댓글 추가",
+    "EDIT": "편집",
+    "JOIN": "참가하기"
+  },
+  "PROFILE": {
+    "GENDER": "성별",
+    "AGE": "나이",
+    "JOINED": "가입 일",
+    "HOLD": "이벤트 보유",
+    "RATING": "평점",
+    "ABOUT_ME": "나에 대해",
+    "INTERESTS": "관심사",
+    "REVIEWS": "리뷰"
+  },
+  "PARTICIPANTS": {
+    "NO_PARTICIPANTS": "너무 조용해요... 아직 모이는 중!"
+  },
+  "CHAT_LIST": {
+    "NO_MORE_CONTENT": "더 이상 내용 없음",
+    "DIRECT": "1:1 채팅",
+    "GROUP": "그룹 채팅",
+    "YESTERDAY": "어제",
+    "TODAY": "오늘"
+  },
+  "CREATE_EVENT": {
+    "ADD_EVENT_COVER_IMAGE": "이벤트에 사진을 입혀보세요",
+    "TITLE": "제목",
+    "EVENT_TITLE": "이벤트 제목",
+    "DESCRIPTION": "설명",
+    "EVENT_DESCRIPTION": "이벤트에 대해 더 알려주세요 🔥🤣",
+    "IS_ONLINE_EVENT": "온라인 이벤트인가요?",
+    "YES": "예",
+    "NO": "아니오",
+    "LOCATION": "위치",
+    "SELECT_CATEGORIES": "카테고리 선택",
+    "START_TIME": "시작 시간",
+    "END_TIME": "종료 시간",
+    "MAX_PARTICIPANTS": "최대 참가자",
+    "PRICE": "가격",
+    "CREATE": "생성"
+  },
+  "ERROR_MSG": {
+    "CATEGORY": "최소한 하나의 카테고리를 선택해주세요, CrowdMeet 스타일로 😎",
+    "START_TIME": "서두르지 마세요! 이벤트 시작 시간은 지금으로부터 최소 10분 후여야 합니다.",
+    "END_TIME": "시간 여행하지 마세요! 종료 시간은 시작 시간 후여야 합니다.",
+    "MAX_PARTICIPANTS": "너무 혼자가 아니고, 너무 붐비지 않아요! 1과 15 사이가 최적입니다."
+  },
+  "HISTORY": {
+    "UPCOMING": "예정된 이벤트",
+    "JOINED": "참가한 이벤트",
+    "VIEW": "보기",
+    "RATE": "평가",
+    "TAG": {
+      "ON_GOING": "진행 중",
+      "ACCEPTED": "수락됨",
+      "APPLIED": "신청됨",
+      "LEFT": "떠남",
+      "DECLINED": "거절됨",
+      "KICKED": "추방됨"
+    }
+  },
+  "MENU": {
+    "EDIT_PROFILE": "프로필 편집",
+    "MEMBERSHIP": "CrowdMeet VIP 라운지",
+    "LANGUAGE": "언어",
+    "DARK_MODE": "다크 모드",
+    "HELP_CENTER": "도움말 센터",
+    "INVITE_FRIENDS": "친구 초대",
+    "LOGOUT": "로그아웃"
+  },
+  "EDIT_PROFILE": {
+    "PHOTOS": "사진",
+    "INTERESTS": "관심사",
+    "PROFILE": "프로필",
+    "NAME": "이름",
+    "BIO": "당신의 CrowdMeet 이야기!",
+    "NAME_PLACEHOLDER": "이름",
+    "BIO_PLACEHOLDER": "재미있는 사실, 독특한 취미 또는 최근의 모험을 공유하세요! CrowdMeet 커뮤니티가 멋진 당신을 알게 해주세요!"
+  },
+  "IN_APP_PURCHASE": {
+    "BUNDLE": {
+      "TITLE": "제목",
+      "DESCRIPTION": "설명"
+    },
+    "MEGA_BOOST": {
+      "DESCRIPTION": "CrowdMeet Boost로 이벤트의 최고의 가시성을 얻으세요! 홈페이지의 최상단에 이벤트를 높이고, 당신의 계획을 사랑할 사용자들에게 개인적으로 초대하세요. 이것은 그냥 부스트가 아닙니다; 이것은 당신의 이벤트의 스타덤 티켓입니다!",
+      "BENFITS": "혜택",
+      "BULLET_POINT_TITLE_1": "최고의 가시성",
+      "BULLET_POINT_TITLE_2": "대상 초대",
+      "BULLET_POINT_TITLE_3": "증가된 참여",
+      "BULLET_POINT_TITLE_4": "개인화된 경험",
+      "BULLET_POINT_TITLE_5": "최대한의 도달",
+      "BULLET_POINT_CONTENT_1": "당신의 이벤트는 홈페이지에서 주목받습니다.",
+      "BULLET_POINT_CONTENT_2": "당신의 이벤트의 느낌과 관심사와 일치하는 사용자들에게 알림을 보냅니다.",
+      "BULLET_POINT_CONTENT_3": "부스트된 이벤트는 일반적으로 더 높은 참여와 RSVP 비율을 보입니다.",
+      "BULLET_POINT_CONTENT_4": "맞춤 추천은 이벤트에 적합한 군중을 의미합니다.",
+      "BULLET_POINT_CONTENT_5": "당신의 즉각적인 네트워크를 넘어서 다양한 관객에게 이벤트의 도달을 확장하세요.",
+      "DURATION": {
+        "1_DAY": "1일",
+        "3_DAY": "3일",
+        "7_DAY": "7일"
+      },
+      "LEFT_PREFIX": "남은 부스트",
+      "UNIT": "부스트가 준비되어 있습니다!"
+    }
+  }
+}

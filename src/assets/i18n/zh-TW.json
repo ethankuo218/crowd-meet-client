@@ -1,0 +1,137 @@
+{
+  "EVENT_LIST": {
+    "SEARCH": "搜尋",
+    "SPOTLIGHT": "CrowdMeet 焦點",
+    "NO_MORE_CONTENT": "沒有更多內容",
+    "FILTERS": "篩選",
+    "RESET": "重置",
+    "CANCEL": "取消",
+    "APPLY": "應用",
+    "CATEGORIES": "類別",
+    "DISTANCE": "距離",
+    "START_TIME": "開始時間",
+    "END_TIME": "結束時間"
+  },
+  "CATEGORY": {
+    "OUTDOOR_ACTIVITY": "戶外活動",
+    "NIGHT_LIFE": "夜生活",
+    "INDOOR_ACTIVITY": "室內活動",
+    "EXERCISE": "運動",
+    "DINING": "用餐",
+    "ACADEMIC": "學術",
+    "PHOTOGRAPHY": "攝影",
+    "TRAVEL": "旅行"
+  },
+  "EVENT_DETAIL": {
+    "EXPECTED_PALS": "預期的夥伴",
+    "DESCRIPTION": "描述",
+    "HOST": "主辦人",
+    "PARTICIPANTS": "參與者",
+    "COMMENTS": "評論",
+    "ADD_COMMENT": "新增評論",
+    "EDIT": "編輯",
+    "JOIN": "加入"
+  },
+  "PROFILE": {
+    "GENDER": "性別",
+    "AGE": "年齡",
+    "JOINED": "加入日期",
+    "HOLD": "舉辦的活動",
+    "RATING": "評分",
+    "ABOUT_ME": "關於我",
+    "INTERESTS": "興趣",
+    "REVIEWS": "評價"
+  },
+  "PARTICIPANTS": {
+    "NO_PARTICIPANTS": "太安靜了... 我們還在集結人群！"
+  },
+  "CHAT_LIST": {
+    "NO_MORE_CONTENT": "沒有更多內容",
+    "DIRECT": "直接",
+    "GROUP": "群組",
+    "YESTERDAY": "昨天",
+    "TODAY": "今天"
+  },
+  "CREATE_EVENT": {
+    "ADD_EVENT_COVER_IMAGE": "為您的活動加上圖片",
+    "TITLE": "標題",
+    "EVENT_TITLE": "活動標題",
+    "DESCRIPTION": "描述",
+    "EVENT_DESCRIPTION": "告訴我們更多關於您的活動 🔥🤣",
+    "IS_ONLINE_EVENT": "是線上活動嗎?",
+    "YES": "是",
+    "NO": "否",
+    "LOCATION": "地點",
+    "SELECT_CATEGORIES": "選擇類別",
+    "START_TIME": "開始時間",
+    "END_TIME": "結束時間",
+    "MAX_PARTICIPANTS": "最大參與者",
+    "PRICE": "價格",
+    "CREATE": "創建"
+  },
+  "ERROR_MSG": {
+    "CATEGORY": "至少選擇一個類別，CrowdMeet 風格 😎",
+    "START_TIME": "不要急！確保您的活動至少在10分鐘後開始。",
+    "END_TIME": "不要時光旅行！結束時間應在開始之後。",
+    "MAX_PARTICIPANTS": "不要太單獨，也不要太擁擠！1到15之間最適合。"
+  },
+  "HISTORY": {
+    "UPCOMING": "即將到來",
+    "JOINED": "已加入",
+    "VIEW": "查看",
+    "RATE": "評分",
+    "TAG": {
+      "ON_GOING": "進行中",
+      "ACCEPTED": "已接受",
+      "APPLIED": "已申請",
+      "LEFT": "已離開",
+      "DECLINED": "已拒絕",
+      "KICKED": "已被踢出"
+    }
+  },
+  "MENU": {
+    "EDIT_PROFILE": "編輯個人資料",
+    "MEMBERSHIP": "CrowdMeet 的 VIP 休息室",
+    "LANGUAGE": "語言",
+    "DARK_MODE": "暗黑模式",
+    "HELP_CENTER": "幫助中心",
+    "INVITE_FRIENDS": "邀請朋友",
+    "LOGOUT": "登出"
+  },
+  "EDIT_PROFILE": {
+    "PHOTOS": "照片",
+    "INTERESTS": "興趣",
+    "PROFILE": "個人資料",
+    "NAME": "名稱",
+    "BIO": "您的 CrowdMeet 故事！",
+    "NAME_PLACEHOLDER": "名稱",
+    "BIO_PLACEHOLDER": "分享有趣的事實、古怪的愛好或您最近的冒險！讓 CrowdMeet 社區認識真正的您！"
+  },
+  "IN_APP_PURCHASE": {
+    "BUNDLE": {
+      "TITLE": "標題",
+      "DESCRIPTION": "描述"
+    },
+    "MEGA_BOOST": {
+      "DESCRIPTION": "使用 CrowdMeet Boost 解鎖您的活動的終極能見度！將您的聚會提升到我們首頁的最上方，並讓我們親自邀請喜歡您計劃的用戶。這不僅僅是一次提升；這是您的活動的明星門票！",
+      "BENFITS": "好處",
+      "BULLET_POINT_TITLE_1": "主要能見度",
+      "BULLET_POINT_TITLE_2": "針對的邀請",
+      "BULLET_POINT_TITLE_3": "增加的參與",
+      "BULLET_POINT_TITLE_4": "個性化的體驗",
+      "BULLET_POINT_TITLE_5": "最大化的範圍",
+      "BULLET_POINT_CONTENT_1": "您的活動在我們的首頁上受到關注。",
+      "BULLET_POINT_CONTENT_2": "我們會向與您的活動氛圍和興趣匹配的用戶發送通知",
+      "BULLET_POINT_CONTENT_3": "提升的活動通常看到更高的參與和RSVP率",
+      "BULLET_POINT_CONTENT_4": "量身定制的建議意味著您的活動的正確人群",
+      "BULLET_POINT_CONTENT_5": "擴大您的活動範圍，超出您的直接網絡，以獲得多樣化的受眾",
+      "DURATION": {
+        "1_DAY": "1 天",
+        "3_DAY": "3 天",
+        "7_DAY": "7 天"
+      },
+      "LEFT_PREFIX": "您還有",
+      "UNIT": "提升準備好了！"
+    }
+  }
+}
