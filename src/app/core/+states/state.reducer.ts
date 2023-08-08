@@ -4,12 +4,13 @@ import { createReducer, on } from '@ngrx/store';
 import * as UserStateActions from './user-state/user.actions';
 import * as ReferenceStateActions from './reference-state/reference.actions';
 import * as EventListStateActions from './event-list-state/event-list.actions';
-import { EventList } from './event-list-state/event-list.model';
+import { BoostedEvent, EventList } from './event-list-state/event-list.model';
 
 export const userFeatureKey = 'user';
 export const userEventsFeatureKey = 'userEvents';
 export const referenceFeatureKey = 'reference';
 export const eventListFeatureKey = 'eventList';
+export const boostedEventsFeatureKey = 'boostedEvents';
 
 export const initialState: State = {
   user: {
@@ -34,7 +35,8 @@ export const initialState: State = {
       pageSize: 0,
       total: 0
     }
-  }
+  },
+  boostedEvents: []
 };
 
 export const userReducer = createReducer(
@@ -72,9 +74,21 @@ export const eventListReducer = createReducer(
   }))
 );
 
+export const boostedEventsReducer = createReducer(
+  initialState.boostedEvents,
+  on(
+    EventListStateActions.storeBoostedEventsState,
+    (state, { boostedEvents }) => ({
+      ...state,
+      boostedEvents: [...boostedEvents]
+    })
+  )
+);
+
 interface State {
   user: User;
   userEvents: UserEvent[];
   reference: Reference;
   eventList: EventList;
+  boostedEvents: BoostedEvent[];
 }

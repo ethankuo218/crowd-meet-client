@@ -11,7 +11,10 @@ import {
 } from '../event/models/event.model';
 import { Observable, ReplaySubject, firstValueFrom, tap } from 'rxjs';
 import { EventActionResponse, EventImageResponse } from './models/core.model';
-import { EventList } from './+states/event-list-state/event-list.model';
+import {
+  BoostedEvent,
+  EventList
+} from './+states/event-list-state/event-list.model';
 import { EventStatus, Image } from './+states/user-state/user.model';
 import { Geolocation } from '@capacitor/geolocation';
 import { LoadingService } from './loading.service';
@@ -39,10 +42,14 @@ export class EventService {
     return this.eventListStateFacade.getEventList();
   }
 
+  getBoostedEvent(): Observable<BoostedEvent[]> {
+    return this.eventListStateFacade.getBoostedEvents();
+  }
+
   async reload(): Promise<void> {
     this._isLoading = true;
     this.currentPage = 1;
-    const result = await firstValueFrom(
+    const eventList = await firstValueFrom(
       this.httpClientService.get<EventList>('event', {
         page: this.currentPage,
         pageSize: 10,
@@ -51,10 +58,17 @@ export class EventService {
         ...this._filter
       })
     );
+    const boostedEvents = await firstValueFrom(
+      this.httpClientService.get<BoostedEvent[]>('event/boosted-events', {
+        ...this.userLocation
+      })
+    );
+
     setTimeout(() => {
       this._isLoading = false;
     }, 300);
-    this.eventListStateFacade.storeEventList(result);
+    this.eventListStateFacade.storeEventList(eventList);
+    this.eventListStateFacade.storeBoostedEvents(boostedEvents);
   }
 
   async loadNextPage(): Promise<void> {

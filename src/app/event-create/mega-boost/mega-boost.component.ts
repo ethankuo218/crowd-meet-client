@@ -38,8 +38,6 @@ export class MegaBoostComponent implements OnInit {
   private sevenDayBoost: MegaBoost[] = [];
 
   ngOnInit(): void {
-    console.log(this.eventId);
-
     this.inAppPurchaseService.getProducts().then((productList) => {
       const oneDayBoostProduct = productList.find((product) =>
         product.identifier.match('mega_boost_1d')

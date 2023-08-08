@@ -31,7 +31,9 @@ import {
   userEventsReducer,
   userFeatureKey,
   userEventsFeatureKey,
-  userReducer
+  userReducer,
+  boostedEventsFeatureKey,
+  boostedEventsReducer
 } from './core/+states/state.reducer';
 
 import { Capacitor } from '@capacitor/core';
@@ -74,7 +76,8 @@ export function createTranslateLoader(http: HttpClient) {
       [userFeatureKey]: userReducer,
       [userEventsFeatureKey]: userEventsReducer,
       [referenceFeatureKey]: referenceReducer,
-      [eventListFeatureKey]: eventListReducer
+      [eventListFeatureKey]: eventListReducer,
+      [boostedEventsFeatureKey]: boostedEventsReducer
     }),
     ServiceWorkerModule.register('/ngsw-worker.js', {
       enabled: environment.production

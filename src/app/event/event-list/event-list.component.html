@@ -7,29 +7,13 @@
     <div class="event-content">
       <h3 class="dark">Suggested</h3>
       <swiper *ngIf="!isLoading" [slidesPerView]="2">
-        <ng-template swiperSlide>
-          <div class="item slide_item">
-            <img src="assets/images/spoon.png" alt="image" />
-            <p class="dark">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elel qweqwe
-              erwer...
-            </p>
-          </div>
-        </ng-template>
-        <ng-template swiperSlide>
-          <div class="item slide_item">
-            <img src="assets/images/spoon.png" alt="image" />
-            <p class="dark">
-              Lorem ipsum dolor sit amet, consectetur adipisicing el...
-            </p>
-          </div>
-        </ng-template>
-        <ng-template swiperSlide>
-          <div class="item slide_item">
-            <img src="assets/images/spoon.png" alt="image" />
-            <p class="dark">
-              Lorem ipsum dolor sit amet, consectetur adipisicing el...
-            </p>
+        <ng-template swiperSlide *ngFor="let item of boosted$ | async">
+          <div class="item slide_item" [routerLink]="['/app/event/list', item.eventId]">
+            <img
+              [src]="item.imageUrl || 'assets/images/spoon.png'"
+              alt="image"
+            />
+            <p class="dark">{{ item.title }}</p>
           </div>
         </ng-template>
       </swiper>
@@ -39,14 +23,20 @@
           <ion-skeleton-text class="img" [animated]="true"> </ion-skeleton-text>
           <p>
             <ion-skeleton-text [animated]="true"></ion-skeleton-text>
-            <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+            <ion-skeleton-text
+              [animated]="true"
+              style="width: 80%"
+            ></ion-skeleton-text>
           </p>
         </div>
         <div class="item slide_item">
           <ion-skeleton-text class="img" [animated]="true"> </ion-skeleton-text>
           <p>
             <ion-skeleton-text [animated]="true"></ion-skeleton-text>
-            <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+            <ion-skeleton-text
+              [animated]="true"
+              style="width: 80%"
+            ></ion-skeleton-text>
           </p>
         </div>
       </div>

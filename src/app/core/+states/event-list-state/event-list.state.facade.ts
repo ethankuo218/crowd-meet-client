@@ -1,9 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { addEventListState, storeEventListState } from './event-list.actions';
-import { Observable } from 'rxjs';
-import { EventList } from './event-list.model';
-import { getEventListState } from './event-list.selector';
+import {
+  addEventListState,
+  storeBoostedEventsState,
+  storeEventListState
+} from './event-list.actions';
+import { Observable, tap } from 'rxjs';
+import { BoostedEvent, EventList } from './event-list.model';
+import {
+  getBoostedEventsState,
+  getEventListState
+} from './event-list.selector';
 
 @Injectable({ providedIn: 'root' })
 export class EventListStateFacade {
@@ -19,5 +26,17 @@ export class EventListStateFacade {
 
   getEventList(): Observable<EventList> {
     return this.store.select(getEventListState());
+  }
+
+  storeBoostedEvents(boostedEvents: BoostedEvent[]): void {
+    this.store.dispatch(storeBoostedEventsState({ boostedEvents }));
+  }
+
+  getBoostedEvents(): Observable<BoostedEvent[]> {
+    return this.store.select(getBoostedEventsState()).pipe(
+      tap((result) => {
+        console.log(result);
+      })
+    );
   }
 }

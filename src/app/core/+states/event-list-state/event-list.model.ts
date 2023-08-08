@@ -19,3 +19,11 @@ export interface Pagination {
   pageSize: number;
   total: number;
 }
+
+export interface BoostedEvent {
+  imageUrl: string;
+  title: string;
+  description: string;
+  startTime: string;
+  eventId: number;
+}

@@ -17,7 +17,6 @@ export class InAppPurchaseService {
   private purchases = inject(Purchases);
   private platform = inject(Platform);
   private auth = inject(Auth);
-  private loadingService = inject(LoadingService);
 
   async initialInAppPurchase(userId: number): Promise<void> {
     this.purchases.setDebugLogsEnabled(false);

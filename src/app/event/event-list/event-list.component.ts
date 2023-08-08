@@ -1,3 +1,4 @@
+import { BoostedEvent } from './../../core/+states/event-list-state/event-list.model';
 import { Component, OnInit, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -22,6 +23,8 @@ export class EventListComponent implements OnInit {
   listing$: Observable<EventListData[]> = this.eventService
     .getEventList()
     .pipe(map((result) => result?.data));
+
+  boosted$: Observable<BoostedEvent[]> = this.eventService.getBoostedEvent();
 
   filter: any = {};
 
