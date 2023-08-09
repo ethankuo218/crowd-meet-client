@@ -112,7 +112,7 @@
                           "
                         >
                           <div *ngIf="i < 3" class="joiner">
-                            <img [src]="'assets/images/profile1.jpg'" />
+                            <img [src]="participant.profilePictureUrl || 'assets/images/profile1.jpg'" />
                           </div>
                           <div *ngIf="i === 3" class="joiner">
                             <div class="more">
