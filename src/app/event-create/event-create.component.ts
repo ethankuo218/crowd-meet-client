@@ -199,6 +199,19 @@ export class EventCreateComponent implements OnInit {
         }
       });
       modal.present();
+      const { data, role } = await modal.onWillDismiss();
+
+      if (role === 'cancel') {
+        this.loadingService.present();
+        await this.eventService.createEvent({
+          ...this.eventForm.value,
+          startTime: new Date(this.eventForm.value.startTime).toISOString(),
+          endTime: new Date(this.eventForm.value.endTime).toISOString(),
+          categories: selection,
+          ...this.selectLocation
+        });
+        this.loadingService.dismiss();
+      }
     }
   }
 
