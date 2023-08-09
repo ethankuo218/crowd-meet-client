@@ -131,7 +131,7 @@
             formControlName="startTime"
           ></ion-input>
           <div
-            *ngIf="eventForm.hasError('startTimeShouldTenMinutes')"
+            *ngIf="eventForm.hasError('startTimeShouldAfterTenMinutes')"
             class="error-msg"
           >
             <fa-icon [icon]="['fas', 'exclamation-circle']"></fa-icon>
@@ -152,7 +152,7 @@
             formControlName="endTime"
           ></ion-input>
           <div
-            *ngIf="eventForm.hasError('endTimeNeedsToAfterStartTime')"
+            *ngIf="eventForm.hasError('endTimeShouldAfterStartTime')"
             class="error-msg"
           >
             <fa-icon [icon]="['fas', 'exclamation-circle']"></fa-icon> End time

@@ -7,7 +7,7 @@ export class InputValidators {
 
     if (startTime.getTime() < currentTime.getTime() + 10 * 60 * 1000) {
       return {
-        startTimeShouldTenMinutes: true
+        startTimeShouldAfterTenMinutes: true
       };
     } else {
       return null;
@@ -17,7 +17,8 @@ export class InputValidators {
   static endTimeValidate(formcCtrl: AbstractControl) {
     const startTime = new Date(formcCtrl.get('startTime')?.value);
     const endTime = new Date(formcCtrl.get('endTime')?.value);
-
+    console.log(startTime.getTime() > endTime.getTime());
+    console.log(formcCtrl.errors);
     if (startTime.getTime() > endTime.getTime()) {
       return {
         endTimeShouldAfterStartTime: true
