@@ -182,4 +182,11 @@ export class EventDetailComponent {
 
     return joined || meetMaxParticipants ? false : true;
   }
+
+  notAllowComment(time: string) {
+    const today = new Date().getTime();
+    const endTime = new Date(time).getTime();
+
+    return today - endTime > 3 * 24 * 60 * 60 * 1000;
+  }
 }

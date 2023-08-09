@@ -184,6 +184,7 @@
                         class="dark_dd"
                         type="text"
                         [(ngModel)]="comment"
+                        [disabled]="notAllowComment(eventDetail.endTime)"
                         placeholder="Add a comment"
                       />
                       <ion-button
