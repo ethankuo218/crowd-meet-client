@@ -16,13 +16,20 @@ import { EventService } from '../core/event.service';
 import { MegaBoostComponent } from '../event-create/mega-boost/mega-boost.component';
 import { Observable, map } from 'rxjs';
 import { Share } from '@capacitor/share';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule, FontAwesomeModule, RouterModule]
+  imports: [
+    CommonModule,
+    IonicModule,
+    FontAwesomeModule,
+    RouterModule,
+    FormsModule
+  ]
 })
 export class HeaderComponent implements OnInit {
   @Input() defaultHref: string = 'app/event/list';
@@ -31,6 +38,7 @@ export class HeaderComponent implements OnInit {
   private router = inject(Router);
   private modalCtrl = inject(ModalController);
   private eventService = inject(EventService);
+  searchText: string = '';
 
   userId$: Observable<number> = inject(UserStateFacade)
     .getUser()
@@ -91,6 +99,14 @@ export class HeaderComponent implements OnInit {
       }
     });
     modal.present();
+  }
+
+  search(): void {
+    this.filter = { ...this.filter, eventName: this.searchText };
+    if (this.searchText === '') {
+      delete this.filter.eventName;
+    }
+    this.eventService.reload();
   }
 
   get currentUrl(): string {
