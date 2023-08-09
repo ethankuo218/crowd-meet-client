@@ -1,7 +1,6 @@
 import { BoostedEvent } from './../../core/+states/event-list-state/event-list.model';
 import { Component, OnInit, inject } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, map } from 'rxjs';
 import { EventListData } from 'src/app/core/+states/event-list-state/event-list.model';
 import { EventService } from '../../core/event.service';
 import {
@@ -24,7 +23,9 @@ export class EventListComponent implements OnInit {
     .getEventList()
     .pipe(map((result) => result?.data));
 
-  boosted$: Observable<BoostedEvent[]> = this.eventService.getBoostedEvent();
+  boosted$: Observable<BoostedEvent[]> = this.eventService
+    .getBoostedEvent()
+    .pipe(map((result) => this.shuffle<BoostedEvent>(result)));
 
   filter: any = {};
 
@@ -46,6 +47,24 @@ export class EventListComponent implements OnInit {
     this.eventService.loadNextPage().then(() => {
       (event as InfiniteScrollCustomEvent).target.complete();
     });
+  }
+
+  private shuffle<T>(inputArray: T[]): T[] {
+    let array = [...inputArray];
+    let currentIndex = array.length,
+      randomIndex;
+
+    while (currentIndex != 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex],
+        array[currentIndex]
+      ];
+    }
+
+    return array;
   }
 
   get noMoreContent(): boolean {
