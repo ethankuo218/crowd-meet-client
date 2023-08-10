@@ -53,7 +53,7 @@ export interface Chat {
     content?: string;
   };
   eventInfo?: { eventId: number; eventTitle: string };
-  type: string;
+  type: string; // event / private
   readInfos: {
     [memberId: string]: {
       readTimestamp: number;

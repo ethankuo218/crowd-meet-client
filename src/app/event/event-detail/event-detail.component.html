@@ -18,7 +18,10 @@
               <div class="event_content">
                 <div class="title-row">
                   <h3 class="dark">{{ eventDetail.title }}</h3>
-                  <small>Estimate: {{ eventDetail.maxParticipants }}</small>
+                  <small
+                    >{{ 'EVENT_DETAIL.EXPECTED_PALS' | translate }}
+                    {{ eventDetail.maxParticipants }}</small
+                  >
                 </div>
                 <div class="main_content">
                   <div
@@ -60,7 +63,7 @@
                   </div>
                   <hr />
                   <div class="description">
-                    <h3>Description</h3>
+                    <h3>{{ 'EVENT_DETAIL.DESCRIPTION' | translate }}</h3>
 
                     <p class="dark_d">
                       {{ eventDetail.description }}
@@ -69,7 +72,7 @@
                   <hr />
                   <div class="host_joiner_info">
                     <div class="creator">
-                      <h3>Host</h3>
+                      <h3>{{ 'EVENT_DETAIL.HOST' | translate }}</h3>
                       <div
                         class="host_info"
                         [routerLink]="[
@@ -79,7 +82,10 @@
                       >
                         <div class="profile_img">
                           <img
-                            [src]="eventDetail.creator.profilePictureUrl || 'assets/images/profile1.jpg'"
+                            [src]="
+                              eventDetail.creator.profilePictureUrl ||
+                              'assets/images/profile1.jpg'
+                            "
                             alt="image"
                           />
                         </div>
@@ -89,7 +95,7 @@
                       </div>
                     </div>
                     <div class="participants">
-                      <h3>Participants</h3>
+                      <h3>{{ 'EVENT_DETAIL.PARTICIPANTS' | translate }}</h3>
                       <div
                         class="joiner_list"
                         (click)="
@@ -101,7 +107,10 @@
                       >
                         <div class="joiner">
                           <img
-                            [src]="eventDetail.creator.profilePictureUrl || 'assets/images/profile1.jpg'"
+                            [src]="
+                              eventDetail.creator.profilePictureUrl ||
+                              'assets/images/profile1.jpg'
+                            "
                             alt="image"
                           />
                         </div>
@@ -112,7 +121,12 @@
                           "
                         >
                           <div *ngIf="i < 3" class="joiner">
-                            <img [src]="participant.profilePictureUrl || 'assets/images/profile1.jpg'" />
+                            <img
+                              [src]="
+                                participant.profilePictureUrl ||
+                                'assets/images/profile1.jpg'
+                              "
+                            />
                           </div>
                           <div *ngIf="i === 3" class="joiner">
                             <div class="more">
@@ -145,7 +159,12 @@
                 <hr />
                 <div class="comments" *ngIf="comments$ | async as comments">
                   <h2 class="dark">
-                    {{ 'Comments (' + comments.length + ')' }}
+                    {{
+                      ('EVENT_DETAIL.COMMENTS' | translate) +
+                        ' (' +
+                        comments.length +
+                        ')'
+                    }}
                   </h2>
                   <div class="comment_list">
                     <div class="comment" *ngFor="let comment of comments">
@@ -185,7 +204,7 @@
                         type="text"
                         [(ngModel)]="comment"
                         [disabled]="notAllowComment(eventDetail.endTime)"
-                        placeholder="Add a comment"
+                        [placeholder]="'EVENT_DETAIL.ADD_COMMENT' | translate"
                       />
                       <ion-button
                         (click)="leaveComment(eventDetail.eventId)"
@@ -215,7 +234,7 @@
             [disabled]="isEventStarted(eventDetail.startTime)"
             (click)="editEvent(eventDetail)"
           >
-            Edit
+            {{ 'EVENT_DETAIL.EDIT' | translate }}
           </ion-button>
           <ng-template #normalUser>
             <ion-button
@@ -230,7 +249,7 @@
                 )
               "
             >
-              Join
+              {{ 'EVENT_DETAIL.JOIN' | translate }}
             </ion-button>
           </ng-template>
         </ion-toolbar>

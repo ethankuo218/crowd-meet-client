@@ -78,7 +78,7 @@
   <ion-toolbar *ngIf="currentUrl === '/app/event/list'">
     <!-- Event-list only -->
     <div class="filter_section">
-      <ion-searchbar [(ngModel)]="searchText" (keyup.enter)="search()"></ion-searchbar>
+      <ion-searchbar [(ngModel)]="searchText" (keyup.enter)="search()" [placeholder]="'EVENT_LIST.SEARCH' | translate"></ion-searchbar>
       <ion-buttons (click)="openFilter()">
         <svg
           id="Group_35"

@@ -1,9 +1,13 @@
 <main class="rating main-area">
   <ion-header>
     <ion-toolbar>
-      <ion-buttons slot="start" (click)="cancel()"> Cancel </ion-buttons>
-      <ion-title>Filters</ion-title>
-      <ion-buttons slot="end" (click)="reset()"> Reset </ion-buttons>
+      <ion-buttons slot="start" (click)="cancel()">{{
+        'EVENT_LIST.CANCEL' | translate
+      }}</ion-buttons>
+      <ion-title>{{ 'EVENT_LIST.FILTERS' | translate }}</ion-title>
+      <ion-buttons slot="end" (click)="reset()">
+        {{ 'EVENT_LIST.RESET' | translate }}
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
 
@@ -11,7 +15,7 @@
     <form [formGroup]="filterForm">
       <div class="filter_list">
         <div class="filter_div">
-          <h3>Categories</h3>
+          <h3>{{ 'EVENT_LIST.CATEGORIES' | translate }}</h3>
           <ion-row
             class="checkbox-tags rounded-checkbox-tags"
             formArrayName="categories"
@@ -27,7 +31,7 @@
             >
               <ion-label class="tag-label">
                 <fa-icon [icon]="['fas', 'star']"></fa-icon>
-                {{ item.name }}
+                {{ 'CATEGORY.' + item.name.toUpperCase() | translate }}
               </ion-label>
               <ion-checkbox [formControlName]="i"></ion-checkbox>
             </ion-item>
@@ -35,7 +39,7 @@
         </div>
 
         <div class="filter_div">
-          <h3>Distance</h3>
+          <h3>{{ 'EVENT_LIST.CATEGORIES' | translate }}</h3>
           <ion-range
             [pin]="true"
             [pinFormatter]="pinFormatter"
@@ -47,7 +51,7 @@
         </div>
 
         <div class="filter_div">
-          <h3>Start Time</h3>
+          <h3>{{ 'EVENT_LIST.START_TIME' | translate }}</h3>
           <ion-input
             class="dark_dd"
             id="start-time"
@@ -58,7 +62,7 @@
         </div>
 
         <div class="filter_div">
-          <h3>End Time</h3>
+          <h3>{{ 'EVENT_LIST.END_TIME' | translate }}</h3>
           <ion-input
             class="dark_dd"
             id="start-time"
@@ -72,7 +76,9 @@
   </div>
   <ion-footer>
     <ion-toolbar>
-      <ion-button (click)="applyFilter()">Apply</ion-button>
+      <ion-button (click)="applyFilter()">{{
+        'EVENT_LIST.APPLY' | translate
+      }}</ion-button>
     </ion-toolbar>
   </ion-footer>
 </main>

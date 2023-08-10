@@ -8,6 +8,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatTabsModule } from '@angular/material/tabs';
 import { EventService } from '../core/event.service';
 import { MatDialogModule } from '@angular/material/dialog';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
@@ -30,7 +31,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     HeaderComponent,
     MatTabsModule,
-    MatDialogModule
+    MatDialogModule,
+    TranslateModule
   ],
   providers: [EventService]
 })

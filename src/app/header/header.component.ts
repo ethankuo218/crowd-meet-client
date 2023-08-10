@@ -17,6 +17,7 @@ import { MegaBoostComponent } from '../event-create/mega-boost/mega-boost.compon
 import { Observable, map } from 'rxjs';
 import { Share } from '@capacitor/share';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -28,7 +29,8 @@ import { FormsModule } from '@angular/forms';
     IonicModule,
     FontAwesomeModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    TranslateModule
   ]
 })
 export class HeaderComponent implements OnInit {

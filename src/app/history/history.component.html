@@ -6,7 +6,9 @@
   <main class="history-area main-area">
     <mat-tab-group>
       <mat-tab>
-        <ng-template mat-tab-label> Upcoming </ng-template>
+        <ng-template mat-tab-label>
+          {{ 'HISTORY.UPCOMING' | translate }}
+        </ng-template>
         <br />
         <ng-container *ngIf="!isLoading">
           <ng-container *ngIf="upcoming$ | async as upcomings">
@@ -16,7 +18,10 @@
               #slidingItem
             >
               <ion-item>
-                <div class="joiner-list-image" [routerLink]="['/app/event/list', item.eventId]">
+                <div
+                  class="joiner-list-image"
+                  [routerLink]="['/app/event/list', item.eventId]"
+                >
                   <img
                     [src]="item.imageUrl || 'assets/images/spoon.png'"
                     alt="image"
@@ -42,7 +47,9 @@
                           item.status === eventStatus.kicked
                       }"
                     >
-                      {{ item.status }}
+                      {{
+                        'HISTORY.TAG.' + item.status.toUpperCase() | translate
+                      }}
                     </div>
                   </div>
                   <p class="dark">
@@ -58,7 +65,7 @@
                 <ion-item-option
                   color="danger"
                   (click)="leave(slidingItem, item.eventId)"
-                  >Leave</ion-item-option
+                  >{{ 'HISTORY.LEAVE' | translate }}</ion-item-option
                 >
               </ion-item-options>
             </ion-item-sliding>
@@ -102,7 +109,9 @@
         </ng-container>
       </mat-tab>
       <mat-tab>
-        <ng-template mat-tab-label> Joined </ng-template>
+        <ng-template mat-tab-label>
+          {{ 'HISTORY.JOINED' | translate }}
+        </ng-template>
         <br />
         <ng-container *ngIf="!isLoading">
           <ng-container *ngIf="joined$ | async as joineds">
@@ -124,7 +133,7 @@
                       item.startTime | date : 'EEE, MMM d, y'
                     }}</small>
                     <div *ngIf="getIsOngoing(item.endTime)" class="status-tag">
-                      Ongoing
+                      {{ 'HISTORY.ON_GOING' | translate }}
                     </div>
                   </div>
                   <p class="dark">
@@ -132,12 +141,13 @@
                   </p>
                   <hr />
                   <div class="button-area">
-                    <ion-button [routerLink]="['/app/event/list', item.eventId]"
-                      >View</ion-button
+                    <ion-button
+                      [routerLink]="['/app/event/list', item.eventId]"
+                      >{{ 'HISTORY.VIEW' | translate }}</ion-button
                     >
                     <ion-button
                       [routerLink]="['/app/history/reviews', item.eventId]"
-                      >Rating</ion-button
+                      >{{ 'HISTORY.RATE' | translate }}</ion-button
                     >
                   </div>
                 </div>
@@ -147,7 +157,7 @@
                 <ion-item-option
                   color="danger"
                   (click)="leave(slidingItem, item.eventId)"
-                  >Leave</ion-item-option
+                  >{{ 'HISTORY.LEAVE' | translate }}</ion-item-option
                 >
               </ion-item-options>
             </ion-item-sliding>

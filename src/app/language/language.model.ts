@@ -6,5 +6,9 @@ export interface LanguageModel {
 export enum Language {
   ENGLISH = 'en',
   SPANISH = 'es',
-  FRANCH = 'fr'
+  FRANCH = 'fr',
+  KOREAN = 'ko',
+  JAPANESE = 'ja',
+  THAI = 'th',
+  CHINESE = 'zh-TW'
 }

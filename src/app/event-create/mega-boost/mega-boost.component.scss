@@ -5,7 +5,12 @@
 .mdl_div h2 {
   font-size: 25px;
   font-weight: 600;
-  margin-top: 2rem;
+  margin-top: 1rem;
+}
+
+.header {
+  margin: 0.5rem;
+  text-align: right;
 }
 
 .modal-footer ion-button {
@@ -22,6 +27,17 @@
   padding: 1rem;
   color: var(--ion-text-color);
   text-align: left;
+
+  h3 {
+    font-size: 20px;
+  }
+
+  li {
+    .title {
+      font-weight: 600;
+      width: fit-content;
+    }
+  }
 }
 
 .product-list {

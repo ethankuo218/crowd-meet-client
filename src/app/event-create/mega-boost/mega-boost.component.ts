@@ -11,13 +11,14 @@ import { EventService } from 'src/app/core/event.service';
 import { LoadingService } from 'src/app/core/loading.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertDialogComponent } from 'src/app/components/alert-dialog/alert-dialog.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-mega-boost',
   templateUrl: './mega-boost.component.html',
   styleUrls: ['./mega-boost.component.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule, FormsModule]
+  imports: [CommonModule, IonicModule, FormsModule, TranslateModule]
 })
 export class MegaBoostComponent implements OnInit {
   private inAppPurchaseService = inject(InAppPurchaseService);
@@ -179,6 +180,10 @@ export class MegaBoostComponent implements OnInit {
     const duration = boostTypeMap[index] * 24 * 60 * 60 * 1000; // duration in millisecond
 
     return current + duration < endTime;
+  }
+
+  cancel(): void {
+    this.modalController.dismiss({}, 'cancel');
   }
 
   get boostCount(): number[] {

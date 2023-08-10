@@ -11,6 +11,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CounterInputComponent } from 'src/app/components/counter-input/counter-input.component';
 import { LocationInputComponent } from 'src/app/components/location-input/location-input.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
@@ -30,7 +31,8 @@ const routes: Routes = [
     HeaderComponent,
     CounterInputComponent,
     LocationInputComponent,
-    MatDialogModule
+    MatDialogModule,
+    TranslateModule
   ],
   declarations: [EventCreateComponent]
 })

@@ -2,12 +2,8 @@
 <ion-content class="edit-profile-content">
   <main class="edit-profile main-area">
     <div class="slider-area">
-      <h3 class="dark fnt-same">Your Best Photos</h3>
-      <div
-        #contenedor
-        class="images"
-        cdkDropListGroup
-      >
+      <h3 class="dark fnt-same">{{ 'EDIT_PROFILE.PHOTOS' | translate }}</h3>
+      <div #contenedor class="images" cdkDropListGroup>
         <ng-container *ngFor="let image of images; let i = index">
           <div
             class="image-item"
@@ -37,7 +33,9 @@
     <div class="container">
       <form [formGroup]="userForm">
         <div class="interest_div">
-          <h3 class="fnt-same dark">Your Interest</h3>
+          <h3 class="fnt-same dark">
+            {{ 'EDIT_PROFILE.INTERESTS' | translate }}
+          </h3>
           <ion-row
             class="checkbox-tags rounded-checkbox-tags"
             formArrayName="interests"
@@ -59,16 +57,19 @@
             </ion-item>
           </ion-row>
         </div>
-        <h3 class="fnt-same dark">Your Profile</h3>
+        <h3 class="fnt-same dark">{{ 'EDIT_PROFILE.NAME' | translate }}</h3>
         <div class="profile_your">
           <input
             type="text"
-            placeholder="Please Enter Your Name"
+            [placeholder]="'EDIT_PROFILE.NAME_PLACEHOLDER' | translate"
             formControlName="name"
           />
+        </div>
+        <h3 class="fnt-same dark">{{ 'EDIT_PROFILE.BIO' | translate }}</h3>
+        <div class="profile_your">
           <textarea
             rows="3"
-            placeholder="Please Write Something"
+            [placeholder]="'EDIT_PROFILE.BIO_PLACEHOLDER' | translate"
             formControlName="bio"
           ></textarea>
         </div>

@@ -1,14 +1,74 @@
 <div class="modal-content">
   <div class="modal-body">
+    <div class="header">
+      <a (click)="cancel()">{{'EVENT_LIST.CANCEl' | translate}}</a>
+    </div>
     <div class="text-center mdl_div">
       <h2 class="primary">{{ 'MEGA BOOST' }}</h2>
 
       <div class="description">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Esse dolor
-        quis sunt consequuntur modi reiciendis sed ea, maxime quia adipisci
-        minus ipsa tempore perspiciatis inventore culpa accusantium eaque!
-        Quibusdam, ullam.
+        {{ 'IN_APP_PURCHASE.MEGA_BOOST.DESCRIPTION' | translate }}
+        <br />
+        <br />
+        <h3>{{ 'IN_APP_PURCHASE.MEGA_BOOST.BENFITS' | translate }}</h3>
+        <ol>
+          <li>
+            <div class="title">
+              {{
+                'IN_APP_PURCHASE.MEGA_BOOST.BULLET_POINT_TITLE_1' | translate
+              }}
+            </div>
+            <span>{{
+              'IN_APP_PURCHASE.MEGA_BOOST.BULLET_POINT_CONTENT_1' | translate
+            }}</span>
+          </li>
+
+          <li>
+            <div class="title">
+              {{
+                'IN_APP_PURCHASE.MEGA_BOOST.BULLET_POINT_TITLE_2' | translate
+              }}
+            </div>
+            {{
+              'IN_APP_PURCHASE.MEGA_BOOST.BULLET_POINT_CONTENT_2' | translate
+            }}
+          </li>
+
+          <li>
+            <div class="title">
+              {{
+                'IN_APP_PURCHASE.MEGA_BOOST.BULLET_POINT_TITLE_3' | translate
+              }}
+            </div>
+            {{
+              'IN_APP_PURCHASE.MEGA_BOOST.BULLET_POINT_CONTENT_3' | translate
+            }}
+          </li>
+
+          <li>
+            <div class="title">
+              {{
+                'IN_APP_PURCHASE.MEGA_BOOST.BULLET_POINT_TITLE_4' | translate
+              }}
+            </div>
+            {{
+              'IN_APP_PURCHASE.MEGA_BOOST.BULLET_POINT_CONTENT_4' | translate
+            }}
+          </li>
+
+          <li>
+            <div class="title">
+              {{
+                'IN_APP_PURCHASE.MEGA_BOOST.BULLET_POINT_TITLE_5' | translate
+              }}
+            </div>
+            {{
+              'IN_APP_PURCHASE.MEGA_BOOST.BULLET_POINT_CONTENT_5' | translate
+            }}
+          </li>
+        </ol>
       </div>
+
       <div
         class="product-list"
         *ngFor="let product of productList; let i = index"

@@ -12,13 +12,20 @@ import {
 } from '@angular/forms';
 import { take } from 'rxjs';
 import { ReferenceStateFacade } from '../core/+states/reference-state/reference.state.facade';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule, FontAwesomeModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    IonicModule,
+    FontAwesomeModule,
+    ReactiveFormsModule,
+    TranslateModule
+  ],
   providers: [ReferenceStateFacade]
 })
 export class FilterComponent implements OnInit {

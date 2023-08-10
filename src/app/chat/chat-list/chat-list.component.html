@@ -3,7 +3,9 @@
   <main class="message-area main-area">
     <mat-tab-group>
       <mat-tab>
-        <ng-template mat-tab-label> Direct </ng-template>
+        <ng-template mat-tab-label>
+          {{ 'CHAT_LIST.DIRECT' | translate }}
+        </ng-template>
         <br />
         <div *ngIf="chats$ | async as chats" class="container">
           <ng-container *ngFor="let chat of chats">
@@ -17,12 +19,14 @@
           </ng-container>
 
           <div *ngIf="chats.length === 0" class="no-more-content">
-            No more content !
+            {{ 'CHAT_LIST.NO_MORE_CONTENT' | translate }}
           </div>
         </div>
       </mat-tab>
       <mat-tab>
-        <ng-template mat-tab-label> Group </ng-template>
+        <ng-template mat-tab-label>
+          {{ 'CHAT_LIST.GROUP' | translate }}
+        </ng-template>
         <br />
         <div *ngIf="chats$ | async as chats" class="container">
           <ng-container *ngFor="let chat of chats">
@@ -36,11 +40,13 @@
           </ng-container>
 
           <div *ngIf="chats.length === 0" class="no-more-content">
-            No more content !
+            {{ 'CHAT_LIST.NO_MORE_CONTENT' | translate }}
           </div>
         </div>
         <ng-template #noContent>
-          <div class="no-more-content">No more content !</div>
+          <div class="no-more-content">
+            {{ 'CHAT_LIST.NO_MORE_CONTENT' | translate }}
+          </div>
         </ng-template>
       </mat-tab>
     </mat-tab-group>

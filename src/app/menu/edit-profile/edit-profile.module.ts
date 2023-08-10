@@ -34,7 +34,8 @@ const routes: Routes = [
     HeaderComponent,
     SwiperModule,
     CheckboxWrapperComponent,
-    DragDropModule
+    DragDropModule,
+    TranslateModule
   ],
   declarations: [EditProfileComponent],
   providers: [LanguageService, ImgUploadService, ReferenceStateFacade]

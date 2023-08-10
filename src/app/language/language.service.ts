@@ -11,8 +11,9 @@ export class LanguageService {
   constructor() {
     this.languages.push(
       { name: 'English', code: Language.ENGLISH },
-      { name: 'Spanish', code: Language.SPANISH },
-      { name: 'French', code: Language.FRANCH }
+      { name: 'Korean', code: Language.KOREAN },
+      { name: 'Thai', code: Language.THAI },
+      { name: '繁體中文', code: Language.CHINESE }
     );
   }
 

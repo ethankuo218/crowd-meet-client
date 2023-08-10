@@ -2,7 +2,7 @@
   "EVENT_LIST": {
     "SEARCH": "Search",
     "SPOTLIGHT": "CrowdMeet Spotlight",
-    "NO_MORE_CONTENT": "no more content",
+    "NO_MORE_CONTENT": "No more content !",
     "FILTERS": "Filters",
     "RESET": "Reset",
     "CANCEL": "Cancel",
@@ -46,7 +46,7 @@
     "NO_PARTICIPANTS": "It's too quiet... We're still gathering the crowd !"
   },
   "CHAT_LIST": {
-    "NO_MORE_CONTENT": "no more content",
+    "NO_MORE_CONTENT": "No more content",
     "DIRECT": "Direct",
     "GROUP": "Group",
     "YESTERDAY": "Yesterday",
@@ -63,10 +63,11 @@
     "NO": "No",
     "LOCATION": "Location",
     "SELECT_CATEGORIES": "Select Categories",
-    "START_TIME": "start time",
-    "END_TIME": "end time",
+    "START_TIME": "Start time",
+    "END_TIME": "End time",
     "MAX_PARTICIPANTS": "Max Participants",
     "PRICE": "Price",
+    "CONFIRM": "Confirm",
     "CREATE": "Create"
   },
   "ERROR_MSG": {

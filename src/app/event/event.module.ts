@@ -16,6 +16,7 @@ import { ParticipantsComponent } from './participants/participants.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { JoinerListComponent } from './joiner-list/joiner-list.component';
 import { Calendar } from '@awesome-cordova-plugins/calendar/ngx';
+import { TranslateModule } from '@ngx-translate/core';
 const routes: Routes = [
   {
     path: '',
@@ -67,7 +68,8 @@ const routes: Routes = [
     FormsModule,
     FilterComponent,
     ProfileComponent,
-    MatDialogModule
+    MatDialogModule,
+    TranslateModule
   ],
   providers: [EventService, Calendar]
 })

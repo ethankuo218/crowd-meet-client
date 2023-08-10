@@ -33,10 +33,6 @@ export class EventListStateFacade {
   }
 
   getBoostedEvents(): Observable<BoostedEvent[]> {
-    return this.store.select(getBoostedEventsState()).pipe(
-      tap((result) => {
-        console.log(result);
-      })
-    );
+    return this.store.select(getBoostedEventsState());
   }
 }
