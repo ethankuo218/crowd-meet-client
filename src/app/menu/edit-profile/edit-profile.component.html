@@ -51,7 +51,7 @@
             >
               <ion-label class="tag-label">
                 <fa-icon [icon]="['fas', 'star']"></fa-icon>
-                {{ item.name }}
+                {{ 'CATEGORY.' + item.name.toUpperCase() | translate }}
               </ion-label>
               <ion-checkbox [formControlName]="i"></ion-checkbox>
             </ion-item>
