@@ -1,12 +1,13 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
+import { HttpClientService } from '../core/http-client.service';
+import { Notification } from './models/notifications.models';
 
 @Injectable()
 export class NotificationsService {
-  constructor(private http: HttpClient) { }
+  private httpClientService = inject(HttpClientService);
 
-  public getData(): Observable<any> {
-    return this.http.get<any>('./assets/sample-data/notifications.json');
+  public getNotifications(): Observable<Notification[]> {
+    return this.httpClientService.get<Notification[]>('notification');
   }
 }

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { NotificationsService } from './notifications.service';
 
 @Component({
   selector: 'app-notifications',
@@ -9,7 +10,5 @@ import { Component } from '@angular/core';
   ]
 })
 export class NotificationsPage {
-  notifications: any;
-
-  constructor() {}
+  notifications$ = inject(NotificationsService).getNotifications();
 }

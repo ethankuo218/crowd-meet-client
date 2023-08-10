@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
 
   async initializeApp() {
     try {
-      await this.fcmTokenService.requetPermission();
+      await this.fcmTokenService.requestPermission();
 
       await Geolocation.requestPermissions({
         permissions: ['location', 'coarseLocation']

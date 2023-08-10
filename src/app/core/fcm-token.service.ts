@@ -4,12 +4,14 @@ import { HttpClientService } from './http-client.service';
 import { firstValueFrom } from 'rxjs';
 import { FcmToken } from './models/core.model';
 import { Capacitor } from '@capacitor/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FcmTokenService {
   private httpClientService = inject(HttpClientService);
+  private router = inject(Router);
 
   private fcmToken: string | undefined;
   private fcmTokenId!: number;
@@ -22,9 +24,28 @@ export class FcmTokenService {
     await PushNotifications.addListener('registration', async (token) => {
       this.fcmToken = token.value;
     });
+
+    await PushNotifications.addListener(
+      'pushNotificationActionPerformed',
+      (result) => {
+        console.log(result.notification.data);
+        let status = '';
+        switch (status) {
+          case NotificationType.EVENT_COMMENT:
+            this.router.navigate(['app/event/list/']);
+            break;
+          case NotificationType.CHAT:
+            this.router.navigate(['app/chat/list']);
+            break;
+          case NotificationType.EVENT_STATUS:
+            this.router.navigate(['app/history']);
+            break;
+        }
+      }
+    );
   }
 
-  async requetPermission(): Promise<void> {
+  async requestPermission(): Promise<void> {
     let permStatus = await PushNotifications.checkPermissions();
 
     if (permStatus.receive === 'prompt') {
@@ -81,4 +102,10 @@ export class FcmTokenService {
 
     return userToken.find((item) => item.token === token) ? true : false;
   }
+}
+
+enum NotificationType {
+  EVENT_COMMENT = 'EVENT_COMMENT',
+  EVENT_STATUS = 'EVENT_STATUS',
+  CHAT = 'CHAT'
 }

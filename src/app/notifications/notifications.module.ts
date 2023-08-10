@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { NotificationsPage } from './notifications.page';
-import { NotificationsResolver } from '../notifications/notifications.resolver';
 import { NotificationsService } from '../notifications/notifications.service';
 import { HeaderComponent } from '../header/header.component';
 
@@ -17,15 +16,12 @@ import { HeaderComponent } from '../header/header.component';
     RouterModule.forChild([
       {
         path: '',
-        component: NotificationsPage,
-        resolve: {
-          data: NotificationsResolver
-        }
+        component: NotificationsPage
       }
     ]),
     HeaderComponent
   ],
   declarations: [NotificationsPage],
-  providers: [NotificationsResolver, NotificationsService]
+  providers: [NotificationsService]
 })
 export class NotificationsPageModule {}
