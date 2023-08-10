@@ -1,5 +1,5 @@
 import { AdmobService } from './core/admob.service';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, NgZone, OnInit, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { Platform } from '@ionic/angular';
@@ -7,6 +7,8 @@ import { Storage } from '@ionic/storage-angular';
 import { Geolocation } from '@capacitor/geolocation';
 import { EventService } from './core/event.service';
 import { FcmTokenService } from './core/fcm-token.service';
+import { App, URLOpenListenerEvent } from '@capacitor/app';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +22,8 @@ export class AppComponent implements OnInit {
   private admobService = inject(AdmobService);
   private eventService = inject(EventService);
   private fcmTokenService = inject(FcmTokenService);
+  private zone = inject(NgZone);
+  private router = inject(Router);
 
   // Inject HistoryHelperService in the app.components.ts so its available app-wide
   constructor() {
@@ -39,6 +43,18 @@ export class AppComponent implements OnInit {
   }
 
   async initializeApp() {
+    App.addListener('appUrlOpen', (event: URLOpenListenerEvent) => {
+      this.zone.run(() => {
+        // Example url: https://beerswift.app/tabs/tab2
+        // slug = /tabs/tab2
+        const slug = event.url.split('.app').pop();
+        if (slug) {
+          this.router.navigate(['app/history']);
+        }
+        // If no match, do nothing - let regular routing
+        // logic take over
+      });
+    });
     try {
       await this.fcmTokenService.requestPermission();
 
