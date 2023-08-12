@@ -20,7 +20,7 @@
               <ion-item>
                 <div
                   class="joiner-list-image"
-                  [routerLink]="['/app/event/list', item.eventId]"
+                  [routerLink]="['/app/history/detail', item.eventId]"
                 >
                   <img
                     [src]="item.imageUrl || 'assets/images/spoon.png'"
@@ -29,7 +29,7 @@
                 </div>
                 <div
                   class="upcoming-content"
-                  [routerLink]="['/app/event/list', item.eventId]"
+                  [routerLink]="['/app/history/detail', item.eventId]"
                 >
                   <div class="content-row">
                     <small class="dark_dd">{{
@@ -142,7 +142,7 @@
                   <hr />
                   <div class="button-area">
                     <ion-button
-                      [routerLink]="['/app/event/list', item.eventId]"
+                      [routerLink]="['/app/history/detail', item.eventId]"
                       >{{ 'HISTORY.VIEW' | translate }}</ion-button
                     >
                     <ion-button

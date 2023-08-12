@@ -18,6 +18,7 @@ import { Observable, map } from 'rxjs';
 import { Share } from '@capacitor/share';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { InAppPurchaseComponent } from '../in-app-purchase/in-app-purchase.component';
 
 @Component({
   selector: 'app-header',
@@ -88,6 +89,18 @@ export class HeaderComponent implements OnInit {
       url: 'http://ionicframework.com/',
       dialogTitle: 'Share with buddies'
     });
+  }
+
+  async openPurchasePage() {
+    const modal = await this.modalCtrl.create({
+      component: InAppPurchaseComponent,
+      initialBreakpoint: 1,
+      breakpoints: [0, 1],
+      componentProps: {
+        isModalMode: true
+      }
+    });
+    modal.present();
   }
 
   async openBoostPage() {

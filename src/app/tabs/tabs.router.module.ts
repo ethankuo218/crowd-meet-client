@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { TabsPage } from './tabs.page';
+import { InAppPurchaseComponent } from '../in-app-purchase/in-app-purchase.component';
 
 const routes: Routes = [
   {
@@ -76,25 +77,13 @@ const routes: Routes = [
               import('../menu/menu.module').then((m) => m.MenuModule)
           }
         ]
-      },
-      {
-        path: 'purchase',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('../in-app-purchase/in-app-purchase.module').then(
-                (m) => m.InAppPurchaseModule
-              )
-          }
-        ]
       }
     ]
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(routes), InAppPurchaseComponent],
   exports: [RouterModule],
   providers: []
 })

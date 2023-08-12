@@ -2,13 +2,18 @@ import { Event, Participant } from './../models/event.model';
 import { UserStateFacade } from '../../core/+states/user-state/user.state.facade';
 import { EventService } from '../../core/event.service';
 import { Component, OnInit, ViewChild, inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Observable, switchMap, tap, map } from 'rxjs';
 import { Browser } from '@capacitor/browser';
-import { IonButton } from '@ionic/angular';
+import { IonButton, IonicModule } from '@ionic/angular';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertDialogComponent } from 'src/app/components/alert-dialog/alert-dialog.component';
 import { Calendar } from '@awesome-cordova-plugins/calendar/ngx';
+import { CommonModule } from '@angular/common';
+import { HeaderComponent } from 'src/app/header/header.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-details',
@@ -16,7 +21,18 @@ import { Calendar } from '@awesome-cordova-plugins/calendar/ngx';
   styleUrls: [
     './styles/event-detail.component.scss',
     './styles/event-detail.shell.scss'
-  ]
+  ],
+  standalone: true,
+  imports: [
+    IonicModule,
+    CommonModule,
+    FormsModule,
+    HeaderComponent,
+    TranslateModule,
+    FontAwesomeModule,
+    RouterModule
+  ],
+  providers: [Calendar]
 })
 export class EventDetailComponent {
   private route = inject(ActivatedRoute);

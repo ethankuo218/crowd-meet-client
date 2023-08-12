@@ -19,9 +19,8 @@
       *ngIf="!currentUrl.match('/app/event/list/')"
       slot="end"
       class="upgrade_btn"
-      [routerLink]="['/app/purchase']"
+      (click)="openPurchasePage()"
     >
-      <!-- <fa-icon [icon]="['fas', 'credit-card']"></fa-icon> -->
       <svg
         id="Layer_2"
         data-name="Layer 2"

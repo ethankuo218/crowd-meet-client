@@ -53,7 +53,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     EventListComponent,
-    EventDetailComponent,
     ListingCardComponent,
     ParticipantsComponent,
     JoinerListComponent
@@ -69,7 +68,8 @@ const routes: Routes = [
     FilterComponent,
     ProfileComponent,
     MatDialogModule,
-    TranslateModule
+    TranslateModule,
+    EventDetailComponent
   ],
   providers: [EventService, Calendar]
 })

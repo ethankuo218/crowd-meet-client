@@ -9,6 +9,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { EventService } from '../core/event.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TranslateModule } from '@ngx-translate/core';
+import { EventDetailComponent } from '../event/event-detail/event-detail.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
     path: 'reviews',
     loadChildren: () =>
       import('./reviews/reviews.module').then((m) => m.ReviewsModule)
+  },
+  {
+    path: 'detail/:id',
+    component: EventDetailComponent
   }
 ];
 
@@ -32,7 +37,8 @@ const routes: Routes = [
     HeaderComponent,
     MatTabsModule,
     MatDialogModule,
-    TranslateModule
+    TranslateModule,
+    EventDetailComponent
   ],
   providers: [EventService]
 })

@@ -9,9 +9,9 @@ import { UserStateFacade } from '../core/+states/user-state/user.state.facade';
 import { UserService } from '../core/user.service';
 import { ImgUploadService } from '../core/img-upload.service';
 import { MatDialogModule } from '@angular/material/dialog';
-import { HttpClient } from '@angular/common/http';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { createTranslateLoader } from '../app.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { InAppPurchaseComponent } from '../in-app-purchase/in-app-purchase.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -23,6 +23,10 @@ const routes: Routes = [
       import('../menu/edit-profile/edit-profile.module').then(
         (m) => m.EditProfileModule
       )
+  },
+  {
+    path: 'purchase',
+    component: InAppPurchaseComponent
   }
 ];
 
@@ -35,7 +39,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     HeaderComponent,
     MatDialogModule,
-    TranslateModule
+    TranslateModule,
+    InAppPurchaseComponent
   ],
   providers: [UserStateFacade, UserService, ImgUploadService]
 })
