@@ -7,14 +7,14 @@ import { EventListData } from 'src/app/core/+states/event-list-state/event-list.
   styleUrls: ['./listing-card.component.scss']
 })
 export class ListingCardComponent {
-  @Input() cardInfo: EventListData = {
-    imageUrl: '',
-    title: '',
-    description: '',
-    eventId: 0,
-    startTime: '',
-    categories: []
-  };
+  private _cardInfo!: EventListData;
+
+  get cardInfo(): EventListData {
+    return this._cardInfo;
+  }
+  @Input() set cardInfo(value: EventListData) {
+    this._cardInfo = { ...value };
+  }
 
   constructor() {}
 }

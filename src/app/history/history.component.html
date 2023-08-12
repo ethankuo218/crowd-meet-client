@@ -23,6 +23,7 @@
                   [routerLink]="['/app/history/detail', item.eventId]"
                 >
                   <img
+                    appImageFallBack
                     [src]="item.imageUrl || 'assets/images/spoon.png'"
                     alt="image"
                   />
@@ -123,6 +124,7 @@
               <ion-item>
                 <div class="joiner-list-image">
                   <img
+                    appImageFallBack
                     [src]="item.imageUrl || 'assets/images/spoon.png'"
                     alt="image"
                   />

@@ -10,6 +10,7 @@ import { EventService } from '../core/event.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TranslateModule } from '@ngx-translate/core';
 import { EventDetailComponent } from '../event/event-detail/event-detail.component';
+import { DirectivesModule } from '../directives/directives.module';
 
 const routes: Routes = [
   {
@@ -38,7 +39,8 @@ const routes: Routes = [
     MatTabsModule,
     MatDialogModule,
     TranslateModule,
-    EventDetailComponent
+    EventDetailComponent,
+    DirectivesModule
   ],
   providers: [EventService]
 })

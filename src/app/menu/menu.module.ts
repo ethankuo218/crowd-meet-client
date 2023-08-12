@@ -11,6 +11,7 @@ import { ImgUploadService } from '../core/img-upload.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TranslateModule } from '@ngx-translate/core';
 import { InAppPurchaseComponent } from '../in-app-purchase/in-app-purchase.component';
+import { DirectivesModule } from '../directives/directives.module';
 
 const routes: Routes = [
   {
@@ -40,7 +41,8 @@ const routes: Routes = [
     HeaderComponent,
     MatDialogModule,
     TranslateModule,
-    InAppPurchaseComponent
+    InAppPurchaseComponent,
+    DirectivesModule
   ],
   providers: [UserStateFacade, UserService, ImgUploadService]
 })

@@ -10,12 +10,18 @@
     <swiper [slidesPerView]="'auto'" [spaceBetween]="10">
       <ng-container *ngFor="let item of cardInfo.categories; let i = index">
         <ng-template swiperSlide>
-          <a class="primary">{{ 'CATEGORY.' + item.name.toUpperCase() | translate }}</a>
+          <a class="primary">{{
+            'CATEGORY.' + item.name.toUpperCase() | translate
+          }}</a>
         </ng-template>
       </ng-container>
     </swiper>
   </div>
   <div class="cause_image">
-    <img [src]="cardInfo.imageUrl || 'assets/images/spoon.png'" alt="image" />
+    <img
+      appImageFallBack
+      [src]="cardInfo.imageUrl || 'assets/images/spoon.png'"
+      alt="image"
+    />
   </div>
 </div>

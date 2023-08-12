@@ -14,7 +14,7 @@
           >
             <div class="inner" cdkDrag>
               <div *ngIf="image; else empty" class="item">
-                <img [src]="image.url" />
+                <img appImageFallBack [src]="image.url" />
                 <button (click)="deletePhoto(image)">
                   <fa-icon [icon]="['fas', 'xmark']"></fa-icon>
                 </button>

@@ -11,6 +11,7 @@ import { EventService } from '../core/event.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatTabsModule } from '@angular/material/tabs';
 import { TranslateModule } from '@ngx-translate/core';
+import { DirectivesModule } from '../directives/directives.module';
 
 const routes: Routes = [
   {
@@ -43,7 +44,8 @@ const routes: Routes = [
     HeaderComponent,
     ChatCardComponent,
     MatTabsModule,
-    TranslateModule
+    TranslateModule,
+    DirectivesModule
   ],
   providers: [EventService, ChatService]
 })

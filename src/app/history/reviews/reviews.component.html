@@ -7,11 +7,12 @@
           <div
             *ngFor="let participant of participants"
             class="joiner_info"
-            [ngClass]="{'disabled': false}"
+            [ngClass]="{ disabled: false }"
             (click)="writeReview(participant)"
           >
             <div class="joiner_img">
               <img
+                appImageFallBack
                 [src]="
                   participant.profilePictureUrl || 'assets/images/profile1.jpg'
                 "
@@ -30,7 +31,11 @@
             </div>
           </div>
           <div *ngIf="participants.length === 0" class="no-more-content">
-            {{canView? 'No participantas wating for review' : 'This event is still goning on'}}
+            {{
+              canView
+                ? 'No participantas wating for review'
+                : 'This event is still goning on'
+            }}
           </div>
         </ng-container>
       </div>

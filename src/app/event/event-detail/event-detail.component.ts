@@ -1,7 +1,7 @@
 import { Event, Participant } from './../models/event.model';
 import { UserStateFacade } from '../../core/+states/user-state/user.state.facade';
 import { EventService } from '../../core/event.service';
-import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { Component, ViewChild, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Observable, switchMap, tap, map } from 'rxjs';
 import { Browser } from '@capacitor/browser';
@@ -14,6 +14,7 @@ import { HeaderComponent } from 'src/app/header/header.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
+import { DirectivesModule } from 'src/app/directives/directives.module';
 
 @Component({
   selector: 'app-details',
@@ -30,7 +31,8 @@ import { FormsModule } from '@angular/forms';
     HeaderComponent,
     TranslateModule,
     FontAwesomeModule,
-    RouterModule
+    RouterModule,
+    DirectivesModule
   ],
   providers: [Calendar]
 })

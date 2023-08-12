@@ -11,6 +11,7 @@ import { AgePipe } from '../core/pipe/age.pipe';
 import { User } from '../core/+states/user-state/user.model';
 import { Review } from '../history/reviews/models/reviews.model';
 import { ReviewsService } from '../history/reviews/reviews.service';
+import { DirectivesModule } from '../directives/directives.module';
 
 @Component({
   selector: 'app-profile',
@@ -24,7 +25,8 @@ import { ReviewsService } from '../history/reviews/reviews.service';
     HeaderComponent,
     RouterModule,
     SwiperModule,
-    AgePipe
+    AgePipe,
+    DirectivesModule
   ],
   providers: [UserService]
 })

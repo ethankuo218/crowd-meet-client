@@ -11,6 +11,7 @@ import { RatingInputComponent } from '../../components/rating-input/rating-input
 import { ReactiveFormsModule } from '@angular/forms';
 import { ReviewsService } from './reviews.service';
 import { EventService } from '../../core/event.service';
+import { DirectivesModule } from 'src/app/directives/directives.module';
 
 const routes: Routes = [
   {
@@ -29,7 +30,8 @@ const routes: Routes = [
     HeaderComponent,
     SwiperModule,
     RatingInputComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DirectivesModule
   ],
   providers: [ReviewsService, EventService]
 })

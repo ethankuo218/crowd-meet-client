@@ -5,11 +5,15 @@
   </ion-refresher>
   <main class="article-area main-area">
     <div class="event-content">
-      <h3 class="dark">{{'EVENT_LIST.SPOTLIGHT' | translate}}</h3>
+      <h3 class="dark">{{ 'EVENT_LIST.SPOTLIGHT' | translate }}</h3>
       <swiper *ngIf="!isLoading" [slidesPerView]="2">
         <ng-template swiperSlide *ngFor="let item of boosted$ | async">
-          <div class="item slide_item" [routerLink]="['/app/event/list', item.eventId]">
+          <div
+            class="item slide_item"
+            [routerLink]="['/app/event/list', item.eventId]"
+          >
             <img
+              appImageFallBack
               [src]="item.imageUrl || 'assets/images/spoon.png'"
               alt="image"
             />
@@ -167,7 +171,9 @@
         </ion-item>
       </div>
     </div>
-    <div *ngIf="noMoreContent" class="no-more-content">{{'EVENT_LIST.NO_MORE_CONTENT' | translate}}</div>
+    <div *ngIf="noMoreContent" class="no-more-content">
+      {{ 'EVENT_LIST.NO_MORE_CONTENT' | translate }}
+    </div>
   </main>
   <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
