@@ -102,11 +102,15 @@ export class EditProfileComponent implements OnInit {
       !_.isEqual(this.imageOrder, currentImageOrder) &&
       currentImageOrder.length > 0
     ) {
-      this.userService.patchUserImageOrder(currentImageOrder).subscribe();
+      this.userService.patchUserImageOrder(currentImageOrder);
     }
 
     if (currentImageOrder.length === 0) {
-      this.userStateFacade.storeUser({ images: [] });
+      this.userStateFacade.storeUser({ profilePictureUrl: '', images: [] });
+    } else {
+      this.userStateFacade.storeUser({
+        profilePictureUrl: this.images[0]?.url
+      });
     }
 
     if (this.userForm.dirty) {

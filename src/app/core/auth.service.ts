@@ -29,13 +29,11 @@ import {
 } from '@angular/fire/auth';
 
 import {
-  AuthStateChange,
   FirebaseAuthentication,
   SignInResult,
   SignInWithOAuthOptions
 } from '@capacitor-firebase/authentication';
 
-import { PushNotifications } from '@capacitor/push-notifications';
 import { SignInProvider } from './models/auth.model';
 import { AuthHelper } from './auth.helper';
 import { Preferences } from '@capacitor/preferences';
