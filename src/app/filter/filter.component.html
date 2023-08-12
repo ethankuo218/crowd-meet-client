@@ -4,7 +4,7 @@
       <ion-buttons slot="start" (click)="cancel()">{{
         'EVENT_LIST.CANCEL' | translate
       }}</ion-buttons>
-      <ion-title>{{ 'EVENT_LIST.FILTERS' | translate }}</ion-title>
+      <ion-title mode="ios">{{ 'EVENT_LIST.FILTERS' | translate }}</ion-title>
       <ion-buttons slot="end" (click)="reset()">
         {{ 'EVENT_LIST.RESET' | translate }}
       </ion-buttons>
@@ -41,6 +41,7 @@
         <div class="filter_div">
           <h3>{{ 'EVENT_LIST.CATEGORIES' | translate }}</h3>
           <ion-range
+            mode="ios"
             [pin]="true"
             [pinFormatter]="pinFormatter"
             [min]="5"

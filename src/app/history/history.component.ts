@@ -1,9 +1,5 @@
 import { Component, inject } from '@angular/core';
-import {
-  ActionSheetController,
-  RefresherCustomEvent,
-  IonItemSliding
-} from '@ionic/angular';
+import { RefresherCustomEvent, IonItemSliding } from '@ionic/angular';
 import { UserService } from '../core/user.service';
 import { EventStatus, UserEvent } from '../core/+states/user-state/user.model';
 import { map } from 'rxjs';
