@@ -22,6 +22,7 @@ import { Image, User, UserEvent } from './+states/user-state/user.model';
 import { Reference } from './+states/reference-state/reference.model';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
+import { Device } from '@capacitor/device';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -39,6 +40,8 @@ export class UserService {
   }
 
   login(): void {
+    Device.getLanguageCode(); // get language
+
     forkJoin([
       this.httpClientService.post<LoginResponse>('user', {}),
       this.httpClientService.get<Reference>('Reference')
@@ -108,8 +111,8 @@ export class UserService {
     return this.httpClientService.delete<Image[]>('user/image', id);
   }
 
-  patchUserImageOrder(order: number[]): Observable<Image[]> {
-    return this.httpClientService
+  patchUserImageOrder(order: number[]): void {
+    this.httpClientService
       .patch<Image[]>('user/image/order', {
         newOrder: order
       })

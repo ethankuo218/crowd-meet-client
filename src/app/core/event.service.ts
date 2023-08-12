@@ -217,13 +217,11 @@ export class EventService {
     await this.loadingService.present();
     try {
       await this.admobService.showReward(AdOption.EVENT_JOIN);
-      await firstValueFrom(
-        this.httpClientService.post<EventActionResponse>(
-          `event/${id}/participant`,
-          {}
-        )
-      );
-      this.router.navigate(['/app/history']);
+      this.httpClientService
+        .post<EventActionResponse>(`event/${id}/participant`, {})
+        .subscribe(() => {
+          this.router.navigate(['app/history']);
+        });
     } catch (error) {
       throw error;
     } finally {

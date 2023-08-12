@@ -1,6 +1,12 @@
 import { UserStateFacade } from './+states/user-state/user.state.facade';
 import { Injectable, inject } from '@angular/core';
-import { AdMob, AdOptions, RewardAdOptions } from '@capacitor-community/admob';
+import {
+  AdMob,
+  AdMobRewardItem,
+  AdOptions,
+  RewardAdOptions,
+  RewardAdPluginEvents
+} from '@capacitor-community/admob';
 import { BannerAdPosition, BannerAdSize } from '@capacitor-community/admob';
 import { Capacitor } from '@capacitor/core';
 import { firstValueFrom, map, retry, timer } from 'rxjs';
@@ -43,8 +49,8 @@ export class AdmobService {
 
   async showInterstitial(): Promise<void> {
     const options: AdOptions = {
-      adId: 'YOUR ADID',
-      isTesting: true
+      adId: 'YOUR ADID'
+      // isTesting: true
       // npa: true
     };
     await AdMob.prepareInterstitial(options);
@@ -75,7 +81,7 @@ export class AdmobService {
     const options: RewardAdOptions = {
       adId: AdId[`${option}${this.platform === 'ios' ? '_IOS' : '_MD'}`],
       // isTesting: true,
-      // npa: true,
+      npa: true,
       ssv: {
         userId: userId,
         customData: JSON.stringify({ fake: 'data' })
@@ -85,7 +91,21 @@ export class AdmobService {
     await AdMob.prepareRewardVideoAd(options);
     await AdMob.showRewardVideoAd();
 
+    if (this.platform !== 'ios') {
+      console.log('Start listen');
+      await new Promise<void>((resolve) => {
+        AdMob.addListener(
+          RewardAdPluginEvents.Rewarded,
+          (rewardItem: AdMobRewardItem) => {
+            console.log(rewardItem);
+            resolve();
+          }
+        );
+      });
+    }
+
     try {
+      console.log('Check current');
       await this.checkCurrentAllowance(option);
     } catch (error) {
       this.dialog.open(AlertDialogComponent, {
