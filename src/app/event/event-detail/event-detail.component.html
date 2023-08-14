@@ -181,26 +181,18 @@
                         </div>
                         <div class="user_name">
                           <h4 class="dark">{{ comment.user.name }}</h4>
+                          <small class="dark_d">{{
+                            comment.createdAt | date : 'MMM d. y | HH:mm a'
+                          }}</small>
                         </div>
                       </div>
 
                       <p class="dark_d">
                         {{ comment.content }}
                       </p>
-                      <small class="dark_d">{{
-                        comment.createdAt | date : 'MMM d. y | HH:mm a'
-                      }}</small>
                     </div>
                   </div>
                   <div class="input_comment" *ngIf="user$ | async as user">
-                    <div class="mini_profile">
-                      <img
-                        appImageFallBack
-                        [src]="
-                          user.profilePictureUrl || 'assets/images/profile1.jpg'
-                        "
-                      />
-                    </div>
                     <div class="comment_input">
                       <input
                         class="dark_dd"
@@ -210,6 +202,7 @@
                         [placeholder]="'EVENT_DETAIL.ADD_COMMENT' | translate"
                       />
                       <ion-button
+                      mode="ios"
                         (click)="leaveComment(eventDetail.eventId)"
                         [disabled]="!comment"
                       >
@@ -226,14 +219,9 @@
 
       <ion-footer *ngIf="!isLoading">
         <ion-toolbar>
-          <h3>
-            {{
-              eventDetail.price === 0 ? 'free' : (eventDetail.price | currency)
-            }}
-          </h3>
           <ion-button
             *ngIf="user.userId === eventDetail.creator.userId; else normalUser"
-            slot="end"
+            slot="start"
             [disabled]="isEventStarted(eventDetail.startTime)"
             (click)="editEvent(eventDetail)"
           >
@@ -242,7 +230,7 @@
           <ng-template #normalUser>
             <ion-button
               #joinBtn
-              slot="end"
+              slot="start"
               (click)="joinEvent(eventDetail.eventId)"
               [disabled]="
                 !isAllowJoin(
@@ -255,6 +243,11 @@
               {{ 'EVENT_DETAIL.JOIN' | translate }}
             </ion-button>
           </ng-template>
+          <h3 slot="end">
+            {{
+              eventDetail.price === 0 ? 'free' : (eventDetail.price | currency)
+            }}
+          </h3>
         </ion-toolbar>
       </ion-footer>
     </ng-container>
@@ -383,11 +376,11 @@
   <ng-container *ngIf="user$ | async as user">
     <ion-footer>
       <ion-toolbar>
-        <h3>free</h3>
-        <ion-button slot="end" disabled> Edit </ion-button>
+        <ion-button slot="start" disabled> Edit </ion-button>
         <ng-template #normalUser>
-          <ion-button slot="end"> Join </ion-button>
+          <ion-button slot="start"> Join </ion-button>
         </ng-template>
+        <h3 slot="end">free</h3>
       </ion-toolbar>
     </ion-footer>
   </ng-container>
