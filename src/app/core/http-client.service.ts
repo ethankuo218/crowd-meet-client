@@ -23,6 +23,11 @@ export class HttpClientService {
 
   private async storeToken(): Promise<string> {
     const idToken = await this.auth.currentUser?.getIdToken(true);
+
+    if (!idToken) {
+      throw new Error('No current user');
+    }
+
     const token = `Bearer ${idToken}`;
     if (idToken && token) {
       await Preferences.set({ key: 'token', value: token });

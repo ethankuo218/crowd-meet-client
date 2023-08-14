@@ -7,6 +7,7 @@
     <ng-template #backbutton>
       <ion-buttons slot="start" class="back-button">
         <ion-back-button
+          mode="ios"
           [icon]="'arrow-back'"
           [text]="''"
           [defaultHref]="defaultHref"
@@ -16,6 +17,7 @@
     </ng-template>
 
     <ion-buttons
+      mode="ios"
       *ngIf="!currentUrl.match('/app/event/list/')"
       slot="end"
       class="upgrade_btn"
@@ -53,6 +55,7 @@
       </svg>
     </ion-buttons>
     <ion-buttons
+      mode="ios"
       *ngIf="currentUrl.match('/app/event/list/')"
       slot="end"
       class="upgrade_btn"
@@ -61,6 +64,7 @@
       <fa-icon [icon]="['fas', 'arrow-up-from-bracket']"></fa-icon>
     </ion-buttons>
     <ion-buttons
+      mode="ios"
       *ngIf="
         (userId$ | async) === curretEventDetailCreatorId &&
         currentUrl.match('/app/event/list/')
