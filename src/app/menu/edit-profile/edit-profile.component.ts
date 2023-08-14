@@ -34,14 +34,7 @@ export class EditProfileComponent implements OnInit {
     interests: new FormArray([])
   });
 
-  images: Array<Image | undefined> = [
-    undefined,
-    undefined,
-    undefined,
-    undefined,
-    undefined,
-    undefined
-  ];
+  images: Array<Image | undefined> = [];
 
   private imageOrder: number[] = [];
 
@@ -83,9 +76,14 @@ export class EditProfileComponent implements OnInit {
           interests: [...patchInterestArr]
         });
 
+        this.images = [];
         result.images.forEach((item) => {
           this.images[item.order] = item;
         });
+
+        while (this.images.length < 6) {
+          this.images.push(undefined);
+        }
 
         this.imageOrder = this.getCurrentOrder();
       },
@@ -96,6 +94,14 @@ export class EditProfileComponent implements OnInit {
   }
 
   ionViewWillLeave(): void {
+    if (this.userForm.dirty) {
+      this.userService.updateUser({
+        name: this.userForm.get('name')?.value,
+        bio: this.userForm.get('bio')?.value,
+        interests: this.getInterests()
+      });
+    }
+
     const currentImageOrder: number[] = this.getCurrentOrder();
 
     if (
@@ -112,22 +118,10 @@ export class EditProfileComponent implements OnInit {
         profilePictureUrl: this.images[0]?.url
       });
     }
-
-    if (this.userForm.dirty) {
-      this.userService.updateUser({
-        name: this.userForm.get('name')?.value,
-        bio: this.userForm.get('bio')?.value,
-        interests: this.getInterests()
-      });
-    }
   }
 
   trackByIndex(index: number, item: any): number {
     return index;
-  }
-
-  updateUserInfo(): void {
-    this.userService.updateUser(this.userForm.value);
   }
 
   selectPhoto(index: number) {
@@ -161,10 +155,20 @@ export class EditProfileComponent implements OnInit {
     const elementAfterIndex: Array<Image | undefined> = [...this.images].slice(
       index + 1
     );
-    const newImagesOrder = elementBeforeIndex.concat(elementAfterIndex);
+    const newImagesOrder = elementBeforeIndex
+      .concat(elementAfterIndex)
+      .filter((item) => item)
+      .map((item) => {
+        return { ...item };
+      });
 
-    newImagesOrder.push(undefined);
-    this.images = newImagesOrder;
+    newImagesOrder.forEach((item, index) => {
+      item.order = index;
+    });
+
+    this.userStateFacade.storeUser({
+      images: newImagesOrder
+    });
   }
 
   private getCurrentOrder() {

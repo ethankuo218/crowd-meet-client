@@ -116,14 +116,12 @@ export class UserService {
       .patch<Image[]>('user/image/order', {
         newOrder: order
       })
-      .pipe(
-        tap((result: Image[]) => {
-          this.userStateFacade.storeUser({
-            profilePictureUrl: result[0].url,
-            images: result
-          });
-        })
-      );
+      .subscribe((result: Image[]) => {
+        this.userStateFacade.storeUser({
+          profilePictureUrl: result[0].url,
+          images: result
+        });
+      });
   }
 
   getProfilePictureUrls(ids: number[]) {

@@ -17,8 +17,6 @@ export class InputValidators {
   static endTimeValidate(formcCtrl: AbstractControl) {
     const startTime = new Date(formcCtrl.get('startTime')?.value);
     const endTime = new Date(formcCtrl.get('endTime')?.value);
-    console.log(startTime.getTime() > endTime.getTime());
-    console.log(formcCtrl.errors);
     if (startTime.getTime() > endTime.getTime()) {
       return {
         endTimeShouldAfterStartTime: true
