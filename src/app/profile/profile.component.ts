@@ -12,6 +12,7 @@ import { User } from '../core/+states/user-state/user.model';
 import { Review } from '../history/reviews/models/reviews.model';
 import { ReviewsService } from '../history/reviews/reviews.service';
 import { DirectivesModule } from '../directives/directives.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profile',
@@ -26,7 +27,8 @@ import { DirectivesModule } from '../directives/directives.module';
     RouterModule,
     SwiperModule,
     AgePipe,
-    DirectivesModule
+    DirectivesModule,
+    TranslateModule
   ],
   providers: [UserService]
 })

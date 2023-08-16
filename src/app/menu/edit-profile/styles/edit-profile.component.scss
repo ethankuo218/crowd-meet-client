@@ -42,22 +42,6 @@
   }
 }
 
-.empty-item {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  height: 150px;
-  width: 100%;
-  border-radius: 25px;
-  border: dashed #b6b9c6 4px;
-  align-items: center;
-
-  fa-icon {
-    font-size: 25px;
-    color: #b6b9c6;
-  }
-}
-
 .profile_your {
   padding: 0px 0 30px;
   text-align: center;
@@ -151,30 +135,51 @@ form .profile_your [type='submit'] {
   padding: 0 16px;
 }
 
-.inner {
-  width: 100%;
-  height: 100%;
-  cursor: move;
-}
-
 .image-item {
-  flex: 1 0 30%; /* NEW */
-  margin: 5px; /* NEW */
-  background-color: transparent;
+  width: 27vw;
   height: 150px;
+  cursor: move;
+  background-color: transparent;
   text-align: center;
   line-height: 5rem;
   position: relative;
 }
 
-.placeholder {
-  flex: 1 0 5rem; /* NEW */
-  margin: 5px; /* NEW */
-  background-color: white;
-  height: 5rem;
-  text-align: center;
-  line-height: 5rem;
-  border: 1px;
+.image-item:active {
+  opacity: 0.6;
+}
+
+.empty-item {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 27vw;
+  height: 150px;
+  border-radius: 25px;
+  border: dashed #b6b9c6 4px;
+  align-items: center;
+
+  fa-icon {
+    font-size: 25px;
+    color: #b6b9c6;
+  }
+}
+
+.cdk-drop-list {
+  display: flex;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 25px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.3;
 }
 
 .cdk-drag-animating {

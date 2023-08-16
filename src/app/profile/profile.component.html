@@ -1,60 +1,20 @@
 <app-header></app-header>
 <ion-content>
   <main class="user-detail-area main-area">
-    <div class="container">
-      <ng-container *ngIf="user$ | async as user">
-        <div class="dr-watson_box">
-          <swiper
-            id="profile-swiper"
-            *ngIf="user.images.length !== 0"
-            [slidesPerView]="1"
-            [pagination]="true"
-          >
-            <ng-template swiperSlide *ngFor="let image of user.images">
-              <img appImageFallBack [src]="image.url" />
-            </ng-template>
-          </swiper>
-          <ng-container *ngIf="user.images.length !== 0">
-            <h3 class="dark">{{ user.name }}</h3>
-            <p class="dark_d">{{ user.gender }}</p>
-            <p class="dark_d">{{ user.birthDate | age }}</p>
-          </ng-container>
-          <div *ngIf="user.images.length === 0" class="row">
-            <div class="collum-1">
-              <img src="assets/images/profile1.jpg" alt="image" />
-            </div>
-            <div class="collum-2">
-              <h3 class="dark">{{ user.name }}</h3>
-              <hr />
-              <p>{{ user.gender }}</p>
-              <p>{{ user.birthDate | age }}{{ 'yr' }}</p>
-            </div>
-          </div>
-        </div>
+    <ng-container *ngIf="user$ | async as user">
+      <swiper
+        id="profile-swiper"
+        *ngIf="user.images.length !== 0"
+        [slidesPerView]="1"
+        [pagination]="true"
+      >
+        <ng-template swiperSlide *ngFor="let image of user.images">
+          <img appImageFallBack [src]="image.url" />
+        </ng-template>
+      </swiper>
 
-        <div class="info-row">
-          <div class="collum text-center">
-            <div class="info-icon">
-              <fa-icon [icon]="['fas', 'people-group']"></fa-icon>
-            </div>
-            <h3 class="primary">5,000+</h3>
-            <p class="dark_d">Joined</p>
-          </div>
-          <div class="collum text-center">
-            <div class="info-icon">
-              <fa-icon [icon]="['fas', 'people-group']"></fa-icon>
-            </div>
-            <h3 class="primary">10+</h3>
-            <p class="dark_d">Hold</p>
-          </div>
-          <div class="collum text-center">
-            <div class="info-icon">
-              <fa-icon [icon]="['fas', 'star']"></fa-icon>
-            </div>
-            <h3 class="primary">4.8</h3>
-            <p class="dark_d">Rating</p>
-          </div>
-        </div>
+      <div class="container">
+        <h3 class="name">{{ user.name }}</h3>
 
         <div class="about_content">
           <h3 class="dark">About me</h3>
@@ -99,8 +59,8 @@
             </div>
           </div>
         </div>
-      </ng-container>
-    </div>
+      </div>
+    </ng-container>
     <div *ngIf="isLoading" class="container">
       <div class="loading-row">
         <div class="collum-1">
