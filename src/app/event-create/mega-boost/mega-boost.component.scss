@@ -6,6 +6,11 @@
   font-size: 25px;
   font-weight: 600;
   margin-top: 1rem;
+
+  fa-icon {
+    color: var(--ion-color-primary);
+    font-size: 18px;
+  }
 }
 
 .header {
@@ -110,4 +115,8 @@
     background-color: #d9d9d9;
     color: grey;
   }
+}
+
+ion-popover {
+  --min-width: 100vw;
 }
