@@ -4,7 +4,7 @@ import { Directive, ElementRef, HostListener, Renderer2 } from '@angular/core';
   selector: '[appImageFallBack]'
 })
 export class ImageFallBackDirective {
-  fallbackUrl: string = 'assets/images/spoon.png';
+  fallbackUrl: string = 'assets/images/event-default.png';
 
   constructor(private _el: ElementRef, private _renderer: Renderer2) {}
 
