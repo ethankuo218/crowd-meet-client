@@ -67,6 +67,13 @@ export class EventService {
     setTimeout(() => {
       this._isLoading = false;
     }, 300);
+
+    if (eventList.data.length === 0) {
+      this._noMoreContent = true;
+    } else {
+      this._noMoreContent = false;
+    }
+
     this.eventListStateFacade.storeEventList(eventList);
     this.eventListStateFacade.storeBoostedEvents(boostedEvents);
   }

@@ -8,6 +8,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IonicModule } from '@ionic/angular';
 import { SwiperModule } from 'swiper/angular';
 import { HeaderComponent } from '../header/header.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 SwiperCore.use([Pagination]);
 
@@ -22,7 +23,8 @@ SwiperCore.use([Pagination]);
     RouterModule,
     HeaderComponent,
     FontAwesomeModule,
-    SwiperModule
+    SwiperModule,
+    TranslateModule
   ]
 })
 export class InAppPurchaseComponent implements OnInit {

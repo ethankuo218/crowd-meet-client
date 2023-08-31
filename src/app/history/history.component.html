@@ -71,7 +71,7 @@
               </ion-item-options>
             </ion-item-sliding>
             <div *ngIf="upcomings.length === 0" class="no-more-content">
-              You don't have upcoming event!
+              {{ 'HISTORY.NO_MORE_CONTENT_UPCOMING' | translate }}
             </div>
           </ng-container>
         </ng-container>
@@ -164,7 +164,7 @@
               </ion-item-options>
             </ion-item-sliding>
             <div *ngIf="joineds.length === 0" class="no-more-content">
-              You don't have joined event!
+              {{ 'HISTORY.NO_MORE_CONTENT_JOINED' | translate }}
             </div>
           </ng-container>
         </ng-container>

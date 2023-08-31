@@ -41,6 +41,7 @@ export class EventListComponent implements OnInit {
     this.eventService.reload().then(() => {
       (event as RefresherCustomEvent).target.complete();
     });
+    console.log(this.noMoreContent);
   }
 
   onIonInfinite(event: Event) {

@@ -7,6 +7,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NotificationsPage } from './notifications.page';
 import { NotificationsService } from '../notifications/notifications.service';
 import { HeaderComponent } from '../header/header.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { HeaderComponent } from '../header/header.component';
         component: NotificationsPage
       }
     ]),
-    HeaderComponent
+    HeaderComponent,
+    TranslateModule
   ],
   declarations: [NotificationsPage],
   providers: [NotificationsService]

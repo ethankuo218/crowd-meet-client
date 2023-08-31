@@ -5,7 +5,7 @@
   </ion-refresher>
   <main class="article-area main-area">
     <div class="event-content">
-      <h3 class="dark">{{ 'EVENT_LIST.SPOTLIGHT' | translate }}</h3>
+      <h3 *ngIf="!noMoreContent" class="dark">{{ 'EVENT_LIST.SPOTLIGHT' | translate }}</h3>
       <swiper *ngIf="!isLoading" [slidesPerView]="2">
         <ng-template swiperSlide *ngFor="let item of boosted$ | async">
           <div

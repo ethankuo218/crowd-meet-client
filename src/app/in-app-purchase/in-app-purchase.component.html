@@ -46,7 +46,7 @@
         </div>
       </div>
       <br /> -->
-      <div class="container-title">Bundle</div>
+      <div class="container-title">{{'IN_APP_PURCHASE.BUNDLE.TITLE' | translate}}</div>
       <div class="bundle-container">
         <swiper [slidesPerView]="1" [pagination]="true">
           <ng-container *ngFor="let product of productList">
@@ -57,9 +57,9 @@
                     {{ product.identifier }}
                     <br />
                     <small>{{ product.description }}</small>
-                    <div class="price-title">Starting at</div>
+                    <div class="price-title">{{'IN_APP_PURCHASE.BUNDLE.STARTING_AT' | translate}}</div>
                     <div class="price">
-                      {{ product.priceString }} <small> / month</small>
+                      {{ product.priceString }} <small> / {{ 'IN_APP_PURCHASE.BUNDLE.MONTH' | translate}}</small>
                     </div>
                   </div>
                   <img src="assets/upgrade.svg" />

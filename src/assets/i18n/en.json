@@ -33,8 +33,8 @@
     "JOIN": "Join"
   },
   "PROFILE": {
-    "GENDER": "Gender",
-    "AGE": "Age",
+    "GENDER": "Gender: ",
+    "AGE": "Age: ",
     "JOINED": "Joined",
     "HOLD": "Event Hold",
     "RATING": "Rating",
@@ -81,6 +81,8 @@
     "JOINED": "Joined",
     "VIEW": "View",
     "RATE": "Rate",
+    "NO_MORE_CONTENT_UPCOMING": "You don't have upcoming event!",
+    "NO_MORE_CONTENT_JOINED": "You don't have joined event!",
     "TAG": {
       "ON_GOING": "Ongoing",
       "ACCEPTED": "Accepted",
@@ -89,6 +91,9 @@
       "DECLINED": "Declined",
       "KICKED": "Kicked"
     }
+  },
+  "NOTIFICATIONS": {
+    "NO_MORE_CONTENT": "You don't have any notifications"
   },
   "MENU": {
     "EDIT_PROFILE": "Edit Profile",
@@ -110,11 +115,13 @@
   },
   "IN_APP_PURCHASE": {
     "BUNDLE": {
-      "TITLE": "title",
+      "TITLE": "Bundle",
+      "STARTING_AT": "Starting at",
+      "MONTH": "month",
       "DESCRIPTION": "description"
     },
     "MEGA_BOOST": {
-      "DESCRIPTION": "Unlock the ultimate visibility for your event with crowdMeet Boost! Elevate your gathering to the top spot on our homepage and let us personally invite users who'll love what you've planned. It's not just a boost; it's your event's ticket to stardom!",
+      "DESCRIPTION": "Unlock the ultimate visibility for your event with CrowdMeet Boost! Elevate your gathering to the top spot on our homepage and let us personally invite users who'll love what you've planned. It's not just a boost; it's your event's ticket to stardom!",
       "BENFITS": "Benefits",
       "BULLET_POINT_TITLE_1": "Prime Visibility",
       "BULLET_POINT_TITLE_2": "Targeted Invites",

@@ -3,8 +3,8 @@
 <ion-content class="notifications-content">
   <main class="notification-area main-area">
     <div class="container">
-      <ng-container *ngFor="let item of notifications$ | async">
-        <div class="image_content">
+      <ng-container *ngIf="notifications$ | async as notifications">
+        <div class="image_content" *ngFor="let item of notifications">
           <div class="poin_ment">
             <div>
               <img src="assets/images/round_image.png" alt="image" />
@@ -18,6 +18,9 @@
           <div class="sample_text">
             <p class="dark_d">{{item.content}}</p>
           </div>
+        </div>
+        <div *ngIf="notifications.length === 0" class="no-more-content" style="margin-top: 2rem;">
+          {{ 'NOTIFICATIONS.NO_MORE_CONTENT' | translate }}
         </div>
       </ng-container>
     </div>
