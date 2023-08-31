@@ -9,7 +9,7 @@ import {
   query,
   where
 } from '@angular/fire/firestore';
-import { Observable, firstValueFrom, take } from 'rxjs';
+import { Observable, firstValueFrom, take, filter, map, of } from 'rxjs';
 import { Chat } from '../models/chat.models';
 import {
   EventImageResponse,
@@ -28,7 +28,9 @@ export class ChatListComponent implements OnInit {
     private readonly chatService: ChatService
   ) {}
 
-  chats$!: Observable<Chat[]>;
+  private chats$!: Observable<Chat[]>;
+  eventChats$!: Observable<Chat[]>;
+  privateChats$!: Observable<Chat[]>;
   user: User | null = null;
   memberPictureUrls$!: Observable<ProfilePictures>;
   eventImageUrls$!: Observable<{ [eventId: number]: string }>;
@@ -43,6 +45,14 @@ export class ChatListComponent implements OnInit {
     this.chatService.getEventImages(this.chats$).subscribe();
     this.memberPictureUrls$ = this.chatService.memberPictures$;
     this.eventImageUrls$ = this.chatService.eventImages$;
+
+    this.eventChats$ = this.chats$.pipe(
+      map((chats) => chats.filter((chat) => chat.type === 'event'))
+    );
+
+    this.privateChats$ = this.chats$.pipe(
+      map((chats) => chats.filter((chat) => chat.type === 'private'))
+    );
   }
 
   private async getUser(): Promise<User | null> {
