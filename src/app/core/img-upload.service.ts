@@ -19,7 +19,7 @@ export class ImgUploadService {
 
   async selectImage(): Promise<string> {
     const image = await Camera.getPhoto({
-      quality: 20,
+      quality: 100,
       height: 800,
       width: 800,
       allowEditing: false,
