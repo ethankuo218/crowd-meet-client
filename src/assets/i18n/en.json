@@ -92,6 +92,16 @@
       "KICKED": "Kicked"
     }
   },
+  "REVIEWS": {
+    "TITLE": "Write a Review",
+    "SUB_TITLE": "Write Your Rewiew",
+    "DESCRIPTION": "How was your experience with ",
+    "PLACEHOLDER": "Please write your comment here",
+    "CANCEL": "Cancel",
+    "SUBMIT": "Submit",
+    "NO_PARTICIPANTS": "No participantas wating for review",
+    "STILL_GOING_ON": "This event is still goning on"
+  },
   "NOTIFICATIONS": {
     "NO_MORE_CONTENT": "You don't have any notifications"
   },

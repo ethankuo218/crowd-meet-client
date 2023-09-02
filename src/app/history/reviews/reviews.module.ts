@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ReviewsService } from './reviews.service';
 import { EventService } from '../../core/event.service';
 import { DirectivesModule } from 'src/app/directives/directives.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
@@ -31,7 +32,8 @@ const routes: Routes = [
     SwiperModule,
     RatingInputComponent,
     ReactiveFormsModule,
-    DirectivesModule
+    DirectivesModule,
+    TranslateModule
   ],
   providers: [ReviewsService, EventService]
 })

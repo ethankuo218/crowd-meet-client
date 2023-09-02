@@ -33,8 +33,8 @@
           <div *ngIf="participants.length === 0" class="no-more-content">
             {{
               canView
-                ? 'No participantas wating for review'
-                : 'This event is still goning on'
+                ? ('REVIEWS.NO_PARTICIPANTS' | translate)
+                : ('REVIEWS.STILL_GOING_ON' | translate)
             }}
           </div>
         </ng-container>

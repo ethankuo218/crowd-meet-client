@@ -1,7 +1,7 @@
 <main class="rating main-area">
   <div class="container">
     <div class="head_arw">
-      <h3 class="dark">Write a Review</h3>
+      <h3 class="dark">{{ 'REVIEW.TITLE' | translate }}</h3>
     </div>
     <form [formGroup]="form">
       <div class="rating-area">
@@ -12,24 +12,24 @@
             alt="image"
           />
           <h3 class="dark">
-            {{ 'How was your experience with ' + userDetail.name + '?' }}
+            {{ ('REVIEW.DESCRIPTION' | translate) + userDetail.name + '?' }}
           </h3>
           <app-rating-input formControlName="rating"></app-rating-input>
           <hr />
         </div>
-        <h3 class="dark">Write Your Rewiew</h3>
+        <h3 class="dark">{{ 'REVIEW.SUB_TITLE' | translate }}</h3>
         <ion-textarea
           class="lm_text"
-          placeholder="Please write your comment here"
+          [placeholder]="'REVIEW.PLACEHOLDER' | translate"
           formControlName="comment"
         ></ion-textarea>
         <div class="button_row">
-          <ion-button class="primary cancel_btn" (click)="cancel()"
-            >Cancel</ion-button
-          >
-          <ion-button class="white submit_btn" (click)="submit()"
-            >Submit</ion-button
-          >
+          <ion-button class="primary cancel_btn" (click)="cancel()">{{
+            'REVIEW.CANCEL' | translate
+          }}</ion-button>
+          <ion-button class="white submit_btn" (click)="submit()">{{
+            'REVIEW.SUBMIT' | translate
+          }}</ion-button>
         </div>
       </div>
     </form>
