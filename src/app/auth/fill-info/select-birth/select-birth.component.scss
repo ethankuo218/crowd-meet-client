@@ -14,13 +14,14 @@
 .birth-row {
   margin-top: 4rem;
   margin-bottom: 4rem;
+  width: 100%;
 }
 
-.birth-row input {
+.birth-row ion-input {
   font-size: 15px;
   border-radius: 12px;
   border: none;
-  padding: 15px 20px;
+  padding: 1rem;
   width: 100%;
   background: var(--ion-input-background-color);
   color: #212121;
