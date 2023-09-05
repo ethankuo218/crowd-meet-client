@@ -30,7 +30,7 @@ export class FillInfoService {
     this.birth = undefined;
     this.interests = undefined;
 
-    this.storage.set('isNewUser', false);
+    this.storage.remove('isNewUser');
     this.router.navigate(['app']);
   }
 }

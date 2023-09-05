@@ -40,6 +40,7 @@ import { Preferences } from '@capacitor/preferences';
 import { UserService } from './user.service';
 import { FcmTokenService } from './fcm-token.service';
 import { firstValueFrom } from 'rxjs';
+import { Storage } from '@ionic/storage-angular';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService implements OnDestroy {
@@ -52,7 +53,7 @@ export class AuthService implements OnDestroy {
   private location = inject(Location);
   private userService = inject(UserService);
   private fcmTokenService = inject(FcmTokenService);
-
+  private store = inject(Storage);
   private auth = inject(Auth);
 
   currentUser: User | null = null;
@@ -204,6 +205,7 @@ export class AuthService implements OnDestroy {
               .then((webResult) => {
                 // ? Sign-out successful
                 Preferences.remove({ key: 'token' });
+                this.store.remove('isNewUser');
                 resolve('Successfully sign out from native and web');
               })
               .catch((webError) => {
