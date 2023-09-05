@@ -45,14 +45,14 @@ export interface UserAllowance {
 }
 
 export enum AllowanceType {
-  EVENT_CREATE = 'eventsCreationAllowance',
-  EVENT_CREATE_AD_WATCH = 'adsWatchedForEventCreation',
-  EVENT_JOIN = 'eventsJoiningAllowance',
-  EVENT_JOIN_AD_WATCH = 'adsWatchedForEventJoining',
-  KICK = 'kickAllowance',
-  KICK_AD_WATCH = 'adsWatchedForKickIncrease',
-  CHECK_PARTICIPANT = 'checkParticipantsAllowance',
-  CHECK_PARTICIPANT_AD_WATCH = 'adsWatchedForCheckParticipants'
+  CREATE_EVENT = 'eventsCreationAllowance',
+  CREATE_EVENT_AD_WATCH = 'adsWatchedForEventCreation',
+  JOIN_EVENT = 'eventsJoiningAllowance',
+  JOIN_EVENT_AD_WATCH = 'adsWatchedForEventJoining',
+  KICK_PARTICIPANT = 'kickAllowance',
+  KICK_PARTICIPANT_AD_WATCH = 'adsWatchedForKickIncrease',
+  VIEW_PARTICIPANT = 'checkParticipantsAllowance',
+  VIEW_PARTICIPANT_AD_WATCH = 'adsWatchedForCheckParticipants'
 }
 
 export interface MegaBoost {

@@ -114,7 +114,7 @@ export class EventService {
 
   async createEvent(eventSetting: EventSetting): Promise<void> {
     try {
-      await this.admobService.showReward(AdOption.EVENT_CREATE);
+      await this.admobService.showReward(AdOption.CREATE_EVENT);
       const eventCreateResult = await firstValueFrom(
         this.httpClientService.post<Event>('event', eventSetting)
       );
@@ -209,7 +209,7 @@ export class EventService {
   async unlockedParticipants(id: number) {
     await this.loadingService.present();
     try {
-      await this.admobService.showReward(AdOption.CHECK_PARTICIPANT);
+      await this.admobService.showReward(AdOption.VIEW_PARTICIPANT);
       await firstValueFrom(
         this.httpClientService.post(`event/${id}/unlocked-participants`, {})
       );
@@ -223,7 +223,7 @@ export class EventService {
   async apply(id: number): Promise<void> {
     await this.loadingService.present();
     try {
-      await this.admobService.showReward(AdOption.EVENT_JOIN);
+      await this.admobService.showReward(AdOption.JOIN_EVENT);
       this.httpClientService
         .post<EventActionResponse>(`event/${id}/participant`, {})
         .subscribe(() => {
@@ -272,7 +272,7 @@ export class EventService {
   async kick(id: number, userId: number): Promise<void> {
     await this.loadingService.present();
     try {
-      await this.admobService.showReward(AdOption.KICK);
+      await this.admobService.showReward(AdOption.KICK_PARTICIPANT);
       await firstValueFrom(
         this.httpClientService.patch<EventActionResponse>(
           `event/${id}/participant`,
