@@ -7,7 +7,7 @@
           {{ 'CHAT_LIST.DIRECT' | translate }}
         </ng-template>
         <br />
-        <div *ngIf="eventChats$ | async as chats" class="container">
+        <div *ngIf="privateChats$ | async as chats" class="container">
           <ng-container *ngFor="let chat of chats">
             <app-chat-card
               *ngIf="user"
@@ -28,7 +28,7 @@
           {{ 'CHAT_LIST.GROUP' | translate }}
         </ng-template>
         <br />
-        <div *ngIf="privateChats$ | async as chats" class="container">
+        <div *ngIf="eventChats$ | async as chats" class="container">
           <ng-container *ngFor="let chat of chats">
             <app-chat-card
               *ngIf="user"
