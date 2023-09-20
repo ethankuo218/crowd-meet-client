@@ -29,16 +29,23 @@ export class FcmTokenService {
       'pushNotificationActionPerformed',
       (result) => {
         console.log(result.notification.data);
-        let status = '';
-        switch (status) {
+        const type = result.notification.data.type;
+        switch (type) {
           case NotificationType.EVENT_COMMENT:
-            this.router.navigate(['app/event/list/']);
+            const eventId = result.notification.data.eventId;
+            this.router.navigate(['app/event/list', eventId]);
             break;
           case NotificationType.CHAT:
             this.router.navigate(['app/chat/list']);
             break;
           case NotificationType.EVENT_STATUS:
-            this.router.navigate(['app/history']);
+            const isHost = result.notification.data.status;
+            const joinerEventId = result.notification.data.eventId;
+            if (isHost) {
+              this.router.navigate(['app/event/joiner-list', joinerEventId]);
+            } else {
+              this.router.navigate(['app/history']);
+            }
             break;
         }
       }
