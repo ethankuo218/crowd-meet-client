@@ -135,7 +135,7 @@ export class MegaBoostComponent implements OnInit {
   private async check(boostType: number): Promise<void> {
     const dialogDef = this.dialog.open(AlertDialogComponent, {
       data: {
-        title: `Do you want to use ${boostType} day boost ?`,
+        title: 'DIALOG.TITLE.BOOST',
         content: ``,
         enableCancelButton: true
       },

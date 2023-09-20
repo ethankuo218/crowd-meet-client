@@ -91,7 +91,7 @@ export class EventDetailComponent {
   addToCalendar(event: Event): void {
     const dialogDef = this.dialog.open(AlertDialogComponent, {
       data: {
-        title: 'Do you want to add this event to calendar ?',
+        title: 'DIALOG.TITLE.CALENDAR',
         content: '',
         enableCancelButton: true
       },
@@ -158,8 +158,8 @@ export class EventDetailComponent {
 
     const dialogDef = this.dialog.open(AlertDialogComponent, {
       data: {
-        title: 'Do you want to check the participants ?',
-        content: `Watch an ad to unlock`,
+        title: 'DIALOG.TITLE.CHECK_PARTICIPANT',
+        content: 'DIALOG.CONTENT.CHECK_PARTICIPANT',
         enableCancelButton: true
       },
       panelClass: 'custom-dialog'

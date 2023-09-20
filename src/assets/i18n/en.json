@@ -93,7 +93,7 @@
       "KICKED": "Kicked"
     }
   },
-  "REVIEWS": {
+  "REVIEW": {
     "TITLE": "Write a Review",
     "SUB_TITLE": "Write Your Rewiew",
     "DESCRIPTION": "How was your experience with ",
@@ -176,5 +176,21 @@
     "DECLINE": "Decline",
     "KICK": "Kick",
     "NO_JOINER": "No participants !"
+  },
+  "DIALOG": {
+    "TITLE": {
+      "CALENDAR": "Do you want to add this event to calendar ?",
+      "CHECK_PARTICIPANT": "Do you want to check the participants ?",
+      "LEAVE_EVENT": "Do you want to check the participants ?",
+      "BOOST": "Do you want to use BOOST ?"
+    },
+    "CONTENT": {
+      "CHECK_PARTICIPANT": "Watch an ad to unlock",
+      "LEAVE_EVENT": "Watch an ad to unlock"
+    },
+    "BUTTON": {
+      "CONFIRM": "Confirm",
+      "CANCEL": "Cancel"
+    }
   }
 }

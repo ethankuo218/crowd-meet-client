@@ -58,8 +58,8 @@ export class HistoryComponent {
     slidingItem.close();
     const dialogRef = this.dialog.open(AlertDialogComponent, {
       data: {
-        title: 'Do you want to leave this event ?',
-        content: '',
+        title: 'DIALOG.TITLE.LEAVE_EVENT',
+        content: 'DIALOG.CONTENT.LEAVE_EVENT',
         enableCancelButton: true
       },
       panelClass: 'custom-dialog'
