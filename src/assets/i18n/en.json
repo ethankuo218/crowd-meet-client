@@ -81,6 +81,7 @@
     "JOINED": "Joined",
     "VIEW": "View",
     "RATE": "Rate",
+    "LEAVE": "Leave",
     "NO_MORE_CONTENT_UPCOMING": "You don't have upcoming event!",
     "NO_MORE_CONTENT_JOINED": "You don't have joined event!",
     "TAG": {
@@ -128,7 +129,25 @@
       "TITLE": "Bundle",
       "STARTING_AT": "Starting at",
       "MONTH": "month",
-      "DESCRIPTION": "description"
+      "DESCRIPTION": "description",
+      "INFLUENCER_BUNDLE": {
+        "TITLE": "Influencer Bundle",
+        "DESCRIPTION_1": "Description A",
+        "DESCRIPTION_2": "Description B",
+        "DESCRIPTION_3": "Description C"
+      },
+      "SOCIAL_BUNDLE": {
+        "TITLE": "Social Bundle",
+        "DESCRIPTION_1": "Description A",
+        "DESCRIPTION_2": "Description B",
+        "DESCRIPTION_3": "Description C"
+      },
+      "LIFESTYLE_BUNDLE": {
+        "TITLE": "Life Style Bundle",
+        "DESCRIPTION_1": "Description A",
+        "DESCRIPTION_2": "Description B",
+        "DESCRIPTION_3": "Description C"
+      }
     },
     "MEGA_BOOST": {
       "DESCRIPTION": "Unlock the ultimate visibility for your event with CrowdMeet Boost! Elevate your gathering to the top spot on our homepage and let us personally invite users who'll love what you've planned. It's not just a boost; it's your event's ticket to stardom!",
@@ -151,5 +170,11 @@
       "LEFT_PREFIX": "You have",
       "UNIT": "boost ready to roll!"
     }
+  },
+  "JOINER_LIST": {
+    "ACCEPT": "Accept",
+    "DECLINE": "Decline",
+    "KICK": "Kick",
+    "NO_JOINER": "No participants !"
   }
 }
