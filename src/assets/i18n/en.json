@@ -1,4 +1,9 @@
 {
+  "LOGIN": {
+    "FACEBOOK":"Login with Facebook",
+    "GOOGLE":"Login with Google",
+    "APPLE":"Login with Apple"
+  },
   "EVENT_LIST": {
     "SEARCH": "Search",
     "SPOTLIGHT": "CrowdMeet Spotlight",

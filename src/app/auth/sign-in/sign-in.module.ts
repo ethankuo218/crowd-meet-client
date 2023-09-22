@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { SignInPage } from './sign-in.page';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
@@ -22,6 +23,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     IonicModule,
     FontAwesomeModule,
+    TranslateModule,
     RouterModule.forChild(routes)
   ],
   declarations: [SignInPage]
