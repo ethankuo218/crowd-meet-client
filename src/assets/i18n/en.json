@@ -192,5 +192,9 @@
       "CONFIRM": "Confirm",
       "CANCEL": "Cancel"
     }
+  },
+  "SELECT_INTERESTS": {
+    "TITLE": "Pick your interests",
+    "SUB_TITLE": "You can add or change them later"
   }
 }

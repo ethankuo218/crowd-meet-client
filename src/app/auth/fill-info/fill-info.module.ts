@@ -10,6 +10,7 @@ import { CheckboxWrapperComponent } from 'src/app/components/checkbox-wrapper/ch
 import { ShellModule } from 'src/app/shell/shell.module';
 import { SwiperModule } from 'swiper/angular';
 import { SelectInterestsComponent } from './select-interests/select-interests.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
@@ -45,7 +46,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SwiperModule,
     ShellModule,
-    CheckboxWrapperComponent
+    CheckboxWrapperComponent,
+    TranslateModule
   ],
   providers: [FillInfoService]
 })
