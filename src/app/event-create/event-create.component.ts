@@ -50,7 +50,7 @@ export class EventCreateComponent implements OnInit {
       endTime: new FormControl('', [Validators.required]),
       maxParticipants: new FormControl(1, counterRangeValidator(1, 15)),
       formattedAddress: new FormControl('', [Validators.required]),
-      price: new FormControl(0, [Validators.required]),
+      price: new FormControl(0, [Validators.required, Validators.max(1000000)]),
       categories: new FormArray([], [Validators.required]),
       isOnline: new FormControl('', [Validators.required])
     },
