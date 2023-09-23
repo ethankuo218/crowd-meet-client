@@ -132,7 +132,7 @@ export class EditProfileComponent implements OnInit {
       this.userStateFacade.storeUser({ profilePictureUrl: '', images: [] });
     } else {
       this.userStateFacade.storeUser({
-        profilePictureUrl: this.images[0]?.url
+        profilePictureUrl: this.images.find((item) => item)?.url
       });
     }
   }
