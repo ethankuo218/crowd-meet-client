@@ -170,15 +170,14 @@ export class AuthService implements OnDestroy {
     if (authProviderId) {
       const authProviderCapitalized =
         authProviderId[0].toUpperCase() + authProviderId.slice(1);
-      message = 'Signing in with ' + authProviderCapitalized;
     } else {
-      message = 'Signing in ...';
     }
 
     this.loadingController
       .create({
-        message: message,
-        duration: 4000
+        spinner: 'dots',
+        duration: 4000,
+        showBackdrop: true
       })
       .then((loader) => {
         this.authLoader = loader;
@@ -228,8 +227,6 @@ export class AuthService implements OnDestroy {
     provider: OAuthProvider | GoogleAuthProvider | FacebookAuthProvider,
     authOptions?: SignInWithOAuthOptions
   ): Promise<SignInResult> {
-    this.presentLoading(provider.providerId);
-
     let authResult: SignInResult | null = null;
 
     if (this.platform.is('capacitor')) {
@@ -371,7 +368,7 @@ export class AuthService implements OnDestroy {
     const authOptions: SignInWithOAuthOptions = {
       scopes: ['email', 'public_profile']
     };
-
+    this.presentLoading(provider.providerId);
     // ? When we use the redirect authentication flow, the code below the socialSignIn() invocation does not get executed as we leave the current page
     return this.socialSignIn(provider, authOptions);
   }
@@ -381,7 +378,7 @@ export class AuthService implements OnDestroy {
     const authOptions: SignInWithOAuthOptions = {
       scopes: ['email', 'profile']
     };
-
+    this.presentLoading(provider.providerId);
     // ? When we use the redirect authentication flow, the code below the socialSignIn() invocation does not get executed as we leave the current page
     return this.socialSignIn(provider, authOptions);
   }
@@ -395,7 +392,7 @@ export class AuthService implements OnDestroy {
     provider.addScope('email');
     provider.addScope('name');
     // provider.setCustomParameters({locale: 'en'});
-
+    this.presentLoading(provider.providerId);
     // ? When we use the redirect authentication flow, the code below the socialSignIn() invocation does not get executed as we leave the current page
     return this.socialSignIn(provider, authOptions);
   }
