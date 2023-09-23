@@ -179,7 +179,7 @@ export class EventCreateComponent implements OnInit {
       } catch (error) {
         console.error(error);
       } finally {
-        this.loadingService.dismiss;
+        this.loadingService.dismiss();
       }
     } else {
       const modal = await this.modalCtrl.create({
@@ -203,14 +203,19 @@ export class EventCreateComponent implements OnInit {
 
       if (role === 'cancel') {
         this.loadingService.present();
-        await this.eventService.createEvent({
-          ...this.eventForm.value,
-          startTime: new Date(this.eventForm.value.startTime).toISOString(),
-          endTime: new Date(this.eventForm.value.endTime).toISOString(),
-          categories: selection,
-          ...this.selectLocation
-        });
-        this.loadingService.dismiss();
+        try {
+          await this.eventService.createEvent({
+            ...this.eventForm.value,
+            startTime: new Date(this.eventForm.value.startTime).toISOString(),
+            endTime: new Date(this.eventForm.value.endTime).toISOString(),
+            categories: selection,
+            ...this.selectLocation
+          });
+        } catch (error) {
+          console.error(error);
+        } finally {
+          this.loadingService.dismiss();
+        }
       }
     }
   }
