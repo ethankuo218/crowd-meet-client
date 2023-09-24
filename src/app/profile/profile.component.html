@@ -2,43 +2,46 @@
 <ion-content>
   <main class="user-detail-area main-area">
     <ng-container *ngIf="user$ | async as user">
-      <swiper
-        id="profile-swiper"
-        *ngIf="user.images.length !== 0"
-        [slidesPerView]="1"
-        [pagination]="true"
-      >
+      <swiper id="profile-swiper" *ngIf="user.images.length !== 0 else noPicture" [slidesPerView]="1" [pagination]="true">
         <ng-template swiperSlide *ngFor="let image of user.images">
           <img appImageFallBack [src]="image.url" />
         </ng-template>
       </swiper>
+      <ng-template #noPicture>
+        <swiper id="profile-swiper" [slidesPerView]="1" [pagination]="true">
+          <ng-template>
+            <img appImageFallBack [src]="'assets/images/event-default.png'" />
+          </ng-template>
+        </swiper>
+      </ng-template>
+
 
       <div class="container">
         <h3 class="name">{{ user.name }}</h3>
 
         <div class="about_content">
-          <h3 class="dark">About me</h3>
+          <h3 class="dark">{{ 'PROFILE.ABOUT_ME' | translate }}</h3>
           <p class="bio dark_d">
             {{ user.bio }}
           </p>
-          <h3 class="dark">Interests</h3>
+        </div>
+        <div class="about_content">
+          <h3 class="dark">{{ 'PROFILE.INTERESTS' | translate }}</h3>
           <div class="interest_div">
             <div class="item btn_item" *ngFor="let item of user.interests">
-              <button>{{ '# ' + item.name }}</button>
+              <button>{{ '# ' + ('CATEGORY.' + item.name.toUpperCase() | translate) }}</button>
             </div>
           </div>
         </div>
         <div class="reviews-area" *ngIf="review$ | async as reviews">
-          <h3 class="dark">{{ 'Reviews(' + reviews.length + ')' }}</h3>
-          <div class="reviews_content" *ngFor="let review of reviews">
+          <h3 class="dark">{{ ('PROFILE.REVIEWS' | translate) + '(' + reviews.length + ')' }}</h3>
+          <div class="reviews_content" *ngFor="let review of reviews; let i = index;">
             <div class="img_text">
               <div class="profile-pic">
-                <img
-                  [src]="
+                <img [src]="
                     review.reviewer.profilePicture ||
                     'assets/images/profile.png'
-                  "
-                />
+                  " />
               </div>
               <h4 class="dark">{{ review.reviewer.name }}</h4>
 
@@ -55,9 +58,11 @@
             <div class="react_div">
               <span class="dark_dd">{{
                 review.reviewDate | date : 'mmd d. yyyy'
-              }}</span>
+                }}</span>
             </div>
+            <hr *ngIf="i < reviews.length-1">
           </div>
+          <br *ngIf="reviews.length === 0">
         </div>
       </div>
     </ng-container>
@@ -72,182 +77,107 @@
           </h3>
           <hr />
           <p>
-            <ion-skeleton-text
-              [animated]="true"
-              style="width: 80%; margin-top: 0.5rem"
-            ></ion-skeleton-text>
+            <ion-skeleton-text [animated]="true" style="width: 80%; margin-top: 0.5rem"></ion-skeleton-text>
           </p>
           <p>
-            <ion-skeleton-text
-              [animated]="true"
-              style="width: 60%"
-            ></ion-skeleton-text>
+            <ion-skeleton-text [animated]="true" style="width: 60%"></ion-skeleton-text>
           </p>
         </div>
       </div>
 
       <div class="info-row">
         <div class="collum text-center">
-          <ion-skeleton-text
-            [animated]="true"
-            style="width: 4rem; height: 4rem; border-radius: 50%; margin: auto"
-          ></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true"
+            style="width: 4rem; height: 4rem; border-radius: 50%; margin: auto"></ion-skeleton-text>
           <h3 class="primary">
-            <ion-skeleton-text
-              [animated]="true"
-              style="width: 40%; margin: auto"
-            ></ion-skeleton-text>
+            <ion-skeleton-text [animated]="true" style="width: 40%; margin: auto"></ion-skeleton-text>
           </h3>
           <p class="dark_d">
-            <ion-skeleton-text
-              [animated]="true"
-              style="width: 60%; margin: auto"
-            ></ion-skeleton-text>
+            <ion-skeleton-text [animated]="true" style="width: 60%; margin: auto"></ion-skeleton-text>
           </p>
         </div>
         <div class="collum text-center">
-          <ion-skeleton-text
-            [animated]="true"
-            style="width: 4rem; height: 4rem; border-radius: 50%; margin: auto"
-          ></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true"
+            style="width: 4rem; height: 4rem; border-radius: 50%; margin: auto"></ion-skeleton-text>
           <h3 class="primary">
-            <ion-skeleton-text
-              [animated]="true"
-              style="width: 40%; margin: auto"
-            ></ion-skeleton-text>
+            <ion-skeleton-text [animated]="true" style="width: 40%; margin: auto"></ion-skeleton-text>
           </h3>
           <p class="dark_d">
-            <ion-skeleton-text
-              [animated]="true"
-              style="width: 60%; margin: auto"
-            ></ion-skeleton-text>
+            <ion-skeleton-text [animated]="true" style="width: 60%; margin: auto"></ion-skeleton-text>
           </p>
         </div>
         <div class="collum text-center">
-          <ion-skeleton-text
-            [animated]="true"
-            style="width: 4rem; height: 4rem; border-radius: 50%; margin: auto"
-          ></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true"
+            style="width: 4rem; height: 4rem; border-radius: 50%; margin: auto"></ion-skeleton-text>
           <h3 class="primary">
-            <ion-skeleton-text
-              [animated]="true"
-              style="width: 40%; margin: auto"
-            ></ion-skeleton-text>
+            <ion-skeleton-text [animated]="true" style="width: 40%; margin: auto"></ion-skeleton-text>
           </h3>
           <p class="dark_d">
-            <ion-skeleton-text
-              [animated]="true"
-              style="width: 60%; margin: auto"
-            ></ion-skeleton-text>
+            <ion-skeleton-text [animated]="true" style="width: 60%; margin: auto"></ion-skeleton-text>
           </p>
         </div>
       </div>
 
       <div class="about_content">
-        <h3 class="dark">About me</h3>
+        <h3 class="dark">{{ 'PROFILE.ABOUT_ME' | translate }}</h3>
         <p class="bio dark_d">
           <ion-skeleton-text [animated]="true"></ion-skeleton-text>
-          <ion-skeleton-text
-            [animated]="true"
-            style="width: 80%"
-          ></ion-skeleton-text>
-          <ion-skeleton-text
-            [animated]="true"
-            style="width: 50%"
-          ></ion-skeleton-text>
-          <ion-skeleton-text
-            [animated]="true"
-            style="width: 40%"
-          ></ion-skeleton-text>
-          <ion-skeleton-text
-            [animated]="true"
-            style="width: 60%"
-          ></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" style="width: 80%"></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" style="width: 50%"></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" style="width: 40%"></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" style="width: 60%"></ion-skeleton-text>
         </p>
-        <h3 class="dark">Interests</h3>
+        <h3 class="dark">{{ 'PROFILE.INTERESTS' | translate }}</h3>
         <div class="interest_div">
-          <ion-skeleton-text
-            [animated]="true"
-            style="
+          <ion-skeleton-text [animated]="true" style="
               width: 23%;
               height: 1.3rem;
               border-radius: 15px;
               margin-right: 0.3rem;
-            "
-          ></ion-skeleton-text>
-          <ion-skeleton-text
-            [animated]="true"
-            style="
+            "></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" style="
               width: 23%;
               height: 1.3rem;
               border-radius: 15px;
               margin-right: 0.3rem;
-            "
-          ></ion-skeleton-text>
-          <ion-skeleton-text
-            [animated]="true"
-            style="
+            "></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" style="
               width: 23%;
               height: 1.3rem;
               border-radius: 15px;
               margin-right: 0.3rem;
-            "
-          ></ion-skeleton-text>
-          <ion-skeleton-text
-            [animated]="true"
-            style="width: 23%; height: 1.3rem; border-radius: 15px"
-          ></ion-skeleton-text>
+            "></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true"
+            style="width: 23%; height: 1.3rem; border-radius: 15px"></ion-skeleton-text>
         </div>
       </div>
       <div class="reviews-area">
         <h3 class="dark">
-          <ion-skeleton-text
-            [animated]="true"
-            style="width: 30%"
-          ></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" style="width: 30%"></ion-skeleton-text>
         </h3>
         <div class="reviews_content">
           <div class="img_text">
             <div class="profile-pic">
-              <ion-skeleton-text
-                [animated]="true"
-                style="width: 4rem; height: 4rem; border-radius: 50%"
-              ></ion-skeleton-text>
+              <ion-skeleton-text [animated]="true"
+                style="width: 4rem; height: 4rem; border-radius: 50%"></ion-skeleton-text>
             </div>
             <h4 class="dark">
-              <ion-skeleton-text
-                [animated]="true"
-                style="width: 70%"
-              ></ion-skeleton-text>
+              <ion-skeleton-text [animated]="true" style="width: 70%"></ion-skeleton-text>
             </h4>
 
             <div class="aside">
-              <ion-skeleton-text
-                [animated]="true"
-                style="width: 80%; height: 2rem; border-radius: 15px"
-              ></ion-skeleton-text>
+              <ion-skeleton-text [animated]="true"
+                style="width: 80%; height: 2rem; border-radius: 15px"></ion-skeleton-text>
             </div>
           </div>
           <p>
-            <ion-skeleton-text
-              [animated]="true"
-              style="width: 100%; height: 0.6rem"
-            ></ion-skeleton-text>
-            <ion-skeleton-text
-              [animated]="true"
-              style="width: 80%; height: 0.6rem"
-            ></ion-skeleton-text>
-            <ion-skeleton-text
-              [animated]="true"
-              style="width: 60%; height: 0.6rem"
-            ></ion-skeleton-text>
+            <ion-skeleton-text [animated]="true" style="width: 100%; height: 0.6rem"></ion-skeleton-text>
+            <ion-skeleton-text [animated]="true" style="width: 80%; height: 0.6rem"></ion-skeleton-text>
+            <ion-skeleton-text [animated]="true" style="width: 60%; height: 0.6rem"></ion-skeleton-text>
           </p>
           <div class="react_div">
             <span class="dark_dd">
-              <ion-skeleton-text
-                [animated]="true"
-                style="width: 5rem"
-              ></ion-skeleton-text>
+              <ion-skeleton-text [animated]="true" style="width: 5rem"></ion-skeleton-text>
             </span>
           </div>
         </div>
