@@ -21,7 +21,6 @@ SwiperCore.use([Pagination, IonicSwiper]);
   templateUrl: './select-interests.component.html',
   styleUrls: [
     './styles/select-interests.component.scss',
-    './styles/select-interests.shell.scss',
     './styles/select-interests.responsive.scss'
   ]
 })

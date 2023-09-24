@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar> </ion-toolbar>
+  <!-- <ion-toolbar> </ion-toolbar> -->
 </ion-header>
 
 <ion-content>
@@ -17,19 +17,16 @@
             <ion-row class="options-list-row" formArrayName="interests">
               <ion-col *ngFor="let item of categoryList; let i = index; trackBy: trackByIndex" size="6">
                 <app-checkbox-wrapper class="custom-checkbox">
-                  <app-image-shell [display]="'cover'" animation="spinner" class="checkbox-cover add-overlay"
-                    [src]="'./assets/sample-images/getting-started/category1-1.1.png'">
-                    <app-aspect-ratio [ratio]="{w:1, h:1}">
-                      <span class="checkbox-title">{{'CATEGORY.' + categoryList[i].name.toUpperCase()}}</span>
-                      <ion-checkbox [formControlName]="categoryList[i].categoryId - 1"></ion-checkbox>
-                    </app-aspect-ratio>
-                  </app-image-shell>
+                  <app-aspect-ratio [ratio]="{w:1, h:1}">
+                    <span class="checkbox-title">{{'CATEGORY.' + categoryList[i].name.toUpperCase() | translate}}</span>
+                    <ion-checkbox [formControlName]="categoryList[i].categoryId - 1"></ion-checkbox>
+                  </app-aspect-ratio>
                 </app-checkbox-wrapper>
               </ion-col>
             </ion-row>
           </ion-col>
           <ion-col class="call-to-action-col">
-            <ion-button class="signup-button" color="secondary" expand="block"
+            <ion-button class="signup-button" expand="block"
               (click)="goNext()">{{'NEXT'}}</ion-button>
           </ion-col>
         </ion-row>
