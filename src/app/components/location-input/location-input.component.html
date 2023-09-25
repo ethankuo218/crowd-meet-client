@@ -1,11 +1,11 @@
 <div class="dropdown">
   <ion-input
-    #inputbox
+    #inputBox
     type="text"
     [disabled]="isDisabled"
     [(ngModel)]="value"
   ></ion-input>
-  <div *ngIf="showDropddown" class="dropdown-content">
+  <div *ngIf="showDropdown" class="dropdown-content">
     <a *ngFor="let item of predictions" (click)="onMenuClick(item)">{{
       item.structured_formatting.main_text
     }}</a>

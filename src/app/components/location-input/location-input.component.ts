@@ -39,16 +39,16 @@ export class LocationInputComponent
 {
   private googleMapsLoaderService = inject(GoogleMapsLoaderService);
 
-  @ViewChild('inputbox') input!: IonInput;
+  @ViewChild('inputBox') input!: IonInput;
   @Output()
-  locaitionChangeEvent: EventEmitter<google.maps.places.PlaceResult> =
+  locationChangeEvent: EventEmitter<google.maps.places.PlaceResult> =
     new EventEmitter();
 
   predictions: google.maps.places.AutocompletePrediction[] = [];
 
   isDisabled: boolean = false;
 
-  showDropddown: boolean = false;
+  showDropdown: boolean = false;
 
   private _value: any;
   onChange: any = () => {};
@@ -80,9 +80,9 @@ export class LocationInputComponent
           if (this._value && this._value !== '') {
             this.predictions =
               await this.googleMapsLoaderService.loadPredictions(this._value);
-            this.showDropddown = true;
+            this.showDropdown = true;
           } else {
-            this.showDropddown = false;
+            this.showDropdown = false;
           }
         }
       });
@@ -114,11 +114,11 @@ export class LocationInputComponent
   async onMenuClick(
     item: google.maps.places.AutocompletePrediction
   ): Promise<void> {
-    this.showDropddown = false;
+    this.showDropdown = false;
     const selectLocation = await this.googleMapsLoaderService.getPlacesDetail(
       item.place_id
     );
-    this.locaitionChangeEvent.emit(selectLocation);
+    this.locationChangeEvent.emit(selectLocation);
     this._value = item.structured_formatting.main_text;
   }
 }
