@@ -10,7 +10,8 @@ import { MenuController } from '@ionic/angular';
 export class TabsPage {
   private readonly tabBarExceptionList = [
     '/app/event/list/',
-    '/app/chat/list/'
+    '/app/chat/list/',
+    '/app/event/profile/'
   ];
 
   constructor(public menu: MenuController, private router: Router) {}
