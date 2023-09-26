@@ -103,6 +103,12 @@ export class ChatService {
     return firstValueFrom(this.http.post('chat/message', body));
   }
 
+  sendPrivateMessage(id: number): Observable<{ chatId: string }> {
+    return this.http.post<{ chatId: string }>('chat/join/private', {
+      userId: id
+    });
+  }
+
   set memberInfos(info: { [firebaseUid: string]: MemberInfo }) {
     this._memberInfos = { ...this._memberInfos, ...info };
   }

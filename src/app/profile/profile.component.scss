@@ -238,3 +238,18 @@ h3.name {
   font-size: 25px;
   font-weight: 600;
 }
+
+.send-btn {
+  --background: transparent;
+  width: fit-content;
+  height: fit-content;
+
+  fa-icon {
+    color: var(--ion-text-color);
+  }
+}
+
+.container .d-flex ion-button{
+  margin-top: auto;
+  margin-bottom: auto;
+}
