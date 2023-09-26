@@ -5,6 +5,7 @@ import { firstValueFrom } from 'rxjs';
 import { FcmToken } from './models/core.model';
 import { Capacitor } from '@capacitor/core';
 import { Router } from '@angular/router';
+import { EventStatus } from './+states/user-state/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +40,9 @@ export class FcmTokenService {
             this.router.navigate(['app/chat/list']);
             break;
           case NotificationType.EVENT_STATUS:
-            const isHost = result.notification.data.status;
+            const isHost =
+              result.notification.data.status === EventStatus.applied ||
+              result.notification.data.status === EventStatus.left;
             const joinerEventId = result.notification.data.eventId;
             if (isHost) {
               this.router.navigate(['app/event/joiner-list', joinerEventId]);
