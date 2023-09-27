@@ -21,13 +21,7 @@
       </ng-template>
 
       <div class="container">
-        <div class="d-flex">
-          <h3 class="name">{{ user.name }}</h3>
-          <ion-button class="send-btn" (click)="sendMessage()">
-            <fa-icon [icon]="['fas', 'paper-plane']"></fa-icon>
-          </ion-button>
-        </div>
-
+        <h3 class="name">{{ user.name }}</h3>
         <div class="about_content">
           <h3 class="dark">{{ 'PROFILE.ABOUT_ME' | translate }}</h3>
           <p class="bio dark_d">
@@ -278,3 +272,15 @@
     </div>
   </main>
 </ion-content>
+<ion-footer *ngIf="user$ | async as user">
+  <ion-toolbar>
+    <ion-button
+      class="send-btn"
+      slot="primary"
+      [disabled]="isOwn(user.userId)"
+      (click)="sendMessage()"
+    >
+      <fa-icon [icon]="['fas', 'paper-plane']"></fa-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

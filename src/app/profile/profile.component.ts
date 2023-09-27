@@ -73,4 +73,8 @@ export class ProfileComponent {
       }
     });
   }
+
+  isOwn(id: number): boolean {
+    return this.id === id;
+  }
 }

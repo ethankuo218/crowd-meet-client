@@ -240,16 +240,10 @@ h3.name {
 }
 
 .send-btn {
-  --background: transparent;
-  width: fit-content;
-  height: fit-content;
-
-  fa-icon {
-    color: var(--ion-text-color);
-  }
+  width: 100%;
 }
 
-.container .d-flex ion-button{
+.container .d-flex ion-button {
   margin-top: auto;
   margin-bottom: auto;
 }
