@@ -4,11 +4,20 @@
   <main class="main-area create-event-area">
     <div class="container">
       <form [formGroup]="eventForm">
-        <img *ngIf="eventCoverPictureUrl; else empty" class="event_image" [src]="eventCoverPictureUrl"
-          (click)="selectImage()" />
+        <img
+          *ngIf="eventCoverPictureUrl; else empty"
+          class="event_image"
+          [src]="eventCoverPictureUrl"
+          (click)="selectImage()"
+        />
 
         <ng-template #empty>
-          <label class="picture" for="picture__input" tabIndex="0" (click)="selectImage()">
+          <label
+            class="picture"
+            for="picture__input"
+            tabIndex="0"
+            (click)="selectImage()"
+          >
             <i class="fa-solid fa-image"></i><br />
             <fa-icon [icon]="['fas', 'image']"></fa-icon>
             <p>{{ 'CREATE_EVENT.ADD_EVENT_COVER_IMAGE' | translate }}</p>
@@ -16,61 +25,96 @@
         </ng-template>
 
         <div class="event_content">
-          <label class="d-block" for="title"><span class="dark">{{
+          <label class="d-block" for="title"
+            ><span class="dark">{{
               'CREATE_EVENT.TITLE' | translate
-              }}</span></label>
-          <ion-input class="dark_dd" id="title" type="text" [placeholder]="'CREATE_EVENT.EVENT_TITLE' | translate"
-            formControlName="title"></ion-input>
+            }}</span></label
+          >
+          <ion-input
+            class="dark_dd"
+            id="title"
+            type="text"
+            [placeholder]="'CREATE_EVENT.EVENT_TITLE' | translate"
+            formControlName="title"
+          ></ion-input>
         </div>
 
         <div class="event_content">
           <label class="d-block" for="title">
             <span class="dark">{{
               'CREATE_EVENT.DESCRIPTION' | translate
-              }}</span>
+            }}</span>
           </label>
-          <ion-textarea class="dark_dd" [placeholder]="'CREATE_EVENT.EVENT_DESCRIPTION' | translate"
-            formControlName="description"></ion-textarea>
+          <ion-textarea
+            class="dark_dd"
+            [placeholder]="'CREATE_EVENT.EVENT_DESCRIPTION' | translate"
+            formControlName="description"
+          ></ion-textarea>
         </div>
 
         <div class="event_content">
-          <label class="d-block" for="isOnline"><span class="dark">{{
+          <label class="d-block" for="isOnline"
+            ><span class="dark">{{
               'CREATE_EVENT.IS_ONLINE_EVENT' | translate
-              }}</span></label>
+            }}</span></label
+          >
           <div class="radio_div">
-            <input type="radio" id="test1" formControlName="isOnline" [value]="true"
-              (ngModelChange)="onIsOnlineChange($event)" />
+            <input
+              type="radio"
+              id="test1"
+              formControlName="isOnline"
+              [value]="true"
+              (ngModelChange)="onIsOnlineChange($event)"
+            />
             <label class="dark" for="test1">{{
               'CREATE_EVENT.YES' | translate
-              }}</label>
-            <input type="radio" id="test2" formControlName="isOnline" [value]="false"
-              (ngModelChange)="onIsOnlineChange($event)" />
+            }}</label>
+            <input
+              type="radio"
+              id="test2"
+              formControlName="isOnline"
+              [value]="false"
+              (ngModelChange)="onIsOnlineChange($event)"
+            />
             <label class="dark" for="test2">{{
               'CREATE_EVENT.NO' | translate
-              }}</label>
+            }}</label>
           </div>
           <br />
           <br />
         </div>
 
         <div class="event_content">
-          <label class="d-block" for="location"><span class="dark">{{
+          <label class="d-block" for="location"
+            ><span class="dark">{{
               'CREATE_EVENT.LOCATION' | translate
-              }}</span></label><br />
-          <app-location-input formControlName="formattedAddress"
-            (locationChangeEvent)="onLocationChange($event)"></app-location-input>
+            }}</span></label
+          ><br />
+          <app-location-input
+            formControlName="formattedAddress"
+            (locationChangeEvent)="onLocationChange($event)"
+          ></app-location-input>
         </div>
 
         <div class="event_content">
-          <label class="d-block" for="topics"><span class="dark">{{
+          <label class="d-block" for="topics"
+            ><span class="dark">{{
               'CREATE_EVENT.SELECT_CATEGORIES' | translate
-              }}</span></label>
-          <ion-row class="checkbox-tags rounded-checkbox-tags" formArrayName="categories">
-            <ion-item lines="none" class="checkbox-tag rounded-tag" *ngFor="
+            }}</span></label
+          >
+          <ion-row
+            class="checkbox-tags rounded-checkbox-tags"
+            formArrayName="categories"
+          >
+            <ion-item
+              lines="none"
+              class="checkbox-tag rounded-tag"
+              *ngFor="
                 let item of categoryList;
                 let i = index;
                 trackBy: trackByIndex
-              ">
+              "
+            >
               <ion-label class="tag-label">
                 <fa-icon [icon]="['fas', 'star']"></fa-icon>
                 {{ 'CATEGORY.' + item.name.toUpperCase() | translate }}
@@ -78,7 +122,10 @@
               <ion-checkbox [formControlName]="i"></ion-checkbox>
             </ion-item>
           </ion-row>
-          <div *ngIf="eventForm.hasError('categoryShouldBeChoose')" class="error-msg">
+          <div
+            *ngIf="eventForm.hasError('categoryShouldBeChoose')"
+            class="error-msg"
+          >
             <fa-icon [icon]="['fas', 'exclamation-circle']"></fa-icon>
             {{ 'ERROR_MSG.CATEGORY' | translate }}
           </div>
@@ -86,35 +133,64 @@
         </div>
 
         <div class="event_content">
-          <label class="d-block" for="start-time"><span class="dark">{{
+          <label class="d-block" for="start-time"
+            ><span class="dark">{{
               'CREATE_EVENT.START_TIME' | translate
-              }}</span></label>
-          <ion-input class="dark_dd" id="start-time" type="datetime-local" [min]="minDate"
-            formControlName="startTime"></ion-input>
-          <div *ngIf="eventForm.hasError('startTimeShouldAfterTenMinutes')" class="error-msg">
+            }}</span></label
+          >
+          <ion-input
+            class="dark_dd"
+            id="start-time"
+            type="datetime-local"
+            [min]="minDate"
+            formControlName="startTime"
+          ></ion-input>
+          <div
+            *ngIf="eventForm.hasError('startTimeShouldAfterTenMinutes')"
+            class="error-msg"
+          >
             <fa-icon [icon]="['fas', 'exclamation-circle']"></fa-icon>
             {{ 'ERROR_MSG.START_TIME' | translate }}
           </div>
         </div>
 
         <div class="event_content">
-          <label class="d-block" for="end-time"><span class="dark">{{
+          <label class="d-block" for="end-time"
+            ><span class="dark">{{
               'CREATE_EVENT.END_TIME' | translate
-              }}</span></label>
-          <ion-input class="dark_dd" id="end-time" type="datetime-local" [min]="minDate"
-            formControlName="endTime"></ion-input>
-          <div *ngIf="eventForm.hasError('endTimeShouldAfterStartTime')" class="error-msg">
+            }}</span></label
+          >
+          <ion-input
+            class="dark_dd"
+            id="end-time"
+            type="datetime-local"
+            [min]="minDate"
+            formControlName="endTime"
+          ></ion-input>
+          <div
+            *ngIf="eventForm.hasError('endTimeShouldAfterStartTime')"
+            class="error-msg"
+          >
             <fa-icon [icon]="['fas', 'exclamation-circle']"></fa-icon>
             {{ 'ERROR_MSG.END_TIME' | translate }}
           </div>
         </div>
 
         <div class="event_content">
-          <label class="d-block" for="topics"><span class="dark">{{
+          <label class="d-block" for="topics"
+            ><span class="dark">{{
               'CREATE_EVENT.MAX_PARTICIPANTS' | translate
-              }}</span></label>
-          <app-counter-input formControlName="maxParticipants" [max]="15" [min]="1"></app-counter-input>
-          <div *ngIf="eventForm.get('maxParticipants')?.hasError('rangeError')" class="error-msg">
+            }}</span></label
+          >
+          <app-counter-input
+            formControlName="maxParticipants"
+            [max]="15"
+            [min]="1"
+          ></app-counter-input>
+          <div
+            *ngIf="eventForm.get('maxParticipants')?.hasError('rangeError')"
+            class="error-msg"
+          >
             <fa-icon [icon]="['fas', 'exclamation-circle']"></fa-icon>
             {{ 'ERROR_MSG.MAX_PARTICIPANTS' | translate }}
           </div>
@@ -122,23 +198,38 @@
         </div>
 
         <div class="event_content">
-          <label class="d-block" for="title"><span class="dark">{{
+          <label class="d-block" for="title"
+            ><span class="dark">{{
               'CREATE_EVENT.PRICE' | translate
-              }}</span></label>
-          <ion-input class="dark_dd" id="price" type="number" formControlName="price"
-            (ionFocus)="eventForm.get('price')?.setValue(null)"></ion-input>
-          <div *ngIf="eventForm.get('price')?.hasError('max')" class="error-msg">
+            }}</span></label
+          >
+          <ion-input
+            class="dark_dd"
+            id="price"
+            type="number"
+            formControlName="price"
+            (ionFocus)="eventForm.get('price')?.setValue(null)"
+          ></ion-input>
+          <div
+            *ngIf="eventForm.get('price')?.hasError('max')"
+            class="error-msg"
+          >
             <fa-icon [icon]="['fas', 'exclamation-circle']"></fa-icon>
             {{ 'ERROR_MSG.MAX_PRICE' | translate }}
           </div>
         </div>
 
         <div class="event_content">
-          <ion-button mode="ios" class="submit-button" (click)="onSubmit()" [disabled]="eventForm.invalid">
+          <ion-button
+            mode="ios"
+            class="submit-button"
+            (click)="onSubmit()"
+            [disabled]="eventForm.invalid"
+          >
             {{
-            mode === 'edit'
-            ? ('CREATE_EVENT.CONFIRM' | translate)
-            : ('CREATE_EVENT.CREATE' | translate)
+              mode === 'edit'
+                ? ('CREATE_EVENT.CONFIRM' | translate)
+                : ('CREATE_EVENT.CREATE' | translate)
             }}
           </ion-button>
         </div>

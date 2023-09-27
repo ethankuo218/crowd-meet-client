@@ -16,6 +16,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment.dev';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -71,6 +72,7 @@ export function createTranslateLoader(http: HttpClient) {
     HttpClientModule,
     FontAwesomeModule,
     ShellModule,
+    ImageCropperModule,
     MatDialogModule,
     StoreModule.forRoot({
       [userFeatureKey]: userReducer,

@@ -1,0 +1,24 @@
+<div class="modal-content">
+  <div class="modal-body">
+    <div class="header">
+      <a (click)="cancel()">cancel</a>
+      <a slot="end" (click)="crop()">crop</a>
+    </div>
+    <div class="text-center mdl_div">
+      <h2 class="primary">
+        {{ 'MEGA BOOST' }}
+      </h2>
+
+      <image-cropper
+        [imageURL]="imageUri"
+        [maintainAspectRatio]="true"
+        [aspectRatio]="1 / 1"
+        format="jpeg"
+        (imageCropped)="onImageCropped($event)"
+        (loadImageFailed)="onLoadImageFailed()"
+      >
+      </image-cropper>
+      <!-- ... rest of your modal content ... -->
+    </div>
+  </div>
+</div>

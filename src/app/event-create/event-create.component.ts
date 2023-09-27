@@ -21,6 +21,8 @@ import * as Formatter from '../core/formatter';
 import { MegaBoostComponent } from './mega-boost/mega-boost.component';
 import { IonContent, ModalController } from '@ionic/angular';
 import { LoadingService } from '../core/loading.service';
+import { ImageCropperModalComponent } from '../components/image-cropper/image-cropper.component';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 @Component({
   selector: 'app-create-page',
@@ -220,10 +222,26 @@ export class EventCreateComponent implements OnInit {
     }
   }
 
-  selectImage(): void {
-    this.eventService.selectImage().then((result) => {
-      this.eventCoverPictureUrl = result;
+  async selectImage(): Promise<void> {
+    const image = await Camera.getPhoto({
+      quality: 100,
+      height: 800,
+      width: 800,
+      allowEditing: false,
+      resultType: CameraResultType.Uri,
+      source: CameraSource.Photos
     });
+    const modal = await this.modalCtrl.create({
+      component: ImageCropperModalComponent,
+      initialBreakpoint: 1,
+      breakpoints: [0, 1],
+      componentProps: {
+        imageUri: image.webPath
+      }
+    });
+    modal.present();
+    const { base64Img } = (await modal.onWillDismiss()).data;
+    this.eventCoverPictureUrl = base64Img;
   }
 
   trackByIndex(index: number, item: Category): number {
