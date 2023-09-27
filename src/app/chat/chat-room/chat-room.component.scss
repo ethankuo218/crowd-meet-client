@@ -10,7 +10,7 @@
 
 .chat_content2 {
   width: 80%;
-  background: #f5f5f5;
+  background: var(--ion-chat-msg-color);
   margin-right: auto;
   padding: 15px 20px;
   border-radius: 7px 20px 20px 20px;
