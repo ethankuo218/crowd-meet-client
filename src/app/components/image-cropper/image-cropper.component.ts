@@ -1,17 +1,6 @@
-import {
-  Component,
-  Output,
-  EventEmitter,
-  Input,
-  ViewChild
-} from '@angular/core';
-import {
-  ImageCroppedEvent,
-  ImageCropperComponent,
-  ImageCropperModule
-} from 'ngx-image-cropper';
+import { Component, Input } from '@angular/core';
+import { ImageCroppedEvent, ImageCropperModule } from 'ngx-image-cropper';
 import { IonicModule, ModalController } from '@ionic/angular';
-import { Capacitor } from '@capacitor/core';
 
 @Component({
   selector: 'app-image-cropper',
@@ -52,3 +41,8 @@ export class ImageCropperModalComponent {
     this.modalController.dismiss({}, 'cancel');
   }
 }
+
+// FIXME:
+// 1. crop button wrong position
+// 2. image not being uploaded
+// 3. modal will be scrolled when moving the crop box
