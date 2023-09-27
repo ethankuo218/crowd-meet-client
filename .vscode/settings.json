@@ -8,6 +8,7 @@
     "editor.formatOnSave": true
   },
   "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.suggest.insertMode": "replace",
     "editor.formatOnType": true,
     "editor.formatOnSave": true
