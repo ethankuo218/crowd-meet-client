@@ -14,6 +14,7 @@ import { ReviewsService } from '../history/reviews/reviews.service';
 import { DirectivesModule } from '../directives/directives.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { ChatService } from '../chat/chat.service';
+import { EntitlementService } from '../core/entitlement.service';
 
 @Component({
   selector: 'app-profile',
@@ -39,6 +40,7 @@ export class ProfileComponent {
   private userService = inject(UserService);
   private reviewService = inject(ReviewsService);
   private chatService = inject(ChatService);
+  private entitlementService = inject(EntitlementService);
 
   private id!: number;
   isLoading = true;
