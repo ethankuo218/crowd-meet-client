@@ -4,8 +4,12 @@
   //     "source.fixAll.eslint": true
   // },
   "[typescript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode",
-      "editor.formatOnSave": true
-    }
-
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[html]": {
+    "editor.suggest.insertMode": "replace",
+    "editor.formatOnType": true,
+    "editor.formatOnSave": true
+  }
 }
