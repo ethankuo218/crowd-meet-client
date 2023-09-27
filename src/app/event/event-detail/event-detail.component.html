@@ -8,7 +8,7 @@
           <div class="cover_photo">
             <img
               appImageFallBack
-              [src]="eventDetail.imageUrl || 'assets/images/background.png'"
+              [src]="eventDetail.imageUrl || 'assets/images/event-default.png'"
             />
           </div>
           <div class="content_area">
@@ -202,7 +202,7 @@
                         [placeholder]="'EVENT_DETAIL.ADD_COMMENT' | translate"
                       />
                       <ion-button
-                      mode="ios"
+                        mode="ios"
                         (click)="leaveComment(eventDetail.eventId)"
                         [disabled]="!comment"
                       >

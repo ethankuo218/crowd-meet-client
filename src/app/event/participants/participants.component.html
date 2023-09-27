@@ -7,6 +7,23 @@
     <div *ngIf="canView; else locked" class="container">
       <div class="joiner_list">
         <div
+          class="joiner_info"
+          [routerLink]="['/app/event/profile', creator.userId]"
+        >
+          <div class="joiner_img">
+            <img
+              [src]="creator.profilePictureUrl || 'assets/images/profile.png'"
+              alt="image"
+            />
+          </div>
+          <div class="joiner_content">
+            <h3 class="dark">{{ creator.name + '(Host)' }}</h3>
+            <p class="dark_d td_p">
+              {{ '' | date : 'MMMM d, y | h:m a' }}
+            </p>
+          </div>
+        </div>
+        <div
           *ngFor="let participant of participants"
           class="joiner_info"
           [routerLink]="['/app/event/profile', participant.userId]"
@@ -27,7 +44,7 @@
           </div>
         </div>
         <div *ngIf="participants.length === 0" class="no-more-content">
-          No participants !
+          {{ 'PARTICIPANTS.NO_PARTICIPANTS' | translate }}
         </div>
       </div>
     </div>
@@ -35,7 +52,7 @@
       <div class="locked-background">
         <div class="icon-container">
           <fa-icon [icon]="['fas', 'lock']"></fa-icon>
-          <p>{{'PARTICIPANTS.NO_PARTICIPANTS' | translate}}</p>
+          <p>{{ 'PARTICIPANTS.NO_PARTICIPANTS' | translate }}</p>
         </div>
       </div>
     </ng-template>

@@ -4,6 +4,7 @@ import { Participant } from '../models/event.model';
 import { ActivatedRoute } from '@angular/router';
 import { EventService } from 'src/app/core/event.service';
 import { RefresherCustomEvent } from '@ionic/angular';
+import { User } from 'src/app/core/+states/user-state/user.model';
 
 @Component({
   selector: 'app-participants',
@@ -19,6 +20,10 @@ export class ParticipantsComponent {
   private eventId!: number;
 
   participants: Participant[] = [];
+
+  get creator(): User {
+    return this.eventService.currentEventDetail?.creator!;
+  }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
