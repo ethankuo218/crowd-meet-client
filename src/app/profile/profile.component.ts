@@ -1,12 +1,12 @@
 import { UserService } from './../core/user.service';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { Component, inject } from '@angular/core';
+import { IonicModule, ModalController } from '@ionic/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HeaderComponent } from '../header/header.component';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { SwiperModule } from 'swiper/angular';
-import { switchMap, Observable, tap } from 'rxjs';
+import { switchMap, Observable, tap, map, firstValueFrom } from 'rxjs';
 import { AgePipe } from '../core/pipe/age.pipe';
 import { User } from '../core/+states/user-state/user.model';
 import { Review } from '../history/reviews/models/reviews.model';
@@ -14,7 +14,9 @@ import { ReviewsService } from '../history/reviews/reviews.service';
 import { DirectivesModule } from '../directives/directives.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { ChatService } from '../chat/chat.service';
-import { EntitlementService } from '../core/entitlement.service';
+import { EntitlementService, Entitlements } from '../core/entitlement.service';
+import { UserStateFacade } from '../core/+states/user-state/user.state.facade';
+import { InAppPurchaseComponent } from '../in-app-purchase/in-app-purchase.component';
 
 @Component({
   selector: 'app-profile',
@@ -40,7 +42,9 @@ export class ProfileComponent {
   private userService = inject(UserService);
   private reviewService = inject(ReviewsService);
   private chatService = inject(ChatService);
+  private userFacade = inject(UserStateFacade);
   private entitlementService = inject(EntitlementService);
+  private modalCtrl = inject(ModalController);
 
   private id!: number;
   isLoading = true;
@@ -66,15 +70,35 @@ export class ProfileComponent {
     })
   );
 
-  sendMessage(): void {
-    this.chatService.sendPrivateMessage(this.id).subscribe({
-      next: ({ chatId }) => {
-        this.router.navigate(['/app/chat/list', chatId]);
-      }
-    });
+  get isOwn$(): Observable<boolean> {
+    return this.userFacade
+      .getUser()
+      .pipe(map((user) => user.userId === Number(this.id)));
   }
 
-  isOwn(id: number): boolean {
-    return this.id === id;
+  async sendMessage(): Promise<void> {
+    const hasPermission = await firstValueFrom(
+      this.entitlementService.hasEntitlement(Entitlements.DIRECT_MESSAGE)
+    );
+
+    console.log(hasPermission);
+
+    if (hasPermission) {
+      this.chatService.sendPrivateMessage(this.id).subscribe({
+        next: ({ chatId }) => {
+          this.router.navigate(['/app/chat/list', chatId]);
+        }
+      });
+    } else {
+      const modal = await this.modalCtrl.create({
+        component: InAppPurchaseComponent,
+        initialBreakpoint: 1,
+        breakpoints: [0, 1],
+        componentProps: {
+          isModalMode: false
+        }
+      });
+      modal.present();
+    }
   }
 }

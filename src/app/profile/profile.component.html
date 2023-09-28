@@ -277,10 +277,11 @@
     <ion-button
       class="send-btn"
       slot="primary"
-      [disabled]="isOwn(user.userId)"
+      *ngIf="!(isOwn$ | async)"
       (click)="sendMessage()"
     >
-      <fa-icon [icon]="['fas', 'paper-plane']"></fa-icon>
+      <fa-icon [icon]="['fas', 'paper-plane']"></fa-icon>&nbsp;
+      <span>{{ 'Message ' + user.name }}</span>
     </ion-button>
   </ion-toolbar>
 </ion-footer>

@@ -8,13 +8,12 @@
       <div class="joiner_list">
         <ng-container *ngIf="joiners$ | async as joiners">
           <div *ngFor="let joiner of joiners">
-            <ion-item-sliding
-              class="joiner_info"
-              #slidingItem
-              [routerLink]="['/app/event/profile', joiner.userId]"
-            >
+            <ion-item-sliding class="joiner_info" #slidingItem>
               <ion-item>
-                <div class="joiner_img">
+                <div
+                  class="joiner_img"
+                  [routerLink]="['/app/event/profile', joiner.userId]"
+                >
                   <img
                     [src]="
                       joiner.profilePictureUrl || 'assets/images/profile.png'
@@ -24,7 +23,12 @@
                 </div>
                 <div class="joiner_content">
                   <div class="content-row">
-                    <h3 class="dark">{{ joiner.name }}</h3>
+                    <h3
+                      class="dark"
+                      [routerLink]="['/app/event/profile', joiner.userId]"
+                    >
+                      {{ joiner.name }}
+                    </h3>
                     <div
                       class="status-tag green"
                       [ngClass]="{
