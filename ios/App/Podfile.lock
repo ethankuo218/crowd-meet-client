@@ -55,7 +55,6 @@ PODS:
     - Capacitor
   - CordovaPlugins (5.0.4):
     - CapacitorCordova
-  - CordovaPluginsResources (0.0.105)
   - CordovaPluginsStatic (5.0.4):
     - CapacitorCordova
     - PurchasesHybridCommon (= 5.0.0)
@@ -185,7 +184,6 @@ DEPENDENCIES:
   - "CapacitorSplashScreen (from `../../node_modules/@capacitor/splash-screen`)"
   - "CapacitorStatusBar (from `../../node_modules/@capacitor/status-bar`)"
   - CordovaPlugins (from `../capacitor-cordova-ios-plugins`)
-  - CordovaPluginsResources (from `../capacitor-cordova-ios-plugins`)
   - CordovaPluginsStatic (from `../capacitor-cordova-ios-plugins`)
   - Firebase/Messaging
 
@@ -253,8 +251,6 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/status-bar"
   CordovaPlugins:
     :path: "../capacitor-cordova-ios-plugins"
-  CordovaPluginsResources:
-    :path: "../capacitor-cordova-ios-plugins"
   CordovaPluginsStatic:
     :path: "../capacitor-cordova-ios-plugins"
 
@@ -277,8 +273,7 @@ SPEC CHECKSUMS:
   CapacitorShare: cd41743331cb71d217c029de54b681cbd91e0fcc
   CapacitorSplashScreen: bd2a056394ba0b8807e7bb3e746424f67c426e03
   CapacitorStatusBar: 48f2899f6846cc7d8431b251ebfc58e1c10e3d58
-  CordovaPlugins: 84ab04dde05749a089d945facca88b769c31a3cf
-  CordovaPluginsResources: 1b3992e05cb6336d2850cd77dd5e3054f2f76f96
+  CordovaPlugins: 5d34365b8364252d6c510ffdcc296010ce4c7e4f
   CordovaPluginsStatic: 846a5b925780e5d60b15af6d9d4c28db3e34fcae
   FBAEMKit: daac7466b918752f020345be5c7d9787f98cfc07
   FBSDKCoreKit: 2cb033464b2134af0138f87d20b859eb3f9be359
@@ -304,6 +299,6 @@ SPEC CHECKSUMS:
   PurchasesHybridCommon: 88fc5fef1cb121457b95d286f1738f81cf3ac148
   RevenueCat: 465a9dc1fff60b09f29792082e5d5d5aeed01122
 
-PODFILE CHECKSUM: 478824c80c96dc8a76a4592ea0b38aae90a5e39a
+PODFILE CHECKSUM: a22e4387d101ec40228d168e1d5c4e392f069b8e
 
 COCOAPODS: 1.12.1
