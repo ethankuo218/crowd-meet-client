@@ -44,7 +44,7 @@ export class ReviewsComponent {
     if (role === 'submit') {
       this.reviewsService
         .review({
-          revieweeId: userDetail.id,
+          revieweeId: userDetail.userId,
           eventId: userDetail.eventId,
           ...data
         })
