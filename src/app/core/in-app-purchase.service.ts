@@ -17,6 +17,7 @@ export class InAppPurchaseService {
   private purchases = inject(Purchases);
   private platform = inject(Platform);
   private auth = inject(Auth);
+  private loadingService = inject(LoadingService);
 
   async initialInAppPurchase(userId: number): Promise<void> {
     this.purchases.setDebugLogsEnabled(false);
@@ -48,7 +49,15 @@ export class InAppPurchaseService {
   }
 
   async purchase(productIdentifier: string): Promise<CustomerInfo> {
-    return (await this.purchases.purchaseProduct(productIdentifier))
-      .customerInfo;
+    this.loadingService.present();
+
+    try {
+      const result = await this.purchases.purchaseProduct(productIdentifier);
+      return result.customerInfo;
+    } catch (error) {
+      throw error;
+    } finally {
+      this.loadingService.dismiss();
+    }
   }
 }
