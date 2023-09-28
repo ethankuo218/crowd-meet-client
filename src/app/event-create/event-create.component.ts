@@ -61,7 +61,7 @@ export class EventCreateComponent implements OnInit {
     ]
   );
 
-  selectLocation:
+  private selectLocation:
     | {
         placeId: string;
         lat: number;

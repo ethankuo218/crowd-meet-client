@@ -16,6 +16,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment.dev';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -54,7 +55,6 @@ import { far } from '@fortawesome/free-regular-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { Crop } from '@ionic-native/crop/ngx';
 import { MatDialogModule } from '@angular/material/dialog';
 
 export function createTranslateLoader(http: HttpClient) {
@@ -71,6 +71,7 @@ export function createTranslateLoader(http: HttpClient) {
     HttpClientModule,
     FontAwesomeModule,
     ShellModule,
+    ImageCropperModule,
     MatDialogModule,
     StoreModule.forRoot({
       [userFeatureKey]: userReducer,
@@ -128,8 +129,7 @@ export function createTranslateLoader(http: HttpClient) {
       },
       deps: [PLATFORM_ID, [new Optional(), RESPONSE]],
       multi: true
-    },
-    Crop
+    }
   ],
   bootstrap: [AppComponent]
 })

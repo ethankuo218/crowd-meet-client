@@ -6,15 +6,17 @@ import {
   CameraSource,
   Photo
 } from '@capacitor/camera';
-import { Crop } from '@ionic-native/crop/ngx';
 import { Filesystem, Directory } from '@capacitor/filesystem';
+import { MatDialog } from '@angular/material/dialog';
+import { ImageCropperModalComponent } from '../components/image-cropper/image-cropper.component';
+import { firstValueFrom } from 'rxjs';
 
 const IMAGE_DIR = 'stored-images';
 
 @Injectable({ providedIn: 'root' })
 export class ImgUploadService {
   private platform = inject(Platform);
-  private crop = inject(Crop);
+  private dialog = inject(MatDialog);
   private uploadedImageName: string[] = [];
 
   async selectImage(): Promise<string> {
@@ -27,26 +29,33 @@ export class ImgUploadService {
       source: CameraSource.Photos
     });
 
-    const cropPath = await this.crop.crop(image.path!, {
-      quality: 100,
-      targetHeight: 800,
-      targetWidth: 800
+    const dialogRef = this.dialog.open(ImageCropperModalComponent, {
+      maxHeight: '67vh',
+      maxWidth: '90vw',
+      height: '67vh',
+      width: '90vw',
+      data: {
+        imageUri: image.webPath
+      },
+      panelClass: 'crop-dialog',
+      hasBackdrop: true,
+      disableClose: true
     });
 
     if (image) {
-      const base64Data = await this.readAsBase64ByPath(cropPath);
+      const { base64Data } = await firstValueFrom(dialogRef.afterClosed());
       const fileName = new Date().getTime() + '.jpeg';
 
       await Filesystem.writeFile({
         directory: Directory.Data,
         path: `${IMAGE_DIR}/${fileName}`,
-        data: base64Data,
+        data: base64Data.split(',')[1],
         recursive: true
       });
 
       this.uploadedImageName.push(fileName);
 
-      return `data:image/png;base64, ${base64Data}`;
+      return base64Data;
     } else {
       return '';
     }

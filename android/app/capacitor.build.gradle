@@ -24,7 +24,6 @@ dependencies {
     implementation project(':capacitor-share')
     implementation project(':capacitor-splash-screen')
     implementation project(':capacitor-status-bar')
-    implementation "com.soundcloud.android:android-crop:1.0.0@aar"
     implementation "com.revenuecat.purchases:purchases-hybrid-common:5.0.0"
     implementation "androidx.annotation:annotation:[1.4.0]"
 }

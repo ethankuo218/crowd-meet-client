@@ -208,6 +208,12 @@ textarea:focus {
   border-radius: 40px;
 }
 
+.crop-dialog .mat-mdc-dialog-surface.mdc-dialog__surface {
+  background-color: var(--ion-dialog-background-color);
+  padding: 0.5rem;
+  border-radius: 25px;
+}
+
 .mega-boost-dialog .mat-mdc-dialog-surface.mdc-dialog__surface {
   background-color: var(--ion-dialog-background-color);
   padding: 15px 20px;

@@ -12,6 +12,7 @@ import { CounterInputComponent } from 'src/app/components/counter-input/counter-
 import { LocationInputComponent } from 'src/app/components/location-input/location-input.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TranslateModule } from '@ngx-translate/core';
+import { ImageCropperModalComponent } from 'src/app/components/image-cropper/image-cropper.component';
 
 const routes: Routes = [
   {
@@ -32,7 +33,8 @@ const routes: Routes = [
     CounterInputComponent,
     LocationInputComponent,
     MatDialogModule,
-    TranslateModule
+    TranslateModule,
+    ImageCropperModalComponent
   ],
   declarations: [EventCreateComponent]
 })
