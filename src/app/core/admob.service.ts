@@ -39,12 +39,14 @@ export class AdmobService {
   async showBanner() {
     const userId = (await firstValueFrom(this.userId$)).toString();
 
-    await AdMob.showBanner({
-      adId: 'test',
-      isTesting: true,
-      adSize: BannerAdSize.ADAPTIVE_BANNER,
-      position: BannerAdPosition.CENTER
-    });
+    try {
+      await AdMob.showBanner({
+        adId: 'test',
+        isTesting: true,
+        adSize: BannerAdSize.ADAPTIVE_BANNER,
+        position: BannerAdPosition.CENTER
+      });
+    } catch (error) {}
   }
 
   async showInterstitial(): Promise<void> {
@@ -80,7 +82,7 @@ export class AdmobService {
     const userId = (await firstValueFrom(this.userId$)).toString();
     const options: RewardAdOptions = {
       adId: AdId[`${option}${this.platform === 'ios' ? '_IOS' : '_MD'}`],
-      // isTesting: true,
+      isTesting: true,
       npa: true,
       ssv: {
         userId: userId,
@@ -88,16 +90,18 @@ export class AdmobService {
       }
     };
 
-    await AdMob.prepareRewardVideoAd(options);
-    await AdMob.showRewardVideoAd();
+    try {
+      await AdMob.prepareRewardVideoAd(options);
+      await AdMob.showRewardVideoAd();
+    } catch (error) {
+      this.showNoAdModal();
+    }
 
     if (this.platform !== 'ios') {
-      console.log('Start listen');
       await new Promise<void>((resolve) => {
         AdMob.addListener(
           RewardAdPluginEvents.Rewarded,
           (rewardItem: AdMobRewardItem) => {
-            console.log(rewardItem);
             resolve();
           }
         );
@@ -105,7 +109,6 @@ export class AdmobService {
     }
 
     try {
-      console.log('Check current');
       await this.checkCurrentAllowance(option);
     } catch (error) {
       this.dialog.open(AlertDialogComponent, {
@@ -141,7 +144,6 @@ export class AdmobService {
     await firstValueFrom(
       this.userService.getAllowance().pipe(
         map((result) => {
-          console.log('Check', result[allowanceType]);
           if (result[allowanceType] > 0) {
             return true;
           } else {
@@ -151,6 +153,17 @@ export class AdmobService {
         retry({ count: 2, delay: () => timer(500) })
       )
     );
+  }
+
+  private showNoAdModal(): void {
+    this.dialog.open(AlertDialogComponent, {
+      data: {
+        title: 'Oops',
+        content: `No AD to show, please ty later`,
+        enableCancelButton: false
+      },
+      panelClass: 'custom-dialog'
+    });
   }
 }
 
