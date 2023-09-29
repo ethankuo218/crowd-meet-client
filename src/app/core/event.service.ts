@@ -49,12 +49,16 @@ export class EventService {
   async reload(): Promise<void> {
     this._isLoading = true;
     this.currentPage = 1;
+
+    const { latitude, longitude } = (await Geolocation.getCurrentPosition())
+      .coords;
     const eventList = await firstValueFrom(
       this.httpClientService.get<EventList>('event', {
         page: this.currentPage,
         pageSize: 10,
         startDate: new Date().toISOString(),
-        ...this.userLocation,
+        lat: latitude,
+        lng: longitude,
         ...this._filter
       })
     );
@@ -126,6 +130,7 @@ export class EventService {
 
       this.router.navigate(['app/history']);
     } catch (error) {
+      // show no ad modal
       throw error;
     }
   }
@@ -290,13 +295,13 @@ export class EventService {
   }
 
   // others
-  getUserLocation(): void {
-    Geolocation.getCurrentPosition().then((result) => {
-      this.userLocation = {
-        lat: result.coords.latitude,
-        lng: result.coords.longitude
-      };
-    });
+  async getUserLocation(): Promise<void> {
+    const { coords } = await Geolocation.getCurrentPosition();
+
+    this.userLocation = {
+      lat: coords.latitude,
+      lng: coords.longitude
+    };
   }
 
   get noMoreContent(): boolean {
