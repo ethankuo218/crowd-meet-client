@@ -51,8 +51,8 @@ export class AdmobService {
 
   async showInterstitial(): Promise<void> {
     const options: AdOptions = {
-      adId: 'YOUR ADID'
-      // isTesting: true
+      adId: 'YOUR ADID',
+      isTesting: true
       // npa: true
     };
     await AdMob.prepareInterstitial(options);
@@ -82,7 +82,7 @@ export class AdmobService {
     const userId = (await firstValueFrom(this.userId$)).toString();
     const options: RewardAdOptions = {
       adId: AdId[`${option}${this.platform === 'ios' ? '_IOS' : '_MD'}`],
-      isTesting: true,
+      // isTesting: true,
       npa: true,
       ssv: {
         userId: userId,
@@ -95,6 +95,7 @@ export class AdmobService {
       await AdMob.showRewardVideoAd();
     } catch (error) {
       this.showNoAdModal();
+      throw error;
     }
 
     if (this.platform !== 'ios') {
