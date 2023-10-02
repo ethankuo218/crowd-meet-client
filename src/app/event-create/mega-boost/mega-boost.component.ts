@@ -3,7 +3,10 @@ import { InAppPurchaseService } from './../../core/in-app-purchase.service';
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { PurchasesStoreProduct } from '@awesome-cordova-plugins/purchases/ngx';
+import {
+  PURCHASE_TYPE,
+  PurchasesStoreProduct
+} from '@awesome-cordova-plugins/purchases/ngx';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { take, firstValueFrom } from 'rxjs';
 import { MegaBoost } from 'src/app/core/models/core.model';
@@ -118,7 +121,10 @@ export class MegaBoostComponent implements OnInit {
     } else {
       try {
         revenueCatId = (
-          await this.inAppPurchaseService.purchase(productIdentifier)
+          await this.inAppPurchaseService.purchase(
+            productIdentifier,
+            PURCHASE_TYPE.INAPP
+          )
         ).nonSubscriptionTransactions.pop()?.transactionIdentifier!;
 
         await this.applyMegaBoost(revenueCatId);

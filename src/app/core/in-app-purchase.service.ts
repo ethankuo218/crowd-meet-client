@@ -2,6 +2,7 @@ import { firstValueFrom, from, map, of, switchMap } from 'rxjs';
 import { Injectable, inject } from '@angular/core';
 import {
   CustomerInfo,
+  PURCHASE_TYPE,
   Purchases,
   PurchasesStoreProduct
 } from '@awesome-cordova-plugins/purchases/ngx';
@@ -48,11 +49,18 @@ export class InAppPurchaseService {
     );
   }
 
-  async purchase(productIdentifier: string): Promise<CustomerInfo> {
+  async purchase(
+    productIdentifier: string,
+    type: PURCHASE_TYPE = PURCHASE_TYPE.SUBS
+  ): Promise<CustomerInfo> {
     this.loadingService.present();
 
     try {
-      const result = await this.purchases.purchaseProduct(productIdentifier);
+      const result = await this.purchases.purchaseProduct(
+        productIdentifier,
+        null,
+        type
+      );
       return result.customerInfo;
     } catch (error) {
       throw error;
