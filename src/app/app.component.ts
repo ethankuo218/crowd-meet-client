@@ -61,7 +61,6 @@ export class AppComponent implements OnInit {
       await Geolocation.requestPermissions({
         permissions: ['location', 'coarseLocation']
       });
-      await this.eventService.getUserLocation();
 
       await this.admobService.initializeAdmob();
     } catch (err) {

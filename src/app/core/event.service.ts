@@ -50,15 +50,18 @@ export class EventService {
     this._isLoading = true;
     this.currentPage = 1;
 
-    const { latitude, longitude } = (await Geolocation.getCurrentPosition())
-      .coords;
+    const hasPermission =
+      (await Geolocation.checkPermissions()).location !== 'denied';
+    const { latitude, longitude } = hasPermission
+      ? (await Geolocation.getCurrentPosition()).coords
+      : { latitude: undefined, longitude: undefined };
     const eventList = await firstValueFrom(
       this.httpClientService.get<EventList>('event', {
         page: this.currentPage,
         pageSize: 10,
         startDate: new Date().toISOString(),
-        lat: latitude,
-        lng: longitude,
+        ...(latitude && { lat: latitude }),
+        ...(longitude && { lng: longitude }),
         ...this._filter
       })
     );
@@ -83,14 +86,17 @@ export class EventService {
   }
 
   async loadNextPage(): Promise<void> {
-    const { latitude, longitude } = (await Geolocation.getCurrentPosition())
-      .coords;
+    const hasPermission =
+      (await Geolocation.checkPermissions()).location !== 'denied';
+    const { latitude, longitude } = hasPermission
+      ? (await Geolocation.getCurrentPosition()).coords
+      : { latitude: undefined, longitude: undefined };
     const result = await firstValueFrom(
       this.httpClientService.get<EventList>('event', {
         page: ++this.currentPage,
         pageSize: 10,
-        lat: latitude,
-        lng: longitude,
+        ...(latitude && { lat: latitude }),
+        ...(longitude && { lng: longitude }),
         startDate: new Date().toISOString(),
         ...this._filter
       })
@@ -292,16 +298,6 @@ export class EventService {
     } finally {
       this.loadingService.dismiss();
     }
-  }
-
-  // others
-  async getUserLocation(): Promise<void> {
-    const { coords } = await Geolocation.getCurrentPosition();
-
-    this.userLocation = {
-      lat: coords.latitude,
-      lng: coords.longitude
-    };
   }
 
   get noMoreContent(): boolean {
