@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { EventService } from 'src/app/core/event.service';
 import { RefresherCustomEvent } from '@ionic/angular';
 import { User } from 'src/app/core/+states/user-state/user.model';
+import { UserStateFacade } from 'src/app/core/+states/user-state/user.state.facade';
 
 @Component({
   selector: 'app-participants',
@@ -14,12 +15,15 @@ import { User } from 'src/app/core/+states/user-state/user.model';
 export class ParticipantsComponent {
   private route = inject(ActivatedRoute);
   private eventService = inject(EventService);
+  private userStateFacade = inject(UserStateFacade);
 
   canView: boolean = true;
 
   private eventId!: number;
 
   participants: Participant[] = [];
+
+  user$ = this.userStateFacade.getUser();
 
   get creator(): User {
     return this.eventService.currentEventDetail?.creator!;
@@ -36,8 +40,11 @@ export class ParticipantsComponent {
     const result = await firstValueFrom(
       this.eventService.getParticipants(this.eventId)
     );
+    const user = await firstValueFrom(this.user$);
     this.canView = result.canView;
-    this.participants = result.canView ? result.participants : [];
+    this.participants = result.canView
+      ? result.participants.filter((item) => item.userId !== user.userId)
+      : [];
     if (event) {
       (event as RefresherCustomEvent).target.complete();
     }

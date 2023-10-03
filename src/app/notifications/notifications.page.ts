@@ -13,7 +13,7 @@ import { Notification } from './models/notifications.models';
 })
 export class NotificationsPage {
   private notificationService = inject(NotificationsService);
-  notificationsReplaySubject: ReplaySubject<Notification[]> =
+  private notificationsReplaySubject: ReplaySubject<Notification[]> =
     new ReplaySubject();
 
   get notifications$(): Observable<Notification[]> {

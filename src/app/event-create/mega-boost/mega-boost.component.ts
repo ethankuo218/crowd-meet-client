@@ -156,14 +156,6 @@ export class MegaBoostComponent implements OnInit {
   }
 
   private async applyMegaBoost(revenueCatId: string): Promise<void> {
-    console.log({
-      ...this.eventInfo,
-      useMegaBoost: {
-        revenueCatId: revenueCatId,
-        isHistoryPurchase: false
-      }
-    });
-
     try {
       if (this.eventInfo) {
         await this.eventService.createEvent({
