@@ -1,3 +1,7 @@
+import {
+  EmailComposer,
+  EmailComposerOptions
+} from '@awesome-cordova-plugins/email-composer/ngx';
 import { LanguageService } from './../language/language.service';
 import { Storage } from '@ionic/storage-angular';
 import { UserStateFacade } from '../core/+states/user-state/user.state.facade';
@@ -16,10 +20,18 @@ export class MenuComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
   private languageService = inject(LanguageService);
+  private emailComposer = inject(EmailComposer);
 
   user$ = inject(UserStateFacade).getUser();
   isDarkMode: boolean = document.body.classList.contains('dark');
   languages = this.languageService.getLanguages();
+
+  async openEmail(): Promise<void> {
+    const email: EmailComposerOptions = {
+      to: 'crowdmeet.dev@crowdmeet.app'
+    };
+    this.emailComposer.open(email);
+  }
 
   changeMode(): void {
     this.isDarkMode = !this.isDarkMode;

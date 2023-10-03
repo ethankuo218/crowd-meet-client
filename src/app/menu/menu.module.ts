@@ -13,6 +13,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { InAppPurchaseComponent } from '../in-app-purchase/in-app-purchase.component';
 import { DirectivesModule } from '../directives/directives.module';
 import { ProfileComponent } from '../profile/profile.component';
+import { EmailComposer } from '@awesome-cordova-plugins/email-composer/ngx';
 
 const routes: Routes = [
   {
@@ -49,6 +50,6 @@ const routes: Routes = [
     InAppPurchaseComponent,
     DirectivesModule
   ],
-  providers: [UserStateFacade, UserService, ImgUploadService]
+  providers: [UserStateFacade, UserService, ImgUploadService, EmailComposer]
 })
 export class MenuModule {}
