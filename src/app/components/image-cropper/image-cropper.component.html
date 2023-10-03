@@ -1,4 +1,8 @@
 <div class="modal-content">
+  <div class="header">
+    <a (click)="cancel()">{{ 'EVENT_LIST.CANCEL' | translate }}</a>
+    <a (click)="crop()">{{ 'Crop' | translate }}</a>
+  </div>
   <mat-dialog-content>
     <image-cropper
       [imageURL]="imageUri"
@@ -10,8 +14,4 @@
     >
     </image-cropper>
   </mat-dialog-content>
-  <ion-toolbar>
-    <ion-button slot="start" (click)="cancel()"> Cancel </ion-button>
-    <ion-button slot="end" (click)="crop()"> Crop </ion-button>
-  </ion-toolbar>
 </div>

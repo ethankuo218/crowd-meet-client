@@ -6,13 +6,14 @@ import {
   MatDialogModule,
   MatDialogRef
 } from '@angular/material/dialog';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-image-cropper',
   templateUrl: './image-cropper.component.html',
   styleUrls: ['./image-cropper.component.scss'],
   standalone: true,
-  imports: [ImageCropperModule, IonicModule, MatDialogModule]
+  imports: [ImageCropperModule, IonicModule, MatDialogModule, TranslateModule]
 })
 export class ImageCropperModalComponent {
   private dialog: MatDialogRef<ImageCropperModalComponent> =

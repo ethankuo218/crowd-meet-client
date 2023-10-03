@@ -1,3 +1,15 @@
-ion-toolbar {
-  --background: transparent;
+.header {
+  margin: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+image-cropper {
+  height: 52vh;
+  width: 70vw;
+}
+
+mat-dialog-content {
+  display: flex;
+  justify-content: center;
 }
