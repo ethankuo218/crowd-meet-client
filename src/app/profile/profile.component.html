@@ -272,12 +272,12 @@
     </div>
   </main>
 </ion-content>
-<ion-footer *ngIf="user$ | async as user">
+<ion-footer *ngIf="!(isOwn$ | async)">
   <ion-toolbar>
     <ion-button
       class="send-btn"
       slot="primary"
-      *ngIf="!(isOwn$ | async)"
+      *ngIf="user$ | async as user"
       (click)="sendMessage()"
     >
       <fa-icon [icon]="['fas', 'paper-plane']"></fa-icon>&nbsp;

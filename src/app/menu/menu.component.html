@@ -7,6 +7,7 @@
             <img
               appImageFallBack
               [src]="user.profilePictureUrl || 'assets/images/profile.png'"
+              [routerLink]="['/app/menu/profile', user.userId]"
               alt="image"
             />
           </div>

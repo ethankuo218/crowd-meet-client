@@ -11,7 +11,8 @@ export class TabsPage {
   private readonly tabBarExceptionList = [
     '/app/event/list/',
     '/app/chat/list/',
-    '/app/event/profile/'
+    '/app/event/profile/',
+    '/app/menu/profile'
   ];
 
   constructor(public menu: MenuController, private router: Router) {}

@@ -12,6 +12,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { TranslateModule } from '@ngx-translate/core';
 import { InAppPurchaseComponent } from '../in-app-purchase/in-app-purchase.component';
 import { DirectivesModule } from '../directives/directives.module';
+import { ProfileComponent } from '../profile/profile.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,10 @@ const routes: Routes = [
   {
     path: 'purchase',
     component: InAppPurchaseComponent
+  },
+  {
+    path: 'profile/:id',
+    component: ProfileComponent
   }
 ];
 
