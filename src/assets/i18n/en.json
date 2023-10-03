@@ -1,8 +1,8 @@
 {
   "LOGIN": {
-    "FACEBOOK":"Login with Facebook",
-    "GOOGLE":"Login with Google",
-    "APPLE":"Login with Apple"
+    "FACEBOOK": "Login with Facebook",
+    "GOOGLE": "Login with Google",
+    "APPLE": "Login with Apple"
   },
   "EVENT_LIST": {
     "SEARCH": "Search",
@@ -138,20 +138,20 @@
       "DESCRIPTION": "description",
       "INFLUENCER_BUNDLE": {
         "TITLE": "Influencer Bundle",
-        "DESCRIPTION_1": "Description A",
-        "DESCRIPTION_2": "Description B",
-        "DESCRIPTION_3": "Description C"
+        "DESCRIPTION_1": "Host endless events: Enjoy the freedom to create events as many times as you wish!",
+        "DESCRIPTION_2": "Stand out with style: Flaunt an exclusive 'Influencer' badge on your CrowdMeet profile.",
+        "DESCRIPTION_3": "Rise above the rest: Secure a higher rank in event listings, ensuring better visibility!"
       },
       "SOCIAL_BUNDLE": {
-        "TITLE": "Social Bundle",
-        "DESCRIPTION_1": "Description A",
-        "DESCRIPTION_2": "Description B",
-        "DESCRIPTION_3": "Description C"
+        "TITLE": "Social Spark Bundle",
+        "DESCRIPTION_1": "Connect beyond boundaries: Message any user, even if you're not in the same event!",
+        "DESCRIPTION_2": "Know before you go: Preview event participants before making your move!",
+        "DESCRIPTION_3": "Unlimited access: Dive into as many events as your heart desires."
       },
       "LIFESTYLE_BUNDLE": {
         "TITLE": "Life Style Bundle",
-        "DESCRIPTION_1": "Description A",
-        "DESCRIPTION_2": "Description B",
+        "DESCRIPTION_1": "All-Inclusive Experience: Get every benefit of both 'Influencer' and 'Social Spark' bundles in one package!",
+        "DESCRIPTION_2": "Ad-free indulgence: Enjoy a completely uninterrupted, ad-free platform experience.",
         "DESCRIPTION_3": "Description C"
       }
     },
