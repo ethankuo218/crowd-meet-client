@@ -42,9 +42,7 @@ export class ParticipantsComponent {
     );
     const user = await firstValueFrom(this.user$);
     this.canView = result.canView;
-    this.participants = result.canView
-      ? result.participants.filter((item) => item.userId !== user.userId)
-      : [];
+    this.participants = result.canView ? result.participants : [];
     if (event) {
       (event as RefresherCustomEvent).target.complete();
     }
