@@ -91,13 +91,11 @@ export class MegaBoostComponent implements OnInit {
     isHistoryPurchase: boolean,
     boostType: number
   ): Promise<void> {
-    this.loadingService.present();
     let revenueCatId = '';
 
     if (isHistoryPurchase) {
+      this.loadingService.present();
       try {
-        await this.check(boostType);
-
         switch (boostType) {
           case 1:
             revenueCatId = this.oneDayBoost.shift()?.revenueCatId!;
@@ -133,25 +131,7 @@ export class MegaBoostComponent implements OnInit {
       } catch (error) {
         console.error('[MEGA BOOST]', error);
       } finally {
-        this.loadingService.dismiss();
       }
-    }
-  }
-
-  private async check(boostType: number): Promise<void> {
-    const dialogDef = this.dialog.open(AlertDialogComponent, {
-      data: {
-        title: 'DIALOG.TITLE.BOOST',
-        content: ``,
-        enableCancelButton: true
-      },
-      panelClass: 'custom-dialog'
-    });
-
-    const result = await firstValueFrom(dialogDef.afterClosed());
-
-    if (result === 'cancel') {
-      throw 'Cancel!';
     }
   }
 
