@@ -28,7 +28,7 @@ export class MenuComponent {
 
   async openEmail(): Promise<void> {
     const email: EmailComposerOptions = {
-      to: 'crowdmeet.dev@crowdmeet.app'
+      to: 'support@crowdmeet.app'
     };
     this.emailComposer.open(email);
   }
