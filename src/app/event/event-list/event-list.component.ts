@@ -25,7 +25,12 @@ export class EventListComponent implements OnInit {
 
   boosted$: Observable<BoostedEvent[]> = this.eventService
     .getBoostedEvent()
-    .pipe(map((result) => this.shuffle<BoostedEvent>(result)));
+    .pipe(
+      map((result) => {
+        console.log(result);
+        return this.shuffle<BoostedEvent>(result);
+      })
+    );
 
   filter: any = {};
 
@@ -51,12 +56,15 @@ export class EventListComponent implements OnInit {
   }
 
   private shuffle<T>(inputArray: T[]): T[] {
+    if (!inputArray || inputArray.length < 1) {
+      return [];
+    }
+
     let array = [...inputArray];
-    let currentIndex = array.length,
-      randomIndex;
+    let currentIndex = array.length;
 
     while (currentIndex != 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
+      const randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
 
       [array[currentIndex], array[randomIndex]] = [
