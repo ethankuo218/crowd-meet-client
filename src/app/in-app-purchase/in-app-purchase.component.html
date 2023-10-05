@@ -3,39 +3,20 @@
 <ion-content>
   <main class="subscriptions-area main-area">
     <div class="container">
-      <div class="container-title">{{'IN_APP_PURCHASE.BUNDLE.TITLE' | translate}}</div>
+      <div class="container-title"></div>
       <div class="bundle-container">
-        <swiper [slidesPerView]="1" [pagination]="true">
+        <swiper
+          [slidesPerView]="1"
+          [pagination]="true"
+          (activeIndexChange)="onActiveIndexChange($event)"
+        >
           <ng-container *ngFor="let product of productList">
             <ng-template swiperSlide>
               <div class="bundle-card" (click)="purchase(product.identifier)">
                 <div class="bundle-header">
                   <div class="bundle-header-title">
-                    {{ product.identifier }}
-                    <br />
+                    <h3>{{ product.identifier }}</h3>
                     <small>{{ product.description }}</small>
-                    <div class="price-title">{{'IN_APP_PURCHASE.BUNDLE.STARTING_AT' | translate}}</div>
-                    <div class="price">
-                      {{ product.priceString }} <small> / {{ 'IN_APP_PURCHASE.BUNDLE.MONTH' | translate}}</small>
-                    </div>
-                  </div>
-                  <img src="assets/upgrade.svg" />
-                </div>
-                <hr />
-                <div class="bundle-description">
-                  <div class="bundle-description-content">
-                    <ion-item>
-                      <fa-icon [icon]="['fas', 'check']"></fa-icon>
-                      Enhanced event visibility
-                    </ion-item>
-                    <ion-item>
-                      <fa-icon [icon]="['fas', 'check']"></fa-icon>Push event
-                      notifications
-                    </ion-item>
-                    <ion-item>
-                      <fa-icon [icon]="['fas', 'check']"></fa-icon>Allow Kick 3
-                      person / event
-                    </ion-item>
                   </div>
                 </div>
               </div>
@@ -43,6 +24,70 @@
           </ng-container>
         </swiper>
       </div>
+
+      <div class="description-container">
+        <div class="description-card">
+          <div class="description-title">Ad</div>
+          <div class="description">
+            <fa-icon [icon]="['fas', 'check']"></fa-icon>
+            <p>{{ productList[currentIndex].description }}</p>
+          </div>
+          <div class="description">
+            <fa-icon [icon]="['fas', 'check']"></fa-icon>
+            <p>Test Description 2</p>
+          </div>
+          <div class="description">
+            <fa-icon [icon]="['fas', 'check']"></fa-icon>
+            <p>Test Description 3</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="description-container">
+        <div class="description-card">
+          <div class="description-title">Create Event</div>
+          <div class="description">
+            <fa-icon [icon]="['fas', 'check']"></fa-icon>
+            <p>Test Description 1</p>
+          </div>
+          <div class="description">
+            <fa-icon [icon]="['fas', 'check']"></fa-icon>
+            <p>Test Description 2</p>
+          </div>
+          <div class="description">
+            <fa-icon [icon]="['fas', 'check']"></fa-icon>
+            <p>Test Description 3</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="description-container">
+        <div class="description-card">
+          <div class="description-title">Join Event</div>
+          <div class="description">
+            <fa-icon [icon]="['fas', 'check']"></fa-icon>
+            <p>Test Description 1</p>
+          </div>
+          <div class="description">
+            <fa-icon [icon]="['fas', 'check']"></fa-icon>
+            <p>Test Description 2</p>
+          </div>
+          <div class="description">
+            <fa-icon [icon]="['fas', 'check']"></fa-icon>
+            <p>Test Description 3</p>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button class="purchase-btn" slot="primary" (click)="purchase('test')">
+      <span>
+        {{ productList[currentIndex].priceString + ' / Month' }}
+      </span>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

@@ -7,6 +7,7 @@ import {
   InfiniteScrollCustomEvent,
   RefresherCustomEvent
 } from '@ionic/angular';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'app-listing',
@@ -25,12 +26,7 @@ export class EventListComponent implements OnInit {
 
   boosted$: Observable<BoostedEvent[]> = this.eventService
     .getBoostedEvent()
-    .pipe(
-      map((result) => {
-        console.log(result);
-        return this.shuffle<BoostedEvent>(result);
-      })
-    );
+    .pipe(map((result) => _.shuffle(result)));
 
   filter: any = {};
 
@@ -53,27 +49,6 @@ export class EventListComponent implements OnInit {
     this.eventService.loadNextPage().then(() => {
       (event as InfiniteScrollCustomEvent).target.complete();
     });
-  }
-
-  private shuffle<T>(inputArray: T[]): T[] {
-    if (!inputArray || inputArray.length < 1) {
-      return [];
-    }
-
-    let array = [...inputArray];
-    let currentIndex = array.length;
-
-    while (currentIndex != 0) {
-      const randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex],
-        array[currentIndex]
-      ];
-    }
-
-    return array;
   }
 
   get noMoreContent(): boolean {

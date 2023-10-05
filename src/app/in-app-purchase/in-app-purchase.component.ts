@@ -1,6 +1,13 @@
 import { InAppPurchaseService } from './../core/in-app-purchase.service';
-import { Component, Input, OnInit, inject } from '@angular/core';
-import SwiperCore, { Pagination } from 'swiper';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  NgZone,
+  OnInit,
+  inject
+} from '@angular/core';
+import SwiperCore, { Pagination, Swiper } from 'swiper';
 import { PurchasesStoreProduct } from '@awesome-cordova-plugins/purchases/ngx';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -28,11 +35,14 @@ SwiperCore.use([Pagination]);
   ]
 })
 export class InAppPurchaseComponent implements OnInit {
-  private inAppPurchaseService = inject(InAppPurchaseService);
-
   @Input() isModalMode = false;
 
+  private inAppPurchaseService = inject(InAppPurchaseService);
+  private zone = inject(NgZone);
+
   productList!: PurchasesStoreProduct[];
+
+  currentIndex: number = 0;
 
   async ngOnInit() {
     this.productList = (await this.inAppPurchaseService.getProducts()).filter(
@@ -42,5 +52,11 @@ export class InAppPurchaseComponent implements OnInit {
 
   purchase(productIdentifier: string): void {
     this.inAppPurchaseService.purchase(productIdentifier);
+  }
+
+  onActiveIndexChange(swiper: Swiper[]): void {
+    this.zone.run(() => {
+      this.currentIndex = swiper[0].activeIndex;
+    });
   }
 }
