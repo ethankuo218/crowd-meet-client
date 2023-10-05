@@ -25,64 +25,66 @@
         </swiper>
       </div>
 
-      <div class="description-container">
-        <div class="description-card">
-          <div class="description-title">Ad</div>
-          <div class="description">
-            <fa-icon [icon]="['fas', 'check']"></fa-icon>
-            <p>{{ productList[currentIndex].description }}</p>
-          </div>
-          <div class="description">
-            <fa-icon [icon]="['fas', 'check']"></fa-icon>
-            <p>Test Description 2</p>
-          </div>
-          <div class="description">
-            <fa-icon [icon]="['fas', 'check']"></fa-icon>
-            <p>Test Description 3</p>
+      <ng-container *ngIf="productList.length !== 0">
+        <div class="description-container">
+          <div class="description-card">
+            <div class="description-title">Ad</div>
+            <div class="description">
+              <fa-icon [icon]="['fas', 'check']"></fa-icon>
+              <p>{{ productList[currentIndex].description }}</p>
+            </div>
+            <div class="description">
+              <fa-icon [icon]="['fas', 'check']"></fa-icon>
+              <p>Test Description 2</p>
+            </div>
+            <div class="description">
+              <fa-icon [icon]="['fas', 'check']"></fa-icon>
+              <p>Test Description 3</p>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="description-container">
-        <div class="description-card">
-          <div class="description-title">Create Event</div>
-          <div class="description">
-            <fa-icon [icon]="['fas', 'check']"></fa-icon>
-            <p>Test Description 1</p>
-          </div>
-          <div class="description">
-            <fa-icon [icon]="['fas', 'check']"></fa-icon>
-            <p>Test Description 2</p>
-          </div>
-          <div class="description">
-            <fa-icon [icon]="['fas', 'check']"></fa-icon>
-            <p>Test Description 3</p>
+        <div class="description-container">
+          <div class="description-card">
+            <div class="description-title">Create Event</div>
+            <div class="description">
+              <fa-icon [icon]="['fas', 'check']"></fa-icon>
+              <p>Test Description 1</p>
+            </div>
+            <div class="description">
+              <fa-icon [icon]="['fas', 'check']"></fa-icon>
+              <p>Test Description 2</p>
+            </div>
+            <div class="description">
+              <fa-icon [icon]="['fas', 'check']"></fa-icon>
+              <p>Test Description 3</p>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="description-container">
-        <div class="description-card">
-          <div class="description-title">Join Event</div>
-          <div class="description">
-            <fa-icon [icon]="['fas', 'check']"></fa-icon>
-            <p>Test Description 1</p>
-          </div>
-          <div class="description">
-            <fa-icon [icon]="['fas', 'check']"></fa-icon>
-            <p>Test Description 2</p>
-          </div>
-          <div class="description">
-            <fa-icon [icon]="['fas', 'check']"></fa-icon>
-            <p>Test Description 3</p>
+        <div class="description-container">
+          <div class="description-card">
+            <div class="description-title">Join Event</div>
+            <div class="description">
+              <fa-icon [icon]="['fas', 'check']"></fa-icon>
+              <p>Test Description 1</p>
+            </div>
+            <div class="description">
+              <fa-icon [icon]="['fas', 'check']"></fa-icon>
+              <p>Test Description 2</p>
+            </div>
+            <div class="description">
+              <fa-icon [icon]="['fas', 'check']"></fa-icon>
+              <p>Test Description 3</p>
+            </div>
           </div>
         </div>
-      </div>
+      </ng-container>
     </div>
   </main>
 </ion-content>
 
-<ion-footer>
+<ion-footer *ngIf="productList.length !== 0">
   <ion-toolbar>
     <ion-button class="purchase-btn" slot="primary" (click)="purchase('test')">
       <span>

@@ -40,7 +40,7 @@ export class InAppPurchaseComponent implements OnInit {
   private inAppPurchaseService = inject(InAppPurchaseService);
   private zone = inject(NgZone);
 
-  productList!: PurchasesStoreProduct[];
+  productList: PurchasesStoreProduct[] = [];
 
   currentIndex: number = 0;
 
