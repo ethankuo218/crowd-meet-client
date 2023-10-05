@@ -1,3 +1,4 @@
+import { EntitlementService, Entitlements } from './entitlement.service';
 import { AdOption, AdmobService } from './admob.service';
 import { ImgUploadService } from './img-upload.service';
 import { EventListStateFacade } from './+states/event-list-state/event-list.state.facade';
@@ -28,6 +29,7 @@ export class EventService {
   private admobService = inject(AdmobService);
   private loadingService = inject(LoadingService);
   private router = inject(Router);
+  private entitlementService = inject(EntitlementService);
 
   private currentPage: number = 1;
   private commentSubject: ReplaySubject<EventComment[]> = new ReplaySubject(1);
@@ -124,7 +126,14 @@ export class EventService {
 
   async createEvent(eventSetting: EventSetting): Promise<void> {
     try {
-      await this.admobService.showReward(AdOption.CREATE_EVENT);
+      const hasEntitlement: boolean = await firstValueFrom(
+        this.entitlementService.hasEntitlement(Entitlements.UNLIMITED_HOST)
+      );
+
+      if (!hasEntitlement) {
+        await this.admobService.showReward(AdOption.CREATE_EVENT);
+      }
+
       const eventCreateResult = await firstValueFrom(
         this.httpClientService.post<Event>('event', eventSetting)
       );
@@ -219,8 +228,16 @@ export class EventService {
 
   async unlockedParticipants(id: number) {
     await this.loadingService.present();
+
     try {
-      await this.admobService.showReward(AdOption.VIEW_PARTICIPANT);
+      const hasEntitlement = await firstValueFrom(
+        this.entitlementService.hasEntitlement(Entitlements.VIEW_PARTICIPANT)
+      );
+
+      if (!hasEntitlement) {
+        await this.admobService.showReward(AdOption.VIEW_PARTICIPANT);
+      }
+
       await firstValueFrom(
         this.httpClientService.post(`event/${id}/unlocked-participants`, {})
       );
@@ -234,7 +251,14 @@ export class EventService {
   async apply(id: number): Promise<void> {
     await this.loadingService.present();
     try {
-      await this.admobService.showReward(AdOption.JOIN_EVENT);
+      const hasEntitlement = await firstValueFrom(
+        this.entitlementService.hasEntitlement(Entitlements.AD_FREE)
+      );
+
+      if (!hasEntitlement) {
+        await this.admobService.showReward(AdOption.JOIN_EVENT);
+      }
+
       this.httpClientService
         .post<EventActionResponse>(`event/${id}/participant`, {})
         .subscribe(() => {
@@ -283,7 +307,14 @@ export class EventService {
   async kick(id: number, userId: number): Promise<void> {
     await this.loadingService.present();
     try {
-      await this.admobService.showReward(AdOption.KICK_PARTICIPANT);
+      const hasEntitlement = await firstValueFrom(
+        this.entitlementService.hasEntitlement(Entitlements.AD_FREE)
+      );
+
+      if (!hasEntitlement) {
+        await this.admobService.showReward(AdOption.KICK_PARTICIPANT);
+      }
+
       await firstValueFrom(
         this.httpClientService.patch<EventActionResponse>(
           `event/${id}/participant`,
