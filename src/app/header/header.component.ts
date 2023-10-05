@@ -84,9 +84,9 @@ export class HeaderComponent implements OnInit {
   async shareEvent(): Promise<void> {
     const eventDetail = this.eventService.currentEventDetail;
     await Share.share({
-      title: 'Join this event !',
+      title: eventDetail?.title,
       text: 'Join this event !',
-      url: 'http://ionicframework.com/',
+      url: `https://dev.crowdmeet.app/app/event/list/${eventDetail?.eventId}`,
       dialogTitle: 'Share with buddies'
     });
   }
