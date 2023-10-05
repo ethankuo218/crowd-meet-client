@@ -6,9 +6,11 @@
     [(ngModel)]="value"
   ></ion-input>
   <div *ngIf="showDropdown" class="dropdown-content">
-    <ng-container *ngFor="let item of predictions" (click)="onMenuClick(item)">
-      <p class="main-text">{{ item.structured_formatting.main_text }}</p>
-      <p class="address">{{ item.description }}</p>
+    <ng-container *ngFor="let item of predictions">
+      <a (click)="onMenuClick(item)">
+        <p class="main-text">{{ item.structured_formatting.main_text }}</p>
+        <p class="address">{{ item.description }}</p>
+      </a>
     </ng-container>
   </div>
 </div>
