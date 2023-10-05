@@ -222,7 +222,7 @@
             mode="ios"
             class="submit-button"
             (click)="onSubmit()"
-            [disabled]="eventForm.invalid"
+            [disabled]="eventForm.invalid || isLoading"
           >
             {{
               mode === 'edit'

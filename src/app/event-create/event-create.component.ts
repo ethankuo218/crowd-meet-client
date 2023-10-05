@@ -61,6 +61,8 @@ export class EventCreateComponent implements OnInit {
     ]
   );
 
+  isLoading: boolean = false;
+
   private selectLocation:
     | {
         placeId: string;
@@ -131,6 +133,7 @@ export class EventCreateComponent implements OnInit {
   }
 
   onSubmit() {
+    this.isLoading = true;
     const dialogRef = this.dialog.open(AlertDialogComponent, {
       data: {
         title: this.mode === 'edit' ? 'Edit Event' : 'Create Event',
@@ -142,6 +145,8 @@ export class EventCreateComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result === 'confirm') {
         this.createEvent();
+      } else {
+        this.isLoading = false;
       }
     });
   }
@@ -179,6 +184,7 @@ export class EventCreateComponent implements OnInit {
       } catch (error) {
         console.error(error);
       } finally {
+        this.isLoading = false;
         this.loadingService.dismiss();
       }
     } else {
@@ -214,6 +220,7 @@ export class EventCreateComponent implements OnInit {
         } catch (error) {
           console.error(error);
         } finally {
+          this.isLoading = false;
           this.loadingService.dismiss();
         }
       }

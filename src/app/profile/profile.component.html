@@ -279,6 +279,7 @@
       slot="primary"
       *ngIf="user$ | async as user"
       (click)="sendMessage()"
+      [disabled]="isSent"
     >
       <fa-icon [icon]="['fas', 'paper-plane']"></fa-icon>&nbsp;
       <span>{{ 'Message ' + user.name }}</span>

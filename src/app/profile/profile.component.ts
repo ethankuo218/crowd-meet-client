@@ -48,6 +48,7 @@ export class ProfileComponent {
 
   private id!: number;
   isLoading = true;
+  isSent: boolean = false;
 
   user$: Observable<User> = this.route.params.pipe(
     switchMap((params) => {
@@ -77,11 +78,10 @@ export class ProfileComponent {
   }
 
   async sendMessage(): Promise<void> {
+    this.isSent = true;
     const hasPermission = await firstValueFrom(
       this.entitlementService.hasEntitlement(Entitlements.DIRECT_MESSAGE)
     );
-
-    console.log(hasPermission);
 
     if (hasPermission) {
       this.chatService.sendPrivateMessage(this.id).subscribe({
@@ -100,5 +100,7 @@ export class ProfileComponent {
       });
       modal.present();
     }
+
+    this.isSent = false;
   }
 }
