@@ -21,4 +21,8 @@ export class ReviewsService {
   getReviewee(id: number): Observable<Review[]> {
     return this.httpClientService.get<Review[]>(`review/reviewee/${id}`);
   }
+
+  getReviewByEvent(id: number): Observable<Review[]> {
+    return this.httpClientService.get<Review[]>(`review/event/${id}`);
+  }
 }

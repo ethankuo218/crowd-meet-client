@@ -7,7 +7,7 @@
           <div
             *ngFor="let participant of participants"
             class="joiner_info"
-            [ngClass]="{ disabled: false }"
+            [ngClass]="{ disabled: isReviewed(participant.userId) }"
             (click)="writeReview(participant)"
           >
             <div class="joiner_img">
@@ -27,7 +27,16 @@
                   {{ participant.registeredAt | date : 'MMM d, y | h:m a' }}
                 </p>
               </div>
-              <fa-icon [icon]="['fas', 'pen-to-square']"></fa-icon>
+              <fa-icon
+                *ngIf="!isReviewed(participant.userId); else reviewed"
+                [icon]="['fas', 'pen-to-square']"
+              ></fa-icon>
+              <ng-template #reviewed>
+                <fa-icon
+                  [icon]="['fas', 'check']"
+                  style="color: rgb(32, 213, 0)"
+                ></fa-icon>
+              </ng-template>
             </div>
           </div>
           <div *ngIf="participants.length === 0" class="no-more-content">

@@ -1,11 +1,12 @@
 import { ReviewsService } from './reviews.service';
 import { ActivatedRoute } from '@angular/router';
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { RatingComponent } from './rating/rating.component';
 import { Participant } from '../../event/models/event.model';
-import { Observable, map, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, map, switchMap } from 'rxjs';
 import { EventService } from '../../core/event.service';
+import { Review } from './models/reviews.model';
 @Component({
   selector: 'app-reviews',
   templateUrl: './reviews.component.html',
@@ -19,8 +20,12 @@ export class ReviewsComponent {
 
   canView: boolean = false;
 
+  private eventId!: number;
+
   participants$: Observable<Participant[]> = this.route.params.pipe(
     switchMap((params) => {
+      this.eventId = params['id'];
+      this.reload();
       return this.eventService.getParticipants(params['id']).pipe(
         map((result) => {
           this.canView = result.canView;
@@ -29,6 +34,9 @@ export class ReviewsComponent {
       );
     })
   );
+
+  private reviewedListBehaviorSubject: BehaviorSubject<Review[]> =
+    new BehaviorSubject<Review[]>([]);
 
   async writeReview(userDetail: Participant) {
     const modal = await this.modalCtrl.create({
@@ -48,7 +56,25 @@ export class ReviewsComponent {
           eventId: userDetail.eventId,
           ...data
         })
-        .subscribe({ next: () => {} });
+        .subscribe({
+          next: () => {
+            this.reload();
+          }
+        });
     }
+  }
+
+  private reload(): void {
+    this.reviewsService.getReviewByEvent(this.eventId).subscribe({
+      next: (result) => {
+        this.reviewedListBehaviorSubject.next(result);
+      }
+    });
+  }
+
+  isReviewed(userId: number) {
+    return this.reviewedListBehaviorSubject.value.find(
+      (item) => item.revieweeId === userId
+    );
   }
 }

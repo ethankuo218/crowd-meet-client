@@ -9,6 +9,7 @@ export interface Review {
     name: string;
     profilePicture: string;
   };
+  revieweeId: number;
   event: {
     eventId: number;
     title: string;
