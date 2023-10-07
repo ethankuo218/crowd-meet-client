@@ -8,10 +8,12 @@
   --page-swiper-pagination-height: 18px;
   --page-pagination-bullet-size: 10px;
 
-  --page-first-slide-background: #c1ebff;
-  --page-second-slide-background: #a9ebd2;
-  --page-third-slide-background: #f0cbe5;
-  --page-last-slide-background: #eef3ff;
+  --page-first-slide-background: #abd0f6;
+  --page-second-slide-background: #5daaf8;
+  --page-third-slide-background: #58a8f8;
+  --page-forth-slide-background: #8fc1f3;
+  --page-fifth-slide-background: #58a7f6;
+  --page-last-slide-background: #84bef8;
 
   --page-vector-decoration-fill: var(--ion-color-light-shade);
 }
@@ -138,6 +140,14 @@ ion-content {
   --page-vector-decoration-fill: var(--page-third-slide-background);
 }
 
+.forth-slide {
+  --page-vector-decoration-fill: var(--page-forth-slide-background);
+}
+
+.fifth-slide {
+  --page-vector-decoration-fill: var(--page-fifth-slide-background);
+}
+
 .last-slide {
   --page-vector-decoration-fill: var(--page-last-slide-background);
 
@@ -215,11 +225,138 @@ ion-content {
     height: var(--page-swiper-pagination-height);
     line-height: 1;
     // .swiper-pagination is 18px height, .slide-inner-row has 40px of padding-bottom => bottom = (40px - 18px)/2 = 11px
-    bottom: calc((var(--page-swiper-pagination-space) - var(--page-swiper-pagination-height) ) / 2);
+    bottom: calc(
+      (
+          var(--page-swiper-pagination-space) -
+            var(--page-swiper-pagination-height)
+        ) / 2
+    );
 
     .swiper-pagination-bullet {
       width: var(--page-pagination-bullet-size);
       height: var(--page-pagination-bullet-size);
     }
   }
+}
+
+.item.btn_item {
+  width: 100%;
+}
+
+.btn_item button {
+  display: block;
+  width: 100%;
+  padding: 0.7rem 0;
+  border-radius: 20px;
+  border: 2px solid var(--ion-color-primary);
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.active_btn {
+  background: var(--ion-color-primary);
+  color: #fff !important;
+}
+
+.illustration-and-decoration-slide {
+  &.slide-inner-row {
+    flex-flow: column;
+    justify-content: space-between;
+
+    // In the last slide .swiper-pagination is hidden
+    border-width: 0px !important;
+  }
+
+  .heading-col {
+    flex: 0 1 auto;
+    max-height: var(--page-max-heading-height);
+    max-height: fit-content;
+  }
+
+  .question-options-col {
+    background-color: var(--page-background);
+    overflow: scroll;
+
+    // @include hide-scrollbars();
+
+    .options-list-row {
+      --ion-grid-column-padding: 0px;
+
+      padding-top: calc(var(--page-margin) / 4);
+      padding-bottom: calc(var(--page-margin) / 4);
+
+      ion-col {
+        transform: translateZ(0px);
+        padding-top: calc(var(--page-margin) / 4);
+        padding-bottom: calc(var(--page-margin) / 4);
+
+        &:nth-child(odd) {
+          padding-right: calc(var(--page-margin) / 4);
+        }
+
+        &:nth-child(even) {
+          padding-left: calc(var(--page-margin) / 4);
+        }
+      }
+    }
+  }
+
+  .call-to-action-col {
+    flex: 0 1 auto;
+    max-height: var(--page-max-call-to-actions-height);
+    max-height: fit-content;
+
+    display: flex;
+    align-items: flex-end;
+
+    padding-top: calc(var(--page-margin) / 2);
+
+    .signup-button {
+      margin: 0px;
+      flex: 1 0 100%;
+    }
+  }
+
+  .custom-checkbox {
+    .checkbox-title {
+      font-weight: 600;
+      font-size: 18px;
+      color: var(--ion-color-primary);
+      text-align: center;
+      word-break: break-word;
+      overflow: visible;
+
+      position: absolute;
+      width: 70%;
+      left: 15%;
+      // vertically centered
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    ion-checkbox {
+      --border-radius: 25px;
+      --border-width: 2px;
+      --border-color: var(--ion-color-primary);
+      --border-color-checked: transparent;
+      --background: transparent;
+      --background-checked: rgba(12, 140, 240, 0.6);
+
+      height: 100%;
+      width: 100%;
+      // Note: We cannot change the styles of the .checkbox-icon because it's inside the shadow dom.
+      // An alternative would be to set --width and --height to 0px and add a custom overlay and icon in the <custom-checkbox> html
+    }
+
+    &.checkbox-checked {
+      .checkbox-title {
+        display: none;
+      }
+    }
+  }
+}
+
+:host ::ng-deep app-aspect-ratio .content-wrapper {
+  text-align: center;
 }

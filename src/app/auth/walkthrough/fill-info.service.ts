@@ -11,24 +11,12 @@ export class FillInfoService {
   private storage = inject(Storage);
   private router = inject(Router);
 
-  gender: string | undefined;
-  birth: string | undefined;
-  interests: number[] | undefined;
-
-  saveInfo() {
+  saveInfo(form: { gender: string; birth: string; interests: number[] }) {
     try {
-      this.userService.updateUser({
-        gender: this.gender,
-        birthDate: this.birth,
-        interests: this.interests
-      });
+      this.userService.updateUser(form);
     } catch (err) {
       return;
     }
-
-    this.gender = undefined;
-    this.birth = undefined;
-    this.interests = undefined;
 
     this.storage.remove('isNewUser');
     this.router.navigate(['app']);

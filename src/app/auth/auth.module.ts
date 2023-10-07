@@ -25,11 +25,6 @@ const routes: Routes = [
           import('./walkthrough/walkthrough.module').then(
             (m) => m.WalkthroughPageModule
           )
-      },
-      {
-        path: 'fill-info',
-        loadChildren: () =>
-          import('./fill-info/fill-info.module').then((m) => m.FillInfoModule)
       }
     ]
   }
