@@ -55,20 +55,15 @@ export class UserService {
           if (isNewUser === null) {
             this.storage.set('isNewUser', loginResult.isNewUser);
             this.router.navigate(
-              loginResult.isNewUser
-                ? ['auth/walkthrough']
-                : ['auth/walkthrough'],
+              loginResult.isNewUser ? ['auth/walkthrough'] : ['app'],
               {
                 replaceUrl: true
               }
             );
           } else {
-            this.router.navigate(
-              isNewUser ? ['auth/walkthrough'] : ['auth/walkthrough'],
-              {
-                replaceUrl: true
-              }
-            );
+            this.router.navigate(isNewUser ? ['auth/walkthrough'] : ['app'], {
+              replaceUrl: true
+            });
           }
           this.fcmTokenService.register();
         }
