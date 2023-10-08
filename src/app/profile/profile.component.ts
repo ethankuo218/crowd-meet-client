@@ -71,6 +71,18 @@ export class ProfileComponent {
     })
   );
 
+  getInfoView(user: User): string {
+    const birthDateObject = new Date(user.birthDate);
+    const today = new Date();
+
+    const age = Math.floor(
+      (today.getTime() - birthDateObject.getTime()) /
+        (365 * 24 * 60 * 60 * 1000)
+    );
+
+    return `${age} / ${user.gender === 'male' ? 'M' : 'F'}`;
+  }
+
   get isOwn$(): Observable<boolean> {
     return this.userFacade
       .getUser()

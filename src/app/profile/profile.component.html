@@ -20,8 +20,13 @@
         </swiper>
       </ng-template>
 
-      <div class="container">
+      <div class="info-content">
         <h3 class="name">{{ user.name }}</h3>
+        <p class="info">
+          {{ getInfoView(user) }}
+        </p>
+      </div>
+      <div class="container">
         <div class="about_content">
           <h3 class="dark">{{ 'PROFILE.ABOUT_ME' | translate }}</h3>
           <p class="bio dark_d">

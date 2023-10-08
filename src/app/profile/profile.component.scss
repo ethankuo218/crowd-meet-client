@@ -231,18 +231,37 @@ swiper ::ng-deep .swiper-slide img {
   object-fit: cover;
 }
 
-h3.name {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  font-size: 25px;
-  font-weight: 600;
-}
-
 .send-btn {
   width: 100%;
 }
 
-.container .d-flex ion-button {
-  margin-top: auto;
-  margin-bottom: auto;
+.container {
+  position: relative;
+  top: -2rem;
+
+  .d-flex ion-button {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+}
+
+.info-content {
+  padding: 0 1rem;
+  position: relative;
+  z-index: 1;
+  top: -4rem;
+  background: linear-gradient(0deg, #464545 10%, transparent 100%);
+
+  h3.name {
+    color: #ffffff;
+    margin-top: 1rem;
+    font-size: 25px;
+    font-weight: 600;
+  }
+
+  p.info {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 600;
+  }
 }
