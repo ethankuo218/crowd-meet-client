@@ -32,12 +32,12 @@
                     <div class="time">
                       <small class="title">
                         {{
-                          eventDetail.startTime | date : 'EEEE, MMMM dd, yyyy'
+                          (eventDetail.startTime
+                            | date : 'EEE, MMM dd, yyyy h:mm a z') +
+                            ' - ' +
+                            (eventDetail.endTime
+                              | date : 'EEE, MMM dd, yyyy h:mm a z')
                         }}
-                      </small>
-                      <br />
-                      <small class="dark_d">
-                        {{ eventDetail.startTime | date : 'h:mm a z' }}
                       </small>
                     </div>
                     <div class="chevron-right">
