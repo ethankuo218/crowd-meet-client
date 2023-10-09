@@ -1,6 +1,14 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable, catchError, from, of, switchMap, throwError } from 'rxjs';
+import {
+  Observable,
+  catchError,
+  from,
+  of,
+  retry,
+  switchMap,
+  throwError
+} from 'rxjs';
 import { GetResult, Preferences } from '@capacitor/preferences';
 import { environment } from 'src/environments/environment.dev';
 import { ErrorDialogComponent } from '../components/error-dialog/error-dialog.component';
@@ -63,6 +71,7 @@ export class HttpClientService {
             headers: headers
           })
           .pipe(
+            retry(2),
             catchError((err) => {
               this.showErrorDialog(err.error.message);
               console.error(`${requestUrl}: ${err.error.message}`);
@@ -88,6 +97,7 @@ export class HttpClientService {
             params: typeof parameter === 'string' ? undefined : parameter
           })
           .pipe(
+            retry(2),
             catchError((err) => {
               this.showErrorDialog(err.error.message);
               console.error(`${requestUrl}: ${err.error.message}`);
@@ -107,6 +117,7 @@ export class HttpClientService {
             headers: headers
           })
           .pipe(
+            retry(2),
             catchError((err) => {
               this.showErrorDialog(err.error.message);
               console.error(`${requestUrl}: ${err.error.message}`);
@@ -126,6 +137,7 @@ export class HttpClientService {
             headers: headers
           })
           .pipe(
+            retry(2),
             catchError((err) => {
               this.showErrorDialog(err.error.message);
               console.error(`${requestUrl}: ${err.error.message}`);
@@ -145,6 +157,7 @@ export class HttpClientService {
             headers: headers
           })
           .pipe(
+            retry(2),
             catchError((err) => {
               this.showErrorDialog(err.error.message);
               console.error(`${requestUrl}: ${err.error.message}`);
