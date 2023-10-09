@@ -13,11 +13,16 @@ import { ReviewsService } from './reviews.service';
 import { EventService } from '../../core/event.service';
 import { DirectivesModule } from 'src/app/directives/directives.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { ProfileComponent } from 'src/app/profile/profile.component';
 
 const routes: Routes = [
   {
     path: ':id',
     component: ReviewsComponent
+  },
+  {
+    path: 'profile/:id',
+    component: ProfileComponent
   }
 ];
 

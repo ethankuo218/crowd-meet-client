@@ -4,24 +4,31 @@
     <div class="container">
       <div class="joiner_list">
         <ng-container *ngIf="participants$ | async as participants">
-          <div
-            *ngFor="let participant of participants"
-            class="joiner_info"
-            [ngClass]="{ disabled: isReviewed(participant.userId) }"
-            (click)="writeReview(participant)"
-          >
+          <div *ngFor="let participant of participants" class="joiner_info">
             <div class="joiner_img">
               <img
                 appImageFallBack
                 [src]="
                   participant.profilePictureUrl || 'assets/images/profile.png'
                 "
+                [routerLink]="[
+                  '/app/history/reviews/profile',
+                  participant.userId
+                ]"
                 alt="image"
               />
             </div>
             <div class="joiner_content">
               <div class="joiner-info">
-                <h3 class="dark">{{ participant.name }}</h3>
+                <h3
+                  class="dark"
+                  [routerLink]="[
+                    '/app/history/reviews/profile',
+                    participant.userId
+                  ]"
+                >
+                  {{ participant.name }}
+                </h3>
                 <hr />
                 <p class="dark_d">
                   {{ participant.registeredAt | date : 'MMM d, y | h:m a' }}
@@ -29,6 +36,7 @@
               </div>
               <fa-icon
                 *ngIf="!isReviewed(participant.userId); else reviewed"
+                (click)="writeReview(participant)"
                 [icon]="['fas', 'pen-to-square']"
               ></fa-icon>
               <ng-template #reviewed>

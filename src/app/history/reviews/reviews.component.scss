@@ -51,8 +51,11 @@
 
       fa-icon {
         width: 25%;
-        text-align: center;
         font-size: 20px;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     }
   }
