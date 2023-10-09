@@ -160,7 +160,7 @@ export class AdmobService {
     this.dialog.open(AlertDialogComponent, {
       data: {
         title: 'Oops',
-        content: `No AD to show, please ty later`,
+        content: `No AD to show, please try later`,
         enableCancelButton: false,
         enableUpgradeButton: true
       },

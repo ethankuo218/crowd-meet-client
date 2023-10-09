@@ -3,15 +3,15 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, catchError, from, of, switchMap, throwError } from 'rxjs';
 import { GetResult, Preferences } from '@capacitor/preferences';
 import { environment } from 'src/environments/environment.dev';
-import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from '../components/error-dialog/error-dialog.component';
 import { Auth } from '@angular/fire/auth';
+import { ToastMsgService } from './toast-msg.service';
 
 @Injectable({ providedIn: 'root' })
 export class HttpClientService {
   private httpClient = inject(HttpClient);
-  private dialog = inject(MatDialog);
   private auth = inject(Auth);
+  private toastMsgService = inject(ToastMsgService);
 
   private urlPrefix: string = environment.serverUrl;
   private timeStamp: number = 0;
@@ -156,13 +156,6 @@ export class HttpClientService {
   }
 
   private showErrorDialog(errorMsg: string) {
-    this.dialog.open(ErrorDialogComponent, {
-      data: {
-        title: 'Oops!',
-        content: errorMsg,
-        enableCancelButton: false
-      },
-      panelClass: 'custom-dialog'
-    });
+    this.toastMsgService.presentToast(errorMsg);
   }
 }
