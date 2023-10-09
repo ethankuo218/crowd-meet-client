@@ -196,7 +196,8 @@
     },
     "BUTTON": {
       "CONFIRM": "Confirm",
-      "CANCEL": "Cancel"
+      "CANCEL": "Cancel",
+      "UPGRADE": "Upgrade"
     }
   },
   "SELECT_INTERESTS": {

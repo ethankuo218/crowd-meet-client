@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { ModalController } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
+import { InAppPurchaseComponent } from 'src/app/in-app-purchase/in-app-purchase.component';
 
 @Component({
   selector: 'app-alert-dialog',
@@ -11,12 +13,27 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [CommonModule, MatDialogModule, TranslateModule]
 })
 export class AlertDialogComponent {
+  private modalCtrl = inject(ModalController);
+
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: {
       title: string;
       content: string;
       enableCancelButton: boolean;
+      enableUpgradeButton: boolean;
     }
   ) {}
+
+  async openPurchasePage() {
+    const modal = await this.modalCtrl.create({
+      component: InAppPurchaseComponent,
+      initialBreakpoint: 1,
+      breakpoints: [0, 1],
+      componentProps: {
+        isModalMode: true
+      }
+    });
+    modal.present();
+  }
 }

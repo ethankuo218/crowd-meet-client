@@ -161,7 +161,8 @@ export class AdmobService {
       data: {
         title: 'Oops',
         content: `No AD to show, please ty later`,
-        enableCancelButton: false
+        enableCancelButton: false,
+        enableUpgradeButton: true
       },
       panelClass: 'custom-dialog'
     });

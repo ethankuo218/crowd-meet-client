@@ -2,18 +2,39 @@
   <div class="modal-body">
     <div class="text-center mdl_div">
       <img src="assets/images/deliver_image.png" alt="image" />
-      <h2 class="primary">{{ data.title | translate}}</h2>
+      <h2 class="primary">{{ data.title | translate }}</h2>
       <p class="dark">
-        {{ data.content| translate }}
+        {{ data.content | translate }}
       </p>
     </div>
   </div>
   <div class="modal-footer">
-    <button mat-button type="button" class="btn btn-primary" [mat-dialog-close]="'confirm'" cdkFocusInitial>
-      {{ 'DIALOG.BUTTON.CONFIRM' | translate}}
+    <button
+      mat-button
+      type="button"
+      class="btn btn-primary"
+      [mat-dialog-close]="'confirm'"
+      cdkFocusInitial
+    >
+      {{ 'DIALOG.BUTTON.CONFIRM' | translate }}
     </button>
-    <button *ngIf="data.enableCancelButton" mat-button type="button" class="primary btn" [mat-dialog-close]="'cancel'">
-      {{'DIALOG.BUTTON.CANCEL' | translate}}
+    <button
+      *ngIf="data.enableCancelButton"
+      mat-button
+      type="button"
+      class="primary btn"
+      [mat-dialog-close]="'cancel'"
+    >
+      {{ 'DIALOG.BUTTON.CANCEL' | translate }}
+    </button>
+    <button
+      *ngIf="data.enableUpgradeButton"
+      mat-button
+      type="button"
+      class="primary btn"
+      (click)="openPurchasePage()"
+    >
+      {{ 'DIALOG.BUTTON.UPGRADE' | translate }}
     </button>
   </div>
 </div>
