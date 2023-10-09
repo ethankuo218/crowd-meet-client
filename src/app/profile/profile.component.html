@@ -14,7 +14,7 @@
       </swiper>
       <ng-template #noPicture>
         <swiper id="profile-swiper" [slidesPerView]="1" [pagination]="true">
-          <ng-template>
+          <ng-template swiperSlide>
             <img appImageFallBack [src]="'assets/images/event-default.png'" />
           </ng-template>
         </swiper>
