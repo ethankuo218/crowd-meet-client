@@ -1,5 +1,13 @@
 @import 'theme/mixins/inputs/checkbox-tag';
 
+::ng-deep body.dark .filter_div h3 {
+  color: #ffffff;
+}
+
+::ng-deep body:not(.dark) .filter_div h3 {
+  color: #000000;
+}
+
 ion-header {
   ion-title {
     margin-top: 0.8rem;
