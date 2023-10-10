@@ -2,6 +2,10 @@
   padding: 0;
 }
 
+.pre-line {
+  white-space: pre-line;
+}
+
 .cover_photo img,
 .cover_photo ion-skeleton-text {
   width: 100%;
@@ -18,11 +22,11 @@
   }
 }
 
-.title-row{
+.title-row {
   display: flex;
   justify-content: space-between;
 
-  small{
+  small {
     display: flex;
     align-items: center;
     font-weight: 600;
@@ -213,7 +217,7 @@
         object-fit: cover;
       }
 
-      fa-icon{
+      fa-icon {
         color: #fff;
         border: #fff solid 2px;
         border-radius: 50%;
