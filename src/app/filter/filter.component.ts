@@ -44,7 +44,7 @@ export class FilterComponent implements OnInit {
 
   filterForm: FormGroup = new FormGroup({
     categories: new FormArray([], []),
-    radius: new FormControl<number>(5, []),
+    radius: new FormControl<number>(250, []),
     startDate: new FormControl<string>('', []),
     endDate: new FormControl<string>('', [])
   });
