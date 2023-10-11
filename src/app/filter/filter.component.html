@@ -50,6 +50,12 @@
             (ionChange)="onDistanceChange($event)"
           ></ion-range>
         </div>
+        <div class="filter_div">
+          <div class="toggle-container">
+            <h3>{{ 'EVENT_LIST.ONLINE' | translate }}</h3>
+            <ion-toggle formControlName="onlineEvent"></ion-toggle>
+          </div>
+        </div>
 
         <div class="filter_div">
           <h3>{{ 'EVENT_LIST.START_TIME' | translate }}</h3>

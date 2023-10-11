@@ -8,6 +8,12 @@
   color: #000000;
 }
 
+.toggle-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 ion-header {
   ion-title {
     margin-top: 0.8rem;

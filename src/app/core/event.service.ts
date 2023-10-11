@@ -35,7 +35,7 @@ export class EventService {
   private commentSubject: ReplaySubject<EventComment[]> = new ReplaySubject(1);
   private _noMoreContent: boolean = false;
   private _isLoading: boolean = false;
-  private _filter: any = { radius: 250 };
+  private _filter: any = { radius: 250, onlineEvent: true };
   private userLocation: { lat: number; lng: number } | undefined;
   private _currentEventDetail: Event | undefined;
 

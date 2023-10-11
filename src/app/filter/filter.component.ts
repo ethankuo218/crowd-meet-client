@@ -46,7 +46,8 @@ export class FilterComponent implements OnInit {
     categories: new FormArray([], []),
     radius: new FormControl<number>(250, []),
     startDate: new FormControl<string>('', []),
-    endDate: new FormControl<string>('', [])
+    endDate: new FormControl<string>('', []),
+    onlineEvent: new FormControl(true, [])
   });
 
   ngOnInit() {
@@ -86,6 +87,7 @@ export class FilterComponent implements OnInit {
       .get('startDate')
       ?.patchValue(Formatter.getFormatTimeString());
     this.filterForm.get('radius')?.patchValue(250);
+    this.filterForm.get('onlineEvent')?.patchValue(true);
   }
 
   applyFilter(): void {
@@ -93,6 +95,7 @@ export class FilterComponent implements OnInit {
       {
         categories: this.getCategories(),
         radius: this.filterForm.value.radius,
+        onlineEvent: this.filterForm.value.onlineEvent,
         ...(this.filterForm.value.startDate && {
           startDate: new Date(this.filterForm.value.startDate).toISOString()
         }),

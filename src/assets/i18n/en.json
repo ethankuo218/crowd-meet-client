@@ -15,7 +15,8 @@
     "CATEGORIES": "Categories",
     "DISTANCE": "Distance",
     "START_TIME": "Start Time",
-    "END_TIME": "End Time"
+    "END_TIME": "End Time",
+    "ONLINE": "Display Online Event"
   },
   "CATEGORY": {
     "OUTDOOR_ACTIVITY": "Outdoor Activity",
