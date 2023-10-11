@@ -1,7 +1,12 @@
 import * as Formatter from './../core/formatter';
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit, inject } from '@angular/core';
-import { IonicModule, ModalController, RangeCustomEvent } from '@ionic/angular';
+import { Component, ElementRef, Input, OnInit, inject } from '@angular/core';
+import {
+  IonicModule,
+  ModalController,
+  RangeCustomEvent,
+  ViewDidEnter
+} from '@ionic/angular';
 import { Category } from '../core/+states/reference-state/reference.model';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
@@ -28,7 +33,9 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
   providers: [ReferenceStateFacade]
 })
-export class FilterComponent implements OnInit {
+export class FilterComponent implements OnInit, ViewDidEnter {
+  constructor(private readonly el: ElementRef) {}
+
   private modalControl = inject(ModalController);
   private referenceStateFacade = inject(ReferenceStateFacade);
 
@@ -75,6 +82,16 @@ export class FilterComponent implements OnInit {
         categories: this.getPatchCategories()
       })
     });
+  }
+
+  ionViewDidEnter(): void {
+    const headerHeight =
+      this.el.nativeElement.querySelector('ion-header').offsetHeight + 'px';
+    const footerHeight =
+      this.el.nativeElement.querySelector('ion-footer').offsetHeight + 'px';
+
+    document.documentElement.style.setProperty('--header-height', headerHeight);
+    document.documentElement.style.setProperty('--footer-height', footerHeight);
   }
 
   cancel(): void {
