@@ -85,6 +85,7 @@ export class FilterComponent implements OnInit {
     this.filterForm
       .get('startDate')
       ?.patchValue(Formatter.getFormatTimeString());
+    this.filterForm.get('radius')?.patchValue(250);
   }
 
   applyFilter(): void {
