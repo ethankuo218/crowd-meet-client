@@ -28,7 +28,6 @@
   display: flex;
   gap: 15px;
   position: relative;
-  margin: 30px 0 0;
   align-items: center;
 }
 
@@ -74,4 +73,38 @@
 .image_content {
   border-bottom: 1px solid #000000;
   padding-bottom: 1rem;
+}
+
+// ... (the rest of your SCSS styles remain unchanged)
+
+.notification-area {
+  .image_content {
+    // Add a subtle shadow to give the "card" some depth.
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    // Add some margin between each card for separation.
+    margin-bottom: 1.5rem;
+
+    // Use padding to create some space inside the card.
+    padding: 1rem;
+
+    // Use a light background color for the card.
+    background-color: #fff;
+
+    // Optional: Slightly rounded corners for aesthetics.
+    border-radius: 8px;
+
+    // Moving the border-bottom style here to give the card some distinction.
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  // To ensure that the last card doesn't have extra margin at the bottom.
+  .image_content:last-child {
+    margin-bottom: 0;
+  }
+
+  .container {
+    // Add padding to the container to ensure cards aren't stuck to the edges.
+    padding: 1rem;
+  }
 }
