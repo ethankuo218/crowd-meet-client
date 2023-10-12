@@ -7,10 +7,14 @@
         <div class="image_content" *ngFor="let item of notifications">
           <div class="poin_ment">
             <div>
-              <img src="assets/images/round_image.png" alt="image" />
+              <fa-icon
+                [icon]="item.content | notificationTitle | notificationIcon"
+              ></fa-icon>
             </div>
             <div class="ment_text">
-              <h2 class="dark">Appointment Cancelled!</h2>
+              <h2 class="dark">
+                {{item.content | notificationTitle | translate}}
+              </h2>
               <p class="dark_d">{{item.createdAt | date: 'EEEE | h:mm a'}}</p>
             </div>
             <!-- <button class="white">New</button> -->
@@ -19,7 +23,11 @@
             <p class="dark_d">{{item.content}}</p>
           </div>
         </div>
-        <div *ngIf="notifications.length === 0" class="no-more-content" style="margin-top: 2rem;">
+        <div
+          *ngIf="notifications.length === 0"
+          class="no-more-content"
+          style="margin-top: 2rem"
+        >
           {{ 'NOTIFICATIONS.NO_MORE_CONTENT' | translate }}
         </div>
       </ng-container>

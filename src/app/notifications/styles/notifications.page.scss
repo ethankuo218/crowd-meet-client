@@ -10,6 +10,14 @@
   margin-right: 12px;
 }
 
+.poin_ment div i {
+  display: inline-block; // Change the display property to inline-block
+  font-size: 60px;
+  width: 60px;
+  height: 60px;
+  vertical-align: middle; // To keep it aligned with adjacent text or elements
+}
+
 .fix .dot_opt {
   position: absolute;
   top: 42px;
@@ -56,9 +64,14 @@
 
 .sample_text p {
   font-size: 13px;
-  margin: 20px 0 0;
+  margin: 0.8rem 0 0;
 }
 
 .image_content2 {
   padding: 0 0 30px;
+}
+
+.image_content {
+  border-bottom: 1px solid #000000;
+  padding-bottom: 1rem;
 }

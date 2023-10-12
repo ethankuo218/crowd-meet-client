@@ -8,6 +8,8 @@ import { NotificationsPage } from './notifications.page';
 import { NotificationsService } from '../notifications/notifications.service';
 import { HeaderComponent } from '../header/header.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { NotificationTitlePipe } from './pipes/notification-title.pipe';
+import { NotificationIconPipe } from './pipes/notification-icon.pipe';
 
 @NgModule({
   imports: [
@@ -23,7 +25,11 @@ import { TranslateModule } from '@ngx-translate/core';
     HeaderComponent,
     TranslateModule
   ],
-  declarations: [NotificationsPage],
+  declarations: [
+    NotificationsPage,
+    NotificationTitlePipe,
+    NotificationIconPipe
+  ],
   providers: [NotificationsService]
 })
 export class NotificationsPageModule {}

@@ -111,7 +111,16 @@
     "STILL_GOING_ON": "This event is still going on"
   },
   "NOTIFICATIONS": {
-    "NO_MORE_CONTENT": "You don't have any notifications"
+    "NO_MORE_CONTENT": "You don't have any notifications",
+    "TITLE": {
+      "NEW_COMMENT": "New Comment",
+      "ACCEPTED": "Accepted",
+      "DECLINED": "Declined",
+      "KICKED": "Kicked out",
+      "LEFT": "User left",
+      "APPLIED": "New application",
+      "UPDATED": "Status updated"
+    }
   },
   "MENU": {
     "EDIT_PROFILE": "Edit Profile",
