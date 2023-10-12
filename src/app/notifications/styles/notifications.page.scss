@@ -75,8 +75,6 @@
   padding-bottom: 1rem;
 }
 
-// ... (the rest of your SCSS styles remain unchanged)
-
 .notification-area {
   .image_content {
     // Add a subtle shadow to give the "card" some depth.
@@ -106,5 +104,17 @@
   .container {
     // Add padding to the container to ensure cards aren't stuck to the edges.
     padding: 1rem;
+  }
+}
+
+::ng-deep body.dark {
+  .notifications-content {
+    .notification-area {
+      .image_content {
+        background-color: #1f1f1f;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 2px 8px rgb(77 166 249 / 30%);
+      }
+    }
   }
 }
