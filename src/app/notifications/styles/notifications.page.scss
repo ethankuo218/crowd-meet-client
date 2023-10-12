@@ -10,26 +10,10 @@
   margin-right: 12px;
 }
 
-.poin_ment div i {
-  display: inline-block; // Change the display property to inline-block
-  font-size: 60px;
-  width: 60px;
-  height: 60px;
-  vertical-align: middle; // To keep it aligned with adjacent text or elements
-}
-
 .fix .dot_opt {
   position: absolute;
   top: 42px;
   right: 20px;
-}
-
-.poin_ment {
-  display: flex;
-  gap: 15px;
-  position: relative;
-  margin: 30px 0 0;
-  align-items: center;
 }
 
 .poin_ment div img {
@@ -71,7 +55,68 @@
   padding: 0 0 30px;
 }
 
+.poin_ment div fa-icon {
+  padding: 10px; // Spacing around the icon
+}
+
 .image_content {
-  border-bottom: 1px solid #000000;
+  border-bottom: 1px solid #e0e0e0; // Lightened the border color for a softer feel
   padding-bottom: 1rem;
+  background: #f7f7f7; // Light background color for each notification block
+  margin-bottom: 10px; // Spacing between notification blocks
+}
+
+.notifications-content {
+  background: #f7f7f7; // Setting the background color to match notification blocks
+}
+
+.container {
+  padding: 1rem; // Standard padding for mobile views
+}
+
+.poin_ment {
+  display: flex;
+  position: relative;
+  gap: 15px;
+  align-items: center;
+  background: #ffffff; // White background for each notification item for a clean look
+  padding: 1rem; // Consistent padding for each notification item
+  border-radius: 8px; // Rounded corners for modern feel
+  margin-bottom: 1rem; // Gap between notifications
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); // Subtle shadow for depth
+
+  & div:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e8e8e8; // Light grey background
+    border-radius: 50%; // Circular for icon
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0; // Prevents shrinking
+  }
+
+  fa-icon {
+    font-size: 30px; // Adjust based on your preference
+    color: #212121; // Dark color for all icons
+  }
+
+  .ment_text h2 {
+    font-size: 17px;
+    font-weight: 700;
+    margin: 0;
+    color: #212121; // Dark color for text
+  }
+
+  .ment_text p {
+    font-size: 13px;
+    margin-top: 0.3rem;
+    color: #757575; // Slightly lighter color for secondary text
+  }
+}
+
+.sample_text p {
+  font-size: 13px;
+  margin: 0.8rem 0 0;
+  color: #757575; // Consistent color for all secondary text
 }
