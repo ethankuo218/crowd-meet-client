@@ -10,6 +10,7 @@ import { HeaderComponent } from '../header/header.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { NotificationTitlePipe } from './pipes/notification-title.pipe';
 import { NotificationIconPipe } from './pipes/notification-icon.pipe';
+import { RelativeDatePipe } from '../core/pipe/relative-date.pipe';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { NotificationIconPipe } from './pipes/notification-icon.pipe';
   declarations: [
     NotificationsPage,
     NotificationTitlePipe,
-    NotificationIconPipe
+    NotificationIconPipe,
+    RelativeDatePipe
   ],
   providers: [NotificationsService]
 })

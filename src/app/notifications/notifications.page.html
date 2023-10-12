@@ -15,7 +15,7 @@
               <h2 class="dark">
                 {{item.content | notificationTitle | translate}}
               </h2>
-              <p class="dark_d">{{item.createdAt | date: 'EEEE | h:mm a'}}</p>
+              <p class="dark_d">{{item.createdAt | relativeDate}}</p>
             </div>
             <!-- <button class="white">New</button> -->
           </div>
