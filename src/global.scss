@@ -142,8 +142,12 @@ textarea:focus {
   color: var(--ion-text-color);
 }
 
-.dark_d {
-  color: #d7d6db;
+::ng-deep body.dark .dark_d {
+  color: #ffffff; // This is for dark theme text color
+}
+
+::ng-deep body:not(.dark) .dark_d {
+  color: #474646; // This is for dark theme text color
 }
 
 .dark_dd {
