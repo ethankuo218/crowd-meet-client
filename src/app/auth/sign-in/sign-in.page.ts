@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../core/auth.service';
 import { UserStateFacade } from 'src/app/core/+states/user-state/user.state.facade';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -10,30 +11,34 @@ import { UserStateFacade } from 'src/app/core/+states/user-state/user.state.faca
 export class SignInPage {
   private authService = inject(AuthService);
   private userStateFacade = inject(UserStateFacade);
+  private router = inject(Router);
 
   ionViewWillEnter(): void {
     this.userStateFacade.storeUser({});
   }
 
-  doFacebookLogin(): void {
+  async doFacebookLogin(): Promise<void> {
     try {
-      this.authService.signInWithFacebook();
+      await this.authService.signInWithFacebook();
+      this.router.navigate(['app']);
     } catch (error) {
       console.error(error);
     }
   }
 
-  doGoogleLogin(): void {
+  async doGoogleLogin(): Promise<void> {
     try {
-      this.authService.signInWithGoogle();
+      await this.authService.signInWithGoogle();
+      this.router.navigate(['app']);
     } catch (error) {
       console.error(error);
     }
   }
 
-  doAppleLogin(): void {
+  async doAppleLogin(): Promise<void> {
     try {
-      this.authService.signInWithApple();
+      await this.authService.signInWithApple();
+      this.router.navigate(['app']);
     } catch (error) {
       console.error(error);
     }

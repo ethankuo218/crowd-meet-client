@@ -52,19 +52,15 @@ export class UserService {
         next: async (result) => {
           this.userStateFacade.storeUser(result);
           const isNewUser = await this.storage.get('isNewUser');
-          if (isNewUser === null) {
+
+          if (
+            isNewUser === true ||
+            (isNewUser === null && loginResult.isNewUser === true)
+          ) {
             this.storage.set('isNewUser', loginResult.isNewUser);
-            this.router.navigate(
-              loginResult.isNewUser ? ['auth/walkthrough'] : ['app'],
-              {
-                replaceUrl: true
-              }
-            );
-          } else {
-            this.router.navigate(isNewUser ? ['auth/walkthrough'] : ['app'], {
-              replaceUrl: true
-            });
+            this.router.navigate(['auth/walkthrough'], { replaceUrl: true });
           }
+
           this.fcmTokenService.register();
         }
       });
