@@ -17,6 +17,10 @@ export class FcmTokenService {
   private fcmToken: string | undefined;
   private fcmTokenId!: number;
 
+  constructor() {
+    this.addListener();
+  }
+
   async addListener(): Promise<void> {
     await PushNotifications.addListener('registration', async (token) => {
       this.fcmToken = token.value;

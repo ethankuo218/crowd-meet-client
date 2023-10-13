@@ -1,11 +1,13 @@
 import { AdmobService } from './core/admob.service';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, NgZone, OnInit, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 import { Geolocation } from '@capacitor/geolocation';
 import { FcmTokenService } from './core/fcm-token.service';
+import { App, URLOpenListenerEvent } from '@capacitor/app';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +20,8 @@ export class AppComponent implements OnInit {
   private storage = inject(Storage);
   private admobService = inject(AdmobService);
   private fcmTokenService = inject(FcmTokenService);
+  private zone = inject(NgZone);
+  private router = inject(Router);
 
   // Inject HistoryHelperService in the app.components.ts so its available app-wide
   constructor() {
@@ -37,6 +41,14 @@ export class AppComponent implements OnInit {
   }
 
   async initializeApp() {
+    App.addListener('appUrlOpen', (event: URLOpenListenerEvent) => {
+      this.zone.run(() => {
+        const slug = event.url.split('.app').pop();
+        if (slug) {
+          this.router.navigate([slug]);
+        }
+      });
+    });
     try {
       await this.fcmTokenService.requestPermission();
 

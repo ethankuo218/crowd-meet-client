@@ -109,6 +109,12 @@ export class ChatService {
     });
   }
 
+  setNotificationsPreference(chatId: number, preference: boolean): void {
+    this.http.put(`chat/${chatId}/notificationPreferences`, {
+      notificationPreference: preference
+    });
+  }
+
   set memberInfos(info: { [firebaseUid: string]: MemberInfo }) {
     this._memberInfos = { ...this._memberInfos, ...info };
   }

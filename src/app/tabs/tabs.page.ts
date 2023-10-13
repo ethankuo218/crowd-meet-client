@@ -9,11 +9,9 @@ import { MenuController } from '@ionic/angular';
   templateUrl: 'tabs.page.html',
   styleUrls: ['./styles/tabs.page.scss']
 })
-export class TabsPage implements OnInit {
+export class TabsPage {
   private menu = inject(MenuController);
   private router = inject(Router);
-  private fcmTokenService = inject(FcmTokenService);
-  private zone = inject(NgZone);
 
   private readonly tabBarExceptionList = [
     '/app/event/list/',
@@ -21,19 +19,6 @@ export class TabsPage implements OnInit {
     '/app/event/profile/',
     '/app/menu/profile'
   ];
-
-  ngOnInit(): void {
-    App.addListener('appUrlOpen', (event: URLOpenListenerEvent) => {
-      this.zone.run(() => {
-        const slug = event.url.split('.app').pop();
-        if (slug) {
-          this.router.navigate([slug]);
-        }
-      });
-    });
-
-    this.fcmTokenService.addListener();
-  }
 
   ionViewWillEnter() {
     this.menu.enable(true);
