@@ -107,7 +107,7 @@ export class ProfileComponent {
         initialBreakpoint: 1,
         breakpoints: [0, 1],
         componentProps: {
-          isModalMode: false
+          isModalMode: true
         }
       });
       modal.present();
