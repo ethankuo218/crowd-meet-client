@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { FcmTokenService } from './../core/fcm-token.service';
+import { Component, NgZone, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { App, URLOpenListenerEvent } from '@capacitor/app';
 import { MenuController } from '@ionic/angular';
 
 @Component({
@@ -7,7 +9,12 @@ import { MenuController } from '@ionic/angular';
   templateUrl: 'tabs.page.html',
   styleUrls: ['./styles/tabs.page.scss']
 })
-export class TabsPage {
+export class TabsPage implements OnInit {
+  private menu = inject(MenuController);
+  private router = inject(Router);
+  private fcmTokenService = inject(FcmTokenService);
+  private zone = inject(NgZone);
+
   private readonly tabBarExceptionList = [
     '/app/event/list/',
     '/app/chat/list/',
@@ -15,7 +22,18 @@ export class TabsPage {
     '/app/menu/profile'
   ];
 
-  constructor(public menu: MenuController, private router: Router) {}
+  ngOnInit(): void {
+    App.addListener('appUrlOpen', (event: URLOpenListenerEvent) => {
+      this.zone.run(() => {
+        const slug = event.url.split('.app').pop();
+        if (slug) {
+          this.router.navigate([slug]);
+        }
+      });
+    });
+
+    this.fcmTokenService.addListener();
+  }
 
   ionViewWillEnter() {
     this.menu.enable(true);
