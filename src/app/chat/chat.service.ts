@@ -13,7 +13,12 @@ import {
 import { EventService } from '../core/event.service';
 import { ProfilePictures } from '../core/models/core.model';
 import { UserService } from '../core/user.service';
-import { Chat, MemberInfo, SendMessageDto } from './models/chat.models';
+import {
+  Chat,
+  MemberInfo,
+  NotificationPreference,
+  SendMessageDto
+} from './models/chat.models';
 
 @Injectable({
   providedIn: 'root'
@@ -106,6 +111,23 @@ export class ChatService {
   sendPrivateMessage(id: number): Observable<{ chatId: string }> {
     return this.http.post<{ chatId: string }>('chat/join/private', {
       userId: id
+    });
+  }
+
+  getNotificationPreference(
+    chatId: string
+  ): Observable<NotificationPreference> {
+    return this.http.get<NotificationPreference>(
+      `chat/${chatId}/notificationPreferences`
+    );
+  }
+
+  setNotificationsPreference(
+    chatId: string,
+    preference: boolean
+  ): Observable<NotificationPreference> {
+    return this.http.put(`chat/${chatId}/notificationPreferences`, {
+      notificationPreference: preference
     });
   }
 

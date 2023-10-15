@@ -16,6 +16,29 @@
       </ion-buttons>
     </ng-template>
 
+    <ng-container
+      *ngIf="notificationPreference$ | async as notificationPreference"
+    >
+      <ion-buttons
+        mode="ios"
+        *ngIf="currentUrl.match('/app/chat/list/')"
+        slot="end"
+        class="upgrade_btn"
+        (click)="
+          setNotificationPreference(
+            !notificationPreference.notificationPreference
+          )
+        "
+      >
+        <fa-icon
+          *ngIf="notificationPreference.notificationPreference; else mute"
+          [icon]="['fas', 'bell']"
+        ></fa-icon>
+        <ng-template #mute>
+          <fa-icon [icon]="['fas', 'bell-slash']"></fa-icon>
+        </ng-template>
+      </ion-buttons>
+    </ng-container>
     <ion-buttons
       mode="ios"
       *ngIf="!currentUrl.match('/app/event/list/')"

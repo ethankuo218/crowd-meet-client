@@ -2,23 +2,26 @@ import { UserStateFacade } from './../core/+states/user-state/user.state.facade'
 import { CommonModule } from '@angular/common';
 import {
   Component,
-  OnInit,
   Output,
   EventEmitter,
   Input,
-  inject
+  inject,
+  OnInit,
+  OnDestroy
 } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { FilterComponent } from '../filter/filter.component';
 import { EventService } from '../core/event.service';
 import { MegaBoostComponent } from '../event-create/mega-boost/mega-boost.component';
-import { Observable, map } from 'rxjs';
+import { Observable, Subject, Subscription, map } from 'rxjs';
 import { Share } from '@capacitor/share';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { InAppPurchaseComponent } from '../in-app-purchase/in-app-purchase.component';
+import { ChatService } from '../chat/chat.service';
+import { NotificationPreference } from '../chat/models/chat.models';
 
 @Component({
   selector: 'app-header',
@@ -34,13 +37,16 @@ import { InAppPurchaseComponent } from '../in-app-purchase/in-app-purchase.compo
     TranslateModule
   ]
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   @Input() defaultHref: string = 'app/event/list';
   @Output() menuEvent = new EventEmitter();
 
   private router = inject(Router);
   private modalCtrl = inject(ModalController);
   private eventService = inject(EventService);
+  private chatService = inject(ChatService);
+  private route = inject(ActivatedRoute);
+
   searchText: string = '';
 
   userId$: Observable<number> = inject(UserStateFacade)
@@ -55,6 +61,15 @@ export class HeaderComponent implements OnInit {
     '/app/notifications'
   ];
 
+  private notificationPreferenceSubject: Subject<NotificationPreference> =
+    new Subject();
+
+  private routeSubscription!: Subscription;
+
+  get notificationPreference$(): Observable<NotificationPreference> {
+    return this.notificationPreferenceSubject;
+  }
+
   get filter() {
     return this.eventService.filter;
   }
@@ -63,7 +78,17 @@ export class HeaderComponent implements OnInit {
     this.eventService.filter = val;
   }
 
-  ngOnInit() {}
+  ngOnInit(): void {
+    this.routeSubscription = this.route.url.subscribe(() => {
+      if (location.pathname.includes('app/chat/list/')) {
+        this.reloadNotificationPreference();
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.routeSubscription.unsubscribe();
+  }
 
   async openFilter() {
     const modal = await this.modalCtrl.create({
@@ -122,6 +147,25 @@ export class HeaderComponent implements OnInit {
       delete this.filter.eventName;
     }
     this.eventService.reload();
+  }
+
+  setNotificationPreference(preference: boolean): void {
+    const chatId: string = this.router.url.split('/').pop() as string;
+
+    this.chatService
+      .setNotificationsPreference(chatId, preference)
+      .subscribe(() => {
+        this.reloadNotificationPreference();
+      });
+  }
+
+  private reloadNotificationPreference(): void {
+    const chatId: string = location.pathname.split('/').pop() as string;
+    this.chatService
+      .getNotificationPreference(chatId)
+      .subscribe((preferenceInfo) => {
+        this.notificationPreferenceSubject.next(preferenceInfo);
+      });
   }
 
   get currentUrl(): string {

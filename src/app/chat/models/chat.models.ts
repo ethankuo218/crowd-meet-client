@@ -73,3 +73,9 @@ export interface SendMessageDto {
   content: string;
   sentTimeStamp: number;
 }
+
+export interface NotificationPreference {
+  chatId: string;
+  notificationPreference: boolean;
+  userId: number;
+}
