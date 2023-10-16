@@ -9,6 +9,7 @@ import { IonicModule } from '@ionic/angular';
 import { SwiperModule } from 'swiper/angular';
 import { HeaderComponent } from '../header/header.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { BundleWordingPipe } from './pipe/bundle-wording.pipe';
 
 SwiperCore.use([Pagination]);
 
@@ -24,7 +25,8 @@ SwiperCore.use([Pagination]);
     HeaderComponent,
     FontAwesomeModule,
     SwiperModule,
-    TranslateModule
+    TranslateModule,
+    BundleWordingPipe
   ]
 })
 export class InAppPurchaseComponent implements OnInit {
@@ -38,9 +40,51 @@ export class InAppPurchaseComponent implements OnInit {
   currentIndex: number = 0;
 
   async ngOnInit() {
-    this.productList = (await this.inAppPurchaseService.getProducts()).filter(
-      (product) => !product.identifier.match('mega_boost')
-    );
+    // this.productList = (await this.inAppPurchaseService.getProducts()).filter(
+    //   (product) => !product.identifier.match('mega_boost')
+    // );
+    this.productList = [
+      {
+        identifier: 'crowdMeet_Influencer_1m',
+        discounts: [],
+        productType: 'NON_CONSUMABLE',
+        title: '',
+        introPrice: null,
+        subscriptionPeriod: 'P1M',
+        productCategory: 'SUBSCRIPTION',
+        price: 6.99,
+        description: '',
+        currencyCode: 'USD',
+        priceString: '$6.99'
+      },
+      {
+        currencyCode: 'USD',
+        introPrice: null,
+        productType: 'NON_CONSUMABLE',
+        priceString: '$4.99',
+        productCategory: 'SUBSCRIPTION',
+        description: '',
+        title: '',
+        subscriptionPeriod: 'P1M',
+        discounts: [],
+        price: 4.99,
+        identifier: 'crowdMeet_social_spark_1m'
+      },
+      {
+        discounts: [],
+        identifier: 'crowdMeet_Lifestyle_1m',
+        price: 10.99,
+        productCategory: 'SUBSCRIPTION',
+        productType: 'NON_CONSUMABLE',
+        introPrice: null,
+        description: '',
+        currencyCode: 'USD',
+        title: '',
+        priceString: '$10.99',
+        subscriptionPeriod: 'P1M'
+      }
+    ] as any as PurchasesStoreProduct[];
+    console.log(this.productList);
   }
 
   purchase(productIdentifier: string): void {

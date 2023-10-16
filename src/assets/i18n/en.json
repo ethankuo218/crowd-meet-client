@@ -141,30 +141,6 @@
     "BIO_PLACEHOLDER": "Share a fun fact, a quirky hobby, or your latest adventure! Let the crowdMeet community get to know the awesome you!"
   },
   "IN_APP_PURCHASE": {
-    "BUNDLE": {
-      "TITLE": "Bundle",
-      "STARTING_AT": "Starting at",
-      "MONTH": "month",
-      "DESCRIPTION": "description",
-      "INFLUENCER_BUNDLE": {
-        "TITLE": "Influencer Bundle",
-        "DESCRIPTION_1": "Host endless events: Enjoy the freedom to create events as many times as you wish!",
-        "DESCRIPTION_2": "Stand out with style: Flaunt an exclusive 'Influencer' badge on your CrowdMeet profile.",
-        "DESCRIPTION_3": "Rise above the rest: Secure a higher rank in event listings, ensuring better visibility!"
-      },
-      "SOCIAL_BUNDLE": {
-        "TITLE": "Social Spark Bundle",
-        "DESCRIPTION_1": "Connect beyond boundaries: Message any user, even if you're not in the same event!",
-        "DESCRIPTION_2": "Know before you go: Preview event participants before making your move!",
-        "DESCRIPTION_3": "Unlimited access: Dive into as many events as your heart desires."
-      },
-      "LIFESTYLE_BUNDLE": {
-        "TITLE": "Life Style Bundle",
-        "DESCRIPTION_1": "All-Inclusive Experience: Get every benefit of both 'Influencer' and 'Social Spark' bundles in one package!",
-        "DESCRIPTION_2": "Ad-free indulgence: Enjoy a completely uninterrupted, ad-free platform experience.",
-        "DESCRIPTION_3": "Description C"
-      }
-    },
     "MEGA_BOOST": {
       "DESCRIPTION": "Unlock the ultimate visibility for your event with CrowdMeet Boost! Elevate your gathering to the top spot on our homepage and let us personally invite users who'll love what you've planned. It's not just a boost; it's your event's ticket to stardom!",
       "BENEFITS": "Benefits",
@@ -185,6 +161,48 @@
       },
       "LEFT_PREFIX": "You have",
       "UNIT": "boost ready to roll!"
+    },
+    "BUNDLE_2": {
+      "FREE": {
+        "TITLE": "Free",
+        "DESCRIPTION": "Dive in, start the fun!",
+        "EVENT_CREATION_1": "Create 1 event + 3 more after watching ads",
+        "EVENT_CREATION_2": "Standard",
+        "EVENT_MANAGEMENT_2": "Join up to 3 events",
+        "EVENT_MANAGEMENT_3": "Only within the same event"
+      },
+      "INFLUENCER": {
+        "TITLE": "Influencer Bundle",
+        "DESCRIPTION": "Host endless events!",
+        "EVENT_CREATION_1": "Unlimited events",
+        "EVENT_CREATION_2": "Higher rank",
+        "EVENT_MANAGEMENT_2": "Join up to 3 events",
+        "EVENT_MANAGEMENT_3": "All events"
+      },
+      "SOCIAL": {
+        "TITLE": "Social Spark Bundle",
+        "DESCRIPTION": "Connect beyond boundaries!",
+        "EVENT_CREATION_1": "Create 1 event \n + 3 more after watching ads",
+        "EVENT_CREATION_2": "Standard",
+        "EVENT_MANAGEMENT_2": "Unlimited events",
+        "EVENT_MANAGEMENT_3": "Only within the same event",
+        "EVENT_MANAGEMENT_4": "Standard"
+      },
+      "LIFESTYLE": {
+        "TITLE": "Life Style Bundle",
+        "DESCRIPTION": "All-Inclusive! The real VIP experience",
+        "EVENT_CREATION_1": "Unlimited events",
+        "EVENT_CREATION_2": "Higher rank",
+        "EVENT_MANAGEMENT_2": "Unlimited events",
+        "EVENT_MANAGEMENT_3": "All events"
+      }
+    },
+    "HEADER": {
+      "EVENT_CREATION_1": "Event Creation",
+      "EVENT_CREATION_2": "Event Listing Rank",
+      "EVENT_MANAGEMENT_2": "Event Joining",
+      "EVENT_MANAGEMENT_3": "View Event Participants",
+      "EVENT_MANAGEMENT_4": "Event Listing Rank"
     }
   },
   "JOINER_LIST": {
