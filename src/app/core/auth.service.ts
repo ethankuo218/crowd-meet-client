@@ -89,7 +89,7 @@ export class AuthService implements OnDestroy {
           const auth = getAuth();
           getRedirectResult(auth)
             .then(
-              (result) => {
+              async (result) => {
                 let credential: any;
 
                 if (result && result !== null) {
@@ -115,6 +115,7 @@ export class AuthService implements OnDestroy {
                   this.dismissLoading();
 
                   this.userService.login();
+                  this.router.navigate(['app']);
                 } else {
                   throw new Error('Could not get user from redirect result');
                 }

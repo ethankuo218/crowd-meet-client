@@ -1,12 +1,5 @@
 import { InAppPurchaseService } from './../core/in-app-purchase.service';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  NgZone,
-  OnInit,
-  inject
-} from '@angular/core';
+import { Component, Input, NgZone, OnInit, inject } from '@angular/core';
 import SwiperCore, { Pagination, Swiper } from 'swiper';
 import { PurchasesStoreProduct } from '@awesome-cordova-plugins/purchases/ngx';
 import { CommonModule } from '@angular/common';

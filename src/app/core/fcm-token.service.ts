@@ -70,7 +70,7 @@ export class FcmTokenService {
 
   async register(): Promise<void> {
     const hasSameToken = await this.hasSameToken(this.fcmToken!);
-    if (!hasSameToken) {
+    if (this.fcmToken && !hasSameToken) {
       this.httpClientService
         .post<FcmToken>('fcm-token', { token: this.fcmToken })
         .subscribe({
@@ -109,7 +109,7 @@ export class FcmTokenService {
     const userToken = await firstValueFrom(
       this.httpClientService.get<FcmToken[]>('fcm-token')
     );
-
+    console.log(userToken, token);
     return userToken.find((item) => item.token === token) ? true : false;
   }
 }
