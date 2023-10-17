@@ -68,4 +68,8 @@ export class InAppPurchaseService {
       this.loadingService.dismiss();
     }
   }
+
+  getCustomerInfo(): Promise<CustomerInfo> {
+    return this.purchases.getCustomerInfo();
+  }
 }

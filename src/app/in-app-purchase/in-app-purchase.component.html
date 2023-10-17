@@ -109,12 +109,20 @@
 <ion-footer *ngIf="productList.length !== 0">
   <ion-toolbar>
     <ion-button
+      [disabled]="
+        productList[currentIndex].identifier === 'free' ||
+        hasSubscribed(productList[currentIndex].identifier)
+      "
       class="purchase-btn"
       slot="primary"
       (click)="purchase(productList[currentIndex].identifier)"
     >
       <span>
-        {{ productList[currentIndex].priceString + ' / Month' }}
+        {{
+          hasSubscribed(productList[currentIndex].identifier)
+            ? 'Subscribed'
+            : productList[currentIndex].priceString + ' / Month'
+        }}
       </span>
     </ion-button>
   </ion-toolbar>
