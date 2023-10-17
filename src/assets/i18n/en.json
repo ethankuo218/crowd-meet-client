@@ -168,33 +168,40 @@
         "DESCRIPTION": "Dive in, start the fun!",
         "EVENT_CREATION_1": "Create 1 event + 3 more after watching ads",
         "EVENT_CREATION_2": "Standard",
-        "EVENT_MANAGEMENT_2": "Join up to 3 events",
-        "EVENT_MANAGEMENT_3": "Only within the same event"
+        "EVENT_JOIN_1": "Join up to 3 events",
+        "EVENT_JOIN_2": "View participants within the same event",
+        "AD_AND_CHAT_1": "Chat with participants within the same event",
+        "AD_AND_CHAT_2": "Watch ads to unlock more events creation"
       },
       "INFLUENCER": {
         "TITLE": "Influencer Bundle",
         "DESCRIPTION": "Host endless events!",
         "EVENT_CREATION_1": "Unlimited events",
-        "EVENT_CREATION_2": "Higher rank",
-        "EVENT_MANAGEMENT_2": "Join up to 3 events",
-        "EVENT_MANAGEMENT_3": "All events"
+        "EVENT_CREATION_2": "Higher rank on event listing",
+        "EVENT_JOIN_1": "Join up to 3 events",
+        "EVENT_JOIN_2": "View participants within the same event",
+        "AD_AND_CHAT_1": "Chat with participants within the same event",
+        "AD_AND_CHAT_2": "Watch ads to unlock more events joining"
       },
       "SOCIAL": {
         "TITLE": "Social Spark Bundle",
         "DESCRIPTION": "Connect beyond boundaries!",
         "EVENT_CREATION_1": "Create 1 event \n + 3 more after watching ads",
-        "EVENT_CREATION_2": "Standard",
-        "EVENT_MANAGEMENT_2": "Unlimited events",
-        "EVENT_MANAGEMENT_3": "Only within the same event",
-        "EVENT_MANAGEMENT_4": "Standard"
+        "EVENT_CREATION_2": "Standard rank on event listing",
+        "EVENT_JOIN_1": "Join unlimited events",
+        "EVENT_JOIN_2": "View event participants before joining",
+        "AD_AND_CHAT_1": "Chat with all users",
+        "AD_AND_CHAT_2": "Watch ads to unlock more events creation"
       },
       "LIFESTYLE": {
         "TITLE": "Life Style Bundle",
         "DESCRIPTION": "All-Inclusive! The real VIP experience",
         "EVENT_CREATION_1": "Unlimited events",
-        "EVENT_CREATION_2": "Higher rank",
-        "EVENT_MANAGEMENT_2": "Unlimited events",
-        "EVENT_MANAGEMENT_3": "All events"
+        "EVENT_CREATION_2": "Higher rank on event listing",
+        "EVENT_JOIN_1": "Join unlimited events",
+        "EVENT_JOIN_2": "View event participants before joining",
+        "AD_AND_CHAT_1": "Chat with all users",
+        "AD_AND_CHAT_2": "Complete ad-free experience"
       }
     },
     "HEADER": {

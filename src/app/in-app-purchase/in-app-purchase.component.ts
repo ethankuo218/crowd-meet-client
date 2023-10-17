@@ -43,7 +43,13 @@ export class InAppPurchaseComponent implements OnInit {
     // this.productList = (await this.inAppPurchaseService.getProducts()).filter(
     //   (product) => !product.identifier.match('mega_boost')
     // );
+    const freeProduct = {
+      identifier: 'free',
+      priceString: '$0.00'
+      // ... add any other necessary default values
+    } as PurchasesStoreProduct;
     this.productList = [
+      freeProduct,
       {
         identifier: 'crowdMeet_Influencer_1m',
         discounts: [],

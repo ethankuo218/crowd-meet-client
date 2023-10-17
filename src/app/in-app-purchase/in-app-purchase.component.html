@@ -51,16 +51,6 @@
                 }}
               </p>
             </div>
-            <div class="description">
-              <fa-icon [icon]="['fas', 'check']"></fa-icon>
-              <p>
-                {{ 'IN_APP_PURCHASE.HEADER.EVENT_MANAGEMENT_3' | translate }}:
-                {{
-                  productList[currentIndex].identifier
-                    | bundleWording : 'EVENT_MANAGEMENT' : 3
-                }}
-              </p>
-            </div>
           </div>
         </div>
 
@@ -69,15 +59,21 @@
             <div class="description-title">Join Event</div>
             <div class="description">
               <fa-icon [icon]="['fas', 'check']"></fa-icon>
-              <p>Test Description 1</p>
+              <p>
+                {{
+                  productList[currentIndex].identifier
+                    | bundleWording : 'EVENT_JOIN' : 1
+                }}
+              </p>
             </div>
             <div class="description">
               <fa-icon [icon]="['fas', 'check']"></fa-icon>
-              <p>Test Description 2</p>
-            </div>
-            <div class="description">
-              <fa-icon [icon]="['fas', 'check']"></fa-icon>
-              <p>Test Description 3</p>
+              <p>
+                {{
+                  productList[currentIndex].identifier
+                    | bundleWording : 'EVENT_JOIN' : 2
+                }}
+              </p>
             </div>
           </div>
         </div>
@@ -87,15 +83,21 @@
             <div class="description-title">ADs and Chats</div>
             <div class="description">
               <fa-icon [icon]="['fas', 'check']"></fa-icon>
-              <p>Test Description 1</p>
+              <p>
+                {{
+                  productList[currentIndex].identifier
+                    | bundleWording : 'AD_AND_CHAT' : 1
+                }}
+              </p>
             </div>
             <div class="description">
               <fa-icon [icon]="['fas', 'check']"></fa-icon>
-              <p>Test Description 2</p>
-            </div>
-            <div class="description">
-              <fa-icon [icon]="['fas', 'check']"></fa-icon>
-              <p>Test Description 3</p>
+              <p>
+                {{
+                  productList[currentIndex].identifier
+                    | bundleWording : 'AD_AND_CHAT' : 2
+                }}
+              </p>
             </div>
           </div>
         </div>
@@ -106,7 +108,11 @@
 
 <ion-footer *ngIf="productList.length !== 0">
   <ion-toolbar>
-    <ion-button class="purchase-btn" slot="primary" (click)="purchase('test')">
+    <ion-button
+      class="purchase-btn"
+      slot="primary"
+      (click)="purchase(productList[currentIndex].identifier)"
+    >
       <span>
         {{ productList[currentIndex].priceString + ' / Month' }}
       </span>
