@@ -134,10 +134,19 @@ export class EventCreateComponent implements OnInit {
 
   onSubmit() {
     this.isLoading = true;
+    const contentI18n =
+      this.mode === 'edit'
+        ? 'CREATE_EVENT.EDIT_CONFIRM'
+        : 'CREATE_EVENT.CREATE_CONFIRM';
+
+    const titleI18n =
+      this.mode === 'edit'
+        ? 'CREATE_EVENT.EDIT_TITLE'
+        : 'CREATE_EVENT.CREATE_TITLE';
     const dialogRef = this.dialog.open(AlertDialogComponent, {
       data: {
-        title: this.mode === 'edit' ? 'Edit Event' : 'Create Event',
-        content: `Confirm to ${this.mode === 'edit' ? 'edit' : 'create'} event`,
+        title: titleI18n,
+        content: contentI18n,
         enableCancelButton: true
       },
       panelClass: 'custom-dialog'

@@ -74,7 +74,11 @@
     "MAX_PARTICIPANTS": "Max Participants",
     "PRICE": "Price",
     "CONFIRM": "Confirm",
-    "CREATE": "Create"
+    "CREATE": "Create",
+    "EDIT_CONFIRM": "Confirm to edit event",
+    "CREATE_CONFIRM": "Confirm to create event",
+    "EDIT_TITLE": "Edit Event",
+    "CREATE_TITLE": "Create Event"
   },
   "ERROR_MSG": {
     "CATEGORY": "One category minimum, crowdMeet style 😎",
