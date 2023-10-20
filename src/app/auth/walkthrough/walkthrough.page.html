@@ -145,12 +145,13 @@
           </ion-col>
           <ion-col class="info-col">
             <div class="info-wrapper">
-              <h3 class="info-title">Welcome to CrowdMeet! 🎉</h3>
-              <p class="info-paragraph">
-                <b>Discover a World of Events</b> : Dive into events tailored
-                just for you. Whether you're looking to host or join, CrowdMeet
-                is your ultimate event hub.
-              </p>
+              <h3 class="info-title">
+                {{'WALKTHROUGH.SLIDE_1.TITLE' | translate}}
+              </h3>
+              <p
+                class="info-paragraph"
+                [innerHTML]="'WALKTHROUGH.SLIDE_1.DESCRIPTION' | translate"
+              ></p>
             </div>
           </ion-col>
         </ion-row>
@@ -228,15 +229,15 @@
           </ion-col>
           <ion-col class="info-col">
             <div class="info-wrapper">
-              <h3 class="info-title">Your Journey Begins Here 🌟</h3>
+              <h3 class="info-title">
+                {{'WALKTHROUGH.SLIDE_2.TITLE' | translate}}
+              </h3>
+              <p
+                class="info-paragraph"
+                [innerHTML]="'WALKTHROUGH.SLIDE_2.DESCRIPTION' | translate"
+              ></p>
               <p class="info-paragraph">
-                <b>Personalize Your Experience</b> : Create your profile to
-                unlock a world of possibilities. Choose your interests, set your
-                preferences, and let us curate events that resonate with you.
-              </p>
-              <p class="info-paragraph">
-                Tip: The more you share, the better we can match you with events
-                you'll love!
+                {{'WALKTHROUGH.SLIDE_2.TIP' | translate}}
               </p>
             </div>
           </ion-col>
@@ -307,7 +308,9 @@
           </ion-col>
           <ion-col class="info-col">
             <div class="info-wrapper">
-              <h3 class="info-title">Your b-day ?</h3>
+              <h3 class="info-title">
+                {{'WALKTHROUGH.SLIDE_3.TITLE' | translate}}
+              </h3>
               <br />
               <ion-input
                 type="date"
@@ -315,11 +318,11 @@
                 [placeholder]="'MM d, yyyy'"
               />
               <p class="info-paragraph">
-                Your profile shows your age , not your birth date.
+                {{'WALKTHROUGH.SLIDE_3.NOTE' | translate}}
               </p>
               <p class="danger" *ngIf="birthDayError">
-                <fa-icon [icon]="['fas', 'circle-exclamation']"></fa-icon>
-                {{'Please fill your B-day'}}
+                <fa-icon [icon]="['fas', 'circle-exclamation']"></fa-icon
+                >{{'WALKTHROUGH.SLIDE_3.ERROR' | translate}}
               </p>
             </div>
           </ion-col>
@@ -399,38 +402,40 @@
           </ion-col>
           <ion-col class="info-col">
             <div class="info-wrapper">
-              <h3 class="info-title">What's your gender ?</h3>
+              <h3 class="info-title">
+                {{'WALKTHROUGH.SLIDE_4.TITLE' | translate}}
+              </h3>
               <br />
               <div class="item btn_item">
                 <button
                   class="primary"
                   (click)="selectGender('male')"
-                  [ngClass]="{ active_btn: gender === 'male' }"
+                  [ngClass]="{active_btn: gender==='male'}"
                 >
-                  Male
+                  {{'WALKTHROUGH.SLIDE_4.MALE' | translate}}
                 </button>
               </div>
               <div class="item btn_item">
                 <button
                   class="primary"
                   (click)="selectGender('female')"
-                  [ngClass]="{ active_btn: gender === 'female' }"
+                  [ngClass]="{active_btn: gender==='female'}"
                 >
-                  Female
+                  {{'WALKTHROUGH.SLIDE_4.FEMALE' | translate}}
                 </button>
               </div>
               <div class="item btn_item">
                 <button
                   class="primary"
                   (click)="selectGender('notToSay')"
-                  [ngClass]="{ active_btn: gender === 'notToSay' }"
+                  [ngClass]="{active_btn: gender==='notToSay'}"
                 >
-                  Prefer not to say
+                  {{'WALKTHROUGH.SLIDE_4.NOT_TO_SAY' | translate}}
                 </button>
               </div>
               <p class="danger" *ngIf="genderError">
-                <fa-icon [icon]="['fas', 'circle-exclamation']"></fa-icon>
-                {{'Please choose your gender'}}
+                <fa-icon [icon]="['fas', 'circle-exclamation']"></fa-icon
+                >{{'WALKTHROUGH.SLIDE_4.ERROR' | translate}}
               </p>
             </div>
           </ion-col>
@@ -560,13 +565,14 @@
             <ion-row class="info-outer">
               <ion-col>
                 <div class="info-wrapper">
-                  <h3 class="info-title">Ready, Set, Adventure! 🚀</h3>
+                  <h3 class="info-title">{{'WALKTHROUGH.SLIDE_6.TITLE'}}</h3>
+                  <p
+                    class="info-paragraph"
+                    [innerHTML]="
+                      'WALKTHROUGH.SLIDE_6.DESCRIPTION' | translate"
+                  ></p>
                   <p class="info-paragraph">
-                    <b>Profile Complete!</b> You're all set to explore, connect,
-                    and create unforgettable memories.
-                  </p>
-                  <p class="info-paragraph">
-                    Dive in and start your CrowdMeet adventure today!
+                    {{'WALKTHROUGH.SLIDE_6.INFO' | translate}}
                   </p>
                 </div>
               </ion-col>
