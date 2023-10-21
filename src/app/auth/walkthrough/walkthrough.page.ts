@@ -185,4 +185,14 @@ export class WalkthroughPage implements AfterViewInit, OnInit {
   get gender() {
     return this.form.get('gender')?.value;
   }
+
+  get dateLimit() {
+    const dateStr = new Date().toJSON().split('T')[0].split('-');
+
+    const year = Number(dateStr[0]) - 15;
+    const month = dateStr[1];
+    const date = dateStr[2];
+
+    return [year, month, date].join('-');
+  }
 }
