@@ -1,0 +1,274 @@
+{
+  "LOGIN": {
+    "FACEBOOK": "",
+    "GOOGLE": "",
+    "APPLE": ""
+  },
+  "EVENT_LIST": {
+    "SEARCH": "",
+    "SPOTLIGHT": "",
+    "NO_MORE_CONTENT": "",
+    "FILTERS": "",
+    "RESET": "",
+    "CANCEL": "",
+    "APPLY": "",
+    "CATEGORIES": "",
+    "DISTANCE": "",
+    "START_TIME": "",
+    "END_TIME": "",
+    "ONLINE": ""
+  },
+  "CATEGORY": {
+    "OUTDOOR_ACTIVITY": "",
+    "NIGHT_LIFE": "",
+    "INDOOR_ACTIVITY": "",
+    "EXERCISE": "",
+    "DINING": "",
+    "ACADEMIC": "",
+    "PHOTOGRAPHY": "",
+    "TRAVEL": ""
+  },
+  "EVENT_DETAIL": {
+    "EXPECTED_PALS": "",
+    "DESCRIPTION": "",
+    "HOST": "",
+    "PARTICIPANTS": "",
+    "COMMENTS": "",
+    "ADD_COMMENT": "",
+    "EDIT": "",
+    "JOIN": ""
+  },
+  "PROFILE": {
+    "GENDER": "",
+    "AGE": "",
+    "JOINED": "",
+    "HOLD": "",
+    "RATING": "",
+    "ABOUT_ME": "",
+    "INTERESTS": "",
+    "REVIEWS": ""
+  },
+  "PARTICIPANTS": {
+    "NO_PARTICIPANTS": ""
+  },
+  "CHAT_LIST": {
+    "NO_MORE_CONTENT": "",
+    "DIRECT": "",
+    "GROUP": "",
+    "YESTERDAY": "",
+    "TODAY": ""
+  },
+  "CREATE_EVENT": {
+    "ADD_EVENT_COVER_IMAGE": "",
+    "TITLE": "",
+    "EVENT_TITLE": "",
+    "DESCRIPTION": "",
+    "EVENT_DESCRIPTION": "",
+    "IS_ONLINE_EVENT": "",
+    "YES": "",
+    "NO": "",
+    "LOCATION": "",
+    "SELECT_CATEGORIES": "",
+    "START_TIME": "",
+    "END_TIME": "",
+    "MAX_PARTICIPANTS": "",
+    "PRICE": "",
+    "CONFIRM": "",
+    "CREATE": "",
+    "EDIT_CONFIRM": "",
+    "CREATE_CONFIRM": "",
+    "EDIT_TITLE": "",
+    "CREATE_TITLE": ""
+  },
+  "ERROR_MSG": {
+    "CATEGORY": "",
+    "START_TIME": "",
+    "END_TIME": "",
+    "MAX_PARTICIPANTS": "",
+    "MAX_PRICE": ""
+  },
+  "HISTORY": {
+    "UPCOMING": "",
+    "JOINED": "",
+    "VIEW": "",
+    "RATE": "",
+    "LEAVE": "",
+    "NO_MORE_CONTENT_UPCOMING": "",
+    "NO_MORE_CONTENT_JOINED": "",
+    "TAG": {
+      "ON_GOING": "",
+      "ACCEPTED": "",
+      "APPLIED": "",
+      "LEFT": "",
+      "DECLINED": "",
+      "KICKED": ""
+    }
+  },
+  "REVIEW": {
+    "TITLE": "",
+    "SUB_TITLE": "",
+    "DESCRIPTION": "",
+    "PLACEHOLDER": "",
+    "CANCEL": "",
+    "SUBMIT": "",
+    "NO_PARTICIPANTS": "",
+    "STILL_GOING_ON": ""
+  },
+  "NOTIFICATIONS": {
+    "NO_MORE_CONTENT": "",
+    "TITLE": {
+      "NEW_COMMENT": "",
+      "ACCEPTED": "",
+      "DECLINED": "",
+      "KICKED": "",
+      "LEFT": "",
+      "APPLIED": "",
+      "UPDATED": ""
+    }
+  },
+  "MENU": {
+    "EDIT_PROFILE": "",
+    "MEMBERSHIP": "",
+    "LANGUAGE": "",
+    "DARK_MODE": "",
+    "HELP_CENTER": "",
+    "INVITE_FRIENDS": "",
+    "LOGOUT": ""
+  },
+  "EDIT_PROFILE": {
+    "PHOTOS": "",
+    "INTERESTS": "",
+    "PROFILE": "",
+    "NAME": "",
+    "BIO": "",
+    "NAME_PLACEHOLDER": "",
+    "BIO_PLACEHOLDER": ""
+  },
+  "IN_APP_PURCHASE": {
+    "MEGA_BOOST": {
+      "DESCRIPTION": "",
+      "BENEFITS": "",
+      "BULLET_POINT_TITLE_1": "",
+      "BULLET_POINT_TITLE_2": "",
+      "BULLET_POINT_TITLE_3": "",
+      "BULLET_POINT_TITLE_4": "",
+      "BULLET_POINT_TITLE_5": "",
+      "BULLET_POINT_CONTENT_1": "",
+      "BULLET_POINT_CONTENT_2": "",
+      "BULLET_POINT_CONTENT_3": "",
+      "BULLET_POINT_CONTENT_4": "",
+      "BULLET_POINT_CONTENT_5": "",
+      "DURATION": {
+        "1_DAY": "",
+        "3_DAY": "",
+        "7_DAY": ""
+      },
+      "LEFT_PREFIX": "",
+      "UNIT": ""
+    },
+    "BUNDLE": {
+      "FREE": {
+        "TITLE": "",
+        "DESCRIPTION": "",
+        "EVENT_CREATION_1": "",
+        "EVENT_CREATION_2": "",
+        "EVENT_JOIN_1": "",
+        "EVENT_JOIN_2": "",
+        "AD_AND_CHAT_1": "",
+        "AD_AND_CHAT_2": ""
+      },
+      "INFLUENCER": {
+        "TITLE": "",
+        "DESCRIPTION": "",
+        "EVENT_CREATION_1": "",
+        "EVENT_CREATION_2": "",
+        "EVENT_JOIN_1": "",
+        "EVENT_JOIN_2": "",
+        "AD_AND_CHAT_1": "",
+        "AD_AND_CHAT_2": ""
+      },
+      "SOCIAL": {
+        "TITLE": "",
+        "DESCRIPTION": "",
+        "EVENT_CREATION_1": "",
+        "EVENT_CREATION_2": "",
+        "EVENT_JOIN_1": "",
+        "EVENT_JOIN_2": "",
+        "AD_AND_CHAT_1": "",
+        "AD_AND_CHAT_2": ""
+      },
+      "LIFESTYLE": {
+        "TITLE": "",
+        "DESCRIPTION": "",
+        "EVENT_CREATION_1": "",
+        "EVENT_CREATION_2": "",
+        "EVENT_JOIN_1": "",
+        "EVENT_JOIN_2": "",
+        "AD_AND_CHAT_1": "",
+        "AD_AND_CHAT_2": ""
+      }
+    },
+    "HEADER": {
+      "EVENT_CREATION_1": "",
+      "EVENT_CREATION_2": "",
+      "EVENT_MANAGEMENT_2": "",
+      "EVENT_MANAGEMENT_3": "",
+      "EVENT_MANAGEMENT_4": ""
+    }
+  },
+  "JOINER_LIST": {
+    "ACCEPT": "",
+    "DECLINE": "",
+    "KICK": "",
+    "NO_JOINER": ""
+  },
+  "DIALOG": {
+    "TITLE": {
+      "CALENDAR": "",
+      "CHECK_PARTICIPANT": "",
+      "LEAVE_EVENT": "",
+      "BOOST": ""
+    },
+    "CONTENT": {
+      "CHECK_PARTICIPANT": "",
+      "LEAVE_EVENT": ""
+    },
+    "BUTTON": {
+      "CONFIRM": "",
+      "CANCEL": "",
+      "UPGRADE": ""
+    }
+  },
+  "SELECT_INTERESTS": {
+    "TITLE": "",
+    "SUB_TITLE": ""
+  },
+  "WALKTHROUGH": {
+    "SLIDE_1": {
+      "TITLE": "",
+      "DESCRIPTION": ""
+    },
+    "SLIDE_2": {
+      "TITLE": "",
+      "DESCRIPTION": "",
+      "TIP": ""
+    },
+    "SLIDE_3": {
+      "TITLE": "",
+      "NOTE": "",
+      "ERROR": ""
+    },
+    "SLIDE_4": {
+      "TITLE": "",
+      "MALE": "",
+      "FEMALE": "",
+      "NOT_TO_SAY": "",
+      "ERROR": ""
+    },
+    "SLIDE_6": {
+      "TITLE": "",
+      "DESCRIPTION": "",
+      "INFO": ""
+    }
+  }
+}

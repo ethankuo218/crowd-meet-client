@@ -166,7 +166,7 @@
       "LEFT_PREFIX": "You have",
       "UNIT": "boost ready to roll!"
     },
-    "BUNDLE_2": {
+    "BUNDLE": {
       "FREE": {
         "TITLE": "Free",
         "DESCRIPTION": "Dive in, start the fun!",
@@ -265,11 +265,6 @@
       "FEMALE": "Female",
       "NOT_TO_SAY": "Rather keep it a mystery",
       "ERROR": "Almost there! Just pick your gender"
-    },
-    "SLIDE_5": {
-      "TITLE": "SELECT_INTERESTS.TITLE",
-      "SUB_TITLE": "SELECT_INTERESTS.SUB_TITLE",
-      "ERROR": "Please choose your interest"
     },
     "SLIDE_6": {
       "TITLE": "Ready, Set, Adventure! 🚀",

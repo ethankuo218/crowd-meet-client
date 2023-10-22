@@ -12,7 +12,7 @@ export class BundleWordingPipe implements PipeTransform {
     bundleWording: string,
     descriptionIndex?: number
   ): string {
-    const baseKey = 'IN_APP_PURCHASE.BUNDLE_2';
+    const baseKey = 'IN_APP_PURCHASE.BUNDLE';
     const identifierLow = identifier.toLowerCase();
 
     let bundlePrefix = '';
