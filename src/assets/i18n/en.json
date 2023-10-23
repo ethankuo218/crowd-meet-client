@@ -271,5 +271,9 @@
       "DESCRIPTION": "<b>Profile Complete!</b> You're all set to explore, connect, and create unforgettable memories.",
       "INFO": "Dive in and start your CrowdMeet adventure today!"
     }
+  },
+  "SHARE": {
+    "APP": "Join me on CrowdMeet",
+    "EVENT": "Check out this event on CrowdMeet!"
   }
 }

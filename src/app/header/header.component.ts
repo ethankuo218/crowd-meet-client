@@ -18,7 +18,7 @@ import { MegaBoostComponent } from '../event-create/mega-boost/mega-boost.compon
 import { Observable, Subject, Subscription, map } from 'rxjs';
 import { Share } from '@capacitor/share';
 import { FormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { InAppPurchaseComponent } from '../in-app-purchase/in-app-purchase.component';
 import { ChatService } from '../chat/chat.service';
 import { NotificationPreference } from '../chat/models/chat.models';
@@ -46,6 +46,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private eventService = inject(EventService);
   private chatService = inject(ChatService);
   private route = inject(ActivatedRoute);
+  private readonly translate = inject(TranslateService);
 
   searchText: string = '';
 
@@ -110,7 +111,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     const eventDetail = this.eventService.currentEventDetail;
     await Share.share({
       title: eventDetail?.title,
-      text: 'Join this event !',
+      text: this.translate.instant('SHARE.EVENT'),
       url: `https://dev.crowdmeet.app/app/event/list/${eventDetail?.eventId}`,
       dialogTitle: 'Share with buddies'
     });

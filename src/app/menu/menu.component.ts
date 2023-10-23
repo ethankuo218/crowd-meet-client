@@ -8,7 +8,8 @@ import { UserStateFacade } from '../core/+states/user-state/user.state.facade';
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../core/auth.service';
 import { Router } from '@angular/router';
-import { Language } from '../language/language.model';
+import { Share } from '@capacitor/share';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-menu',
@@ -21,6 +22,7 @@ export class MenuComponent {
   private router = inject(Router);
   private languageService = inject(LanguageService);
   private emailComposer = inject(EmailComposer);
+  private translate = inject(TranslateService);
 
   user$ = inject(UserStateFacade).getUser();
   isDarkMode: boolean = document.body.classList.contains('dark');
@@ -41,6 +43,14 @@ export class MenuComponent {
 
   changeLanguage(event: any): void {
     this.languageService.setLanguage(event.target?.value);
+  }
+
+  inviteFriends(): void {
+    Share.share({
+      title: this.translate.instant('SHARE.APP'),
+      text: 'https://dev.crowdmeet.app/',
+      dialogTitle: 'Invite friends'
+    });
   }
 
   logout(): void {
