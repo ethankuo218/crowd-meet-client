@@ -8,12 +8,11 @@ import {
   PurchasesStoreProduct
 } from '@awesome-cordova-plugins/purchases/ngx';
 import { IonicModule, ModalController } from '@ionic/angular';
-import { take, firstValueFrom } from 'rxjs';
+import { take } from 'rxjs';
 import { MegaBoost } from 'src/app/core/models/core.model';
 import { EventService } from 'src/app/core/event.service';
 import { LoadingService } from 'src/app/core/loading.service';
 import { MatDialog } from '@angular/material/dialog';
-import { AlertDialogComponent } from 'src/app/components/alert-dialog/alert-dialog.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
