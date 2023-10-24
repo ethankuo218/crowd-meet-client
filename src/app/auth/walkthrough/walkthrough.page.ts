@@ -25,7 +25,7 @@ import {
 } from '@angular/forms';
 import { Category } from 'src/app/core/+states/reference-state/reference.model';
 import { ReferenceStateFacade } from 'src/app/core/+states/reference-state/reference.state.facade';
-import { take } from 'rxjs';
+import { skip, take } from 'rxjs';
 import { Router } from '@angular/router';
 
 SwiperCore.use([Pagination, IonicSwiper]);
@@ -90,7 +90,7 @@ export class WalkthroughPage implements AfterViewInit, OnInit {
 
     this.referenceStateFacade
       .getCategories()
-      .pipe(take(1))
+      .pipe(skip(1), take(1))
       .subscribe({
         next: (result) => {
           this.categoryList = result;
