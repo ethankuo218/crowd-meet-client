@@ -491,24 +491,24 @@
               </p>
               <br />
               <ion-col class="question-options-col">
-                <ion-row class="options-list-row" formArrayName="interests">
-                  <ion-col
-                    *ngFor="let item of categoryList; let i = index; trackBy: trackByIndex"
-                    size="6"
-                  >
-                    <app-checkbox-wrapper class="custom-checkbox">
-                      <app-aspect-ratio [ratio]="{w:2, h:1}">
-                        <span class="checkbox-title"
-                          >{{'CATEGORY.' + categoryList[i].name.toUpperCase() |
-                          translate}}</span
-                        >
-                        <ion-checkbox
-                          [formControlName]="categoryList[i].categoryId - 1"
-                        ></ion-checkbox>
-                      </app-aspect-ratio>
-                    </app-checkbox-wrapper>
-                  </ion-col>
-                </ion-row>
+                <div class="category-scroll-container">
+                  <ion-row class="options-list-row" formArrayName="interests">
+                    <ion-col
+                      *ngFor="let item of categoryList; let i = index; trackBy: trackByIndex"
+                      size="6"
+                    >
+                      <app-checkbox-wrapper class="custom-checkbox">
+                        <app-aspect-ratio [ratio]="{w:2, h:1}">
+                          <span class="checkbox-title"
+                            >{{'CATEGORY.' + categoryList[i].name.toUpperCase()
+                            | translate}}</span
+                          >
+                          <ion-checkbox></ion-checkbox>
+                        </app-aspect-ratio>
+                      </app-checkbox-wrapper>
+                    </ion-col>
+                  </ion-row>
+                </div>
               </ion-col>
               <p class="danger" *ngIf="interestsError">
                 <fa-icon [icon]="['fas', 'circle-exclamation']"></fa-icon>

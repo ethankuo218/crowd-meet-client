@@ -18,6 +18,12 @@
   --page-vector-decoration-fill: var(--ion-color-light-shade);
 }
 
+.category-scroll-container {
+  max-height: 65vh;
+  overflow-y: auto;
+  width: 100%; // Ensure it takes full width
+}
+
 // Note:  All the CSS variables defined below are overrides of Ionic elements CSS Custom Properties
 ion-header {
   ion-toolbar {
