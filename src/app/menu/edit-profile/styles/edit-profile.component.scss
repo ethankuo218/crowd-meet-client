@@ -81,6 +81,14 @@ form .profile_your [type='submit'] {
 
 .interest_div {
   margin-bottom: 2rem;
+  .interests-scrollable {
+    max-height: 12.5rem; /* Adjust this value to your preference */
+    overflow-y: auto;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+    border-radius: 0.625rem; /* optional, for aesthetics */
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1); /* optional, for aesthetics */
+  }
 }
 
 .checkbox-tags {

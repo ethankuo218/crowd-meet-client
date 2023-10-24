@@ -79,6 +79,11 @@ ion-footer {
 }
 
 .checkbox-tags {
+  max-height: 13rem; // Adjust the height based on your requirement
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ion-color-primary) var(--ion-color-light);
+
   padding: calc(var(--page-margin) / 2)
     calc(var(--page-margin) - var(--page-tags-gutter));
 

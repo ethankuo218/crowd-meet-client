@@ -3,11 +3,7 @@
   <main class="edit-profile main-area">
     <div class="slider-area">
       <h3 class="dark fnt-same">{{ 'EDIT_PROFILE.PHOTOS' | translate }}</h3>
-      <div
-        #contenedor
-        class="images"
-        cdkDropListGroup
-      >
+      <div #contenedor class="images" cdkDropListGroup>
         <div
           cdkDropList
           (cdkDropListEntered)="onDropListEntered($event)"
@@ -42,26 +38,28 @@
           <h3 class="fnt-same dark">
             {{ 'EDIT_PROFILE.INTERESTS' | translate }}
           </h3>
-          <ion-row
-            class="checkbox-tags rounded-checkbox-tags"
-            formArrayName="interests"
-          >
-            <ion-item
-              lines="none"
-              class="checkbox-tag rounded-tag"
-              *ngFor="
-                let item of categoryList;
-                let i = index;
-                trackBy: trackByIndex
-              "
+          <div class="interests-scrollable">
+            <ion-row
+              class="checkbox-tags rounded-checkbox-tags"
+              formArrayName="interests"
             >
-              <ion-label class="tag-label">
-                <fa-icon [icon]="['fas', 'star']"></fa-icon>
-                {{ 'CATEGORY.' + item.name.toUpperCase() | translate }}
-              </ion-label>
-              <ion-checkbox [formControlName]="i"></ion-checkbox>
-            </ion-item>
-          </ion-row>
+              <ion-item
+                lines="none"
+                class="checkbox-tag rounded-tag"
+                *ngFor="
+                  let item of categoryList;
+                  let i = index;
+                  trackBy: trackByIndex
+                "
+              >
+                <ion-label class="tag-label">
+                  <fa-icon [icon]="['fas', 'star']"></fa-icon>
+                  {{ 'CATEGORY.' + item.name.toUpperCase() | translate }}
+                </ion-label>
+                <ion-checkbox [formControlName]="i"></ion-checkbox>
+              </ion-item>
+            </ion-row>
+          </div>
         </div>
         <h3 class="fnt-same dark">{{ 'EDIT_PROFILE.NAME' | translate }}</h3>
         <div class="profile_your">

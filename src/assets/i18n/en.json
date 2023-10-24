@@ -26,7 +26,21 @@
     "DINING": "Dining",
     "ACADEMIC": "Academic",
     "PHOTOGRAPHY": "Photography",
-    "TRAVEL": "Travel"
+    "CREATIVE": "Creative",
+    "OUTDOORS": "Outdoors",
+    "GAMES_AND_SPORTS": "Games & Sports",
+    "STUDY_GROUPS": "Study Groups",
+    "FITNESS": "Fitness",
+    "FILMS": "Films",
+    "FOOD_AND_COOKING": "Food & Cooking",
+    "PARENTING": "Parenting",
+    "LANGUAGES": "Languages",
+    "TRAVEL_AND_TOURS": "Travel & Tours",
+    "MUSIC_AND_DANCE": "Music & Dance",
+    "ENTREPRENEURSHIP": "Entrepreneurship",
+    "SPIRITUALITY": "Spirituality",
+    "PETS": "Pets",
+    "GARDENING": "Gardening"
   },
   "EVENT_DETAIL": {
     "EXPECTED_PALS": "Expected Pals",

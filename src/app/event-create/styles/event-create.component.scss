@@ -248,3 +248,15 @@
 app-location-input {
   width: 100%;
 }
+
+.category-selection-container {
+  position: relative;
+}
+
+.scrollable-categories {
+  padding: 0.7rem;
+  max-height: 12.5rem;
+  overflow-y: scroll;
+  border: 0.0625rem solid #bebebe;
+  border-radius: 0.625rem;
+}
