@@ -95,7 +95,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     const modal = await this.modalCtrl.create({
       component: FilterComponent,
       initialBreakpoint: 1,
-      breakpoints: [0, 1],
+      breakpoints: [0, 0.9],
       componentProps: { filter: this.filter }
     });
     modal.present();
@@ -121,7 +121,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     const modal = await this.modalCtrl.create({
       component: InAppPurchaseComponent,
       initialBreakpoint: 1,
-      breakpoints: [0, 1],
+      breakpoints: [0, 0.9],
       componentProps: {
         isModalMode: true
       }
@@ -133,7 +133,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     const modal = await this.modalCtrl.create({
       component: MegaBoostComponent,
       initialBreakpoint: 1,
-      breakpoints: [0, 1],
+      breakpoints: [0, 0.9],
       componentProps: {
         eventId: this.eventService.currentEventDetail?.eventId,
         endTime: this.eventService.currentEventDetail?.endTime

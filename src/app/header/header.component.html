@@ -41,7 +41,10 @@
     </ng-container>
     <ion-buttons
       mode="ios"
-      *ngIf="!currentUrl.match('/app/event/list/')"
+      *ngIf="
+        !currentUrl.match('/app/event/list/') &&
+        !currentUrl.match('/app/history/detail/')
+      "
       slot="end"
       class="upgrade_btn"
       (click)="openPurchasePage()"
@@ -79,7 +82,10 @@
     </ion-buttons>
     <ion-buttons
       mode="ios"
-      *ngIf="currentUrl.match('/app/event/list/')"
+      *ngIf="
+        currentUrl.match('/app/event/list/') ||
+        currentUrl.match('/app/history/detail/')
+      "
       slot="end"
       class="upgrade_btn"
       (click)="shareEvent()"
@@ -90,7 +96,8 @@
       mode="ios"
       *ngIf="
         (userId$ | async) === curretEventDetailCreatorId &&
-        currentUrl.match('/app/event/list/')
+        (currentUrl.match('/app/event/list/') ||
+          currentUrl.match('/app/history/detail/'))
       "
       slot="end"
       class="upgrade_btn"
