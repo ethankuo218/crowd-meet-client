@@ -47,6 +47,7 @@
                 *ngFor="let item of languages"
                 class="dark"
                 [value]="item.code"
+                [selected]="item.code === selectedLanguage"
               >
                 {{ item.name }}
               </option>

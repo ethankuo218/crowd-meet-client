@@ -10,6 +10,7 @@ import { AuthService } from '../core/auth.service';
 import { Router } from '@angular/router';
 import { Share } from '@capacitor/share';
 import { TranslateService } from '@ngx-translate/core';
+import { Language } from '../language/language.model';
 
 @Component({
   selector: 'app-menu',
@@ -27,6 +28,7 @@ export class MenuComponent {
   user$ = inject(UserStateFacade).getUser();
   isDarkMode: boolean = document.body.classList.contains('dark');
   languages = this.languageService.getLanguages();
+  selectedLanguage: Language = this.languageService.currentLanguage;
 
   async openEmail(): Promise<void> {
     const email: EmailComposerOptions = {
@@ -42,7 +44,8 @@ export class MenuComponent {
   }
 
   changeLanguage(event: any): void {
-    this.languageService.setLanguage(event.target?.value);
+    this.selectedLanguage = event.target.value as Language;
+    this.languageService.setLanguage(this.selectedLanguage);
   }
 
   inviteFriends(): void {

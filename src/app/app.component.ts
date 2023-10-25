@@ -8,6 +8,8 @@ import { Geolocation } from '@capacitor/geolocation';
 import { FcmTokenService } from './core/fcm-token.service';
 import { App, URLOpenListenerEvent } from '@capacitor/app';
 import { Router } from '@angular/router';
+import { LanguageService } from './language/language.service';
+import { Language } from './language/language.model';
 
 @Component({
   selector: 'app-root',
@@ -22,26 +24,43 @@ export class AppComponent implements OnInit {
   private fcmTokenService = inject(FcmTokenService);
   private zone = inject(NgZone);
   private router = inject(Router);
+  private languageService = inject(LanguageService); // Inject the LanguageService
 
   // Inject HistoryHelperService in the app.components.ts so its available app-wide
   constructor() {
     this.initializeApp();
-    this.setLanguage();
     this.storage.create();
   }
 
   ngOnInit(): void {
     this.platform.ready().then(async () => {
-      const isDarkMode = await this.storage.get('isDarkMode');
-      // Check if the user has previously set a preference
-      if (isDarkMode !== null) {
-        document.body.classList.toggle('dark', isDarkMode);
-      } else {
-        // If not, then set the dark mode based on system preference
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-        document.body.classList.toggle('dark', prefersDark.matches);
-      }
+      await this.initializeDarkMode();
+      await this.initializeLanguage();
     });
+  }
+
+  private async initializeDarkMode(): Promise<void> {
+    const isDarkMode = await this.storage.get('isDarkMode');
+    if (isDarkMode !== null) {
+      document.body.classList.toggle('dark', isDarkMode);
+    } else {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+      document.body.classList.toggle('dark', prefersDark.matches);
+    }
+  }
+
+  private async initializeLanguage(): Promise<void> {
+    const storedLanguage = await this.languageService.getStoredLanguage();
+    if (storedLanguage) {
+      this.languageService.setLanguage(storedLanguage);
+    } else {
+      const defaultLang: string = this.translate.getBrowserLang() ?? '';
+      const isKnownLang = Object.values(Language).includes(
+        defaultLang as Language
+      );
+      const langToSet = isKnownLang ? defaultLang : Language.ENGLISH;
+      this.languageService.setLanguage(langToSet as Language);
+    }
   }
 
   async initializeApp() {
@@ -66,10 +85,5 @@ export class AppComponent implements OnInit {
     } finally {
       await SplashScreen.hide();
     }
-  }
-
-  public setLanguage(): void {
-    this.translate.setDefaultLang('en');
-    this.translate.use('en');
   }
 }
