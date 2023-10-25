@@ -43,7 +43,8 @@
       mode="ios"
       *ngIf="
         !currentUrl.match('/app/event/list/') &&
-        !currentUrl.match('/app/history/detail/')
+        !currentUrl.match('/app/history/detail/') &&
+        !currentUrl.match('/app/menu/purchase')
       "
       slot="end"
       class="upgrade_btn"
