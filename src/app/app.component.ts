@@ -33,7 +33,11 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.platform.ready().then(async () => {
       const isDarkMode = await this.storage.get('isDarkMode');
-      if (isDarkMode === null) {
+      // Check if the user has previously set a preference
+      if (isDarkMode !== null) {
+        document.body.classList.toggle('dark', isDarkMode);
+      } else {
+        // If not, then set the dark mode based on system preference
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
         document.body.classList.toggle('dark', prefersDark.matches);
       }
