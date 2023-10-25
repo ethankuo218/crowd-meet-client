@@ -8,7 +8,8 @@ import {
   HostBinding,
   NgZone,
   OnInit,
-  inject
+  inject,
+  OnDestroy
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -25,7 +26,7 @@ import {
 } from '@angular/forms';
 import { Category } from 'src/app/core/+states/reference-state/reference.model';
 import { ReferenceStateFacade } from 'src/app/core/+states/reference-state/reference.state.facade';
-import { skip, take } from 'rxjs';
+import { Subscription, skip, take } from 'rxjs';
 import { Router } from '@angular/router';
 
 SwiperCore.use([Pagination, IonicSwiper]);
@@ -39,7 +40,7 @@ SwiperCore.use([Pagination, IonicSwiper]);
     './styles/walkthrough.responsive.scss'
   ]
 })
-export class WalkthroughPage implements AfterViewInit, OnInit {
+export class WalkthroughPage implements AfterViewInit, OnInit, OnDestroy {
   private fillInfoService = inject(FillInfoService);
   private referenceStateFacade = inject(ReferenceStateFacade);
   private formBuilder = inject(FormBuilder);
@@ -56,6 +57,8 @@ export class WalkthroughPage implements AfterViewInit, OnInit {
   categoryList: Category[] = [];
 
   form!: FormGroup;
+
+  private referenceSubscription!: Subscription;
 
   get interests(): FormArray {
     return <FormArray>this.form.get('interests');
@@ -88,17 +91,21 @@ export class WalkthroughPage implements AfterViewInit, OnInit {
       interests: this.formBuilder.array([])
     });
 
-    this.referenceStateFacade
+    this.referenceSubscription = this.referenceStateFacade
       .getCategories()
-      .pipe(skip(1), take(1))
       .subscribe({
         next: (result) => {
+          this.categoryList = [];
           this.categoryList = result;
           this.categoryList.forEach(() => {
             this.interests.push(new FormControl());
           });
         }
       });
+  }
+
+  ngOnDestroy(): void {
+    this.referenceSubscription.unsubscribe();
   }
 
   // Disable side menu for this page
