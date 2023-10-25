@@ -114,6 +114,9 @@
             },
             "development": {
               "browserTarget": "app:build:development"
+            },
+            "test": {
+              "browserTarget": "app:build:test"
             }
           },
           "defaultConfiguration": "development"
@@ -178,9 +181,7 @@
     }
   },
   "cli": {
-    "schematicCollections": [
-      "@ionic/angular-toolkit"
-    ],
+    "schematicCollections": ["@ionic/angular-toolkit"],
     "analytics": false
   },
   "schematics": {

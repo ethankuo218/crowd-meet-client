@@ -10,6 +10,7 @@
     "build:prod": "ng build --configuration production",
     "build:sit": "ng build --configuration test && npx cap sync",
     "watch": "ng build --watch --configuration development",
+    "watch:sit": "ng serve --port=8100 --proxy-config proxy.conf.json --configuration test",
     "test": "ng test",
     "lint": "ng lint"
   },
