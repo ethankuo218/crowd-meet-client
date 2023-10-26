@@ -37,12 +37,11 @@
     "TRAVEL_AND_TOURS": "旅遊 & 導覽",
     "MUSIC_AND_DANCE": "音樂 & 舞蹈",
     "ENTREPRENEURSHIP": "創業",
-    "SPIRITUALITY": "靈性",
     "PETS": "寵物",
     "GARDENING": "園藝"
   },
   "EVENT_DETAIL": {
-    "EXPECTED_PALS": "預期的夥伴",
+    "EXPECTED_PALS": "預期夥伴數:",
     "DESCRIPTION": "描述",
     "HOST": "主辦人",
     "PARTICIPANTS": "參與者",
