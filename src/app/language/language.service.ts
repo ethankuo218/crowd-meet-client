@@ -14,7 +14,7 @@ export class LanguageService {
     this.languages.push(
       { name: 'English', code: Language.ENGLISH },
       { name: 'Korean', code: Language.KOREAN },
-      { name: 'Thai', code: Language.THAI },
+      { name: 'ภาษาไทย', code: Language.THAI },
       { name: '繁體中文', code: Language.CHINESE }
     );
   }

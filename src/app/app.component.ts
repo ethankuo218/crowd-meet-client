@@ -54,7 +54,9 @@ export class AppComponent implements OnInit {
     if (storedLanguage) {
       this.languageService.setLanguage(storedLanguage);
     } else {
-      const defaultLang: string = this.translate.getBrowserLang() ?? '';
+      let defaultLang: string = this.translate.getBrowserLang() ?? '';
+      if (defaultLang === 'zh') defaultLang = 'zh-TW';
+
       const isKnownLang = Object.values(Language).includes(
         defaultLang as Language
       );
