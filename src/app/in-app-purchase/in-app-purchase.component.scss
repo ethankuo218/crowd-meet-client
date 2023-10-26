@@ -118,14 +118,14 @@
 
   .description-card {
     background: var(--ion-card-background);
-    border: 2px solid rgba(12, 140, 240, .6);
+    border: 2px solid rgba(12, 140, 240, 0.6);
     border-radius: 15px;
     padding: 0 1rem 1rem 1rem;
 
     .description-title {
       width: 30vw;
       background-color: #ffffff;
-      border: solid 2px rgba(12, 140, 240, .4);
+      border: solid 2px rgba(12, 140, 240, 0.4);
       font-size: 14px;
       text-align: center;
       border-radius: 10px;

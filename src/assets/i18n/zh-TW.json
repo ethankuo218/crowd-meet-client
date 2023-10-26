@@ -1,16 +1,22 @@
 {
+  "LOGIN": {
+    "FACEBOOK": "使用 Facebook 登入",
+    "GOOGLE": "使用 Google 登入",
+    "APPLE": "使用 Apple 登入"
+  },
   "EVENT_LIST": {
     "SEARCH": "搜尋",
-    "SPOTLIGHT": "CrowdMeet 焦點",
-    "NO_MORE_CONTENT": "沒有更多內容",
+    "SPOTLIGHT": "CrowdMeet 亮點",
+    "NO_MORE_CONTENT": "沒有更多內容啦！",
     "FILTERS": "篩選",
-    "RESET": "重置",
+    "RESET": "重設",
     "CANCEL": "取消",
     "APPLY": "應用",
     "CATEGORIES": "類別",
     "DISTANCE": "距離",
     "START_TIME": "開始時間",
-    "END_TIME": "結束時間"
+    "END_TIME": "結束時間",
+    "ONLINE": "顯示線上活動"
   },
   "CATEGORY": {
     "OUTDOOR_ACTIVITY": "戶外活動",
@@ -20,7 +26,20 @@
     "DINING": "用餐",
     "ACADEMIC": "學術",
     "PHOTOGRAPHY": "攝影",
-    "TRAVEL": "旅行"
+    "CREATIVE": "創意",
+    "GAMES_AND_SPORTS": "遊戲 & 運動",
+    "STUDY_GROUPS": "學習小組",
+    "FITNESS": "健身",
+    "FILMS": "電影",
+    "COOKING": "烹飪",
+    "PARENTING": "育兒",
+    "LANGUAGES": "語言",
+    "TRAVEL_AND_TOURS": "旅遊 & 導覽",
+    "MUSIC_AND_DANCE": "音樂 & 舞蹈",
+    "ENTREPRENEURSHIP": "創業",
+    "SPIRITUALITY": "靈性",
+    "PETS": "寵物",
+    "GARDENING": "園藝"
   },
   "EVENT_DETAIL": {
     "EXPECTED_PALS": "預期的夥伴",
@@ -30,108 +49,243 @@
     "COMMENTS": "評論",
     "ADD_COMMENT": "新增評論",
     "EDIT": "編輯",
-    "JOIN": "加入"
+    "JOIN": "參加"
   },
   "PROFILE": {
-    "GENDER": "性別",
-    "AGE": "年齡",
-    "JOINED": "加入日期",
-    "HOLD": "舉辦的活動",
+    "GENDER": "性別：",
+    "AGE": "年齡：",
+    "JOINED": "加入",
+    "HOLD": "活動主持",
     "RATING": "評分",
     "ABOUT_ME": "關於我",
     "INTERESTS": "興趣",
     "REVIEWS": "評價"
   },
   "PARTICIPANTS": {
-    "NO_PARTICIPANTS": "太安靜了... 我們還在集結人群！"
+    "NO_PARTICIPANTS": "這裡太安靜了... 我們還在聚集人潮喔！"
   },
   "CHAT_LIST": {
     "NO_MORE_CONTENT": "沒有更多內容",
-    "DIRECT": "直接",
+    "DIRECT": "私訊",
     "GROUP": "群組",
     "YESTERDAY": "昨天",
     "TODAY": "今天"
   },
   "CREATE_EVENT": {
-    "ADD_EVENT_COVER_IMAGE": "為您的活動加上圖片",
+    "ADD_EVENT_COVER_IMAGE": "為你的活動加上一張照片吧",
     "TITLE": "標題",
     "EVENT_TITLE": "活動標題",
     "DESCRIPTION": "描述",
-    "EVENT_DESCRIPTION": "告訴我們更多關於您的活動 🔥🤣",
-    "IS_ONLINE_EVENT": "是線上活動嗎?",
+    "EVENT_DESCRIPTION": "告訴我們更多關於你的活動 🔥🤣",
+    "IS_ONLINE_EVENT": "是線上活動嗎",
     "YES": "是",
     "NO": "否",
     "LOCATION": "地點",
     "SELECT_CATEGORIES": "選擇類別",
     "START_TIME": "開始時間",
     "END_TIME": "結束時間",
-    "MAX_PARTICIPANTS": "最大參與者",
+    "MAX_PARTICIPANTS": "最多參與者",
     "PRICE": "價格",
-    "CREATE": "創建"
+    "CONFIRM": "確認",
+    "CREATE": "創建",
+    "EDIT_CONFIRM": "確認編輯活動",
+    "CREATE_CONFIRM": "確認創建活動",
+    "EDIT_TITLE": "編輯活動",
+    "CREATE_TITLE": "創建活動"
   },
   "ERROR_MSG": {
-    "CATEGORY": "至少選擇一個類別，CrowdMeet 風格 😎",
-    "START_TIME": "不要急！確保您的活動至少在10分鐘後開始。",
-    "END_TIME": "不要時光旅行！結束時間應在開始之後。",
-    "MAX_PARTICIPANTS": "不要太單獨，也不要太擁擠！1到15之間最適合。"
+    "CATEGORY": "至少選擇一個類別，這是 CrowdMeet 風格 😎",
+    "START_TIME": "別急！確保你的活動至少從10分鐘後開始。",
+    "END_TIME": "我們不能穿越時光！結束時間應該在開始時間之後。",
+    "MAX_PARTICIPANTS": "不勢單力薄，也不要太擁擠！1到15人是最佳人數。",
+    "MAX_PRICE": "您不可以設定超過一百萬的價格。"
   },
   "HISTORY": {
     "UPCOMING": "即將到來",
-    "JOINED": "已加入",
+    "JOINED": "已參加",
     "VIEW": "查看",
-    "RATE": "評分",
+    "RATE": "評價",
+    "LEAVE": "離開",
+    "NO_MORE_CONTENT_UPCOMING": "您還沒有即將到來的活動哦！",
+    "NO_MORE_CONTENT_JOINED": "您還沒有參加的活動！",
     "TAG": {
       "ON_GOING": "進行中",
       "ACCEPTED": "已接受",
       "APPLIED": "已申請",
       "LEFT": "已離開",
       "DECLINED": "已拒絕",
-      "KICKED": "已被踢出"
+      "KICKED": "被踢出"
+    }
+  },
+  "REVIEW": {
+    "TITLE": "撰寫評論",
+    "SUB_TITLE": "分享您的感受",
+    "DESCRIPTION": "您與",
+    "PLACEHOLDER": "請在這裡輸入您的評論",
+    "CANCEL": "取消",
+    "SUBMIT": "提交",
+    "NO_PARTICIPANTS": "沒有待評價的參與者",
+    "STILL_GOING_ON": "此活動還在進行中"
+  },
+  "NOTIFICATIONS": {
+    "NO_MORE_CONTENT": "您沒有任何新通知",
+    "TITLE": {
+      "NEW_COMMENT": "新評論",
+      "ACCEPTED": "已接受",
+      "DECLINED": "已拒絕",
+      "KICKED": "被踢出",
+      "LEFT": "用戶已離開",
+      "APPLIED": "新申請",
+      "UPDATED": "狀態已更新"
     }
   },
   "MENU": {
-    "EDIT_PROFILE": "編輯個人資料",
-    "MEMBERSHIP": "CrowdMeet 的 VIP 休息室",
+    "EDIT_PROFILE": "編輯資料",
+    "MEMBERSHIP": "CrowdMeet的貴賓室",
     "LANGUAGE": "語言",
-    "DARK_MODE": "暗黑模式",
+    "DARK_MODE": "深色模式",
     "HELP_CENTER": "幫助中心",
-    "INVITE_FRIENDS": "邀請朋友",
+    "INVITE_FRIENDS": "邀請好友",
     "LOGOUT": "登出"
   },
   "EDIT_PROFILE": {
     "PHOTOS": "照片",
     "INTERESTS": "興趣",
-    "PROFILE": "個人資料",
+    "PROFILE": "個人檔案",
     "NAME": "名稱",
-    "BIO": "您的 CrowdMeet 故事！",
+    "BIO": "你的CrowdMeet故事!",
     "NAME_PLACEHOLDER": "名稱",
-    "BIO_PLACEHOLDER": "分享有趣的事實、古怪的愛好或您最近的冒險！讓 CrowdMeet 社區認識真正的您！"
+    "BIO_PLACEHOLDER": "分享一個有趣的事實，一個古怪的愛好，或你的最新冒險！讓CrowdMeet社群更加認識獨特的你！"
   },
   "IN_APP_PURCHASE": {
-    "BUNDLE": {
-      "TITLE": "標題",
-      "DESCRIPTION": "描述"
-    },
     "MEGA_BOOST": {
-      "DESCRIPTION": "使用 CrowdMeet Boost 解鎖您的活動的終極能見度！將您的聚會提升到我們首頁的最上方，並讓我們親自邀請喜歡您計劃的用戶。這不僅僅是一次提升；這是您的活動的明星門票！",
-      "BENFITS": "好處",
-      "BULLET_POINT_TITLE_1": "主要能見度",
-      "BULLET_POINT_TITLE_2": "針對的邀請",
-      "BULLET_POINT_TITLE_3": "增加的參與",
-      "BULLET_POINT_TITLE_4": "個性化的體驗",
-      "BULLET_POINT_TITLE_5": "最大化的範圍",
-      "BULLET_POINT_CONTENT_1": "您的活動在我們的首頁上受到關注。",
-      "BULLET_POINT_CONTENT_2": "我們會向與您的活動氛圍和興趣匹配的用戶發送通知",
-      "BULLET_POINT_CONTENT_3": "提升的活動通常看到更高的參與和RSVP率",
-      "BULLET_POINT_CONTENT_4": "量身定制的建議意味著您的活動的正確人群",
-      "BULLET_POINT_CONTENT_5": "擴大您的活動範圍，超出您的直接網絡，以獲得多樣化的受眾",
+      "DESCRIPTION": "確保你的活動脫穎而出！立即提升並在我們的首頁上搶佔首位。更多的曝光，更多的參與者，更多的話題！",
+      "BENEFITS": "優勢",
+      "BULLET_POINT_TITLE_1": "首要曝光",
+      "BULLET_POINT_TITLE_2": "目標邀請",
+      "BULLET_POINT_TITLE_3": "增加參與",
+      "BULLET_POINT_TITLE_4": "個性化體驗",
+      "BULLET_POINT_TITLE_5": "最大化的觸及",
+      "BULLET_POINT_CONTENT_1": "你的活動將在我們的首頁上受到關注。",
+      "BULLET_POINT_CONTENT_2": "我們會向與你的活動風格和興趣匹配的用戶發送通知",
+      "BULLET_POINT_CONTENT_3": "提升的活動通常看到更高的參與和回應率",
+      "BULLET_POINT_CONTENT_4": "度身定制的推薦意味著您的活動將吸引合適的人群",
+      "BULLET_POINT_CONTENT_5": "將您的活動觸及範圍擴展到您的直接網絡之外，吸引多樣化的觀眾",
       "DURATION": {
-        "1_DAY": "1 天",
-        "3_DAY": "3 天",
-        "7_DAY": "7 天"
+        "1_DAY": "1天",
+        "3_DAY": "3天",
+        "7_DAY": "7天"
       },
-      "LEFT_PREFIX": "您還有",
-      "UNIT": "提升準備好了！"
+      "LEFT_PREFIX": "你還有",
+      "UNIT": "次提升待啟用！"
+    },
+    "BUNDLE": {
+      "FREE": {
+        "TITLE": "免費",
+        "DESCRIPTION": "馬上加入，開始樂趣！",
+        "EVENT_CREATION_1": "建立1個活動 + 觀看廣告後再加3個",
+        "EVENT_CREATION_2": "標準",
+        "EVENT_JOIN_1": "參加最多3個活動",
+        "EVENT_JOIN_2": "查看同一活動內的參與者",
+        "AD_AND_CHAT_1": "與同一活動內的參與者聊天",
+        "AD_AND_CHAT_2": "觀看廣告以解鎖更多活動建立"
+      },
+      "INFLUENCER": {
+        "TITLE": "影響者套組",
+        "DESCRIPTION": "無盡的活動任你主持！",
+        "EVENT_CREATION_1": "無限制的活動",
+        "EVENT_CREATION_2": "活動列表中的高級排序",
+        "EVENT_JOIN_1": "參加最多3場活動",
+        "EVENT_JOIN_2": "查看同一活動的參加者",
+        "AD_AND_CHAT_1": "與同一活動的參加者聊天",
+        "AD_AND_CHAT_2": "觀看廣告以解鎖更多的活動參加"
+      },
+      "SOCIAL": {
+        "TITLE": "社交火花套組",
+        "DESCRIPTION": "超越界限的連接！",
+        "EVENT_CREATION_1": "創建1場活動\n + 觀看廣告後再增加3場",
+        "EVENT_CREATION_2": "活動列表中的標準排序",
+        "EVENT_JOIN_1": "參加無限的活動",
+        "EVENT_JOIN_2": "參加前可查看活動的參加者",
+        "AD_AND_CHAT_1": "與所有用戶聊天",
+        "AD_AND_CHAT_2": "觀看廣告以解鎖更多的活動創建"
+      },
+      "LIFESTYLE": {
+        "TITLE": "生活風格套組",
+        "DESCRIPTION": "全包！真正的VIP體驗",
+        "EVENT_CREATION_1": "無限制的活動",
+        "EVENT_CREATION_2": "活動列表中的高級排序",
+        "EVENT_JOIN_1": "參加無限的活動",
+        "EVENT_JOIN_2": "參加前可查看活動的參加者",
+        "AD_AND_CHAT_1": "與所有用戶聊天",
+        "AD_AND_CHAT_2": "完全無廣告體驗"
+      }
+    },
+    "HEADER": {
+      "EVENT_CREATION_1": "活動創建",
+      "EVENT_CREATION_2": "活動列表排序",
+      "EVENT_MANAGEMENT_2": "參加活動",
+      "EVENT_MANAGEMENT_3": "查看活動參加者",
+      "EVENT_MANAGEMENT_4": "活動列表排序"
     }
+  },
+  "JOINER_LIST": {
+    "ACCEPT": "接受",
+    "DECLINE": "拒絕",
+    "KICK": "踢出",
+    "NO_JOINER": "沒有參加者！"
+  },
+  "DIALOG": {
+    "TITLE": {
+      "CALENDAR": "你想將此活動加到行事曆嗎？",
+      "CHECK_PARTICIPANT": "你想查看參加者嗎？",
+      "LEAVE_EVENT": "你確定要離開此活動嗎？",
+      "BOOST": "你想使用BOOST嗎？"
+    },
+    "CONTENT": {
+      "CHECK_PARTICIPANT": "觀看廣告以解鎖",
+      "LEAVE_EVENT": "觀看廣告以解鎖"
+    },
+    "BUTTON": {
+      "CONFIRM": "確認",
+      "CANCEL": "取消",
+      "UPGRADE": "升級"
+    }
+  },
+  "SELECT_INTERESTS": {
+    "TITLE": "選擇你的興趣",
+    "SUB_TITLE": "你隨時可以新增或更改它們"
+  },
+  "WALKTHROUGH": {
+    "SLIDE_1": {
+      "TITLE": "歡迎來到CrowdMeet！🎉",
+      "DESCRIPTION": "<b>探索活動的世界</b>：為您量身定制的活動等你來參與。無論你是想主持還是加入，CrowdMeet都是你的終極活動中心。"
+    },
+    "SLIDE_2": {
+      "TITLE": "你的旅程從這裡開始 🌟",
+      "DESCRIPTION": "<b>個性化你的體驗</b>：建立你的個人檔案以解鎖無窮的可能性。選擇你的興趣，設定你的偏好，讓我們為你策劃與你心靈契合的活動。",
+      "TIP": "提示：你分享的越多，我們就越能匹配你喜歡的活動！"
+    },
+    "SLIDE_3": {
+      "TITLE": "你的生日是什麼時候？",
+      "NOTE": "別擔心，只會顯示你的年齡，不會顯示具體日期。",
+      "ERROR": "哎呀！你忘了填寫你的生日"
+    },
+    "SLIDE_4": {
+      "TITLE": "你的性別是？",
+      "MALE": "男性",
+      "FEMALE": "女性",
+      "NOT_TO_SAY": "我要保持神秘",
+      "ERROR": "快完成了！只需要選擇你的性別"
+    },
+    "SLIDE_6": {
+      "TITLE": "準備好，開始冒險吧！🚀",
+      "DESCRIPTION": "<b>個人檔案完成！</b>你已經準備好去探索、連接，並創造難忘的回憶。",
+      "INFO": "快點投入並開始你的CrowdMeet冒險吧！"
+    }
+  },
+  "SHARE": {
+    "APP": "邀請你加入CrowdMeet",
+    "EVENT": "在CrowdMeet上查看這個活動！"
   }
 }
