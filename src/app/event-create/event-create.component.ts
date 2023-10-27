@@ -199,8 +199,8 @@ export class EventCreateComponent implements OnInit {
     } else {
       const modal = await this.modalCtrl.create({
         component: MegaBoostComponent,
-        initialBreakpoint: 1,
-        breakpoints: [0, 1],
+        initialBreakpoint: 0.95,
+        breakpoints: [0, 0.95],
         componentProps: {
           eventId: this.eventId,
           endTime: new Date(this.eventForm.value.endTime).toISOString(),

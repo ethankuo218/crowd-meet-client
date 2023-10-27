@@ -104,8 +104,8 @@ export class ProfileComponent {
     } else {
       const modal = await this.modalCtrl.create({
         component: InAppPurchaseComponent,
-        initialBreakpoint: 1,
-        breakpoints: [0, 1],
+        initialBreakpoint: 0.95,
+        breakpoints: [0, 0.95],
         componentProps: {
           isModalMode: true
         }
