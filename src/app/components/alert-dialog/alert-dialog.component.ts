@@ -28,8 +28,8 @@ export class AlertDialogComponent {
   async openPurchasePage() {
     const modal = await this.modalCtrl.create({
       component: InAppPurchaseComponent,
-      initialBreakpoint: 0.95,
-      breakpoints: [0, 0.95],
+      initialBreakpoint: 1,
+      breakpoints: [0, 1],
       componentProps: {
         isModalMode: true
       }
