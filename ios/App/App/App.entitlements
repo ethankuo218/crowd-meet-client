@@ -11,6 +11,8 @@
 	<key>com.apple.developer.associated-domains</key>
 	<array>
 		<string>applinks:dev.crowdmeet.app</string>
+		<string>applinks:sit.crowdmeet.app</string>
+		<string>applinks:crowdmeet.app</string>
 	</array>
 </dict>
 </plist>
