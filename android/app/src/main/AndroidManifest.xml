@@ -40,6 +40,8 @@
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
         <data android:scheme="https" android:host="dev.crowdmeet.app" />
+        <data android:scheme="https" android:host="sit.crowdmeet.app" />
+        <data android:scheme="https" android:host="crowdmeet.app" />
       </intent-filter>
 
     </activity>
