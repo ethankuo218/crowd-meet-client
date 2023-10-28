@@ -23,10 +23,17 @@ if [ ! -f env/$ENV/android/google-services.json ]; then
     exit 1
 fi
 
+# Check if the iOS files for the specified environment exist
+if [ ! -f env/$ENV/ios/Info.plist ]; then
+    echo "Error: File env/$ENV/ios/Info.plist does not exist!"
+    exit 1
+fi
+
 echo "Switching to environment '$ENV'..."
 
 # copy the files
 cp env/$ENV/android/strings.xml android/app/src/main/res/values/strings.xml
 cp env/$ENV/android/google-services.json android/app/google-services.json
+cp env/$ENV/ios/Info.plist ios/App/App/Info.plist
 
 echo "Environment '$ENV' set successfully."
