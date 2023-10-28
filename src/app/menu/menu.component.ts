@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { Share } from '@capacitor/share';
 import { TranslateService } from '@ngx-translate/core';
 import { Language } from '../language/language.model';
+import { environment } from 'src/environments/environment.dev';
 
 @Component({
   selector: 'app-menu',
@@ -51,7 +52,7 @@ export class MenuComponent {
   inviteFriends(): void {
     Share.share({
       title: this.translate.instant('SHARE.APP'),
-      text: 'https://dev.crowdmeet.app/',
+      text: environment.appDomain,
       dialogTitle: 'Invite friends'
     });
   }

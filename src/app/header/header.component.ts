@@ -22,6 +22,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { InAppPurchaseComponent } from '../in-app-purchase/in-app-purchase.component';
 import { ChatService } from '../chat/chat.service';
 import { NotificationPreference } from '../chat/models/chat.models';
+import { environment } from 'src/environments/environment.dev';
 
 @Component({
   selector: 'app-header',
@@ -112,7 +113,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     await Share.share({
       title: eventDetail?.title,
       text: this.translate.instant('SHARE.EVENT'),
-      url: `https://dev.crowdmeet.app/app/event/list/${eventDetail?.eventId}`,
+      url: `${environment.appDomain}/app/event/list/${eventDetail?.eventId}`,
       dialogTitle: 'Share with buddies'
     });
   }
