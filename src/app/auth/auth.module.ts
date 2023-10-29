@@ -1,8 +1,21 @@
-import { NgModule } from '@angular/core';
+import { NgModule, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
+import {
+  Routes,
+  RouterModule,
+  CanActivateFn,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot
+} from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { AuthService } from '../core/auth.service';
+
+const preventNavigateToSignInPage: CanActivateFn = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot
+) => {
+  return inject(AuthService).isLogout();
+};
 
 const routes: Routes = [
   {
@@ -17,7 +30,8 @@ const routes: Routes = [
       {
         path: 'sign-in',
         loadChildren: () =>
-          import('./sign-in/sign-in.module').then((m) => m.SignInPageModule)
+          import('./sign-in/sign-in.module').then((m) => m.SignInPageModule),
+        canActivate: [preventNavigateToSignInPage]
       },
       {
         path: 'walkthrough',

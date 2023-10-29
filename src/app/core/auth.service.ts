@@ -417,4 +417,11 @@ export class AuthService implements OnDestroy {
       return result ? true : this.router.parseUrl('auth');
     });
   }
+
+  isLogout(): Promise<boolean | UrlTree> {
+    return firstValueFrom(user(this.auth)).then((result) => {
+      console.log(result ? this.router.parseUrl('app') : true);
+      return result ? this.router.parseUrl('app') : true;
+    });
+  }
 }
