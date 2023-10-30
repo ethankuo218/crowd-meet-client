@@ -7,6 +7,7 @@
       (init)="swiperInit()"
       (slideChangeTransitionStart)="slideWillChange()"
       (slideChange)="slideDidChange()"
+      [preventClicksPropagation]="true"
     >
       <ng-template swiperSlide>
         <ion-row
@@ -524,6 +525,12 @@
                 <fa-icon [icon]="['fas', 'circle-exclamation']"></fa-icon>
                 {{'Please choose your interest'}}
               </p>
+              <ion-button
+                class="continue-btn"
+                [disabled]="interestsError"
+                (click)="moveToNextSlide()"
+                >{{'WALKTHROUGH.SLIDE_3.CONTINUE' | translate}}</ion-button
+              >
             </div>
           </ion-col>
         </ion-row>
