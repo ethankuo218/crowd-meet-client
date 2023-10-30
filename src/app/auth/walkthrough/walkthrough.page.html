@@ -446,8 +446,8 @@
               <div class="item btn_item">
                 <button
                   class="primary"
-                  (click)="selectGender('notToSay')"
-                  [ngClass]="{active_btn: gender==='notToSay'}"
+                  (click)="selectGender('secret')"
+                  [ngClass]="{active_btn: gender==='secret'}"
                 >
                   {{'WALKTHROUGH.SLIDE_4.NOT_TO_SAY' | translate}}
                 </button>
@@ -463,7 +463,6 @@
       <ng-template swiperSlide>
         <ion-row
           class="slide-inner-row fifth-slide illustration-and-decoration-slide"
-          [ngClass]="{'swiper-no-swiping': interestsError}"
         >
           <ion-col class="decoration-col">
             <!-- http://jxnblk.com/paths/?d=M0%200%20V5%20H5%20C25%205%2025%2020%2045%2020%20S65%205%2085%205%20H90%20V0%20Z -->
@@ -590,7 +589,9 @@
             <ion-row class="info-outer">
               <ion-col>
                 <div class="info-wrapper">
-                  <h3 class="info-title">{{'WALKTHROUGH.SLIDE_6.TITLE'}}</h3>
+                  <h3 class="info-title">
+                    {{'WALKTHROUGH.SLIDE_6.TITLE' | translate}}
+                  </h3>
                   <p
                     class="info-paragraph"
                     [innerHTML]="

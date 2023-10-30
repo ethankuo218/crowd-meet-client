@@ -26,7 +26,7 @@ import {
 } from '@angular/forms';
 import { Category } from 'src/app/core/+states/reference-state/reference.model';
 import { ReferenceStateFacade } from 'src/app/core/+states/reference-state/reference.state.facade';
-import { Subscription, skip, take } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 
 SwiperCore.use([Pagination, IonicSwiper]);
@@ -62,7 +62,8 @@ export class WalkthroughPage implements AfterViewInit, OnInit, OnDestroy {
 
   private fieldErrorMapping: { [key: string]: () => boolean } = {
     birth: () => this.birthDayError,
-    gender: () => this.genderError
+    gender: () => this.genderError,
+    interests: () => this.interestsError
   };
 
   get interests(): FormArray {
@@ -109,6 +110,7 @@ export class WalkthroughPage implements AfterViewInit, OnInit, OnDestroy {
       });
     this.observeFieldChanges('birth', 2);
     this.observeFieldChanges('gender', 3);
+    this.observeFieldChanges('interests', 4);
   }
 
   ngOnDestroy(): void {
@@ -199,6 +201,8 @@ export class WalkthroughPage implements AfterViewInit, OnInit, OnDestroy {
     if (this.swiperRef.activeIndex === 2 && this.birthDayError) {
       this.swiperRef.allowSlideNext = false;
     } else if (this.swiperRef.activeIndex === 3 && this.genderError) {
+      this.swiperRef.allowSlideNext = false;
+    } else if (this.swiperRef.activeIndex === 4 && this.interestsError) {
       this.swiperRef.allowSlideNext = false;
     }
   }
