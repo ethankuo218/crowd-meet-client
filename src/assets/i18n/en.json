@@ -268,7 +268,8 @@
     "SLIDE_3": {
       "TITLE": "When's your birthday?",
       "NOTE": "Don't worry, only your age shows up, not the exact date.",
-      "ERROR": "Oops! You missed your birthday"
+      "ERROR": "Select your birthday before moving on",
+      "CONTINUE": "Continue"
     },
     "SLIDE_4": {
       "TITLE": "And your gender is?",

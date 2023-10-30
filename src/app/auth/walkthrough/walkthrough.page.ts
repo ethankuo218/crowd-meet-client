@@ -60,6 +60,11 @@ export class WalkthroughPage implements AfterViewInit, OnInit, OnDestroy {
 
   private referenceSubscription!: Subscription;
 
+  private fieldErrorMapping: { [key: string]: () => boolean } = {
+    birth: () => this.birthDayError,
+    gender: () => this.genderError
+  };
+
   get interests(): FormArray {
     return <FormArray>this.form.get('interests');
   }
@@ -102,6 +107,8 @@ export class WalkthroughPage implements AfterViewInit, OnInit, OnDestroy {
           });
         }
       });
+    this.observeFieldChanges('birth', 2);
+    this.observeFieldChanges('gender', 3);
   }
 
   ngOnDestroy(): void {
@@ -145,6 +152,28 @@ export class WalkthroughPage implements AfterViewInit, OnInit, OnDestroy {
     }
   }
 
+  moveToNextSlide(): void {
+    this.swiperRef?.slideNext();
+  }
+
+  private observeFieldChanges(fieldName: string, slideIndex: number): void {
+    this.form.get(fieldName)?.valueChanges.subscribe((value) => {
+      if (this.isSlideActive(slideIndex)) {
+        const errorField = this.fieldErrorMapping[fieldName]();
+        this.updateSlideMovementPermission(value, errorField);
+      }
+    });
+  }
+
+  private isSlideActive(index: number): boolean {
+    return this.swiperRef?.activeIndex === index;
+  }
+
+  private updateSlideMovementPermission(value: any, errorField: boolean): void {
+    if (!this.swiperRef) return;
+    this.swiperRef.allowSlideNext = value && !errorField;
+  }
+
   public setSwiperInstance(swiper: SwiperCore): void {
     // console.log('setSwiperInstance');
   }
@@ -160,6 +189,18 @@ export class WalkthroughPage implements AfterViewInit, OnInit, OnDestroy {
   public markSlides(swiper: SwiperCore): void {
     this.isFirstSlide = swiper.isBeginning || swiper.activeIndex === 0;
     this.isLastSlide = swiper.isEnd;
+  }
+
+  slideDidChange(): void {
+    if (!this.swiperRef) return;
+    this.swiperRef.allowSlideNext = true;
+
+    // Restrict for specific conditions
+    if (this.swiperRef.activeIndex === 2 && this.birthDayError) {
+      this.swiperRef.allowSlideNext = false;
+    } else if (this.swiperRef.activeIndex === 3 && this.genderError) {
+      this.swiperRef.allowSlideNext = false;
+    }
   }
 
   public skipWalkthrough(): void {

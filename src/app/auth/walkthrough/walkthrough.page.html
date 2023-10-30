@@ -6,6 +6,7 @@
       (swiper)="setSwiperInstance($event)"
       (init)="swiperInit()"
       (slideChangeTransitionStart)="slideWillChange()"
+      (slideChange)="slideDidChange()"
     >
       <ng-template swiperSlide>
         <ion-row
@@ -246,7 +247,6 @@
       <ng-template swiperSlide>
         <ion-row
           class="slide-inner-row third-slide illustration-and-decoration-slide"
-          [ngClass]="{'swiper-no-swiping': birthDayError}"
         >
           <ion-col class="illustration-col">
             <app-aspect-ratio [ratio]="{w:915, h:549}">
@@ -334,10 +334,16 @@
               <p class="info-paragraph">
                 {{'WALKTHROUGH.SLIDE_3.NOTE' | translate}}
               </p>
-              <!-- <p class="danger" *ngIf="birthDayError">
-                <fa-icon [icon]="['fas', 'circle-exclamation']"></fa-icon
-                >{{'WALKTHROUGH.SLIDE_3.ERROR' | translate}}
-              </p> -->
+              <p class="danger" *ngIf="birthDayError">
+                <fa-icon [icon]="['fas', 'circle-exclamation']"></fa-icon>
+                {{'WALKTHROUGH.SLIDE_3.ERROR' | translate}}
+              </p>
+              <ion-button
+                class="continue-btn"
+                [disabled]="birthDayError"
+                (click)="moveToNextSlide()"
+                >{{'WALKTHROUGH.SLIDE_3.CONTINUE' | translate}}</ion-button
+              >
             </div>
           </ion-col>
         </ion-row>
@@ -345,7 +351,6 @@
       <ng-template swiperSlide>
         <ion-row
           class="slide-inner-row forth-slide illustration-and-decoration-slide"
-          [ngClass]="{'swiper-no-swiping': genderError}"
         >
           <ion-col class="illustration-col">
             <app-aspect-ratio [ratio]="{w:915, h:749}">
