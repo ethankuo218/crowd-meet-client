@@ -238,7 +238,7 @@
     "TITLE": {
       "CALENDAR": "Do you want to add this event to calendar ?",
       "CHECK_PARTICIPANT": "Do you want to check the participants ?",
-      "LEAVE_EVENT": "Do you want to check the participants ?",
+      "LEAVE_EVENT": "Do you want to leave this event ?",
       "BOOST": "Do you want to use BOOST ?"
     },
     "CONTENT": {
