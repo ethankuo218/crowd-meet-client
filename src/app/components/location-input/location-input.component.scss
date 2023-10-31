@@ -39,3 +39,31 @@ ion-input {
   font-size: 14px;
   margin: 0 0 25px;
 }
+
+.input-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 0;
+  height: 41px;
+  padding: 0; // Ensure no padding
+
+  ion-input {
+    flex: 0 0 75%;
+    margin-right: 5%;
+    height: 40px;
+    --padding-start: 0;
+    --padding-end: 0;
+    padding: 0; // Explicitly set padding
+    margin: 0; // Explicitly set margin
+  }
+
+  .search-btn {
+    flex: 0 0 20%;
+    height: 40px;
+    padding: 0; // Explicitly set padding
+    margin: 0; // Explicitly set margin
+    line-height: 40px; // Match line-height with height
+  }
+}

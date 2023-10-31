@@ -1,10 +1,17 @@
 <div class="dropdown">
-  <ion-input
-    #inputBox
-    type="text"
-    [disabled]="isDisabled"
-    [(ngModel)]="value"
-  ></ion-input>
+  <div class="input-container">
+    <ion-input
+      placeholder="enter location name or address"
+      #inputBox
+      type="text"
+      [disabled]="isDisabled"
+      [(ngModel)]="value"
+      style="margin-right: 2%"
+    ></ion-input>
+    <ion-button class="search-btn" fill="outline" (click)="loadPredictions()"
+      >Search</ion-button
+    >
+  </div>
   <div *ngIf="showDropdown" class="dropdown-content">
     <ng-container *ngFor="let item of predictions">
       <a (click)="onMenuClick(item)">

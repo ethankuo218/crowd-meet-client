@@ -67,25 +67,35 @@ export class LocationInputComponent
   private subscription!: Subscription;
 
   async ngAfterViewInit(): Promise<void> {
-    const inputElement = await this.input.getInputElement();
-    this.subscription = fromEvent(inputElement, 'keyup')
-      .pipe(
-        map((event) => inputElement.value),
-        debounceTime(1000)
-      )
-      .subscribe({
-        next: async (val) => {
-          this._value = val;
+    // const inputElement = await this.input.getInputElement();
+    // this.subscription = fromEvent(inputElement, 'keyup')
+    //   .pipe(
+    //     map((event) => inputElement.value),
+    //     debounceTime(1000)
+    //   )
+    //   .subscribe({
+    //     next: async (val) => {
+    //       this._value = val;
+    //       if (this._value && this._value !== '') {
+    //         this.predictions =
+    //           await this.googleMapsLoaderService.loadPredictions(this._value);
+    //         this.showDropdown = true;
+    //       } else {
+    //         this.showDropdown = false;
+    //       }
+    //     }
+    //   });
+  }
 
-          if (this._value && this._value !== '') {
-            this.predictions =
-              await this.googleMapsLoaderService.loadPredictions(this._value);
-            this.showDropdown = true;
-          } else {
-            this.showDropdown = false;
-          }
-        }
-      });
+  async loadPredictions(): Promise<void> {
+    if (this._value && this._value !== '') {
+      this.predictions = await this.googleMapsLoaderService.loadPredictions(
+        this._value
+      );
+      this.showDropdown = true;
+    } else {
+      this.showDropdown = false;
+    }
   }
 
   ngOnDestroy(): void {
