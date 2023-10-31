@@ -112,7 +112,9 @@
               {{ product.price | currency }}
             </div>
             <div class="content-small">
-              <s>{{ 110 | currency }}</s>
+              <s *ngIf="i === 0">{{ product.price / 0.9 | currency }}</s>
+              <s *ngIf="i === 1">{{ product.price / 0.85 | currency }}</s>
+              <s *ngIf="i === 2">{{ product.price / 0.8 }}</s>
             </div>
           </ng-container>
           <ng-template #left>
