@@ -79,8 +79,13 @@ export class ProfileComponent {
       (today.getTime() - birthDateObject.getTime()) /
         (365 * 24 * 60 * 60 * 1000)
     );
-
-    return `${age} / ${user.gender === 'male' ? 'M' : 'F'}`;
+    const genderDisplayMap = {
+      male: 'M',
+      female: 'F',
+      secret: '?'
+    };
+    type GenderKey = 'male' | 'female' | 'secret';
+    return `${age} / ${genderDisplayMap[user.gender as GenderKey] ?? '?'}`;
   }
 
   get isOwn$(): Observable<boolean> {
