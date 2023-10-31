@@ -11,7 +11,7 @@ export class FillInfoService {
   private storage = inject(Storage);
   private router = inject(Router);
 
-  saveInfo(form: { gender: string; birth: string; interests: number[] }) {
+  saveInfo(form: { gender: string; birthDate: string; interests: number[] }) {
     try {
       this.userService.updateUser(form);
     } catch (err) {

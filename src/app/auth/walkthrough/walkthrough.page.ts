@@ -229,7 +229,8 @@ export class WalkthroughPage implements AfterViewInit, OnInit, OnDestroy {
     });
 
     this.fillInfoService.saveInfo({
-      ...this.form.value,
+      birthDate: this.form.get('birth')!.value.split('T')[0],
+      gender: this.gender,
       interests: selection
     });
   }
