@@ -45,7 +45,7 @@ export class LocationInputComponent
     new EventEmitter();
 
   predictions: google.maps.places.AutocompletePrediction[] = [];
-
+  private lastValue: string = '';
   isDisabled: boolean = false;
 
   showDropdown: boolean = false;
@@ -66,29 +66,11 @@ export class LocationInputComponent
 
   private subscription!: Subscription;
 
-  async ngAfterViewInit(): Promise<void> {
-    // const inputElement = await this.input.getInputElement();
-    // this.subscription = fromEvent(inputElement, 'keyup')
-    //   .pipe(
-    //     map((event) => inputElement.value),
-    //     debounceTime(1000)
-    //   )
-    //   .subscribe({
-    //     next: async (val) => {
-    //       this._value = val;
-    //       if (this._value && this._value !== '') {
-    //         this.predictions =
-    //           await this.googleMapsLoaderService.loadPredictions(this._value);
-    //         this.showDropdown = true;
-    //       } else {
-    //         this.showDropdown = false;
-    //       }
-    //     }
-    //   });
-  }
+  async ngAfterViewInit(): Promise<void> {}
 
   async loadPredictions(): Promise<void> {
-    if (this._value && this._value !== '') {
+    if (this._value && this._value !== '' && this._value !== this.lastValue) {
+      this.lastValue = this._value;
       this.predictions = await this.googleMapsLoaderService.loadPredictions(
         this._value
       );

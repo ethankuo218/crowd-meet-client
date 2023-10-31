@@ -8,7 +8,11 @@
       [(ngModel)]="value"
       style="margin-right: 2%"
     ></ion-input>
-    <ion-button class="search-btn" fill="outline" (click)="loadPredictions()"
+    <ion-button
+      class="search-btn"
+      fill="outline"
+      (click)="loadPredictions()"
+      disabled="{{ isDisabled }}"
       >Search</ion-button
     >
   </div>
