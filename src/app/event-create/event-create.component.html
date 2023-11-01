@@ -92,6 +92,13 @@
             formControlName="formattedAddress"
             (locationChangeEvent)="onLocationChange($event)"
           ></app-location-input>
+          <div
+            *ngIf="eventForm.get('isOnline')?.touched && !isValidLocation"
+            class="error-msg"
+          >
+            <fa-icon [icon]="['fas', 'exclamation-circle']"></fa-icon>
+            {{ 'ERROR_MSG.INVALID_LOCATION' | translate }}
+          </div>
         </div>
 
         <div class="event_content category-selection-container">
@@ -224,7 +231,7 @@
             mode="ios"
             class="submit-button"
             (click)="onSubmit()"
-            [disabled]="eventForm.invalid || isLoading"
+            [disabled]="eventForm.invalid || isLoading || !isValidLocation"
           >
             {{
               mode === 'edit'

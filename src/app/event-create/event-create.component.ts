@@ -266,4 +266,9 @@ export class EventCreateComponent implements OnInit {
       formattedAddress: placeDetail.formatted_address!
     };
   }
+
+  get isValidLocation(): boolean {
+    if (this.eventForm.get('isOnline')?.value) return true;
+    return this.selectLocation?.placeId !== undefined;
+  }
 }
