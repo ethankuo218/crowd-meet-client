@@ -98,7 +98,11 @@
     "END_TIME": "Let's not time travel! End time should be after the start.",
     "MAX_PARTICIPANTS": "Not too solo, not too crowded! Between 1 and 15 is the sweet spot.",
     "MAX_PRICE": "You are not allow to set the price over a million dollar.",
-    "INVALID_LOCATION": "Select a valid location from the list"
+    "INVALID_LOCATION": "Select a valid location from the list after clicking search"
+  },
+  "LOCATION_INPUT": {
+    "SEARCH": "Search",
+    "PLACEHOLDER": "Enter location name or address"
   },
   "HISTORY": {
     "UPCOMING": "Upcoming",

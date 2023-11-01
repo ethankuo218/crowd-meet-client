@@ -1,7 +1,7 @@
 <div class="dropdown">
   <div class="input-container">
     <ion-input
-      placeholder="enter location name or address"
+      placeholder="{{ 'LOCATION_INPUT.PLACEHOLDER' | translate }}"
       #inputBox
       type="text"
       [disabled]="isDisabled"
@@ -13,7 +13,7 @@
       fill="outline"
       (click)="loadPredictions()"
       disabled="{{ isDisabled }}"
-      >Search</ion-button
+      >{{ 'LOCATION_INPUT.SEARCH' | translate }}</ion-button
     >
   </div>
   <div *ngIf="showDropdown" class="dropdown-content">

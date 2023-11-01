@@ -18,6 +18,7 @@ import {
   FormsModule
 } from '@angular/forms';
 import { fromEvent, map, debounceTime, Subscription } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-location-input',
@@ -32,7 +33,13 @@ import { fromEvent, map, debounceTime, Subscription } from 'rxjs';
     GoogleMapsLoaderService
   ],
   standalone: true,
-  imports: [CommonModule, IonicModule, FontAwesomeModule, FormsModule]
+  imports: [
+    CommonModule,
+    IonicModule,
+    FontAwesomeModule,
+    FormsModule,
+    TranslateModule
+  ]
 })
 export class LocationInputComponent
   implements ControlValueAccessor, AfterViewInit, OnDestroy
