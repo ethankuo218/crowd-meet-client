@@ -181,7 +181,8 @@
         "7_DAY": "7天"
       },
       "LEFT_PREFIX": "你還有",
-      "UNIT": "次提升待啟用！"
+      "UNIT": "次提升待啟用！",
+      "HINT": "您的活動會在 mega boost 結束前開始!"
     },
     "BUNDLE": {
       "FREE": {

@@ -181,7 +181,8 @@
         "7_DAY": "7 วัน"
       },
       "LEFT_PREFIX": "คุณเหลือ",
-      "UNIT": "จำนวนบูสต์ที่ใช้งานได้"
+      "UNIT": "จำนวนบูสต์ที่ใช้งานได้",
+      "HINT": "Your event will start before the boost end!"
     },
     "BUNDLE": {
       "FREE": {

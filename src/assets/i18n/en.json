@@ -181,7 +181,8 @@
         "7_DAY": "7 DAYS"
       },
       "LEFT_PREFIX": "You have",
-      "UNIT": "boost ready to roll!"
+      "UNIT": "boost ready to roll!",
+      "HINT": "Your event will start before the boost end!"
     },
     "BUNDLE": {
       "FREE": {

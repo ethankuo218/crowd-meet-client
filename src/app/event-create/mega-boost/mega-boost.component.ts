@@ -157,7 +157,7 @@ export class MegaBoostComponent implements OnInit {
     }
   }
 
-  isAvailable(index: number): boolean {
+  isLongerThanEvent(index: number): boolean {
     const boostTypeMap = [1, 3, 7];
     const current = new Date().getTime();
     const endTime = new Date(this.endTime).getTime();
