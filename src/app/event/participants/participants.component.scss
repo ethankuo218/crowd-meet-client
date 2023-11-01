@@ -83,3 +83,25 @@ hr {
 ion-modal {
   --height: 10rem;
 }
+
+.content-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h3 {
+    margin-right: 10px;
+  }
+}
+
+.status-tag {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  text-align: center;
+  text-transform: capitalize;
+  &.green {
+    background-color: #41bf65;
+    color: var(--ion-tag-text-color);
+  }
+}
