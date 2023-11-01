@@ -113,12 +113,18 @@
           <div *ngIf="i === 2" class="title">7 DAY</div>
           <ng-container *ngIf="boostCount[i] === 0; else left">
             <div class="content">
-              {{ product.price | currency }}
+              <span class="price">{{ product.price | currency }}</span>
             </div>
             <div class="content-small">
-              <s *ngIf="i === 0">{{ product.price / 0.9 | currency }}</s>
-              <s *ngIf="i === 1">{{ product.price / 0.85 | currency }}</s>
-              <s *ngIf="i === 2">{{ product.price / 0.8 }}</s>
+              <s class="original-price" *ngIf="i === 0">{{
+                product.price / 0.9 | currency
+              }}</s>
+              <s class="original-price" *ngIf="i === 1">{{
+                product.price / 0.85 | currency
+              }}</s>
+              <s class="original-price" *ngIf="i === 2">{{
+                product.price / 0.8 | currency
+              }}</s>
             </div>
           </ng-container>
           <ng-template #left>
