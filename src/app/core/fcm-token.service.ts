@@ -81,7 +81,9 @@ export class FcmTokenService {
     } else {
       this.httpClientService.get<FcmToken[]>('fcm-token').subscribe({
         next: (result) => {
-          this.fcmTokenId = result[0].id;
+          if (Array.isArray(result) && result.length > 0) {
+            this.fcmTokenId = result[0].id;
+          }
         }
       });
     }
