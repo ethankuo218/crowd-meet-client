@@ -95,6 +95,7 @@ export class EventCreateComponent implements OnInit {
   }
 
   ionViewWillEnter() {
+    this.isLoading = false;
     this.content.scrollToTop(500);
     this.route.paramMap.pipe(take(1)).subscribe((params) => {
       this.mode = params.get('mode')!;
