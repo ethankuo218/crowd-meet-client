@@ -39,7 +39,7 @@
     "ENTREPRENEURSHIP": "การลงทุน",
     "PETS": "สัตว์เลี้ยง",
     "GARDENING": "ทำสวน",
-    "COSMETOLOGY_AND_HAIRDRESSING": "เครื่องสำอางและทำผม"
+    "COSMETOLOGY_AND_HAIRDRESSING": "เครื่องสำอางและการทำผม"
   },
   "EVENT_DETAIL": {
     "EXPECTED_PALS": "จำนวนผู้เข้าร่วมที่คาดหวัง",
@@ -99,11 +99,11 @@
     "END_TIME": "อย่าเดินทางข้ามเวลา! เวลาสิ้นสุดควรเกิดขึ้นหลังจากเวลาเริ่มต้น",
     "MAX_PARTICIPANTS": "ไม่โดดเดี่ยวหรือแออัดเกินไป! ผู้เข้าร่วม 1 ถึง 15 คนเป็นจำนวนที่ดีที่สุด",
     "MAX_PRICE": "คุณไม่ได้รับอนุญาตให้ตั้งราคาเกินหนึ่งพันดอลลาร์",
-    "INVALID_LOCATION": "Select a valid location from the list after clicking search"
+    "INVALID_LOCATION": "เลือกสถานที่จากรายการ หลังจากกดค้นหา"
   },
   "LOCATION_INPUT": {
-    "SEARCH": "Search",
-    "PLACEHOLDER": "Enter location name or address"
+    "SEARCH": "ค้นหา",
+    "PLACEHOLDER": "กรอกชื่อสถานที่หรือที่อยู่"
   },
   "HISTORY": {
     "UPCOMING": "จะเริ่มในเร็ว ๆ นี้",
@@ -182,8 +182,8 @@
         "7_DAY": "7 วัน"
       },
       "LEFT_PREFIX": "คุณเหลือ",
-      "UNIT": "จำนวนบูสต์ที่ใช้งานได้",
-      "HINT": "Your event will start before the boost end!"
+      "UNIT": "บูสต์ที่ใช้งานได้",
+      "HINT": "อีเวนต์ของคุณจะเริ่มก่อนที่บูสต์จะหมด!"
     },
     "BUNDLE": {
       "FREE": {
