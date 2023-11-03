@@ -218,6 +218,13 @@
             (ionFocus)="eventForm.get('price')?.setValue(null)"
           ></ion-input>
           <div
+            *ngIf="eventForm.get('price')?.hasError('min')"
+            class="error-msg"
+          >
+            <fa-icon [icon]="['fas', 'exclamation-circle']"></fa-icon>
+            {{ 'ERROR_MSG.MIN_PRICE' | translate }}
+          </div>
+          <div
             *ngIf="eventForm.get('price')?.hasError('max')"
             class="error-msg"
           >

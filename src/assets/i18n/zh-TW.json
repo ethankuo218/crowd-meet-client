@@ -100,6 +100,7 @@
     "END_TIME": "我們不能穿越時光！結束時間應該在開始時間之後。",
     "MAX_PARTICIPANTS": "不勢單力薄，也不要太擁擠！1到15人是最佳人數。",
     "MAX_PRICE": "您不可以設定超過一百萬的價格。",
+    "MIN_PRICE": "活動價格不能低於 $0!",
     "INVALID_LOCATION": "按下搜尋後請從選單中選擇地點"
   },
   "LOCATION_INPUT": {
