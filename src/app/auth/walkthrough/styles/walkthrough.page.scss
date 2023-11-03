@@ -409,3 +409,14 @@ ion-content {
     }
   }
 }
+
+::ng-deep body.dark {
+  .info-col {
+    .info-wrapper {
+      .slide-title,
+      .slide-subtitle {
+        color: #000000; // Change to a suitable color for dark mode
+      }
+    }
+  }
+}
