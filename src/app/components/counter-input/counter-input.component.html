@@ -6,7 +6,15 @@
   </div>
 </div>
 <!-- <span class="counter-value">{{ _counterValue }}</span> -->
-<input type="number" class="counter-value" [(ngModel)]="counterValue">
+<input
+  type="number"
+  class="counter-value"
+  [(ngModel)]="counterValue"
+  min="1"
+  max="15"
+  pattern="\d+"
+  maxlength="2"
+/>
 <div class="button-outer">
   <div class="button-wrapper">
     <ion-button class="counter-icon" (click)="increase()">
