@@ -32,11 +32,20 @@
                     <div class="time">
                       <small class="title">
                         {{
-                          (eventDetail.startTime
-                            | date : 'EEE, MMM dd, yyyy h:mm a z') +
-                            ' - ' +
-                            (eventDetail.endTime
-                              | date : 'EEE, MMM dd, yyyy h:mm a z')
+                          eventDetail.startTime
+                            | date
+                              : 'EEE, MMM dd, yyyy h:mm a z'
+                              : undefined
+                              : currentLocale
+                        }}
+                        -
+                        <br />
+                        {{
+                          eventDetail.endTime
+                            | date
+                              : 'EEE, MMM dd, yyyy h:mm a z'
+                              : undefined
+                              : currentLocale
                         }}
                       </small>
                     </div>

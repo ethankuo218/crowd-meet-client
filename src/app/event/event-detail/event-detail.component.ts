@@ -15,6 +15,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { DirectivesModule } from 'src/app/directives/directives.module';
+import { Language } from 'src/app/language/language.model';
+import { LanguageService } from 'src/app/language/language.service';
 
 @Component({
   selector: 'app-details',
@@ -42,6 +44,7 @@ export class EventDetailComponent {
   private eventService = inject(EventService);
   private dialog = inject(MatDialog);
   private calendar = inject(Calendar);
+  private readonly languageService = inject(LanguageService);
 
   @ViewChild('joinBtn') joinBtn!: IonButton;
 
@@ -206,5 +209,18 @@ export class EventDetailComponent {
     const endTime = new Date(time).getTime();
 
     return today - endTime > 3 * 24 * 60 * 60 * 1000;
+  }
+
+  get currentLocale(): string {
+    switch (this.languageService.currentLanguage) {
+      case Language.THAI:
+        return 'th';
+      case Language.KOREAN:
+        return 'ko';
+      case Language.CHINESE:
+        return 'zh-Hant';
+      default:
+        return 'en';
+    }
   }
 }

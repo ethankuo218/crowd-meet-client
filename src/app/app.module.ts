@@ -56,6 +56,14 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { MatDialogModule } from '@angular/material/dialog';
+import { registerLocaleData } from '@angular/common';
+import localeTh from '@angular/common/locales/th';
+import localeKo from '@angular/common/locales/ko';
+import localeZh from '@angular/common/locales/zh-Hant';
+
+registerLocaleData(localeTh);
+registerLocaleData(localeKo);
+registerLocaleData(localeZh);
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
