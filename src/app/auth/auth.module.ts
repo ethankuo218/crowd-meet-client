@@ -5,16 +5,26 @@ import {
   RouterModule,
   CanActivateFn,
   ActivatedRouteSnapshot,
-  RouterStateSnapshot
+  RouterStateSnapshot,
+  UrlTree
 } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { AuthService } from '../core/auth.service';
+import { UserService } from '../core/user.service';
+import { Observable, map } from 'rxjs';
 
 const preventNavigateToSignInPage: CanActivateFn = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot
 ) => {
   return inject(AuthService).isLogout();
+};
+
+const preventBackToWalkthroughPage: CanActivateFn = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot
+): Promise<boolean | UrlTree> => {
+  return inject(UserService).hasFilledWalkthrough();
 };
 
 const routes: Routes = [
@@ -38,7 +48,8 @@ const routes: Routes = [
         loadChildren: () =>
           import('./walkthrough/walkthrough.module').then(
             (m) => m.WalkthroughPageModule
-          )
+          ),
+        canActivate: [preventBackToWalkthroughPage]
       }
     ]
   }

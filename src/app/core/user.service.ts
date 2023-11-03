@@ -7,6 +7,7 @@ import {
   firstValueFrom,
   forkJoin,
   map,
+  take,
   tap,
   throwError
 } from 'rxjs';
@@ -20,7 +21,7 @@ import {
 } from './models/core.model';
 import { Image, User, UserEvent } from './+states/user-state/user.model';
 import { Reference } from './+states/reference-state/reference.model';
-import { Router } from '@angular/router';
+import { Router, UrlTree } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 import { Device } from '@capacitor/device';
 
@@ -134,6 +135,24 @@ export class UserService {
 
   getAllowance(): Observable<UserAllowance> {
     return this.httpClientService.get<UserAllowance>('user/me/allowance');
+  }
+
+  getHasBirthDate(): Observable<boolean> {
+    return this.userStateFacade.getUser().pipe(
+      map((user) => {
+        if (user.birthDate) {
+          return true;
+        }
+        return false;
+      })
+    );
+  }
+
+  hasFilledWalkthrough(): Promise<boolean | UrlTree> {
+    return firstValueFrom(this.userStateFacade.getUser()).then((user) => {
+      console.log(user);
+      return user.birthDate ? this.router.parseUrl('app/menu') : true;
+    });
   }
 
   async reloadUserEvents(): Promise<void> {
