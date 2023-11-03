@@ -49,7 +49,8 @@
     "COMMENTS": "Comments",
     "ADD_COMMENT": "Add a comment",
     "EDIT": "Edit",
-    "JOIN": "Join"
+    "JOIN": "Join",
+    "ONLINE_EVENT": "Online Event"
   },
   "PROFILE": {
     "GENDER": "Gender: ",

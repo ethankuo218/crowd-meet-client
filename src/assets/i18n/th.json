@@ -42,14 +42,15 @@
     "COSMETOLOGY_AND_HAIRDRESSING": "เครื่องสำอางและการทำผม"
   },
   "EVENT_DETAIL": {
-    "EXPECTED_PALS": "จำนวนผู้เข้าร่วมที่คาดหวัง",
+    "EXPECTED_PALS": "คาดหวังผู้เข้าร่วมจำนวน",
     "DESCRIPTION": "รายละเอียด",
     "HOST": "เจ้าของอีเวนต์",
     "PARTICIPANTS": "ผู้เข้าร่วม",
     "COMMENTS": "ความคิดเห็น",
     "ADD_COMMENT": "เพิ่มความคิดเห็น",
     "EDIT": "แก้ไข",
-    "JOIN": "เข้าร่วม"
+    "JOIN": "เข้าร่วม",
+    "ONLINE_EVENT": "อีเวนต์ออนไลน์"
   },
   "PROFILE": {
     "GENDER": "เพศ",

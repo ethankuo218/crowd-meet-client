@@ -51,7 +51,10 @@
                     </div>
                     <div class="place">
                       <small class="title"
-                        >{{ eventDetail.formattedAddress || 'Online event' }}
+                        >{{
+                          eventDetail.formattedAddress ||
+                            'EVENT_DETAIL.ONLINE_EVENT' | translate
+                        }}
                       </small>
                     </div>
                     <fa-icon
