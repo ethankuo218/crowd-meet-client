@@ -7,6 +7,7 @@ import {
   firstValueFrom,
   forkJoin,
   map,
+  take,
   tap,
   throwError
 } from 'rxjs';
@@ -134,6 +135,17 @@ export class UserService {
 
   getAllowance(): Observable<UserAllowance> {
     return this.httpClientService.get<UserAllowance>('user/me/allowance');
+  }
+
+  getHasBirthDate(): Observable<boolean> {
+    return this.userStateFacade.getUser().pipe(
+      map((user) => {
+        if (user.birthDate) {
+          return true;
+        }
+        return false;
+      })
+    );
   }
 
   async reloadUserEvents(): Promise<void> {

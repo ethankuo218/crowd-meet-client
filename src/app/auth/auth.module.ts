@@ -9,12 +9,28 @@ import {
 } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { AuthService } from '../core/auth.service';
+import { UserService } from '../core/user.service';
+import { Observable, map } from 'rxjs';
 
 const preventNavigateToSignInPage: CanActivateFn = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot
 ) => {
   return inject(AuthService).isLogout();
+};
+
+const preventBackToWalkthroughPage: CanActivateFn = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot
+): Observable<boolean> => {
+  const userService = inject(UserService);
+
+  return userService.getHasBirthDate().pipe(
+    map((hasBirthDate) => {
+      console.log(`getHasBirthDate: ${hasBirthDate}`);
+      return !hasBirthDate; // negate the value to ensure users with a birthday can't access
+    })
+  );
 };
 
 const routes: Routes = [
@@ -38,7 +54,8 @@ const routes: Routes = [
         loadChildren: () =>
           import('./walkthrough/walkthrough.module').then(
             (m) => m.WalkthroughPageModule
-          )
+          ),
+        canActivate: [preventBackToWalkthroughPage]
       }
     ]
   }
