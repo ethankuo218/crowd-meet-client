@@ -11,6 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NotificationTitlePipe } from './pipes/notification-title.pipe';
 import { NotificationIconPipe } from './pipes/notification-icon.pipe';
 import { RelativeDatePipe } from '../core/pipe/relative-date.pipe';
+import { EventDetailComponent } from '../event/event-detail/event-detail.component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,10 @@ import { RelativeDatePipe } from '../core/pipe/relative-date.pipe';
       {
         path: '',
         component: NotificationsPage
+      },
+      {
+        path: 'detail/:id',
+        component: EventDetailComponent
       }
     ]),
     HeaderComponent,

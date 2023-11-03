@@ -4,7 +4,11 @@
   <main class="notification-area main-area">
     <div class="container">
       <ng-container *ngIf="notifications$ | async as notifications">
-        <div class="image_content" *ngFor="let item of notifications">
+        <div
+          class="image_content"
+          *ngFor="let item of notifications"
+          [routerLink]="['/app/notifications/detail', item.eventId]"
+        >
           <div class="poin_ment">
             <div>
               <fa-icon
