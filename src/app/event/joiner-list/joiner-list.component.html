@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header [defaultHref]="'app/event/list/' + eventId"></app-header>
 <ion-content>
   <ion-refresher slot="fixed" (ionRefresh)="reload($event)">
     <ion-refresher-content></ion-refresher-content>

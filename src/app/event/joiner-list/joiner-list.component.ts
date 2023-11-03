@@ -15,7 +15,7 @@ export class JoinerListComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private eventService = inject(EventService);
 
-  private eventId!: number;
+  eventId!: number;
 
   private joinerSubject: Subject<Participant[]> = new Subject();
 
@@ -33,6 +33,7 @@ export class JoinerListComponent implements OnInit {
       this.eventService.getParticipants(this.eventId)
     );
 
+    console.log(result);
     this.joinerSubject.next(result.canView ? result.participants : []);
     if (event) {
       (event as RefresherCustomEvent).target.complete();
