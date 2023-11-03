@@ -21,7 +21,7 @@ import {
 } from './models/core.model';
 import { Image, User, UserEvent } from './+states/user-state/user.model';
 import { Reference } from './+states/reference-state/reference.model';
-import { Router } from '@angular/router';
+import { Router, UrlTree } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 import { Device } from '@capacitor/device';
 
@@ -146,6 +146,13 @@ export class UserService {
         return false;
       })
     );
+  }
+
+  hasFilledWalkthrough(): Promise<boolean | UrlTree> {
+    return firstValueFrom(this.userStateFacade.getUser()).then((user) => {
+      console.log(user);
+      return user.birthDate ? this.router.parseUrl('app/menu') : true;
+    });
   }
 
   async reloadUserEvents(): Promise<void> {

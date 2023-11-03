@@ -5,7 +5,8 @@ import {
   RouterModule,
   CanActivateFn,
   ActivatedRouteSnapshot,
-  RouterStateSnapshot
+  RouterStateSnapshot,
+  UrlTree
 } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { AuthService } from '../core/auth.service';
@@ -22,15 +23,8 @@ const preventNavigateToSignInPage: CanActivateFn = (
 const preventBackToWalkthroughPage: CanActivateFn = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot
-): Observable<boolean> => {
-  const userService = inject(UserService);
-
-  return userService.getHasBirthDate().pipe(
-    map((hasBirthDate) => {
-      console.log(`getHasBirthDate: ${hasBirthDate}`);
-      return !hasBirthDate; // negate the value to ensure users with a birthday can't access
-    })
-  );
+): Promise<boolean | UrlTree> => {
+  return inject(UserService).hasFilledWalkthrough();
 };
 
 const routes: Routes = [
