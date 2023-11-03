@@ -320,7 +320,7 @@
             </svg>
           </ion-col>
           <ion-col class="info-col">
-            <div class="info-wrapper">
+            <div class="info-wrapper third-slide-info-wrapper">
               <h3 class="info-title">
                 {{'WALKTHROUGH.SLIDE_3.TITLE' | translate}}
               </h3>
@@ -457,6 +457,13 @@
                 <fa-icon [icon]="['fas', 'circle-exclamation']"></fa-icon
                 >{{'WALKTHROUGH.SLIDE_4.ERROR' | translate}}
               </p>
+
+              <ion-button
+                class="continue-btn"
+                [disabled]="genderError"
+                (click)="moveToNextSlide()"
+                >{{'WALKTHROUGH.SLIDE_3.CONTINUE' | translate}}</ion-button
+              >
             </div>
           </ion-col>
         </ion-row>

@@ -6,7 +6,7 @@
   --page-margin: var(--app-broad-margin);
   --page-background: var(--app-background);
 
-  --page-swiper-pagination-space: 40px;
+  --page-swiper-pagination-space: 70px;
   --page-swiper-pagination-height: 18px;
   --page-pagination-bullet-size: 10px;
 
@@ -21,7 +21,7 @@
 }
 
 .category-scroll-container {
-  max-height: 65vh;
+  max-height: 55vh;
   overflow-y: auto;
   width: 100%; // Ensure it takes full width
 }
@@ -138,7 +138,7 @@ ion-content {
 }
 
 .continue-btn {
-  margin-top: 2.5rem;
+  margin-top: 1.5rem;
   width: 100%;
 }
 
@@ -152,6 +152,9 @@ ion-content {
 
 .third-slide {
   --page-vector-decoration-fill: var(--page-third-slide-background);
+  .info-wrapper.third-slide-info-wrapper {
+    margin-top: -50px !important;
+  }
 }
 
 .forth-slide {
