@@ -19,7 +19,7 @@ export class ImgUploadService {
   private dialog = inject(MatDialog);
   private uploadedImageName: string[] = [];
 
-  async selectImage(): Promise<string> {
+  async selectImage(cleanPreviousSelection = false): Promise<string> {
     const image = await Camera.getPhoto({
       quality: 100,
       height: 800,
@@ -52,7 +52,7 @@ export class ImgUploadService {
         data: base64Data.split(',')[1],
         recursive: true
       });
-
+      if (cleanPreviousSelection) this.uploadedImageName = [];
       this.uploadedImageName.push(fileName);
 
       return base64Data;

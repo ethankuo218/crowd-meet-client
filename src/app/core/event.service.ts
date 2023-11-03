@@ -170,7 +170,7 @@ export class EventService {
 
   // event image
   selectImage(): Promise<string> {
-    return this.imgUploadService.selectImage();
+    return this.imgUploadService.selectImage(true);
   }
 
   private async updateEventImage(id: number, mode: string): Promise<void> {
