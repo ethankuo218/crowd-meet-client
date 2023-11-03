@@ -182,7 +182,13 @@
                   <div class="comment_list">
                     <div class="comment" *ngFor="let comment of comments">
                       <div class="user">
-                        <div class="user_img">
+                        <div
+                          class="user_img"
+                          [routerLink]="[
+                            '/app/event/profile',
+                            comment.user.userId
+                          ]"
+                        >
                           <img
                             appImageFallBack
                             [src]="
@@ -192,7 +198,15 @@
                           />
                         </div>
                         <div class="user_name">
-                          <h4 class="dark">{{ comment.user.name }}</h4>
+                          <h4
+                            class="dark"
+                            [routerLink]="[
+                              '/app/event/profile',
+                              comment.user.userId
+                            ]"
+                          >
+                            {{ comment.user.name }}
+                          </h4>
                           <small class="dark_d">{{
                             comment.createdAt | date : 'MMM d. y | HH:mm a'
                           }}</small>
