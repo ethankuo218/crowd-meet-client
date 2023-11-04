@@ -214,7 +214,7 @@ export class EventDetailComponent {
   get currentLocale(): [string, string] {
     switch (this.languageService.currentLanguage) {
       case Language.THAI:
-        return ['th', 'EEE dd MMM yyyy h:mm a z'];
+        return ['th', 'EEE dd MMM yyyy HH:mm z'];
 
       case Language.KOREAN:
         return ['ko', 'yyyy년 M월 d일 HH:mm'];
