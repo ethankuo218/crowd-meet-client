@@ -211,16 +211,19 @@ export class EventDetailComponent {
     return today - endTime > 3 * 24 * 60 * 60 * 1000;
   }
 
-  get currentLocale(): string {
+  get currentLocale(): [string, string] {
     switch (this.languageService.currentLanguage) {
       case Language.THAI:
-        return 'th';
+        return ['th', 'EEE dd MMM yyyy h:mm a z'];
+
       case Language.KOREAN:
-        return 'ko';
+        return ['ko', 'yyyy년 M월 d일 HH:mm'];
+
       case Language.CHINESE:
-        return 'zh-Hant';
+        return ['zh-Hant', 'y年M月d日 EEEE HH:mm zzzz'];
+
       default:
-        return 'en';
+        return ['en', 'EEE, MMM dd, yyyy h:mm a z'];
     }
   }
 }

@@ -34,18 +34,18 @@
                         {{
                           eventDetail.startTime
                             | date
-                              : 'EEE, MMM dd, yyyy h:mm a z'
+                              : currentLocale[1]
                               : undefined
-                              : currentLocale
+                              : currentLocale[0]
                         }}
                         -
                         <br />
                         {{
                           eventDetail.endTime
                             | date
-                              : 'EEE, MMM dd, yyyy h:mm a z'
+                              : currentLocale[1]
                               : undefined
-                              : currentLocale
+                              : currentLocale[0]
                         }}
                       </small>
                     </div>
