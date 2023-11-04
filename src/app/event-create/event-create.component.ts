@@ -99,42 +99,66 @@ export class EventCreateComponent implements OnInit {
   }
 
   ionViewWillEnter() {
+    this.resetForm();
+    this.route.paramMap.pipe(take(1)).subscribe((params) => {
+      this.initializeForm(params);
+    });
+  }
+
+  private resetForm(): void {
     this.isLoading = false;
     this.content.scrollToTop(500);
-    this.route.paramMap.pipe(take(1)).subscribe((params) => {
-      this.mode = params.get('mode')!;
-      this.eventForm.reset();
-      delete this.eventCoverPictureUrl;
-      delete this.selectLocation;
+    this.eventForm.reset();
+    delete this.eventCoverPictureUrl;
+    delete this.selectLocation;
+    const today = new Date(new Date().getTime() + 10 * 60 * 1000).toISOString();
+    this.minDate = today;
+  }
 
-      const today = new Date(
-        new Date().getTime() + 10 * 60 * 1000
-      ).toISOString();
-      this.minDate = today;
+  private initializeForm(params: any): void {
+    this.mode = params.get('mode')!;
+    if (this.mode === 'edit') {
+      const eventInfo: Event = JSON.parse(params.get('eventInfo')!);
+      this.setEditMode(eventInfo);
+    } else {
+      this.setDefaultFormValues();
+    }
+  }
 
-      if (this.mode === 'edit') {
-        const eventInfo: Event = JSON.parse(params.get('eventInfo')!);
-        this.eventId = eventInfo.eventId;
-        this.eventForm.patchValue(eventInfo);
-        this.eventForm
-          .get('startTime')
-          ?.patchValue(Formatter.getFormatTimeString(eventInfo.startTime));
-        this.eventForm
-          .get('endTime')
-          ?.patchValue(Formatter.getFormatTimeString(eventInfo.endTime));
-        this.eventCoverPictureUrl = eventInfo.imageUrl;
-        this.onIsOnlineChange(eventInfo.isOnline);
-      } else {
-        this.eventForm.get('maxParticipants')?.setValue(1);
-        this.eventForm
-          .get('startTime')
-          ?.patchValue(Formatter.getFormatTimeString(today));
-        this.eventForm
-          .get('endTime')
-          ?.patchValue(Formatter.getFormatTimeString(today));
-        this.eventForm.get('price')?.patchValue(0);
-      }
-    });
+  private setEditMode(eventInfo: Event): void {
+    this.eventId = eventInfo.eventId;
+    this.eventForm.patchValue(eventInfo);
+    this.eventForm
+      .get('startTime')
+      ?.patchValue(Formatter.getFormatTimeString(eventInfo.startTime));
+    this.eventForm
+      .get('endTime')
+      ?.patchValue(Formatter.getFormatTimeString(eventInfo.endTime));
+    this.eventCoverPictureUrl = eventInfo.imageUrl;
+    this.onIsOnlineChange(eventInfo.isOnline);
+
+    if (!eventInfo.isOnline) {
+      this.selectLocation = {
+        placeId: eventInfo.placeId,
+        lat: eventInfo.lat,
+        lng: eventInfo.lng,
+        formattedAddress: eventInfo.formattedAddress
+      };
+      this.eventForm
+        .get('formattedAddress')
+        ?.patchValue(eventInfo.formattedAddress);
+    }
+  }
+
+  private setDefaultFormValues(): void {
+    this.eventForm.get('maxParticipants')?.setValue(1);
+    this.eventForm
+      .get('startTime')
+      ?.patchValue(Formatter.getFormatTimeString(this.minDate));
+    this.eventForm
+      .get('endTime')
+      ?.patchValue(Formatter.getFormatTimeString(this.minDate));
+    this.eventForm.get('price')?.patchValue(0);
   }
 
   onSubmit() {
@@ -166,78 +190,104 @@ export class EventCreateComponent implements OnInit {
   }
 
   private async createEvent(): Promise<void> {
-    if (this.eventCoverPictureUrl === null) {
-      this.dialog.open(AlertDialogComponent, {
-        data: {
-          title: 'Oops!',
-          content: `Please upload event image`,
-          enableCancelButton: true
-        },
-        panelClass: 'custom-dialog'
-      });
+    if (!this.eventCoverPictureUrl) {
+      this.showUploadImageAlert();
       return;
     }
 
-    const selection: number[] = [];
-    this.categories.value.forEach((value: boolean, index: number) => {
-      if (value) {
-        selection.push(this.categoryList[index].categoryId);
-      }
-    });
+    const selection = this.getSelectedCategories();
 
-    if (this.mode === 'edit' && this.eventId) {
+    if (this.isEditMode()) {
+      await this.handleEventUpdate(selection);
+    } else {
+      await this.handleEventCreation(selection);
+    }
+  }
+
+  private showUploadImageAlert(): void {
+    this.dialog.open(AlertDialogComponent, {
+      data: {
+        title: 'Oops!',
+        content: 'Please upload event image',
+        enableCancelButton: true
+      },
+      panelClass: 'custom-dialog'
+    });
+  }
+
+  private getSelectedCategories(): number[] {
+    return this.categories.value
+      .map((value: boolean, index: number) =>
+        value ? this.categoryList[index].categoryId : null
+      )
+      .filter((categoryId: number) => categoryId !== null);
+  }
+
+  private isEditMode(): boolean {
+    return !!(this.mode === 'edit' && this.eventId);
+  }
+
+  private async handleEventUpdate(selection: number[]): Promise<void> {
+    this.loadingService.present();
+    try {
+      await this.eventService.updateEvent(
+        this.eventId!,
+        this.getEventPayload(selection)
+      );
+    } catch (error) {
+      console.error(error);
+    } finally {
+      this.setLoading(false);
+    }
+  }
+
+  private async handleEventCreation(selection: number[]): Promise<void> {
+    const modal = await this.createMegaBoostModal(selection);
+    const { role } = await modal.onWillDismiss();
+
+    if (role === 'cancel') {
       this.loadingService.present();
       try {
-        await this.eventService.updateEvent(this.eventId, {
-          ...this.eventForm.value,
-          startTime: new Date(this.eventForm.value.startTime).toISOString(),
-          endTime: new Date(this.eventForm.value.endTime).toISOString(),
-          categories: selection,
-          ...this.selectLocation
-        });
+        await this.eventService.createEvent(this.getEventPayload(selection));
       } catch (error) {
         console.error(error);
       } finally {
-        this.isLoading = false;
-        this.loadingService.dismiss();
+        this.setLoading(false);
       }
-    } else {
-      const modal = await this.modalCtrl.create({
-        component: MegaBoostComponent,
-        initialBreakpoint: 1,
-        breakpoints: [0, 1],
-        componentProps: {
-          eventId: this.eventId,
-          endTime: new Date(this.eventForm.value.endTime).toISOString(),
-          eventInfo: {
-            ...this.eventForm.value,
-            startTime: new Date(this.eventForm.value.startTime).toISOString(),
-            endTime: new Date(this.eventForm.value.endTime).toISOString(),
-            categories: selection,
-            ...this.selectLocation
-          }
-        }
-      });
-      modal.present();
-      const { data, role } = await modal.onWillDismiss();
+    }
+  }
 
-      if (role === 'cancel') {
-        this.loadingService.present();
-        try {
-          await this.eventService.createEvent({
-            ...this.eventForm.value,
-            startTime: new Date(this.eventForm.value.startTime).toISOString(),
-            endTime: new Date(this.eventForm.value.endTime).toISOString(),
-            categories: selection,
-            ...this.selectLocation
-          });
-        } catch (error) {
-          console.error(error);
-        } finally {
-          this.isLoading = false;
-          this.loadingService.dismiss();
-        }
+  private createMegaBoostModal(
+    selection: number[]
+  ): Promise<HTMLIonModalElement> {
+    return this.modalCtrl.create({
+      component: MegaBoostComponent,
+      initialBreakpoint: 1,
+      breakpoints: [0, 1],
+      componentProps: {
+        eventId: this.eventId,
+        endTime: new Date(this.eventForm.value.endTime).toISOString(),
+        eventInfo: this.getEventPayload(selection)
       }
+    });
+  }
+
+  private getEventPayload(selection: number[]): any {
+    return {
+      ...this.eventForm.value,
+      startTime: new Date(this.eventForm.value.startTime).toISOString(),
+      endTime: new Date(this.eventForm.value.endTime).toISOString(),
+      categories: selection,
+      ...this.selectLocation
+    };
+  }
+
+  private setLoading(loading: boolean): void {
+    this.isLoading = loading;
+    if (loading) {
+      this.loadingService.present();
+    } else {
+      this.loadingService.dismiss();
     }
   }
 
