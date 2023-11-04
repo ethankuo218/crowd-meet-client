@@ -128,6 +128,15 @@ export class EventCreateComponent implements OnInit {
   private setEditMode(eventInfo: Event): void {
     this.eventId = eventInfo.eventId;
     this.eventForm.patchValue(eventInfo);
+    const eventCategoryIds = new Set(
+      eventInfo.categories.map((cat) => cat.categoryId)
+    );
+    this.categoryList.forEach((category, index) => {
+      this.categories
+        .at(index)
+        .setValue(eventCategoryIds.has(category.categoryId));
+    });
+
     this.eventForm
       .get('startTime')
       ?.patchValue(Formatter.getFormatTimeString(eventInfo.startTime));
