@@ -256,6 +256,7 @@ export class EventCreateComponent implements OnInit {
       this.location.clearValidators();
       this.location.disable();
       this.location.updateValueAndValidity();
+      delete this.selectLocation;
     } else {
       this.location.setValidators([Validators.required]);
       this.location.enable();
