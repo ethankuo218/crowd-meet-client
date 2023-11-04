@@ -5,7 +5,7 @@ import { PurchasesStoreProduct } from '@awesome-cordova-plugins/purchases/ngx';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ModalController } from '@ionic/angular';
 import { SwiperModule } from 'swiper/angular';
 import { HeaderComponent } from '../header/header.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -34,6 +34,7 @@ export class InAppPurchaseComponent implements OnInit {
 
   private inAppPurchaseService = inject(InAppPurchaseService);
   private zone = inject(NgZone);
+  private modalControl = inject(ModalController);
 
   productList: PurchasesStoreProduct[] = [];
   activeSubscriptions: string[] = [];
@@ -117,6 +118,10 @@ export class InAppPurchaseComponent implements OnInit {
   hasSubscribed(identifier: string): boolean {
     const formattedIdentifier = this.formatIdentifier(identifier);
     return this.activeSubscriptions.includes(formattedIdentifier);
+  }
+
+  cancel(): void {
+    this.modalControl.dismiss(null, 'cancel');
   }
 
   private formatIdentifier(identifier: string): string {

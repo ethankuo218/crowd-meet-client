@@ -2,6 +2,13 @@
 
 <ion-content>
   <main class="subscriptions-area main-area">
+    <ion-header *ngIf="isModalMode">
+      <ion-toolbar>
+        <ion-buttons slot="start" (click)="cancel()" class="cancel-btn">{{
+          'EVENT_LIST.CANCEL' | translate
+        }}</ion-buttons>
+      </ion-toolbar>
+    </ion-header>
     <div class="container">
       <div class="container-title"></div>
       <div class="bundle-container">

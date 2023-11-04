@@ -122,7 +122,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     const modal = await this.modalCtrl.create({
       component: InAppPurchaseComponent,
       initialBreakpoint: 1,
-      breakpoints: [0, 0.9],
+      // breakpoints: [0, 0.9],
       componentProps: {
         isModalMode: true
       }

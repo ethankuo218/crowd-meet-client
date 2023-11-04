@@ -157,3 +157,11 @@
 .purchase-btn {
   width: 100%;
 }
+
+.cancel-btn {
+  --background: transparent;
+  color: var(--ion-color-primary);
+  font-weight: 400;
+  height: 1rem;
+  width: fit-content;
+}
