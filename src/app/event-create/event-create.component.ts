@@ -252,6 +252,7 @@ export class EventCreateComponent implements OnInit {
 
   private async handleEventCreation(selection: number[]): Promise<void> {
     const modal = await this.createMegaBoostModal(selection);
+    modal.present();
     const { role } = await modal.onWillDismiss();
 
     if (role === 'cancel') {
