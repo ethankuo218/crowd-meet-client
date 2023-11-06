@@ -118,3 +118,75 @@
     }
   }
 }
+
+.skeleton {
+  // Ensure that the skeleton takes up the full width of its container to match the loaded cards.
+  width: 100%;
+
+  // Mimic the card appearance for the skeleton
+  .image_content {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 8px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .poin_ment {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+
+  .poin_ment div {
+    // Skeleton for the icon or image
+    width: 60px;
+    height: 60px;
+    border-radius: 50%; // Round shape if your icons/images are round
+  }
+
+  .ment_text {
+    // Skeleton for the text next to the icon/image
+    h2,
+    p {
+      border-radius: 4px;
+    }
+
+    h2 {
+      // Mimic the title size
+      width: 50%; // Adjust as needed
+      height: 20px; // Adjust as needed to match your title height
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      // Mimic the paragraph size
+      width: 80%; // Adjust as needed
+      height: 15px; // Adjust as needed to match your paragraph height
+    }
+  }
+
+  .sample_text {
+    p {
+      // Skeleton for the secondary text
+      width: 90%; // Adjust as needed
+      height: 15px; // Adjust as needed to match your paragraph height
+      margin-top: 0.8rem;
+    }
+  }
+}
+
+// Adapt dark theme skeleton style if necessary
+::ng-deep body.dark {
+  .notifications-content {
+    .notification-area {
+      .skeleton {
+        .image_content {
+          background-color: #2b2b2b; // Dark background for dark theme
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+      }
+    }
+  }
+}

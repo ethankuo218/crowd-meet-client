@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { NotificationsService } from './notifications.service';
-import { Observable, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, Subject, catchError } from 'rxjs';
 import { Notification } from './models/notifications.models';
 
 @Component({
@@ -12,23 +12,34 @@ import { Notification } from './models/notifications.models';
   ]
 })
 export class NotificationsPage {
-  private notificationService = inject(NotificationsService);
-  private notificationsReplaySubject: ReplaySubject<Notification[]> =
-    new ReplaySubject();
+  notifications$ = new BehaviorSubject<Notification[] | null>(null);
+  isLoading$ = new BehaviorSubject<boolean>(true);
+  private destroy$ = new Subject<void>();
 
-  get notifications$(): Observable<Notification[]> {
-    return this.notificationsReplaySubject;
-  }
+  constructor(private notificationService: NotificationsService) {}
 
   ionViewWillEnter() {
     this.reload();
   }
 
-  private reload(): void {
-    this.notificationService.getNotifications().subscribe({
-      next: (result) => {
-        this.notificationsReplaySubject.next(result);
-      }
-    });
+  ionViewWillLeave() {
+    this.destroy$.next();
+  }
+
+  reload() {
+    this.isLoading$.next(true);
+    this.notificationService
+      .getNotifications()
+      .pipe(
+        catchError((error) => {
+          console.error(error);
+          this.isLoading$.next(false);
+          return [];
+        })
+      )
+      .subscribe((notifications) => {
+        this.notifications$.next(notifications);
+        this.isLoading$.next(false);
+      });
   }
 }

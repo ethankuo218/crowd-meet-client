@@ -3,38 +3,76 @@
 <ion-content class="notifications-content">
   <main class="notification-area main-area">
     <div class="container">
-      <ng-container *ngIf="notifications$ | async as notifications">
-        <div
-          class="image_content"
-          *ngFor="let item of notifications"
-          [routerLink]="['/app/notifications/detail', item.eventId]"
-        >
+      <!-- Handle loading state -->
+      <ng-container *ngIf="isLoading$ | async; else contentLoaded">
+        <div class="image_content skeleton" *ngFor="let _ of [].constructor(5)">
           <div class="poin_ment">
             <div>
-              <fa-icon
-                [icon]="item.content | notificationTitle | notificationIcon"
-              ></fa-icon>
+              <ion-skeleton-text
+                animated
+                style="width: 60px; height: 60px"
+              ></ion-skeleton-text>
             </div>
             <div class="ment_text">
               <h2 class="dark">
-                {{item.content | notificationTitle | translate}}
+                <ion-skeleton-text
+                  animated
+                  style="width: 50%"
+                ></ion-skeleton-text>
               </h2>
-              <p class="dark_d">{{item.createdAt | relativeDate}}</p>
+              <p class="dark_d">
+                <ion-skeleton-text
+                  animated
+                  style="width: 80%"
+                ></ion-skeleton-text>
+              </p>
             </div>
-            <!-- <button class="white">New</button> -->
           </div>
           <div class="sample_text">
-            <p class="dark_d">{{item.content}}</p>
+            <p class="dark_d">
+              <ion-skeleton-text
+                animated
+                style="width: 90%"
+              ></ion-skeleton-text>
+            </p>
           </div>
         </div>
-        <div
-          *ngIf="notifications.length === 0"
-          class="no-more-content"
-          style="margin-top: 2rem"
-        >
-          {{ 'NOTIFICATIONS.NO_MORE_CONTENT' | translate }}
-        </div>
       </ng-container>
+
+      <!-- Handle loaded content -->
+      <ng-template #contentLoaded>
+        <ng-container *ngIf="notifications$ | async as notifications">
+          <div
+            *ngFor="let item of notifications"
+            class="image_content"
+            [routerLink]="['/app/notifications/detail', item.eventId]"
+          >
+            <div class="poin_ment">
+              <div>
+                <fa-icon
+                  [icon]="item.content | notificationTitle | notificationIcon"
+                ></fa-icon>
+              </div>
+              <div class="ment_text">
+                <h2 class="dark">
+                  {{item.content | notificationTitle | translate}}
+                </h2>
+                <p class="dark_d">{{item.createdAt | relativeDate}}</p>
+              </div>
+            </div>
+            <div class="sample_text">
+              <p class="dark_d">{{item.content}}</p>
+            </div>
+          </div>
+          <div
+            *ngIf="notifications.length === 0"
+            class="no-more-content"
+            style="margin-top: 2rem"
+          >
+            {{ 'NOTIFICATIONS.NO_MORE_CONTENT' | translate }}
+          </div>
+        </ng-container>
+      </ng-template>
     </div>
   </main>
 </ion-content>
