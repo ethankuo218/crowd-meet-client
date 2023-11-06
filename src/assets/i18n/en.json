@@ -50,7 +50,13 @@
     "ADD_COMMENT": "Add a comment",
     "EDIT": "Edit",
     "JOIN": "Join",
-    "ONLINE_EVENT": "Online Event"
+    "ONLINE_EVENT": "Online Event",
+    "CONFIRM_DIALOG": {
+      "HEADER": "Join Event?",
+      "MESSAGE": "Once confirmed, the event organizer will review and validate your application.",
+      "CONFIRM": "Apply to Join",
+      "CANCEL": "Maybe Later"
+    }
   },
   "PROFILE": {
     "GENDER": "Gender: ",

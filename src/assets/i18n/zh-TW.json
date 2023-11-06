@@ -50,7 +50,13 @@
     "ADD_COMMENT": "新增評論",
     "EDIT": "編輯",
     "JOIN": "參加",
-    "ONLINE_EVENT": "線上活動"
+    "ONLINE_EVENT": "線上活動",
+    "CONFIRM_DIALOG": {
+      "HEADER": "加入活動？",
+      "MESSAGE": "確認後，活動主辦方將審核並驗證您的申請。",
+      "CONFIRM": "申請加入",
+      "CANCEL": "稍後再說"
+    }
   },
   "PROFILE": {
     "GENDER": "性別：",

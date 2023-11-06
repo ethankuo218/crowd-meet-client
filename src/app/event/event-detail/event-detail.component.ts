@@ -5,13 +5,13 @@ import { Component, ViewChild, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Observable, switchMap, tap, map } from 'rxjs';
 import { Browser } from '@capacitor/browser';
-import { IonButton, IonicModule } from '@ionic/angular';
+import { AlertController, IonButton, IonicModule } from '@ionic/angular';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertDialogComponent } from 'src/app/components/alert-dialog/alert-dialog.component';
 import { Calendar } from '@awesome-cordova-plugins/calendar/ngx';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from 'src/app/header/header.component';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { DirectivesModule } from 'src/app/directives/directives.module';
@@ -45,6 +45,8 @@ export class EventDetailComponent {
   private dialog = inject(MatDialog);
   private calendar = inject(Calendar);
   private readonly languageService = inject(LanguageService);
+  private readonly alertController = inject(AlertController);
+  private readonly translate = inject(TranslateService);
 
   @ViewChild('joinBtn') joinBtn!: IonButton;
 
@@ -140,12 +142,32 @@ export class EventDetailComponent {
   }
 
   async joinEvent(id: number): Promise<void> {
-    this.joinBtn.disabled = true;
-    try {
-      await this.eventService.apply(id);
-    } catch (err) {
-      this.joinBtn.disabled = false;
-    }
+    const alert = await this.alertController.create({
+      header: this.translate.instant('EVENT_DETAIL.CONFIRM_DIALOG.HEADER'),
+
+      message: this.translate.instant('EVENT_DETAIL.CONFIRM_DIALOG.MESSAGE'),
+      buttons: [
+        {
+          text: this.translate.instant('EVENT_DETAIL.CONFIRM_DIALOG.CANCEL'),
+          role: 'cancel',
+          handler: () => {}
+        },
+        {
+          text: this.translate.instant('DIALOG.BUTTON.CONFIRM'),
+          handler: async () => {
+            this.joinBtn.disabled = true;
+            try {
+              await this.eventService.apply(id);
+            } catch (err) {
+              console.error('Error applying to join the event:', err);
+              this.joinBtn.disabled = false;
+            }
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   checkParticipants(isHost: boolean, eventId: number): void {
