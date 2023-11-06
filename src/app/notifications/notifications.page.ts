@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NotificationsService } from './notifications.service';
 import { BehaviorSubject, Subject, catchError } from 'rxjs';
 import { Notification } from './models/notifications.models';
+import { RefresherCustomEvent } from '@ionic/angular';
 
 @Component({
   selector: 'app-notifications',
@@ -26,7 +27,7 @@ export class NotificationsPage {
     this.destroy$.next();
   }
 
-  reload() {
+  private reload() {
     this.isLoading$.next(true);
     this.notificationService
       .getNotifications()
@@ -40,6 +41,23 @@ export class NotificationsPage {
       .subscribe((notifications) => {
         this.notifications$.next(notifications);
         this.isLoading$.next(false);
+      });
+  }
+
+  doRefresh(event: Event) {
+    this.notificationService
+      .getNotifications()
+      .pipe(
+        catchError((error) => {
+          console.error(error);
+          (event as RefresherCustomEvent).target.complete();
+          return [];
+        })
+      )
+      .subscribe((notifications) => {
+        this.notifications$.next(notifications);
+        this.isLoading$.next(false);
+        (event as RefresherCustomEvent).target.complete();
       });
   }
 }

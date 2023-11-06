@@ -1,6 +1,10 @@
 <app-header [defaultHref]="'app/notifications'"></app-header>
 
 <ion-content class="notifications-content">
+  <!-- Pull to refresh component -->
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <main class="notification-area main-area">
     <div class="container">
       <!-- Handle loading state -->
