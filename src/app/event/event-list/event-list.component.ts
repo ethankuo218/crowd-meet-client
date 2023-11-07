@@ -64,7 +64,7 @@ export class EventListComponent implements OnInit {
       loop: itemCount > 2,
       autoplay: {
         delay: 2000,
-        disableOnInteraction: true
+        disableOnInteraction: false
       }
     };
   }
