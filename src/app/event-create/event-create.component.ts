@@ -264,6 +264,8 @@ export class EventCreateComponent implements OnInit {
       } finally {
         this.setLoading(false);
       }
+    } else {
+      this.setLoading(false);
     }
   }
 
@@ -273,7 +275,7 @@ export class EventCreateComponent implements OnInit {
     return this.modalCtrl.create({
       component: MegaBoostComponent,
       initialBreakpoint: 1,
-      breakpoints: [0, 1],
+      // breakpoints: [0, 1],
       componentProps: {
         eventId: this.eventId,
         endTime: new Date(this.eventForm.value.endTime).toISOString(),

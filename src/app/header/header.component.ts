@@ -134,7 +134,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     const modal = await this.modalCtrl.create({
       component: MegaBoostComponent,
       initialBreakpoint: 1,
-      breakpoints: [0, 0.9],
+      // breakpoints: [0, 0.9],
       componentProps: {
         eventId: this.eventService.currentEventDetail?.eventId,
         endTime: this.eventService.currentEventDetail?.endTime
