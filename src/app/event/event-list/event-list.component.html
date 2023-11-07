@@ -9,7 +9,7 @@
         <h3 *ngIf="boosted.length !== 0" class="dark">
           {{ 'EVENT_LIST.SPOTLIGHT' | translate }}
         </h3>
-        <swiper *ngIf="!isLoading" [slidesPerView]="2">
+        <swiper *ngIf="!isLoading" [config]="swiperConfig">
           <ng-template swiperSlide *ngFor="let item of boosted">
             <div
               class="item slide_item"

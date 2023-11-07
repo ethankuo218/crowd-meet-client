@@ -8,6 +8,14 @@ import {
   RefresherCustomEvent
 } from '@ionic/angular';
 import * as _ from 'underscore';
+import Swiper, {
+  Autoplay,
+  Navigation,
+  Pagination,
+  SwiperOptions
+} from 'swiper';
+// configure Swiper to use modules
+Swiper.use([Navigation, Pagination, Autoplay]);
 
 @Component({
   selector: 'app-listing',
@@ -19,14 +27,13 @@ import * as _ from 'underscore';
 })
 export class EventListComponent implements OnInit {
   private eventService = inject(EventService);
+  swiperConfig!: SwiperOptions;
 
   listing$: Observable<EventListData[]> = this.eventService
     .getEventList()
     .pipe(map((result) => result?.data));
 
-  boosted$: Observable<BoostedEvent[]> = this.eventService
-    .getBoostedEvent()
-    .pipe(map((result) => _.shuffle(result)));
+  boosted$!: Observable<BoostedEvent[]>;
 
   filter: any = {};
 
@@ -35,6 +42,13 @@ export class EventListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.boosted$ = this.eventService.getBoostedEvent().pipe(
+      map((result) => {
+        const shuffled = _.shuffle(result);
+        this.setSwiperConfig(shuffled.length);
+        return shuffled;
+      })
+    );
     this.eventService.reload();
   }
 
@@ -42,7 +56,17 @@ export class EventListComponent implements OnInit {
     this.eventService.reload().then(() => {
       (event as RefresherCustomEvent).target.complete();
     });
-    console.log(this.noMoreContent);
+  }
+
+  private setSwiperConfig(itemCount: number): void {
+    this.swiperConfig = {
+      slidesPerView: 2,
+      loop: itemCount > 2,
+      autoplay: {
+        delay: 2000,
+        disableOnInteraction: true
+      }
+    };
   }
 
   onIonInfinite(event: Event) {
