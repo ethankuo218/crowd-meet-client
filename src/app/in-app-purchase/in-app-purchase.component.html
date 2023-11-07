@@ -19,7 +19,10 @@
         >
           <ng-container *ngFor="let product of productList">
             <ng-template swiperSlide>
-              <div class="bundle-card" (click)="purchase(product.identifier)">
+              <div
+                class="bundle-card"
+                (click)="buttonDisabled ? null : purchase(product.identifier)"
+              >
                 <div class="bundle-header">
                   <div class="bundle-header-title">
                     <h3>{{ product.identifier | bundleWording : 'TITLE' }}</h3>
@@ -116,24 +119,12 @@
 <ion-footer *ngIf="productList.length !== 0">
   <ion-toolbar>
     <ion-button
-      [disabled]="
-        productList[currentIndex].identifier === 'free' ||
-        hasSubscribed(productList[currentIndex].identifier) ||
-        hasLifeStyleSubscribed()
-      "
+      [disabled]="buttonDisabled"
       class="purchase-btn"
       slot="primary"
       (click)="purchase(productList[currentIndex].identifier)"
     >
-      <span>
-        {{
-          hasLifeStyleSubscribed()
-            ? 'LifeStyle Bundle Subscribed'
-            : hasSubscribed(productList[currentIndex].identifier)
-            ? 'Subscribed'
-            : productList[currentIndex].priceString + ' / Month'
-        }}
-      </span>
+      <span>{{ buttonText }}</span>
     </ion-button>
   </ion-toolbar>
 </ion-footer>

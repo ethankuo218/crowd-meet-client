@@ -36,6 +36,8 @@ export class InAppPurchaseComponent implements OnInit {
   private zone = inject(NgZone);
   private modalControl = inject(ModalController);
 
+  buttonDisabled!: boolean;
+  buttonText!: string;
   productList: PurchasesStoreProduct[] = [];
   activeSubscriptions: string[] = [];
   currentIndex: number = 0;
@@ -97,6 +99,26 @@ export class InAppPurchaseComponent implements OnInit {
     //   }
     // ] as any as PurchasesStoreProduct[];
     console.log(this.productList);
+    this.updateButtonProperties();
+  }
+
+  updateButtonProperties() {
+    const product = this.productList[this.currentIndex];
+    this.buttonDisabled =
+      product.identifier === 'free' ||
+      this.hasSubscribed(product.identifier) ||
+      this.hasLifeStyleSubscribed();
+    this.buttonText = this.getButtonText(product);
+  }
+
+  getButtonText(product: PurchasesStoreProduct): string {
+    if (this.hasLifeStyleSubscribed()) {
+      return 'LifeStyle Bundle Subscribed';
+    } else if (this.hasSubscribed(product.identifier)) {
+      return 'Subscribed';
+    } else {
+      return product.priceString + ' / Month';
+    }
   }
 
   async purchase(productIdentifier: string): Promise<void> {
@@ -107,11 +129,13 @@ export class InAppPurchaseComponent implements OnInit {
     this.activeSubscriptions = customerInfo.activeSubscriptions.map(
       (subscription) => this.formatIdentifier(subscription)
     );
+    this.updateButtonProperties();
   }
 
   onActiveIndexChange(swiper: Swiper[]): void {
     this.zone.run(() => {
       this.currentIndex = swiper[0].activeIndex;
+      this.updateButtonProperties();
     });
   }
 
