@@ -118,7 +118,8 @@
     <ion-button
       [disabled]="
         productList[currentIndex].identifier === 'free' ||
-        hasSubscribed(productList[currentIndex].identifier)
+        hasSubscribed(productList[currentIndex].identifier) ||
+        hasLifeStyleSubscribed()
       "
       class="purchase-btn"
       slot="primary"
@@ -126,7 +127,9 @@
     >
       <span>
         {{
-          hasSubscribed(productList[currentIndex].identifier)
+          hasLifeStyleSubscribed()
+            ? 'LifeStyle Bundle Subscribed'
+            : hasSubscribed(productList[currentIndex].identifier)
             ? 'Subscribed'
             : productList[currentIndex].priceString + ' / Month'
         }}

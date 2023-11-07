@@ -117,7 +117,25 @@ export class InAppPurchaseComponent implements OnInit {
 
   hasSubscribed(identifier: string): boolean {
     const formattedIdentifier = this.formatIdentifier(identifier);
+    const influencerAndSocialSpark = [
+      'crowdmeet_influencer_1m',
+      'crowdmeet_social_spark_1m'
+    ];
+    const activeSubscriptionsSet = new Set(this.activeSubscriptions);
+    if (
+      formattedIdentifier === 'crowdmeet_lifestyle_1m' &&
+      influencerAndSocialSpark.every((identifier) =>
+        activeSubscriptionsSet.has(identifier)
+      )
+    ) {
+      return true;
+    }
     return this.activeSubscriptions.includes(formattedIdentifier);
+  }
+
+  hasLifeStyleSubscribed(): boolean {
+    const identifier = 'crowdMeet_Lifestyle_1m';
+    return this.activeSubscriptions.includes(this.formatIdentifier(identifier));
   }
 
   cancel(): void {
