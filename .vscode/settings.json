@@ -12,5 +12,8 @@
     "editor.suggest.insertMode": "replace",
     "editor.formatOnType": true,
     "editor.formatOnSave": true
-  }
+  },
+  "cSpell.words": [
+    "reviewee"
+  ]
 }

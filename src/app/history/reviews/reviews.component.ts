@@ -4,9 +4,18 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { RatingComponent } from './rating/rating.component';
 import { Participant } from '../../event/models/event.model';
-import { BehaviorSubject, Observable, map, switchMap } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  combineLatest,
+  forkJoin,
+  map,
+  switchMap
+} from 'rxjs';
 import { EventService } from '../../core/event.service';
 import { Review } from './models/reviews.model';
+import { User } from 'src/app/core/+states/user-state/user.model';
+import { UserStateFacade } from 'src/app/core/+states/user-state/user.state.facade';
 @Component({
   selector: 'app-reviews',
   templateUrl: './reviews.component.html',
@@ -17,28 +26,50 @@ export class ReviewsComponent {
   private route = inject(ActivatedRoute);
   private eventService = inject(EventService);
   private reviewsService = inject(ReviewsService);
+  private userStateFacade = inject(UserStateFacade);
 
   canView: boolean = false;
 
   private eventId!: number;
+  private readonly userId$ = this.userStateFacade
+    .getUser()
+    .pipe(map((user) => user.userId));
+  private readonly reviewedSet = new Set<number>();
 
-  participants$: Observable<Participant[]> = this.route.params.pipe(
-    switchMap((params) => {
+  eventData$: Observable<{
+    host: User | null;
+    participants: Participant[];
+    canView: boolean;
+  }> = combineLatest([this.route.params, this.userId$]).pipe(
+    switchMap(([params, userId]) => {
       this.eventId = params['id'];
-      this.reload();
-      return this.eventService.getParticipants(params['id']).pipe(
-        map((result) => {
-          this.canView = result.canView;
-          return result.canView ? result.participants : [];
+      const eventHost$ = this.eventService.getEventHost(this.eventId);
+      const participants$ = this.eventService.getParticipants(this.eventId);
+
+      return forkJoin({ host: eventHost$, participants: participants$ }).pipe(
+        map(({ host, participants }) => {
+          this.canView = participants.canView;
+          return {
+            host: host && host.userId !== userId ? host : null,
+            participants: this.canView
+              ? participants.participants.filter((p) => p.userId !== userId)
+              : [],
+            canView: this.canView
+          };
         })
       );
     })
   );
 
+  ionViewWillEnter() {
+    this.reloadReview();
+    this.reviewedSet.clear();
+  }
+
   private reviewedListBehaviorSubject: BehaviorSubject<Review[]> =
     new BehaviorSubject<Review[]>([]);
 
-  async writeReview(userDetail: Participant) {
+  async writeReview(userDetail: Participant | User) {
     const modal = await this.modalCtrl.create({
       component: RatingComponent,
       componentProps: { userDetail: userDetail },
@@ -53,18 +84,18 @@ export class ReviewsComponent {
       this.reviewsService
         .review({
           revieweeId: userDetail.userId,
-          eventId: userDetail.eventId,
+          eventId: this.eventId,
           ...data
         })
         .subscribe({
           next: () => {
-            this.reload();
+            this.reviewedSet.add(userDetail.userId);
           }
         });
     }
   }
 
-  private reload(): void {
+  private reloadReview(): void {
     this.reviewsService.getReviewByEvent(this.eventId).subscribe({
       next: (result) => {
         this.reviewedListBehaviorSubject.next(result);
@@ -73,6 +104,9 @@ export class ReviewsComponent {
   }
 
   isReviewed(userId: number) {
+    if (this.reviewedSet.has(userId)) {
+      return true;
+    }
     return this.reviewedListBehaviorSubject.value.find(
       (item) => item.revieweeId === userId
     );

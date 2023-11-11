@@ -10,7 +10,7 @@ import {
   EventSetting,
   GetParticipantsResponse
 } from '../event/models/event.model';
-import { Observable, ReplaySubject, firstValueFrom, tap } from 'rxjs';
+import { Observable, ReplaySubject, firstValueFrom, map, tap } from 'rxjs';
 import { EventActionResponse, EventImageResponse } from './models/core.model';
 import {
   BoostedEvent,
@@ -269,6 +269,14 @@ export class EventService {
     } finally {
       this.loadingService.dismiss();
     }
+  }
+
+  getEventHost(eventId: number) {
+    return this.httpClientService.get<Event>(`event/${eventId}`).pipe(
+      map((result) => {
+        return result.creator;
+      })
+    );
   }
 
   async leave(id: number): Promise<void> {

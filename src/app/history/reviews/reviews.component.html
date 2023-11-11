@@ -3,8 +3,58 @@
   <main class="fix notification-area main-area p-0">
     <div class="container">
       <div class="joiner_list">
-        <ng-container *ngIf="participants$ | async as participants">
-          <div *ngFor="let participant of participants" class="joiner_info">
+        <ng-container *ngIf="eventData$ | async as eventData">
+          <!-- Display Event Host -->
+          <div *ngIf="eventData.host" class="joiner_info">
+            <div class="joiner_img">
+              <img
+                appImageFallBack
+                [src]="
+                  eventData.host.profilePictureUrl ||
+                  'assets/images/profile.png'
+                "
+                [routerLink]="[
+                  '/app/history/reviews/profile',
+                  eventData.host.userId
+                ]"
+                alt="image"
+              />
+            </div>
+            <div class="joiner_content">
+              <div class="joiner-info">
+                <h3
+                  class="dark"
+                  [routerLink]="[
+                    '/app/history/reviews/profile',
+                    eventData.host.userId
+                  ]"
+                >
+                  {{ eventData.host.name }}
+                </h3>
+                <hr />
+                <p class="dark_d">({{ 'EVENT_DETAIL.HOST' | translate }})</p>
+              </div>
+              <fa-icon
+                *ngIf="!isReviewed(eventData.host.userId); else reviewed"
+                (click)="writeReview(eventData.host)"
+                [icon]="['fas', 'pen-to-square']"
+                class="edit-icon"
+              ></fa-icon>
+              <ng-template #reviewed>
+                <fa-icon
+                  [icon]="['fas', 'check']"
+                  class="check-icon"
+                  style="color: rgb(32, 213, 0)"
+                ></fa-icon>
+              </ng-template>
+            </div>
+          </div>
+
+          <!-- Display Participants -->
+          <div
+            *ngFor="let participant of eventData.participants"
+            class="joiner_info"
+          >
             <div class="joiner_img">
               <img
                 appImageFallBack
@@ -38,20 +88,27 @@
                 *ngIf="!isReviewed(participant.userId); else reviewed"
                 (click)="writeReview(participant)"
                 [icon]="['fas', 'pen-to-square']"
+                class="edit-icon"
               ></fa-icon>
               <ng-template #reviewed>
                 <fa-icon
                   [icon]="['fas', 'check']"
+                  class="check-icon"
                   style="color: rgb(32, 213, 0)"
                 ></fa-icon>
               </ng-template>
             </div>
           </div>
-          <div *ngIf="participants.length === 0" class="no-more-content">
+
+          <!-- No More Content Message -->
+          <div
+            *ngIf="eventData.participants.length === 0 && !eventData.host"
+            class="no-more-content"
+          >
             {{
-              canView
-                ? ('REVIEWS.NO_PARTICIPANTS' | translate)
-                : ('REVIEWS.STILL_GOING_ON' | translate)
+              eventData.canView
+                ? ('REVIEW.NO_PARTICIPANTS' | translate)
+                : ('REVIEW.STILL_GOING_ON' | translate)
             }}
           </div>
         </ng-container>
