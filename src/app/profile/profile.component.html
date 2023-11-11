@@ -55,12 +55,17 @@
               <div class="profile-pic">
                 <img
                   [src]="
-                    review.reviewer.profilePicture ||
+                    review.reviewer?.profilePicture ||
                     'assets/images/profile.png'
                   "
                 />
               </div>
-              <h4 class="dark">{{ review.reviewer.name }}</h4>
+              <h4 class="dark">
+                {{
+                  review.reviewer?.name || 'EVENT_DETAIL.DELETED_USER'
+                    | translate
+                }}
+              </h4>
 
               <div class="aside">
                 <a class="star">

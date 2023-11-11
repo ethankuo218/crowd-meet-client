@@ -70,6 +70,7 @@ export class ReviewsComponent {
     new BehaviorSubject<Review[]>([]);
 
   async writeReview(userDetail: Participant | User) {
+    if (!userDetail.userId) return;
     const modal = await this.modalCtrl.create({
       component: RatingComponent,
       componentProps: { userDetail: userDetail },
@@ -89,7 +90,7 @@ export class ReviewsComponent {
         })
         .subscribe({
           next: () => {
-            this.reviewedSet.add(userDetail.userId);
+            this.reviewedSet.add(userDetail.userId!);
           }
         });
     }

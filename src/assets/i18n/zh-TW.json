@@ -51,6 +51,7 @@
     "EDIT": "編輯",
     "JOIN": "參加",
     "ONLINE_EVENT": "線上活動",
+    "DELETED_USER": "已刪除用戶",
     "CONFIRM_DIALOG": {
       "HEADER": "加入活動？",
       "MESSAGE": "確認後，活動主辦方將審核並驗證您的申請。",

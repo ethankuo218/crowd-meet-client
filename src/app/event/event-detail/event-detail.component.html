@@ -184,10 +184,11 @@
                       <div class="user">
                         <div
                           class="user_img"
-                          [routerLink]="[
-                            '/app/event/profile',
+                          [routerLink]="
                             comment.user.userId
-                          ]"
+                              ? ['/app/event/profile', comment.user.userId]
+                              : null
+                          "
                         >
                           <img
                             appImageFallBack
@@ -200,12 +201,16 @@
                         <div class="user_name">
                           <h4
                             class="dark"
-                            [routerLink]="[
-                              '/app/event/profile',
+                            [routerLink]="
                               comment.user.userId
-                            ]"
+                                ? ['/app/event/profile', comment.user.userId]
+                                : null
+                            "
                           >
-                            {{ comment.user.name }}
+                            {{
+                              comment.user.name ?? 'EVENT_DETAIL.DELETED_USER'
+                                | translate
+                            }}
                           </h4>
                           <small class="dark_d">{{
                             comment.createdAt | date : 'MMM d. y | HH:mm a'

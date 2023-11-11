@@ -84,12 +84,14 @@
                   {{ participant.registeredAt | date : 'MMM d, y | h:m a' }}
                 </p>
               </div>
-              <fa-icon
-                *ngIf="!isReviewed(participant.userId); else reviewed"
-                (click)="writeReview(participant)"
-                [icon]="['fas', 'pen-to-square']"
-                class="edit-icon"
-              ></fa-icon>
+              <ng-container *ngIf="participant.userId">
+                <fa-icon
+                  *ngIf="!isReviewed(participant.userId); else reviewed"
+                  (click)="writeReview(participant)"
+                  [icon]="['fas', 'pen-to-square']"
+                  class="edit-icon"
+                ></fa-icon>
+              </ng-container>
               <ng-template #reviewed>
                 <fa-icon
                   [icon]="['fas', 'check']"

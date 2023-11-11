@@ -8,7 +8,7 @@ export interface Review {
     userId: number;
     name: string;
     profilePicture: string;
-  };
+  } | null;
   revieweeId: number;
   event: {
     eventId: number;

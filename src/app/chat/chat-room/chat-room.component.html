@@ -25,7 +25,7 @@
                   <img
                     appImageFallBack
                     [src]="
-                      memberPictureUrls[message.senderId].profilePicture ||
+                      memberPictureUrls[message.senderId]?.profilePicture ||
                       'assets/images/event-default.png'
                     "
                     alt="image"
@@ -34,7 +34,11 @@
                 </div>
                 <div class="chat_content chat_content2">
                   <p style="font-weight: lighter">
-                    {{ memberInfos[message.senderId].name }}
+                    {{
+                      memberPictureUrls[message.senderId]
+                        ? memberInfos[message.senderId].name
+                        : ('EVENT_DETAIL.DELETED_USER' | translate)
+                    }}
                   </p>
                   <p class="dark">{{ message.content }}</p>
                   <small class="dark">{{

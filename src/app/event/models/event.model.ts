@@ -39,11 +39,11 @@ export interface GetParticipantsResponse {
 export interface Participant {
   id: number;
   eventId: number;
-  userId: number;
+  userId: number | null;
   registeredAt: string;
   status: string;
-  name: string;
-  profilePictureUrl: string;
+  name: string | null;
+  profilePictureUrl: string | null;
 }
 
 export interface EventComment {
@@ -52,8 +52,8 @@ export interface EventComment {
   createdAt: string;
   eventId: number;
   user: {
-    userId: number;
-    name: string;
-    profilePictureUrl: string;
+    userId?: number;
+    name?: string;
+    profilePictureUrl: string | null;
   };
 }

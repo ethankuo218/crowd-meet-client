@@ -12,7 +12,9 @@
               <ion-item>
                 <div
                   class="joiner_img"
-                  [routerLink]="['/app/event/profile', joiner.userId]"
+                  [routerLink]="
+                    joiner.userId ? ['/app/event/profile', joiner.userId] : null
+                  "
                 >
                   <img
                     [src]="
@@ -25,9 +27,15 @@
                   <div class="content-row">
                     <h3
                       class="dark"
-                      [routerLink]="['/app/event/profile', joiner.userId]"
+                      [routerLink]="
+                        joiner.userId
+                          ? ['/app/event/profile', joiner.userId]
+                          : null
+                      "
                     >
-                      {{ joiner.name }}
+                      {{
+                        joiner.name ?? 'EVENT_DETAIL.DELETED_USER' | translate
+                      }}
                     </h3>
                     <div
                       class="status-tag green"
@@ -51,12 +59,18 @@
                   <div class="button_area">
                     <ion-button
                       (click)="accept(joiner.id)"
-                      [disabled]="joiner.status !== eventStatus.applied"
+                      [disabled]="
+                        joiner.status !== eventStatus.applied ||
+                        joiner.userId === null
+                      "
                       >{{ 'JOINER_LIST.ACCEPT' | translate }}</ion-button
                     >
                     <ion-button
                       (click)="decline(joiner.id)"
-                      [disabled]="joiner.status !== eventStatus.applied"
+                      [disabled]="
+                        joiner.status !== eventStatus.applied ||
+                        joiner.userId === null
+                      "
                       >{{ 'JOINER_LIST.DECLINE' | translate }}</ion-button
                     >
                   </div>

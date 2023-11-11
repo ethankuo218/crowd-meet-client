@@ -51,6 +51,7 @@
     "EDIT": "Edit",
     "JOIN": "Join",
     "ONLINE_EVENT": "Online Event",
+    "DELETED_USER": "Deleted User",
     "CONFIRM_DIALOG": {
       "HEADER": "Join Event?",
       "MESSAGE": "Once confirmed, the event organizer will review and validate your application.",

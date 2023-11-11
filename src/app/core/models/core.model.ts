@@ -8,10 +8,12 @@ export interface ProfilePictureResponse {
 }
 
 export interface ProfilePictures {
-  [firebaseUid: string]: {
-    userId: number;
-    profilePicture: string | null;
-  };
+  [firebaseUid: string]:
+    | {
+        userId: number;
+        profilePicture: string | null;
+      }
+    | undefined;
 }
 
 export interface EventImageResponse {
