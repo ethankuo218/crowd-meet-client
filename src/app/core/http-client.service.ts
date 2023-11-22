@@ -128,10 +128,12 @@ export class HttpClientService {
     );
   }
 
-  delete<T>(apiName: string, id: number): Observable<T> {
+  delete<T>(apiName: string, id?: number): Observable<T> {
     return from(this.getIdToken()).pipe(
       switchMap((headers: HttpHeaders): Observable<T> => {
-        const requestUrl = `${this.urlPrefix}${apiName}/${id}`;
+        const requestUrl = id
+          ? `${this.urlPrefix}${apiName}/${id}`
+          : `${this.urlPrefix}${apiName}`;
         return this.httpClient
           .delete<T>(requestUrl, {
             headers: headers

@@ -1,3 +1,6 @@
+import { EntitlementService } from './../core/entitlement.service';
+import { AlertController } from '@ionic/angular';
+import { UserService } from './../core/user.service';
 import {
   EmailComposer,
   EmailComposerOptions
@@ -30,6 +33,11 @@ export class MenuComponent {
   isDarkMode: boolean = document.body.classList.contains('dark');
   languages = this.languageService.getLanguages();
   selectedLanguage: Language = this.languageService.currentLanguage;
+
+  constructor(
+    private readonly userService: UserService,
+    private readonly alertController: AlertController
+  ) {}
 
   async openEmail(): Promise<void> {
     const email: EmailComposerOptions = {
@@ -65,5 +73,56 @@ export class MenuComponent {
     } catch (error) {
       console.error(error);
     }
+  }
+
+  async deleteAccount(): Promise<void> {
+    const firstResponse = await this.showAlert(
+      this.translate.instant('DELETE_ACCOUNT.RETAIN_HINT'),
+      this.translate.instant('DELETE_ACCOUNT.LEAVE'),
+      this.translate.instant('DELETE_ACCOUNT.STAY')
+    );
+
+    if (firstResponse) {
+      const secondResponse = await this.showAlert(
+        this.translate.instant('DELETE_ACCOUNT.SUBSCRIPTION_HINT'),
+        this.translate.instant('DELETE_ACCOUNT.SUBSCRIPTION_LEAVE'),
+        this.translate.instant('DELETE_ACCOUNT.STAY')
+      );
+
+      if (secondResponse) {
+        this.userService.deleteAccount().subscribe({
+          next: () => {
+            this.logout();
+          },
+          error: (err) => {
+            console.error(err);
+          }
+        });
+      }
+    }
+  }
+
+  private async showAlert(
+    message: string,
+    confirmText: string,
+    cancelText: string
+  ): Promise<boolean> {
+    return new Promise<boolean>(async (resolve) => {
+      const alert = await this.alertController.create({
+        message: message,
+        buttons: [
+          {
+            text: cancelText,
+            role: 'cancel',
+            handler: () => resolve(false)
+          },
+          {
+            text: confirmText,
+            handler: () => resolve(true)
+          }
+        ]
+      });
+      await alert.present();
+    });
   }
 }

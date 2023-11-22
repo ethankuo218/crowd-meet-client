@@ -160,7 +160,15 @@
     "DARK_MODE": "Dark Mode",
     "HELP_CENTER": "Help Center",
     "INVITE_FRIENDS": "Invite Friends",
-    "LOGOUT": "Logout"
+    "LOGOUT": "Logout",
+    "DELETE_ACCOUNT": "Delete Account"
+  },
+  "DELETE_ACCOUNT": {
+    "SUBSCRIPTION_LEAVE": "Delete Account",
+    "SUBSCRIPTION_HINT": "Deleting your account does not automatically cancel any active subscriptions. Please cancel them manually in the App Store or Google Play Store to avoid future charges.",
+    "RETAIN_HINT": "Your CrowdMeet family would love for you to stay. Discover more events and keep connecting with us. Continue your journey with us?",
+    "LEAVE": "Leave heartlessly",
+    "STAY": "Stay with the Crowd 🥰"
   },
   "EDIT_PROFILE": {
     "PHOTOS": "Photos",

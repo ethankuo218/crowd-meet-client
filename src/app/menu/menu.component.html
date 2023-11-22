@@ -96,6 +96,17 @@
               </div>
             </div>
           </a>
+
+          <a (click)="deleteAccount()">
+            <div class="acc__card">
+              <div class="acc__title danger">
+                <fa-icon class="danger" [icon]="['fas', 'trash-alt']"></fa-icon>
+                <span class="danger">{{
+                  'MENU.DELETE_ACCOUNT' | translate
+                }}</span>
+              </div>
+            </div>
+          </a>
         </div>
       </div>
     </div>

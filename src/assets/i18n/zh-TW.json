@@ -160,7 +160,15 @@
     "DARK_MODE": "深色模式",
     "HELP_CENTER": "幫助中心",
     "INVITE_FRIENDS": "邀請好友",
-    "LOGOUT": "登出"
+    "LOGOUT": "登出",
+    "DELETE_ACCOUNT": "刪除帳戶"
+  },
+  "DELETE_ACCOUNT": {
+    "SUBSCRIPTION_LEAVE": "刪除帳號",
+    "SUBSCRIPTION_HINT": "刪除您的帳號不會自動取消任何有效的訂閱。若您現在有訂閱項目請在App Store或Google Play商店手動取消",
+    "RETAIN_HINT": "CrowdMeet大家庭希望您留下來。探索更多活動，並繼續與我們保持聯繫。繼續與我們一起旅行？",
+    "LEAVE": "無情離開",
+    "STAY": "我要留下來🥰"
   },
   "EDIT_PROFILE": {
     "PHOTOS": "照片",

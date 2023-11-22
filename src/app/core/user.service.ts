@@ -172,4 +172,8 @@ export class UserService {
   getMegaBoost(): Observable<MegaBoost[]> {
     return this.httpClientService.get<MegaBoost[]>('user/me/mega-boost');
   }
+
+  deleteAccount(): Observable<void> {
+    return this.httpClientService.delete<void>('user/me');
+  }
 }

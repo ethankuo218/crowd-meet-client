@@ -51,7 +51,7 @@
     "EDIT": "แก้ไข",
     "JOIN": "เข้าร่วม",
     "ONLINE_EVENT": "อีเวนต์ออนไลน์",
-    "DELETED_USER": "Deleted User",
+    "DELETED_USER": "บัญชีถูกลบ",
     "CONFIRM_DIALOG": {
       "HEADER": "ต้องการเข้าร่วมหรือไม่",
       "MESSAGE": "เมื่อยืนยันแล้ว เจ้าของอีเวนต์จะตรวจสอบและตอบรับการสมัครของคุณ.",
@@ -160,7 +160,15 @@
     "DARK_MODE": "โหมดมืด",
     "HELP_CENTER": "ศูนย์การช่วยเหลือ",
     "INVITE_FRIENDS": "ชวนเพื่อนมาเข้าร่วม",
-    "LOGOUT": "ออกจากระบบ"
+    "LOGOUT": "ออกจากระบบ",
+    "DELETE_ACCOUNT": "ลบบัญชีของคุณ"
+  },
+  "DELETE_ACCOUNT": {
+    "SUBSCRIPTION_LEAVE": "ลบบัญชีของคุณ",
+    "SUBSCRIPTION_HINT": "Deleting your account does not automatically cancel any active subscriptions. Please cancel them manually in the App Store or Google Play Store to avoid future charges.",
+    "RETAIN_HINT": "Your CrowdMeet family would love for you to stay. Discover more events and keep connecting with us. Continue your journey with us?",
+    "LEAVE": "Leave heartlessly",
+    "STAY": "Stay with the Crowd 🥰"
   },
   "EDIT_PROFILE": {
     "PHOTOS": "รูปภาพ",
