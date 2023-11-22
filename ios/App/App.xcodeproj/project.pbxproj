@@ -125,7 +125,6 @@
 				504EC3011FED79650016851F /* Frameworks */,
 				504EC3021FED79650016851F /* Resources */,
 				9592DBEFFC6D2A0C8D5DEB22 /* [CP] Embed Pods Frameworks */,
-				E5EA71332AA4047D00D3BA27 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -222,23 +221,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-App/Pods-App-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		E5EA71332AA4047D00D3BA27 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "PATH_TO_GOOGLE_PLISTS=\"${PROJECT_DIR}/App\"\necho \"Memory information1\"\ncase \"${CONFIGURATION}\" in\n\n   \"Debug\" )\n        cp -r \"$PATH_TO_GOOGLE_PLISTS/GoogleService-Info-dev.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\" ;;\n\n   \"Release_SIT\" )\n        cp -r \"$PATH_TO_GOOGLE_PLISTS/GoogleService-Info-sit.plist\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\" ;;   \n\n    *)\n        ;;\nesac\necho \"Memory information2\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
