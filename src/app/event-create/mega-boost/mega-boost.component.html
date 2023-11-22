@@ -1,143 +1,151 @@
-<div class="modal-content">
-  <div class="modal-body">
-    <div class="header">
-      <a (click)="cancel()">{{ 'EVENT_LIST.CANCEL' | translate }}</a>
-    </div>
-    <div class="text-center mdl_div">
-      <h2 class="primary">
-        {{ 'MEGA BOOST' }}
-        <fa-icon
-          [icon]="['fas', 'circle-question']"
-          id="click-trigger"
-        ></fa-icon>
-        <ion-popover
-          trigger="click-trigger"
-          triggerAction="click"
-          [alignment]="'start'"
-        >
-          <ng-template>
-            <ion-content class="ion-padding">
-              <h3>{{ 'IN_APP_PURCHASE.MEGA_BOOST.BENEFITS' | translate }}</h3>
-              <ol>
-                <li>
-                  <div class="title">
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons (click)="cancel()">
+      <a>
+        {{ 'EVENT_LIST.CANCEL' | translate }}
+      </a>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="modal-content">
+    <div class="modal-body">
+      <div class="text-center mdl_div">
+        <h2 class="primary">
+          {{ 'MEGA BOOST' }}
+          <fa-icon
+            [icon]="['fas', 'circle-question']"
+            id="click-trigger"
+          ></fa-icon>
+          <ion-popover
+            trigger="click-trigger"
+            triggerAction="click"
+            [alignment]="'start'"
+          >
+            <ng-template>
+              <ion-content class="ion-padding">
+                <h3>{{ 'IN_APP_PURCHASE.MEGA_BOOST.BENEFITS' | translate }}</h3>
+                <ol>
+                  <li>
+                    <div class="title">
+                      {{
+                        'IN_APP_PURCHASE.MEGA_BOOST.BULLET_POINT_TITLE_1'
+                          | translate
+                      }}
+                    </div>
+                    <span>{{
+                      'IN_APP_PURCHASE.MEGA_BOOST.BULLET_POINT_CONTENT_1'
+                        | translate
+                    }}</span>
+                  </li>
+
+                  <li>
+                    <div class="title">
+                      {{
+                        'IN_APP_PURCHASE.MEGA_BOOST.BULLET_POINT_TITLE_2'
+                          | translate
+                      }}
+                    </div>
                     {{
-                      'IN_APP_PURCHASE.MEGA_BOOST.BULLET_POINT_TITLE_1'
+                      'IN_APP_PURCHASE.MEGA_BOOST.BULLET_POINT_CONTENT_2'
                         | translate
                     }}
-                  </div>
-                  <span>{{
-                    'IN_APP_PURCHASE.MEGA_BOOST.BULLET_POINT_CONTENT_1'
-                      | translate
-                  }}</span>
-                </li>
+                  </li>
 
-                <li>
-                  <div class="title">
+                  <li>
+                    <div class="title">
+                      {{
+                        'IN_APP_PURCHASE.MEGA_BOOST.BULLET_POINT_TITLE_3'
+                          | translate
+                      }}
+                    </div>
                     {{
-                      'IN_APP_PURCHASE.MEGA_BOOST.BULLET_POINT_TITLE_2'
+                      'IN_APP_PURCHASE.MEGA_BOOST.BULLET_POINT_CONTENT_3'
                         | translate
                     }}
-                  </div>
-                  {{
-                    'IN_APP_PURCHASE.MEGA_BOOST.BULLET_POINT_CONTENT_2'
-                      | translate
-                  }}
-                </li>
+                  </li>
 
-                <li>
-                  <div class="title">
+                  <li>
+                    <div class="title">
+                      {{
+                        'IN_APP_PURCHASE.MEGA_BOOST.BULLET_POINT_TITLE_4'
+                          | translate
+                      }}
+                    </div>
                     {{
-                      'IN_APP_PURCHASE.MEGA_BOOST.BULLET_POINT_TITLE_3'
+                      'IN_APP_PURCHASE.MEGA_BOOST.BULLET_POINT_CONTENT_4'
                         | translate
                     }}
-                  </div>
-                  {{
-                    'IN_APP_PURCHASE.MEGA_BOOST.BULLET_POINT_CONTENT_3'
-                      | translate
-                  }}
-                </li>
+                  </li>
 
-                <li>
-                  <div class="title">
+                  <li>
+                    <div class="title">
+                      {{
+                        'IN_APP_PURCHASE.MEGA_BOOST.BULLET_POINT_TITLE_5'
+                          | translate
+                      }}
+                    </div>
                     {{
-                      'IN_APP_PURCHASE.MEGA_BOOST.BULLET_POINT_TITLE_4'
+                      'IN_APP_PURCHASE.MEGA_BOOST.BULLET_POINT_CONTENT_5'
                         | translate
                     }}
-                  </div>
-                  {{
-                    'IN_APP_PURCHASE.MEGA_BOOST.BULLET_POINT_CONTENT_4'
-                      | translate
-                  }}
-                </li>
+                  </li>
+                </ol>
+              </ion-content>
+            </ng-template>
+          </ion-popover>
+        </h2>
 
-                <li>
-                  <div class="title">
-                    {{
-                      'IN_APP_PURCHASE.MEGA_BOOST.BULLET_POINT_TITLE_5'
-                        | translate
-                    }}
-                  </div>
-                  {{
-                    'IN_APP_PURCHASE.MEGA_BOOST.BULLET_POINT_CONTENT_5'
-                      | translate
-                  }}
-                </li>
-              </ol>
-            </ion-content>
-          </ng-template>
-        </ion-popover>
-      </h2>
-
-      <div class="description">
-        {{ 'IN_APP_PURCHASE.MEGA_BOOST.DESCRIPTION' | translate }}
-        <br />
-        <br />
-      </div>
-
-      <div
-        class="product-list"
-        *ngFor="let product of productList; let i = index"
-      >
-        <div class="product-hint" *ngIf="!isLongerThanEvent(i)">
-          <fa-icon [icon]="['far', 'calendar-days']"></fa-icon>
-          &nbsp;
-          <span>{{ 'IN_APP_PURCHASE.MEGA_BOOST.HINT' | translate }}</span>
+        <div class="description">
+          {{ 'IN_APP_PURCHASE.MEGA_BOOST.DESCRIPTION' | translate }}
+          <br />
+          <br />
         </div>
+
         <div
-          class="product-card"
-          (click)="purchase(product.identifier, boostCount[i] !== 0, 1)"
+          class="product-list"
+          *ngFor="let product of productList; let i = index"
         >
-          <div *ngIf="i === 0" class="title">1 DAY</div>
-          <div *ngIf="i === 1" class="title">3 DAY</div>
-          <div *ngIf="i === 2" class="title">7 DAY</div>
-          <ng-container *ngIf="boostCount[i] === 0; else left">
-            <div class="content">
-              <span class="price">{{ product.price | currency }}</span>
-            </div>
-            <div class="content-small">
-              <s class="original-price" *ngIf="i === 0">{{
-                product.price / 0.9 | currency
-              }}</s>
-              <s class="original-price" *ngIf="i === 1">{{
-                product.price / 0.85 | currency
-              }}</s>
-              <s class="original-price" *ngIf="i === 2">{{
-                product.price / 0.8 | currency
-              }}</s>
-            </div>
-          </ng-container>
-          <ng-template #left>
-            <div class="content">
-              {{ 'Left: ' + boostCount[i] }}
-            </div>
-            <div class="content-small"></div>
-          </ng-template>
-          <div *ngIf="i === 0" class="badge">10% off</div>
-          <div *ngIf="i === 1" class="badge">15% off</div>
-          <div *ngIf="i === 2" class="badge">20% off</div>
+          <div class="product-hint" *ngIf="!isLongerThanEvent(i)">
+            <fa-icon [icon]="['far', 'calendar-days']"></fa-icon>
+            &nbsp;
+            <span>{{ 'IN_APP_PURCHASE.MEGA_BOOST.HINT' | translate }}</span>
+          </div>
+          <div
+            class="product-card"
+            (click)="purchase(product.identifier, boostCount[i] !== 0, 1)"
+          >
+            <div *ngIf="i === 0" class="title">1 DAY</div>
+            <div *ngIf="i === 1" class="title">3 DAY</div>
+            <div *ngIf="i === 2" class="title">7 DAY</div>
+            <ng-container *ngIf="boostCount[i] === 0; else left">
+              <div class="content">
+                <span class="price">{{ product.price | currency }}</span>
+              </div>
+              <div class="content-small">
+                <s class="original-price" *ngIf="i === 0">{{
+                  product.price / 0.9 | currency
+                }}</s>
+                <s class="original-price" *ngIf="i === 1">{{
+                  product.price / 0.85 | currency
+                }}</s>
+                <s class="original-price" *ngIf="i === 2">{{
+                  product.price / 0.8 | currency
+                }}</s>
+              </div>
+            </ng-container>
+            <ng-template #left>
+              <div class="content">
+                {{ 'Left: ' + boostCount[i] }}
+              </div>
+              <div class="content-small"></div>
+            </ng-template>
+            <div *ngIf="i === 0" class="badge">10% off</div>
+            <div *ngIf="i === 1" class="badge">15% off</div>
+            <div *ngIf="i === 2" class="badge">20% off</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</ion-content>

@@ -71,4 +71,4 @@ Thumbs.db
 android/app/src/main/res/values/strings.xml
 ios/App/App/Info.plist
 android/app/google-services.json
-
+ios/App/App/GoogleService-Info.plist
