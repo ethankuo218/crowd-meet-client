@@ -13,7 +13,9 @@
       <div class="container-title"></div>
       <div class="bundle-container">
         <swiper
-          [slidesPerView]="1"
+          [slidesPerView]="1.3"
+          [spaceBetween]="30"
+          [centeredSlides]="true"
           [pagination]="true"
           (activeIndexChange)="onActiveIndexChange($event)"
         >
