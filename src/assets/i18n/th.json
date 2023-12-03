@@ -164,11 +164,11 @@
     "DELETE_ACCOUNT": "ลบบัญชีของคุณ"
   },
   "DELETE_ACCOUNT": {
-    "SUBSCRIPTION_LEAVE": "ลบบัญชีของคุณ",
-    "SUBSCRIPTION_HINT": "Deleting your account does not automatically cancel any active subscriptions. Please cancel them manually in the App Store or Google Play Store to avoid future charges.",
-    "RETAIN_HINT": "Your CrowdMeet family would love for you to stay. Discover more events and keep connecting with us. Continue your journey with us?",
-    "LEAVE": "Leave heartlessly",
-    "STAY": "Stay with the Crowd 🥰"
+    "SUBSCRIPTION_LEAVE": "ลบบัญชี",
+    "SUBSCRIPTION_HINT": "การลบบัญชีไม่ได้ยกเลิกการสมัครสมาชิกโดยอัตโนมัติ กรุณากดยกเลิกการสมัครสมาชิกบน App Store หรือ Google Play Store เพื่อป้องกันการเรียกเก็บเงินรอบถัดไป",
+    "RETAIN_HINT": "ชาว CrowdMeet ต้องเสียใจที่คุณจากไป ค้นหาอีเวนต์เพิ่มเติมและเชื่อมต่อกับพวกเรา คุณต้องการร่วมสนุกกับพวกเราต่อหรือไม่",
+    "LEAVE": "ยืนยันที่จะไปจากเรา",
+    "STAY": "ต้องการใช้ CrowdMeet ต่อ 🥰"
   },
   "EDIT_PROFILE": {
     "PHOTOS": "รูปภาพ",

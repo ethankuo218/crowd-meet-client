@@ -19,6 +19,7 @@
 		F80D2C1D2AE9636F00DC9097 /* GoogleService-Info-sit.plist in Resources */ = {isa = PBXBuildFile; fileRef = F80D2C1C2AE9636F00DC9097 /* GoogleService-Info-sit.plist */; };
 		F811499D2A66617400F185C6 /* crowdMeetConfig.storekit in Resources */ = {isa = PBXBuildFile; fileRef = F811499C2A66617400F185C6 /* crowdMeetConfig.storekit */; };
 		F811499F2A6661E500F185C6 /* StoreKitTestCertificate.cer in Resources */ = {isa = PBXBuildFile; fileRef = F811499E2A6661E500F185C6 /* StoreKitTestCertificate.cer */; };
+		F84552592B10E55E00B1DFA7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F84552582B10E55E00B1DFA7 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		F80D2C1C2AE9636F00DC9097 /* GoogleService-Info-sit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-sit.plist"; sourceTree = "<group>"; };
 		F811499C2A66617400F185C6 /* crowdMeetConfig.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = crowdMeetConfig.storekit; sourceTree = "<group>"; };
 		F811499E2A6661E500F185C6 /* StoreKitTestCertificate.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = StoreKitTestCertificate.cer; sourceTree = "<group>"; };
+		F84552582B10E55E00B1DFA7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F88F24692A5078B900C7C00C /* push.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = push.apns; sourceTree = "<group>"; };
 		FC68EB0AF532CFC21C3344DD /* Pods-App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-App/Pods-App.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -89,6 +91,7 @@
 		504EC3061FED79650016851F /* App */ = {
 			isa = PBXGroup;
 			children = (
+				F84552582B10E55E00B1DFA7 /* GoogleService-Info.plist */,
 				F80D2C1C2AE9636F00DC9097 /* GoogleService-Info-sit.plist */,
 				E5E07EAC2A40971F001DA019 /* App.entitlements */,
 				50379B222058CBB4000EE86E /* capacitor.config.json */,
@@ -181,6 +184,7 @@
 				F811499F2A6661E500F185C6 /* StoreKitTestCertificate.cer in Resources */,
 				50379B232058CBB4000EE86E /* capacitor.config.json in Resources */,
 				F80D2C1D2AE9636F00DC9097 /* GoogleService-Info-sit.plist in Resources */,
+				F84552592B10E55E00B1DFA7 /* GoogleService-Info.plist in Resources */,
 				504EC30D1FED79650016851F /* Main.storyboard in Resources */,
 				2FAD9763203C412B000D30F8 /* config.xml in Resources */,
 			);
