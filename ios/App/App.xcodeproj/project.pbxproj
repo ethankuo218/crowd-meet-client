@@ -14,8 +14,7 @@
 		504EC30F1FED79650016851F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30E1FED79650016851F /* Assets.xcassets */; };
 		504EC3121FED79650016851F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC3101FED79650016851F /* LaunchScreen.storyboard */; };
 		50B271D11FEDC1A000F3C39B /* public in Resources */ = {isa = PBXBuildFile; fileRef = 50B271D01FEDC1A000F3C39B /* public */; };
-		A084ECDBA7D38E1E42DFC39D /* Pods_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */; };
-		E5E07EAE2A4097A8001DA019 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5E07EAD2A4097A8001DA019 /* StoreKit.framework */; };
+		A6227B145009545DDF0A9F3B /* Pods_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */; };
 		F80D2C1D2AE9636F00DC9097 /* GoogleService-Info-sit.plist in Resources */ = {isa = PBXBuildFile; fileRef = F80D2C1C2AE9636F00DC9097 /* GoogleService-Info-sit.plist */; };
 		F811499D2A66617400F185C6 /* crowdMeetConfig.storekit in Resources */ = {isa = PBXBuildFile; fileRef = F811499C2A66617400F185C6 /* crowdMeetConfig.storekit */; };
 		F811499F2A6661E500F185C6 /* StoreKitTestCertificate.cer in Resources */ = {isa = PBXBuildFile; fileRef = F811499E2A6661E500F185C6 /* StoreKitTestCertificate.cer */; };
@@ -50,8 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A084ECDBA7D38E1E42DFC39D /* Pods_App.framework in Frameworks */,
-				E5E07EAE2A4097A8001DA019 /* StoreKit.framework in Frameworks */,
+				A6227B145009545DDF0A9F3B /* Pods_App.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
