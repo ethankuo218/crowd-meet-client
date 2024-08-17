@@ -12,7 +12,6 @@ $RECYCLE.BIN/
 *.log
 log.txt
 
-
 /.sourcemaps
 /.versions
 /coverage
@@ -52,7 +51,6 @@ yarn-error.log
 !.vscode/extensions.json
 .history/*
 
-
 # Miscellaneous
 /.angular
 /.angular/cache
@@ -72,3 +70,7 @@ android/app/src/main/res/values/strings.xml
 ios/App/App/Info.plist
 android/app/google-services.json
 ios/App/App/GoogleService-Info.plist
+
+# env file
+/src/environments/*
+/env*
