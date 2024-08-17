@@ -72,5 +72,5 @@ android/app/google-services.json
 ios/App/App/GoogleService-Info.plist
 
 # env file
-/src/environments/*
+/src/environments
 /env*
